@@ -10,6 +10,12 @@
   },
   "devDependencies": {
     "@types/node": "^18",
-    "nuxt": "^3.5.1"
+    "nuxt": "^3.5.1",
+    "@inkline/plugin": "^1.0.0",
+    "@inkline/config": "^1.0.0",
+    "sass": "^1.0.0"
+  },
+  "dependencies": {
+    "@inkline/inkline": "^4.0.0"
   }
 }
