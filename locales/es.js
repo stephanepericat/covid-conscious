@@ -1,12 +1,12 @@
 export default {
   layout: {
-    footerLegal: "© {year} All rights reserved.",
-    home: "Home",
-    community: "Community",
-    learn: "Learn",
-    news: "News",
-    products: "Products",
-    search: "Search",
-    submitContent: "Submit Content",
+    footerLegal: "© {year} Reservados todos los derechos.",
+    home: "Página Principal",
+    community: "Comunidad",
+    learn: "Aprender",
+    news: "Noticias",
+    products: "Productos",
+    search: "Buscar",
+    submitContent: "Enviar Contenido",
   },
 };

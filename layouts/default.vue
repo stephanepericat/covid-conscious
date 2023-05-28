@@ -51,6 +51,14 @@ import { localePath } from 'vue-i18n-routing';
                 </IButton>
               </template>
             </IInput>
+            <IDropdown placement="bottom-end">
+              <INavItem><Icon :name="currentLocale.flag" /> <span>{{ currentLocale.name }}</span></INavItem>
+                <template #body>
+                  <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
+                    <span>{{ locale.name }}</span>
+                  </IDropdownItem>
+                </template>
+              </IDropdown>
         </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
@@ -71,6 +79,16 @@ import { localePath } from 'vue-i18n-routing';
     </ILayoutFooter>
   </ILayout>
 </template>
+<script setup>
+const { locale, locales } = useI18n();
+const switchLocalePath = useSwitchLocalePath();
+const currentLocale = computed(() => {
+  return (locales.value).find(i => i.code === locale.value)
+});
+const availableLocales = computed(() => {
+  return (locales.value).filter(i => i.code !== locale.value)
+});
+</script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
 
@@ -83,15 +101,13 @@ import { localePath } from 'vue-i18n-routing';
 
       &-footer {
         height: 30px;
+        margin-right: 20px;
       }
     }
 
     &__search {
-      flex-grow: 0;
-
-      &:hover {
-        flex-grow: 1;
-      }
+      margin: 0 10px;
+      width: 200px;
     }
 
     &__content {
