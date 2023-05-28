@@ -3,69 +3,72 @@ import { localePath } from 'vue-i18n-routing';
 
 <template>
   <ILayout class="default-layout">
+    <!-- header -->
     <ILayoutHeader>
       <INavbar>
         <INavbarBrand :to="localePath('/')">
           <img class="default-layout__logo" src="/covid-conscious-logo.svg" />
         </INavbarBrand>
         <INavbarCollapsible>
-            <INav class="default-layout__nav">
-              <IDropdown>
-                <INavItem> {{ $t("layout.community") }} </INavItem>
-                <template #body>
-                  <IDropdownItem>Action</IDropdownItem>
-                  <IDropdownItem>Another action</IDropdownItem>
-                  <IDropdownItem disabled>Disabled action</IDropdownItem>
-                  <IDropdownDivider />
-                  <IDropdownItem>Separated item</IDropdownItem>
-                </template>
-              </IDropdown>
-              <IDropdown>
-                <INavItem> {{ $t("layout.learn") }} </INavItem>
-                <template #body>
-                  <IDropdownItem>Action</IDropdownItem>
-                  <IDropdownItem>Another action</IDropdownItem>
-                  <IDropdownItem disabled>Disabled action</IDropdownItem>
-                  <IDropdownDivider />
-                  <IDropdownItem>Separated item</IDropdownItem>
-                </template>
-              </IDropdown>
-              <IDropdown>
-                <INavItem> {{ $t("layout.products") }} </INavItem>
-                <template #body>
-                  <IDropdownItem>Action</IDropdownItem>
-                  <IDropdownItem>Another action</IDropdownItem>
-                  <IDropdownItem disabled>Disabled action</IDropdownItem>
-                  <IDropdownDivider />
-                  <IDropdownItem>Separated item</IDropdownItem>
-                </template>
-              </IDropdown>
-              <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
-              <INavItem :to="localePath('/submit')"> {{ $t("layout.submitContent") }} </INavItem>
-            </INav>
-            <IInput class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
-              <template #append>
-                <IButton color="primary">
-                  <IIcon name="ink-search" />
-                </IButton>
+          <INav class="default-layout__nav">
+            <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
+            <IDropdown>
+              <INavItem> {{ $t("layout.community") }} </INavItem>
+              <template #body>
+                <IDropdownItem>Action</IDropdownItem>
+                <IDropdownItem>Another action</IDropdownItem>
+                <IDropdownItem disabled>Disabled action</IDropdownItem>
+                <IDropdownDivider />
+                <IDropdownItem>Separated item</IDropdownItem>
               </template>
-            </IInput>
-            <IDropdown placement="bottom-end">
-              <INavItem><Icon :name="currentLocale.flag" /> <span>{{ currentLocale.name }}</span></INavItem>
-                <template #body>
-                  <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
-                    <span>{{ locale.name }}</span>
-                  </IDropdownItem>
-                </template>
-              </IDropdown>
+            </IDropdown>
+            <IDropdown>
+              <INavItem> {{ $t("layout.learn") }} </INavItem>
+              <template #body>
+                <IDropdownItem>Action</IDropdownItem>
+                <IDropdownItem>Another action</IDropdownItem>
+                <IDropdownItem disabled>Disabled action</IDropdownItem>
+                <IDropdownDivider />
+                <IDropdownItem>Separated item</IDropdownItem>
+              </template>
+            </IDropdown>
+            <IDropdown>
+              <INavItem> {{ $t("layout.products") }} </INavItem>
+              <template #body>
+                <IDropdownItem>Action</IDropdownItem>
+                <IDropdownItem>Another action</IDropdownItem>
+                <IDropdownItem disabled>Disabled action</IDropdownItem>
+                <IDropdownDivider />
+                <IDropdownItem>Separated item</IDropdownItem>
+              </template>
+            </IDropdown>
+            <INavItem :to="localePath('/submit')"> {{ $t("layout.submitContent") }} </INavItem>
+          </INav>
+          <IInput class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
+            <template #append>
+              <IButton color="primary">
+                <IIcon name="ink-search" />
+              </IButton>
+            </template>
+          </IInput>
+          <IDropdown placement="bottom-end">
+            <INavItem><Icon :name="currentLocale.flag" /> <span>{{ currentLocale.name }}</span></INavItem>
+            <template #body>
+              <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
+                <span>{{ locale.name }}</span>
+              </IDropdownItem>
+            </template>
+          </IDropdown>
         </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
+    <!-- content -->
     <ILayoutContent class="default-layout__content">
       <IContainer class="default-layout__content--container">
         <NuxtPage />
       </IContainer>
     </ILayoutContent>
+    <!-- footer -->
     <ILayoutFooter class="default-layout__footer">
       <IContainer class="default-layout__footer--container">
         <INav class="default-layout__footer--nav">
