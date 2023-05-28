@@ -5,7 +5,7 @@ import { localePath } from 'vue-i18n-routing';
   <ILayout class="default-layout">
     <ILayoutHeader>
       <INavbar>
-        <INavbarBrand to="/">
+        <INavbarBrand :to="localePath('/')">
           <img class="default-layout__logo" src="/covid-conscious-logo.svg" />
         </INavbarBrand>
         <INavbarCollapsible>
@@ -40,8 +40,8 @@ import { localePath } from 'vue-i18n-routing';
                   <IDropdownItem>Separated item</IDropdownItem>
                 </template>
               </IDropdown>
-              <INavItem to="/news"> {{ $t("layout.news") }} </INavItem>
-              <INavItem to="/submit"> {{ $t("layout.submitContent") }} </INavItem>
+              <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
+              <INavItem :to="localePath('/submit')"> {{ $t("layout.submitContent") }} </INavItem>
             </INav>
             <IInput class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
               <template #append>
@@ -81,6 +81,7 @@ import { localePath } from 'vue-i18n-routing';
 <script setup>
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
+const localePath = useLocalePath();
 const currentLocale = computed(() => {
   return (locales.value).find(i => i.code === locale.value)
 });
