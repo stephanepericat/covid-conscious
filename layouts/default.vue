@@ -1,15 +1,18 @@
+
+import { localePath } from 'vue-i18n-routing';
+
 <template>
   <ILayout class="default-layout">
     <ILayoutHeader>
       <INavbar>
         <INavbarBrand to="/">
-          <img  class="default-layout__logo" src="/covid-conscious-logo.svg" />
+          <img class="default-layout__logo" src="/covid-conscious-logo.svg" />
         </INavbarBrand>
         <INavbarCollapsible>
             <INav class="default-layout__nav">
-              <INavItem to="/"> Home </INavItem>
+              <INavItem to="/"> {{ $t("layout.home") }} </INavItem>
               <IDropdown>
-                <INavItem> Community </INavItem>
+                <INavItem> {{ $t("layout.community") }} </INavItem>
                 <template #body>
                   <IDropdownItem>Action</IDropdownItem>
                   <IDropdownItem>Another action</IDropdownItem>
@@ -19,7 +22,7 @@
                 </template>
               </IDropdown>
               <IDropdown>
-                <INavItem> Learn </INavItem>
+                <INavItem> {{ $t("layout.learn") }} </INavItem>
                 <template #body>
                   <IDropdownItem>Action</IDropdownItem>
                   <IDropdownItem>Another action</IDropdownItem>
@@ -29,7 +32,7 @@
                 </template>
               </IDropdown>
               <IDropdown>
-                <INavItem> Products </INavItem>
+                <INavItem> {{ $t("layout.products") }} </INavItem>
                 <template #body>
                   <IDropdownItem>Action</IDropdownItem>
                   <IDropdownItem>Another action</IDropdownItem>
@@ -38,10 +41,10 @@
                   <IDropdownItem>Separated item</IDropdownItem>
                 </template>
               </IDropdown>
-              <INavItem to="/news"> News </INavItem>
-              <INavItem to="/contact"> Submit Content </INavItem>
+              <INavItem to="/news"> {{ $t("layout.news") }} </INavItem>
+              <INavItem to="/contact"> {{ $t("layout.submitContent") }} </INavItem>
             </INav>
-            <IInput class="default-layout__search" placeholder="Search...">
+            <IInput class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
               <template #append>
                 <IButton color="primary">
                   <IIcon name="ink-search" />
@@ -59,9 +62,9 @@
     <ILayoutFooter class="default-layout__footer">
       <IContainer class="default-layout__footer--container">
         <INav class="default-layout__footer--nav">
-          <INavItem class="default-layout__footer--legal">&copy;{{ new Date().getFullYear() }} All Rights Reserved.</INavItem>
+          <INavItem class="default-layout__footer--legal"> {{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }} </INavItem>
           <INavbarBrand to="/" class="default-layout__footer--logo">
-            <img  class="default-layout__logo-footer" src="/covid-conscious-logo.svg" />
+            <img class="default-layout__logo-footer" src="/covid-conscious-logo.svg" />
           </INavbarBrand>
         </INav>
       </IContainer>
