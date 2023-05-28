@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     modules: ['@inkline/plugin/nuxt'],
     inkline: {
         globals: {
-            // colorMode: 'dark',
+            colorMode: 'light',
         },
     },
 });

@@ -1,7 +1,7 @@
 <template>
   <ILayout class="default-layout">
     <ILayoutHeader>
-      <INavbar color="light">
+      <INavbar>
         <INavbarBrand to="/">
           <img  class="default-layout__logo" src="/covid-conscious-logo.svg" />
         </INavbarBrand>
@@ -51,16 +51,20 @@
         </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
-    <ILayout vertical>
-        <ILayoutContent class="default-layout__content">
-          <IContainer class="default-layout__content--container">
-            <NuxtPage />
-          </IContainer>
-        </ILayoutContent>
-        <!-- <ILayoutAside class="default-layout__aside"> Right Aside </ILayoutAside> -->
-    </ILayout>
-    <ILayoutFooter>
-      <div class="default-layout__footer">&nbsp;</div>
+    <ILayoutContent class="default-layout__content">
+      <IContainer class="default-layout__content--container">
+        <NuxtPage />
+      </IContainer>
+    </ILayoutContent>
+    <ILayoutFooter class="default-layout__footer">
+      <IContainer class="default-layout__footer--container">
+        <INav class="default-layout__footer--nav">
+          <INavItem class="default-layout__footer--legal">&copy;{{ new Date().getFullYear() }} All Rights Reserved.</INavItem>
+          <INavbarBrand to="/" class="default-layout__footer--logo">
+            <img  class="default-layout__logo-footer" src="/covid-conscious-logo.svg" />
+          </INavbarBrand>
+        </INav>
+      </IContainer>
     </ILayoutFooter>
   </ILayout>
 </template>
@@ -73,6 +77,10 @@
     &__logo {
       height: 50px;
       width: auto;
+
+      &-footer {
+        height: 30px;
+      }
     }
 
     &__search {
@@ -83,14 +91,27 @@
       }
     }
 
+    &__content {
+      &--container {
+        padding: 50px;
+      }
+    }
+
     &__footer {
       background-color: var(--color-light);
+      padding: 30px 0 50px 0;
+
+      &--nav {
+        display: flex;
+        width: 100%;
+      }
+
+      &--legal {
+        flex-grow: 1;
+      }
     }
 
     // @include breakpoint('md') {
-    //   &__aside {
-    //     display: none;
-    //   }
     // }
   }
 </style>
