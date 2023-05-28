@@ -18,6 +18,7 @@
     "sass": "^1.0.0"
   },
   "dependencies": {
-    "@inkline/inkline": "^4.0.0"
+    "@inkline/inkline": "^4.0.0",
+    "@nuxtjs/sanity": "^1.7.2"
   }
 }

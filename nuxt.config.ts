@@ -1,13 +1,13 @@
-import { resolve } from 'path'
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@inkline/plugin/nuxt', '@nuxtjs/i18n', 'nuxt-icon'],
+  modules: ['@inkline/plugin/nuxt', '@nuxtjs/i18n', '@nuxtjs/sanity', 'nuxt-icon'],
+
   inkline: {
     globals: {
       colorMode: 'light',
     },
   },
+
   i18n: {
     baseUrl: '/',
     defaultLocale: 'en',
@@ -18,6 +18,11 @@ export default defineNuxtConfig({
       { code: 'fr', iso: 'fr-FR', name: 'Français (FR)', flag: 'flag:fr-1x1', file: 'fr.js' },
       { code: 'pt', iso: 'pt-BR', name: 'Português (BR)', flag: 'flag:br-1x1', file: 'pt.js' },
     ],
-    // vueI18n: './i18n.config.ts',
-  }
+  },
+
+  sanity: {
+    apiVersion: '2021-10-21',
+    dataset: process.env.SANITY_DATASET,
+    projectId: process.env.SANITY_PROJECTID,
+  },
 });
