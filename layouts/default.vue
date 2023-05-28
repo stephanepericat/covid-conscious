@@ -19,6 +19,16 @@
                 </template>
               </IDropdown>
               <IDropdown>
+                <INavItem> Learn </INavItem>
+                <template #body>
+                  <IDropdownItem>Action</IDropdownItem>
+                  <IDropdownItem>Another action</IDropdownItem>
+                  <IDropdownItem disabled>Disabled action</IDropdownItem>
+                  <IDropdownDivider />
+                  <IDropdownItem>Separated item</IDropdownItem>
+                </template>
+              </IDropdown>
+              <IDropdown>
                 <INavItem> Products </INavItem>
                 <template #body>
                   <IDropdownItem>Action</IDropdownItem>
