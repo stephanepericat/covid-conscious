@@ -1,6 +1,3 @@
 <template>
-  <div>{{ title }} submit page</div>
+  <h1>{{ $t("comingSoon") }}</h1>
 </template>
-<script setup>
-const title = ref("cccc.org");
-</script>

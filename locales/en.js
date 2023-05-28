@@ -1,4 +1,5 @@
 export default {
+  comingSoon: "Coming soon...",
   layout: {
     footerLegal: "© {year} All rights reserved.",
     home: "Home",
