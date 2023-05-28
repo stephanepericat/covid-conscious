@@ -10,7 +10,6 @@ import { localePath } from 'vue-i18n-routing';
         </INavbarBrand>
         <INavbarCollapsible>
             <INav class="default-layout__nav">
-              <INavItem to="/"> {{ $t("layout.home") }} </INavItem>
               <IDropdown>
                 <INavItem> {{ $t("layout.community") }} </INavItem>
                 <template #body>
@@ -42,7 +41,7 @@ import { localePath } from 'vue-i18n-routing';
                 </template>
               </IDropdown>
               <INavItem to="/news"> {{ $t("layout.news") }} </INavItem>
-              <INavItem to="/contact"> {{ $t("layout.submitContent") }} </INavItem>
+              <INavItem to="/submit"> {{ $t("layout.submitContent") }} </INavItem>
             </INav>
             <IInput class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
               <template #append>
@@ -107,7 +106,6 @@ const availableLocales = computed(() => {
 
     &__search {
       margin: 0 10px;
-      width: 200px;
     }
 
     &__content {
