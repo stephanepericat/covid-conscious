@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@inkline/inkline": "^4.0.0",
-    "@nuxtjs/sanity": "^1.7.2"
+    "@nuxtjs/sanity": "^1.7.2",
+    "groq": "^3.11.3"
   }
 }

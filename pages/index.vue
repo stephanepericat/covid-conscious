@@ -1,6 +1,11 @@
 <template>
-  <div>{{ title }} home page</div>
+  <ul>
+    <li v-for="cat in data" :key="cat._createdAt">{{ cat.name[locale] }}</li>
+  </ul>
 </template>
 <script setup>
-const title = ref("cccc.org");
+import query from "~/sanity/productCategories.sanity";
+
+const { locale } = useI18n();
+const { data, refresh } = useSanityQuery(query);
 </script>
