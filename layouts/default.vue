@@ -80,7 +80,7 @@ import { localePath } from 'vue-i18n-routing';
                   <span class="default-layout__footer--dropdown-label" v-text="$t('layout.contactUs')" />
                 </IDropdownItem>
                 <IDropdownItem>
-                  <Icon class="default-layout__footer--dropdown-icon" name="ph:twitter-logo-light" />
+                  <Icon class="default-layout__footer--dropdown-icon" name="ri:twitter-line" />
                   <span class="default-layout__footer--dropdown-label" v-text="$t('layout.twitter')" />
                 </IDropdownItem>
               </template>
