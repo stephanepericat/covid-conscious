@@ -68,7 +68,23 @@ import { localePath } from 'vue-i18n-routing';
         <INav class="default-layout__footer--nav">
           <INavItem class="default-layout__footer--legal"> {{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }} </INavItem>
           <INavbarBrand to="/" class="default-layout__footer--logo">
-            <img class="default-layout__logo-footer" src="/covid-conscious-logo.svg" />
+            <IDropdown placement="top-end" events="hover">
+              <img class="default-layout__logo-footer" src="/covid-conscious-logo.svg" />
+              <template #body>
+                <IDropdownItem>
+                  <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:android-chat" />
+                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.about')" />
+                </IDropdownItem>
+                <IDropdownItem>
+                  <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:contact-support-outline" />
+                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.contactUs')" />
+                </IDropdownItem>
+                <IDropdownItem>
+                  <Icon class="default-layout__footer--dropdown-icon" name="ph:twitter-logo-light" />
+                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.twitter')" />
+                </IDropdownItem>
+              </template>
+            </IDropdown>
           </INavbarBrand>
         </INav>
       </IContainer>
@@ -134,6 +150,16 @@ const menuCategoriesSorted = computed(() => {
       &--nav {
         display: flex;
         width: 100%;
+      }
+
+      &--dropdown {
+        &-icon {
+          height: 22px;
+        }
+
+        &-label {
+          margin-left: 8px;
+        }
       }
 
       &--legal {

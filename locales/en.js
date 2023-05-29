@@ -1,13 +1,21 @@
 export default {
   comingSoon: "Coming soon...",
+  home: {
+    description: "Covid Conscious - A platform for Covid advice",
+    pageTitle: "Latest Publications",
+    title: "Covid Conscious - Latest Publications",
+  },
   layout: {
+    about: "About",
     footerLegal: "© {year} All rights reserved.",
     home: "Home",
     community: "Community",
+    contactUs: "Contact Us",
     learn: "Learn",
     news: "News",
     products: "Products",
     search: "Search",
     submitContent: "Submit Content",
+    twitter: "Follow us on Twitter",
   },
 };
