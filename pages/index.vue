@@ -1,10 +1,14 @@
 <template>
   <div class="home-page">
     <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
+    <pre>{{ latestPublications }}</pre>
   </div>
 </template>
 <script setup>
-const { t } = useI18n();
+import latestPublicationsQuery from '~/sanity/latestPublications';
+
+const { locale, t } = useI18n();
+
 useHead({
   meta: [
     { name: "description", content: t("home.description") },
@@ -12,5 +16,5 @@ useHead({
   title: t("home.title")
 });
 
-const { locale } = useI18n();
+const { data: latestPublications } = useSanityQuery(latestPublicationsQuery, { locale });
 </script>
