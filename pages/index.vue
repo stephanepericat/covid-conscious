@@ -7,5 +7,5 @@
 import query from "~/sanity/productCategories.sanity";
 
 const { locale } = useI18n();
-const { data, refresh } = useSanityQuery(query);
+const { data, refresh } = useSanityQuery(query, { locale });
 </script>
