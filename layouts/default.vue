@@ -4,7 +4,7 @@ import { localePath } from 'vue-i18n-routing';
 <template>
   <ILayout class="default-layout">
     <!-- header -->
-    <ILayoutHeader>
+    <ILayoutHeader class="default-layout__header">
       <INavbar>
         <INavbarBrand :to="localePath('/')">
           <img class="default-layout__logo" src="/covid-conscious-logo.svg" />
@@ -122,6 +122,11 @@ const menuCategoriesSorted = computed(() => {
 
   .default-layout {
     height: 100vh;
+
+    &__header {
+      position: sticky;
+      top: 0;
+    }
 
     &__logo {
       height: 50px;
