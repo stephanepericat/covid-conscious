@@ -8,7 +8,7 @@
           <IListGroupItem v-for="article in latestPublications.news">
             <IMedia>
               <h3>
-                <NuxtLink :to="article.link" target="_blank">{{ article.title }}</NuxtLink>
+                <NuxtLink :to="article.link" target="_blank">{{ article.source }}: {{ article.title }}</NuxtLink>
               </h3>
               <em>
                 <span>{{ article.category }} &bullet; </span>
