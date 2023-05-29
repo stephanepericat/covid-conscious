@@ -15,31 +15,25 @@ import { localePath } from 'vue-i18n-routing';
             <IDropdown>
               <INavItem> {{ $t("layout.community") }} </INavItem>
               <template #body>
-                <IDropdownItem>Action</IDropdownItem>
-                <IDropdownItem>Another action</IDropdownItem>
-                <IDropdownItem disabled>Disabled action</IDropdownItem>
-                <IDropdownDivider />
-                <IDropdownItem>Separated item</IDropdownItem>
+                <IDropdownItem v-for="category in menuCategoriesSorted.communityCategory" :key="category.name">
+                  {{ category.name }}
+                </IDropdownItem>
               </template>
             </IDropdown>
             <IDropdown>
               <INavItem> {{ $t("layout.learn") }} </INavItem>
               <template #body>
-                <IDropdownItem>Action</IDropdownItem>
-                <IDropdownItem>Another action</IDropdownItem>
-                <IDropdownItem disabled>Disabled action</IDropdownItem>
-                <IDropdownDivider />
-                <IDropdownItem>Separated item</IDropdownItem>
+                <IDropdownItem v-for="category in menuCategoriesSorted.educationCategory" :key="category.name">
+                  {{ category.name }}
+                </IDropdownItem>
               </template>
             </IDropdown>
             <IDropdown>
               <INavItem> {{ $t("layout.products") }} </INavItem>
               <template #body>
-                <IDropdownItem>Action</IDropdownItem>
-                <IDropdownItem>Another action</IDropdownItem>
-                <IDropdownItem disabled>Disabled action</IDropdownItem>
-                <IDropdownDivider />
-                <IDropdownItem>Separated item</IDropdownItem>
+                <IDropdownItem v-for="category in menuCategoriesSorted.productCategory" :key="category.name">
+                  {{ category.name }}
+                </IDropdownItem>
               </template>
             </IDropdown>
             <INavItem :to="localePath('/submit')"> {{ $t("layout.submitContent") }} </INavItem>
@@ -82,6 +76,8 @@ import { localePath } from 'vue-i18n-routing';
   </ILayout>
 </template>
 <script setup>
+import menuCategoriesQuery from "~/sanity/menuCategories.sanity";
+
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
@@ -90,6 +86,19 @@ const currentLocale = computed(() => {
 });
 const availableLocales = computed(() => {
   return (locales.value).filter(i => i.code !== locale.value)
+});
+
+const { data: menuCategories } = useSanityQuery(menuCategoriesQuery, { locale });
+const menuCategoriesSorted = computed(() => {
+  return menuCategories?.value?.reduce((acc, val) => {
+    if(!acc[val.category]) {
+      acc[val.category] = [];
+    }
+
+    acc[val.category].push(val);
+
+    return acc;
+  }, {});
 });
 </script>
 <style lang="scss" scoped>
