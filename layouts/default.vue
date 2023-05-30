@@ -7,7 +7,7 @@ import { localePath } from 'vue-i18n-routing';
     <ILayoutHeader class="default-layout__header">
       <INavbar>
         <INavbarBrand :to="localePath('/')">
-          <img class="default-layout__logo" src="/covid-conscious-logo.svg" />
+          <img class="default-layout__logo" :src="logoFile" />
         </INavbarBrand>
         <INavbarCollapsible>
           <INav class="default-layout__nav">
@@ -78,7 +78,7 @@ import { localePath } from 'vue-i18n-routing';
           <INavItem class="default-layout__footer--legal"> {{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }} </INavItem>
           <INavbarBrand to="/" class="default-layout__footer--logo">
             <IDropdown placement="top-end" events="hover">
-              <img class="default-layout__logo-footer" src="/covid-conscious-logo.svg" />
+              <img class="default-layout__logo-footer" :src="logoFile" />
               <template #body>
                 <IDropdownItem>
                   <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:android-chat" />
@@ -109,6 +109,8 @@ const inkline = useInkline();
 const { locale, locales, t } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
+
+// Current and available languages
 const currentLocale = computed(() => {
   return (locales.value).find(i => i.code === locale.value)
 });
@@ -116,6 +118,7 @@ const availableLocales = computed(() => {
   return (locales.value).filter(i => i.code !== locale.value)
 });
 
+// Menu Categories
 const { data: menuCategories } = useSanityQuery(menuCategoriesQuery, { locale });
 const menuCategoriesSorted = computed(() => {
   return menuCategories?.value?.reduce((acc, val) => {
@@ -131,8 +134,19 @@ const menuCategoriesSorted = computed(() => {
 
 // Inkline color mode
 const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON);
-const colorModeTooltip = computed(() => inkline.options.colorMode === DARK ? t('layout.switch.lightMode') :  t('layout.switch.darkMode'));
+const colorModeTooltip = computed(() => {
+  return inkline.options.colorMode === DARK
+    ? t('layout.switch.lightMode')
+    : t('layout.switch.darkMode')
+});
 const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
+
+// App Logo
+const logoFile = computed(() => {
+  return inkline.options.colorMode === DARK
+    ? '/covid-conscious-logo-light.svg'
+    : '/covid-conscious-logo.svg'
+});
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
