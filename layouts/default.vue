@@ -46,13 +46,19 @@ import { localePath } from 'vue-i18n-routing';
             </template>
           </IInput>
           <IDropdown placement="bottom-end">
-            <INavItem><Icon :name="currentLocale.flag" /> <span>{{ currentLocale.name }}</span></INavItem>
+            <INavItem>
+              <Icon :name="currentLocale.flag" />
+              <!-- <span class="default-layout__locale">{{ currentLocale.name }}</span> -->
+            </INavItem>
             <template #body>
               <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
                 <span>{{ locale.name }}</span>
               </IDropdownItem>
             </template>
           </IDropdown>
+          <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
+            <Icon :name="colorModeIcon" />
+          </INavItem>
         </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
@@ -92,8 +98,11 @@ import { localePath } from 'vue-i18n-routing';
   </ILayout>
 </template>
 <script setup>
-import menuCategoriesQuery from "~/sanity/menuCategories.sanity";
+import menuCategoriesQuery from '~/sanity/menuCategories.sanity';
+import { useInkline } from '@inkline/inkline';
+import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
 
+const inkline = useInkline();
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
@@ -116,64 +125,84 @@ const menuCategoriesSorted = computed(() => {
     return acc;
   }, {});
 });
+
+// Inkline color mode
+const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? DARK_ICON : LIGHT_ICON);
+const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
 
-  .default-layout {
-    height: 100vh;
+.default-layout {
+  height: 100vh;
 
-    &__header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+  &__header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    &__logo {
-      height: 50px;
-      width: auto;
-
-      &-footer {
-        height: 30px;
-        margin-right: 20px;
+    &--color-mode {
+      &:hover {
+        cursor: pointer;
       }
     }
-
-    &__search {
-      margin: 0 10px;
-    }
-
-    &__content {
-      &--container {
-        padding: 50px;
-      }
-    }
-
-    &__footer {
-      background-color: var(--color-light);
-      padding: 30px 0 50px 0;
-
-      &--nav {
-        display: flex;
-        width: 100%;
-      }
-
-      &--dropdown {
-        &-icon {
-          height: 22px;
-        }
-
-        &-label {
-          margin-left: 8px;
-        }
-      }
-
-      &--legal {
-        flex-grow: 1;
-      }
-    }
-
-    // @include breakpoint('md') {
-    // }
   }
+
+  &__logo {
+    height: 50px;
+    width: auto;
+
+    &-footer {
+      height: 30px;
+      margin-right: 20px;
+    }
+  }
+
+  &__locale {
+    margin-left: 8px;
+  }
+
+  &__search {
+    margin: 0 10px;
+  }
+
+  &__content {
+    &--container {
+      padding: 50px;
+    }
+  }
+
+  &__footer {
+    background-color: var(--color-light);
+    padding: 30px 0 50px 0;
+
+    &--nav {
+      display: flex;
+      width: 100%;
+    }
+
+    &--dropdown {
+      &-icon {
+        height: 22px;
+      }
+
+      &-label {
+        margin-left: 8px;
+      }
+    }
+
+    &--legal {
+      flex-grow: 1;
+    }
+  }
+
+  // @include breakpoint('md') {
+  // }
+}
+
+.dark-theme {
+  .default-layout__footer {
+    background: var(--color-dark);
+  }
+}
 </style>

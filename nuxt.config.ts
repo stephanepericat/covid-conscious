@@ -15,6 +15,7 @@ export default defineNuxtConfig({
   inkline: {
     globals: {
       colorMode: 'light',
+      colorModeStrategy: 'localStorage',
     },
   },
 
