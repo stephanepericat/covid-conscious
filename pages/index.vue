@@ -7,6 +7,17 @@
         <IListGroup size="sm" :border="false">
           <IListGroupItem v-for="article in latestPublications.news">
             <IMedia>
+              <template #image>
+                <img
+                  v-if="article.thumbnail"
+                  class="home-page__thumbnail"
+                  :src="article.thumbnail"
+                  :alt="article.title"
+                />
+                <div v-else class="home-page__thumbnail--fallback">
+                  <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+                </div>
+              </template>
               <h3>
                 <NuxtLink :to="article.link" target="_blank">{{ article.source }}: {{ article.title }}</NuxtLink>
               </h3>
@@ -24,6 +35,17 @@
         <IListGroup size="sm" :border="false">
           <IListGroupItem v-for="article in latestPublications.community">
             <IMedia>
+              <template #image>
+                <img
+                  v-if="article.thumbnail"
+                  class="home-page__thumbnail"
+                  :src="article.thumbnail"
+                  :alt="article.title"
+                />
+                <div v-else class="home-page__thumbnail--fallback">
+                  <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+                </div>
+              </template>
               <h3>
                 <NuxtLink :to="article.link">{{ article.title }}</NuxtLink>
               </h3>
@@ -41,6 +63,17 @@
         <IListGroup size="sm" :border="false">
           <IListGroupItem v-for="article in latestPublications.learn">
             <IMedia>
+              <template #image>
+                <img
+                  v-if="article.thumbnail"
+                  class="home-page__thumbnail"
+                  :src="article.thumbnail"
+                  :alt="article.title"
+                />
+                <div v-else class="home-page__thumbnail--fallback">
+                  <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+                </div>
+              </template>
               <h3>
                 <NuxtLink :to="article.link">{{ article.title }}</NuxtLink>
               </h3>
@@ -58,6 +91,17 @@
         <IListGroup size="sm" :border="false">
           <IListGroupItem v-for="article in latestPublications.products">
             <IMedia>
+              <template #image>
+                <img
+                  v-if="article.thumbnail"
+                  class="home-page__thumbnail"
+                  :src="article.thumbnail"
+                  :alt="article.title"
+                />
+                <div v-else class="home-page__thumbnail--fallback">
+                  <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+                </div>
+              </template>
               <h3>
                 <NuxtLink :to="article.link">{{ article.title }}</NuxtLink>
               </h3>
@@ -89,6 +133,8 @@ useHead({
 const { data: latestPublications } = useSanityQuery(latestPublicationsQuery, { locale });
 </script>
 <style lang="scss" scoped>
+$thumbnailDimension: 80px;
+
 .home-page {
   &__container {
     display: flex;
@@ -100,6 +146,24 @@ const { data: latestPublications } = useSanityQuery(latestPublicationsQuery, { l
     &--card {
       width: calc(50% - 10px);
       margin: 10px 0;
+    }
+  }
+
+  &__thumbnail {
+    width: $thumbnailDimension;
+    height: $thumbnailDimension;
+
+    &--fallback {
+      flex: none;
+      margin-right: var(--margin-right);
+      width: $thumbnailDimension;
+      height: $thumbnailDimension;
+
+      &-icon {
+        width: $thumbnailDimension;
+        height: $thumbnailDimension;
+        opacity: .2;
+      }
     }
   }
 }

@@ -8,6 +8,7 @@ export default groq`
     "published": _createdAt,
     "link": "/" + _type + "/" + category->uri.current + "/" + uri.current,
     "category": category->name[$locale],
+    "thumbnail": visual.asset->url,
   },
   "learn": *[(_type == "education") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": title[$locale],
@@ -15,6 +16,7 @@ export default groq`
     "published": _createdAt,
     "link": "/" + _type + "/" + category->uri.current + "/" + uri.current,
     "category": category->name[$locale],
+    "thumbnail": visual.asset->url,
   },
   "news": *[(_type == "link") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": title[$locale],
@@ -23,6 +25,7 @@ export default groq`
     "link": url,
     "category": category->name[$locale],
     source,
+    "thumbnail": visual.asset->url,
   },
   "products": *[(_type == "product") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": title[$locale],
@@ -30,6 +33,7 @@ export default groq`
     "published": _createdAt,
     "link": "/" + _type + "/" + category->uri.current + "/" + uri.current,
     "category": category->name[$locale],
+    "thumbnail": visual.asset->url,
   },
 }
 `
