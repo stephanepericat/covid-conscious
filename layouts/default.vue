@@ -45,7 +45,7 @@ import { localePath } from 'vue-i18n-routing';
               </IButton>
             </template>
           </IInput>
-          <IDropdown placement="bottom-end">
+          <IDropdown placement="bottom-end" events="hover">
             <INavItem>
               <Icon :name="currentLocale.flag" />
               <!-- <span class="default-layout__locale">{{ currentLocale.name }}</span> -->
@@ -56,9 +56,12 @@ import { localePath } from 'vue-i18n-routing';
               </IDropdownItem>
             </template>
           </IDropdown>
-          <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
-            <Icon :name="colorModeIcon" />
-          </INavItem>
+          <ITooltip placement="bottom-end" size="sm">
+            <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
+              <Icon :name="colorModeIcon" />
+            </INavItem>
+            <template #body>{{ colorModeTooltip }}</template>
+          </ITooltip>
         </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
@@ -103,7 +106,7 @@ import { useInkline } from '@inkline/inkline';
 import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
 
 const inkline = useInkline();
-const { locale, locales } = useI18n();
+const { locale, locales, t } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
 const currentLocale = computed(() => {
@@ -127,7 +130,8 @@ const menuCategoriesSorted = computed(() => {
 });
 
 // Inkline color mode
-const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? DARK_ICON : LIGHT_ICON);
+const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON);
+const colorModeTooltip = computed(() => inkline.options.colorMode === DARK ? t('layout.switch.lightMode') :  t('layout.switch.darkMode'));
 const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
 </script>
 <style lang="scss" scoped>

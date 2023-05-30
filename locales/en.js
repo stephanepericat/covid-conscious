@@ -16,6 +16,10 @@ export default {
     products: "Products",
     search: "Search",
     submitContent: "Submit Content",
+    switch: {
+      darkMode: "Switch To Dark Mode",
+      lightMode: "Switch To Light Mode",
+    },
     twitter: "Follow us on Twitter",
   },
 };

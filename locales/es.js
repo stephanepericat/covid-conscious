@@ -16,6 +16,10 @@ export default {
     products: "Productos",
     search: "Buscar",
     submitContent: "Enviar Contenido",
+    switch: {
+      darkMode: "Cambiar al modo oscuro",
+      lightMode: "Cambiar al modo de luz",
+    },
     twitter: "Síganos en Twitter",
   },
 };
