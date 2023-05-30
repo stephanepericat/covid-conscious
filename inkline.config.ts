@@ -36,7 +36,7 @@ export default defineConfig({
                 gray: '#8e9fa4',
                 dark: 'var(--color-gray-800)',
                 black: '#000000',
-                primary: '<% theme.color.blue %>',
+                primary: '<% theme.color.red %>',
                 secondary: '<% theme.color.purple %>',
                 info: '<% theme.color.teal %>',
                 success: '<% theme.color.green %>',
@@ -71,7 +71,7 @@ export default defineConfig({
             typography: {
                 fontFamily: {
                     primary: {
-                        base: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+                        base: "'Barlow Condensed', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
                         monospace:
                             "'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
                         print: "'Georgia', 'Times New Roman', 'Times', serif"

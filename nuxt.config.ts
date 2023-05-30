@@ -1,5 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: "anonymous" },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap' },
+      ]
+    }
+  },
+  
   modules: ['@inkline/plugin/nuxt', '@nuxtjs/i18n', '@nuxtjs/sanity', 'nuxt-icon'],
 
   inkline: {
