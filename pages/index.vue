@@ -118,7 +118,7 @@
   </div>
 </template>
 <script setup>
-import latestPublicationsQuery from '~/sanity/latestPublications';
+import latestPublicationsQuery from '~/sanity/latestPublications.sanity';
 import { format } from "date-fns";
 
 const { locale, t } = useI18n();
