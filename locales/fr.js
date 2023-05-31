@@ -24,7 +24,7 @@ export default {
   },
   search: {
     description: "Covid Conscious - Une plateforme de conseils Covid",
-    pageTitle: "Résultats de recherche pour \"{searchTerm}\"",
+    pageTitle: "{totalItems} Résultats de recherche pour \"{searchTerm}\"",
     title: "Covid Conscious - Recherche \"{searchTerm}\"",
   },
 };

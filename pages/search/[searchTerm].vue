@@ -1,6 +1,6 @@
 <template>
   <div class="search-page">
-    <h1>{{ $t("search.pageTitle", { searchTerm }) }}</h1>
+    <h1>{{ $t("search.pageTitle", { searchTerm, totalItems }) }}</h1>
     <IListGroup size="sm" :border="false">
       <IListGroupItem v-for="article in searchResults">
         <IMedia>
@@ -48,7 +48,9 @@ useHead({
   title: t("search.title", { searchTerm: searchTerm.value })
 });
 
-const { data: searchResults } = useSanityQuery(searchQuery, { locale, searchTerm });
+const { data } = useSanityQuery(searchQuery, { locale, searchTerm });
+const searchResults = computed(() => data?.value?.results || []);
+const totalItems = computed(() => data?.value?.total || 0);
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/variables.scss";
