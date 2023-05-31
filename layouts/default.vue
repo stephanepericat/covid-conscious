@@ -38,9 +38,9 @@ import { localePath } from 'vue-i18n-routing';
             </IDropdown>
             <INavItem :to="localePath('/submit')"> {{ $t("layout.submitContent") }} </INavItem>
           </INav>
-          <IInput class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
+          <IInput v-model="searchTerm" @keydown.enter="onSearch" class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
             <template #append>
-              <IButton color="primary">
+              <IButton color="primary" :disabled="!searchTerm.length" @click="onSearch">
                 <IIcon name="ink-search" />
               </IButton>
             </template>
@@ -109,6 +109,7 @@ const inkline = useInkline();
 const { locale, locales, t } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 const localePath = useLocalePath();
+const router = useRouter();
 
 // Current and available languages
 const currentLocale = computed(() => {
@@ -147,6 +148,10 @@ const logoFile = computed(() => {
     ? '/covid-conscious-logo-light.svg'
     : '/covid-conscious-logo.svg'
 });
+
+// Search
+const searchTerm = ref("");
+const onSearch = () => router.push({ path: `/search/${encodeURIComponent(searchTerm.value)}`});
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
