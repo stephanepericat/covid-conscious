@@ -16,7 +16,12 @@
             </div>
           </template>
           <h3>
-            <NuxtLink :to="article.link || article.path" target="_blank"><span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}</NuxtLink>
+            <NuxtLink
+              :to="article.link || article.path"
+              :target="article.link ? '_blank' : '_self'"
+            >
+              <span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}
+            </NuxtLink>
           </h3>
           <em>
             <span>{{ article.category }} &bullet; </span>
@@ -26,9 +31,6 @@
         </IMedia>
       </IListGroupItem>
     </IListGroup>
-    <!-- <pre>
-      {{ searchResults }}
-    </pre> -->
   </div>
 </template>
 <script setup>
