@@ -22,4 +22,9 @@ export default {
     },
     twitter: "Follow us on Twitter",
   },
+  search: {
+    description: "Covid Conscious - A platform for Covid advice",
+    pageTitle: "Search Results for \"{searchTerm}\"",
+    title: "Covid Conscious - Search \"{searchTerm}\"",
+  },
 };
