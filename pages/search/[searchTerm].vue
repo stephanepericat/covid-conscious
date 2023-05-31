@@ -2,7 +2,7 @@
   <div class="search-page">
     <h1>{{ $t("search.pageTitle", { searchTerm, totalItems }) }}</h1>
     <IListGroup size="sm" :border="false">
-      <IListGroupItem v-for="article in searchResults">
+      <IListGroupItem v-for="article in visibleItems">
         <IMedia>
           <template #image>
             <img
@@ -31,6 +31,7 @@
         </IMedia>
       </IListGroupItem>
     </IListGroup>
+    <IPagination v-model="currentPage" class="search-page__pagination" :items-total="totalItems" :items-per-page="itemsPerPage" />
   </div>
 </template>
 <script setup>
@@ -48,9 +49,15 @@ useHead({
   title: t("search.title", { searchTerm: searchTerm.value })
 });
 
+const currentPage = ref(1);
+const itemsPerPage = ref(4);
+const startItem = computed(() => (currentPage.value - 1) * itemsPerPage.value);
+const endItem = computed(() => startItem.value + itemsPerPage.value);
+
 const { data } = useSanityQuery(searchQuery, { locale, searchTerm });
 const searchResults = computed(() => data?.value?.results || []);
 const totalItems = computed(() => data?.value?.total || 0);
+const visibleItems = computed(() => searchResults.value.slice(startItem.value, endItem.value));
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/variables.scss";
@@ -72,6 +79,12 @@ const totalItems = computed(() => data?.value?.total || 0);
         opacity: .2;
       }
     }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 }
 </style>
