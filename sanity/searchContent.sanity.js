@@ -8,6 +8,7 @@ export default groq`
   "category": category->name[$locale],
   "categoryUri": category->uri.current,
   "link": url,
+  "path": "/" + _type + "/" + category->uri.current + "/" + uri.current,
   "source": source,
   "thumbnail": visual.asset->url,
   "type": _type,

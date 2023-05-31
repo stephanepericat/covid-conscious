@@ -133,7 +133,7 @@ useHead({
 const { data: latestPublications } = useSanityQuery(latestPublicationsQuery, { locale });
 </script>
 <style lang="scss" scoped>
-$thumbnailDimension: 80px;
+@import "~/assets/sass/variables.scss";
 
 .home-page {
   &__container {
