@@ -151,7 +151,13 @@ const logoFile = computed(() => {
 
 // Search
 const searchTerm = ref("");
-const onSearch = () => router.push({ path: `/search/${encodeURIComponent(searchTerm.value)}`});
+const onSearch = () => {
+  if (!searchTerm.value.length) {
+    return;
+  }
+
+  router.push({ path: `/search/${encodeURIComponent(searchTerm.value)}`});
+};
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
