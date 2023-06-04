@@ -8,6 +8,7 @@ export default groq`
   "published": _createdAt,
   "updated": _updatedAt,
   "body": description[$locale],
-  "thumbnail": visual.asset->url,
+  "category": category->name[$locale]
+  // "thumbnail": visual.asset->url,
 }
 `

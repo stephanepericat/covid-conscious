@@ -1,4 +1,7 @@
 export default {
+  article: {
+    updated: "Updated",
+  },
   comingSoon: "Coming soon...",
   home: {
     description: "Covid Conscious - A platform for Covid advice",
