@@ -1,0 +1,39 @@
+@import "./variables.scss";
+
+@mixin eyebrow() {
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+}
+
+@mixin loader() {
+  margin: 40px auto;
+}
+
+@mixin pagination() {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+@mixin pending() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin thumbnail($dimension: $thumbnailDimension) {
+  width: $dimension;
+    height: $dimension;
+
+    &--fallback {
+      flex: none;
+      margin-right: var(--margin-right);
+      width: $dimension;
+      height: $dimension;
+
+      &-icon {
+        width: $dimension;
+        height: $dimension;
+        opacity: .2;
+      }
+    }
+}
