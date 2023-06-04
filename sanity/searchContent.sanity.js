@@ -13,7 +13,7 @@ export default groq`
     "link": url,
     "path": "/" + _type + "/" + category->uri.current + "/" + uri.current,
     "source": source,
-    "thumbnail": visual.asset->url,
+    "thumbnail": visual.asset._ref,
     "type": _type,
     "uri": uri.current,
   },

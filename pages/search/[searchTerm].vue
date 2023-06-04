@@ -7,17 +7,18 @@
         <IListGroupItem v-for="article in visibleItems">
           <IMedia>
             <template #image>
-              <img
+              <SanityImage
                 v-if="article.thumbnail"
-                class="search-page__thumbnail"
-                :src="article.thumbnail"
-                :alt="article.title"
+                :asset-id="article.thumbnail"
+                auto="format"
+                :h="80"
+                :w="80"
               />
               <div v-else class="search-page__thumbnail--fallback">
                 <Icon class="search-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
               </div>
             </template>
-            <h3>
+            <h3 class="search-page__link">
               <NuxtLink
                 :to="article.link || article.path"
                 :target="article.link ? '_blank' : '_self'"
@@ -73,6 +74,10 @@ const visibleItems = computed(() => searchResults.value.slice(startItem.value, e
 
   &__loader {
     @include loader();
+  }
+
+  &__link {
+    @include titleLink();
   }
 
   &__thumbnail {

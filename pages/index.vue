@@ -10,17 +10,18 @@
             <IListGroupItem v-for="article in latestPublications.news">
               <IMedia>
                 <template #image>
-                  <img
+                  <SanityImage
                     v-if="article.thumbnail"
-                    class="home-page__thumbnail"
-                    :src="article.thumbnail"
-                    :alt="article.title"
+                    :asset-id="article.thumbnail"
+                    auto="format"
+                    :h="80"
+                    :w="80"
                   />
                   <div v-else class="home-page__thumbnail--fallback">
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
                   </div>
                 </template>
-                <h3>
+                <h3 class="home-page__link">
                   <NuxtLink :to="article.link" target="_blank">{{ article.source }}: {{ article.title }}</NuxtLink>
                 </h3>
                 <em>
@@ -38,11 +39,12 @@
             <IListGroupItem v-for="article in latestPublications.community">
               <IMedia>
                 <template #image>
-                  <img
+                  <SanityImage
                     v-if="article.thumbnail"
-                    class="home-page__thumbnail"
-                    :src="article.thumbnail"
-                    :alt="article.title"
+                    :asset-id="article.thumbnail"
+                    auto="format"
+                    :h="80"
+                    :w="80"
                   />
                   <div v-else class="home-page__thumbnail--fallback">
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
@@ -66,11 +68,12 @@
             <IListGroupItem v-for="article in latestPublications.learn">
               <IMedia>
                 <template #image>
-                  <img
+                  <SanityImage
                     v-if="article.thumbnail"
-                    class="home-page__thumbnail"
-                    :src="article.thumbnail"
-                    :alt="article.title"
+                    :asset-id="article.thumbnail"
+                    auto="format"
+                    :h="80"
+                    :w="80"
                   />
                   <div v-else class="home-page__thumbnail--fallback">
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
@@ -94,11 +97,12 @@
             <IListGroupItem v-for="article in latestPublications.products">
               <IMedia>
                 <template #image>
-                  <img
+                  <SanityImage
                     v-if="article.thumbnail"
-                    class="home-page__thumbnail"
-                    :src="article.thumbnail"
-                    :alt="article.title"
+                    :asset-id="article.thumbnail"
+                    auto="format"
+                    :h="80"
+                    :w="80"
                   />
                   <div v-else class="home-page__thumbnail--fallback">
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
@@ -146,6 +150,10 @@ const { data: latestPublications, pending } = useLazySanityQuery(latestPublicati
 
   &__loader {
     @include loader();
+  }
+
+  &__link {
+    @include titleLink();
   }
 
   &__container {

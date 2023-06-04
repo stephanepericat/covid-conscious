@@ -6,10 +6,11 @@
 
       <IMedia class="article-page__author">
         <template #image>
-          <img
-            class="article-page__author--thumbnail"
-            :src="article.author.avatar"
-            :alt="article.author.nickname"
+          <SanityImage
+            :asset-id="article.author.avatar"
+            auto="format"
+            :h="50"
+            :w="50"
           />
         </template>
         <h5 class="article-page__author--name">
@@ -69,11 +70,6 @@
 
   &__author {
     margin-bottom: 40px;
-
-    &--thumbnail {
-      width: 50px;
-      height: 50px;
-    }
   }
 
   &__info {
