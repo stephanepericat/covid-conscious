@@ -1,6 +1,6 @@
 <template>
-  <div class="home-page">
-    <ILoader v-if="pending" class="home-page__loader" :class="{ pending }" />
+  <div class="home-page" :class="{ pending }">
+    <ILoader v-if="pending" class="home-page__loader" />
     <template v-else>
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
       <div class="home-page__container">
