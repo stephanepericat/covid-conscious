@@ -156,7 +156,7 @@ const onSearch = () => {
     return;
   }
 
-  router.push({ path: `/search/${encodeURIComponent(searchTerm.value)}`});
+  router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)});
 };
 </script>
 <style lang="scss" scoped>

@@ -20,7 +20,7 @@
             </template>
             <h3 class="search-page__link">
               <NuxtLink
-                :to="article.link || article.path"
+                :to="article.link || localePath(article.path)"
                 :target="article.link ? '_blank' : '_self'"
               >
                 <span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}
@@ -28,7 +28,7 @@
             </h3>
             <em>
               <span>{{ article.category }} &bullet; </span>
-              <span><NuxtLink :to="`/${AUTHOR}/${article.author.slug}`">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
+              <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
               <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
             </em>
           </IMedia>
@@ -45,6 +45,7 @@ import { AUTHOR } from "~/assets/constants/types";
 
 const { locale, t } = useI18n();
 const route = useRoute();
+const localePath = useLocalePath();
 const searchTerm = computed(() => route.params.searchTerm);
 
 useHead({

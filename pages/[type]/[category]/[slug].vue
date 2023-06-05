@@ -14,7 +14,7 @@
           />
         </template>
         <h5 class="article-page__author--name">
-          <NuxtLink :text="article.author.nickname" :to="`/${AUTHOR}/${article.author.slug}`" />
+          <NuxtLink :text="article.author.nickname" :to="localePath(`/${AUTHOR}/${article.author.slug}`)" />
         </h5>
         <p class="article-page__info">
           <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), "Y-MM-dd") }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), "Y-MM-dd") }})</span>
@@ -67,6 +67,7 @@
   import publicationQuery from "~/sanity/publication.sanity";
 
   const { locale, t } = useI18n();
+  const localePath = useLocalePath();
   const { params } = useRoute();
   const { type, category, slug } = params;
 
