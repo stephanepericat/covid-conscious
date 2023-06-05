@@ -23,6 +23,7 @@
 
       <section class="article-page__body">
         <SanityContent :blocks="article.body" />
+        <!-- community content -->
         <template v-if="type === COMMUNITY && article.info">
           <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
           <div class="article-page__body--info-address">
@@ -47,13 +48,22 @@
             </IButton>
           </div>
         </template>
+        <!-- product content -->
+        <template v-if="type === PRODUCT">
+          <div class="article-page__body--info-product">
+            <IButton v-if="article.link" class="article-page__body--info-product-button" :to="article.link" target="_blank">
+              <Icon class="article-page__body--info-product-icon" name="material-symbols:info-outline-rounded" />
+              {{ $t("article.moreInfo") }}
+            </IButton>
+          </div>
+        </template>
       </section>
     </template>
   </div>
 </template>
 <script setup>
   import { format } from "date-fns";
-  import { AUTHOR, COMMUNITY } from "~/assets/constants/types";
+  import { AUTHOR, COMMUNITY, PRODUCT } from "~/assets/constants/types";
   import publicationQuery from "~/sanity/publication.sanity";
 
   const { locale, t } = useI18n();
@@ -129,7 +139,8 @@
         font-size: 1.1rem;
       }
 
-      &-contact {
+      &-contact,
+      &-product {
         margin-top: 20px;
 
         &-button {
@@ -139,6 +150,10 @@
         &-icon {
           margin-right: 5px;
         }
+      }
+
+      &-product {
+        margin-top: 40px;
       }
     }
   }

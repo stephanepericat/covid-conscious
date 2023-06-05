@@ -3,6 +3,7 @@ export default {
     call: "Call",
     contactInfo: "Datos de Contacto",
     email: "Correo Electrónico",
+    moreInfo: "Más Información",
     title: "Covid Conscious - {title}",
     updated: "Actualizado",
     website: "Ir al Sitio Web",
