@@ -63,7 +63,7 @@
           </IListGroup>
         </section>
         <section class="home-page__container--card">
-          <h4>{{ $t("layout.learn") }}</h4>
+          <h4>{{ $t("layout.education") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.learn">
               <IMedia>
@@ -92,7 +92,7 @@
           </IListGroup>
         </section>
         <section class="home-page__container--card">
-          <h4>{{ $t("layout.products") }}</h4>
+          <h4>{{ $t("layout.product") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.products">
               <IMedia>
