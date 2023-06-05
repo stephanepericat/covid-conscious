@@ -9,12 +9,12 @@ export default groq`
   "updated": _updatedAt,
   "body": description[$locale],
   "category": category->name[$locale],
-  // "thumbnail": visual.asset->url,
   "info": contactInfo {
     "street1": streetAdressOne,
     "street2": streetAdressTwo,
     city,
     zipCode,
+    country,
     "phone": phoneNumber,
     email,
     website,

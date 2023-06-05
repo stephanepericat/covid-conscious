@@ -50,7 +50,7 @@
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
                   </div>
                 </template>
-                <h3>
+                <h3 class="home-page__link">
                   <NuxtLink :to="article.link">{{ article.title }}</NuxtLink>
                 </h3>
                 <em>
@@ -79,7 +79,7 @@
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
                   </div>
                 </template>
-                <h3>
+                <h3 class="home-page__link">
                   <NuxtLink :to="article.link">{{ article.title }}</NuxtLink>
                 </h3>
                 <em>
@@ -108,7 +108,7 @@
                     <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
                   </div>
                 </template>
-                <h3>
+                <h3 class="home-page__link">
                   <NuxtLink :to="article.link">{{ article.title }}</NuxtLink>
                 </h3>
                 <em>

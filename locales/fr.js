@@ -1,6 +1,11 @@
 export default {
   article: {
+    call: "Appeler",
+    contactInfo: "Coordonnées",
+    email: "E-mail",
+    title: "Covid Conscious - {title}",
     updated: "Mis à jour",
+    website: "Visiter le Site Web",
   },
   comingSoon: "À venir...",
   home: {
