@@ -21,7 +21,7 @@ import { localePath } from 'vue-i18n-routing';
               </template>
             </IDropdown>
             <IDropdown>
-              <INavItem> {{ $t("layout.learn") }} </INavItem>
+              <INavItem> {{ $t("layout.education") }} </INavItem>
               <template #body>
                 <IDropdownItem v-for="category in menuCategoriesSorted.educationCategory" :key="category.name">
                   {{ category.name }}
@@ -29,7 +29,7 @@ import { localePath } from 'vue-i18n-routing';
               </template>
             </IDropdown>
             <IDropdown>
-              <INavItem> {{ $t("layout.products") }} </INavItem>
+              <INavItem> {{ $t("layout.product") }} </INavItem>
               <template #body>
                 <IDropdownItem v-for="category in menuCategoriesSorted.productCategory" :key="category.name">
                   {{ category.name }}

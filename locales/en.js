@@ -19,9 +19,9 @@ export default {
     home: "Home",
     community: "Community",
     contactUs: "Contact Us",
-    learn: "Learn",
+    education: "Learn",
     news: "News",
-    products: "Products",
+    product: "Products",
     search: "Search",
     submitContent: "Submit Content",
     switch: {

@@ -17,7 +17,7 @@
           <NuxtLink :text="article.author.nickname" :to="`/${AUTHOR}/${article.author.slug}`" />
         </h5>
         <p class="article-page__info">
-          <span class="article-page__info--category">{{ type }} / {{ article.category }} / {{ format(new Date(article.published), "Y-MM-dd") }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), "Y-MM-dd") }})</span>
+          <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), "Y-MM-dd") }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), "Y-MM-dd") }})</span>
         </p>
       </IMedia>
 
@@ -68,6 +68,7 @@
   });
 
   const pageTitle = computed(() => t("article.title", { title: article?.value?.title || "" }));
+  const articleType = computed(() => t(`layout.${type}`));
 
   useHead({
     meta: [

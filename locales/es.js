@@ -19,9 +19,9 @@ export default {
     home: "Página Principal",
     community: "Comunidad",
     contactUs: "Contacta con nosotros",
-    learn: "Aprender",
+    education: "Aprender",
     news: "Noticias",
-    products: "Productos",
+    product: "Productos",
     search: "Buscar",
     submitContent: "Enviar Contenido",
     switch: {
