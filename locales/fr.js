@@ -5,7 +5,7 @@ export default {
     email: "E-mail",
     title: "Covid Conscious - {title}",
     updated: "Mis à jour",
-    website: "Visiter le Site Web",
+    website: "Site Web",
   },
   comingSoon: "À venir...",
   home: {

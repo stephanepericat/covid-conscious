@@ -123,6 +123,7 @@
       @include eyebrow();
 
       font-weight: 400;
+      margin-top: 40px;
 
       &-address {
         font-size: 1.1rem;
