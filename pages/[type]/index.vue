@@ -51,7 +51,6 @@
   const localePath = useLocalePath();
   const localeType = computed(() => t(`layout.${type}`));
 
-
   useHead({
     meta: [
       { name: "description", content: t("list.description") },
