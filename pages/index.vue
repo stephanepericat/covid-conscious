@@ -27,7 +27,7 @@
                 <em>
                   <span>{{ article.category }} &bullet; </span>
                   <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                  <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
+                  <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
                 </em>
               </IMedia>
             </IListGroupItem>
@@ -56,7 +56,7 @@
                 <em>
                   <span>{{ article.category }} &bullet; </span>
                   <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                  <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
+                  <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
                 </em>
               </IMedia>
             </IListGroupItem>
@@ -85,7 +85,7 @@
                 <em>
                   <span>{{ article.category }} &bullet; </span>
                   <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                  <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
+                  <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
                 </em>
               </IMedia>
             </IListGroupItem>
@@ -114,7 +114,7 @@
                 <em>
                   <span>{{ article.category }} &bullet; </span>
                   <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                  <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
+                  <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
                 </em>
               </IMedia>
             </IListGroupItem>
@@ -125,21 +125,22 @@
   </div>
 </template>
 <script setup>
-import { format } from "date-fns";
-import latestPublicationsQuery from '~/sanity/latestPublications.sanity';
-import { AUTHOR } from "~/assets/constants/types";
+  import { format } from "date-fns";
+  import latestPublicationsQuery from '~/sanity/latestPublications.sanity';
+  import { AUTHOR } from "~/assets/constants/types";
+  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
 
-const { locale, t } = useI18n();
-const localePath = useLocalePath();
+  const { locale, t } = useI18n();
+  const localePath = useLocalePath();
 
-useHead({
-  meta: [
-    { name: "description", content: t("home.description") },
-  ],
-  title: t("home.title")
-});
+  useHead({
+    meta: [
+      { name: "description", content: t("home.description") },
+    ],
+    title: t("home.title")
+  });
 
-const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale });
+  const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale });
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

@@ -29,7 +29,7 @@
             <em>
               <span>{{ article.category }} &bullet; </span>
               <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-              <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
+              <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
         </IListGroupItem>
@@ -43,6 +43,7 @@
   import searchQuery from "~/sanity/searchContent.sanity";
   import { AUTHOR } from "~/assets/constants/types";
   import { usePagination } from "~/assets/composables/usePagination";
+  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
 
   const { locale, t } = useI18n();
   const route = useRoute();

@@ -17,7 +17,7 @@
           <NuxtLink :text="article.author.nickname" :to="localePath(`/${AUTHOR}/${article.author.slug}`)" />
         </h5>
         <p class="article-page__info">
-          <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), "Y-MM-dd") }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), "Y-MM-dd") }})</span>
+          <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), DEFAULT_DATE_FORMAT) }})</span>
         </p>
       </IMedia>
 
@@ -65,6 +65,7 @@
   import { format } from "date-fns";
   import { AUTHOR, COMMUNITY, PRODUCT } from "~/assets/constants/types";
   import publicationQuery from "~/sanity/publication.sanity";
+  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
 
   const { locale, t } = useI18n();
   const localePath = useLocalePath();
