@@ -39,31 +39,29 @@
   </div>
 </template>
 <script setup>
-import { format } from "date-fns";
-import searchQuery from "~/sanity/searchContent.sanity";
-import { AUTHOR } from "~/assets/constants/types";
+  import { format } from "date-fns";
+  import searchQuery from "~/sanity/searchContent.sanity";
+  import { AUTHOR } from "~/assets/constants/types";
+  import { usePagination } from "~/assets/composables/usePagination";
 
-const { locale, t } = useI18n();
-const route = useRoute();
-const localePath = useLocalePath();
-const searchTerm = computed(() => route.params.searchTerm);
+  const { locale, t } = useI18n();
+  const route = useRoute();
+  const localePath = useLocalePath();
+  const searchTerm = computed(() => route.params.searchTerm);
 
-useHead({
-  meta: [
-    { name: "description", content: t("search.description") },
-  ],
-  title: t("search.title", { searchTerm: searchTerm.value })
-});
+  useHead({
+    meta: [
+      { name: "description", content: t("search.description") },
+    ],
+    title: t("search.title", { searchTerm: searchTerm.value })
+  });
 
-const currentPage = ref(1);
-const itemsPerPage = ref(4);
-const startItem = computed(() => (currentPage.value - 1) * itemsPerPage.value);
-const endItem = computed(() => startItem.value + itemsPerPage.value);
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination();
 
-const { data, pending } = useLazySanityQuery(searchQuery, { locale, searchTerm });
-const searchResults = computed(() => data?.value?.results || []);
-const totalItems = computed(() => data?.value?.total || 0);
-const visibleItems = computed(() => searchResults.value.slice(startItem.value, endItem.value));
+  const { data, pending } = useLazySanityQuery(searchQuery, { locale, searchTerm });
+  const searchResults = computed(() => data?.value?.results || []);
+  const totalItems = computed(() => data?.value?.total || 0);
+  const visibleItems = computed(() => searchResults.value.slice(startItem.value, endItem.value));
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

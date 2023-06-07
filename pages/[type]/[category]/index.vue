@@ -42,6 +42,7 @@
   import { format } from "date-fns";
   import publicationsByCategoryQuery from "~/sanity/publicationsByCategory.sanity";
   import { AUTHOR } from "~/assets/constants/types";
+  import { usePagination } from "~/assets/composables/usePagination";
 
   const { locale, t } = useI18n();
   const { params } = useRoute();
@@ -49,10 +50,7 @@
   const localePath = useLocalePath();
   const localeType = computed(() => t(`layout.${type}`));
 
-  const currentPage = ref(1);
-  const itemsPerPage = ref(4);
-  const startItem = computed(() => (currentPage.value - 1) * itemsPerPage.value);
-  const endItem = computed(() => startItem.value + itemsPerPage.value);
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination();
 
   const { data, pending } = useLazySanityQuery(publicationsByCategoryQuery, {
     locale, 
