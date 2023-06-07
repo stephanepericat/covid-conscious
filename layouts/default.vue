@@ -160,8 +160,6 @@ const onSearch = () => {
 };
 </script>
 <style lang="scss" scoped>
-@import '@inkline/inkline/css/mixins';
-
 .default-layout {
   height: 100vh;
 
@@ -224,9 +222,6 @@ const onSearch = () => {
       flex-grow: 1;
     }
   }
-
-  // @include breakpoint('md') {
-  // }
 }
 
 .dark-theme {

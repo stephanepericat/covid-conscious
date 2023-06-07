@@ -143,6 +143,7 @@ const { data: latestPublications, pending } = useLazySanityQuery(latestPublicati
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
+@import '@inkline/inkline/css/mixins';
 
 .home-page {
   &.pending {
@@ -172,6 +173,15 @@ const { data: latestPublications, pending } = useLazySanityQuery(latestPublicati
 
   &__thumbnail {
     @include thumbnail();
+  }
+
+  @include breakpoint('md') {
+    &__container {
+      &--card {
+        width: 100%;
+        margin: 0 0 40px 0;
+      }
+    }
   }
 }
 </style>

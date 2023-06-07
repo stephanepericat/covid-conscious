@@ -1,8 +1,8 @@
 <template>
-  <div class="category-page" :class="{ pending, type }">
+  <div class="category-page" :class="{ pending }">
     <ILoader v-if="pending" class="category-page__loader" />
     <template v-else>
-      <h1 class="category-page__title" v-text="`${localeType} / ${localeCategory}`" />
+      <h1 class="category-page__title" v-text="pageTitle" />
       <IListGroup size="sm" :border="false">
         <IListGroupItem v-for="article in visibleItems">
           <IMedia>
@@ -41,7 +41,7 @@
 <script setup>
   import { format } from "date-fns";
   import publicationsByCategoryQuery from "~/sanity/publicationsByCategory.sanity";
-  import { AUTHOR, LINK, NEWS } from "~/assets/constants/types";
+  import { AUTHOR } from "~/assets/constants/types";
 
   const { locale, t } = useI18n();
   const { params } = useRoute();
@@ -54,17 +54,17 @@
   const startItem = computed(() => (currentPage.value - 1) * itemsPerPage.value);
   const endItem = computed(() => startItem.value + itemsPerPage.value);
 
-  const articleType = computed(() => type === NEWS ? LINK : type);
   const { data, pending } = useLazySanityQuery(publicationsByCategoryQuery, {
     locale, 
-    articleCategory: category, 
-    articleType: articleType.value, 
-    categoryTable: `${articleType.value}Category`,
+    articleCategory: category,
+    articleType: type, 
+    categoryTable: `${type}Category`,
   });
   const results = computed(() => data?.value?.results || []);
   const totalItems = computed(() => data?.value?.total || 0);
   const visibleItems = computed(() => results.value.slice(startItem.value, endItem.value));
   const localeCategory = computed(() => data?.value?.categoryLabel?.label || category);
+  const pageTitle = computed(() => `${localeType.value} / ${localeCategory.value}`);
 
   useHead({
     meta: [
