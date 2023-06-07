@@ -34,6 +34,35 @@
           </IListGroup>
         </section>
         <section class="home-page__container--card">
+          <h4>{{ $t("layout.product") }}</h4>
+          <IListGroup size="sm" :border="false">
+            <IListGroupItem v-for="article in latestPublications.products">
+              <IMedia>
+                <template #image>
+                  <SanityImage
+                    v-if="article.thumbnail"
+                    :asset-id="article.thumbnail"
+                    auto="format"
+                    :h="80"
+                    :w="80"
+                  />
+                  <div v-else class="home-page__thumbnail--fallback">
+                    <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+                  </div>
+                </template>
+                <h3 class="home-page__link">
+                  <NuxtLink :to="localePath(article.link)">{{ article.title }}</NuxtLink>
+                </h3>
+                <em>
+                  <span>{{ article.category }} &bullet; </span>
+                  <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
+                  <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
+                </em>
+              </IMedia>
+            </IListGroupItem>
+          </IListGroup>
+        </section>
+        <section class="home-page__container--card">
           <h4>{{ $t("layout.community") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.community">
@@ -66,35 +95,6 @@
           <h4>{{ $t("layout.education") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.learn">
-              <IMedia>
-                <template #image>
-                  <SanityImage
-                    v-if="article.thumbnail"
-                    :asset-id="article.thumbnail"
-                    auto="format"
-                    :h="80"
-                    :w="80"
-                  />
-                  <div v-else class="home-page__thumbnail--fallback">
-                    <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-                  </div>
-                </template>
-                <h3 class="home-page__link">
-                  <NuxtLink :to="localePath(article.link)">{{ article.title }}</NuxtLink>
-                </h3>
-                <em>
-                  <span>{{ article.category }} &bullet; </span>
-                  <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                  <span>{{ format(new Date(article.published), "Y-MM-dd") }}</span>
-                </em>
-              </IMedia>
-            </IListGroupItem>
-          </IListGroup>
-        </section>
-        <section class="home-page__container--card">
-          <h4>{{ $t("layout.product") }}</h4>
-          <IListGroup size="sm" :border="false">
-            <IListGroupItem v-for="article in latestPublications.products">
               <IMedia>
                 <template #image>
                   <SanityImage
