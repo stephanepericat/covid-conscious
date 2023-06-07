@@ -113,64 +113,64 @@ import { localePath } from 'vue-i18n-routing';
   </ILayout>
 </template>
 <script setup>
-import menuCategoriesQuery from '~/sanity/menuCategories.sanity';
-import { useInkline } from '@inkline/inkline';
-import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
-import { COMMUNITY, EDUCATION, PRODUCT } from '~/assets/constants/types';
+  import menuCategoriesQuery from '~/sanity/menuCategories.sanity';
+  import { useInkline } from '@inkline/inkline';
+  import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
+  import { COMMUNITY, EDUCATION, PRODUCT } from '~/assets/constants/types';
 
-const inkline = useInkline();
-const { locale, locales, t } = useI18n();
-const switchLocalePath = useSwitchLocalePath();
-const localePath = useLocalePath();
-const router = useRouter();
+  const inkline = useInkline();
+  const { locale, locales, t } = useI18n();
+  const switchLocalePath = useSwitchLocalePath();
+  const localePath = useLocalePath();
+  const router = useRouter();
 
-// Current and available languages
-const currentLocale = computed(() => {
-  return (locales.value).find(i => i.code === locale.value)
-});
-const availableLocales = computed(() => {
-  return (locales.value).filter(i => i.code !== locale.value)
-});
+  // Current and available languages
+  const currentLocale = computed(() => {
+    return (locales.value).find(i => i.code === locale.value)
+  });
+  const availableLocales = computed(() => {
+    return (locales.value).filter(i => i.code !== locale.value)
+  });
 
-// Menu Categories
-const { data: menuCategories } = useSanityQuery(menuCategoriesQuery, { locale });
-const menuCategoriesSorted = computed(() => {
-  return menuCategories?.value?.reduce((acc, val) => {
-    if(!acc[val.type]) {
-      acc[val.type] = [];
+  // Menu Categories
+  const { data: menuCategories } = useSanityQuery(menuCategoriesQuery, { locale });
+  const menuCategoriesSorted = computed(() => {
+    return menuCategories?.value?.reduce((acc, val) => {
+      if(!acc[val.type]) {
+        acc[val.type] = [];
+      }
+
+      acc[val.type].push(val);
+
+      return acc;
+    }, {});
+  });
+
+  // Inkline color mode
+  const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON);
+  const colorModeTooltip = computed(() => {
+    return inkline.options.colorMode === DARK
+      ? t('layout.switch.lightMode')
+      : t('layout.switch.darkMode')
+  });
+  const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
+
+  // App Logo
+  const logoFile = computed(() => {
+    return inkline.options.colorMode === DARK
+      ? '/covid-conscious-logo-light.svg'
+      : '/covid-conscious-logo.svg'
+  });
+
+  // Search
+  const searchTerm = ref("");
+  const onSearch = () => {
+    if (!searchTerm.value.length) {
+      return;
     }
 
-    acc[val.type].push(val);
-
-    return acc;
-  }, {});
-});
-
-// Inkline color mode
-const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON);
-const colorModeTooltip = computed(() => {
-  return inkline.options.colorMode === DARK
-    ? t('layout.switch.lightMode')
-    : t('layout.switch.darkMode')
-});
-const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
-
-// App Logo
-const logoFile = computed(() => {
-  return inkline.options.colorMode === DARK
-    ? '/covid-conscious-logo-light.svg'
-    : '/covid-conscious-logo.svg'
-});
-
-// Search
-const searchTerm = ref("");
-const onSearch = () => {
-  if (!searchTerm.value.length) {
-    return;
-  }
-
-  router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)});
-};
+    router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)});
+  };
 </script>
 <style lang="scss" scoped>
 .default-layout {
