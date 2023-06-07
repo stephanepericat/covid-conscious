@@ -2,7 +2,7 @@
   <div class="search-page" :class="{ pending }">
     <ILoader v-if="pending" class="search-page__loader" />
     <template v-else>
-      <h1>{{ $t("search.pageTitle", { searchTerm, totalItems }) }}</h1>
+      <h1 class="search-page__title">{{ $t("search.pageTitle", { searchTerm, totalItems }) }}</h1>
       <IListGroup size="sm" :border="false">
         <IListGroupItem v-for="article in visibleItems">
           <IMedia>
@@ -71,6 +71,10 @@ const visibleItems = computed(() => searchResults.value.slice(startItem.value, e
 .search-page {
   &.pending {
     @include pending();
+  }
+
+  &__title {
+    margin-bottom: 30px;
   }
 
   &__loader {

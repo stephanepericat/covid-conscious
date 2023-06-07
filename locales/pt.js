@@ -31,6 +31,11 @@ export default {
     },
     twitter: "Siga-nos no Twitter",
   },
+  list: {
+    categoryTitle: "Covid Conscious - {type} - {category}",
+    description: "Covid Conscious - Uma plataforma para conselhos sobre a Covid",
+    typeTitle: "Covid Conscious - {type}",
+  },
   search: {
     description: "Covid Conscious - Uma plataforma para conselhos sobre a Covid",
     pageTitle: "{totalItems} Resultados da busca por \"{searchTerm}\"",
