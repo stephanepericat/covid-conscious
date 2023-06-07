@@ -20,6 +20,7 @@
   "dependencies": {
     "@inkline/inkline": "^4.0.0",
     "@nuxtjs/sanity": "^1.7.2",
+    "@sanity/client": "^6.1.2",
     "date-fns": "^2.30.0",
     "groq": "^3.11.3"
   }
