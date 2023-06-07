@@ -1,6 +1,7 @@
 <template>
   <div class="type-page" :class="{ pending, type }">
     <ILoader v-if="pending" class="type-page__loader" />
+    <NotFound v-else-if="!pending && !results.length" :category="localeType" />
     <template v-else>
       <h1 class="type-page__title" v-text="localeType" />
       <IListGroup size="sm" :border="false">

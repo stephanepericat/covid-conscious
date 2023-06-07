@@ -36,6 +36,10 @@ export default {
     description: "Covid Conscious - A platform for Covid advice",
     typeTitle: "Covid Conscious - {type}",
   },
+  notFound: {
+    title: "Not Found",
+    description: "There are no publications yet for '{category}'.",
+  },
   search: {
     description: "Covid Conscious - A platform for Covid advice",
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",

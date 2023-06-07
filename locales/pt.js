@@ -36,6 +36,10 @@ export default {
     description: "Covid Conscious - Uma plataforma para conselhos sobre a Covid",
     typeTitle: "Covid Conscious - {type}",
   },
+  notFound: {
+    title: "Não Encontrado",
+    description: "Ainda não há publicações para '{category}'.",
+  },
   search: {
     description: "Covid Conscious - Uma plataforma para conselhos sobre a Covid",
     pageTitle: "{totalItems} Resultados da busca por \"{searchTerm}\"",
