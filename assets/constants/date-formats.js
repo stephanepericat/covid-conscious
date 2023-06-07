@@ -1,1 +1,1 @@
-export const DEFAULT_DATE_FORMAT = DEFAULT_DATE_FORMAT;
+export const DEFAULT_DATE_FORMAT = "Y-MM-dd";

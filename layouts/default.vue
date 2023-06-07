@@ -15,7 +15,11 @@ import { localePath } from 'vue-i18n-routing';
             <IDropdown>
               <INavItem> {{ $t("layout.community") }} </INavItem>
               <template #body>
-                <IDropdownItem v-for="category in menuCategoriesSorted.communityCategory" :key="category.name">
+                <IDropdownItem
+                  v-for="category in menuCategoriesSorted.communityCategory"
+                  :key="category.name"
+                  :to="`/${COMMUNITY}/${category.slug}`"
+                >
                   {{ category.name }}
                 </IDropdownItem>
               </template>
@@ -23,7 +27,11 @@ import { localePath } from 'vue-i18n-routing';
             <IDropdown>
               <INavItem> {{ $t("layout.education") }} </INavItem>
               <template #body>
-                <IDropdownItem v-for="category in menuCategoriesSorted.educationCategory" :key="category.name">
+                <IDropdownItem
+                  v-for="category in menuCategoriesSorted.educationCategory"
+                  :key="category.name"
+                  :to="`/${EDUCATION}/${category.slug}`"
+                >
                   {{ category.name }}
                 </IDropdownItem>
               </template>
@@ -31,7 +39,11 @@ import { localePath } from 'vue-i18n-routing';
             <IDropdown>
               <INavItem> {{ $t("layout.product") }} </INavItem>
               <template #body>
-                <IDropdownItem v-for="category in menuCategoriesSorted.productCategory" :key="category.name">
+                <IDropdownItem
+                  v-for="category in menuCategoriesSorted.productCategory"
+                  :key="category.name"
+                  :to="`/${PRODUCT}/${category.slug}`"
+                >
                   {{ category.name }}
                 </IDropdownItem>
               </template>
@@ -104,6 +116,7 @@ import { localePath } from 'vue-i18n-routing';
 import menuCategoriesQuery from '~/sanity/menuCategories.sanity';
 import { useInkline } from '@inkline/inkline';
 import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
+import { COMMUNITY, EDUCATION, PRODUCT } from '~/assets/constants/types';
 
 const inkline = useInkline();
 const { locale, locales, t } = useI18n();
@@ -123,11 +136,11 @@ const availableLocales = computed(() => {
 const { data: menuCategories } = useSanityQuery(menuCategoriesQuery, { locale });
 const menuCategoriesSorted = computed(() => {
   return menuCategories?.value?.reduce((acc, val) => {
-    if(!acc[val.category]) {
-      acc[val.category] = [];
+    if(!acc[val.type]) {
+      acc[val.type] = [];
     }
 
-    acc[val.category].push(val);
+    acc[val.type].push(val);
 
     return acc;
   }, {});
