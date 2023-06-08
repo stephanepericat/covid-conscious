@@ -23,6 +23,7 @@ export default {
     education: "Éducation",
     news: "Actualités",
     product: "Produits",
+    rss: "Flux RSS",
     search: "Rechercher",
     submitContent: "Soumettre Du Contenu",
     switch: {

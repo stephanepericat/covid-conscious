@@ -1,4 +1,5 @@
 import rssFeedQuery from "../../sanity/rssFeed.sanity";
+import { LINK } from "../../assets/constants/types";
 
 export default eventHandler(async (event) => {
   const { fetch } = useSanity();
@@ -6,7 +7,7 @@ export default eventHandler(async (event) => {
   const query = getQuery(event);
   const locale = query?.lang || "en";
 
-  const { origin } = getRequestURL(event);
+  const { origin: BASE_URL } = getRequestURL(event);
 
   try {
     const { entries, settings } = await fetch(rssFeedQuery, { locale });

@@ -100,6 +100,10 @@ import { localePath } from 'vue-i18n-routing';
                   <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:contact-support-outline" />
                   <span class="default-layout__footer--dropdown-label" v-text="$t('layout.contactUs')" />
                 </IDropdownItem>
+                <IDropdownItem @click="onRssFeedClick">
+                  <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:rss-feed-rounded" />
+                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.rss')" />
+                </IDropdownItem>
                 <IDropdownItem>
                   <Icon class="default-layout__footer--dropdown-icon" name="ri:twitter-line" />
                   <span class="default-layout__footer--dropdown-label" v-text="$t('layout.twitter')" />
@@ -171,6 +175,10 @@ import { localePath } from 'vue-i18n-routing';
 
     router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)});
   };
+
+  // Feed URL
+  const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`);
+  const onRssFeedClick = () => window.open(rssFeedUrl.value);
 </script>
 <style lang="scss" scoped>
 .default-layout {
