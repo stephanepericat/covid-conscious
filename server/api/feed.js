@@ -1,3 +1,4 @@
+import { Feed } from "feed";
 import rssFeedQuery from "../../sanity/rssFeed.sanity";
 import { LINK } from "../../assets/constants/types";
 
@@ -11,18 +12,44 @@ export default eventHandler(async (event) => {
 
   try {
     const { entries, settings } = await fetch(rssFeedQuery, { locale });
-    // console.log("settings", settings);
-    // console.log("entries", entries);
+
+    const feed = new Feed({
+      title: settings.title,
+      description: settings.description,
+      id: `${BASE_URL}/`,
+      link: `${BASE_URL}/`,
+      language: locale,
+      image: settings.image,
+      favicon: BASE_URL + "/favicon.ico",
+      copyright: `All rights reserved ${new Date().getFullYear()}, ${settings.author.name}.`,
+      updated: entries?.[0] ? new Date(entries[0]?.updatedAt) : undefined,
+      author: {
+        email: settings.author.email,
+        link: BASE_URL,
+        name: settings.author.name,
+      },
+    });
+
+    entries.forEach((entry) => {
+      const title = entry.type === LINK ? `${entry.source}: ${entry.title}` : entry.title;
+      const link = entry.type === LINK ? entry.link : `${BASE_URL}${entry.slug}`;
+
+      feed.addItem({
+        title,
+        description: entry.description,
+        published: new Date(entry.publishedAt),
+        id: entry.id,
+        link,
+        date: new Date(entry.publishedAt),
+        image: entry.image,
+        author: [entry.author.name],
+        category: [{ name: entry.category }],
+      });
+    });
 
     setHeader(event, "Content-Type", "application/xml");
 
-    return `<?xml version="1.0" encoding="UTF-8"?>
-      <note>
-        <to>Tove</to>
-        <from>Jani</from>
-        <heading>Reminder</heading>
-        <body>Don't forget me this weekend!</body>
-      </note>`;
+    return feed.rss2();
   } catch(e) {
     console.log("error", e.message);
   }

@@ -14,6 +14,7 @@ export default groq`
       "source": source,
       "category": category->name[$locale],
       "image": visual.asset->url,
+      "author": author-> { "name": nickname },
     },
     "settings": *[_type == "feedSettings"][0] {
       "title": title,
