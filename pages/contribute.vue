@@ -38,7 +38,7 @@
 </template>
 <script setup>
   import { useForm } from "@inkline/inkline";
-  import { URL_REGEX } from "~/assets/constants/url-validation-regex.js";
+  import { urlValidator } from "~/assets/utils/url-validator";
   import { COMMUNITY, NEWS, PRODUCT } from "~/assets/constants/types";
 
   const { t } = useI18n();
@@ -101,13 +101,7 @@
         {
           message: "Please enter a valid link.",
           name: "custom",
-          validator: (v) => {
-            if(!v.length) {
-              return true;
-            }
-
-            return URL_REGEX.test(v);
-          },
+          validator: urlValidator,
         },
       ],
     },
