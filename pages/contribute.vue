@@ -32,8 +32,6 @@
         <IButton type="submit" :disabled="form.invalid">{{ $t('contribute.labels.submit') }}</IButton>
       </IFormGroup>
     </IForm>
-
-    <!-- <pre class="_margin-top:2 _text:muted">{{ form }}</pre> -->
   </div>
 </template>
 <script setup>
@@ -107,7 +105,18 @@
     },
   });
 
-  const onSubmit = () => console.log(form.value);
+  const onSubmit = async () => {
+    try {
+      const { data } = await useFetch('/api/contribute', {
+        method: "POST",
+        body: form.value,
+      });
+
+      console.log("data", data.value.ok);
+    } catch(e) {
+      console.error("catch", e);
+    }
+  }
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

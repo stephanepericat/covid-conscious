@@ -13,6 +13,7 @@
     "sass": "^1.0.0"
   },
   "dependencies": {
+    "@emailjs/nodejs": "^2.2.0",
     "@inkline/config": "^1.0.0",
     "@inkline/inkline": "^4.0.2",
     "@inkline/plugin": "^1.5.2",
