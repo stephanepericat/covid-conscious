@@ -10,7 +10,21 @@ export default defineNuxtConfig({
     }
   },
   
-  modules: ['@inkline/plugin/nuxt', '@nuxtjs/i18n', '@nuxtjs/sanity', 'nuxt-icon'],
+  modules: [
+    '@inkline/plugin/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxtjs/sanity',
+    '@nuxtjs/turnstile',
+    'nuxt-icon',
+  ],
+
+  runtimeConfig: {
+    turnstile: {
+      secretKey: process.env.TURNSTILE_SECRET_KEY,
+    },
+  },
+
+  // modules
 
   inkline: {
     globals: {
@@ -35,5 +49,9 @@ export default defineNuxtConfig({
     apiVersion: '2021-10-21',
     dataset: process.env.SANITY_DATASET,
     projectId: process.env.SANITY_PROJECTID,
+  },
+
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY,
   },
 });

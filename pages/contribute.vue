@@ -29,7 +29,10 @@
         <IFormError for="link" :visible="['invalid']" />
       </IFormGroup>
       <IFormGroup>
-        <IButton type="submit" :disabled="form.invalid">{{ $t('contribute.labels.submit') }}</IButton>
+        <NuxtTurnstile v-model="token" />
+      </IFormGroup>
+      <IFormGroup>
+        <IButton type="submit" :disabled="form.invalid || !token">{{ $t('contribute.labels.submit') }}</IButton>
       </IFormGroup>
     </IForm>
   </div>
@@ -117,7 +120,9 @@
     } catch(e) {
       console.error("catch", e);
     }
-  }
+  };
+
+  const token = ref("");
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

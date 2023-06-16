@@ -19,6 +19,7 @@
     "@inkline/plugin": "^1.5.2",
     "@nuxtjs/i18n": "^8.0.0-beta.12",
     "@nuxtjs/sanity": "^1.7.2",
+    "@nuxtjs/turnstile": "^0.4.0",
     "@sanity/client": "^6.1.3",
     "date-fns": "^2.30.0",
     "feed": "^4.2.2",
