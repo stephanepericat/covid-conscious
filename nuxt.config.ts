@@ -28,6 +28,7 @@ export default defineNuxtConfig({
   // module options
 
   cloudflareAnalytics: {
+    scriptPath: false,
     token: process.env.CLOUDFARE_ANALYTICS_TOKEN,
   },
 
