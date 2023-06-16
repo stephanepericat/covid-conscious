@@ -48,7 +48,7 @@ import { localePath } from 'vue-i18n-routing';
                 </IDropdownItem>
               </template>
             </IDropdown>
-            <INavItem :to="localePath('/submit')"> {{ $t("layout.submitContent") }} </INavItem>
+            <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
           </INav>
           <IInput v-model="searchTerm" @keydown.enter="onSearch" class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
             <template #append>

@@ -9,6 +9,9 @@ export default {
     website: "Ir Para o Site",
   },
   comingSoon: "Em breve...",
+  contribute: {
+    title: "Contribuir",
+  },
   home: {
     description: "Covid Conscious - Uma plataforma para conselhos sobre a Covid",
     pageTitle: "Ùltimas Publicações",
@@ -25,7 +28,7 @@ export default {
     product: "Produtos",
     rss: "Feed RSS",
     search: "Procurar",
-    submitContent: "Enviar Conteúdo",
+    submitContent: "Contribuir",
     switch: {
       darkMode: "Alternar para o modo escuro",
       lightMode: "Alternar para o modo de luz",

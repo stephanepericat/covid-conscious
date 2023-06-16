@@ -452,19 +452,19 @@
     micromustache "8.0.3"
     pathe "^1.0.0"
 
-"@inkline/inkline@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@inkline/inkline/-/inkline-4.0.0.tgz#839a7b3319ee9b479a676c58720ff14b2a631999"
-  integrity sha512-JncBuc7bfe2jaQGRLZbgz1cARlEgHasEEafARSa5g5r/tH/TSvEteU/B/n6yuU4id5erPBAV6JY7YM7geov1eA==
+"@inkline/inkline@^4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@inkline/inkline/-/inkline-4.0.2.tgz#912f00f91b654b2b931da8f2ece6a508f9cadc27"
+  integrity sha512-MWdgFZbqQWFtD38gI8IAikiIxqYuB99FTUlXPo8cvknG7qlHFNLaFMNtrKRnGLuKHL6W3QsBrZ/5ry6dkc+z8A==
   dependencies:
     "@floating-ui/dom" "^1.0.4"
     "@popperjs/core" "2.11.6"
     normalize.css "^8.0.1"
 
-"@inkline/plugin@^1.0.0":
-  version "1.5.1"
-  resolved "https://registry.yarnpkg.com/@inkline/plugin/-/plugin-1.5.1.tgz#ea77c992193e9d991ec2e2b7388a1f28a3051492"
-  integrity sha512-taLDDsw4TKUB4OmV/Lxu058gX7Us+A1VE1BdoOpi4tGKDFeDOWr6lrrz7AWWXwsVkm32UQU/2DdVhCOty2Hj+g==
+"@inkline/plugin@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@inkline/plugin/-/plugin-1.5.2.tgz#5f8f8220c3f352af78469a9cf2a5a4603f910329"
+  integrity sha512-0Vc3jirTthcUAKZbBvKgAZkOgaPh2ftwrgb+UZnM/UOcAVnLffCJENu06Ve+EBgsUV98wZzEbP2NVfctx+FLcg==
   dependencies:
     "@grozav/logger" "^1.0.1"
     "@grozav/utils" "^1.1.6"
@@ -912,10 +912,10 @@
     estree-walker "^2.0.2"
     picomatch "^2.3.1"
 
-"@sanity/client@^6.1.2":
-  version "6.1.2"
-  resolved "https://registry.yarnpkg.com/@sanity/client/-/client-6.1.2.tgz#03a032c3b1c98c35efa94db6acd478ae2a71a46c"
-  integrity sha512-8/NRBmyzJaT8ZNZxj3UmOAhvqKxDtXWysogsa4rn+o/Z+zS7upkToh1wSdvoFLcv9uHSYF6JGeycigjwO1Zpnw==
+"@sanity/client@^6.1.3":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@sanity/client/-/client-6.1.3.tgz#94b87b1de78b041fb85cc489fefc03304c353e3b"
+  integrity sha512-asO/AvN+/D1Ljd6UNPWlo/toeO6SmZdsxyl+fJdLfI9by4svp/K3hD4Qy2DXXmwOfGYqGSH7etv2lnRhu+C5YA==
   dependencies:
     "@sanity/eventsource" "^5.0.0"
     get-it "^8.1.0"
@@ -2475,10 +2475,10 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, 
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
 
-groq@^3.12.0:
-  version "3.12.0"
-  resolved "https://registry.yarnpkg.com/groq/-/groq-3.12.0.tgz#81c7ec588c028a9e885eabe799de92af6648ab66"
-  integrity sha512-AyPKzCVFeNcSB/pyEW/tuvAbnWB+FKXW70nzMOliTsYjgNoxUQ0L9xPmqv8Q7QmTXuRgATgfRsy2mO4WOxHRXg==
+groq@^3.12.1:
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/groq/-/groq-3.12.1.tgz#ce644a2f916d90c37e022edfd7367d25037c7600"
+  integrity sha512-hxkLbHvyM2DnKna1TwzJu8aUK1HdjQ2tk1KoWKczF6YsUeajsQyUPs2xQV1G7CwiSbyVoJs5wd3kGLz60T6uug==
 
 gzip-size@^7.0.0:
   version "7.0.0"
