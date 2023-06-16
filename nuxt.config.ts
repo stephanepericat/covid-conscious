@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxtjs/sanity',
     '@nuxtjs/turnstile',
+    'nuxt-cloudflare-analytics',
     'nuxt-icon',
   ],
 
@@ -24,7 +25,11 @@ export default defineNuxtConfig({
     },
   },
 
-  // modules
+  // module options
+
+  cloudflareAnalytics: {
+    token: process.env.CLOUDFARE_ANALYTICS_TOKEN,
+  },
 
   inkline: {
     globals: {

@@ -3388,6 +3388,13 @@ nuxi@3.5.3:
   optionalDependencies:
     fsevents "~2.3.2"
 
+nuxt-cloudflare-analytics@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/nuxt-cloudflare-analytics/-/nuxt-cloudflare-analytics-1.0.8.tgz#30e55db459d4792686eef457280194dc50922367"
+  integrity sha512-gUBcxHfvR06tBNDszTj/cMx8EGwtNFqICk7IBM66JIebe/VG0HgDF6AFJfqqOFG5ACk6ApdAxREHhvnmgUSudA==
+  dependencies:
+    "@nuxt/kit" "^3.0.0"
+
 nuxt-icon@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/nuxt-icon/-/nuxt-icon-0.4.1.tgz#38252825b973afa103879fd7849d7410f1706576"
