@@ -11,6 +11,26 @@ export default {
   comingSoon: "Em breve...",
   contribute: {
     description: "Você pode usar este formulário para enviar uma notícia, sugerir um produto para avaliação ou compartilhar uma dica da comunidade.",
+    errors: {
+      category: {
+        required: "Por favor, selecione uma categoria.",
+      },
+      description: {
+        required: "Insira uma descrição..",
+        min: "A descrição precisa ter pelo menos 20 caracteres.",
+      },
+      email: {
+        required: "Por favor insira um endereço de e-mail.",
+        invalid: "Por favor insira um endereço de e-mail válido.",
+      },
+      from_name: {
+        required: "Insira um nome.",
+        min: "O nome precisa ter pelo menos 3 caracteres.",
+      },
+      link: {
+        invalid: "Insira um link válido.",
+      },
+    },
     labels: {
       category: "Categoria",
       description: "Descrição",
@@ -19,12 +39,13 @@ export default {
       name: "Nome",
       submit: "Enviar",
     },
+    pageTitle: "Covid Conscious - Contribuir",
     placeholders: {
-      category: "Select a category",
-      description: "Enter a description",
-      email: "Enter your email address",
-      link: "Enter a link",
-      name: "Enter your name",
+      category: "Selecione uma categoria",
+      description: "Insira uma descrição",
+      email: "Insira o seu endereço de email",
+      link: "Insira um link",
+      name: "Insira seu nome",
     },
     title: "Contribuir",
   },

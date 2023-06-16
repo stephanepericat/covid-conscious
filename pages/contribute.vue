@@ -54,7 +54,7 @@
     category: {
       validators: [
         {
-          message: "Please select a category.",
+          message: t("contribute.errors.category.required"),
           name: "required",
         },
       ],
@@ -62,11 +62,11 @@
     description: {
       validators: [
         {
-          message: "Please enter a description.",
+          message: t("contribute.errors.description.required"),
           name: "required",
         },
         {
-          message: "The description needs to be at least 20 characters.",
+          message: t("contribute.errors.description.min"),
           name: 'minLength',
           value: 20,
         },
@@ -75,11 +75,11 @@
     email: {
       validators: [
         { 
-          message: "Please enter an email address.",
+          message: t("contribute.errors.email.required"),
           name: "required",
         },
         {
-          message: "Please enter a valid email address.",
+          message: t("contribute.errors.email.invalid"),
           name: "email",
         },
       ],
@@ -87,11 +87,11 @@
     from_name: {
       validators: [
         {
-          message: "Please enter a name.",
+          message: t("contribute.errors.from_name.required"),
           name: "required",
         },
         {
-          message: "The name needs to be at least 3 characters.",
+          message: t("contribute.errors.from_name.min"),
           name: 'minLength',
           value: 3,
         },
@@ -100,7 +100,7 @@
     link: {
       validators: [
         {
-          message: "Please enter a valid link.",
+          message: t("contribute.errors.link.invalid"),
           name: "custom",
           validator: urlValidator,
         },
@@ -123,6 +123,13 @@
   };
 
   const token = ref("");
+
+  useHead({
+    meta: [
+      { name: "description", content: t("contribute.description") },
+    ],
+    title: t("contribute.pageTitle")
+  });
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

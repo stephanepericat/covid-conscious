@@ -11,6 +11,26 @@ export default {
   comingSoon: "Coming soon...",
   contribute: {
     description: "You can use this form to submit a piece of news, suggest a product to review, or share a community tip.",
+    errors: {
+      category: {
+        required: "Please select a category.",
+      },
+      description: {
+        required: "Please enter a description.",
+        min: "The description needs to be at least 20 characters.",
+      },
+      email: {
+        required: "Please enter an email address.",
+        invalid: "Please enter a valid email address.",
+      },
+      from_name: {
+        required: "Please enter a name.",
+        min: "The name needs to be at least 3 characters.",
+      },
+      link: {
+        invalid: "Please enter a valid link.",
+      },
+    },
     labels: {
       category: "Category",
       description: "Description",
@@ -19,6 +39,7 @@ export default {
       name: "Name",
       submit: "Submit",
     },
+    pageTitle: "Covid Conscious - Contribute",
     placeholders: {
       category: "Select a category",
       description: "Enter a description",
