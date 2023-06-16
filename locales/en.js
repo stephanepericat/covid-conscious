@@ -13,6 +13,7 @@ export default {
     description: "You can use this form to submit a piece of news, suggest a product to review, or share a community tip.",
     labels: {
       category: "Category",
+      description: "Description",
       email: "Email Address",
       link: "Link",
       name: "Name",
@@ -20,6 +21,7 @@ export default {
     },
     placeholders: {
       category: "Select a category",
+      description: "Enter a description",
       email: "Enter your email address",
       link: "Enter a link",
       name: "Enter your name",

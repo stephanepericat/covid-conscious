@@ -13,6 +13,7 @@ export default {
     description: "Vous pouvez utiliser ce formulaire pour soumettre une nouvelle, suggérer un produit à évaluer ou partager une astuce communautaire.",
     labels: {
       category: "Catégorie",
+      description: "Description",
       email: "Adresse E-mail",
       link: "Lien",
       name: "Nom",
@@ -20,6 +21,7 @@ export default {
     },
     placeholders: {
       category: "Select a category",
+      description: "Enter a description",
       email: "Enter your email address",
       link: "Enter a link",
       name: "Enter your name",
