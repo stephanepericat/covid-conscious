@@ -3,22 +3,22 @@
     <h1 v-text="$t('contribute.title')" />
     <p v-text="$t('contribute.description')" />
     <IForm class="contribute-page__form" v-model="form" @submit="onSubmit">
-      <IFormGroup>
+      <IFormGroup required>
         <IFormLabel>{{ $t('contribute.labels.name') }}</IFormLabel>
         <IInput name="from_name" :placeholder="$t('contribute.placeholders.name')" :error="['invalid']" />
         <IFormError for="from_name" :visible="['invalid']" />
       </IFormGroup>
-      <IFormGroup>
+      <IFormGroup required>
         <IFormLabel>{{ $t('contribute.labels.email') }}</IFormLabel>
         <IInput name="email" :placeholder="$t('contribute.placeholders.email')" :error="['invalid']" />
         <IFormError for="email" :visible="['invalid']" />
       </IFormGroup>
-      <IFormGroup>
+      <IFormGroup required>
         <IFormLabel>{{ $t('contribute.labels.category') }}</IFormLabel>
         <ISelect name="category" :options="categories" :placeholder="$t('contribute.placeholders.category')" :error="['invalid']" />
         <IFormError for="category" :visible="['invalid']" />
       </IFormGroup>
-      <IFormGroup>
+      <IFormGroup required>
         <IFormLabel>{{ $t('contribute.labels.description') }}</IFormLabel>
         <ITextarea name="description" :placeholder="$t('contribute.placeholders.description')" :error="['invalid']" />
         <IFormError for="description" :visible="['invalid']" />
@@ -113,6 +113,7 @@
       });
 
       console.log("data", data.value.ok);
+      console.log("data", data.value.errors);
     } catch(e) {
       console.error("catch", e);
     }
