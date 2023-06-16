@@ -10,6 +10,20 @@ export default {
   },
   comingSoon: "Em breve...",
   contribute: {
+    description: "Você pode usar este formulário para enviar uma notícia, sugerir um produto para avaliação ou compartilhar uma dica da comunidade.",
+    labels: {
+      category: "Categoria",
+      email: "Email",
+      link: "Link",
+      name: "Nome",
+      submit: "Enviar",
+    },
+    placeholders: {
+      category: "Select a category",
+      email: "Enter your email address",
+      link: "Enter a link",
+      name: "Enter your name",
+    },
     title: "Contribuir",
   },
   home: {

@@ -10,6 +10,20 @@ export default {
   },
   comingSoon: "Coming soon...",
   contribute: {
+    description: "You can use this form to submit a piece of news, suggest a product to review, or share a community tip.",
+    labels: {
+      category: "Category",
+      email: "Email Address",
+      link: "Link",
+      name: "Name",
+      submit: "Submit",
+    },
+    placeholders: {
+      category: "Select a category",
+      email: "Enter your email address",
+      link: "Enter a link",
+      name: "Enter your name",
+    },
     title: "Contribute",
   },
   home: {

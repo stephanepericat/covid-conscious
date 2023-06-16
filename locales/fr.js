@@ -10,6 +10,20 @@ export default {
   },
   comingSoon: "À venir...",
   contribute: {
+    description: "Vous pouvez utiliser ce formulaire pour soumettre une nouvelle, suggérer un produit à évaluer ou partager une astuce communautaire.",
+    labels: {
+      category: "Catégorie",
+      email: "Adresse E-mail",
+      link: "Lien",
+      name: "Nom",
+      submit: "Soumettre",
+    },
+    placeholders: {
+      category: "Select a category",
+      email: "Enter your email address",
+      link: "Enter a link",
+      name: "Enter your name",
+    },
     title: "Contribuer",
   },
   home: {
