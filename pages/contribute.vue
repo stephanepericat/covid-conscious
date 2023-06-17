@@ -2,6 +2,7 @@
   <div class="contribute-page">
     <h1 v-text="$t('contribute.title')" />
     <p v-text="$t('contribute.description')" />
+
     <IForm class="contribute-page__form" v-model="form" @submit="onSubmit">
       <IFormGroup required>
         <IFormLabel>{{ $t('contribute.labels.name') }}</IFormLabel>
@@ -32,7 +33,12 @@
         <NuxtTurnstile v-model="token" />
       </IFormGroup>
       <IFormGroup>
-        <IButton type="submit" :disabled="form.invalid || !token">{{ $t('contribute.labels.submit') }}</IButton>
+        <IButton type="submit" :disabled="buttonDisabled">
+          <Icon class="contribute-page__loading" name="eos-icons:loading" v-if="isSubmitting" />
+          <template v-else>
+            {{ $t('contribute.labels.submit') }}
+          </template>
+        </IButton>
       </IFormGroup>
     </IForm>
   </div>
@@ -108,7 +114,11 @@
     },
   });
 
+  const isSubmitting = ref(false);
+
   const onSubmit = async () => {
+    isSubmitting.value = true;
+
     try {
       const { data } = await useFetch('/api/contribute', {
         method: "POST",
@@ -116,13 +126,17 @@
       });
 
       console.log("data", data.value.ok);
-      console.log("data", data.value.errors);
+      console.log("errors", data.value.errors);
     } catch(e) {
       console.error("catch", e);
+    } finally {
+      isSubmitting.value = false;
     }
   };
 
   const token = ref("");
+
+  const buttonDisabled = computed(() => form.value.invalid || !token.value || isSubmitting.value);
 
   useHead({
     meta: [
@@ -137,6 +151,10 @@
 .contribute-page {
   &__form {
     width: 50%;
+  }
+
+  &__loading {
+    margin: 4px 11px;
   }
 
   @include breakpoint('md') {
