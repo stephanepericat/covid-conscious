@@ -30,7 +30,7 @@
         <IFormError for="link" :visible="['invalid']" />
       </IFormGroup>
       <IFormGroup>
-        <NuxtTurnstile v-model="token" />
+        <NuxtTurnstile class="contribute-page__captcha" v-model="token" />
       </IFormGroup>
       <IFormGroup>
         <IButton type="submit" :disabled="buttonDisabled">
@@ -136,7 +136,7 @@
 
   const token = ref("");
 
-  const buttonDisabled = computed(() => form.value.invalid || !token.value || isSubmitting.value);
+  const buttonDisabled = computed(() => form.value.untouched || form.value.invalid || !token.value || isSubmitting.value);
 
   useHead({
     meta: [
@@ -151,6 +151,10 @@
 .contribute-page {
   &__form {
     width: 50%;
+  }
+
+  &__captcha {
+    margin-top: 7px;
   }
 
   &__loading {
