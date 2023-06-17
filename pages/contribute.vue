@@ -41,14 +41,16 @@
         </IButton>
       </IFormGroup>
     </IForm>
+    <IToastContainer />
   </div>
 </template>
 <script setup>
-  import { useForm } from "@inkline/inkline";
+  import { useForm, useToast } from "@inkline/inkline";
   import { urlValidator } from "~/assets/utils/url-validator";
   import { COMMUNITY, NEWS, PRODUCT } from "~/assets/constants/types";
 
   const { t } = useI18n();
+  const toast = useToast();
 
   const categories = [
     { id: COMMUNITY, label: t(`layout.${COMMUNITY}`) },
@@ -116,6 +118,22 @@
 
   const isSubmitting = ref(false);
 
+  const showErrorToast = () => {
+    toast.show({
+      title: t("contribute.toast.error.title"),
+      message: t("contribute.toast.error.message"),
+      color: "danger"
+    });
+  };
+
+  const showSuccessToast = () => {
+    toast.show({
+      title: t("contribute.toast.success.title"),
+      message: t("contribute.toast.success.message"),
+      color: "success"
+    });
+  };
+
   const onSubmit = async () => {
     isSubmitting.value = true;
 
@@ -125,10 +143,13 @@
         body: form.value,
       });
 
-      console.log("data", data.value.ok);
-      console.log("errors", data.value.errors);
+      if(data.value?.ok) {
+        showSuccessToast()
+      } else {
+        showErrorToast();
+      }
     } catch(e) {
-      console.error("catch", e);
+      showErrorToast();
     } finally {
       isSubmitting.value = false;
     }

@@ -48,6 +48,16 @@ export default {
       name: "Entrez votre nom",
     },
     title: "Contribuer",
+    toast: {
+      error: {
+        title: "Quelque chose s'est mal passé.",
+        message: "Veuillez réessayer plus tard.",
+      },
+      success: {
+        title: "Envoyé!",
+        message: "Nous avons reçu votre soumission et nous l'examinerons bientôt.",
+      },
+    },
   },
   home: {
     description: "Covid Conscious - Une plateforme de conseils Covid",

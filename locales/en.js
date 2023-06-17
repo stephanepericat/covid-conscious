@@ -48,6 +48,16 @@ export default {
       name: "Enter your name",
     },
     title: "Contribute",
+    toast: {
+      error: {
+        title: "Something went wrong.",
+        message: "Please try again later.",
+      },
+      success: {
+        title: "Submitted!",
+        message: "We received your submission, and will review it soon.",
+      },
+    },
   },
   home: {
     description: "Covid Conscious - A platform for Covid advice",

@@ -6,7 +6,7 @@ export default eventHandler(async (event) => {
   const body = parseBody(rest);
   
   if(!valid) {
-    return { ok: false, errors };
+    return { ok: false };
   }
 
   try {
@@ -20,9 +20,9 @@ export default eventHandler(async (event) => {
       },
     );
 
-    return { ok: true, errors: null };
+    return { ok: true };
   } catch(e) {
-    console.error(e.text, body);
-    return { ok: false, errors: [e.text] };
+    console.error(e?.text || null, body);
+    throw new Error(e);
   }
 });
