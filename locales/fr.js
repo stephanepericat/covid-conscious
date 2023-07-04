@@ -4,7 +4,7 @@ export default {
     contactInfo: "Coordonnées",
     email: "E-mail",
     moreInfo: "Plus d'Information",
-    title: "Covid Conscious - {title}",
+    title: "That Covid Life - {title}",
     updated: "Mis à jour",
     website: "Site Web",
   },
@@ -39,7 +39,7 @@ export default {
       name: "Nom",
       submit: "Soumettre",
     },
-    pageTitle: "Covid Conscious - Contribuer",
+    pageTitle: "That Covid Life - Contribuer",
     placeholders: {
       category: "Choisissez une catégorie",
       description: "Entrez une description",
@@ -60,9 +60,9 @@ export default {
     },
   },
   home: {
-    description: "Covid Conscious - Une plateforme de conseils Covid",
+    description: "That Covid Life - Une plateforme de conseils Covid",
     pageTitle: "Dernières Publications",
-    title: "Covid Conscious - Dernières Publications",
+    title: "That Covid Life - Dernières Publications",
   },
   layout: {
     about: "À Propos",
@@ -83,17 +83,17 @@ export default {
     twitter: "Suivez-nous sur Twitter",
   },
   list: {
-    categoryTitle: "Covid Conscious - {type} - {category}",
-    description: "Covid Conscious - Une plateforme de conseils Covid",
-    typeTitle: "Covid Conscious - {type}",
+    categoryTitle: "That Covid Life - {type} - {category}",
+    description: "That Covid Life - Une plateforme de conseils Covid",
+    typeTitle: "That Covid Life - {type}",
   },
   notFound: {
     title: "Non Trouvé",
     description: "Il n'y a pas encore de publications pour '{category}'.",
   },
   search: {
-    description: "Covid Conscious - Une plateforme de conseils Covid",
+    description: "That Covid Life - Une plateforme de conseils Covid",
     pageTitle: "{totalItems} Résultats de recherche pour \"{searchTerm}\"",
-    title: "Covid Conscious - Recherche \"{searchTerm}\"",
+    title: "That Covid Life - Recherche \"{searchTerm}\"",
   },
 };

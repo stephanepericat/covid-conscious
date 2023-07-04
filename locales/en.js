@@ -4,7 +4,7 @@ export default {
     contactInfo: "Contact Info",
     email: "Email",
     moreInfo: "More Information",
-    title: "Covid Conscious - {title}",
+    title: "That Covid Life - {title}",
     updated: "Updated",
     website: "Go To Website",
   },
@@ -39,7 +39,7 @@ export default {
       name: "Name",
       submit: "Submit",
     },
-    pageTitle: "Covid Conscious - Contribute",
+    pageTitle: "That Covid Life - Contribute",
     placeholders: {
       category: "Select a category",
       description: "Enter a description",
@@ -60,9 +60,9 @@ export default {
     },
   },
   home: {
-    description: "Covid Conscious - A platform for Covid advice",
+    description: "That Covid Life - A platform for Covid advice",
     pageTitle: "Latest Publications",
-    title: "Covid Conscious - Latest Publications",
+    title: "That Covid Life - Latest Publications",
   },
   layout: {
     about: "About",
@@ -83,17 +83,17 @@ export default {
     twitter: "Follow us on Twitter",
   },
   list: {
-    categoryTitle: "Covid Conscious - {type} - {category}",
-    description: "Covid Conscious - A platform for Covid advice",
-    typeTitle: "Covid Conscious - {type}",
+    categoryTitle: "That Covid Life - {type} - {category}",
+    description: "That Covid Life - A platform for Covid advice",
+    typeTitle: "That Covid Life - {type}",
   },
   notFound: {
     title: "Not Found",
     description: "There are no publications yet for '{category}'.",
   },
   search: {
-    description: "Covid Conscious - A platform for Covid advice",
+    description: "That Covid Life - A platform for Covid advice",
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",
-    title: "Covid Conscious - Search \"{searchTerm}\"",
+    title: "That Covid Life - Search \"{searchTerm}\"",
   },
 };

@@ -1,6 +1,3 @@
-
-import { localePath } from 'vue-i18n-routing';
-
 <template>
   <ILayout class="default-layout">
     <!-- header -->
@@ -160,11 +157,7 @@ import { localePath } from 'vue-i18n-routing';
   const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
 
   // App Logo
-  const logoFile = computed(() => {
-    return inkline.options.colorMode === DARK
-      ? '/covid-conscious-logo-light.svg'
-      : '/covid-conscious-logo.svg'
-  });
+  const logoFile = computed(() => `/covid-life-${inkline.options.colorMode}.png`);
 
   // Search
   const searchTerm = ref("");
