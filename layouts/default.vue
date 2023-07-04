@@ -84,7 +84,10 @@
     <ILayoutFooter class="default-layout__footer">
       <IContainer class="default-layout__footer--container">
         <INav class="default-layout__footer--nav">
-          <INavItem class="default-layout__footer--legal"> {{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }} </INavItem>
+          <INavItem class="default-layout__footer--legal">
+            <span class="default-layout__footer--legal-text">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</span>
+            <NuxtLink :to="localePath('/disclaimer')">{{ $t("layout.here") }}</NuxtLink>.
+          </INavItem>
           <INavbarBrand to="/" class="default-layout__footer--logo">
             <IDropdown placement="top-end" events="hover">
               <img class="default-layout__logo-footer" :src="logoFile" />

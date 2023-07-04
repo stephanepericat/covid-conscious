@@ -59,6 +59,9 @@ export default {
       },
     },
   },
+  disclaimer: {
+    updated: "Última actualización",
+  },
   home: {
     description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
     pageTitle: "Últimas Publicaciones",
@@ -66,7 +69,9 @@ export default {
   },
   layout: {
     about: "Acerca De",
-    footerLegal: "© {year} Reservados todos los derechos.",
+    disclaimer: "Descargo de responsabilidad",
+    footerLegal: "© {year} Reservados todos los derechos. Por favor, lea nuestro aviso legal",
+    here: "aquí",
     home: "Página Principal",
     community: "Comunidad",
     contactUs: "Contacta con nosotros",
