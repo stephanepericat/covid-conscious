@@ -1,7 +1,7 @@
 <template>
   <div class="not-found">
     <Icon class="not-found__icon" name="iconoir:file-not-found" />
-    <h1 v-text="$t('notFound.title')" />
+    <h1 class="not-found__title" v-text="$t('notFound.title')" />
     <h3 v-text="$t('notFound.description', { category })" />
   </div>
 </template>
@@ -11,16 +11,22 @@
   });
 </script>
 <style lang="scss" scoped>
-  .not-found {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+@import "~/assets/sass/mixins.scss";
 
-    &__icon {
-      height: 80px;
-      margin-bottom: 50px;
-      opacity: .4;
-      width: 80px;
-    }
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    @include title();
   }
+
+  &__icon {
+    height: 80px;
+    margin-bottom: 50px;
+    opacity: .4;
+    width: 80px;
+  }
+}
 </style>
