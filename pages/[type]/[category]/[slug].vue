@@ -102,7 +102,7 @@
   }
 
   &__title {
-    font-weight: 500;
+    @include title();
     margin-bottom: 40px;
   }
 
