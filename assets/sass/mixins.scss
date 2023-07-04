@@ -22,20 +22,20 @@
 
 @mixin thumbnail($dimension: $thumbnailDimension) {
   width: $dimension;
+  height: $dimension;
+
+  &--fallback {
+    flex: none;
+    margin-right: var(--margin-right);
+    width: $dimension;
     height: $dimension;
 
-    &--fallback {
-      flex: none;
-      margin-right: var(--margin-right);
+    &-icon {
       width: $dimension;
       height: $dimension;
-
-      &-icon {
-        width: $dimension;
-        height: $dimension;
-        opacity: .2;
-      }
+      opacity: .2;
     }
+  }
 }
 
 @mixin title() {

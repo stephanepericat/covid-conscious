@@ -157,7 +157,7 @@
   const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
 
   // App Logo
-  const logoFile = computed(() => `/covid-life-${inkline.options.colorMode}.png`);
+  const logoFile = computed(() => `/covid-life-v3-${inkline.options.colorMode}.png`);
 
   // Search
   const searchTerm = ref("");
