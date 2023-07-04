@@ -1,6 +1,6 @@
 <template>
   <div class="contribute-page">
-    <h1 v-text="$t('contribute.title')" />
+    <h1 class="contribute-page__title" v-text="$t('contribute.title')" />
     <p v-text="$t('contribute.description')" />
 
     <IForm class="contribute-page__form" v-model="form" @submit="onSubmit">
@@ -167,9 +167,14 @@
   });
 </script>
 <style lang="scss" scoped>
+@import "~/assets/sass/mixins.scss";
 @import '@inkline/inkline/css/mixins';
 
 .contribute-page {
+  &__title {
+    @include title();
+  }
+
   &__form {
     width: 50%;
   }

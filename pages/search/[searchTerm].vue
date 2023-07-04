@@ -73,6 +73,7 @@
   }
 
   &__title {
+    @include title();
     margin-bottom: 30px;
   }
 

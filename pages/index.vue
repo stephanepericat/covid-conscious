@@ -5,7 +5,7 @@
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
       <div class="home-page__container">
         <section class="home-page__container--card">
-          <h4>{{ $t("layout.news") }}</h4>
+          <h4 class="home-page__sub-title">{{ $t("layout.news") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.news">
               <IMedia>
@@ -34,7 +34,7 @@
           </IListGroup>
         </section>
         <section class="home-page__container--card">
-          <h4>{{ $t("layout.product") }}</h4>
+          <h4 class="home-page__sub-title">{{ $t("layout.product") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.products">
               <IMedia>
@@ -63,7 +63,7 @@
           </IListGroup>
         </section>
         <section class="home-page__container--card">
-          <h4>{{ $t("layout.community") }}</h4>
+          <h4 class="home-page__sub-title">{{ $t("layout.community") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.community">
               <IMedia>
@@ -92,7 +92,7 @@
           </IListGroup>
         </section>
         <section class="home-page__container--card">
-          <h4>{{ $t("layout.education") }}</h4>
+          <h4 class="home-page__sub-title">{{ $t("layout.education") }}</h4>
           <IListGroup size="sm" :border="false">
             <IListGroupItem v-for="article in latestPublications.learn">
               <IMedia>
@@ -155,7 +155,12 @@
     @include loader();
   }
 
-  &__link {
+  &__title {
+    @include title();
+  }
+
+  &__link,
+  &__sub-title {
     @include titleLink();
   }
 

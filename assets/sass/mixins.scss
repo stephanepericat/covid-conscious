@@ -38,6 +38,11 @@
     }
 }
 
+@mixin title() {
+  font-family: 'Abril Fatface', cursive;
+  font-weight: 400;
+}
+
 @mixin titleLink() {
   font-weight: 500;
 }
