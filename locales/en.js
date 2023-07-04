@@ -60,6 +60,10 @@ export default {
     },
   },
   disclaimer: {
+    links: "EXTERNAL LINKS DISCLAIMER",
+    professional: "PROFESSIONAL DISCLAIMER",
+    testimonials: "TESTIMONIALS DISCLAIMER",
+    website: "WEBSITE DISCLAIMER",
     updated: "Last Updated",
   },
   home: {

@@ -6,7 +6,7 @@ export default groq`
   "website": website[$locale],
   "links": links[$locale],
   "professional": professional[$locale],
-  "testimonials": testimonialsp[$locale],
+  "testimonials": testimonials[$locale],
   "updated": _updatedAt,
 }
 `;

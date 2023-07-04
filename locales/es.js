@@ -60,6 +60,10 @@ export default {
     },
   },
   disclaimer: {
+    links: "RENUNCIA DE ENLACES EXTERNOS",
+    professional: "RENUNCIA PROFESIONAL",
+    testimonials: "RENUNCIA DE RESPONSABILIDAD DE TESTIMONIOS",
+    website: "EXENCIÓN DE RESPONSABILIDAD DEL SITIO WEB",
     updated: "Última actualización",
   },
   home: {

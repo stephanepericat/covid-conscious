@@ -60,6 +60,10 @@ export default {
     },
   },
   disclaimer: {
+    links: "AVIS DE NON-RESPONSABILITÉ LIENS EXTERNES",
+    professional: "AVIS DE NON-RESPONSABILITÉ PROFESSIONNEL",
+    testimonials: "AVIS DE NON-RESPONSABILITÉ DES TÉMOIGNAGES",
+    website: "AVIS DE NON-RESPONSABILITÉ DU SITE WEB",
     updated: "Dernière mise à jour",
   },
   home: {

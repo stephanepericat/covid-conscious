@@ -60,6 +60,10 @@ export default {
     },
   },
   disclaimer: {
+    links: "AVISO DE LINKS EXTERNOS",
+    professional: "ISENÇÃO DE RESPONSABILIDADE PROFISSIONAL",
+    testimonials: "TESTEMUNHOS ISENÇÃO DE RESPONSABILIDADE",
+    website: "ISENÇÃO DE RESPONSABILIDADE DO SITE",
     updated: "Ultima atualização",
   },
   home: {
