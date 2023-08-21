@@ -20,8 +20,8 @@
             </template>
             <h3 class="search-page__link">
               <NuxtLink
-                :to="article.link || localePath(article.path)"
-                :target="article.link ? '_blank' : '_self'"
+                :to="article.type === 'link' ? article.link : localePath(article.path)"
+                :target="article.type === 'link' ? '_blank' : '_self'"
               >
                 <span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}
               </NuxtLink>
