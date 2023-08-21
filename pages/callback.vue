@@ -7,8 +7,6 @@
   </div>
 </template>
 <script setup>
-  // import { navigateTo, useRouter, useLocalePath, useSupabaseUser, watch } from '#imports'
-  // import { useRuntimeConfig } from '#app'
   definePageMeta({
     layout: 'empty'
   })
