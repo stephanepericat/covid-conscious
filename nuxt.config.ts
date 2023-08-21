@@ -23,6 +23,11 @@ export default defineNuxtConfig({
   ],
 
   runtimeConfig: {
+    public: {
+      supabaseForum: {
+        rootPath: '/forum',
+      },
+    },
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
@@ -63,7 +68,7 @@ export default defineNuxtConfig({
   supabase: {
     redirect: true,
     redirectOptions: {
-      callback: '/confirm',
+      callback: '/callback',
       exclude: [
         '/',
       ],

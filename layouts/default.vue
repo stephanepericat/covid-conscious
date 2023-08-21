@@ -147,7 +147,7 @@
       acc[val.type].push(val);
 
       return acc;
-    }, {});
+    }, {}) || {};
   });
 
   // Inkline color mode
