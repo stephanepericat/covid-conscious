@@ -80,6 +80,7 @@ export default {
     community: "Communauté",
     contactUs: "Contactez-Nous",
     education: "Éducation",
+    forum: "Forum",
     news: "Actualités",
     product: "Produits",
     rss: "Flux RSS",
@@ -90,6 +91,11 @@ export default {
       lightMode: "Passer en mode lumière",
     },
     twitter: "Suivez-nous sur Twitter",
+    user: {
+      account: "Mon Compte",
+      signIn: "Connexion",
+      signOut: "Déconnexion"
+    },
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
@@ -104,5 +110,176 @@ export default {
     description: "That Covid Life - Une plateforme de conseils Covid",
     pageTitle: "{totalItems} Résultats de recherche pour \"{searchTerm}\"",
     title: "That Covid Life - Recherche \"{searchTerm}\"",
+  },
+  'supabase-forum': {
+    account: {
+      back: 'Retour',
+      title: 'Mon Compte',
+      labels: {
+        about: 'À Propos',
+        avatar: 'Avatar',
+        email: 'Addresse E-mail',
+        fullName: 'Nom Légal',
+        update: 'Mettre à Jour',
+        username: 'Nom d\'Utilisateur',
+        website: 'Site Web',
+      },
+    },
+    auth: {
+      description: 'Entrez votre addresse e-mail afin de recevoir un lien de connexion.',
+      label: 'Entrez votre addresse e-mail...',
+      submit: 'Envoyez-moi un lien de connexion!',
+      toast: {
+        error: {
+          message: 'Veuillez réessayer ultérieurement.',
+          title: 'Une erreur s\'est produite',
+        },
+        success: {
+          message: 'Consultez votre boîte mail pour le lien de connexion.',
+          title: 'Lien envoyé!',
+        },
+        update: {
+          message: 'Vos préférences ont été sauvegardées.',
+          title: 'Informations de compte mises à jour!',
+        },
+      },
+    },
+    comments: {
+      box: {
+        button: 'Publier le commentaire',
+        loggedIn: 'Vous devrez être connecté pour pouvoir publier un commentaire.',
+        placeholder: 'Tapez votre commentaire ici...',
+        title: 'Ajouter Un Commentaire',
+      },
+      description: 'Vous consultez le(s) commentaire(s) {start} à {end} de {total}.',
+      noComments: 'Il n\'y a pas encore de commentaires pour ce message.',
+      toast: {
+        error: {
+          message: 'Nous ne sommes pas en mesure de publier votre commentaire actuellement.',
+          title: 'Une erreur s\'est produite',
+        },
+        success: {
+          message: 'Votre commentaire a été publié.',
+          title: 'Commentaire ajouté!',
+        },
+      }
+    },
+    create: {
+      categories: {
+        lifestyle: 'Mode de Vie',
+        'long-covid': 'Covid Long',
+        products: 'Produits',
+        recovery: 'Rétablissement',
+        relationships: 'Relations',
+        'self-care': 'Soins Personnels',
+      },
+      errors: {
+        category: {
+          required: 'Vous devez choisir une catégorie',
+        },
+        contents: {
+          empty: 'Le corps du message ne peut pas être vide',
+          required: 'Contenu requis',
+        },
+        title: {
+          required: 'Titre requis',
+          tooLong: 'Le titre est trop long',
+        },
+      },
+      labels: {
+        category: 'Catégorie',
+        contents: 'Corps du Message',
+        submit: 'Soumettre',
+        title: 'Titre',
+      },
+      modal: {
+        title: 'Confirmez laPublication',
+        description: 'Vous êtes sur le point de publier ce message. Il ne vous est pas possible de l\'éditer ultérieurement.',
+        confirmation: 
+          'Vérifiez que tout est correct, et cliquez sur "Publier" si vous êtes prêt, ou "Annuler" si vous souhaitez de modifier votre message.',
+        buttons: {
+          cancel: 'Annuler',
+          confirm: 'Publier',
+        },
+      },
+      placeholders: {
+        category: 'Choisissez une catégorie',
+        contents: 'Entrez le corps du message',
+        title: 'Entrez un titre',
+      },
+      title: 'Créer Un Message',
+      toast: {
+        error: {
+          message: 'Nous ne sommes pas en mesure de publier votre message actuellement.',
+          title: 'Une erreur s\'est produite',
+        },
+        success: {
+          message: '"{title}" a été publié.',
+          title: 'Message ajouté!',
+        },
+      },
+    },
+    disabled: {
+      message: {
+        comment: 'Vous devez définir un nom d\'utilisateur, avant de pouvoir ajouter un commentaire.',
+        post: 'Vous devez définir un nom d\'utilisateur, avant de pouvoir publier un message.'
+      },
+      redirect: 'Visitez votre compte pour définir un nom d\'utlisateur.',
+    },
+    nav: {
+      create: 'Créer Un Message',
+      latest: 'Messages Récents',
+      login: 'Connexion',
+      logout: 'Déconnexion',
+      my: {
+        account: 'Mon Compte',
+        posts: 'Mes Messages',
+      },
+      search: 'Recherche',
+    },
+    latest: {
+      title: 'Messages Récents',
+    },
+    list: {
+      description: 'Vous consultez le(s) message(s) {start} à {end} de {total}.',
+    },
+    post: {
+      comments: 'Commentaires',
+    },
+    posts: {
+      buttonLabel: 'Supprimer {amount} Message(s)',
+      description: 'Sélectionnez le(s) message(s) que vous souhaitez supprimer.',
+      modal: {
+        title: 'Confirmer La Suppréssion',
+        description: 'Vous êtes sur le point de supprimer {amount} message(s). Ceci ne peut pas être annulé.',
+        confirmation: 'Êtes-vous sûr(e) de vouloir continuer?',
+        buttons: {
+          cancel: 'Annuler',
+          confirm: 'Supprimer',
+        },
+      },
+      noPosts: 'Vous n\'avez pas encore publié de messages.',
+      table: {
+        published: 'Date de publication',
+        title: 'Titre Du Message',
+        topic: 'Thème'
+      },
+      title: 'Mes Messages',
+      toast: {
+        error: {
+          message: 'Nos ne sommes pas en mesure de supprimer vos messages actuellement.',
+          title: 'Une erreur s\'est produite',
+        },
+        success: {
+          message: 'Les messages sélectionnés ont été supprimés de manière permanente.',
+          title: 'Messages(s) Supprimé(s)!',
+        },
+      },
+    },
+    search: {
+      description: 'Recherchez parmis les messages, en tapant un terme de recherche ci-dessous',
+      label: 'Tapez votre terme de recherche...',
+      title: 'Recherche',
+    },
   },
 };

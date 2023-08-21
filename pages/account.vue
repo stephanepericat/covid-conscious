@@ -1,0 +1,67 @@
+<template>
+  <PageShell class="sf-account-page">
+    <h1
+      class="sf-account-page__title"
+      v-text="$t('supabase-forum.account.title')"
+    />
+    <template v-if="user">
+      <Account
+        class="sf-account-page__account"
+        @error="onError"
+        @success="onUpdateSuccess"
+      />
+      <IFormGroup class="sf-account-page__logout">
+        <IButton
+          link
+          color="danger"
+          @click.prevent="signOut"
+        >
+          Sign Out
+        </IButton>
+      </IFormGroup>
+    </template>
+  </PageShell>
+</template>
+<script setup>
+  import PageShell from '../components/PageShell.vue'
+  import { useSignOut } from '../assets/composables/useSignOut'
+  import { useToast } from '@inkline/inkline'
+  // import { useI18n, useSupabaseUser } from '#imports'
+  import Account from '../components/UserAccount.vue'
+
+  const toast = useToast()
+  const user = useSupabaseUser()
+  const { t } = useI18n()
+  const { onError, signOut } = useSignOut(user)
+
+  const onUpdateSuccess = () => {
+    toast.show({
+      title: t('supabase-forum.auth.toast.update.title'),
+      message: t('supabase-forum.auth.toast.update.message'),
+      color: 'success'
+    })
+  }
+</script>
+<style lang="scss" scoped>
+@import "../assets/sass/mixins.scss";
+
+.sf-account-page {
+  &__title {
+    @include title();
+  }
+
+  // &__account,
+  // &__logout {
+  //   width: 50%;
+  // }
+
+  &__account {
+    margin: 40px 0;
+  }
+
+  &__logout {
+    display: flex;
+    justify-content: center;
+  }
+}
+</style>

@@ -80,6 +80,7 @@ export default {
     community: "Comunidad",
     contactUs: "Contacta con nosotros",
     education: "Aprender",
+    forum: "Foro",
     news: "Noticias",
     product: "Productos",
     rss: "RSS Feed",
@@ -90,6 +91,11 @@ export default {
       lightMode: "Cambiar al modo de luz",
     },
     twitter: "Síganos en Twitter",
+    user: {
+      account: "Mi cuenta",
+      signIn: "Iniciar sesión",
+      signOut: "Cerrar sesión"
+    },
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
@@ -104,5 +110,176 @@ export default {
     description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
     pageTitle: "{totalItems} Resultados de la búsqueda de \"{searchTerm}\"",
     title: "That Covid Life - Búsqueda \"{searchTerm}\"",
+  },
+  'supabase-forum': {
+    account: {
+      back: 'Atras',
+      title: 'Mi Cuenta',
+      labels: {
+        about: 'Acerca de mí',
+        avatar: 'Avatar',
+        email: 'Dirección de correo electrónico',
+        fullName: 'Nombre completo',
+        update: 'Actualizar',
+        username: 'Nombre de usuario',
+        website: 'Sitio web',
+      },
+    },
+    auth: {
+      description: 'Ingrese su dirección de correo electrónico para recibir un enlace de inicio de sesión',
+      label: 'Introduzca su dirección de correo electrónico...',
+      submit: '¡Envíame un enlace de inicio de sesión!',
+      toast: {
+        error: {
+          message: 'Por favor inténtalo de nuevo más tarde.',
+          title: 'Algo salió mal',
+        },
+        success: {
+          message: 'Revise su correo electrónico para el enlace de inicio de sesión.',
+          title: '¡Enlace enviado!',
+        },
+        update: {
+          message: 'Tus preferencias han sido guardadas.',
+          title: '¡Información de cuenta actualizada!',
+        },
+      },
+    },
+    comments: {
+      box: {
+        button: 'Publicar comentario',
+        loggedIn: 'Debe iniciar sesión para publicar comentarios.',
+        placeholder: 'Escriba su comentario aquí...',
+        title: 'Agregar un comentario',
+      },
+      description: 'Estás viendo los comentarios desde el {start} hasta el {end} de {total}.',
+      noComments: 'Todavía no hay comentarios en esta publicación.',
+      toast: {
+        error: {
+          message: 'No podemos publicar su comentario en este momento.',
+          title: 'Algo salió mal',
+        },
+        success: {
+          message: 'Tu comentario ha sido publicado.',
+          title: '¡Comentario añadido!',
+        },
+      }
+    },
+    create: {
+      categories: {
+        lifestyle: 'Estilo de Vida',
+        'long-covid': 'Largo Covid',
+        products: 'Productos',
+        recovery: 'Recuperación',
+        relationships: 'Relaciones',
+        'self-care': 'Autocuidado',
+      },
+      errors: {
+        category: {
+          required: 'Debes elegir una categoría',
+        },
+        contents: {
+          empty: 'El contenido no puede estar vacío',
+          required: 'Algún contenido es requerido',
+        },
+        title: {
+          required: 'Se requiere un título',
+          tooLong: 'El título es demasiado largo',
+        },
+      },
+      labels: {
+        category: 'Categoría',
+        contents: 'Contenido',
+        submit: 'Enviar',
+        title: 'Titulo',
+      },
+      modal: {
+        title: 'Confirmar publicación',
+        description: 'Estás a punto de publicar esta publicación. No se puede editar más tarde.',
+        confirmation: 
+          'Verifique que todo esté bien y haga clic en "publicar" si está listo, o "cancelar" si necesita editar esta publicación.',
+        buttons: {
+          cancel: 'Cancelar',
+          confirm: 'Publicar',
+        },
+      },
+      placeholders: {
+        category: 'Elija una categoría',
+        contents: 'Ingrese algún contenido',
+        title: 'Ingrese un título',
+      },
+      title: 'Crear publicación',
+      toast: {
+        error: {
+          message: 'No podemos publicar su publicación en este momento.',
+          title: 'Algo salió mal',
+        },
+        success: {
+          message: '"{title}" ha sido publicado.',
+          title: '¡Publicación añadida!',
+        },
+      },
+    },
+    disabled: {
+      message: {
+        comment: 'Necesitas configurar un nombre de usuario antes de poder comentar.',
+        post: 'Necesitas configurar un nombre de usuario antes de poder publicar.'
+      },
+      redirect: 'Ve a tu cuenta para configurar una ahora.',
+    },
+    nav: {
+      create: 'Crear publicación',
+      latest: 'Últimas publicaciones',
+      login: 'Iniciar sesión',
+      logout: 'Cerrar sesión',
+      my: {
+        account: 'Mi cuenta',
+        posts: 'Mis publicaciones',
+      },
+      search: 'Buscar',
+    },
+    latest: {
+      title: 'Últimas publicaciones',
+    },
+    list: {
+      description: 'Estás viendo la(s) publicación(es) desde el {start} hasta el {end} de {total}.',
+    },
+    post: {
+      comments: 'Comentarios',
+    },
+    posts: {
+      buttonLabel: 'Eliminar {amount} publicación(es)',
+      description: 'Selecciona las publicaciones que deseas eliminar.',
+      modal: {
+        title: 'Confirmar eliminación',
+        description: 'Estás a punto de eliminar {amount} publicación(es). Esto no se puede deshacer.',
+        confirmation: '¿Está seguro de que desea continuar?',
+        buttons: {
+          cancel: 'Cancelar',
+          confirm: 'Eliminación',
+        },
+      },
+      noPosts: 'Aún no has publicado nada.',
+      table: {
+        published: 'Fecha de publicación',
+        title: 'Título de la publicación',
+        topic: 'Tema'
+      },
+      title: 'Mis publicaciones',
+      toast: {
+        error: {
+          message: 'No podemos eliminar tu(s) publicación(es) en este momento.',
+          title: 'Algo salió mal',
+        },
+        success: {
+          message: 'Su selección ha sido eliminada permanentemente.',
+          title: '¡Publicación(es) eliminada(s)!',
+        },
+      },
+    },
+    search: {
+      description: 'Busca publicaciones ingresando un término de búsqueda a continuación.',
+      label: 'Escriba un término de búsqueda...',
+      title: 'Buscar',
+    },
   },
 };

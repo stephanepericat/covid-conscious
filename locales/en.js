@@ -80,6 +80,7 @@ export default {
     community: "Community",
     contactUs: "Contact Us",
     education: "Learn",
+    forum: "Forum",
     news: "News",
     product: "Products",
     rss: "RSS Feed",
@@ -90,6 +91,11 @@ export default {
       lightMode: "Switch To Light Mode",
     },
     twitter: "Follow us on Twitter",
+    user: {
+      account: "My Account",
+      signIn: "Sign In",
+      signOut: "Sign Out"
+    },
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
@@ -104,5 +110,176 @@ export default {
     description: "That Covid Life - A platform for Covid advice",
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",
     title: "That Covid Life - Search \"{searchTerm}\"",
+  },
+  'supabase-forum': {
+    account: {
+      back: 'Back',
+      title: 'My Account',
+      labels: {
+        about: 'About Me',
+        avatar: 'Avatar',
+        email: 'Email Address',
+        fullName: 'Full Name',
+        update: 'Update',
+        username: 'Username',
+        website: 'Website',
+      },
+    },
+    auth: {
+      description: 'Enter your email address to receive a login link',
+      label: 'Enter your email address...',
+      submit: 'Send me a login link!',
+      toast: {
+        error: {
+          message: 'Please try again later.',
+          title: 'Something went wrong',
+        },
+        success: {
+          message: 'Check your email for the login link.',
+          title: 'Link sent!',
+        },
+        update: {
+          message: 'Your preferences have been saved.',
+          title: 'Account info updated!',
+        },
+      },
+    },
+    comments: {
+      box: {
+        button: 'Post Comment',
+        loggedIn: 'You must be logged in to post comments.',
+        placeholder: 'Type your comment here...',
+        title: 'Add A Comment',
+      },
+      description: 'You are viewing comment(s) {start} through {end} of {total}.',
+      noComments: 'There are no comments on this post yet.',
+      toast: {
+        error: {
+          message: 'We are unable to publish your comment at this time.',
+          title: 'Something went wrong',
+        },
+        success: {
+          message: 'Your comment has been published.',
+          title: 'Comment Added!',
+        },
+      }
+    },
+    create: {
+      categories: {
+        lifestyle: 'Lifestyle',
+        'long-covid': 'Long Covid',
+        products: 'Products',
+        recovery: 'Recovery',
+        relationships: 'Relationships',
+        'self-care': 'Self-Care',
+      },
+      errors: {
+        category: {
+          required: 'You must choose a category',
+        },
+        contents: {
+          empty: 'Contents cannot be empty',
+          required: 'Some content is required',
+        },
+        title: {
+          required: 'A title is required',
+          tooLong: 'The title is too long',
+        },
+      },
+      labels: {
+        category: 'Category',
+        contents: 'Contents',
+        submit: 'Submit',
+        title: 'Title',
+      },
+      modal: {
+        title: 'Confirm Publication',
+        description: 'You are about to publish this post. It cannot be edited later.',
+        confirmation: 
+          'Please verify everything is ok, and click "publish" if you are ready, or "cancel" if you need to edit this post.',
+        buttons: {
+          cancel: 'Cancel',
+          confirm: 'Publish',
+        },
+      },
+      placeholders: {
+        category: 'Choose a category',
+        contents: 'Enter some content',
+        title: 'Enter a title',
+      },
+      title: 'Create Post',
+      toast: {
+        error: {
+          message: 'We are unable to publish your post at this time.',
+          title: 'Something went wrong',
+        },
+        success: {
+          message: '"{title}" has been published.',
+          title: 'Post Added!',
+        },
+      },
+    },
+    disabled: {
+      message: {
+        comment: 'You need to set up a username before you can comment.',
+        post: 'You need to set up a username before you can post.'
+      },
+      redirect: 'Go to your account to set one up now.',
+    },
+    nav: {
+      create: 'Create Post',
+      latest: 'Latest Posts',
+      login: 'Sign In',
+      logout: 'Sign Out',
+      my: {
+        account: 'My Account',
+        posts: 'My Posts',
+      },
+      search: 'Search',
+    },
+    latest: {
+      title: 'Latest Posts',
+    },
+    list: {
+      description: 'You are viewing post(s) {start} through {end} of {total}.',
+    },
+    post: {
+      comments: 'Comments',
+    },
+    posts: {
+      buttonLabel: 'Delete {amount} Post(s)',
+      description: 'Select the post(s) you wish to delete.',
+      modal: {
+        title: 'Confirm Deletion',
+        description: 'You are about to delete {amount} post(s). This cannot be undone.',
+        confirmation: 'Are you sure you want to proceed?',
+        buttons: {
+          cancel: 'Cancel',
+          confirm: 'Delete',
+        },
+      },
+      noPosts: 'You have not posted anything yet.',
+      table: {
+        published: 'Publication Date',
+        title: 'Post Title',
+        topic: 'Topic'
+      },
+      title: 'My Posts',
+      toast: {
+        error: {
+          message: 'We are unable to delete your post(s) at this time.',
+          title: 'Something went wrong',
+        },
+        success: {
+          message: 'Your selection has been permanently deleted.',
+          title: 'Post(s) Deleted!',
+        },
+      },
+    },
+    search: {
+      description: 'Search for posts by entering a search term below.',
+      label: 'Type a search term...',
+      title: 'Search',
+    },
   },
 };

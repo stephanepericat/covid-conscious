@@ -80,6 +80,7 @@ export default {
     community: "Comunidade",
     contactUs: "Contate-Nos",
     education: "Aprender",
+    forum: "Fórum",
     news: "Notícias",
     product: "Produtos",
     rss: "Feed RSS",
@@ -90,6 +91,11 @@ export default {
       lightMode: "Alternar para o modo de luz",
     },
     twitter: "Siga-nos no Twitter",
+    user: {
+      account: "Minha Conta",
+      signIn: "Entrar",
+      signOut: "Sair"
+    },
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
@@ -104,5 +110,176 @@ export default {
     description: "That Covid Life - Uma plataforma para conselhos sobre a Covid",
     pageTitle: "{totalItems} Resultados da busca por \"{searchTerm}\"",
     title: "That Covid Life - Busca \"{searchTerm}\"",
+  },
+  'supabase-forum': {
+    account: {
+      back: 'Voltar',
+      title: 'Minha conta',
+      labels: {
+        about: 'Sobre mim',
+        avatar: 'Avatar',
+        email: 'Endereço de e-mail',
+        fullName: 'Nome Completo',
+        update: 'Atualizar',
+        username: 'Nome de usuário',
+        website: 'Site',
+      },
+    },
+    auth: {
+      description: 'Digite seu endereço de e-mail para receber um link de login',
+      label: 'Digite seu endereço de e-mail...',
+      submit: 'Envie-me um link de login!',
+      toast: {
+        error: {
+          message: 'Por favor, tente novamente mais tarde.',
+          title: 'Algo deu errado',
+        },
+        success: {
+          message: 'Verifique seu e-mail para o link de login.',
+          title: 'Link enviado!',
+        },
+        update: {
+          message: 'Suas preferências foram salvas.',
+          title: 'Informações da conta atualizadas!',
+        },
+      },
+    },
+    comments: {
+      box: {
+        button: 'Postar comentário',
+        loggedIn: 'Você deve estar logado para postar comentários.',
+        placeholder: 'Digite seu comentário aqui...',
+        title: 'Adicionar um comentário',
+      },
+      description: 'Você está visualizando o(s) comentário(s) {start} até {end} de {total}.',
+      noComments: 'Ainda não há comentários neste post.',
+      toast: {
+        error: {
+          message: 'Não é possível publicar seu comentário no momento.',
+          title: 'Algo deu errado',
+        },
+        success: {
+          message: 'Seu comentário foi publicado.',
+          title: 'Comentário adicionado!',
+        },
+      }
+    },
+    create: {
+      categories: {
+        lifestyle: 'Estilo de Vida',
+        'long-covid': 'Covid Longa',
+        products: 'Produtos',
+        recovery: 'Recuperação',
+        relationships: 'Relacionamentos',
+        'self-care': 'Autocuidado',
+      },
+      errors: {
+        category: {
+          required: 'Você deve escolher uma categoria',
+        },
+        contents: {
+          empty: 'Conteúdo não pode estar vazio',
+          required: 'Algum conteúdo é necessário',
+        },
+        title: {
+          required: 'É necessário um títul',
+          tooLong: 'O título é muito longo',
+        },
+      },
+      labels: {
+        category: 'Categoria',
+        contents: 'Conteúdo',
+        submit: 'Enviar',
+        title: 'Título',
+      },
+      modal: {
+        title: 'Confirmar Publicação',
+        description: 'Você está prestes a publicar este post. Não pode ser editado posteriormente.',
+        confirmation: 
+          'Verifique se está tudo bem e clique em "publicar" se estiver pronto ou em "cancelar" se precisar editar esta post.',
+        buttons: {
+          cancel: 'Cancelar',
+          confirm: 'Publicar',
+        },
+      },
+      placeholders: {
+        category: 'Escolha uma categoria',
+        contents: 'Digite algum conteúdo',
+        title: 'Digite um título',
+      },
+      title: 'Criar Post',
+      toast: {
+        error: {
+          message: 'Não é possível publicar sua post no momento.',
+          title: 'Algo deu errado',
+        },
+        success: {
+          message: '"{title}" foi publicado.',
+          title: 'Post adicionada!',
+        },
+      },
+    },
+    disabled: {
+      message: {
+        comment: 'Você precisa configurar um nome de usuário antes de poder comentar.',
+        post: 'Você precisa configurar um nome de usuário antes de poder postar.'
+      },
+      redirect: 'Vá para sua conta para configurar uma agora.',
+    },
+    nav: {
+      create: 'Criar Post',
+      latest: 'Últimas Posts',
+      login: 'Entrar',
+      logout: 'Sair',
+      my: {
+        account: 'Minha Conta',
+        posts: 'Minhas Posts',
+      },
+      search: 'Pesquisar',
+    },
+    latest: {
+      title: 'Últimos Posts',
+    },
+    list: {
+      description: 'Você está visualizando post(s) {start} até {end} de {total}.',
+    },
+    post: {
+      comments: 'Comentários',
+    },
+    posts: {
+      buttonLabel: 'Excluir {amount} Post(s)',
+      description: 'Selecione a(s) post(s) que deseja excluir.',
+      modal: {
+        title: 'Confirmar exclusão',
+        description: 'Você está prestes a deletar {amount} post(s). Isto não pode ser desfeito.',
+        confirmation: 'Tem certeza que deseja prosseguir?',
+        buttons: {
+          cancel: 'Cancelar',
+          confirm: 'Excluir',
+        },
+      },
+      noPosts: 'Você ainda não postou nada.',
+      table: {
+        published: 'PData de Publicação',
+        title: 'Título da Post',
+        topic: 'Tópico'
+      },
+      title: 'Minhas Posts',
+      toast: {
+        error: {
+          message: 'Não é possível excluir sua(s) post(s) no momento.',
+          title: 'Algo deu errado',
+        },
+        success: {
+          message: 'Sua seleção foi excluída permanentemente.',
+          title: 'Post(s) Deletada(s)!',
+        },
+      },
+    },
+    search: {
+      description: 'Pesquise postagens inserindo um termo de pesquisa abaixo.',
+      label: 'igite um termo de busca...',
+      title: 'Pesquisar',
+    },
   },
 };

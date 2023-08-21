@@ -19,9 +19,15 @@ export default defineNuxtConfig({
     '@nuxtjs/turnstile',
     'nuxt-cloudflare-analytics',
     'nuxt-icon',
+    '@nuxtjs/supabase',
   ],
 
   runtimeConfig: {
+    public: {
+      supabaseForum: {
+        rootPath: '/forum',
+      },
+    },
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
@@ -57,6 +63,17 @@ export default defineNuxtConfig({
     apiVersion: '2021-10-21',
     dataset: process.env.SANITY_DATASET,
     projectId: process.env.SANITY_PROJECTID,
+  },
+
+  supabase: {
+    redirect: true,
+    redirectOptions: {
+      callback: '/callback',
+      exclude: [
+        '/',
+      ],
+      login: '/login',
+    },
   },
 
   turnstile: {
