@@ -42,8 +42,6 @@
   import { format } from 'date-fns'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  // import { computed, toRefs, watch } from '#imports'
-  // import { useRuntimeConfig } from '#app'
 
   const emit = defineEmits(['page-change'])
 
