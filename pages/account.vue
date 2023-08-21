@@ -26,7 +26,6 @@
   import PageShell from '../components/PageShell.vue'
   import { useSignOut } from '../assets/composables/useSignOut'
   import { useToast } from '@inkline/inkline'
-  // import { useI18n, useSupabaseUser } from '#imports'
   import Account from '../components/UserAccount.vue'
 
   const toast = useToast()
