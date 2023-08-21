@@ -64,7 +64,7 @@
   </div>
 </template>
 <script setup>
-  import { useSignOut } from '~/assets/composables/useSignOut';
+  import { useSignOut } from '~/assets/composables/useSignOut'
 
   const config = useRuntimeConfig()
   const user = useSupabaseUser()

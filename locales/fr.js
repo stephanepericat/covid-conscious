@@ -80,6 +80,7 @@ export default {
     community: "Communauté",
     contactUs: "Contactez-Nous",
     education: "Éducation",
+    forum: "Forum",
     news: "Actualités",
     product: "Produits",
     rss: "Flux RSS",
@@ -90,6 +91,11 @@ export default {
       lightMode: "Passer en mode lumière",
     },
     twitter: "Suivez-nous sur Twitter",
+    user: {
+      account: "Mon Compte",
+      signIn: "Connexion",
+      signOut: "Déconnexion"
+    },
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",

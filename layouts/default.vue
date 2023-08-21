@@ -45,6 +45,7 @@
                 </IDropdownItem>
               </template>
             </IDropdown>
+            <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
             <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
           </INav>
           <IInput v-model="searchTerm" @keydown.enter="onSearch" class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
@@ -57,7 +58,6 @@
           <IDropdown placement="bottom-end" events="hover">
             <INavItem>
               <Icon :name="currentLocale.flag" />
-              <!-- <span class="default-layout__locale">{{ currentLocale.name }}</span> -->
             </INavItem>
             <template #body>
               <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
@@ -71,6 +71,26 @@
             </INavItem>
             <template #body>{{ colorModeTooltip }}</template>
           </ITooltip>
+          <IDropdown placement="bottom-end" events="hover">
+            <INavItem>
+              <Icon name="material-symbols:account-circle" />
+            </INavItem>
+            <template #body>
+              <template v-if="isLoggedIn">
+                <IDropdownItem :to="localePath('/account')">
+                  <span>{{ $t('layout.user.account') }}</span>
+                </IDropdownItem>
+                <IDropdownItem @click.prevent="signOut">
+                  <span>{{ $t('layout.user.signOut') }}</span>
+                </IDropdownItem>
+              </template>
+              <template v-else>
+                <IDropdownItem :to="localePath('/login')">
+                  <span>{{ $t('layout.user.signIn') }}</span>
+                </IDropdownItem>
+              </template>
+            </template>
+          </IDropdown>
         </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
@@ -121,6 +141,7 @@
   import { useInkline } from '@inkline/inkline';
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
   import { COMMUNITY, EDUCATION, PRODUCT } from '~/assets/constants/types';
+  import { useSignOut } from '~/assets/composables/useSignOut';
 
   const inkline = useInkline();
   const { locale, locales, t } = useI18n();
@@ -175,6 +196,11 @@
   // Feed URL
   const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`);
   const onRssFeedClick = () => window.open(rssFeedUrl.value);
+
+  // User Menu
+  const user = useSupabaseUser()
+  const isLoggedIn = computed(() => !!user?.value?.id)
+  const { signOut } = useSignOut(user)
 </script>
 <style lang="scss" scoped>
 .default-layout {
