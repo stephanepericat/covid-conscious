@@ -23,9 +23,8 @@
   </IForm>
 </template>
 <script setup>
-  import { usePosts } from '../assets/composables/usePosts'
+  import { usePosts } from '~/assets/composables/usePosts'
   import PostDisabled from './PostDisabled.vue'
-  // import { computed, ref, toRefs, useSupabaseUser } from '#imports'
 
   const emit = defineEmits(['success', 'error'])
 
@@ -70,7 +69,7 @@
   }
 </script>
 <style lang="scss" scoped>
-@import "../utils/sass/mixins.scss";
+@import "~/assets/sass/mixins.scss";
 
 .sf-comment-box {
   &__title {

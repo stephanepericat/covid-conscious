@@ -18,8 +18,6 @@
   </div>
 </template>
 <script setup>
-  import { computed, ref, toRefs, useSupabaseClient, watch } from '#imports'
-
   const props = defineProps({
     path: { type: String, default: '' }
   })

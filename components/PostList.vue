@@ -59,10 +59,8 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { usePagination } from '../assets/composables/usePagination'
-  import { DEFAULT_DATE_FORMAT } from '../utils/constants/date-formats'
-  // import { computed, toRefs } from '#imports'
-  // import { useRuntimeConfig } from '#app'
+  import { usePagination } from '~/assets/composables/usePagination'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
   const emit = defineEmits(['page-change'])
 
@@ -88,7 +86,7 @@
   })
 </script>
 <style lang="scss" scoped>
-@import "../utils/sass/mixins.scss";
+@import "~/assets/sass/mixins.scss";
 
 .sf-post-list {
   &.pending {

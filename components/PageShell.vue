@@ -34,13 +34,6 @@
           />
           {{ $t('supabase-forum.nav.my.posts') }}
         </INavItem>
-        <INavItem :to="localePath(`${rootPath}/account`)">
-          <Icon
-            class="sf-page-shell__nav--icon"
-            name="material-symbols:account-circle"
-          />
-          {{ $t('supabase-forum.nav.my.account') }}
-        </INavItem>
         <INavItem
           class="sf-page-shell__nav--action"
           @click.prevent="signOut"
@@ -71,9 +64,7 @@
   </div>
 </template>
 <script setup>
-  import { useSignOut } from '../assets/composables/useSignOut';
-  // import { computed, useLocalePath, useSupabaseUser } from '#imports'
-  // import { useRuntimeConfig } from '#app'
+  import { useSignOut } from '~/assets/composables/useSignOut';
 
   const config = useRuntimeConfig()
   const user = useSupabaseUser()

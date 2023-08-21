@@ -29,8 +29,6 @@
 
 <script setup>
   import isEmail from 'validator/lib/isEmail'
-  // import { computed, ref, useSupabaseClient } from '#imports'
-  // import { useRuntimeConfig } from '#app'
 
   const emit = defineEmits(['success', 'error'])
 

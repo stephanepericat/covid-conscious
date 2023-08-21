@@ -40,8 +40,8 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { usePagination } from '../assets/composables/usePagination'
-  import { DEFAULT_DATE_FORMAT } from '../utils/constants/date-formats'
+  import { usePagination } from '~/assets/composables/usePagination'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   // import { computed, toRefs, watch } from '#imports'
   // import { useRuntimeConfig } from '#app'
 
@@ -76,7 +76,7 @@
   })
 </script>
 <style lang="scss" scoped>
-@import "../utils/sass/mixins.scss";
+@import "~/assets/sass/mixins.scss";
 
 .sf-comment-list {
   &.pending {

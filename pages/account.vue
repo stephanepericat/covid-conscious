@@ -50,10 +50,10 @@
     @include title();
   }
 
-  &__account,
-  &__logout {
-    width: 50vh;
-  }
+  // &__account,
+  // &__logout {
+  //   width: 50%;
+  // }
 
   &__account {
     margin: 40px 0;

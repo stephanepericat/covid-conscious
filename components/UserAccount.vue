@@ -68,8 +68,7 @@
   </div>
 </template>
 <script setup>
-  import { usePosts } from '../assets/composables/usePosts'
-  // import { onMounted, ref, useSupabaseClient, useSupabaseUser } from '#imports'
+  import { usePosts } from '~/assets/composables/usePosts'
   import Avatar from './UserAvatar.vue'
 
   const emit = defineEmits(['success', 'error'])

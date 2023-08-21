@@ -104,8 +104,7 @@
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
   import { useForm } from '@inkline/inkline'
-  // import { computed, ref, useI18n, useSupabaseUser } from '#imports'
-  import { usePosts } from '../assets/composables/usePosts'
+  import { usePosts } from '~/assets/composables/usePosts'
   import PostDisabled from './PostDisabled.vue'
 
   const emit = defineEmits(['error', 'success'])
