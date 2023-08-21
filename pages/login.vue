@@ -10,7 +10,6 @@
 </template>
 <script setup>
   import { useToast } from '@inkline/inkline'
-  // import { useI18n } from '#imports'
 
   import Auth from '../components/UserAuth.vue'
 

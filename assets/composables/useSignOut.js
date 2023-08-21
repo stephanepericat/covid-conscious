@@ -1,6 +1,4 @@
 import { useToast } from '@inkline/inkline';
-import { useI18n, useLocalePath, useRouter, useSupabaseClient } from '#imports'
-import { useRuntimeConfig } from '#app'
 
 export const useSignOut = (user) => {
   const config = useRuntimeConfig()
