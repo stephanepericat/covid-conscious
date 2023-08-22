@@ -15,7 +15,7 @@
                 <IDropdownItem
                   v-for="category in menuCategoriesSorted.communityCategory"
                   :key="category.name"
-                  :to="`/${COMMUNITY}/${category.slug}`"
+                  :to="localePath(`/${COMMUNITY}/${category.slug}`)"
                 >
                   {{ category.name }}
                 </IDropdownItem>
@@ -27,7 +27,7 @@
                 <IDropdownItem
                   v-for="category in menuCategoriesSorted.educationCategory"
                   :key="category.name"
-                  :to="`/${EDUCATION}/${category.slug}`"
+                  :to="localePath(`/${EDUCATION}/${category.slug}`)"
                 >
                   {{ category.name }}
                 </IDropdownItem>
@@ -39,7 +39,7 @@
                 <IDropdownItem
                   v-for="category in menuCategoriesSorted.productCategory"
                   :key="category.name"
-                  :to="`/${PRODUCT}/${category.slug}`"
+                  :to="localePath(`/${PRODUCT}/${category.slug}`)"
                 >
                   {{ category.name }}
                 </IDropdownItem>
