@@ -1,6 +1,6 @@
 <template>
   <div class="search-page" :class="{ pending }">
-    <ILoader v-if="pending" class="search-page__loader" />
+    <ILoader v-if="pending || loading" class="search-page__loader" />
     <template v-else>
       <h1 class="search-page__title">{{ $t("search.pageTitle", { searchTerm, totalItems }) }}</h1>
       <IListGroup size="sm" :border="false">
@@ -14,6 +14,7 @@
                 :h="80"
                 :w="80"
               />
+              <img v-else-if="article.avatar" class="search-page__avatar" :src="article.avatar" />
               <div v-else class="search-page__thumbnail--fallback">
                 <Icon class="search-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
               </div>
@@ -28,7 +29,13 @@
             </h3>
             <em>
               <span>{{ article.category }} &bullet; </span>
-              <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
+              <span>
+                <NuxtLink
+                  :to="localePath(article.type === FORUM ? `/${FORUM}/${USER}/${article.author.slug}` : `/${AUTHOR}/${article.author.slug}`)"
+                >
+                  {{ article.author.nickname }}
+                </NuxtLink> &bullet;
+              </span>
               <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
@@ -39,30 +46,38 @@
   </div>
 </template>
 <script setup>
-  import { format } from "date-fns";
-  import searchQuery from "~/sanity/searchContent.sanity";
-  import { AUTHOR } from "~/assets/constants/types";
-  import { usePagination } from "~/assets/composables/usePagination";
-  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
+  import { format } from 'date-fns'
+  import orderBy from 'lodash/orderBy'
+  import searchQuery from '~/sanity/searchContent.sanity'
+  import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
+  import { usePagination } from '~/assets/composables/usePagination'
+  import { usePosts } from '~/assets/composables/usePosts'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
 
-  const { locale, t } = useI18n();
-  const route = useRoute();
-  const localePath = useLocalePath();
-  const searchTerm = computed(() => route.params.searchTerm);
+  const { locale, t } = useI18n()
+  const route = useRoute()
+  const localePath = useLocalePath()
+  const searchTerm = computed(() => route.params.searchTerm)
+  const { searchPosts, loading } = usePosts()
 
   useHead({
     meta: [
-      { name: "description", content: t("search.description") },
+      { name: 'description', content: t('search.description') },
     ],
-    title: t("search.title", { searchTerm: searchTerm.value })
-  });
+    title: t('search.title', { searchTerm: searchTerm.value })
+  })
 
-  const { currentPage, itemsPerPage, startItem, endItem } = usePagination();
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
-  const { data, pending } = useLazySanityQuery(searchQuery, { locale, searchTerm });
-  const searchResults = computed(() => data?.value?.results || []);
-  const totalItems = computed(() => data?.value?.total || 0);
-  const visibleItems = computed(() => searchResults.value.slice(startItem.value, endItem.value));
+  const { data, pending } = useSanityQuery(searchQuery, { locale, searchTerm })
+  const forumSearch = await searchPosts(searchTerm.value)
+  const searchResults = computed(() => {
+    const merged = [...forumSearch.map(mapForumSearchResult), ...data.value.results];
+    return orderBy(merged, 'published', 'desc')
+  })
+  const totalItems = computed(() => searchResults?.value?.length || 0)
+  const visibleItems = computed(() => searchResults?.value?.slice(startItem.value, endItem.value) || [])
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
@@ -85,7 +100,8 @@
     @include titleLink();
   }
 
-  &__thumbnail {
+  &__thumbnail,
+  &__avatar {
     @include thumbnail();
   }
 
