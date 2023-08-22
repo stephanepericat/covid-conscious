@@ -12,13 +12,6 @@
         />
         {{ $t('supabase-forum.nav.latest') }}
       </INavItem>
-      <INavItem :to="localePath(`${rootPath}/search`)">
-        <Icon
-          class="sf-page-shell__nav--icon"
-          name="material-symbols:find-in-page-outline-rounded"
-        />
-        {{ $t('supabase-forum.nav.search') }}
-      </INavItem>
       <template v-if="user">
         <INavItem :to="localePath(`${rootPath}/create`)">
           <Icon

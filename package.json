@@ -28,6 +28,7 @@
     "debounce": "^1.2.1",
     "feed": "^4.2.2",
     "groq": "^3.12.1",
+    "lodash": "^4.17.21",
     "nuxt": "^3.5.3",
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-icon": "^0.4.1",

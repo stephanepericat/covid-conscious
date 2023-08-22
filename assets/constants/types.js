@@ -1,6 +1,9 @@
 export const AUTHOR = "author";
 export const COMMUNITY = "community";
+export const EDUCATION = "education";
+export const FORUM = "forum";
 export const LINK = "link";
 export const NEWS = "news";
+export const POST = "post";
 export const PRODUCT = "product";
-export const EDUCATION = "education";
+export const USER = "user";
