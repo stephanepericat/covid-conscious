@@ -35,7 +35,6 @@
 
   const emit = defineEmits(['success', 'error'])
 
-  // const config = useRuntimeConfig()
   const redirectUrl = computed(() => `${window?.location?.origin}/callback`)
 
   const client = useSupabaseClient()
