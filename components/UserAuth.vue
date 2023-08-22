@@ -12,6 +12,9 @@
       />
     </IFormGroup>
     <IFormGroup>
+      <NuxtTurnstile class="sf-auth__captcha" v-model="token" />
+    </IFormGroup>
+    <IFormGroup>
       <IButton
         block
         type="submit"
@@ -38,8 +41,9 @@
   const client = useSupabaseClient()
   const loading = ref(false)
   const email = ref('')
+  const token = ref(null)
 
-  const submitBtnEnabled = computed(() => email.value && isEmail(email.value) && !loading.value)
+  const submitBtnEnabled = computed(() => token.value && email.value && isEmail(email.value) && !loading.value)
 
   const handleLogin = async () => {
     try {
