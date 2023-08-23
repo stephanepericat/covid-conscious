@@ -56,38 +56,47 @@
               {{ $t("article.moreInfo") }}
             </IButton>
           </div>
+          <div class="article-page__reviews">
+            <ReviewBox class="article-page__reviews--box" />
+            <h2 class="article-page__reviews--title">
+              <Icon name="material-symbols:rate-review-outline-rounded" />
+              <span v-text="$t('reviews.title')" />
+            </h2>
+            <p class="article-page__reviews--add-anonymous" v-text="$t('reviews.noReviews')" />
+          </div>
         </template>
       </section>
     </template>
   </div>
 </template>
 <script setup>
-  import { format } from "date-fns";
-  import { AUTHOR, COMMUNITY, PRODUCT } from "~/assets/constants/types";
-  import publicationQuery from "~/sanity/publication.sanity";
-  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
+  import { format } from 'date-fns'
+  import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
+  import publicationQuery from '~/sanity/publication.sanity'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import ReviewBox from '~/components/ReviewBox.vue'
 
-  const { locale, t } = useI18n();
-  const localePath = useLocalePath();
-  const { params } = useRoute();
-  const { type, category, slug } = params;
+  const { locale, t } = useI18n()
+  const localePath = useLocalePath()
+  const { params } = useRoute()
+  const { type, category, slug } = params
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
     category,
     locale,
     slug,
     type,
-  });
+  })
 
-  const pageTitle = computed(() => t("article.title", { title: article?.value?.title || "" }));
-  const articleType = computed(() => t(`layout.${type}`));
+  const pageTitle = computed(() => t('article.title', { title: article?.value?.title || '' }))
+  const articleType = computed(() => t(`layout.${type}`))
 
   useHead({
     meta: [
-      { name: "description", content: t("home.description") },
+      { name: 'description', content: t('home.description') },
     ],
     title: pageTitle.value
-  });
+  })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
@@ -156,6 +165,22 @@
 
       &-product {
         margin-top: 40px;
+      }
+    }
+  }
+
+  &__reviews {
+    margin-top: 40px;
+
+    &--box {
+      margin-bottom: 20px;
+    }
+
+    &--title {
+      @include titleLink();
+
+      span {
+        margin-left: 5px;
       }
     }
   }

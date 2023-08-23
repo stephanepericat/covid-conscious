@@ -106,6 +106,16 @@ export default {
     title: "Not Found",
     description: "There are no publications yet for '{category}'.",
   },
+  reviews: {
+    add: 'Add A Review',
+    notLoggedIn: 'You must be logged in to post a product review.',
+    noReviews: 'There are no reviews for this product yet.',
+    placeholder: 'Type your review here...',
+    rate: 'Rate This Product',
+    signIn: 'Sign in now',
+    submit: 'Submit your review',
+    title: 'Reviews',
+  },
   search: {
     description: "That Covid Life - A platform for Covid advice",
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",
