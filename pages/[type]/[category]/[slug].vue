@@ -62,7 +62,7 @@
               <Icon name="material-symbols:rate-review-outline-rounded" />
               <span v-text="$t('reviews.title')" />
             </h2>
-            <p class="article-page__reviews--add-anonymous" v-text="$t('reviews.noReviews')" />
+            <p class="article-page__reviews--none" v-text="$t('reviews.noReviews')" />
           </div>
         </template>
       </section>
@@ -174,6 +174,10 @@
 
     &--box {
       margin-bottom: 20px;
+    }
+
+    &--none {
+      font-size: 16px;
     }
 
     &--title {
