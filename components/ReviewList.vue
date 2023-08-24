@@ -47,6 +47,9 @@
     articleId: { type: String, default: null },
   })
 
+  const config = useRuntimeConfig()
+  const rootPath = computed(() => config.public.supabaseForum.rootPath)
+
   const { articleId } = toRefs(props)
   const total = ref(100) // TODO: get total count from db
 
