@@ -27,7 +27,6 @@
 </template>
 <script setup>
   import { usePosts } from '~/assets/composables/usePosts'
-  import StarRating from 'vue-star-rating'
 
   const localePath = useLocalePath()
   const user = useSupabaseUser()

@@ -47,7 +47,6 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import StarRating from 'vue-star-rating'
   import { usePagination } from '~/assets/composables/usePagination'
   import { useReviews } from '~/assets/composables/useReviews'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
