@@ -62,7 +62,7 @@
               <Icon name="material-symbols:rate-review-outline-rounded" />
               <span v-text="$t('reviews.title')" />
             </h2>
-            <p class="article-page__reviews--none" v-text="$t('reviews.noReviews')" />
+            <ReviewList v-if="articleId" :article-id="articleId" />
           </div>
         </template>
       </section>
@@ -75,6 +75,7 @@
   import publicationQuery from '~/sanity/publication.sanity'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
+  import ReviewList from '~/components/ReviewList.vue'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -87,6 +88,8 @@
     slug,
     type,
   })
+
+  const articleId = computed(() => article?.value?.id || null)
 
   const pageTitle = computed(() => t('article.title', { title: article?.value?.title || '' }))
   const articleType = computed(() => t(`layout.${type}`))
@@ -174,10 +177,6 @@
 
     &--box {
       margin-bottom: 20px;
-    }
-
-    &--none {
-      font-size: 16px;
     }
 
     &--title {

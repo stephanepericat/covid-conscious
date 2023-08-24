@@ -1,7 +1,5 @@
 /* eslint-disable no-useless-escape */
 
-import { ref, useSupabaseClient } from '#imports'
-
 export const usePosts = () => {
   const supabase = useSupabaseClient()
 

@@ -108,6 +108,9 @@ export default {
   },
   reviews: {
     add: 'Add A Review',
+    list: {
+      description: 'You are viewing review(s) {start} through {end} of {total}.',
+    },
     notLoggedIn: 'You must be logged in to post a product review.',
     noReviews: 'There are no reviews for this product yet.',
     placeholder: 'Type your review here...',
