@@ -22,6 +22,14 @@
             class="review-list__body"
             v-text="review.body"
           />
+          <ClientOnly>
+            <StarRating
+              :rating="review.rating"
+              read-only
+              :show-rating="false"
+              :star-size="12"
+            />
+          </ClientOnly>
           <em>
             <span><NuxtLink :to="localePath(`${rootPath}/user/${review.profiles.id}`)">{{ review.profiles.username }}</NuxtLink> &bullet; </span>
             <span>{{ format(new Date(review.created_at), DEFAULT_DATE_FORMAT) }}</span>
@@ -39,6 +47,7 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
+  import StarRating from 'vue-star-rating'
   import { usePagination } from '~/assets/composables/usePagination'
   import { useReviews } from '~/assets/composables/useReviews'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
