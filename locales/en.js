@@ -106,6 +106,30 @@ export default {
     title: "Not Found",
     description: "There are no publications yet for '{category}'.",
   },
+  reviews: {
+    add: 'Add A Review',
+    average: 'Average Rating',
+    list: {
+      description: 'You are viewing review(s) {start} through {end} of {total}.',
+    },
+    notLoggedIn: 'You must be logged in to post a product review.',
+    noReviews: 'There are no reviews for this product yet.',
+    placeholder: 'Type your review here...',
+    rate: 'Rate This Product',
+    signIn: 'Sign in now',
+    submit: 'Submit your review',
+    title: 'Reviews',
+    toast: {
+      error: {
+        message: 'We are unable to publish your review at this time.',
+        title: 'Something went wrong',
+      },
+      success: {
+        message: 'Your review has been published.',
+        title: 'Review Added!',
+      },
+    },
+  },
   search: {
     description: "That Covid Life - A platform for Covid advice",
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",

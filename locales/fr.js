@@ -106,6 +106,30 @@ export default {
     title: "Non Trouvé",
     description: "Il n'y a pas encore de publications pour '{category}'.",
   },
+  reviews: {
+    add: 'Ajouter Un Avis',
+    average: 'Note moyenne',
+    list: {
+      description: 'Vous consultez les avis de {start} à {end} de {total}.',
+    },
+    notLoggedIn: 'Vous devez être connecté pour publier un avis sur un produit.',
+    noReviews: 'Il n\'y a pas encore d\'avis sur ce produit.',
+    placeholder: 'Tapez votre avis ici...',
+    rate: 'Évaluez Ce Produit',
+    signIn: 'Connectez-vous maintenant',
+    submit: 'Soumettre votre avis',
+    title: 'Avis',
+    toast: {
+      error: {
+        message: 'Nous ne sommes pas en mesure de publier votre avis pour le moment.',
+        title: 'Une erreur s\'est produite',
+      },
+      success: {
+        message: 'Votre avis a été publié.',
+        title: 'Avis Ajouté!',
+      },
+    },
+  },
   search: {
     description: "That Covid Life - Une plateforme de conseils Covid",
     pageTitle: "{totalItems} Résultats de recherche pour \"{searchTerm}\"",

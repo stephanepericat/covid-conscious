@@ -106,6 +106,30 @@ export default {
     title: "No Encontrado",
     description: "Aún no hay publicaciones para '{category}'.",
   },
+  reviews: {
+    add: 'Calificación Promedio',
+    average: 'Average Rating',
+    list: {
+      description: 'Estás viendo reseñas desde el {start} hasta el {end} de {total}.',
+    },
+    notLoggedIn: 'Debes iniciar sesión para publicar una reseña del producto.',
+    noReviews: 'Aún no hay reseñas para este producto.',
+    placeholder: 'Escriba su reseña aquí...',
+    rate: 'Calificar este producto',
+    signIn: 'Iniciar sesión ahora',
+    submit: 'Envía tu reseña',
+    title: 'Reseñas',
+    toast: {
+      error: {
+        message: 'No podemos publicar su reseña en este momento.',
+        title: 'Algo salió mal',
+      },
+      success: {
+        message: 'Tu reseña ha sido publicada.',
+        title: '¡Reseña agregada!',
+      },
+    },
+  },
   search: {
     description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
     pageTitle: "{totalItems} Resultados de la búsqueda de \"{searchTerm}\"",

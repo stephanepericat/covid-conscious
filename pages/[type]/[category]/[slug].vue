@@ -2,7 +2,19 @@
   <div class="article-page" :class="{ pending }">
     <ILoader v-if="pending" class="article-page__loader" />
     <template v-else-if="!pending && article">
-      <h1 v-text="article.title" class="article-page__title" />
+      <h1 class="article-page__title">
+        <span>{{ article.title }}</span>
+        <div v-if="type === PRODUCT && ratingsAverage" class="article-page__title--info">
+          <StarRating
+            :increment="0.01"
+            :rating="parseFloat(ratingsAverage)"
+            read-only
+            :show-rating="false"
+            :star-size="30"
+          />
+          <em class="article-page__title--average">({{ $t('reviews.average') }}: {{ ratingsAverage }})</em>
+        </div>
+      </h1>
 
       <IMedia class="article-page__author">
         <template #image>
@@ -56,38 +68,110 @@
               {{ $t("article.moreInfo") }}
             </IButton>
           </div>
+          <div class="article-page__reviews" v-if="articleId">
+            <ReviewBox
+              class="article-page__reviews--box"
+              :article-id="articleId"
+              @error="onReviewPostError"
+              @success="onReviewPostSuccess"
+            />
+            <h2 class="article-page__reviews--title">
+              <Icon name="material-symbols:rate-review-outline-rounded" />
+              <span v-text="$t('reviews.title')" />
+            </h2>
+            <ReviewList
+              :pending="reviewsPending"
+              :page="activePage"
+              :reviews="reviews"
+              :total-items="totalReviews"
+              @page-change="onReviewsPageChange"
+            />
+          </div>
         </template>
       </section>
     </template>
+    <IToastContainer />
   </div>
 </template>
 <script setup>
-  import { format } from "date-fns";
-  import { AUTHOR, COMMUNITY, PRODUCT } from "~/assets/constants/types";
-  import publicationQuery from "~/sanity/publication.sanity";
-  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
+  import { format } from 'date-fns'
+  import { useToast } from '@inkline/inkline'
+  import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
+  import publicationQuery from '~/sanity/publication.sanity'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import ReviewBox from '~/components/ReviewBox.vue'
+  import ReviewList from '~/components/ReviewList.vue'
+  import { useReviews } from '~/assets/composables/useReviews'
 
-  const { locale, t } = useI18n();
-  const localePath = useLocalePath();
-  const { params } = useRoute();
-  const { type, category, slug } = params;
+  const { locale, t } = useI18n()
+  const localePath = useLocalePath()
+  const { params } = useRoute()
+  const { type, category, slug } = params
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
     category,
     locale,
     slug,
     type,
-  });
+  })
 
-  const pageTitle = computed(() => t("article.title", { title: article?.value?.title || "" }));
-  const articleType = computed(() => t(`layout.${type}`));
+  const articleId = computed(() => article?.value?.id || null)
+
+  const pageTitle = computed(() => t('article.title', { title: article?.value?.title || '' }))
+  const articleType = computed(() => t(`layout.${type}`))
 
   useHead({
     meta: [
-      { name: "description", content: t("home.description") },
+      { name: 'description', content: t('home.description') },
     ],
     title: pageTitle.value
-  });
+  })
+
+  // PRODUCT REVIEWS
+  const { getRatingsAverage, getReviews, getReviewsCount, reviewsLoading } = useReviews()
+  const totalReviews = ref(0)
+  const reviews = ref([])
+  const ratingsAverage = ref("")
+  const activePage = ref(1)
+  const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
+
+  const onReviewsPageChange = async ({ currentPage, startItem, endItem }) => {
+    if(activePage.value !== currentPage) {
+      activePage.value = currentPage
+      reviews.value = await getReviews(articleId.value, startItem, endItem - 1)
+      totalReviews.value = await getReviewsCount(articleId.value)
+      ratingsAverage.value = await getRatingsAverage(articleId.value)
+    }
+  }
+
+  const toast = useToast()
+
+  const onReviewPostSuccess = async () => {
+    toast.show({
+      title: t('reviews.toast.success.title'),
+      message: t('reviews.toast.success.message'),
+      color: 'success'
+    })
+
+    activePage.value = 1
+    reviews.value = await getReviews(articleId.value)
+    totalReviews.value = await getReviewsCount(articleId.value)
+    ratingsAverage.value = await getRatingsAverage(articleId.value)
+  }
+
+  const onReviewPostError = () => toast.show({
+    title: t('reviews.toast.error.title'),
+    message: t('reviews.toast.error.message'),
+    color: 'danger'
+  })
+
+  watchOnce(articleId, async () => {
+    if(!articleId.value || type !== PRODUCT) return
+
+    reviews.value = await getReviews(articleId.value)
+    totalReviews.value = await getReviewsCount(articleId.value)
+    ratingsAverage.value = await getRatingsAverage(articleId.value)
+  }, { immediate: true })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
@@ -104,6 +188,20 @@
   &__title {
     @include title();
     margin-bottom: 40px;
+
+    &--info {
+      display: flex;
+      height: 48px;
+    }
+
+    &--average {
+      align-items: flex-end;
+      display: flex;
+      font-family: var(--body--font-family, var(--font-family-primary-base));
+      font-size: 16px;
+      margin-left: 5px;
+      padding-bottom: 8px;
+    }
   }
 
   &__info--category,
@@ -156,6 +254,22 @@
 
       &-product {
         margin-top: 40px;
+      }
+    }
+  }
+
+  &__reviews {
+    margin-top: 40px;
+
+    &--box {
+      margin-bottom: 20px;
+    }
+
+    &--title {
+      @include titleLink();
+
+      span {
+        margin-left: 5px;
       }
     }
   }
