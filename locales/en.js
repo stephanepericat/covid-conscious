@@ -119,6 +119,16 @@ export default {
     signIn: 'Sign in now',
     submit: 'Submit your review',
     title: 'Reviews',
+    toast: {
+      error: {
+        message: 'We are unable to publish your review at this time.',
+        title: 'Something went wrong',
+      },
+      success: {
+        message: 'Your review has been published.',
+        title: 'Review Added!',
+      },
+    },
   },
   search: {
     description: "That Covid Life - A platform for Covid advice",

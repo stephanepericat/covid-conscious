@@ -42,16 +42,31 @@ export const useReviews = () => {
 
   const getRatingsAverage = async (productId) => {
     try {
-      const { data, error } = await supabase.rpc('get_rating_average', { pid: productId })
+      const { data: rating, error } = await supabase.rpc('get_rating_average', { pid: productId })
       if (error) throw error
-      return data
+      return rating
     } catch (e) {
       console.error(e)
-      return 0
+      return ""
     }
   }
 
+  const createReview = async (payload) => {
+    return await supabase
+      .from('review')
+      .insert(payload)
+      .select(`
+        id,
+        body,
+        rating,
+        created_at,
+        profiles ( id, username )
+      `)
+      .single()
+  }
+
   return {
+    createReview,
     getRatingsAverage,
     getReviews,
     getReviewsCount,

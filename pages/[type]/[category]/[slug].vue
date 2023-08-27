@@ -68,14 +68,18 @@
               {{ $t("article.moreInfo") }}
             </IButton>
           </div>
-          <div class="article-page__reviews">
-            <ReviewBox class="article-page__reviews--box" />
+          <div class="article-page__reviews" v-if="articleId">
+            <ReviewBox
+              class="article-page__reviews--box"
+              :article-id="articleId"
+              @error="onReviewPostError"
+              @success="onReviewPostSuccess"
+            />
             <h2 class="article-page__reviews--title">
               <Icon name="material-symbols:rate-review-outline-rounded" />
               <span v-text="$t('reviews.title')" />
             </h2>
             <ReviewList
-              v-if="articleId"
               :pending="reviewsPending"
               :page="activePage"
               :reviews="reviews"
@@ -86,10 +90,12 @@
         </template>
       </section>
     </template>
+    <IToastContainer />
   </div>
 </template>
 <script setup>
   import { format } from 'date-fns'
+  import { useToast } from '@inkline/inkline'
   import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
@@ -137,6 +143,27 @@
       ratingsAverage.value = await getRatingsAverage(articleId.value)
     }
   }
+
+  const toast = useToast()
+
+  const onReviewPostSuccess = async () => {
+    toast.show({
+      title: t('reviews.toast.success.title'),
+      message: t('reviews.toast.success.message'),
+      color: 'success'
+    })
+
+    activePage.value = 1
+    reviews.value = await getReviews(articleId.value)
+    totalReviews.value = await getReviewsCount(articleId.value)
+    ratingsAverage.value = await getRatingsAverage(articleId.value)
+  }
+
+  const onReviewPostError = () => toast.show({
+    title: t('reviews.toast.error.title'),
+    message: t('reviews.toast.error.message'),
+    color: 'danger'
+  })
 
   watchOnce(articleId, async () => {
     if(!articleId.value || type !== PRODUCT) return
