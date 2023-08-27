@@ -40,7 +40,19 @@ export const useReviews = () => {
     }
   }
 
+  const getRatingsAverage = async (productId) => {
+    try {
+      const { data, error } = await supabase.rpc('get_rating_average', { pid: productId })
+      if (error) throw error
+      return data
+    } catch (e) {
+      console.error(e)
+      return 0
+    }
+  }
+
   return {
+    getRatingsAverage,
     getReviews,
     getReviewsCount,
     reviewsLoading,

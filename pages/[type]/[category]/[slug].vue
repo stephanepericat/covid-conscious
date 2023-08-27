@@ -2,7 +2,19 @@
   <div class="article-page" :class="{ pending }">
     <ILoader v-if="pending" class="article-page__loader" />
     <template v-else-if="!pending && article">
-      <h1 v-text="article.title" class="article-page__title" />
+      <h1 class="article-page__title">
+        <span>{{ article.title }}</span>
+        <div v-if="type === PRODUCT && ratingsAverage" class="article-page__title--info">
+          <StarRating
+            :increment="0.01"
+            :rating="parseFloat(ratingsAverage)"
+            read-only
+            :show-rating="false"
+            :star-size="30"
+          />
+          <em class="article-page__title--average">({{ $t('reviews.average') }}: {{ ratingsAverage }})</em>
+        </div>
+      </h1>
 
       <IMedia class="article-page__author">
         <template #image>
@@ -109,10 +121,11 @@
     title: pageTitle.value
   })
 
-  // REVIEWS
-  const { getReviews, getReviewsCount, reviewsLoading } = useReviews()
+  // PRODUCT REVIEWS
+  const { getRatingsAverage, getReviews, getReviewsCount, reviewsLoading } = useReviews()
   const totalReviews = ref(0)
   const reviews = ref([])
+  const ratingsAverage = ref("")
   const activePage = ref(1)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
 
@@ -121,14 +134,16 @@
       activePage.value = currentPage
       reviews.value = await getReviews(articleId.value, startItem, endItem - 1)
       totalReviews.value = await getReviewsCount(articleId.value)
+      ratingsAverage.value = await getRatingsAverage(articleId.value)
     }
   }
 
   watchOnce(articleId, async () => {
-    if(!articleId.value) return
+    if(!articleId.value || type !== PRODUCT) return
 
     reviews.value = await getReviews(articleId.value)
     totalReviews.value = await getReviewsCount(articleId.value)
+    ratingsAverage.value = await getRatingsAverage(articleId.value)
   }, { immediate: true })
 </script>
 <style lang="scss" scoped>
@@ -146,6 +161,20 @@
   &__title {
     @include title();
     margin-bottom: 40px;
+
+    &--info {
+      display: flex;
+      height: 48px;
+    }
+
+    &--average {
+      align-items: flex-end;
+      display: flex;
+      font-family: var(--body--font-family, var(--font-family-primary-base));
+      font-size: 16px;
+      margin-left: 5px;
+      padding-bottom: 8px;
+    }
   }
 
   &__info--category,

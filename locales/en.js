@@ -108,6 +108,7 @@ export default {
   },
   reviews: {
     add: 'Add A Review',
+    average: 'Average Rating',
     list: {
       description: 'You are viewing review(s) {start} through {end} of {total}.',
     },
