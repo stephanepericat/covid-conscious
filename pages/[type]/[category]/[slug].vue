@@ -62,7 +62,14 @@
               <Icon name="material-symbols:rate-review-outline-rounded" />
               <span v-text="$t('reviews.title')" />
             </h2>
-            <ReviewList v-if="articleId" :article-id="articleId" />
+            <ReviewList
+              v-if="articleId"
+              :pending="reviewsPending"
+              :page="activePage"
+              :reviews="reviews"
+              :total-items="totalReviews"
+              @page-change="onReviewsPageChange"
+            />
           </div>
         </template>
       </section>
@@ -76,6 +83,7 @@
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
   import ReviewList from '~/components/ReviewList.vue'
+  import { useReviews } from '~/assets/composables/useReviews'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -100,6 +108,28 @@
     ],
     title: pageTitle.value
   })
+
+  // REVIEWS
+  const { getReviews, getReviewsCount, reviewsLoading } = useReviews()
+  const totalReviews = ref(0)
+  const reviews = ref([])
+  const activePage = ref(1)
+  const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
+
+  const onReviewsPageChange = async ({ currentPage, startItem, endItem }) => {
+    if(activePage.value !== currentPage) {
+      activePage.value = currentPage
+      reviews.value = await getReviews(articleId.value, startItem, endItem - 1)
+      totalReviews.value = await getReviewsCount(articleId.value)
+    }
+  }
+
+  watchOnce(articleId, async () => {
+    if(!articleId.value) return
+
+    reviews.value = await getReviews(articleId.value)
+    totalReviews.value = await getReviewsCount(articleId.value)
+  }, { immediate: true })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

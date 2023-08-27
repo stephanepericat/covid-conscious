@@ -3,7 +3,7 @@ export const useReviews = () => {
 
   const reviewsLoading = ref(false)
 
-  const getReviews = async (productId, start = 0, end = 10) => {
+  const getReviews = async (productId, start = 0, end = 3) => {
     reviewsLoading.value = true
     
     try {
@@ -29,8 +29,20 @@ export const useReviews = () => {
     }
   }
 
+  const getReviewsCount = async (productId) => {
+    try {
+      const { data, error } = await supabase.rpc('get_reviews_count', { pid: productId })
+      if (error) throw error
+      return data
+    } catch (e) {
+      console.error(e)
+      return 0
+    }
+  }
+
   return {
     getReviews,
+    getReviewsCount,
     reviewsLoading,
   }
 }

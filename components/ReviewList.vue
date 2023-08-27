@@ -41,6 +41,7 @@
         class="review-list__pagination"
         :items-total="total"
         :items-per-page="itemsPerPage"
+        @update:modelValue="onPageChange"
       />
     </template>
   </div>
@@ -48,36 +49,38 @@
 <script setup>
   import { format } from 'date-fns'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { useReviews } from '~/assets/composables/useReviews'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
+  const emit = defineEmits(['page-change'])
+
   const props = defineProps({
-    articleId: { type: String, default: null },
+    reviews: { type: Array, default: () => [] },
+    page: { type: Number, default: 1 },
+    pending: Boolean,
+    totalItems: { type: Number, default: 0 },
   })
+
+  const { page: activePage, totalItems: total } = toRefs(props)
 
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
 
-  const { articleId } = toRefs(props)
-  const total = ref(100) // TODO: get total count from db
-
-  const { currentPage, itemsPerPage, startItem, endItem, setItemsPerPage } = usePagination()
-
-  setItemsPerPage(10)
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
   const start = computed(() => startItem.value + 1)
   const end = computed(() => endItem.value > total.value ? total.value : endItem.value)
 
-  const { getReviews, reviewsLoading } = useReviews()
-  const pending = computed(() => !articleId.value || reviewsLoading.value)
+  const onPageChange = () => emit('page-change', {
+    currentPage: currentPage.value,
+    endItem: endItem.value,
+    startItem: startItem.value,
+  })
 
-  let reviews = ref([])
-
-  watch([articleId, currentPage], async () => {
-    if(!articleId.value) return
-
-    reviews.value = await getReviews(articleId.value, startItem.value, endItem.value)
-  }, { immediate: true })
+  watch(activePage, () => {
+    if(activePage.value !== currentPage.value) {
+      currentPage.value = activePage.value
+    }
+  })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
