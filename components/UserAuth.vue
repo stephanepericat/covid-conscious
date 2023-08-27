@@ -42,7 +42,7 @@
   const email = ref('')
   const token = ref(null)
 
-  const submitBtnEnabled = computed(() => /* token.value && */ email.value && isEmail(email.value) && !loading.value)
+  const submitBtnEnabled = computed(() => token.value && email.value && isEmail(email.value) && !loading.value)
 
   const handleLogin = async () => {
     try {
