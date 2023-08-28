@@ -70,7 +70,7 @@
           </div>
           <div class="article-page__reviews" v-if="articleId">
             <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
-            <div v-if="hasUserReviewed">You already reviewed this product.</div>
+            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">You already reviewed this product.</div>
             <ReviewBox
               v-else
               class="article-page__reviews--box"
@@ -269,7 +269,8 @@
   &__reviews {
     margin-top: 40px;
 
-    &--box {
+    &--box,
+    &--reviewed {
       margin-bottom: 20px;
     }
 
