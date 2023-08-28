@@ -69,7 +69,10 @@
             </IButton>
           </div>
           <div class="article-page__reviews" v-if="articleId">
+            <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
+            <div v-if="hasUserReviewed">You already reviewed this product.</div>
             <ReviewBox
+              v-else
               class="article-page__reviews--box"
               :article-id="articleId"
               @error="onReviewPostError"
@@ -107,6 +110,7 @@
   const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
+  const user = useSupabaseUser()
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
     category,
@@ -128,11 +132,12 @@
   })
 
   // PRODUCT REVIEWS
-  const { getRatingsAverage, getReviews, getReviewsCount, reviewsLoading } = useReviews()
+  const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, reviewsLoading } = useReviews()
   const totalReviews = ref(0)
   const reviews = ref([])
   const ratingsAverage = ref("")
   const activePage = ref(1)
+  const hasUserReviewed = ref(true)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
 
   const onReviewsPageChange = async ({ currentPage, startItem, endItem }) => {
@@ -141,6 +146,7 @@
       reviews.value = await getReviews(articleId.value, startItem, endItem - 1)
       totalReviews.value = await getReviewsCount(articleId.value)
       ratingsAverage.value = await getRatingsAverage(articleId.value)
+      hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
     }
   }
 
@@ -157,6 +163,7 @@
     reviews.value = await getReviews(articleId.value)
     totalReviews.value = await getReviewsCount(articleId.value)
     ratingsAverage.value = await getRatingsAverage(articleId.value)
+    hasUserReviewed.value = true
   }
 
   const onReviewPostError = () => toast.show({
@@ -171,6 +178,7 @@
     reviews.value = await getReviews(articleId.value)
     totalReviews.value = await getReviewsCount(articleId.value)
     ratingsAverage.value = await getRatingsAverage(articleId.value)
+    hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
   }, { immediate: true })
 </script>
 <style lang="scss" scoped>

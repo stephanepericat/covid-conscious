@@ -3,6 +3,21 @@ export const useReviews = () => {
 
   const reviewsLoading = ref(false)
 
+  const checkUserReview = async (productId, userId = null) => {
+    if(!userId || !productId) {
+      return false
+    }
+
+    try {
+      const { data, error } = await supabase.rpc('has_user_reviewed_product', { pid: productId, userid: userId })
+      if (error) throw error
+      return data
+    } catch (e) {
+      console.error(e)
+      return 0
+    }
+  }
+
   const getReviews = async (productId, start = 0, end = 3) => {
     reviewsLoading.value = true
     
@@ -66,6 +81,7 @@ export const useReviews = () => {
   }
 
   return {
+    checkUserReview,
     createReview,
     getRatingsAverage,
     getReviews,

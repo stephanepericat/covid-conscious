@@ -1,6 +1,5 @@
 <template>
   <div class="review-box">
-    <h3 v-text="$t('reviews.add')" class="review-box__title" />
     <div class="review-box__form" v-if="canReview">
       <ITextarea
         v-model="reviewContent"
@@ -35,7 +34,7 @@
   import { useReviews } from '~/assets/composables/useReviews'
 
   const props = defineProps({
-    articleId: { type: String, default: null }
+    articleId: { type: String, default: null },
   })
 
   const emit = defineEmits(['error', 'success'])
@@ -89,8 +88,6 @@
   }
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
-
 .review-box {
   &__anonymous {
     font-size: 16px;
@@ -104,10 +101,6 @@
 
   &__submit {
     margin-top: 20px;
-  }
-
-  &__title {
-    @include titleLink();
   }
 }
 </style>

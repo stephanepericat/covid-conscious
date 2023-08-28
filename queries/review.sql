@@ -46,3 +46,11 @@ begin
   return(select AVG(rating)::numeric(10,2) from public.review where product_id = pid);
 end;
 $$ language plpgsql stable;
+
+-- 6. Create a function to check that a user has posted a review
+create function public.has_user_reviewed_product(pid uuid, userid uuid)
+returns boolean as $$
+begin
+  return(select count(*) from public.review where product_id = pid and author_id = userid);
+end;
+$$ language plpgsql stable;
