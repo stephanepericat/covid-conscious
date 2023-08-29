@@ -32,7 +32,8 @@
           </ClientOnly>
           <em>
             <span><NuxtLink :to="localePath(`${rootPath}/user/${review.profiles.id}`)">{{ review.profiles.username }}</NuxtLink> &bullet; </span>
-            <span>{{ format(new Date(review.created_at), DEFAULT_DATE_FORMAT) }}</span>
+            <span>{{ format(new Date(review.updated_at), DEFAULT_DATE_FORMAT) }}</span>
+            <span v-if="review.updated_at > review.created_at"> &bullet; {{ $t('reviews.edited') }}</span>
           </em>
         </IListGroupItem>
       </IListGroup>

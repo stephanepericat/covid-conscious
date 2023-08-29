@@ -113,6 +113,7 @@ export default {
       already: 'You already reviewed this product.',
       click: 'Click here to edit your review.'
     },
+    edited: 'edited',
     list: {
       description: 'You are viewing review(s) {start} through {end} of {total}.',
     },

@@ -113,6 +113,7 @@ export default {
       already: 'Vous avez déjà évalué ce produit.',
       click: 'Cliquez ici pour modifier votre avis.'
     },
+    edited: 'édité',
     list: {
       description: 'Vous consultez les avis de {start} à {end} de {total}.',
     },

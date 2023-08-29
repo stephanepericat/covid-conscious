@@ -113,6 +113,7 @@ export default {
       already: 'Ya revisaste este producto.',
       click: 'Haga clic aquí para editar su reseña.'
     },
+    edited: 'editado',
     list: {
       description: 'Estás viendo reseñas desde el {start} hasta el {end} de {total}.',
     },

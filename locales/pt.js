@@ -113,6 +113,7 @@ export default {
       already: 'Você já avaliou este produto.',
       click: 'Clique aqui para editar seu comentário.'
     },
+    edited: 'editado',
     list: {
       description: 'Você está visualizando avaliações de {start} a {end} de {total}.',
     },
