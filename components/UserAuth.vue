@@ -41,8 +41,9 @@
   const loading = ref(false)
   const email = ref('')
   const token = ref(null)
+  const tokenValidation = computed(() => token.value || process.env.NODE_ENV === 'development')
 
-  const submitBtnEnabled = computed(() => token.value && email.value && isEmail(email.value) && !loading.value)
+  const submitBtnEnabled = computed(() => tokenValidation.value && email.value && isEmail(email.value) && !loading.value)
 
   const handleLogin = async () => {
     try {

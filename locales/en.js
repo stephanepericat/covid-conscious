@@ -109,6 +109,11 @@ export default {
   reviews: {
     add: 'Add A Review',
     average: 'Average Rating',
+    edit: {
+      already: 'You already reviewed this product.',
+      click: 'Click here to edit your review.'
+    },
+    edited: 'edited',
     list: {
       description: 'You are viewing review(s) {start} through {end} of {total}.',
     },
@@ -128,7 +133,12 @@ export default {
         message: 'Your review has been published.',
         title: 'Review Added!',
       },
+      update: {
+        message: 'Your review has been updated.',
+        title: 'Review Updated!',
+      },
     },
+    update: 'Update your review',
   },
   search: {
     description: "That Covid Life - A platform for Covid advice",

@@ -5,7 +5,8 @@ create table public.review (
   product_id       uuid not null,
   body             text not null,
   rating           integer not null,
-  created_at       timestamp default now()
+  created_at       timestamp default now(),
+  updated_at       timestamp default now()
 );
 
 comment on table public.review is 'A product review written by a user.';
@@ -15,6 +16,7 @@ comment on column public.review.product_id is 'The id of the product article.';
 comment on column public.review.body is 'The main body text of our review.';
 comment on column public.review.rating is 'The rating of our review.';
 comment on column public.review.created_at is 'The time this post was created.';
+comment on column public.review.updated_at is 'The time this post was updated.';
 
 -- 2. Set up Row Level Security (RLS)
 -- See https://supabase.com/docs/guides/auth/row-level-security for more details.
@@ -44,5 +46,13 @@ create function public.get_rating_average(pid uuid)
 returns text as $$
 begin
   return(select AVG(rating)::numeric(10,2) from public.review where product_id = pid);
+end;
+$$ language plpgsql stable;
+
+-- 6. Create a function to check that a user has posted a review
+create function public.has_user_reviewed_product(pid uuid, userid uuid)
+returns boolean as $$
+begin
+  return(select count(*) from public.review where product_id = pid and author_id = userid);
 end;
 $$ language plpgsql stable;

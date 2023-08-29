@@ -109,6 +109,11 @@ export default {
   reviews: {
     add: 'Ajouter Un Avis',
     average: 'Note moyenne',
+    edit: {
+      already: 'Vous avez déjà évalué ce produit.',
+      click: 'Cliquez ici pour modifier votre avis.'
+    },
+    edited: 'édité',
     list: {
       description: 'Vous consultez les avis de {start} à {end} de {total}.',
     },
@@ -128,7 +133,12 @@ export default {
         message: 'Votre avis a été publié.',
         title: 'Avis Ajouté!',
       },
+      update: {
+        message: 'Votre avis a été mis à jour.',
+        title: 'Avis mis à jour!',
+      },
     },
+    update: 'Mettre à jour votre avis',
   },
   search: {
     description: "That Covid Life - Une plateforme de conseils Covid",

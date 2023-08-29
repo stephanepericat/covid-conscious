@@ -69,7 +69,23 @@
             </IButton>
           </div>
           <div class="article-page__reviews" v-if="articleId">
+            <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
+            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">
+              <p>
+                <span v-text="$t('reviews.edit.already')" /> <a v-if="articleId" href="#" @click="onShowReviewEditor" v-text="$t('reviews.edit.click')" />
+              </p>
+              <ReviewBox
+                v-if="showReviewEditor"
+                class="article-page__reviews--box"
+                :article-id="articleId"
+                update
+                :user-review="userReview"
+                @error="onReviewPostError"
+                @success="onReviewPostSuccess"
+              />
+            </div>
             <ReviewBox
+              v-else
               class="article-page__reviews--box"
               :article-id="articleId"
               @error="onReviewPostError"
@@ -107,6 +123,7 @@
   const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
+  const user = useSupabaseUser()
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
     category,
@@ -128,12 +145,15 @@
   })
 
   // PRODUCT REVIEWS
-  const { getRatingsAverage, getReviews, getReviewsCount, reviewsLoading } = useReviews()
+  const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
   const totalReviews = ref(0)
   const reviews = ref([])
   const ratingsAverage = ref("")
   const activePage = ref(1)
+  const hasUserReviewed = ref(true)
+  const showReviewEditor = ref(false)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
+  const userReview = ref(null)
 
   const onReviewsPageChange = async ({ currentPage, startItem, endItem }) => {
     if(activePage.value !== currentPage) {
@@ -141,15 +161,16 @@
       reviews.value = await getReviews(articleId.value, startItem, endItem - 1)
       totalReviews.value = await getReviewsCount(articleId.value)
       ratingsAverage.value = await getRatingsAverage(articleId.value)
+      hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
     }
   }
 
   const toast = useToast()
 
-  const onReviewPostSuccess = async () => {
+  const onReviewPostSuccess = async ({ updated }) => {
     toast.show({
-      title: t('reviews.toast.success.title'),
-      message: t('reviews.toast.success.message'),
+      title: t(`reviews.toast.${updated ? 'update' : 'success'}.title`),
+      message: t(`reviews.toast.${updated ? 'update' : 'success'}.message`),
       color: 'success'
     })
 
@@ -157,6 +178,7 @@
     reviews.value = await getReviews(articleId.value)
     totalReviews.value = await getReviewsCount(articleId.value)
     ratingsAverage.value = await getRatingsAverage(articleId.value)
+    hasUserReviewed.value = true
   }
 
   const onReviewPostError = () => toast.show({
@@ -165,12 +187,19 @@
     color: 'danger'
   })
 
-  watchOnce(articleId, async () => {
+  const onShowReviewEditor = async () => {
+    userReview.value = await getUserReview(articleId.value, user.value.id)
+    showReviewEditor.value = true
+  }
+
+  watch(articleId, async () => {
     if(!articleId.value || type !== PRODUCT) return
 
+    activePage.value = 1
     reviews.value = await getReviews(articleId.value)
     totalReviews.value = await getReviewsCount(articleId.value)
     ratingsAverage.value = await getRatingsAverage(articleId.value)
+    hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
   }, { immediate: true })
 </script>
 <style lang="scss" scoped>
@@ -261,7 +290,8 @@
   &__reviews {
     margin-top: 40px;
 
-    &--box {
+    &--box,
+    &--reviewed {
       margin-bottom: 20px;
     }
 

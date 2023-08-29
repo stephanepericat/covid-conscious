@@ -1,6 +1,5 @@
 <template>
   <div class="review-box">
-    <h3 v-text="$t('reviews.add')" class="review-box__title" />
     <div class="review-box__form" v-if="canReview">
       <ITextarea
         v-model="reviewContent"
@@ -21,7 +20,7 @@
         :disabled="!canSubmit || submitting"
         @click="onSubmit"
       >
-        {{ $t('reviews.submit') }}
+        {{ buttonLabel }}
       </IButton>
     </div>
     <p v-else class="review-box__anonymous">
@@ -35,23 +34,26 @@
   import { useReviews } from '~/assets/composables/useReviews'
 
   const props = defineProps({
-    articleId: { type: String, default: null }
+    articleId: { type: String, default: null },
+    update: Boolean,
+    userReview: { type: Object, default: () => ({})},
   })
 
   const emit = defineEmits(['error', 'success'])
 
-  const { articleId } = toRefs(props)
+  const { articleId, update, userReview } = toRefs(props)
 
+  const { t } = useI18n()
   const localePath = useLocalePath()
   const user = useSupabaseUser()
   const { getUserById } = usePosts()
-  const { createReview } = useReviews()
+  const { createReview, updateReview } = useReviews()
 
   const userInfo = await getUserById(user?.value?.id || null)
   const canReview = computed(() => userInfo && userInfo.username !== null)
 
-  const reviewContent = ref('')
-  const reviewRating = ref(0)
+  const reviewContent = ref(update.value ? userReview.value.body : '')
+  const reviewRating = ref(update.value ? userReview.value.rating : 0)
 
   const clearForm = () => {
     reviewContent.value = ''
@@ -61,6 +63,8 @@
   const canSubmit = computed(() => articleId.value && canReview.value && reviewContent.value && reviewRating.value)
 
   const submitting = ref(false)
+
+  const buttonLabel = ref(update.value ? t('reviews.update') : t('reviews.submit'))
 
   const onSubmit = async () => {
     const payload = {
@@ -73,24 +77,25 @@
     submitting.value = true
 
     try {
-      const { data, error } = await createReview(payload)
+      const { data, error } = update.value
+        ? await updateReview({ ...payload, updated_at: new Date() }, userReview.value.id)
+        : await createReview(payload)
+
       if(error) throw error
 
       if(data?.id) {
-        emit('success')
+        emit('success', { updated: update.value })
       }
     } catch(e) {
       console.error(e)
       emit('error')
     } finally {
-      clearForm()
+      if(!update.value) clearForm()
       submitting.value = false
     }
   }
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
-
 .review-box {
   &__anonymous {
     font-size: 16px;
@@ -104,10 +109,6 @@
 
   &__submit {
     margin-top: 20px;
-  }
-
-  &__title {
-    @include titleLink();
   }
 }
 </style>
