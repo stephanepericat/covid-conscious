@@ -6,7 +6,7 @@ create table public.review (
   body             text not null,
   rating           integer not null,
   created_at       timestamp default now(),
-  updated_at       timestamp
+  updated_at       timestamp default now()
 );
 
 comment on table public.review is 'A product review written by a user.';
