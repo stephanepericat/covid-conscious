@@ -20,7 +20,7 @@
         :disabled="!canSubmit || submitting"
         @click="onSubmit"
       >
-        {{ $t('reviews.submit') }}
+        {{ buttonLabel }}
       </IButton>
     </div>
     <p v-else class="review-box__anonymous">
@@ -35,22 +35,25 @@
 
   const props = defineProps({
     articleId: { type: String, default: null },
+    update: Boolean,
+    userReview: { type: Object, default: () => ({})},
   })
 
   const emit = defineEmits(['error', 'success'])
 
-  const { articleId } = toRefs(props)
+  const { articleId, update, userReview } = toRefs(props)
 
+  const { t } = useI18n()
   const localePath = useLocalePath()
   const user = useSupabaseUser()
   const { getUserById } = usePosts()
-  const { createReview } = useReviews()
+  const { createReview, updateReview } = useReviews()
 
   const userInfo = await getUserById(user?.value?.id || null)
   const canReview = computed(() => userInfo && userInfo.username !== null)
 
-  const reviewContent = ref('')
-  const reviewRating = ref(0)
+  const reviewContent = ref(update.value ? userReview.value.body : '')
+  const reviewRating = ref(update.value ? userReview.value.rating : 0)
 
   const clearForm = () => {
     reviewContent.value = ''
@@ -61,28 +64,34 @@
 
   const submitting = ref(false)
 
+  const buttonLabel = ref(update.value ? t('reviews.update') : t('reviews.submit'))
+
   const onSubmit = async () => {
     const payload = {
       body: reviewContent.value,
       rating: reviewRating.value,
       author_id: user.value.id,
       product_id: articleId.value,
+      updated_at: update.value ? new Date() : null,
     }
 
     submitting.value = true
 
     try {
-      const { data, error } = await createReview(payload)
+      const { data, error } = update.value
+        ? await updateReview(payload, userReview.value.id)
+        : await createReview(payload)
+
       if(error) throw error
 
       if(data?.id) {
-        emit('success')
+        emit('success', { updated: update.value })
       }
     } catch(e) {
       console.error(e)
       emit('error')
     } finally {
-      clearForm()
+      if(!update.value) clearForm()
       submitting.value = false
     }
   }

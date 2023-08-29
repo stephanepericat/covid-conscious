@@ -18,6 +18,27 @@ export const useReviews = () => {
     }
   }
 
+  const getUserReview = async (productId, userId) => {
+    try {
+      const { data, error } = await supabase
+        .from('review')
+        .select(`
+          id,
+          body,
+          rating
+        `)
+        .eq('product_id', productId)
+        .eq('author_id', userId)
+        .single()
+
+      if (error) throw error
+      return data
+    } catch (e) {
+      console.error(e)
+      return 0
+    }
+  }
+
   const getReviews = async (productId, start = 0, end = 3) => {
     reviewsLoading.value = true
     
@@ -29,6 +50,7 @@ export const useReviews = () => {
           body,
           rating,
           created_at,
+          updated_at,
           profiles ( id, username )
         `)
         .eq('product_id', productId)
@@ -75,6 +97,23 @@ export const useReviews = () => {
         body,
         rating,
         created_at,
+        updated_at,
+        profiles ( id, username )
+      `)
+      .single()
+  }
+
+  const updateReview = async (payload, reviewId) => {
+    return await supabase
+      .from('review')
+      .update(payload)
+      .eq('id', reviewId)
+      .select(`
+        id,
+        body,
+        rating,
+        created_at,
+        updated_at,
         profiles ( id, username )
       `)
       .single()
@@ -86,6 +125,8 @@ export const useReviews = () => {
     getRatingsAverage,
     getReviews,
     getReviewsCount,
+    getUserReview,
     reviewsLoading,
+    updateReview,
   }
 }

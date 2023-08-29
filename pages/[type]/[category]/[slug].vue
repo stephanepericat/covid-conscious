@@ -70,7 +70,20 @@
           </div>
           <div class="article-page__reviews" v-if="articleId">
             <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
-            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">You already reviewed this product.</div>
+            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">
+              <p>
+                <span v-text="$t('reviews.edit.already')" /> <a v-if="articleId" href="#" @click="onShowReviewEditor" v-text="$t('reviews.edit.click')" />
+              </p>
+              <ReviewBox
+                v-if="showReviewEditor"
+                class="article-page__reviews--box"
+                :article-id="articleId"
+                update
+                :user-review="userReview"
+                @error="onReviewPostError"
+                @success="onReviewPostSuccess"
+              />
+            </div>
             <ReviewBox
               v-else
               class="article-page__reviews--box"
@@ -132,13 +145,15 @@
   })
 
   // PRODUCT REVIEWS
-  const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, reviewsLoading } = useReviews()
+  const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
   const totalReviews = ref(0)
   const reviews = ref([])
   const ratingsAverage = ref("")
   const activePage = ref(1)
   const hasUserReviewed = ref(true)
+  const showReviewEditor = ref(false)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
+  const userReview = ref(null)
 
   const onReviewsPageChange = async ({ currentPage, startItem, endItem }) => {
     if(activePage.value !== currentPage) {
@@ -152,10 +167,10 @@
 
   const toast = useToast()
 
-  const onReviewPostSuccess = async () => {
+  const onReviewPostSuccess = async ({ updated }) => {
     toast.show({
-      title: t('reviews.toast.success.title'),
-      message: t('reviews.toast.success.message'),
+      title: t(`reviews.toast.${updated ? 'update' : 'success'}.title`),
+      message: t(`reviews.toast.${updated ? 'update' : 'success'}.message`),
       color: 'success'
     })
 
@@ -172,9 +187,15 @@
     color: 'danger'
   })
 
+  const onShowReviewEditor = async () => {
+    userReview.value = await getUserReview(articleId.value, user.value.id)
+    showReviewEditor.value = true
+  }
+
   watch(articleId, async () => {
     if(!articleId.value || type !== PRODUCT) return
 
+    activePage.value = 1
     reviews.value = await getReviews(articleId.value)
     totalReviews.value = await getReviewsCount(articleId.value)
     ratingsAverage.value = await getRatingsAverage(articleId.value)

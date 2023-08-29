@@ -109,6 +109,10 @@ export default {
   reviews: {
     add: 'Calificación Promedio',
     average: 'Average Rating',
+    edit: {
+      already: 'Ya revisaste este producto.',
+      click: 'Haga clic aquí para editar su reseña.'
+    },
     list: {
       description: 'Estás viendo reseñas desde el {start} hasta el {end} de {total}.',
     },
@@ -128,7 +132,12 @@ export default {
         message: 'Tu reseña ha sido publicada.',
         title: '¡Reseña agregada!',
       },
+      update: {
+        message: 'Tu reseña ha sido actualizada.',
+        title: '¡Revisión actualizada!',
+      },
     },
+    update: 'Actualiza tu reseña',
   },
   search: {
     description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
