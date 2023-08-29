@@ -172,7 +172,7 @@
     color: 'danger'
   })
 
-  watchOnce(articleId, async () => {
+  watch(articleId, async () => {
     if(!articleId.value || type !== PRODUCT) return
 
     reviews.value = await getReviews(articleId.value)
