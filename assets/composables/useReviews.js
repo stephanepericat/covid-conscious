@@ -54,7 +54,7 @@ export const useReviews = () => {
           profiles ( id, username )
         `)
         .eq('product_id', productId)
-        .order('created_at', { ascending: false })
+        .order('updated_at', { ascending: false })
         .range(start, end)
 
       if (error) throw error

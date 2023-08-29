@@ -72,14 +72,13 @@
       rating: reviewRating.value,
       author_id: user.value.id,
       product_id: articleId.value,
-      updated_at: update.value ? new Date() : null,
     }
 
     submitting.value = true
 
     try {
       const { data, error } = update.value
-        ? await updateReview(payload, userReview.value.id)
+        ? await updateReview({ ...payload, updated_at: new Date() }, userReview.value.id)
         : await createReview(payload)
 
       if(error) throw error
