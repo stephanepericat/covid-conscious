@@ -20,7 +20,8 @@
         <template #image>
           <SanityImage
             :asset-id="article.author.avatar"
-            auto="format"
+            fit="crop"
+            crop="top,left"
             :h="50"
             :w="50"
           />
