@@ -34,6 +34,7 @@
     "nuxt-cloudflare-analytics": "^1.0.8",
     "nuxt-icon": "^0.4.1",
     "validator": "^13.9.0",
+    "vue-social-sharing": "^4.0.0-alpha4",
     "vue-star-rating": "^2.1.0"
   }
 }
