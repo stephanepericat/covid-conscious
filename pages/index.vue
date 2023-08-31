@@ -13,7 +13,8 @@
                   <SanityImage
                     v-if="article.thumbnail"
                     :asset-id="article.thumbnail"
-                    auto="format"
+                    fit="crop"
+                    crop="top,left"
                     :h="80"
                     :w="80"
                   />
@@ -42,7 +43,8 @@
                   <SanityImage
                     v-if="article.thumbnail"
                     :asset-id="article.thumbnail"
-                    auto="format"
+                    fit="crop"
+                    crop="top,left"
                     :h="80"
                     :w="80"
                   />
@@ -71,7 +73,8 @@
                   <SanityImage
                     v-if="article.thumbnail"
                     :asset-id="article.thumbnail"
-                    auto="format"
+                    fit="crop"
+                    crop="top,left"
                     :h="80"
                     :w="80"
                   />
@@ -100,7 +103,8 @@
                   <SanityImage
                     v-if="article.thumbnail"
                     :asset-id="article.thumbnail"
-                    auto="format"
+                    fit="crop"
+                    crop="top,left"
                     :h="80"
                     :w="80"
                   />
