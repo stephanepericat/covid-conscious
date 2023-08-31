@@ -27,7 +27,7 @@
           />
         </template>
         <h5 class="article-page__author--name">
-          <NuxtLink :text="article.author.nickname" :to="localePath(`/${AUTHOR}/${article.author.slug}`)" />
+          <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink>
         </h5>
         <p class="article-page__info">
           <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), DEFAULT_DATE_FORMAT) }})</span>
