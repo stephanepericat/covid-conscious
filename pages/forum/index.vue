@@ -1,5 +1,5 @@
 <template>
-  <PageShell class="sf-index-page">
+  <div class="sf-index-page">
     <h1
       class="sf-index-page__title"
       v-text="$t('supabase-forum.latest.title')"
@@ -10,10 +10,9 @@
       :total-items="total"
       @page-change="onPageChange"
     />
-  </PageShell>
+  </div>
 </template>
 <script setup>
-  import PageShell from '~/components/PageShell.vue'
   import PostList from '~/components/PostList.vue'
   import { usePosts } from '~/assets/composables/usePosts'
 

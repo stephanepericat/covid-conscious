@@ -1,5 +1,5 @@
 <template>
-  <PageShell class="sf-user-page">
+  <div class="sf-user-page">
     <IMedia class="sf-user-page__info">
       <template #image>
         <img
@@ -37,10 +37,9 @@
       &laquo;
       {{ $t('supabase-forum.account.back') }}
     </a>
-  </PageShell>
+  </div>
 </template>
 <script setup>
-  import PageShell from '~/components/PageShell.vue'
   import { usePosts } from '~/assets/composables/usePosts'
 
   const route = useRoute()

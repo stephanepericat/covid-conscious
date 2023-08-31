@@ -45,7 +45,28 @@
                 </IDropdownItem>
               </template>
             </IDropdown>
-            <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
+            <IDropdown>
+              <INavItem> {{ $t("layout.forum") }} </INavItem>
+              <template #body>
+                <IDropdownItem
+                  :to="localePath(`/${FORUM}`)"
+                >
+                  {{ $t('supabase-forum.nav.latest') }}
+                </IDropdownItem>
+                <template v-if="isLoggedIn">
+                  <IDropdownItem
+                    :to="localePath(`/${FORUM}/create`)"
+                  >
+                    {{ $t('supabase-forum.nav.create') }}
+                  </IDropdownItem>
+                  <IDropdownItem
+                    :to="localePath(`/${FORUM}/my-posts`)"
+                  >
+                    {{ $t('supabase-forum.nav.my.posts') }}
+                  </IDropdownItem>
+                </template>
+              </template>
+            </IDropdown>
             <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
           </INav>
           <IInput v-model="searchTerm" @keydown.enter="onSearch" class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
@@ -140,7 +161,7 @@
   import menuCategoriesQuery from '~/sanity/menuCategories.sanity';
   import { useInkline } from '@inkline/inkline';
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
-  import { COMMUNITY, EDUCATION, PRODUCT } from '~/assets/constants/types';
+  import { COMMUNITY, EDUCATION, FORUM, PRODUCT } from '~/assets/constants/types';
   import { useSignOut } from '~/assets/composables/useSignOut';
 
   const inkline = useInkline();
