@@ -1,4 +1,3 @@
-// import { QuillEditor } from '@vueup/vue-quill'
 import StarRating from 'vue-star-rating'
 import consola from 'consola'
 

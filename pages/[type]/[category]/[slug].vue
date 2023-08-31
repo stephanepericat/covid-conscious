@@ -21,7 +21,7 @@
           <SanityImage
             :asset-id="article.author.avatar"
             fit="crop"
-            crop="top,left"
+            crop="entropy"
             :h="50"
             :w="50"
           />
@@ -36,6 +36,14 @@
 
       <section class="article-page__body">
         <SanityContent :blocks="article.body" />
+
+        <!-- social media sharing -->
+        <ShareButtons
+          :title="article.title"
+          :url="url.href"
+          :hashtag="hashtag"
+        />
+
         <!-- community content -->
         <template v-if="type === COMMUNITY && article.info">
           <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
@@ -119,12 +127,15 @@
   import ReviewBox from '~/components/ReviewBox.vue'
   import ReviewList from '~/components/ReviewList.vue'
   import { useReviews } from '~/assets/composables/useReviews'
+  import ShareButtons from '~/components/ShareButtons.vue'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
   const user = useSupabaseUser()
+  const url = useRequestURL()
+  const hashtag = computed(() => category.replace(/-/gi, ''))
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
     category,

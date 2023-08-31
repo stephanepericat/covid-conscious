@@ -11,7 +11,7 @@
                 v-if="article.thumbnail"
                 :asset-id="article.thumbnail"
                 fit="crop"
-                crop="top,left"
+                crop="entropy"
                 :h="80"
                 :w="80"
               />
