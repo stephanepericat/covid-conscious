@@ -115,7 +115,6 @@
         </template>
       </section>
     </template>
-    {{ article }}
     <IToastContainer />
   </div>
 </template>

@@ -1,25 +1,46 @@
 <template>
   <div class="share-buttons">
     <ShareNetwork network="facebook" :url="url" :title="title" :hashtags="hashtag">
-      <Icon name="logos:facebook"></Icon>
-    </ShareNetwork>
-    <ShareNetwork network="reddit" :url="url" :title="title">
-      <Icon name="logos:reddit-icon"></Icon>
+      <ITooltip size="sm" placement="right">
+        <Icon name="logos:facebook"></Icon>
+        <template #body>{{ $t('article.share.facebook') }}</template>
+      </ITooltip>
     </ShareNetwork>
     <ShareNetwork network="pinterest" :url="url" :title="title">
-      <Icon name="logos:pinterest"></Icon>
+      <ITooltip size="sm" placement="right">
+        <Icon name="logos:pinterest"></Icon>
+        <template #body>{{ $t('article.share.pinterest') }}</template>
+      </ITooltip>
+    </ShareNetwork>
+    <ShareNetwork network="reddit" :url="url" :title="title">
+      <ITooltip size="sm" placement="right">
+        <Icon name="logos:reddit-icon"></Icon>
+        <template #body>{{ $t('article.share.reddit') }}</template>
+      </ITooltip>
     </ShareNetwork>
     <ShareNetwork network="telegram" :url="url" :title="title">
-      <Icon name="logos:telegram"></Icon>
+      <ITooltip size="sm" placement="right">
+        <Icon name="logos:telegram"></Icon>
+        <template #body>{{ $t('article.share.telegram') }}</template>
+      </ITooltip>
     </ShareNetwork>
     <ShareNetwork network="twitter" :url="url" :title="title" :hashtags="hashtag">
-      <Icon name="logos:twitter"></Icon>
+      <ITooltip size="sm" placement="right">
+        <Icon name="logos:twitter"></Icon>
+        <template #body>{{ $t('article.share.twitter') }}</template>
+      </ITooltip>
     </ShareNetwork>
     <ShareNetwork network="whatsapp" :url="url" :title="title">
-      <Icon name="logos:whatsapp-icon"></Icon>
+      <ITooltip size="sm" placement="right">
+        <Icon name="logos:whatsapp-icon"></Icon>
+        <template #body>{{ $t('article.share.whatsapp') }}</template>
+      </ITooltip>
     </ShareNetwork>
     <ShareNetwork network="email" :url="url" :title="title">
-      <Icon name="material-symbols:mail-outline-rounded"></Icon>
+      <ITooltip size="sm" placement="right">
+        <Icon name="material-symbols:mail-outline-rounded"></Icon>
+        <template #body>{{ $t('article.share.mail') }}</template>
+      </ITooltip>
     </ShareNetwork>
   </div>
 </template>
