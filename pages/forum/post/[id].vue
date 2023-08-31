@@ -1,5 +1,5 @@
 <template>
-  <PageShell class="sf-post-page">
+  <div class="sf-post-page">
     <ILoader
       v-if="loading"
       class="sf-post-page__loader"
@@ -58,12 +58,11 @@
         />
       </section>
     </template>
-  </PageShell>
+  </div>
 </template>
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
-  import PageShell from '~/components/PageShell.vue'
   import CommentBox from '~/components/CommentBox.vue'
   import CommentList from '~/components/CommentList.vue'
   import { usePosts } from '~/assets/composables/usePosts'

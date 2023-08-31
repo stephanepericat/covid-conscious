@@ -1,5 +1,5 @@
 <template>
-  <PageShell class="sf-my-posts-page">
+  <div class="sf-my-posts-page">
     <h1
       class="sf-my-posts-page__title"
       v-text="$t('supabase-forum.posts.title')"
@@ -78,13 +78,12 @@
         </template>
       </IModal>
     </template>
-  </PageShell>
+  </div>
 </template>
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import PageShell from '~/components/PageShell.vue'
   import { usePagination } from '~/assets/composables/usePagination'
   import { usePosts } from '~/assets/composables/usePosts'
 

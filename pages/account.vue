@@ -1,5 +1,5 @@
 <template>
-  <PageShell class="sf-account-page">
+  <div class="sf-account-page">
     <h1
       class="sf-account-page__title"
       v-text="$t('supabase-forum.account.title')"
@@ -20,10 +20,9 @@
         </IButton>
       </IFormGroup>
     </template>
-  </PageShell>
+  </div>
 </template>
 <script setup>
-  import PageShell from '../components/PageShell.vue'
   import { useSignOut } from '../assets/composables/useSignOut'
   import { useToast } from '@inkline/inkline'
   import Account from '../components/UserAccount.vue'
