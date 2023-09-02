@@ -91,9 +91,9 @@ export default {
     education: "Éducation",
     forum: "Forum",
     more: {
-      articles: 'Plus D\'Articles',
-      news: 'Plus De Nouvelles',
-      posts: 'Plus De Messages',
+      articles: 'Plus d\'Articles',
+      news: 'Plus de Nouvelles',
+      posts: 'Plus de Messages',
     },
     news: "Actualités",
     product: "Produits",
