@@ -1,6 +1,6 @@
 <template>
   <div class="home-page" :class="{ pending }">
-    <ILoader v-if="pending" class="home-page__loader" />
+    <ILoader v-if="pending || loading" class="home-page__loader" />
     <template v-else>
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
       <div class="home-page__container">
@@ -38,31 +38,30 @@
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
             <IListGroup size="sm" :border="false">
-              <!-- <IListGroupItem v-for="article in latestPublications.learn">
+              <IListGroupItem v-for="post in posts">
                 <IMedia>
                   <template #image>
-                    <SanityImage
-                      v-if="article.thumbnail"
-                      :asset-id="article.thumbnail"
-                      fit="crop"
-                      crop="entropy"
-                      :h="80"
-                      :w="80"
-                    />
-                    <div v-else class="home-page__thumbnail--fallback">
-                      <Icon class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-                    </div>
+                    <div class="home-page__thumbnail--fallback">
+                    <ClientOnly>
+                      <img
+                        v-if="post.avatar"
+                        class="home-page__thumbnail"
+                        :src="post.avatar"
+                      >
+                    </ClientOnly>
+                    <Icon v-if="!post.avatar || isSSR" class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+                  </div>
                   </template>
                   <h3 class="home-page__link">
-                    <NuxtLink :to="localePath(article.link)">{{ article.title }}</NuxtLink>
+                    <NuxtLink :to="localePath(`${rootPath}/post/${post.id}`)">{{ post.headline }}</NuxtLink>
                   </h3>
                   <em>
-                    <span>{{ article.category }} &bullet; </span>
-                    <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                    <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
+                    <span>{{ $t(`supabase-forum.create.categories.${post.topic}`) }} &bullet; </span>
+                    <span><NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink> &bullet; </span>
+                    <span>{{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
                   </em>
                 </IMedia>
-              </IListGroupItem> -->
+              </IListGroupItem>
             </IListGroup>
           </section>
         </div>
@@ -163,22 +162,29 @@
   </div>
 </template>
 <script setup>
-  import { format } from "date-fns";
-  import latestPublicationsQuery from '~/sanity/latestPublications.sanity';
-  import { AUTHOR } from "~/assets/constants/types";
-  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
+  import { format } from 'date-fns'
+  import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
+  import { AUTHOR } from '~/assets/constants/types'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { usePosts } from '~/assets/composables/usePosts'
 
-  const { locale, t } = useI18n();
-  const localePath = useLocalePath();
+  const { locale, t } = useI18n()
+  const localePath = useLocalePath()
+  const { loading, getPosts } = usePosts()
+  const posts = ref([])
+  const config = useRuntimeConfig()
+  const rootPath = computed(() => config.public.supabaseForum.rootPath)
+  const isSSR = computed(() => !process.client)
 
   useHead({
     meta: [
-      { name: "description", content: t("home.description") },
+      { name: 'description', content: t('home.description') },
     ],
-    title: t("home.title")
-  });
+    title: t('home.title')
+  })
 
-  const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale });
+  const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
+  posts.value = await getPosts(0, 4)
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
