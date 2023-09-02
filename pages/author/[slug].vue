@@ -1,7 +1,21 @@
 <template>
-  <div class="author-page">{{ slug }}</div>
+  <div class="author-page">
+    <h1 class="author-page__title">{{ $t('comingSoon') }}</h1>
+    <a href="#" @click="() => router.go(-1)">
+      &laquo;
+      {{ $t('supabase-forum.account.back') }}
+    </a>
+  </div>
 </template>
 <script setup>
-  const { params } = useRoute();
-  const { slug } = params;
+  const router = useRouter()
 </script>
+<style lang="scss" scoped>
+@import "~/assets/sass/mixins.scss";
+
+.author-page {
+  &__title {
+    @include title();
+  }
+}
+</style>

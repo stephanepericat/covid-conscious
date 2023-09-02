@@ -19,12 +19,19 @@
       <IMedia class="article-page__author">
         <template #image>
           <SanityImage
+            v-if="article.author.avatar"
             :asset-id="article.author.avatar"
             fit="crop"
             crop="entropy"
             :h="50"
             :w="50"
           />
+          <div v-else class="article-page__author--placeholder">
+            <Icon
+              class="article-page__author--placeholder-icon"
+              name="material-symbols:account-circle-full"
+            />
+          </div>
         </template>
         <h5 class="article-page__author--name">
           <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink>
@@ -254,6 +261,18 @@
 
   &__author {
     margin-bottom: 40px;
+
+    &--placeholder {
+      height: 50px;
+      margin-right: var(--media--image--margin-right, var(--margin-right));
+      width: 50px;
+
+      &-icon  {
+        height: 48px;
+        opacity: .5;
+        width: 48px;
+      }
+    }
   }
 
   &__info {
