@@ -1,5 +1,5 @@
 <template>
-  <div class="home-page" :class="{ pending }">
+  <div class="home-page" :class="{ pending: pending || loading }">
     <ILoader v-if="pending || loading" class="home-page__loader" />
     <template v-else>
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
@@ -34,6 +34,9 @@
                 </IMedia>
               </IListGroupItem>
             </IListGroup>
+            <NuxtLink class="home-page__more" :to="localePath('/news')">
+              {{ $t('layout.more.news') }} &raquo;
+            </NuxtLink>
           </section>
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
@@ -63,6 +66,9 @@
                 </IMedia>
               </IListGroupItem>
             </IListGroup>
+            <NuxtLink class="home-page__more" :to="localePath('/forum')">
+              {{ $t('layout.more.posts') }} &raquo;
+            </NuxtLink>
           </section>
         </div>
         <div class="home-page__container--other">
@@ -95,6 +101,9 @@
                 </IMedia>
               </IListGroupItem>
             </IListGroup>
+            <NuxtLink class="home-page__more" :to="localePath('/product')">
+              {{ $t('layout.more.articles') }} &raquo;
+            </NuxtLink>
           </section>
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.community") }}</h3>
@@ -125,6 +134,9 @@
                 </IMedia>
               </IListGroupItem>
             </IListGroup>
+            <NuxtLink class="home-page__more" :to="localePath('/community')">
+              {{ $t('layout.more.articles') }} &raquo;
+            </NuxtLink>
           </section>
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.education") }}</h3>
@@ -155,6 +167,9 @@
                 </IMedia>
               </IListGroupItem>
             </IListGroup>
+            <NuxtLink class="home-page__more" :to="localePath('/education')">
+              {{ $t('layout.more.articles') }} &raquo;
+            </NuxtLink>
           </section>
         </div>
       </div>
@@ -230,6 +245,10 @@
 
   &__thumbnail {
     @include thumbnail();
+  }
+
+  &__more {
+    padding-left: var(--list-group--padding-left, var(--padding-left));
   }
 
   @include breakpoint('md') {

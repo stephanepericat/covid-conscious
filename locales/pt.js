@@ -90,6 +90,11 @@ export default {
     contactUs: "Contate-Nos",
     education: "Aprender",
     forum: "Fórum",
+    more: {
+      articles: 'Mais Artigos',
+      news: 'Mais Notícias',
+      posts: 'Mais Postagens',
+    },
     news: "Notícias",
     product: "Produtos",
     rss: "Feed RSS",
