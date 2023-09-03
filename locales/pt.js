@@ -82,8 +82,9 @@ export default {
   },
   layout: {
     about: "Sobre",
+    contents: "Conteúdo",
     disclaimer: "Isenção de responsabilidade",
-    footerLegal: "© {year} Todos os direitos reservados. Por favor, leia o nosso aviso ",
+    footerLegal: "© {year} Todos os direitos reservados.",
     here: "aqui",
     home: "Pagina Inicial",
     community: "Comunidade",
@@ -104,9 +105,11 @@ export default {
       darkMode: "Alternar para o modo escuro",
       lightMode: "Alternar para o modo de luz",
     },
+    tcl: 'That Covid Life',
     twitter: "Siga-nos no Twitter",
     user: {
       account: "Minha Conta",
+      area: "Área do Usuário",
       signIn: "Entrar",
       signOut: "Sair"
     },

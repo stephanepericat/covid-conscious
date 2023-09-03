@@ -124,35 +124,76 @@
     <!-- footer -->
     <ILayoutFooter class="default-layout__footer">
       <IContainer class="default-layout__footer--container">
-        <INav class="default-layout__footer--nav">
-          <INavItem class="default-layout__footer--legal">
-            <span class="default-layout__footer--legal-text">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</span>
-            <NuxtLink :to="localePath('/disclaimer')">{{ $t("layout.here") }}</NuxtLink>.
-          </INavItem>
-          <INavbarBrand to="/" class="default-layout__footer--logo">
-            <IDropdown placement="top-end" events="hover">
-              <img class="default-layout__logo-footer" :src="logoFile" />
-              <template #body>
-                <IDropdownItem>
-                  <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:android-chat" />
-                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.about')" />
-                </IDropdownItem>
-                <IDropdownItem>
-                  <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:contact-support-outline" />
-                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.contactUs')" />
-                </IDropdownItem>
-                <IDropdownItem @click="onRssFeedClick">
-                  <Icon class="default-layout__footer--dropdown-icon" name="material-symbols:rss-feed-rounded" />
-                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.rss')" />
-                </IDropdownItem>
-                <IDropdownItem>
-                  <Icon class="default-layout__footer--dropdown-icon" name="ri:twitter-line" />
-                  <span class="default-layout__footer--dropdown-label" v-text="$t('layout.twitter')" />
-                </IDropdownItem>
-              </template>
-            </IDropdown>
+        <div class="default-layout__footer--container-block">
+          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.tcl') }}</h5>
+          <ul class="default-layout__footer--list">
+            <li>
+              <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
+            </li>
+            <li>
+              <a href="mailto:covidconsciousproject@gmail.com">{{ $t('layout.contactUs') }}</a>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
+            </li>
+            <li>
+              <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/thatcovidlife" target="_blank">{{ $t('layout.twitter') }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="default-layout__footer--container-block">
+          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.contents') }}</h5>
+          <ul class="default-layout__footer--list">
+            <li>
+              <NuxtLink :to="localePath('/')">{{ $t('layout.home') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/news')">{{ $t('layout.news') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/community')">{{ $t('layout.community') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/education')">{{ $t('layout.education') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/forum')">{{ $t('layout.forum') }}</NuxtLink>
+            </li>
+          </ul>
+        </div>
+        <div class="default-layout__footer--container-block">
+          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.user.area') }}</h5>
+          <ul class="default-layout__footer--list">
+            <li>
+              <NuxtLink :to="localePath('/login')">{{ $t('layout.user.signIn') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/account')">{{ $t('layout.user.account') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/forum/my-posts')">{{ $t('supabase-forum.nav.my.posts') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/forum/create')">{{ $t('supabase-forum.nav.create') }}</NuxtLink>
+            </li>
+            <li>&nbsp;</li>
+            <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
+          </ul>
+        </div>
+        <div class="default-layout__footer--container-block logo">
+          <INavbarBrand :to="localePath('/')">
+            <img class="default-layout__logo-footer" :src="logoFile" />
           </INavbarBrand>
-        </INav>
+        </div>
       </IContainer>
     </ILayoutFooter>
   </ILayout>
@@ -216,7 +257,6 @@
 
   // Feed URL
   const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`);
-  const onRssFeedClick = () => window.open(rssFeedUrl.value);
 
   // User Menu
   const user = useSupabaseUser()
@@ -225,6 +265,8 @@
 </script>
 <style lang="scss" scoped>
 .default-layout {
+  @import "~/assets/sass/mixins.scss";
+
   height: 100vh;
 
   &__header {
@@ -244,8 +286,7 @@
     width: auto;
 
     &-footer {
-      height: 30px;
-      margin-right: 20px;
+      height: 40px;
     }
   }
 
@@ -265,25 +306,35 @@
 
   &__footer {
     background-color: var(--color-light);
-    padding: 30px 0 50px 0;
+    padding: 30px 0 70px 0;
 
-    &--nav {
+    &--container {
       display: flex;
-      width: 100%;
+      padding: 0 60px;
+
+      &-block {
+        flex-basis: 25%;
+
+        &.logo {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+          align-items: center;
+        }
+
+        &-title {
+          @include eyebrow();
+
+          font-size: 16px;
+        }
+      }
     }
 
-    &--dropdown {
-      &-icon {
-        height: 22px;
-      }
-
-      &-label {
-        margin-left: 8px;
-      }
-    }
-
-    &--legal {
-      flex-grow: 1;
+    &--list {
+      line-height: 16px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
   }
 }
