@@ -14,7 +14,7 @@ export default groq`
     "street2": streetAdressTwo,
     city,
     zipCode,
-    country,
+    "country": coalesce(country->name[$locale], country->name['en'], null),
     "phone": phoneNumber,
     email,
     website,

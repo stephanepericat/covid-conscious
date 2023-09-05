@@ -16,6 +16,9 @@ export default groq`
     "thumbnail": visual.asset._ref,
     "type": _type,
     "uri": uri.current,
+    "countryCode": contactInfo.country->code,
+    "countryName": coalesce(contactInfo.country->name[$locale], contactInfo.country->name['en'], null),
+    "city": contactInfo.city,
   },
   "total": count(*[_type == $articleType])
 }

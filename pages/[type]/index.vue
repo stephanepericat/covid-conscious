@@ -4,6 +4,35 @@
     <NotFound v-else-if="!pending && !results.length" :category="localeType" />
     <template v-else>
       <h1 class="type-page__title" v-text="localeType" />
+      <div class="type-page__filters">
+        <IForm class="type-page__filters--form">
+          <ISelect
+            class="type-page__filters--select"
+            v-model="selectedCategory"
+            :options="filterCategories"
+            :placeholder="$t('list.filters.selectCategory')"
+          />
+          <template v-if="type === COMMUNITY">
+            <ISelect
+              class="type-page__filters--select"
+              v-model="selectedCountry"
+              :options="filterCountries"
+              :placeholder="$t('list.filters.selectCountry')"
+            />
+            <ISelect
+              class="type-page__filters--select"
+              v-model="selectedCity"
+              :disabled="!selectedCountry"
+              :options="filterCities"
+              :placeholder="$t('list.filters.selectCity')"
+            />
+          </template>
+          <IButton @click="clearFilters">
+            <Icon name="carbon:reset" />
+            <span class="type-page__filters--form-reset">{{ $t('list.filters.reset') }}</span>
+          </IButton>
+        </IForm>
+      </div>
       <IListGroup size="sm" :border="false">
         <IListGroupItem v-for="article in visibleItems">
           <IMedia>
@@ -41,32 +70,109 @@
   </div>
 </template>
 <script setup>
-  import { format } from "date-fns";
-  import publicationsByTypeQuery from "~/sanity/publicationsByType.sanity";
-  import { AUTHOR, LINK, NEWS } from "~/assets/constants/types";
-  import { usePagination } from "~/assets/composables/usePagination";
-  import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
+  import { format } from 'date-fns'
+  import _ from 'lodash'
+  import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
+  import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
+  import { usePagination } from '~/assets/composables/usePagination'
+  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
-  const { locale, t } = useI18n();
-  const { params } = useRoute();
-  const { type } = params;
-  const localePath = useLocalePath();
-  const localeType = computed(() => t(`layout.${type}`));
+  const { locale, t } = useI18n()
+  const { params } = useRoute()
+  const { type } = params
+  const localePath = useLocalePath()
+  const localeType = computed(() => t(`layout.${type}`))
 
   useHead({
     meta: [
-      { name: "description", content: t("list.description") },
+      { name: 'description', content: t('list.description') },
     ],
-    title: t("list.typeTitle", { type: localeType.value })
-  });
+    title: t('list.typeTitle', { type: localeType.value })
+  })
 
-  const { currentPage, itemsPerPage, startItem, endItem } = usePagination();
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
-  const articleType = computed(() => type === NEWS ? LINK : type);
-  const { data, pending } = useLazySanityQuery(publicationsByTypeQuery, { locale, articleType: articleType.value });
-  const results = computed(() => data?.value?.results || []);
-  const totalItems = computed(() => data?.value?.total || 0);
-  const visibleItems = computed(() => results.value.slice(startItem.value, endItem.value));
+  const articleType = computed(() => type === NEWS ? LINK : type)
+  const { data, pending } = useLazySanityQuery(publicationsByTypeQuery, { locale, articleType: articleType.value })
+  const results = computed(() => data?.value?.results || [])
+
+  // FILTERS
+  const filterCategories = computed(() => {
+    return _.sortBy(
+      _.uniqBy(
+        results
+          .value
+          .map(({ category, categoryUri }) => ({ label: category, id: categoryUri })),
+      'id'),
+    'label')
+  })
+  const selectedCategory = ref(null)
+
+  const filterCountries = computed(() => {
+    if(type !== COMMUNITY) return []
+
+    const matches = selectedCategory.value
+      ? results.value.filter((result) => result.categoryUri === selectedCategory.value)
+      : results.value
+
+    return _.sortBy(
+      _.uniqBy(
+        matches.map(({ countryCode, countryName }) => ({ label: countryName, id: countryCode })),
+        'id'
+      ),
+    'label')
+  })
+
+  const selectedCountry = ref(null)
+
+  const filterCities = computed(() => {
+    if(type !== COMMUNITY || !selectedCountry.value) return []
+
+    const matches = results.value.filter((result) => result.countryCode === selectedCountry.value)
+
+    return _.sortBy(
+      _.uniqBy(
+        matches.map(({ city }) => ({ label: city, id: city })),
+        'id'
+      ),
+    'label')
+  })
+
+  const selectedCity = ref(null)
+
+  const matches = computed(() => {
+    let items = [...results.value]
+
+    if(
+      !selectedCategory.value &&
+      !selectedCountry.value &&
+      !selectedCity.value
+    ) {
+      return items
+    }
+
+    if(selectedCategory.value) {
+      items = items.filter((result) => result.categoryUri === selectedCategory.value)
+    }
+
+    if(selectedCountry.value) {
+      items = items.filter((result) => result.countryCode === selectedCountry.value)
+    }
+
+    if(selectedCity.value) {
+      items = items.filter((result) => result.city === selectedCity.value)
+    }
+
+    return items
+  })
+  const totalItems = computed(() => matches.value.length || 0)
+  const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value))
+
+  const clearFilters = () => {
+    selectedCategory.value = null
+    selectedCity.value = null
+    selectedCountry.value = null
+  }
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
@@ -95,6 +201,23 @@
 
   &__pagination {
     @include pagination();
+  }
+
+  &__filters {
+    margin-bottom: 20px;
+
+    &--form {
+      display: flex;
+      justify-content: space-between;
+
+      &-reset {
+        margin-left: 5px;
+      }
+    }
+
+    &--select {
+      flex-basis: 25%;
+    }
   }
 }
 </style>
