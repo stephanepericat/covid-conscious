@@ -185,7 +185,9 @@
             <li>
               <NuxtLink :to="localePath('/forum/create')">{{ $t('supabase-forum.nav.create') }}</NuxtLink>
             </li>
-            <li>&nbsp;</li>
+            <li>
+              <NuxtLink :to="localePath('/privacy-policy')">{{ $t('layout.privacyPolicy') }}</NuxtLink>
+            </li>
             <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
           </ul>
         </div>

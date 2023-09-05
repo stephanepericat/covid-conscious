@@ -76,7 +76,6 @@ export default defineNuxtConfig({
         '/es',
         '/pt',
         '*/forum',
-        '*/forum/search',
         '*/forum/post/*',
         '*/forum/user/*',
         '*/news',
@@ -86,6 +85,7 @@ export default defineNuxtConfig({
         '*/contribute',
         '*/search*',
         '*/author/*',
+        '*/privacy-policy'
       ],
       login: '/login',
     },

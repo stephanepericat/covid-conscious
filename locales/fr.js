@@ -97,6 +97,7 @@ export default {
       posts: 'Plus de Messages',
     },
     news: "Actualités",
+    privacyPolicy: "Politique de Confidentialité",
     product: "Produits",
     rss: "Flux RSS",
     search: "Rechercher",
