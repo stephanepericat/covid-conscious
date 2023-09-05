@@ -117,6 +117,12 @@ export default {
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
     description: "That Covid Life - Uma plataforma para conselhos sobre a Covid",
+    filters: {
+      reset: 'Redefinir Filtros',
+      selectCategory: 'Selecione uma categoria...',
+      selectCity: 'Selecione uma cidade...',
+      selectCountry: 'Selecione um pais...',
+    },
     typeTitle: "That Covid Life - {type}",
   },
   notFound: {
