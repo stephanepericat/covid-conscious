@@ -131,9 +131,6 @@
               <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
             </li>
             <li>
-              <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
-            </li>
-            <li>
               <a href="mailto:covidconsciousproject@gmail.com">{{ $t('layout.contactUs') }}</a>
             </li>
             <li>
@@ -150,9 +147,6 @@
         <div class="default-layout__footer--container-block">
           <h5 class="default-layout__footer--container-block-title">{{ $t('layout.contents') }}</h5>
           <ul class="default-layout__footer--list">
-            <li>
-              <NuxtLink :to="localePath('/')">{{ $t('layout.home') }}</NuxtLink>
-            </li>
             <li>
               <NuxtLink :to="localePath('/news')">{{ $t('layout.news') }}</NuxtLink>
             </li>
@@ -171,23 +165,18 @@
           </ul>
         </div>
         <div class="default-layout__footer--container-block">
-          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.user.area') }}</h5>
+          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.legal') }}</h5>
           <ul class="default-layout__footer--list">
             <li>
-              <NuxtLink :to="localePath('/login')">{{ $t('layout.user.signIn') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/account')">{{ $t('layout.user.account') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/forum/my-posts')">{{ $t('supabase-forum.nav.my.posts') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/forum/create')">{{ $t('supabase-forum.nav.create') }}</NuxtLink>
+              <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
             </li>
             <li>
               <NuxtLink :to="localePath('/privacy-policy')">{{ $t('layout.privacyPolicy') }}</NuxtLink>
             </li>
+            <li>
+              <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
+            </li>
+            <li>&nbsp;</li>
             <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
           </ul>
         </div>

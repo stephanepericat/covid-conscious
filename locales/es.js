@@ -91,6 +91,7 @@ export default {
     contactUs: "Contacta con nosotros",
     education: "Aprender",
     forum: "Foro",
+    legal: "Información Legal",
     more: {
       articles: 'Más Artículos',
       news: 'Mas Noticias',
@@ -107,12 +108,13 @@ export default {
       lightMode: "Cambiar al modo de luz",
     },
     tcl: 'That Covid Life',
+    terms: 'Términos y Condiciones',
     twitter: "Síganos en Twitter",
     user: {
       account: "Mi cuenta",
       area: "Área de Usuario",
       signIn: "Iniciar sesión",
-      signOut: "Cerrar sesión"
+      signOut: "Cerrar sesión",
     },
   },
   list: {
