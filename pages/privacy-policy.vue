@@ -1,12 +1,12 @@
 <template>
-  <div class="disclaimer-page" :class="{ pending }">
-    <ILoader v-if="pending" class="disclaimer-page__loader" />
+  <div class="privacy-policy-page" :class="{ pending }">
+    <ILoader v-if="pending" class="privacy-policy-page__loader" />
     <template v-else>
-      <h1 class="disclaimer-page__title">
+      <h1 class="privacy-policy-page__title">
         {{ policy[0].title }}
       </h1>
       
-      <div class="disclaimer-page__contents">
+      <div class="privacy-policy-page__contents">
         <SanityContent :blocks="policy[0].contents" />
       </div>
     </template>
@@ -16,12 +16,12 @@
   import policyQuery from '~/sanity/policy.sanity'
 
   const { locale } = useI18n()
-  const { data: policy, pending } = useLazySanityQuery(policyQuery, { locale, policyType: "Disclaimer" })
+  const { data: policy, pending } = useLazySanityQuery(policyQuery, { locale, policyType: "Privacy Policy" })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
 
-.disclaimer-page {
+.privacy-policy-page {
   &.pending {
     @include pending();
   }

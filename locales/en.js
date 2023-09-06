@@ -91,12 +91,14 @@ export default {
     contactUs: "Contact Us",
     education: "Learn",
     forum: "Forum",
+    legal: "Legal Information",
     more: {
       articles: 'More Articles',
       news: 'More News',
       posts: 'More Posts',
     },
     news: "News",
+    privacyPolicy: "Privacy Policy",
     product: "Products",
     rss: "RSS Feed",
     search: "Search",
@@ -106,12 +108,13 @@ export default {
       lightMode: "Switch To Light Mode",
     },
     tcl: 'That Covid Life',
+    terms: 'Terms & Conditions',
     twitter: "Follow us on Twitter",
     user: {
       account: "My Account",
       area: "User Area",
       signIn: "Sign In",
-      signOut: "Sign Out"
+      signOut: "Sign Out",
     },
   },
   list: {
