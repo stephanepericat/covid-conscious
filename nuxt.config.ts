@@ -38,7 +38,7 @@ export default defineNuxtConfig({
 
   cloudflareAnalytics: {
     proxyPath: "/api/_ca/p",
-    token: process.env.CLOUDFARE_ANALYTICS_TOKEN,
+    token: process.env.CLOUDFLARE_ANALYTICS_TOKEN,
   },
 
   inkline: {
