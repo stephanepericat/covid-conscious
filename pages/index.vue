@@ -3,7 +3,7 @@
     <ILoader v-if="pending || loading" class="home-page__loader" />
     <template v-else>
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
-      <p>This is the preview environment</p>
+      <p>This is the preview environment...</p>
       <div class="home-page__container">
         <div class="home-page__container--top">
           <section class="home-page__container--news">
