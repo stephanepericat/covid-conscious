@@ -90,6 +90,13 @@ export default {
     community: "Comunidad",
     contactUs: "Contacta con nosotros",
     education: "Aprender",
+    empty: {
+      community: 'Aún no hay enlaces de la comunidad.',
+      education: 'Aún no hay contenido educativo.',
+      forum: 'Aún no hay publicaciones en el foro.',
+      news: 'Aún no hay noticias.',
+      product: 'Aún no hay reseñas de productos.',
+    },
     forum: "Foro",
     legal: "Información Legal",
     more: {
