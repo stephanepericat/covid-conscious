@@ -131,7 +131,7 @@
               <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
             </li>
             <li>
-              <a href="mailto:covidconsciousproject@gmail.com">{{ $t('layout.contactUs') }}</a>
+              <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
             </li>
             <li>
               <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
