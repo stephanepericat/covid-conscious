@@ -45,126 +45,132 @@
   </div>
 </template>
 <script setup>
-  import { useForm, useToast } from "@inkline/inkline";
-  import { urlValidator } from "~/assets/utils/url-validator";
-  import { COMMUNITY, NEWS, PRODUCT } from "~/assets/constants/types";
+  import { useForm, useToast } from '@inkline/inkline'
+  import { urlValidator } from '~/assets/utils/url-validator'
+  import { COMMUNITY, NEWS, PRODUCT } from '~/assets/constants/types'
 
-  const { t } = useI18n();
-  const toast = useToast();
+  const { t } = useI18n()
+  const toast = useToast()
 
   const categories = [
     { id: COMMUNITY, label: t(`layout.${COMMUNITY}`) },
     { id: NEWS, label: t(`layout.${NEWS}`) },
     { id: PRODUCT, label: t(`layout.${PRODUCT}`) },
-  ];
+  ]
 
   const form = useForm({
     category: {
       validators: [
         {
-          message: t("contribute.errors.category.required"),
-          name: "required",
+          message: t('contribute.errors.category.required'),
+          name: 'required',
         },
       ],
+      value: '',
     },
     description: {
       validators: [
         {
-          message: t("contribute.errors.description.required"),
-          name: "required",
+          message: t('contribute.errors.description.required'),
+          name: 'required',
         },
         {
-          message: t("contribute.errors.description.min"),
+          message: t('contribute.errors.description.min'),
           name: 'minLength',
           value: 20,
         },
       ],
+      value: '',
     },
     email: {
       validators: [
         { 
-          message: t("contribute.errors.email.required"),
-          name: "required",
+          message: t('contribute.errors.email.required'),
+          name: 'required',
         },
         {
-          message: t("contribute.errors.email.invalid"),
-          name: "email",
+          message: t('contribute.errors.email.invalid'),
+          name: 'email',
         },
       ],
+      value: '',
     },
     from_name: {
       validators: [
         {
-          message: t("contribute.errors.from_name.required"),
-          name: "required",
+          message: t('contribute.errors.from_name.required'),
+          name: 'required',
         },
         {
-          message: t("contribute.errors.from_name.min"),
+          message: t('contribute.errors.from_name.min'),
           name: 'minLength',
           value: 3,
         },
       ],
+      value: '',
     },
     link: {
       validators: [
         {
-          message: t("contribute.errors.link.invalid"),
-          name: "custom",
+          message: t('contribute.errors.link.invalid'),
+          name: 'custom',
           validator: urlValidator,
         },
       ],
+      value: '',
     },
-  });
+  })
 
-  const isSubmitting = ref(false);
+  const isSubmitting = ref(false)
 
   const showErrorToast = () => {
     toast.show({
-      title: t("contribute.toast.error.title"),
-      message: t("contribute.toast.error.message"),
-      color: "danger"
-    });
-  };
+      title: t('contribute.toast.error.title'),
+      message: t('contribute.toast.error.message'),
+      color: 'danger'
+    })
+  }
 
   const showSuccessToast = () => {
     toast.show({
-      title: t("contribute.toast.success.title"),
-      message: t("contribute.toast.success.message"),
-      color: "success"
-    });
-  };
+      title: t('contribute.toast.success.title'),
+      message: t('contribute.toast.success.message'),
+      color: 'success'
+    })
+  }
 
   const onSubmit = async () => {
-    isSubmitting.value = true;
+    isSubmitting.value = true
 
     try {
       const { data } = await useFetch('/api/contribute', {
-        method: "POST",
+        method: 'POST',
         body: form.value,
-      });
+      })
 
       if(data.value?.ok) {
         showSuccessToast()
       } else {
-        showErrorToast();
+        showErrorToast()
       }
     } catch(e) {
-      showErrorToast();
+      showErrorToast()
     } finally {
-      isSubmitting.value = false;
+      isSubmitting.value = false
     }
-  };
+  }
 
-  const token = ref("");
+  const token = ref('')
+  const tokenValidation = computed(() => token.value || process.env.NODE_ENV === 'development')
 
-  const buttonDisabled = computed(() => form.value.untouched || form.value.invalid || !token.value || isSubmitting.value);
+  const buttonDisabled = computed(() => form.value.untouched || form.value.invalid || !tokenValidation.value || isSubmitting.value)
 
   useHead({
     meta: [
-      { name: "description", content: t("contribute.description") },
+      { name: 'description', content: t('contribute.description') },
     ],
-    title: t("contribute.pageTitle")
-  });
+    title: t('contribute.pageTitle')
+  })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
