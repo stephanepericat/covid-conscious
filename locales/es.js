@@ -19,6 +19,7 @@ export default {
   },
   comingSoon: "Muy pronto...",
   contribute: {
+    back: 'Ir a la página de inicio',
     description: "Puede usar este formulario para enviar una noticia, sugerir un producto para revisar o compartir un consejo de la comunidad.",
     errors: {
       category: {
@@ -56,6 +57,7 @@ export default {
       link: "Introduzca un enlace",
       name: "Introduzca su nombre",
     },
+    sent: 'Tu contribución ha sido enviada. Lo revisaremos y nos comunicaremos con usted en breve a la dirección de correo electrónico que proporcionó.',
     title: "Contribuir",
     toast: {
       error: {

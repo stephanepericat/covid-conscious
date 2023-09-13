@@ -1,46 +1,54 @@
 <template>
   <div class="contribute-page">
     <h1 class="contribute-page__title" v-text="$t('contribute.title')" />
-    <p v-text="$t('contribute.description')" />
 
-    <IForm class="contribute-page__form" v-model="form" @submit="onSubmit">
-      <IFormGroup required>
-        <IFormLabel>{{ $t('contribute.labels.name') }}</IFormLabel>
-        <IInput name="from_name" :placeholder="$t('contribute.placeholders.name')" :error="['invalid']" />
-        <IFormError for="from_name" :visible="['invalid']" />
-      </IFormGroup>
-      <IFormGroup required>
-        <IFormLabel>{{ $t('contribute.labels.email') }}</IFormLabel>
-        <IInput name="email" :placeholder="$t('contribute.placeholders.email')" :error="['invalid']" />
-        <IFormError for="email" :visible="['invalid']" />
-      </IFormGroup>
-      <IFormGroup required>
-        <IFormLabel>{{ $t('contribute.labels.category') }}</IFormLabel>
-        <ISelect name="category" :options="categories" :placeholder="$t('contribute.placeholders.category')" :error="['invalid']" />
-        <IFormError for="category" :visible="['invalid']" />
-      </IFormGroup>
-      <IFormGroup required>
-        <IFormLabel>{{ $t('contribute.labels.description') }}</IFormLabel>
-        <ITextarea name="description" :placeholder="$t('contribute.placeholders.description')" :error="['invalid']" />
-        <IFormError for="description" :visible="['invalid']" />
-      </IFormGroup>
-      <IFormGroup>
-        <IFormLabel>{{ $t('contribute.labels.link') }}</IFormLabel>
-        <IInput name="link" :placeholder="$t('contribute.placeholders.link')" :error="['invalid']" />
-        <IFormError for="link" :visible="['invalid']" />
-      </IFormGroup>
-      <IFormGroup>
-        <NuxtTurnstile class="contribute-page__captcha" v-model="token" />
-      </IFormGroup>
-      <IFormGroup>
-        <IButton type="submit" :disabled="buttonDisabled">
-          <Icon class="contribute-page__loading" name="eos-icons:loading" v-if="isSubmitting" />
-          <template v-else>
-            {{ $t('contribute.labels.submit') }}
-          </template>
-        </IButton>
-      </IFormGroup>
-    </IForm>
+    <template v-if="sent">
+      <p>{{ $t('contribute.sent') }}</p>
+      <NuxtLink :to="localePath('/')">{{ $t('contribute.back') }} &raquo;</NuxtLink>
+    </template>
+
+    <template v-else>
+      <p v-text="$t('contribute.description')" />
+      <IForm class="contribute-page__form" v-model="form" @submit="onSubmit">
+        <IFormGroup required>
+          <IFormLabel>{{ $t('contribute.labels.name') }}</IFormLabel>
+          <IInput name="from_name" :placeholder="$t('contribute.placeholders.name')" :error="['invalid']" />
+          <IFormError for="from_name" :visible="['invalid']" />
+        </IFormGroup>
+        <IFormGroup required>
+          <IFormLabel>{{ $t('contribute.labels.email') }}</IFormLabel>
+          <IInput name="email" :placeholder="$t('contribute.placeholders.email')" :error="['invalid']" />
+          <IFormError for="email" :visible="['invalid']" />
+        </IFormGroup>
+        <IFormGroup required>
+          <IFormLabel>{{ $t('contribute.labels.category') }}</IFormLabel>
+          <ISelect name="category" :options="categories" :placeholder="$t('contribute.placeholders.category')" :error="['invalid']" />
+          <IFormError for="category" :visible="['invalid']" />
+        </IFormGroup>
+        <IFormGroup required>
+          <IFormLabel>{{ $t('contribute.labels.description') }}</IFormLabel>
+          <ITextarea name="description" :placeholder="$t('contribute.placeholders.description')" :error="['invalid']" />
+          <IFormError for="description" :visible="['invalid']" />
+        </IFormGroup>
+        <IFormGroup>
+          <IFormLabel>{{ $t('contribute.labels.link') }}</IFormLabel>
+          <IInput name="link" :placeholder="$t('contribute.placeholders.link')" :error="['invalid']" />
+          <IFormError for="link" :visible="['invalid']" />
+        </IFormGroup>
+        <IFormGroup>
+          <NuxtTurnstile class="contribute-page__captcha" v-model="token" />
+        </IFormGroup>
+        <IFormGroup>
+          <IButton type="submit" :disabled="buttonDisabled">
+            <Icon class="contribute-page__loading" name="eos-icons:loading" v-if="isSubmitting" />
+            <template v-else>
+              {{ $t('contribute.labels.submit') }}
+            </template>
+          </IButton>
+        </IFormGroup>
+      </IForm>
+    </template>
+
     <IToastContainer />
   </div>
 </template>
@@ -50,6 +58,7 @@
   import { COMMUNITY, NEWS, PRODUCT } from '~/assets/constants/types'
 
   const { t } = useI18n()
+  const localePath = useLocalePath()
   const toast = useToast()
 
   const categories = [
@@ -122,6 +131,7 @@
   })
 
   const isSubmitting = ref(false)
+  const sent = ref(false)
 
   const showErrorToast = () => {
     toast.show({
@@ -132,6 +142,8 @@
   }
 
   const showSuccessToast = () => {
+    sent.value = true
+
     toast.show({
       title: t('contribute.toast.success.title'),
       message: t('contribute.toast.success.message'),
@@ -141,6 +153,7 @@
 
   const onSubmit = async () => {
     isSubmitting.value = true
+    sent.value = false
 
     try {
       const { data } = await useFetch('/api/contribute', {
@@ -160,7 +173,7 @@
     }
   }
 
-  const token = ref('')
+  const token = ref(null)
   const tokenValidation = computed(() => token.value || process.env.NODE_ENV === 'development')
 
   const buttonDisabled = computed(() => form.value.untouched || form.value.invalid || !tokenValidation.value || isSubmitting.value)

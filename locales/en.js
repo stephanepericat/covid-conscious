@@ -19,6 +19,7 @@ export default {
   },
   comingSoon: "Coming soon...",
   contribute: {
+    back: 'Go Home',
     description: "You can use this form to submit a piece of news, suggest a product to review, or share a community tip.",
     errors: {
       category: {
@@ -56,6 +57,7 @@ export default {
       link: "Enter a link",
       name: "Enter your name",
     },
+    sent: 'Your contribution has been sent. We will review it, and get back to you shortly at the email address you provided.',
     title: "Contribute",
     toast: {
       error: {
