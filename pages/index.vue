@@ -7,7 +7,7 @@
         <div class="home-page__container--top">
           <section class="home-page__container--news">
             <h3 class="home-page__sub-title">{{ $t("layout.news") }}</h3>
-            <template v-if="latestPublications.news.length">
+            <template v-if="latestPublications?.news?.length">
               <IListGroup size="sm" :border="false">
                 <IListGroupItem v-for="article in latestPublications.news">
                   <IMedia>
@@ -43,7 +43,7 @@
           </section>
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
-            <template v-if="posts.length">
+            <template v-if="posts?.length">
               <IListGroup size="sm" :border="false">
                 <IListGroupItem v-for="post in posts">
                   <IMedia>
@@ -80,7 +80,7 @@
         <div class="home-page__container--other">
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.product") }}</h3>
-            <template v-if="latestPublications.products.length">
+            <template v-if="latestPublications?.products.length">
               <IListGroup size="sm" :border="false">
                 <IListGroupItem v-for="article in latestPublications.products">
                   <IMedia>
@@ -116,7 +116,7 @@
           </section>
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.community") }}</h3>
-            <template v-if="latestPublications.community.length">
+            <template v-if="latestPublications?.community?.length">
               <IListGroup size="sm" :border="false">
                 <IListGroupItem v-for="article in latestPublications.community">
                   <IMedia>
@@ -152,7 +152,7 @@
           </section>
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.education") }}</h3>
-            <template v-if="latestPublications.learn.length">
+            <template v-if="latestPublications?.learn?.length">
               <IListGroup size="sm" :border="false">
                 <IListGroupItem v-for="article in latestPublications.learn">
                   <IMedia>
