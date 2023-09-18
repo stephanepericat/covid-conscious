@@ -221,9 +221,25 @@ export default {
         placeholder: 'Tapez votre commentaire ici...',
         title: 'Ajouter Un Commentaire',
       },
+      cancel: 'Annuler',
+      delete: 'Supprimer',
+      deletion: {
+        title: 'Confirmer la suppression du commentaire',
+        description: 'Vous êtes sur le point de supprimer votre commentaire. Ceci ne peut pas être annulé.',
+      },
       description: 'Vous consultez le(s) commentaire(s) {start} à {end} de {total}.',
       noComments: 'Il n\'y a pas encore de commentaires pour ce message.',
       toast: {
+        deletion: {
+          error: {
+            message: 'Nous ne sommes pas en mesure de supprimer votre commentaire pour le moment.',
+            title: 'Une erreur s\'est produite',
+          },
+          success: {
+            message: 'Votre commentaire a été supprimé.',
+            title: 'Commentaire Supprimé!',
+          },
+        },
         error: {
           message: 'Nous ne sommes pas en mesure de publier votre commentaire actuellement.',
           title: 'Une erreur s\'est produite',

@@ -220,9 +220,25 @@ export default {
         placeholder: 'Type your comment here...',
         title: 'Add A Comment',
       },
+      cancel: 'Cancel',
+      delete: 'Delete',
+      deletion: {
+        title: 'Confirm Comment Deletion',
+        description: 'You are about to delete your comment. This cannot be undone.',
+      },
       description: 'You are viewing comment(s) {start} through {end} of {total}.',
       noComments: 'There are no comments on this post yet.',
       toast: {
+        deletion: {
+          error: {
+            message: 'We are unable to delete your comment at this time.',
+            title: 'Something went wrong',
+          },
+          success: {
+            message: 'Your comment has been deleted.',
+            title: 'Comment Deleted!',
+          },
+        },
         error: {
           message: 'We are unable to publish your comment at this time.',
           title: 'Something went wrong',

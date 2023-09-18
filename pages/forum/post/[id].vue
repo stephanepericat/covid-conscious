@@ -11,14 +11,14 @@
       />
       <IMedia class="sf-post-page__author">
         <template #image>
-          <div class="sf-post-page__avatar--placeholder" v-if="!post.avatar">
+          <div class="sf-post-page__avatar--placeholder" v-if="!post.avatar || isSSR">
             <Icon
               class="sf-post-page__avatar--placeholder-icon"
               name="material-symbols:account-circle-full"
             />
           </div>
           <img
-            v-else
+            v-else-if="post.avatar && !isSSR"
             class="sf-post-page__avatar"
             :src="post.avatar"
           >
@@ -54,10 +54,40 @@
           :page="activePage"
           :pending="commentsLoading"
           :total-items="totalComments"
+          @delete-comment="onDeleteComment"
           @page-change="onCommentsPageChange"
         />
+        <IModal
+        class="sf-post-page__modal"
+          v-model="commentDeletionModalVisible"
+          :close-on-press-escape="false"
+          :hide-on-click-outside="false"
+          :show-close="false"
+        >
+          <template #header>{{ $t('supabase-forum.comments.deletion.title') }}</template>
+          <span>{{ $t('supabase-forum.comments.deletion.description') }}</span>
+          <template #footer>
+            <div class="sf-post-page__modal--footer">
+              <IButton
+                size="sm"
+                @click="onDeleteCommentCancelled"
+              >
+                {{ $t('supabase-forum.comments.cancel') }}
+              </IButton>
+              <IButton
+                size="sm"
+                color="danger"
+                class="sf-post-page__modal--footer-confirm"
+                @click="onDeleteCommentConfirmed"
+              >
+                {{ $t('supabase-forum.comments.delete') }}
+              </IButton>
+            </div>
+          </template>
+        </IModal>
       </section>
     </template>
+    <IToastContainer />
   </div>
 </template>
 <script setup>
@@ -74,7 +104,8 @@
   const route = useRoute()
   const toast = useToast()
   const { t } = useI18n()
-  const { commentsLoading, getComments, getCommentsCount, getPost, loading } = usePosts()
+  const { commentsLoading, deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
+  const isSSR = computed(() => !process.client)
 
   const post = await getPost(route.params.id)
 
@@ -105,6 +136,50 @@
   const onCommentPostError = () => toast.show({
     title: t('supabase-forum.comments.toast.error.title'),
     message: t('supabase-forum.comments.toast.error.message'),
+    color: 'danger'
+  })
+
+  const commentDeletionModalVisible = ref(false)
+  const commentToDelete = ref(null)
+
+  const onDeleteComment = ({ id }) => {
+    console.log(`deleting comment id: ${id}`)
+    commentToDelete.value = id
+    commentDeletionModalVisible.value = true
+  }
+
+  const onDeleteCommentCancelled = () => {
+    commentToDelete.value = null
+    commentDeletionModalVisible.value = false
+  }
+
+  const onDeleteCommentConfirmed = async (id) => {
+    try {
+      const deleted = await deleteComment(commentToDelete.value)
+      if(!deleted) throw new Error('Unable to delete comment')
+      onCommentDeletionPostSuccess()
+    } catch (e) {
+      onCommentDeletionPostError()
+    } finally {
+      onDeleteCommentCancelled()
+    }
+  }
+
+  const onCommentDeletionPostSuccess = async () => {
+    toast.show({
+      title: t('supabase-forum.comments.toast.deletion.success.title'),
+      message: t('supabase-forum.comments.toast.deletion.success.message'),
+      color: 'success'
+    })
+
+    activePage.value = 1
+    comments.value = await getComments(route.params.id)
+    totalComments.value = await getCommentsCount(route.params.id)
+  }
+
+  const onCommentDeletionPostError = () => toast.show({
+    title: t('supabase-forum.comments.toast.deletion.error.title'),
+    message: t('supabase-forum.comments.toast.deletion.error.message'),
     color: 'danger'
   })
 
@@ -177,6 +252,17 @@
 
       span {
         margin-left: 5px;
+      }
+    }
+  }
+
+  &__modal {
+    &--footer {
+      display: flex;
+      justify-content: flex-end;
+
+      &-confirm {
+        margin-left: 10px;
       }
     }
   }

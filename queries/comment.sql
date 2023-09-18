@@ -29,6 +29,9 @@ create policy "Users can insert their own comment." on public.comment
 create policy "Users can update own comment." on public.comment
   for update using (auth.uid() = author_id);
 
+create policy "Users can delete own comment." on public.comment
+  for delete using (auth.uid() = author_id);
+
 -- 4. Create a total count function
 create function public.get_comments_count(pid integer)
 returns integer as $$
