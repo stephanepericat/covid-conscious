@@ -220,10 +220,25 @@ export default {
         placeholder: 'Escriba su comentario aquí...',
         title: 'Agregar un comentario',
       },
+      cancel: 'Cancelar',
       delete: 'Suprimir',
+      deletion: {
+        title: 'Confirmar la eliminación del comentario',
+        description: 'Estás a punto de eliminar tu comentario. Esto no se puede deshacer.',
+      },
       description: 'Estás viendo los comentarios desde el {start} hasta el {end} de {total}.',
       noComments: 'Todavía no hay comentarios en esta publicación.',
       toast: {
+        deletion: {
+          error: {
+            message: 'No podemos eliminar su comentario en este momento.',
+            title: 'Algo salió mal',
+          },
+          success: {
+            message: 'Tu comentario ha sido eliminado.',
+            title: '¡Comentario Borrado!',
+          },
+        },
         error: {
           message: 'No podemos publicar su comentario en este momento.',
           title: 'Algo salió mal',

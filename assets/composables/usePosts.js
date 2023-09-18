@@ -205,13 +205,31 @@ export const usePosts = () => {
   const deleting = ref(false)
 
   const deleteUserPosts = async (posts = []) => {
-    deleting.value = true;
+    deleting.value = true
 
     try {
       const { error } = await supabase
         .from('post')
         .delete()
         .in('id', posts)
+
+      if(error) throw error
+      return true
+    } catch(e) {
+      throw e
+    } finally {
+      deleting.value = false
+    }
+  }
+
+  const deleteComment = async (commentId) => {
+    deleting.value = true
+
+    try {
+      const { error } = await supabase
+        .from('comment')
+        .delete()
+        .eq('id', commentId)
 
       if(error) throw error
       return true
@@ -286,7 +304,9 @@ export const usePosts = () => {
     commentsLoading,
     createComment,
     createPost,
+    deleteComment,
     deleteUserPosts,
+    deleting,
     getAvatarUrl,
     getComments,
     getCommentsCount,

@@ -220,10 +220,25 @@ export default {
         placeholder: 'Digite seu comentário aqui...',
         title: 'Adicionar um comentário',
       },
+      cancel: 'Cancelar',
       delete: 'Apagar',
+      deletion: {
+        title: 'Confirmar exclusão de comentário',
+        description: 'Você está prestes a excluir seu comentário. Isto não pode ser desfeito.',
+      },
       description: 'Você está visualizando o(s) comentário(s) {start} até {end} de {total}.',
       noComments: 'Ainda não há comentários neste post.',
       toast: {
+        deletion: {
+          error: {
+            message: 'Não podemos excluir seu comentário neste momento.',
+            title: 'Algo deu errado',
+          },
+          success: {
+            message: 'Seu comentário foi excluído.',
+            title: 'Comentário Deletado!',
+          },
+        },
         error: {
           message: 'Não é possível publicar seu comentário no momento.',
           title: 'Algo deu errado',
