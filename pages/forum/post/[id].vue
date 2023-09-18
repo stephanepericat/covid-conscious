@@ -87,6 +87,7 @@
         </IModal>
       </section>
     </template>
+    <IToastContainer />
   </div>
 </template>
 <script setup>

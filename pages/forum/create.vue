@@ -8,6 +8,7 @@
       @error="onError"
       @success="onSuccess"
     />
+    <IToastContainer />
   </div>
 </template>
 <script setup>

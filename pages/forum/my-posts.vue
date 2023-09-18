@@ -78,6 +78,7 @@
         </template>
       </IModal>
     </template>
+    <IToastContainer />
   </div>
 </template>
 <script setup>
