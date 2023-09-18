@@ -149,13 +149,11 @@
   }
 
   const onDeleteCommentCancelled = () => {
-    console.log('deletion cancelled')
     commentToDelete.value = null
     commentDeletionModalVisible.value = false
   }
 
   const onDeleteCommentConfirmed = async (id) => {
-    console.log('deletion confirmed')
     try {
       const deleted = await deleteComment(commentToDelete.value)
       if(!deleted) throw new Error('Unable to delete comment')
