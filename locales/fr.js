@@ -221,6 +221,7 @@ export default {
         placeholder: 'Tapez votre commentaire ici...',
         title: 'Ajouter Un Commentaire',
       },
+      delete: 'Supprimer',
       description: 'Vous consultez le(s) commentaire(s) {start} à {end} de {total}.',
       noComments: 'Il n\'y a pas encore de commentaires pour ce message.',
       toast: {

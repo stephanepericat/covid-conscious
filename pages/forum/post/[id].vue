@@ -54,6 +54,7 @@
           :page="activePage"
           :pending="commentsLoading"
           :total-items="totalComments"
+          @delete-comment="onDeleteComment"
           @page-change="onCommentsPageChange"
         />
       </section>
@@ -107,6 +108,8 @@
     message: t('supabase-forum.comments.toast.error.message'),
     color: 'danger'
   })
+
+  const onDeleteComment = (commentId) => console.log('deleting comment id:', commentId)
 
   totalComments.value = await getCommentsCount(route.params.id)
   comments.value = await getComments(route.params.id)

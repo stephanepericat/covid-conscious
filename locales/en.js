@@ -220,6 +220,7 @@ export default {
         placeholder: 'Type your comment here...',
         title: 'Add A Comment',
       },
+      delete: 'Delete',
       description: 'You are viewing comment(s) {start} through {end} of {total}.',
       noComments: 'There are no comments on this post yet.',
       toast: {

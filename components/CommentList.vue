@@ -16,12 +16,26 @@
       >
         <IListGroupItem
           v-for="comment in comments"
+          class="sf-comment-list__item"
           :key="comment.id"
         >
-          <p
-            class="sf-comment-list__body"
-            v-text="comment.body"
-          />
+          <div class="sf-comment-list__item--contents">
+            <p
+              class="sf-comment-list__body"
+              v-text="comment.body"
+            />
+            <nav class="sf-comment-list__actions">
+              <a
+                v-if="showDeleteAction(comment.profiles.id)"
+                href="#"
+                @click="(e) => onDeleteComment(e, comment.id)"
+              >
+                {{ $t('supabase-forum.comments.delete') }}
+              </a>
+              <!-- <span v-if="showDeleteAction(comment.profiles.id)">&bull;&nbsp;</span>
+              <a href="#">Report</a> -->
+            </nav>
+          </div>
           <em>
             <span><NuxtLink :to="localePath(`${rootPath}/user/${comment.profiles.id}`)">{{ comment.profiles.username }}</NuxtLink> &bullet; </span>
             <span>{{ format(new Date(comment.created_at), DEFAULT_DATE_FORMAT) }}</span>
@@ -43,7 +57,8 @@
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
-  const emit = defineEmits(['page-change'])
+  const emit = defineEmits(['page-change', 'delete-comment'])
+  const user = useSupabaseUser()
 
   const props = defineProps({
     comments: { type: Array, default: () => [] },
@@ -66,6 +81,13 @@
     endItem: endItem.value,
     startItem: startItem.value,
   })
+
+  const showDeleteAction = (userId) => user.value && userId === user.value.id
+
+  const onDeleteComment = (e, commentId) => {
+    e.preventDefault()
+    emit('delete-comment', commentId)
+  }
 
   watch(activePage, () => {
     if(activePage.value !== currentPage.value) {
@@ -90,12 +112,24 @@
   }
 
   &__body {
+    flex-grow: 1;
     font-size: .9rem;
     margin-bottom: 5px;
   }
 
   &__pagination {
     @include pagination();
+  }
+
+  &__item {
+    &--contents {
+      display: flex;
+    }
+  }
+
+  &__actions {
+    margin-left: 10px;
+    flex-shrink: 0;
   }
 }
 </style>
