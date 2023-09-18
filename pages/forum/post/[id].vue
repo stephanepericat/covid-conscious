@@ -109,7 +109,7 @@
     color: 'danger'
   })
 
-  const onDeleteComment = (commentId) => console.log('deleting comment id:', commentId)
+  const onDeleteComment = ({ id, user }) => console.log(`deleting comment id: ${id} for user: ${user}`)
 
   totalComments.value = await getCommentsCount(route.params.id)
   comments.value = await getComments(route.params.id)

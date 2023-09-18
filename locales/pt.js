@@ -220,7 +220,7 @@ export default {
         placeholder: 'Digite seu comentário aqui...',
         title: 'Adicionar um comentário',
       },
-      delete: 'Deletar',
+      delete: 'Apagar',
       description: 'Você está visualizando o(s) comentário(s) {start} até {end} de {total}.',
       noComments: 'Ainda não há comentários neste post.',
       toast: {

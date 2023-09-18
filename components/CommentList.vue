@@ -86,7 +86,7 @@
 
   const onDeleteComment = (e, commentId) => {
     e.preventDefault()
-    emit('delete-comment', commentId)
+    emit('delete-comment', { id: commentId,  user: user.value.id })
   }
 
   watch(activePage, () => {
