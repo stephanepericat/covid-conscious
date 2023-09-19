@@ -7,13 +7,14 @@
       </h1>
       
       <div class="privacy-policy-page__contents">
-        <SanityContent :blocks="policy[0].contents" />
+        <SanityContent :blocks="policy[0].contents" :serializers="serializers" />
       </div>
     </template>
   </div>
 </template>
 <script setup>
   import policyQuery from '~/sanity/policy.sanity'
+  import { serializers } from '~/assets/constants/serializers'
 
   const { locale } = useI18n()
   const { data: policy, pending } = useLazySanityQuery(policyQuery, { locale, policyType: "Privacy Policy" })
