@@ -8,7 +8,7 @@ export default groq`
   "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },
   "published": _createdAt,
   "updated": _updatedAt,
-  "body": coalesce(description[$locale], description['${baseLanguage}'], null),
+  "body": coalesce(description[$locale], description['${baseLanguage}'], []),
   "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),
   "info": contactInfo {
     "street1": streetAdressOne,

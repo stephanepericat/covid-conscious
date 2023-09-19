@@ -42,7 +42,7 @@
       </IMedia>
 
       <section class="article-page__body">
-        <SanityContent :blocks="article.body" />
+        <SanityContent :blocks="article.body" :serializers="serializers" />
 
         <!-- social media sharing -->
         <ShareButtons
@@ -135,6 +135,7 @@
   import ReviewList from '~/components/ReviewList.vue'
   import { useReviews } from '~/assets/composables/useReviews'
   import ShareButtons from '~/components/ShareButtons.vue'
+  import { serializers } from '~/assets/constants/serializers'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
