@@ -33,7 +33,10 @@ export default eventHandler(async (event) => {
   try {
     return await d.translateText(text, null, locale, { tagHandling: 'html' })
   } catch(e) {
-    console.error(e?.text || null, body)
-    sendError(event, e)
+    console.error(e)
+    sendError(
+      event,
+      createError({ statusCode: 500, statusMessage: e.message || e })
+    )
   }
 })
