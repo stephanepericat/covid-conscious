@@ -23,6 +23,9 @@ export default eventHandler(async (event) => {
     return { ok: true }
   } catch(e) {
     console.error(e?.text || null, body)
-    sendError(event, e)
+    sendError(
+      event,
+      createError({ statusCode: 500, statusMessage: e?.text || null, data: body })
+    )
   }
 })
