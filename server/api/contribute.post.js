@@ -1,12 +1,12 @@
-import emailjs from '@emailjs/nodejs';
-import { parseBody } from "../../assets/utils/body-parser";
+import emailjs from '@emailjs/nodejs'
+import { parseBody } from '../../assets/utils/body-parser'
 
 export default eventHandler(async (event) => {
-  const { valid, errors, ...rest } = await readBody(event);
-  const body = parseBody(rest);
+  const { valid, errors, ...rest } = await readBody(event)
+  const body = parseBody(rest)
   
   if(!valid) {
-    return { ok: false };
+    return { ok: false }
   }
 
   try {
@@ -18,11 +18,11 @@ export default eventHandler(async (event) => {
         publicKey: process.env.EMAILJS_PUBLIC_KEY,
         privateKey: process.env.EMAILJS_PRIVATE_KEY,
       },
-    );
+    )
 
-    return { ok: true };
+    return { ok: true }
   } catch(e) {
-    console.error(e?.text || null, body);
-    throw new Error(e);
+    console.error(e?.text || null, body)
+    sendError(event, e)
   }
-});
+})
