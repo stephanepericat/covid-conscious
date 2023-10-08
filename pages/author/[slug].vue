@@ -3,7 +3,7 @@
     <h1 class="author-page__title">{{ $t('comingSoon') }}</h1>
     <a href="#" @click="() => router.go(-1)">
       &laquo;
-      {{ $t('supabase-forum.account.back') }}
+      {{ $t('forum.account.back') }}
     </a>
   </div>
 </template>

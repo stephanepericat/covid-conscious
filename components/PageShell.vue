@@ -10,7 +10,7 @@
           class="sf-page-shell__nav--icon"
           name="material-symbols:add-alert-rounded"
         />
-        {{ $t('supabase-forum.nav.latest') }}
+        {{ $t('forum.nav.latest') }}
       </INavItem>
       <template v-if="user">
         <INavItem :to="localePath(`${rootPath}/create`)">
@@ -18,14 +18,14 @@
             class="sf-page-shell__nav--icon"
             name="material-symbols:add-box-outline-rounded"
           />
-          {{ $t('supabase-forum.nav.create') }}
+          {{ $t('forum.nav.create') }}
         </INavItem>
         <INavItem :to="localePath(`${rootPath}/my-posts`)">
           <Icon
             class="sf-page-shell__nav--icon"
             name="material-symbols:lab-profile-rounded"
           />
-          {{ $t('supabase-forum.nav.my.posts') }}
+          {{ $t('forum.nav.my.posts') }}
         </INavItem>
         <INavItem
           class="sf-page-shell__nav--action"
@@ -35,7 +35,7 @@
             class="sf-page-shell__nav--icon"
             name="ph:sign-out-bold"
           />
-          {{ $t('supabase-forum.nav.logout') }}
+          {{ $t('forum.nav.logout') }}
         </INavItem>
       </template>
       <INavItem
@@ -46,7 +46,7 @@
           class="sf-page-shell__nav--icon"
           name="ph:sign-in-bold"
         />
-        {{ $t('supabase-forum.nav.login') }}
+        {{ $t('forum.nav.login') }}
       </INavItem>
     </INav>
     <section class="sf-page-shell__contents">

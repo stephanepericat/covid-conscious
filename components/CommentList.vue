@@ -7,9 +7,9 @@
       v-if="pending"
       class="sf-comment-list__loader"
     />
-    <p v-else-if="!pending && !totalItems" v-text="$t('supabase-forum.comments.noComments')" />
+    <p v-else-if="!pending && !totalItems" v-text="$t('forum.comments.noComments')" />
     <template v-else>
-      <p v-text="$t('supabase-forum.comments.description', { start, end, total })" />
+      <p v-text="$t('forum.comments.description', { start, end, total })" />
       <IListGroup
         size="sm"
         :border="false"
@@ -30,7 +30,7 @@
                 href="#"
                 @click="(e) => onDeleteComment(e, comment.id)"
               >
-                {{ $t('supabase-forum.comments.delete') }}
+                {{ $t('forum.comments.delete') }}
               </a>
               <!-- <span v-if="showDeleteAction(comment.profiles.id)">&bull;&nbsp;</span>
               <a href="#">Report</a> -->

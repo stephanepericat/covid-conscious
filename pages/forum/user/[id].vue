@@ -24,18 +24,18 @@
               class="sf-user-page__website--icon"
               name="mdi:web"
             />
-            <a :href="user.website" target="_blank">{{ $t('supabase-forum.account.labels.website') }}</a>
+            <a :href="user.website" target="_blank">{{ $t('forum.account.labels.website') }}</a>
           </div>
         </div>
       </template>
     </IMedia>
     <div v-if="user.about">
-      <h3 v-text="$t('supabase-forum.account.labels.about')" />
+      <h3 v-text="$t('forum.account.labels.about')" />
       <p v-text="user.about" />
     </div>
     <a href="#" @click="() => router.go(-1)">
       &laquo;
-      {{ $t('supabase-forum.account.back') }}
+      {{ $t('forum.account.back') }}
     </a>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="sf-create-page">
     <h1
       class="sf-create-page__title"
-      v-text="$t('supabase-forum.create.title')"
+      v-text="$t('forum.create.title')"
     />
     <PostEditor
       @error="onError"
@@ -19,14 +19,14 @@
   const toast = useToast()
 
   const onError = () => toast.show({
-    title: t('supabase-forum.create.toast.error.title'),
-    message: t('supabase-forum.create.toast.error.message'),
+    title: t('forum.create.toast.error.title'),
+    message: t('forum.create.toast.error.message'),
     color: 'danger'
   })
 
   const onSuccess = (payload) => toast.show({
-    title: t('supabase-forum.create.toast.success.title'),
-    message: t('supabase-forum.create.toast.success.message', { title: payload.headline }),
+    title: t('forum.create.toast.success.title'),
+    message: t('forum.create.toast.success.message', { title: payload.headline }),
     color: 'success'
   })
 </script>

@@ -12,7 +12,7 @@
         />
       </IFormGroup>
       <IFormGroup>
-        <IFormLabel>{{ $t("supabase-forum.account.labels.email") }}</IFormLabel>
+        <IFormLabel>{{ $t("forum.account.labels.email") }}</IFormLabel>
         <IInput
           v-model="user.email"
           type="text"
@@ -21,7 +21,7 @@
         />
       </IFormGroup>
       <IFormGroup>
-        <IFormLabel>{{ $t("supabase-forum.account.labels.username") }}</IFormLabel>
+        <IFormLabel>{{ $t("forum.account.labels.username") }}</IFormLabel>
         <IInput
           v-model="username"
           type="text"
@@ -29,7 +29,7 @@
         />
       </IFormGroup>
       <IFormGroup>
-        <IFormLabel>{{ $t("supabase-forum.account.labels.fullName") }}</IFormLabel>
+        <IFormLabel>{{ $t("forum.account.labels.fullName") }}</IFormLabel>
         <IInput
           v-model="fullName"
           type="text"
@@ -37,7 +37,7 @@
         />
       </IFormGroup>
       <IFormGroup>
-        <IFormLabel>{{ $t("supabase-forum.account.labels.website") }}</IFormLabel>
+        <IFormLabel>{{ $t("forum.account.labels.website") }}</IFormLabel>
         <IInput
           v-model="website"
           type="text"
@@ -45,7 +45,7 @@
         />
       </IFormGroup>
       <IFormGroup>
-        <IFormLabel>{{ $t("supabase-forum.account.labels.about") }}</IFormLabel>
+        <IFormLabel>{{ $t("forum.account.labels.about") }}</IFormLabel>
         <ITextarea
           v-model="about"
           name="about"
@@ -61,7 +61,7 @@
             v-if="updateLoading"
             name="eos-icons:loading"
           />
-          {{ $t("supabase-forum.account.labels.update") }}
+          {{ $t("forum.account.labels.update") }}
         </IButton>
       </IFormGroup>
     </IForm>

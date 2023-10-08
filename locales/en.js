@@ -180,7 +180,7 @@ export default {
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",
     title: "That Covid Life - Search \"{searchTerm}\"",
   },
-  'supabase-forum': {
+  forum: {
     account: {
       back: 'Back',
       title: 'My Account',
@@ -330,6 +330,8 @@ export default {
     },
     post: {
       comments: 'Comments',
+      translate: 'Translate',
+      translation: 'Translation',
     },
     posts: {
       buttonLabel: 'Delete {amount} Post(s)',

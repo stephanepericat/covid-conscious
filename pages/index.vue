@@ -63,7 +63,7 @@
                       <NuxtLink :to="localePath(`${rootPath}/post/${post.id}`)">{{ post.headline }}</NuxtLink>
                     </h3>
                     <em>
-                      <span>{{ $t(`supabase-forum.create.categories.${post.topic}`) }} &bullet; </span>
+                      <span>{{ $t(`forum.create.categories.${post.topic}`) }} &bullet; </span>
                       <span><NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink> &bullet; </span>
                       <span>{{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
                     </em>

@@ -3,9 +3,9 @@
     <template #icon>
       <IIcon name="ink-warning" />
     </template>
-    <span>{{ $t(`supabase-forum.disabled.message.${type}`) }}&nbsp;</span>
+    <span>{{ $t(`forum.disabled.message.${type}`) }}&nbsp;</span>
     <NuxtLink :to="localePath('/account')">
-      {{ $t('supabase-forum.disabled.redirect') }}
+      {{ $t('forum.disabled.redirect') }}
     </NuxtLink>
   </IAlert>
 </template>

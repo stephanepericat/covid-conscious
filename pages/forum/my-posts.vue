@@ -2,16 +2,16 @@
   <div class="sf-my-posts-page">
     <h1
       class="sf-my-posts-page__title"
-      v-text="$t('supabase-forum.posts.title')"
+      v-text="$t('forum.posts.title')"
     />
     <ILoader v-if="loading || reloading" class="sf-my-posts-page__loader" size="sm" />
-    <p v-else-if="!loading && !reloading && !posts.length" v-text="$t('supabase-forum.posts.noPosts')" />
+    <p v-else-if="!loading && !reloading && !posts.length" v-text="$t('forum.posts.noPosts')" />
     <template v-else>
-      <p v-text="$t(`supabase-forum.posts.description`)" />
+      <p v-text="$t(`forum.posts.description`)" />
       <div class="sf-my-posts-page__tools">
         <p
           class="sf-my-posts-page__tools--counter"
-          v-text="$t('supabase-forum.list.description', { start, end, total })"
+          v-text="$t('forum.list.description', { start, end, total })"
         />
         <div class="sf-my-posts-page__tools--actions">
           <IButton
@@ -19,7 +19,7 @@
             :color="selectedNone ? 'light' : 'danger'"
             @click="showConfirmation = true"
           >
-            {{ $t('supabase-forum.posts.buttonLabel', { amount: selection.length }) }}
+            {{ $t('forum.posts.buttonLabel', { amount: selection.length }) }}
           </IButton>
         </div>
       </div>
@@ -34,9 +34,9 @@
                 @change="onMultiSelection"
               />
             </th>
-            <th class="sf-my-posts-page__table--flex" v-text="$t(`supabase-forum.posts.table.title`)" />
-            <th class="sf-my-posts-page__table--fixed" v-text="$t(`supabase-forum.posts.table.topic`)" />
-            <th class="sf-my-posts-page__table--fixed" v-text="$t(`supabase-forum.posts.table.published`)" />
+            <th class="sf-my-posts-page__table--flex" v-text="$t(`forum.posts.table.title`)" />
+            <th class="sf-my-posts-page__table--fixed" v-text="$t(`forum.posts.table.topic`)" />
+            <th class="sf-my-posts-page__table--fixed" v-text="$t(`forum.posts.table.published`)" />
           </tr>
         </thead>
         <tbody class="sf-my-posts-page__table--body">
@@ -49,7 +49,7 @@
               />
             </td>
             <td>{{ post.headline }}</td>
-            <td>{{ $t(`supabase-forum.create.categories.${post.topic}`) }}</td>
+            <td>{{ $t(`forum.create.categories.${post.topic}`) }}</td>
             <td>{{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</td>
           </tr>
         </tbody>
@@ -63,16 +63,16 @@
         @update:modelValue="onPageChange"
       />
       <IModal v-model="showConfirmation">
-        <template #header>{{ $t('supabase-forum.posts.modal.title') }}</template>
-        <p v-text="$t('supabase-forum.posts.modal.description', { amount: selection.length })" />
-        <strong v-text="$t('supabase-forum.posts.modal.confirmation')" />
+        <template #header>{{ $t('forum.posts.modal.title') }}</template>
+        <p v-text="$t('forum.posts.modal.description', { amount: selection.length })" />
+        <strong v-text="$t('forum.posts.modal.confirmation')" />
         <template #footer>
           <div class="sf-my-posts-page__modal--footer">
             <IButton class="sf-my-posts-page__modal--footer-action" @click="showConfirmation = false">
-              {{ $t('supabase-forum.posts.modal.buttons.cancel') }}
+              {{ $t('forum.posts.modal.buttons.cancel') }}
             </IButton>
             <IButton class="sf-my-posts-page__modal--footer-action" color="danger" @click="onDelete">
-              {{ $t('supabase-forum.posts.modal.buttons.confirm') }}
+              {{ $t('forum.posts.modal.buttons.confirm') }}
             </IButton>
           </div>
         </template>
@@ -160,14 +160,14 @@
   const toast = useToast()
 
   const onDeleteSuccess = async () => toast.show({
-    title: t('supabase-forum.posts.toast.success.title'),
-    message: t('supabase-forum.posts.toast.success.message'),
+    title: t('forum.posts.toast.success.title'),
+    message: t('forum.posts.toast.success.message'),
     color: 'success'
   })
 
   const onDeleteError = () => toast.show({
-    title: t('supabase-forum.posts.toast.error.title'),
-    message: t('supabase-forum.posts.toast.error.message'),
+    title: t('forum.posts.toast.error.title'),
+    message: t('forum.posts.toast.error.message'),
     color: 'danger'
   })
 
