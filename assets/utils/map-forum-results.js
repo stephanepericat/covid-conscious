@@ -12,7 +12,7 @@ export const mapForumSearchResult = (result) => {
       slug: result.profiles.id,
     },
     published: `${year}-${month}-${day}T12:00:01Z`,
-    category: t(`supabase-forum.create.categories.${result.topic}`),
+    category: t(`forum.create.categories.${result.topic}`),
     avatar: result.avatar,
     title: result.headline,
     path: `/${FORUM}/${POST}/${result.id}`,

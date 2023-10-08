@@ -181,7 +181,7 @@ export default {
     pageTitle: "{totalItems} Résultats de recherche pour \"{searchTerm}\"",
     title: "That Covid Life - Recherche \"{searchTerm}\"",
   },
-  'supabase-forum': {
+  forum: {
     account: {
       back: 'Retour',
       title: 'Mon Compte',
@@ -331,6 +331,8 @@ export default {
     },
     post: {
       comments: 'Commentaires',
+      translate: 'Traduire',
+      translation: 'Traduction',
     },
     posts: {
       buttonLabel: 'Supprimer {amount} Message(s)',

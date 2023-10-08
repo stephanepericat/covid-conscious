@@ -4,11 +4,11 @@
     @submit.prevent="handleLogin"
   >
     <IFormGroup>
-      <IFormLabel>{{ $t("supabase-forum.auth.description") }}</IFormLabel>
+      <IFormLabel>{{ $t("forum.auth.description") }}</IFormLabel>
       <IInput
         v-model="email"
         clearable
-        :placeholder="$t('supabase-forum.auth.label')"
+        :placeholder="$t('forum.auth.label')"
       />
     </IFormGroup>
     <IFormGroup>
@@ -24,7 +24,7 @@
           v-if="loading"
           name="eos-icons:loading"
         />
-        {{ $t('supabase-forum.auth.submit') }}
+        {{ $t('forum.auth.submit') }}
       </IButton>
     </IFormGroup>
   </IForm>

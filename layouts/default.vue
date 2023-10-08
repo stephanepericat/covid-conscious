@@ -51,18 +51,18 @@
                 <IDropdownItem
                   :to="localePath(`/${FORUM}`)"
                 >
-                  {{ $t('supabase-forum.nav.latest') }}
+                  {{ $t('forum.nav.latest') }}
                 </IDropdownItem>
                 <template v-if="isLoggedIn">
                   <IDropdownItem
                     :to="localePath(`/${FORUM}/create`)"
                   >
-                    {{ $t('supabase-forum.nav.create') }}
+                    {{ $t('forum.nav.create') }}
                   </IDropdownItem>
                   <IDropdownItem
                     :to="localePath(`/${FORUM}/my-posts`)"
                   >
-                    {{ $t('supabase-forum.nav.my.posts') }}
+                    {{ $t('forum.nav.my.posts') }}
                   </IDropdownItem>
                 </template>
               </template>

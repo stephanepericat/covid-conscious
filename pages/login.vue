@@ -18,15 +18,15 @@
 
   const onSuccess = () => {
     toast.show({
-      title: t('supabase-forum.auth.toast.success.title'),
-      message: t('supabase-forum.auth.toast.success.message'),
+      title: t('forum.auth.toast.success.title'),
+      message: t('forum.auth.toast.success.message'),
       color: 'success'
     })
   }
   const onError = () => {
     toast.show({
-      title: t('supabase-forum.auth.toast.error.title'),
-      message: t('supabase-forum.auth.toast.error.message'),
+      title: t('forum.auth.toast.error.title'),
+      message: t('forum.auth.toast.error.message'),
       color: 'danger'
     })
   }

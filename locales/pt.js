@@ -180,7 +180,7 @@ export default {
     pageTitle: "{totalItems} Resultados da busca por \"{searchTerm}\"",
     title: "That Covid Life - Busca \"{searchTerm}\"",
   },
-  'supabase-forum': {
+  forum: {
     account: {
       back: 'Voltar',
       title: 'Minha conta',
@@ -330,6 +330,8 @@ export default {
     },
     post: {
       comments: 'Comentários',
+      translate: 'Traduzir',
+      translation: 'Tradução',
     },
     posts: {
       buttonLabel: 'Excluir {amount} Post(s)',

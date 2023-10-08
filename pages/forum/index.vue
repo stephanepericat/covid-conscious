@@ -2,7 +2,7 @@
   <div class="sf-index-page">
     <h1
       class="sf-index-page__title"
-      v-text="$t('supabase-forum.latest.title')"
+      v-text="$t('forum.latest.title')"
     />
     <PostList
       :pending="loading"

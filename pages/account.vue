@@ -2,7 +2,7 @@
   <div class="sf-account-page">
     <h1
       class="sf-account-page__title"
-      v-text="$t('supabase-forum.account.title')"
+      v-text="$t('forum.account.title')"
     />
     <template v-if="user">
       <Account
@@ -34,8 +34,8 @@
 
   const onUpdateSuccess = () => {
     toast.show({
-      title: t('supabase-forum.auth.toast.update.title'),
-      message: t('supabase-forum.auth.toast.update.message'),
+      title: t('forum.auth.toast.update.title'),
+      message: t('forum.auth.toast.update.message'),
       color: 'success'
     })
   }

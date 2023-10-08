@@ -15,8 +15,8 @@ export const useSignOut = (user) => {
 
   const onError = () => {
     toast.show({
-      title: t('supabase-forum.auth.toast.error.title'),
-      message: t('supabase-forum.auth.toast.error.message'),
+      title: t('forum.auth.toast.error.title'),
+      message: t('forum.auth.toast.error.message'),
       color: 'danger'
     })
   }

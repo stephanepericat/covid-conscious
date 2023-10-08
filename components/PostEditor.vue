@@ -7,10 +7,10 @@
       @submit="showConfirmation = true"
     >
       <IFormGroup required>
-        <IFormLabel>{{ $t('supabase-forum.create.labels.title') }}</IFormLabel>
+        <IFormLabel>{{ $t('forum.create.labels.title') }}</IFormLabel>
         <IInput
           name="title"
-          :placeholder="$t('supabase-forum.create.placeholders.title')"
+          :placeholder="$t('forum.create.placeholders.title')"
           :error="['invalid']"
           autofocus
         />
@@ -20,13 +20,13 @@
         />
       </IFormGroup>
       <IFormGroup required>
-        <IFormLabel>{{ $t('supabase-forum.create.labels.contents') }}</IFormLabel>
+        <IFormLabel>{{ $t('forum.create.labels.contents') }}</IFormLabel>
         <ClientOnly>
           <QuillEditor
             ref="editor"
             class="sf-post-editor__editor"
             name="contents"
-            :placeholder="$t('supabase-forum.create.placeholders.contents')"
+            :placeholder="$t('forum.create.placeholders.contents')"
             theme="snow"
             toolbar="essential"
             @update:content="onContentsUpdate"
@@ -46,11 +46,11 @@
         </ClientOnly>
       </IFormGroup>
       <IFormGroup required>
-        <IFormLabel>{{ $t('supabase-forum.create.labels.category') }}</IFormLabel>
+        <IFormLabel>{{ $t('forum.create.labels.category') }}</IFormLabel>
         <ISelect
           name="category"
           :options="categories"
-          :placeholder="$t('supabase-forum.create.placeholders.category')"
+          :placeholder="$t('forum.create.placeholders.category')"
           :error="['invalid']"
         />
         <IFormError
@@ -74,15 +74,15 @@
             name="eos-icons:loading"
           />
           <template v-else>
-            {{ $t('supabase-forum.create.labels.submit') }}
+            {{ $t('forum.create.labels.submit') }}
           </template>
         </IButton>
       </IFormGroup>
     </IForm>
     <IModal v-model="showConfirmation" size="lg">
-      <template #header>{{ $t('supabase-forum.create.modal.title') }}</template>
-      <p v-text="$t('supabase-forum.create.modal.description')" />
-      <strong v-text="$t('supabase-forum.create.modal.confirmation')" />
+      <template #header>{{ $t('forum.create.modal.title') }}</template>
+      <p v-text="$t('forum.create.modal.description')" />
+      <strong v-text="$t('forum.create.modal.confirmation')" />
       <section class="sf-post-editor__modal--preview">
         <h3 v-text="form.title.value" />
         <div v-html="htmlContents" />
@@ -90,10 +90,10 @@
       <template #footer>
         <div class="sf-post-editor__modal--footer">
           <IButton class="sf-post-editor__modal--footer-action" @click="showConfirmation = false">
-            {{ $t('supabase-forum.create.modal.buttons.cancel') }}
+            {{ $t('forum.create.modal.buttons.cancel') }}
           </IButton>
           <IButton class="sf-post-editor__modal--footer-action" color="danger" @click="onSubmit">
-            {{ $t('supabase-forum.create.modal.buttons.confirm') }}
+            {{ $t('forum.create.modal.buttons.confirm') }}
           </IButton>
         </div>
       </template>
@@ -116,7 +116,7 @@
   const topics = await getTopics()
 
   const categories = computed(
-    () => topics?.map((topic) => ({ id: topic, label: t(`supabase-forum.create.categories.${topic}`) })) || []
+    () => topics?.map((topic) => ({ id: topic, label: t(`forum.create.categories.${topic}`) })) || []
   );
 
   const { username } = await getUserById(user.value.id)
@@ -128,11 +128,11 @@
     title: {
       validators: [
         {
-          message: t('supabase-forum.create.errors.title.required'),
+          message: t('forum.create.errors.title.required'),
           name: 'required',
         },
         {
-          message: t('supabase-forum.create.errors.title.tooLong'),
+          message: t('forum.create.errors.title.tooLong'),
           name: 'maxLength',
           value: 280,
         },
@@ -141,7 +141,7 @@
     category: {
       validators: [
         {
-          message: t('supabase-forum.create.errors.category.required'),
+          message: t('forum.create.errors.category.required'),
           name: 'required',
         },
       ],
@@ -149,12 +149,12 @@
     contents: {
       validators: [
         {
-          message: t('supabase-forum.create.errors.contents.required'),
+          message: t('forum.create.errors.contents.required'),
           name: 'required',
         },
         {
           name: 'custom',
-          message: t('supabase-forum.create.errors.contents.empty'),
+          message: t('forum.create.errors.contents.empty'),
           validator: isValidContent,
         },
       ],

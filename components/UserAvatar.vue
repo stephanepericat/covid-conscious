@@ -6,7 +6,7 @@
       :style="imgStyle"
     />
     <IFormGroup>
-      <IFormLabel>{{ $t("supabase-forum.account.labels.avatar") }}</IFormLabel>
+      <IFormLabel>{{ $t("forum.account.labels.avatar") }}</IFormLabel>
       <IInput
         id="single"
         type="file"

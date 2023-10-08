@@ -8,7 +8,7 @@
       class="sf-post-list__loader"
     />
     <template v-else>
-      <p v-text="$t('supabase-forum.list.description', { start, end, total })" />
+      <p v-text="$t('forum.list.description', { start, end, total })" />
       <IListGroup
         size="sm"
         :border="false"
@@ -40,7 +40,7 @@
               </NuxtLink>
             </h3>
             <em>
-              <span>{{ $t(`supabase-forum.create.categories.${post.topic}`) }} &bullet; </span>
+              <span>{{ $t(`forum.create.categories.${post.topic}`) }} &bullet; </span>
               <span><NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink> &bullet; </span>
               <span>{{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
             </em>

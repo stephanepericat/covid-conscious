@@ -1,14 +1,14 @@
 <template>
   <IForm class="sf-comment-box" @submit.prevent="onSubmit">
-    <h3 class="sf-comment-box__title" v-text="$t('supabase-forum.comments.box.title')" />
+    <h3 class="sf-comment-box__title" v-text="$t('forum.comments.box.title')" />
 
-    <p v-if="!loggedIn" v-text="$t('supabase-forum.comments.box.loggedIn')" />
+    <p v-if="!loggedIn" v-text="$t('forum.comments.box.loggedIn')" />
 
     <PostDisabled v-else-if="loggedIn && !canComment" type="comment" />
 
     <template v-else>
       <IFormGroup>
-        <ITextarea v-model="comment" :disabled="loading" :placeholder="$t('supabase-forum.comments.box.placeholder')" />
+        <ITextarea v-model="comment" :disabled="loading" :placeholder="$t('forum.comments.box.placeholder')" />
       </IFormGroup>
       <IFormGroup>
         <IButton :disabled="buttonDisabled || loading" type="submit">
@@ -16,7 +16,7 @@
             v-if="loading"
             name="eos-icons:loading"
           />
-          {{ $t('supabase-forum.comments.box.button') }}
+          {{ $t('forum.comments.box.button') }}
         </IButton>
       </IFormGroup>
     </template>

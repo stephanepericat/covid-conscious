@@ -30,14 +30,26 @@
         </h5>
         <p class="sf-post-page__info">
           <span class="sf-post-page__info--category">
-            {{ $t(`supabase-forum.create.categories.${post.topic}`) }} / {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}
+            {{ $t(`forum.create.categories.${post.topic}`) }} / {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}
           </span>
         </p>
       </IMedia>
-      <section
-        class="sf-post-page__body"
-        v-html="post.body"
-      />
+      <section class="sf-post-page__body">
+        <div class="sf-post-page__body--contents" ref="postBody" v-html="post.body"></div>
+        <a
+          v-if="showTranslateButton"
+          class="sf-post-page__translate--button"
+          href="#" 
+          @click="onTranslateClick"
+        >
+          {{ $t('forum.post.translate') }} &raquo;
+        </a>
+        <ILoader v-else-if="isTranslating" size="sm" />
+        <div v-else-if="showTranslation">
+          <h5 class="sf-post-page__translate--label">{{ $t('forum.post.translation') }}</h5>
+          <div v-html="translationResults.text" />
+        </div>
+      </section>
       <section class="sf-post-page__comments">
         <CommentBox
           class="sf-post-page__comments--box"
@@ -47,7 +59,7 @@
         />
         <h2 class="sf-post-page__comments--title">
           <Icon name="icon-park-outline:comments" />
-          <span>{{ $t("supabase-forum.post.comments") }}</span>
+          <span>{{ $t("forum.post.comments") }}</span>
         </h2>
         <CommentList
           :comments="comments"
@@ -64,15 +76,15 @@
           :hide-on-click-outside="false"
           :show-close="false"
         >
-          <template #header>{{ $t('supabase-forum.comments.deletion.title') }}</template>
-          <span>{{ $t('supabase-forum.comments.deletion.description') }}</span>
+          <template #header>{{ $t('forum.comments.deletion.title') }}</template>
+          <span>{{ $t('forum.comments.deletion.description') }}</span>
           <template #footer>
             <div class="sf-post-page__modal--footer">
               <IButton
                 size="sm"
                 @click="onDeleteCommentCancelled"
               >
-                {{ $t('supabase-forum.comments.cancel') }}
+                {{ $t('forum.comments.cancel') }}
               </IButton>
               <IButton
                 size="sm"
@@ -80,7 +92,7 @@
                 class="sf-post-page__modal--footer-confirm"
                 @click="onDeleteCommentConfirmed"
               >
-                {{ $t('supabase-forum.comments.delete') }}
+                {{ $t('forum.comments.delete') }}
               </IButton>
             </div>
           </template>
@@ -91,11 +103,13 @@
   </div>
 </template>
 <script setup>
+  import consola from 'consola'
   import { format } from 'date-fns'
-  import { useToast } from '@inkline/inkline'
+  import { ILoader, useToast } from '@inkline/inkline'
   import CommentBox from '~/components/CommentBox.vue'
   import CommentList from '~/components/CommentList.vue'
   import { usePosts } from '~/assets/composables/usePosts'
+  import { useTranslation } from '~/assets/composables/useTranslation'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
   const config = useRuntimeConfig()
@@ -103,11 +117,12 @@
 
   const route = useRoute()
   const toast = useToast()
-  const { t } = useI18n()
+  const { t, locale, localeProperties } = useI18n()
   const { commentsLoading, deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
   const isSSR = computed(() => !process.client)
 
   const post = await getPost(route.params.id)
+  const postBody = ref(null)
 
   const totalComments = ref(0)
   const comments = ref([])
@@ -123,8 +138,8 @@
 
   const onCommentPostSuccess = async () => {
     toast.show({
-      title: t('supabase-forum.comments.toast.success.title'),
-      message: t('supabase-forum.comments.toast.success.message'),
+      title: t('forum.comments.toast.success.title'),
+      message: t('forum.comments.toast.success.message'),
       color: 'success'
     })
 
@@ -134,8 +149,8 @@
   }
 
   const onCommentPostError = () => toast.show({
-    title: t('supabase-forum.comments.toast.error.title'),
-    message: t('supabase-forum.comments.toast.error.message'),
+    title: t('forum.comments.toast.error.title'),
+    message: t('forum.comments.toast.error.message'),
     color: 'danger'
   })
 
@@ -167,8 +182,8 @@
 
   const onCommentDeletionPostSuccess = async () => {
     toast.show({
-      title: t('supabase-forum.comments.toast.deletion.success.title'),
-      message: t('supabase-forum.comments.toast.deletion.success.message'),
+      title: t('forum.comments.toast.deletion.success.title'),
+      message: t('forum.comments.toast.deletion.success.message'),
       color: 'success'
     })
 
@@ -178,13 +193,40 @@
   }
 
   const onCommentDeletionPostError = () => toast.show({
-    title: t('supabase-forum.comments.toast.deletion.error.title'),
-    message: t('supabase-forum.comments.toast.deletion.error.message'),
+    title: t('forum.comments.toast.deletion.error.title'),
+    message: t('forum.comments.toast.deletion.error.message'),
     color: 'danger'
   })
 
+  // TRANSLATION
+  const { translateText } = useTranslation()
+  const isTranslating = ref(false)
+  const translationResults = ref(null)
+  const showTranslateButton = computed(() => postBody.value && !isTranslating.value && !translationResults.value)
+  const showTranslation = computed(() => postBody.value && !isTranslating.value && translationResults.value)
+  const needIso = ref(['en', 'pt'])
+  const targetLanguage = computed(() => needIso.value.includes(locale.value) ? localeProperties.value.iso : locale.value)
+
+  const onTranslateClick = async (e) => {
+    e.preventDefault()
+
+    try {
+      isTranslating.value = true
+      translationResults.value = await translateText(postBody.value.innerHTML, targetLanguage.value)
+    } catch(e) {
+      consola.error(e)
+      translationResults.value = null
+    } finally {
+      isTranslating.value = false
+    }
+  }
+
   totalComments.value = await getCommentsCount(route.params.id)
   comments.value = await getComments(route.params.id)
+
+  watch(locale, () => {
+    translationResults.value = null
+  })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
@@ -264,6 +306,16 @@
       &-confirm {
         margin-left: 10px;
       }
+    }
+  }
+
+  &__translate {
+    &--button {
+      font-weight: 500;
+    }
+
+    &--label {
+      @include eyebrow()
     }
   }
 }
