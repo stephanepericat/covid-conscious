@@ -255,8 +255,10 @@
   const { signOut } = useSignOut(user)
 </script>
 <style lang="scss" scoped>
+@import '@inkline/inkline/css/mixins';
+@import "~/assets/sass/mixins.scss";
+
 .default-layout {
-  @import "~/assets/sass/mixins.scss";
 
   height: 100vh;
 
@@ -326,6 +328,16 @@
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    @include breakpoint-down('md') {
+      &--container {
+        flex-direction: column;
+
+        &-block {
+          margin-bottom: 20px;
+        }
+      }
     }
   }
 }
