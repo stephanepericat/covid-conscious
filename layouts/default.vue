@@ -2,7 +2,7 @@
   <ILayout class="default-layout">
     <!-- header -->
     <ILayoutHeader class="default-layout__header">
-      <INavbar>
+      <INavbar :collapse-on-item-click="false">
         <INavbarBrand :to="localePath('/')">
           <img class="default-layout__logo" :src="logoFile" />
         </INavbarBrand>
