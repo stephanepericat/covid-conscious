@@ -266,11 +266,16 @@
     padding-left: var(--list-group--padding-left, var(--padding-left));
   }
 
-  @include breakpoint('md') {
+  @include breakpoint-down('md') {
     &__container {
+      &--top,
+      &--other {
+        flex-direction: column;
+      }
+
+      &--news,
       &--card {
         width: 100%;
-        margin: 0 0 40px 0;
       }
     }
   }
