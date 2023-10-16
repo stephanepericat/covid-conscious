@@ -22,6 +22,7 @@ export default defineNuxtConfig({
     'nuxt-cloudflare-analytics',
     'nuxt-icon',
     '@nuxtjs/supabase',
+    '@nuxtjs/robots',
     // '@vueuse/nuxt',
   ],
 
