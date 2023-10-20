@@ -12,6 +12,7 @@
   "devDependencies": {
     "@nuxt/devtools": "^0.8.5",
     "@types/node": "^18",
+    "nuxt-simple-sitemap": "^3.4.0",
     "sass": "^1.0.0"
   },
   "dependencies": {

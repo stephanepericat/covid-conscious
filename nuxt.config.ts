@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     'nuxt-icon',
     '@nuxtjs/supabase',
     '@nuxtjs/robots',
+    'nuxt-simple-sitemap',
     // '@vueuse/nuxt',
   ],
 
