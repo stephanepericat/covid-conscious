@@ -53,7 +53,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    baseUrl: '/',
+    baseUrl: `${process.env.NUXT_PUBLIC_SITE_URL}/`,
     defaultLocale: 'en',
     langDir: 'locales',
     locales: [
