@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
     '@nuxtjs/robots',
     'nuxt-simple-sitemap',
+    'nuxt-security',
     // '@vueuse/nuxt',
   ],
 
@@ -41,7 +42,7 @@ export default defineNuxtConfig({
   // module options
 
   cloudflareAnalytics: {
-    proxyPath: "/api/_ca/p",
+    proxyPath: '/api/_ca/p',
     token: process.env.CLOUDFLARE_ANALYTICS_TOKEN,
   },
 
@@ -68,6 +69,15 @@ export default defineNuxtConfig({
     apiVersion: '2021-10-21',
     dataset: process.env.SANITY_DATASET,
     projectId: process.env.SANITY_PROJECTID,
+  },
+
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': ["'self'", 'data:', 'blob:', 'cdn.sanity.io'],
+      },
+      crossOriginEmbedderPolicy: 'unsafe-none',
+    }
   },
 
   supabase: {
