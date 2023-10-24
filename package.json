@@ -7,11 +7,14 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "vitest",
+    "test:ci": "vitest --run"
   },
   "devDependencies": {
     "@nuxt/devtools": "^0.8.5",
     "@types/node": "^18",
+    "@vitest/coverage-istanbul": "^0.34.6",
     "happy-dom": "^12.9.1",
     "nuxt-security": "^1.0.0-rc.2",
     "nuxt-simple-sitemap": "^3.4.0",
