@@ -26,7 +26,6 @@ export default defineNuxtConfig({
     'nuxt-simple-sitemap',
     'nuxt-security',
     'nuxt-vitest',
-    // '@vueuse/nuxt',
   ],
 
   runtimeConfig: {
