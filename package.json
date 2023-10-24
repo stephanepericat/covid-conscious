@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
+    "coverage": "open ./coverage/index.html",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
