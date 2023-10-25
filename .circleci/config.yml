@@ -19,7 +19,7 @@ jobs:
   #         command: "echo Hello, World!"
   run-tests:
     docker:
-      - image: circleci/node:18.18
+      - image: circleci/node:18
     steps:
       - checkout
       # - run: "npm install -g yarn"
