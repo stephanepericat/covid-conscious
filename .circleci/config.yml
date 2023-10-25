@@ -9,7 +9,7 @@ jobs:
     steps:
       - checkout
       - run: "yarn --immutable"
-      - run: "yarn test"
+      - run: "yarn test:ci"
 
 workflows:
   test-workflow:
