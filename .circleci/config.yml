@@ -19,7 +19,7 @@ jobs:
   #         command: "echo Hello, World!"
   run-tests:
     docker:
-      - image: node:alpine-18.16.0
+      - image: node:18-alpine
     steps:
       - checkout
       # - run: "npm install -g yarn"
