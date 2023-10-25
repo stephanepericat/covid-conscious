@@ -19,10 +19,10 @@ jobs:
   #         command: "echo Hello, World!"
   run-tests:
     docker:
-      - image: cimg/base:stable
+      - image: circleci/node:18.18
     steps:
       - checkout
-      - run: "npm install -g yarn"
+      # - run: "npm install -g yarn"
       - run: "yarn --immutable"
       - run: "yarn test"
 
