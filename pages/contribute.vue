@@ -67,7 +67,7 @@
     { id: PRODUCT, label: t(`layout.${PRODUCT}`) },
   ]
 
-  const form = useForm({
+  const { schema: form } = useForm({
     category: {
       validators: [
         {

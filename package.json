@@ -9,8 +9,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "vitest",
-    "test:ci": "vitest --run"
+    "test": "vitest --watch",
+    "test:ci": "vitest run"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.0",
@@ -19,7 +19,7 @@
     "happy-dom": "^12.9.1",
     "nuxt-security": "^1.0.0-rc.2",
     "nuxt-simple-sitemap": "^3.4.0",
-    "nuxt-vitest": "^0.11.0",
+    "nuxt-vitest": "^0.11.3",
     "sass": "^1.0.0",
     "vitest": "^0.33.0"
   },

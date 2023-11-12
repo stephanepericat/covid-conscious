@@ -84,7 +84,7 @@
       <p v-text="$t('forum.create.modal.description')" />
       <strong v-text="$t('forum.create.modal.confirmation')" />
       <section class="sf-post-editor__modal--preview">
-        <h3 v-text="form.title.value" />
+        <h3 v-text="form?.title?.value || ''" />
         <div v-html="htmlContents" />
       </section>
       <template #footer>
@@ -124,7 +124,7 @@
 
   const isValidContent = (v) => v.length > 0 && v !== '\n'
 
-  const form = useForm({
+  const { schema: form } = useForm({
     title: {
       validators: [
         {
@@ -179,7 +179,7 @@
 
   const isSubmitting = ref(false)
   // const token = ref(null)
-  const buttonDisabled = computed(() => form.value.untouched || form.value.invalid || !hasContent.value || isSubmitting.value)
+  const buttonDisabled = computed(() => form?.value?.untouched || form?.value?.invalid || !hasContent.value || isSubmitting.value)
 
   const clearForm = () =>  {
     form.value.title.value = ''

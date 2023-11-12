@@ -79,6 +79,7 @@ export const usePosts = () => {
   const getTopics = async () => {
     try {
       const { data, error } = await supabase.rpc('get_topics')
+      console.log('topics', data)
       if (error) throw error
       return data?.replace(/[\{\}]/gi, '').split(',') || []
     } catch (e) {
@@ -308,6 +309,7 @@ export const usePosts = () => {
     deleteUserPosts,
     deleting,
     getAvatarUrl,
+    getAvatars,
     getComments,
     getCommentsCount,
     getPost,
