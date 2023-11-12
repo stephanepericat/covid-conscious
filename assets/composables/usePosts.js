@@ -18,6 +18,7 @@ export const usePosts = () => {
 
   const getAvatars = async (data) =>  {
     const profiles = data.reduce((acc, val) => {
+      /* istanbul ignore else */
       if(!acc[val.profiles.id]) {
         acc[val.profiles.id] = val.profiles.avatar_url
       }
@@ -79,7 +80,6 @@ export const usePosts = () => {
   const getTopics = async () => {
     try {
       const { data, error } = await supabase.rpc('get_topics')
-      console.log('topics', data)
       if (error) throw error
       return data?.replace(/[\{\}]/gi, '').split(',') || []
     } catch (e) {
