@@ -12,7 +12,7 @@ export default defineVitestConfig({
         "plugins/*.js",
       ],
       provider: 'istanbul',
-      reportsDirectory: 'coverage',
+      reportsDirectory: './coverage',
     },
     globals: true,
   },
