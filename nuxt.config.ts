@@ -25,7 +25,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     'nuxt-simple-sitemap',
     'nuxt-security',
-    // '@vueuse/nuxt',
+    'nuxt-vitest',
   ],
 
   runtimeConfig: {

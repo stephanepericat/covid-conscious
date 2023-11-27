@@ -18,6 +18,7 @@ export const usePosts = () => {
 
   const getAvatars = async (data) =>  {
     const profiles = data.reduce((acc, val) => {
+      /* istanbul ignore else */
       if(!acc[val.profiles.id]) {
         acc[val.profiles.id] = val.profiles.avatar_url
       }
@@ -308,6 +309,7 @@ export const usePosts = () => {
     deleteUserPosts,
     deleting,
     getAvatarUrl,
+    getAvatars,
     getComments,
     getCommentsCount,
     getPost,
