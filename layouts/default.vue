@@ -171,12 +171,14 @@
               <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
             </li>
             <li>
+              <NuxtLink :to="localePath('/forum-guidelines')">{{ $t('layout.forumGuidelines') }}</NuxtLink>
+            </li>
+            <li>
               <NuxtLink :to="localePath('/privacy-policy')">{{ $t('layout.privacyPolicy') }}</NuxtLink>
             </li>
             <li>
               <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
             </li>
-            <li>&nbsp;</li>
             <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
           </ul>
         </div>

@@ -100,6 +100,7 @@ export default {
       product: 'Ainda não há avaliações de produtos.',
     },
     forum: "Fórum",
+    forumGuidelines: "Diretrizes do Fórum",
     legal: "Informações Legais",
     more: {
       articles: 'Mais Artigos',

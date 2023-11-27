@@ -100,6 +100,7 @@ export default {
       product: 'Aucun avis de produit pour l\'instant.',
     },
     forum: "Forum",
+    forumGuidelines: "Lignes Directrices du Forum",
     legal: "Informations Légales",
     more: {
       articles: 'Plus d\'Articles',

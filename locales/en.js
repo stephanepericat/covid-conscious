@@ -100,6 +100,7 @@ export default {
       product: 'No product reviews yet.',
     },
     forum: "Forum",
+    forumGuidelines: "Forum Guidelines",
     legal: "Legal Information",
     more: {
       articles: 'More Articles',

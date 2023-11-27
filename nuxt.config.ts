@@ -93,6 +93,7 @@ export default defineNuxtConfig({
         '*/forum',
         '*/forum/post/*',
         '*/forum/user/*',
+        '*/forum-guidelines',
         '*/news',
         '*/community*',
         '*/education*',
