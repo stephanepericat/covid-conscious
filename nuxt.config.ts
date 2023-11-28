@@ -98,6 +98,7 @@ export default defineNuxtConfig({
         '*/community*',
         '*/education*',
         '*/product*',
+        '*/resource*',
         '*/contribute',
         '*/search*',
         '*/author/*',

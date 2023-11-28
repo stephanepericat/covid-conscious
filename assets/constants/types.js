@@ -6,4 +6,5 @@ export const LINK = "link";
 export const NEWS = "news";
 export const POST = "post";
 export const PRODUCT = "product";
+export const RESOURCE = "resource";
 export const USER = "user";

@@ -110,6 +110,7 @@ export default {
     news: "Actualités",
     privacyPolicy: "Politique de Confidentialité",
     product: "Produits",
+    resource: "Ressources",
     rss: "Flux RSS",
     search: "Rechercher",
     submitContent: "Contribuer",

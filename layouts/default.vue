@@ -9,6 +9,7 @@
         <INavbarCollapsible>
           <INav class="default-layout__nav">
             <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
+            <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
             <IDropdown>
               <INavItem> {{ $t("layout.community") }} </INavItem>
               <template #body>

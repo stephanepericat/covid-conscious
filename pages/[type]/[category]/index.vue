@@ -22,13 +22,19 @@
             </template>
             <h3 class="category-page__link">
               <NuxtLink
-                :to="article.type === 'link' ? article.link : localePath(article.path)"
-                :target="article.type === 'link' ? '_blank' : '_self'"
+                :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
+                :target="isExternalLink(article.type) ? '_blank' : '_self'"
               >
-                <span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}
+                <span v-if="isNews(article.type)">{{ article.source }}: </span>{{ article.title }}
               </NuxtLink>
             </h3>
-            <em>
+            <p
+              v-if="isResource(article.type) && article.description"
+              class="category-page__description"
+            >
+              {{ article.description }}
+            </p>
+            <em v-if="!isResource(article.type)">
               <span>{{ article.category }} &bullet; </span>
               <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
               <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
@@ -46,6 +52,7 @@
   import { AUTHOR } from "~/assets/constants/types";
   import { usePagination } from "~/assets/composables/usePagination";
   import { DEFAULT_DATE_FORMAT } from "~/assets/constants/date-formats";
+  import { isExternalLink, isNews, isResource } from '~/assets/utils/article-types'
 
   const { locale, t } = useI18n();
   const { params } = useRoute();
