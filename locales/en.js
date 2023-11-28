@@ -110,6 +110,7 @@ export default {
     news: "News",
     privacyPolicy: "Privacy Policy",
     product: "Products",
+    resource: "Resources",
     rss: "RSS Feed",
     search: "Search",
     submitContent: "Contribute",

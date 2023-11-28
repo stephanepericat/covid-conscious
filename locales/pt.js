@@ -111,6 +111,7 @@ export default {
     privacyPolicy: "Política de Privacidade",
     product: "Produtos",
     rss: "Feed RSS",
+    resource: "Recursos",
     search: "Procurar",
     submitContent: "Contribuir",
     switch: {

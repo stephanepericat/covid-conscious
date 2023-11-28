@@ -7,6 +7,7 @@ export default groq`
   "results": *[_type == $articleType && category->uri.current == $articleCategory] | order(_createdAt desc){
     // "id": _id,
     "title": coalesce(title[$locale], title['${baseLanguage}'], null),
+    "description": coalesce(description[$locale], description['${baseLanguage}'], null),
     "author": author-> { nickname, "slug": uri.current },
     "published": _createdAt,
     "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),

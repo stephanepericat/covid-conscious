@@ -51,16 +51,22 @@
             </template>
             <h3 class="type-page__link">
               <NuxtLink
-                :to="article.type === 'link' ? article.link : localePath(article.path)"
-                :target="article.type === 'link' ? '_blank' : '_self'"
+                :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
+                :target="isExternalLink(article.type) ? '_blank' : '_self'"
               >
-                <span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}
+                <span v-if="isNews(article.type)">{{ article.source }}: </span>{{ article.title }}
               </NuxtLink>
             </h3>
-            <em>
-              <span>{{ article.category }} &bullet; </span>
-              <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-              <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
+            <p
+              v-if="isResource(article.type) && article.description"
+              class="type-page__description"
+            >
+              {{ article.description }}
+            </p>
+            <em v-if="!isResource(article.type)">
+              <span>{{ article.category }}</span>
+              <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
+              <span> &bullet; {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
         </IListGroupItem>
@@ -76,6 +82,7 @@
   import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { isExternalLink, isNews, isResource } from '~/assets/utils/article-types'
 
   const { locale, t } = useI18n()
   const { params } = useRoute()
