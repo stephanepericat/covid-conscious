@@ -2,11 +2,11 @@
   <ILayout class="default-layout">
     <!-- header -->
     <ILayoutHeader class="default-layout__header">
-      <INavbar :collapse-on-item-click="false">
+      <INavbar :collapse-on-item-click="false" :collapse="false">
         <INavbarBrand :to="localePath('/')">
           <img class="default-layout__logo" :src="logoFile" />
         </INavbarBrand>
-        <INavbarCollapsible>
+        <!-- <INavbarCollapsible>
           <INav class="default-layout__nav">
             <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
             <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
@@ -69,7 +69,8 @@
               </template>
             </IDropdown>
             <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
-          </INav>
+          </INav>-->
+          <INav>
           <IInput v-model="searchTerm" @keydown.enter="onSearch" class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
             <template #append>
               <IButton color="primary" :disabled="!searchTerm.length" @click="onSearch">
@@ -113,7 +114,17 @@
               </template>
             </template>
           </IDropdown>
-        </INavbarCollapsible>
+          </INav>
+        <!-- </INavbarCollapsible> -->
+    </INavbar>
+    <INavbar class="default-layout__sub-nav">
+        <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
+        <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
+        <INavItem :to="localePath('/community')"> {{ $t("layout.community") }} </INavItem>
+        <INavItem :to="localePath('/product')"> {{ $t("layout.product") }} </INavItem>
+        <INavItem :to="localePath('/education')"> {{ $t("layout.education") }} </INavItem>
+        <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
+        <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
     </INavbar>
     </ILayoutHeader>
     <!-- content -->
@@ -283,6 +294,12 @@
 
     &-footer {
       height: 40px;
+    }
+  }
+
+  &__sub-nav {
+    :deep(.container) {
+      justify-content: space-evenly;
     }
   }
 
