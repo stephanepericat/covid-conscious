@@ -2,76 +2,17 @@
   <ILayout class="default-layout">
     <!-- header -->
     <ILayoutHeader class="default-layout__header">
-      <INavbar :collapse-on-item-click="false" :collapse="false">
+      <INavbar class="default-layout__main-nav" :collapse="false">
         <INavbarBrand :to="localePath('/')">
           <img class="default-layout__logo" :src="logoFile" />
         </INavbarBrand>
-        <!-- <INavbarCollapsible>
-          <INav class="default-layout__nav">
-            <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
-            <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
-            <IDropdown>
-              <INavItem> {{ $t("layout.community") }} </INavItem>
-              <template #body>
-                <IDropdownItem
-                  v-for="category in menuCategoriesSorted.communityCategory"
-                  :key="category.name"
-                  :to="localePath(`/${COMMUNITY}/${category.slug}`)"
-                >
-                  {{ category.name }}
-                </IDropdownItem>
-              </template>
-            </IDropdown>
-            <IDropdown>
-              <INavItem> {{ $t("layout.education") }} </INavItem>
-              <template #body>
-                <IDropdownItem
-                  v-for="category in menuCategoriesSorted.educationCategory"
-                  :key="category.name"
-                  :to="localePath(`/${EDUCATION}/${category.slug}`)"
-                >
-                  {{ category.name }}
-                </IDropdownItem>
-              </template>
-            </IDropdown>
-            <IDropdown>
-              <INavItem> {{ $t("layout.product") }} </INavItem>
-              <template #body>
-                <IDropdownItem
-                  v-for="category in menuCategoriesSorted.productCategory"
-                  :key="category.name"
-                  :to="localePath(`/${PRODUCT}/${category.slug}`)"
-                >
-                  {{ category.name }}
-                </IDropdownItem>
-              </template>
-            </IDropdown>
-            <IDropdown>
-              <INavItem> {{ $t("layout.forum") }} </INavItem>
-              <template #body>
-                <IDropdownItem
-                  :to="localePath(`/${FORUM}`)"
-                >
-                  {{ $t('forum.nav.latest') }}
-                </IDropdownItem>
-                <template v-if="isLoggedIn">
-                  <IDropdownItem
-                    :to="localePath(`/${FORUM}/create`)"
-                  >
-                    {{ $t('forum.nav.create') }}
-                  </IDropdownItem>
-                  <IDropdownItem
-                    :to="localePath(`/${FORUM}/my-posts`)"
-                  >
-                    {{ $t('forum.nav.my.posts') }}
-                  </IDropdownItem>
-                </template>
-              </template>
-            </IDropdown>
-            <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
-          </INav>-->
-          <INav>
-          <IInput v-model="searchTerm" @keydown.enter="onSearch" class="default-layout__search" :placeholder="`${$t('layout.search')}...`">
+        <INav>
+          <IInput
+            v-model="searchTerm"
+            @keydown.enter="onSearch"
+            class="default-layout__search"
+            :placeholder="`${$t('layout.search')}...`"
+          >
             <template #append>
               <IButton color="primary" :disabled="!searchTerm.length" @click="onSearch">
                 <IIcon name="ink-search" />
@@ -88,55 +29,28 @@
               </IDropdownItem>
             </template>
           </IDropdown>
-          <!-- <ITooltip placement="bottom-end" size="sm">
-            <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
-              <Icon :name="colorModeIcon" />
-            </INavItem>
-            <template #body>{{ colorModeTooltip }}</template>
-          </ITooltip> -->
-          <!-- <IDropdown placement="bottom-end" events="hover">
-            <INavItem>
-              <Icon name="material-symbols:account-circle" />
-            </INavItem>
-            <template #body>
-              <template v-if="isLoggedIn">
-                <IDropdownItem :to="localePath('/account')">
-                  <span>{{ $t('layout.user.account') }}</span>
-                </IDropdownItem>
-                <IDropdownItem @click.prevent="signOut">
-                  <span>{{ $t('layout.user.signOut') }}</span>
-                </IDropdownItem>
-              </template>
-              <template v-else>
-                <IDropdownItem :to="localePath('/login')">
-                  <span>{{ $t('layout.user.signIn') }}</span>
-                </IDropdownItem>
-              </template>
-            </template>
-          </IDropdown> -->
           <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
             <Icon :name="colorModeIcon" />
           </INavItem>
-          <INavItem :to="localePath('/login')">
+          <INavItem @click="onAuthClick" class="default-layout__header--auth">
             <Icon name="material-symbols:account-circle" />
-            Sign In
+            {{ $t(isLoggedIn ? 'layout.user.signOut' : 'layout.user.signIn') }}
           </INavItem>
+      </INav>
+      </INavbar>
+      <INavbar class="default-layout__sub-nav">
+        <INavbarCollapsible>
+          <INav>
+            <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
+            <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
+            <INavItem :to="localePath('/community')"> {{ $t("layout.community") }} </INavItem>
+            <INavItem :to="localePath('/product')"> {{ $t("layout.product") }} </INavItem>
+            <INavItem :to="localePath('/education')"> {{ $t("layout.education") }} </INavItem>
+            <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
+            <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
           </INav>
-        <!-- </INavbarCollapsible> -->
-    </INavbar>
-    <INavbar class="default-layout__sub-nav">
-      <INavbarCollapsible>
-        <INav>
-          <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
-          <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
-          <INavItem :to="localePath('/community')"> {{ $t("layout.community") }} </INavItem>
-          <INavItem :to="localePath('/product')"> {{ $t("layout.product") }} </INavItem>
-          <INavItem :to="localePath('/education')"> {{ $t("layout.education") }} </INavItem>
-          <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
-          <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
-        </INav>
-      </INavbarCollapsible>
-    </INavbar>
+        </INavbarCollapsible>
+      </INavbar>
     </ILayoutHeader>
     <!-- content -->
     <ILayoutContent class="default-layout__content">
@@ -215,69 +129,49 @@
   </ILayout>
 </template>
 <script setup>
-  import menuCategoriesQuery from '~/sanity/menuCategories.sanity';
-  import { useInkline } from '@inkline/inkline';
-  import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes';
-  import { COMMUNITY, EDUCATION, FORUM, PRODUCT } from '~/assets/constants/types';
-  import { useSignOut } from '~/assets/composables/useSignOut';
+  import { useInkline } from '@inkline/inkline'
+  import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
+  import { useSignOut } from '~/assets/composables/useSignOut'
 
-  const inkline = useInkline();
-  const { locale, locales, t } = useI18n();
-  const switchLocalePath = useSwitchLocalePath();
-  const localePath = useLocalePath();
-  const router = useRouter();
+  const inkline = useInkline()
+  const { locale, locales, t } = useI18n()
+  const switchLocalePath = useSwitchLocalePath()
+  const localePath = useLocalePath()
+  const router = useRouter()
 
   // Current and available languages
   const currentLocale = computed(() => {
     return (locales.value).find(i => i.code === locale.value)
-  });
+  })
   const availableLocales = computed(() => {
     return (locales.value).filter(i => i.code !== locale.value)
-  });
-
-  // Menu Categories
-  const { data: menuCategories } = useSanityQuery(menuCategoriesQuery, { locale });
-  const menuCategoriesSorted = computed(() => {
-    return menuCategories?.value?.reduce((acc, val) => {
-      if(!acc[val.type]) {
-        acc[val.type] = [];
-      }
-
-      acc[val.type].push(val);
-
-      return acc;
-    }, {}) || {};
-  });
+  })
 
   // Inkline color mode
-  const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON);
-  const colorModeTooltip = computed(() => {
-    return inkline.options.colorMode === DARK
-      ? t('layout.switch.lightMode')
-      : t('layout.switch.darkMode')
-  });
-  const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK;
+  const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON)
+  const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK
 
   // App Logo
-  const logoFile = computed(() => `/covid-life-v3-${inkline.options.colorMode}.png`);
+  const logoFile = computed(() => `/covid-life-v3-${inkline.options.colorMode}.png`)
 
   // Search
-  const searchTerm = ref("");
+  const searchTerm = ref("")
   const onSearch = () => {
     if (!searchTerm.value.length) {
-      return;
+      return
     }
 
-    router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)});
-  };
+    router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)})
+  }
 
   // Feed URL
-  const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`);
+  const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`)
 
   // User Menu
   const user = useSupabaseUser()
   const isLoggedIn = computed(() => !!user?.value?.id)
   const { signOut } = useSignOut(user)
+  const onAuthClick = () => (isLoggedIn ? signOut() : router.push({ path: localePath(`/login`)}))
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
@@ -291,6 +185,12 @@
     position: sticky;
     top: 0;
     z-index: 1000;
+
+    &--auth {
+      &:hover {
+        cursor: pointer;
+      }
+    }
 
     &--color-mode {
       &:hover {
@@ -330,6 +230,21 @@
 
   &__search {
     margin: 0 10px;
+
+    @include breakpoint('xs') {
+      margin: 20px 0 10px 0;
+      width: 100%;
+    }
+
+    :deep(input) {
+      transition: width .2s;
+
+      @include breakpoint-up('lg') {
+        &:focus {
+          width: 250px;
+        }
+      }
+    }
   }
 
   &__content {
