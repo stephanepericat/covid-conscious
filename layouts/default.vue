@@ -88,13 +88,13 @@
               </IDropdownItem>
             </template>
           </IDropdown>
-          <ITooltip placement="bottom-end" size="sm">
+          <!-- <ITooltip placement="bottom-end" size="sm">
             <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
               <Icon :name="colorModeIcon" />
             </INavItem>
             <template #body>{{ colorModeTooltip }}</template>
-          </ITooltip>
-          <IDropdown placement="bottom-end" events="hover">
+          </ITooltip> -->
+          <!-- <IDropdown placement="bottom-end" events="hover">
             <INavItem>
               <Icon name="material-symbols:account-circle" />
             </INavItem>
@@ -113,18 +113,29 @@
                 </IDropdownItem>
               </template>
             </template>
-          </IDropdown>
+          </IDropdown> -->
+          <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
+            <Icon :name="colorModeIcon" />
+          </INavItem>
+          <INavItem :to="localePath('/login')">
+            <Icon name="material-symbols:account-circle" />
+            Sign In
+          </INavItem>
           </INav>
         <!-- </INavbarCollapsible> -->
     </INavbar>
     <INavbar class="default-layout__sub-nav">
-        <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
-        <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
-        <INavItem :to="localePath('/community')"> {{ $t("layout.community") }} </INavItem>
-        <INavItem :to="localePath('/product')"> {{ $t("layout.product") }} </INavItem>
-        <INavItem :to="localePath('/education')"> {{ $t("layout.education") }} </INavItem>
-        <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
-        <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
+      <INavbarCollapsible>
+        <INav>
+          <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
+          <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
+          <INavItem :to="localePath('/community')"> {{ $t("layout.community") }} </INavItem>
+          <INavItem :to="localePath('/product')"> {{ $t("layout.product") }} </INavItem>
+          <INavItem :to="localePath('/education')"> {{ $t("layout.education") }} </INavItem>
+          <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
+          <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
+        </INav>
+      </INavbarCollapsible>
     </INavbar>
     </ILayoutHeader>
     <!-- content -->
@@ -298,8 +309,18 @@
   }
 
   &__sub-nav {
-    :deep(.container) {
-      justify-content: space-evenly;
+    :deep(.navbar-collapsible) {
+      justify-content: center;
+    }
+
+    @include breakpoint-down('md') {
+      :deep(.collapse-toggle) {
+        margin-left: 10px;
+      }
+
+      :deep(.navbar-collapsible) {
+        margin-top: 10px;
+      }
     }
   }
 
