@@ -41,13 +41,7 @@
       <INavbar class="default-layout__sub-nav">
         <INavbarCollapsible>
           <INav>
-            <INavItem :to="localePath('/news')"> {{ $t("layout.news") }} </INavItem>
-            <INavItem :to="localePath('/resource')"> {{ $t("layout.resource") }} </INavItem>
-            <INavItem :to="localePath('/community')"> {{ $t("layout.community") }} </INavItem>
-            <INavItem :to="localePath('/product')"> {{ $t("layout.product") }} </INavItem>
-            <INavItem :to="localePath('/education')"> {{ $t("layout.education") }} </INavItem>
-            <INavItem :to="localePath('/forum')"> {{ $t("layout.forum") }} </INavItem>
-            <INavItem :to="localePath('/contribute')"> {{ $t("layout.submitContent") }} </INavItem>
+            <INavItem v-for="(item, index) in subNavItems" :key="index" :to="item.url"> {{ item.label }} </INavItem>
           </INav>
         </INavbarCollapsible>
       </INavbar>
@@ -138,6 +132,16 @@
   const switchLocalePath = useSwitchLocalePath()
   const localePath = useLocalePath()
   const router = useRouter()
+
+  const subNavItems = computed(() => [
+    { label: t('layout.news'), url: localePath('/news') },
+    { label: t('layout.resource'), url: localePath('/resource') },
+    { label: t('layout.community'), url: localePath('/community') },
+    { label: t('layout.product'), url: localePath('/product') },
+    { label: t('layout.education'), url: localePath('/education') },
+    { label: t('layout.forum'), url: localePath('/forum') },
+    { label: t('layout.submitContent'), url: localePath('/contribute') },
+  ])
 
   // Current and available languages
   const currentLocale = computed(() => {
