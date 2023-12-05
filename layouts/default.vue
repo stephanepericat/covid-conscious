@@ -32,10 +32,27 @@
           <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
             <Icon :name="colorModeIcon" />
           </INavItem>
-          <INavItem @click="onAuthClick" class="default-layout__header--auth">
-            <Icon name="material-symbols:account-circle" />
-            {{ $t(isLoggedIn ? 'layout.user.signOut' : 'layout.user.signIn') }}
-          </INavItem>
+          <IDropdown placement="bottom-end" events="hover">
+            <INavItem>
+              <Icon name="material-symbols:account-circle" />
+              <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
+            </INavItem>
+            <template #body>
+              <template v-if="isLoggedIn">
+                <IDropdownItem :to="localePath('/account')">
+                  <span>{{ $t('layout.user.account') }}</span>
+                </IDropdownItem>
+                <IDropdownItem @click.prevent="signOut">
+                  <span>{{ $t('layout.user.signOut') }}</span>
+                </IDropdownItem>
+              </template>
+              <template v-else>
+                <IDropdownItem :to="localePath('/login')">
+                  <span>{{ $t('layout.user.signIn') }}</span>
+                </IDropdownItem>
+              </template>
+            </template>
+          </IDropdown>
       </INav>
       </INavbar>
       <INavbar class="default-layout__sub-nav">
@@ -175,7 +192,6 @@
   const user = useSupabaseUser()
   const isLoggedIn = computed(() => !!user?.value?.id)
   const { signOut } = useSignOut(user)
-  const onAuthClick = () => (isLoggedIn ? signOut() : router.push({ path: localePath(`/login`)}))
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
@@ -200,6 +216,12 @@
       &:hover {
         cursor: pointer;
       }
+    }
+  }
+
+  &__user {
+    &--label {
+      margin-left: 5px;
     }
   }
 
