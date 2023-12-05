@@ -19,6 +19,9 @@
             :color="selectedNone ? 'light' : 'danger'"
             @click="showConfirmation = true"
           >
+            <template #icon>
+              <Icon name="material-symbols:auto-delete-outline-rounded" />
+            </template>
             {{ $t('forum.posts.buttonLabel', { amount: selection.length }) }}
           </IButton>
         </div>
