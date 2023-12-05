@@ -127,6 +127,7 @@ export default {
       signIn: "Connexion",
       signOut: "Déconnexion",
     },
+    userAccount: 'Compte d\'Utilisateur',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",

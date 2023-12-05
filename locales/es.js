@@ -91,7 +91,7 @@ export default {
     home: "Página Principal",
     community: "Comunidad",
     contactUs: "Contacta con nosotros",
-    education: "Aprender",
+    education: "Educación",
     empty: {
       community: 'Aún no hay enlaces de la comunidad.',
       education: 'Aún no hay contenido educativo.',
@@ -127,6 +127,7 @@ export default {
       signIn: "Iniciar sesión",
       signOut: "Cerrar sesión",
     },
+    userAccount: 'Cuenta de Usuario',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
