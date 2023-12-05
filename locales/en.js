@@ -91,7 +91,7 @@ export default {
     home: "Home",
     community: "Community",
     contactUs: "Contact Us",
-    education: "Learn",
+    education: "Education",
     empty: {
       community: 'No community links yet.',
       education: 'No educational content yet.',
