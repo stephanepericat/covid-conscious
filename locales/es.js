@@ -112,6 +112,7 @@ export default {
     product: "Productos",
     resource: "Recursos",
     rss: "RSS Feed",
+    "scientific-library": "Biblioteca",
     search: "Buscar",
     submitContent: "Contribuir",
     switch: {

@@ -112,6 +112,7 @@ export default {
     product: "Products",
     resource: "Resources",
     rss: "RSS Feed",
+    "scientific-library": "Library",
     search: "Search",
     submitContent: "Contribute",
     switch: {

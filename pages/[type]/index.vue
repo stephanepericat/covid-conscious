@@ -12,7 +12,7 @@
             :options="filterCategories"
             :placeholder="$t('list.filters.selectCategory')"
           />
-          <template v-if="type === COMMUNITY">
+          <template v-if="isCommunity(type)">
             <ISelect
               class="type-page__filters--select"
               v-model="selectedCountry"
@@ -49,17 +49,20 @@
                 <Icon class="type-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
               </div>
             </template>
-            <h3 class="type-page__link">
+            <h3
+              class="type-page__link"
+            >
               <NuxtLink
                 :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
                 :target="isExternalLink(article.type) ? '_blank' : '_self'"
               >
-                <span v-if="isNews(article.type)">{{ article.source }}: </span>{{ article.title }}
+                <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
               </NuxtLink>
             </h3>
             <p
-              v-if="isResource(article.type) && article.description"
+              v-if="(isResource(article.type) || isLibrary(article.type)) && article.description"
               class="type-page__description"
+              :class="{ 'no-margin': isLibrary(article.type) }"
             >
               {{ article.description }}
             </p>
@@ -82,7 +85,7 @@
   import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import { isExternalLink, isNews, isResource } from '~/assets/utils/article-types'
+  import { isCommunity, isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
 
   const { locale, t } = useI18n()
   const { params } = useRoute()
@@ -194,12 +197,20 @@
     margin-bottom: 30px;
   }
 
+  &__description {
+    &.no-margin {
+      margin: 0;
+    }
+  }
+
   &__loader {
     @include loader();
   }
 
   &__link {
     @include titleLink();
+
+    margin-bottom: 5px;
   }
 
   &__thumbnail {

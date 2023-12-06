@@ -2,6 +2,7 @@ export const AUTHOR = "author";
 export const COMMUNITY = "community";
 export const EDUCATION = "education";
 export const FORUM = "forum";
+export const LIBRARY = "scientific-library";
 export const LINK = "link";
 export const NEWS = "news";
 export const POST = "post";
