@@ -6,7 +6,7 @@ export default groq`
 {
   "results": *[_type == $articleType] | order(_createdAt desc){
     // "id": _id,
-    "title": coalesce(title[$locale], title['${baseLanguage}'], null),
+    "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
     "description": coalesce(description[$locale], description['${baseLanguage}'], null),
     "author": author-> { nickname, "slug": uri.current },
     "published": _createdAt,
