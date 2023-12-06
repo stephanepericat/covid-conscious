@@ -6,27 +6,29 @@
       <h1 class="type-page__title" v-text="localeType" />
       <div class="type-page__filters">
         <IForm class="type-page__filters--form">
-          <ISelect
-            class="type-page__filters--select"
-            v-model="selectedCategory"
-            :options="filterCategories"
-            :placeholder="$t('list.filters.selectCategory')"
-          />
-          <template v-if="isCommunity(type)">
+          <div class="type-page__filters--form-actions">
             <ISelect
               class="type-page__filters--select"
-              v-model="selectedCountry"
-              :options="filterCountries"
-              :placeholder="$t('list.filters.selectCountry')"
+              v-model="selectedCategory"
+              :options="filterCategories"
+              :placeholder="$t('list.filters.selectCategory')"
             />
-            <ISelect
-              class="type-page__filters--select"
-              v-model="selectedCity"
-              :disabled="!selectedCountry"
-              :options="filterCities"
-              :placeholder="$t('list.filters.selectCity')"
-            />
-          </template>
+            <template v-if="isCommunity(type)">
+              <ISelect
+                class="type-page__filters--select"
+                v-model="selectedCountry"
+                :options="filterCountries"
+                :placeholder="$t('list.filters.selectCountry')"
+              />
+              <ISelect
+                class="type-page__filters--select"
+                v-model="selectedCity"
+                :disabled="!selectedCountry"
+                :options="filterCities"
+                :placeholder="$t('list.filters.selectCity')"
+              />
+            </template>
+          </div>
           <IButton @click="clearFilters">
             <Icon name="carbon:reset" />
             <span class="type-page__filters--form-reset">{{ $t('list.filters.reset') }}</span>
@@ -185,6 +187,7 @@
   }
 </script>
 <style lang="scss" scoped>
+@import '@inkline/inkline/css/mixins';
 @import "~/assets/sass/mixins.scss";
 
 .type-page {
@@ -228,13 +231,32 @@
       display: flex;
       justify-content: space-between;
 
+      &-actions {
+        display: flex;
+      }
+
       &-reset {
         margin-left: 5px;
       }
     }
 
     &--select {
-      flex-basis: 25%;
+      margin-right: 25px;
+    }
+
+    @include breakpoint-down('md') {
+      &--form {
+        flex-direction: column;
+
+        &-actions {
+          flex-direction: column;
+        }
+      }
+
+      &--select {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
     }
   }
 }
