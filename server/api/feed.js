@@ -1,6 +1,5 @@
 import { Feed } from "feed";
 import rssFeedQuery from "../../sanity/rssFeed.sanity";
-// import { LIBRARY, LINK } from "../../assets/constants/types";
 import { isNews, isLibrary } from "~/assets/utils/article-types";
 
 export default eventHandler(async (event) => {
