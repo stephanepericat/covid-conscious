@@ -28,6 +28,13 @@
                 :placeholder="$t('list.filters.selectCity')"
               />
             </template>
+            <ISelect
+              v-if="isLibrary(type)"
+              class="type-page__filters--select"
+              v-model="selectedLanguage"
+              :options="filterLanguages"
+              :placeholder="$t('list.filters.selectLanguage')"
+            />
           </div>
           <IButton @click="clearFilters">
             <Icon name="carbon:reset" />
@@ -71,7 +78,7 @@
             <em v-if="!isResource(article.type)">
               <span>{{ article.category }}</span>
               <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
-              <span> &bullet; {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
+              <span> &bullet; {{ format(new Date(article.date ? `${article.date}T12:00:01Z` : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
         </IListGroupItem>
@@ -84,12 +91,14 @@
   import { format } from 'date-fns'
   import _ from 'lodash'
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
-  import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
+  import { AUTHOR, COMMUNITY, LIBRARY, LINK, NEWS } from '~/assets/constants/types'
+  import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { isCommunity, isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
 
   const { locale, t } = useI18n()
+  const { getLanguages } = useLanguages()
   const { params } = useRoute()
   const { type } = params
   const localePath = useLocalePath()
@@ -152,13 +161,30 @@
 
   const selectedCity = ref(null)
 
+  const filterLanguages = computed(() => {
+    if(type !== LIBRARY) return [];
+
+    const codes = results.value.filter((r) => !!r.language).map((r) => r.language)
+    const matches = getLanguages(codes)
+
+    return _.sortBy(
+      _.uniqBy(
+        matches.map(({ code, name }) => ({ label: name, id: code })),
+        'id'
+      ),
+    'label')
+  });
+
+  const selectedLanguage = ref(null)
+
   const matches = computed(() => {
     let items = [...results.value]
 
     if(
       !selectedCategory.value &&
       !selectedCountry.value &&
-      !selectedCity.value
+      !selectedCity.value &&
+      !selectedLanguage.value
     ) {
       return items
     }
@@ -175,6 +201,10 @@
       items = items.filter((result) => result.city === selectedCity.value)
     }
 
+    if(selectedLanguage.value) {
+      items = items.filter((result) => result.language === selectedLanguage.value)
+    }
+
     return items
   })
   const totalItems = computed(() => matches.value.length || 0)
@@ -184,6 +214,7 @@
     selectedCategory.value = null
     selectedCity.value = null
     selectedCountry.value = null
+    selectedLanguage.value = null
   }
 </script>
 <style lang="scss" scoped>

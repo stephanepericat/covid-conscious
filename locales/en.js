@@ -84,6 +84,7 @@ export default {
   },
   layout: {
     about: "About",
+    bluesky: "Follow us on Bluesky",
     contents: "Contents",
     disclaimer: "Disclaimer",
     footerLegal: "© {year} All rights reserved.",
@@ -138,6 +139,7 @@ export default {
       selectCategory: 'Select a category...',
       selectCity: 'Select a city...',
       selectCountry: 'Select a country...',
+      selectLanguage: 'Select a language...',
     },
     typeTitle: "That Covid Life - {type}",
   },
