@@ -97,6 +97,7 @@ export default defineNuxtConfig({
         '*/news',
         '*/community*',
         '*/education*',
+        '*/scientific-library*',
         '*/product*',
         '*/resource*',
         '*/contribute',

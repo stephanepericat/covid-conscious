@@ -4,11 +4,12 @@ import { baseLanguage } from '~/assets/constants/base-language'
 // TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
 export default groq`
 {
-  "results": *[_type == $articleType] | order(_createdAt desc){
+  "results": *[_type == $articleType] | order(publicationDate desc, _createdAt desc){
     // "id": _id,
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
     "description": coalesce(description[$locale], description['${baseLanguage}'], null),
     "author": author-> { nickname, "slug": uri.current },
+    "date": coalesce(publicationDate, null),
     "published": _createdAt,
     "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),
     "categoryUri": category->uri.current,
@@ -21,6 +22,7 @@ export default groq`
     "countryCode": contactInfo.country->code,
     "countryName": coalesce(contactInfo.country->name[$locale], contactInfo.country->name['${baseLanguage}'], null),
     "city": contactInfo.city,
+    "language": coalesce(language, null)
   },
   "total": count(*[_type == $articleType])
 }

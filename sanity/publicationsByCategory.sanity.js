@@ -1,6 +1,7 @@
 import groq from 'groq'
 import { baseLanguage } from '~/assets/constants/base-language'
 
+// DEPRECATED !
 // TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
 export default groq`
 {

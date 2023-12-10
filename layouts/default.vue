@@ -88,6 +88,9 @@
               <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
             </li>
             <li>
+              <a href="https://bsky.app/profile/thatcovidlife.bsky.social" target="_blank">{{ $t('layout.bluesky') }}</a>
+            </li>
+            <li>
               <a href="https://twitter.com/thatcovidlife" target="_blank">{{ $t('layout.twitter') }}</a>
             </li>
           </ul>
@@ -97,6 +100,12 @@
           <ul class="default-layout__footer--list">
             <li>
               <NuxtLink :to="localePath('/news')">{{ $t('layout.news') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/resource')">{{ $t('layout.resource') }}</NuxtLink>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
             </li>
             <li>
               <NuxtLink :to="localePath('/community')">{{ $t('layout.community') }}</NuxtLink>
@@ -127,6 +136,7 @@
             <li>
               <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
             </li>
+            <li>&nbsp</li>
             <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
           </ul>
         </div>
@@ -143,9 +153,11 @@
   import { useInkline } from '@inkline/inkline'
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
   import { useSignOut } from '~/assets/composables/useSignOut'
+  import { useLanguages } from '~/assets/composables/useLanguages'
 
   const inkline = useInkline()
-  const { locale, locales, t } = useI18n()
+  const { t } = useI18n()
+  const { currentLocale, availableLocales, locale } = useLanguages()
   const switchLocalePath = useSwitchLocalePath()
   const localePath = useLocalePath()
   const router = useRouter()
@@ -153,20 +165,13 @@
   const subNavItems = computed(() => [
     { label: t('layout.news'), url: localePath('/news') },
     { label: t('layout.resource'), url: localePath('/resource') },
+    { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
     { label: t('layout.community'), url: localePath('/community') },
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.education'), url: localePath('/education') },
     { label: t('layout.forum'), url: localePath('/forum') },
     { label: t('layout.submitContent'), url: localePath('/contribute') },
   ])
-
-  // Current and available languages
-  const currentLocale = computed(() => {
-    return (locales.value).find(i => i.code === locale.value)
-  })
-  const availableLocales = computed(() => {
-    return (locales.value).filter(i => i.code !== locale.value)
-  })
 
   // Inkline color mode
   const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON)

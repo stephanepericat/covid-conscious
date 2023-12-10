@@ -206,7 +206,7 @@
     margin: 4px 11px;
   }
 
-  @include breakpoint('md') {
+  @include breakpoint-down('md') {
     &__form {
       width: 100%;
     }

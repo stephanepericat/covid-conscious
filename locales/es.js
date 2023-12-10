@@ -84,6 +84,7 @@ export default {
   },
   layout: {
     about: "Acerca De",
+    bluesky: "Síguenos en Bluesky",
     contents: "Contenido",
     disclaimer: "Descargo de responsabilidad",
     footerLegal: "© {year} Reservados todos los derechos.",
@@ -112,6 +113,7 @@ export default {
     product: "Productos",
     resource: "Recursos",
     rss: "RSS Feed",
+    "scientific-library": "Biblioteca",
     search: "Buscar",
     submitContent: "Contribuir",
     switch: {
@@ -137,6 +139,8 @@ export default {
       selectCategory: 'Seleccione una categoría...',
       selectCity: 'Selecciona una ciudad...',
       selectCountry: 'Seleccione un país...',
+      selectLanguage: 'Selecciona un idioma...',
+      selectSource: 'Seleccione una fuente...',
     },
     typeTitle: "That Covid Life - {type}",
   },

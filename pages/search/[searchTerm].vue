@@ -22,13 +22,20 @@
             </template>
             <h3 class="search-page__link">
               <NuxtLink
-                :to="article.type === 'link' ? article.link : localePath(article.path)"
-                :target="article.type === 'link' ? '_blank' : '_self'"
+                :to="isNews(article.type) || isLibrary(article.type) ? article.link : localePath(article.path)"
+                :target="isNews(article.type) || isLibrary(article.type) ? '_blank' : '_self'"
               >
-                <span v-if="article.type === 'link'">{{ article.source }}: </span>{{ article.title }}
+                <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
               </NuxtLink>
             </h3>
-            <em>
+            <p
+              v-if="(isResource(article.type) || isLibrary(article.type)) && article.description"
+              class="search-page__description"
+              :class="{ 'no-margin': isLibrary(article.type) }"
+            >
+              {{ article.description }}
+            </p>
+            <em v-if="!isResource(article.type)">
               <span>{{ article.category }} &bullet; </span>
               <span>
                 <NuxtLink
@@ -37,7 +44,7 @@
                   {{ article.author.nickname }}
                 </NuxtLink> &bullet;
               </span>
-              <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
+              <span>{{ format(new Date(article.date ? `${article.date}T12:00:01Z` : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
         </IListGroupItem>
@@ -55,6 +62,7 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
+  import { isNews, isLibrary, isResource } from '~/assets/utils/article-types'
 
   const { locale, t } = useI18n()
   const route = useRoute()
@@ -99,6 +107,14 @@
 
   &__link {
     @include titleLink();
+
+    margin-bottom: 5px;
+  }
+
+  &__description {
+    &.no-margin {
+      margin: 0;
+    }
   }
 
   &__thumbnail,
