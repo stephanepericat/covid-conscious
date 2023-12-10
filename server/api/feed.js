@@ -1,6 +1,7 @@
 import { Feed } from "feed";
 import rssFeedQuery from "../../sanity/rssFeed.sanity";
-import { LINK } from "../../assets/constants/types";
+// import { LIBRARY, LINK } from "../../assets/constants/types";
+import { isNews, isLibrary } from "~/assets/utils/article-types";
 
 export default eventHandler(async (event) => {
   const { fetch } = useSanity();
@@ -31,8 +32,8 @@ export default eventHandler(async (event) => {
     });
 
     entries.forEach((entry) => {
-      const title = entry.type === LINK ? `${entry.source}: ${entry.title}` : entry.title;
-      const link = entry.type === LINK ? entry.link : `${BASE_URL}${entry.slug}`;
+      const title = isNews(entry.type) || isLibrary(entry.type) ? `${entry.source}: ${entry.title}` : entry.title;
+      const link = isNews(entry.type) || isLibrary(entry.type) ? entry.link : `${BASE_URL}${entry.slug}`;
 
       feed.addItem({
         title,
