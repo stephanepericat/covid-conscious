@@ -273,6 +273,7 @@
 
     &--select {
       margin-right: 25px;
+      min-width: 230px;
     }
 
     @include breakpoint-down('md') {
