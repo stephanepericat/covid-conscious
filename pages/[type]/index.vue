@@ -76,11 +76,11 @@
               </NuxtLink>
             </h3>
             <p
-              v-if="(isResource(article.type) || isLibrary(article.type)) && article.description"
+              v-if="(isResource(article.type) || isLibrary(article.type)) && article.summary"
               class="type-page__description"
               :class="{ 'no-margin': isLibrary(article.type) }"
             >
-              {{ article.description }}
+              {{ article.summary }}
             </p>
             <em v-if="!isResource(article.type)">
               <span>{{ article.category }}</span>
