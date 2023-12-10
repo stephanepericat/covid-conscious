@@ -140,6 +140,7 @@ export default {
       selectCity: 'Selecciona una ciudad...',
       selectCountry: 'Seleccione un país...',
       selectLanguage: 'Selecciona un idioma...',
+      selectSource: 'Seleccione una fuente...',
     },
     typeTitle: "That Covid Life - {type}",
   },

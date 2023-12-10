@@ -29,6 +29,13 @@
               />
             </template>
             <ISelect
+              v-if="isLibrary(type) || isNews(type)"
+              class="type-page__filters--select"
+              v-model="selectedSource"
+              :options="filterSources"
+              :placeholder="$t('list.filters.selectSource')"
+            />
+            <ISelect
               v-if="isLibrary(type)"
               class="type-page__filters--select"
               v-model="selectedLanguage"
@@ -161,10 +168,30 @@
 
   const selectedCity = ref(null)
 
+  const filterSources = computed(() => {
+    if(!isLibrary(type) && !isNews(type)) return [];
+
+    const matches = selectedCategory.value
+      ? results.value.filter((r) => r.categoryUri === selectedCategory.value)
+      : results.value
+
+    return _.sortBy(
+      _.uniqBy(
+        matches.map(({ source }) => ({ label: source, id: source })),
+        'id'
+      ),
+    'label')
+  });
+
+  const selectedSource = ref(null)
+
   const filterLanguages = computed(() => {
     if(type !== LIBRARY) return [];
 
-    const codes = results.value.filter((r) => !!r.language).map((r) => r.language)
+    const articles = selectedSource.value
+      ? results.value.filter((r) => r.source === selectedSource.value)
+      : results.value
+    const codes = articles.filter((r) => !!r.language).map((r) => r.language)
     const matches = getLanguages(codes)
 
     return _.sortBy(
@@ -184,7 +211,8 @@
       !selectedCategory.value &&
       !selectedCountry.value &&
       !selectedCity.value &&
-      !selectedLanguage.value
+      !selectedLanguage.value &&
+      !selectedSource.value
     ) {
       return items
     }
@@ -205,6 +233,10 @@
       items = items.filter((result) => result.language === selectedLanguage.value)
     }
 
+    if(selectedSource.value) {
+      items = items.filter((result) => result.source === selectedSource.value)
+    }
+
     return items
   })
   const totalItems = computed(() => matches.value.length || 0)
@@ -215,6 +247,7 @@
     selectedCity.value = null
     selectedCountry.value = null
     selectedLanguage.value = null
+    selectedSource.value = null
   }
 </script>
 <style lang="scss" scoped>
