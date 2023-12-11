@@ -22,8 +22,8 @@
             </template>
             <h3 class="search-page__link">
               <NuxtLink
-                :to="isNews(article.type) || isLibrary(article.type) ? article.link : localePath(article.path)"
-                :target="isNews(article.type) || isLibrary(article.type) ? '_blank' : '_self'"
+                :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
+                :target="isExternalLink(article.type) ? '_blank' : '_self'"
               >
                 <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
               </NuxtLink>
@@ -62,7 +62,7 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
-  import { isNews, isLibrary, isResource } from '~/assets/utils/article-types'
+  import { isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
 
   const { locale, t } = useI18n()
   const route = useRoute()
