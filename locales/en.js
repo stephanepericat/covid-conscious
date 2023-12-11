@@ -200,6 +200,7 @@ export default {
         username: 'Username',
         website: 'Website',
       },
+      signIn: 'Sign In To Post',
     },
     auth: {
       description: 'Enter your email address to receive a login link',

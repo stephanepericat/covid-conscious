@@ -5,18 +5,27 @@
         class="sf-index-page__title"
         v-text="$t('forum.latest.title')"
       />
-      <div v-if="isLoggedIn" class="sf-index-page__header--actions">
-        <IButton class="sf-index-page__header--actions-button" :to="localePath(`/${FORUM}/my-posts`)">
+      <div class="sf-index-page__header--actions">
+        <template v-if="isLoggedIn">
+          <IButton class="sf-index-page__header--actions-button" :to="localePath(`/${FORUM}/my-posts`)">
+            <template #icon>
+              <Icon name="material-symbols:folder-managed-outline-rounded" />
+            </template>
+            {{ $t('forum.nav.my.posts') }}
+          </IButton>
+          <IButton class="sf-index-page__header--actions-button" :to="localePath(`/${FORUM}/create`)">
+            <template #icon>
+              <Icon name="material-symbols:ink-pen-rounded" />
+            </template>
+            {{ $t('forum.nav.create') }}
+          </IButton>
+        </template>
+        <IButton v-else class="sf-index-page__header--actions-button" :to="localePath(`/login`)">
           <template #icon>
-            <Icon name="material-symbols:folder-managed-outline-rounded" />
+            <Icon name="material-symbols:login" />
           </template>
-          {{ $t('forum.nav.my.posts') }}
+          {{ $t('forum.account.signIn') }}
         </IButton>
-        <IButton class="sf-index-page__header--actions-button" :to="localePath(`/${FORUM}/create`)">
-          <template #icon>
-            <Icon name="material-symbols:ink-pen-rounded" />
-          </template>
-          {{ $t('forum.nav.create') }}</IButton>
       </div>
     </div>
     <PostList
