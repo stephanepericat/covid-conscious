@@ -9,6 +9,7 @@ export default groq`
       "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
       // TODO: fix description for library items
       "description": array::join(string::split((pt::text(coalesce(description[$locale], description['${baseLanguage}'], null))), "")[0..255], "") + "...",
+      "summary": coalesce(summary[$locale], summary['${baseLanguage}'], summary, null),
       "publishedAt": _createdAt,
       "updatedAt": _updatedAt,
       "link": url,
