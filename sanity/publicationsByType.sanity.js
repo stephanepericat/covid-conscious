@@ -7,12 +7,12 @@ export default groq`
   "results": *[_type == $articleType] | order(publicationDate desc, _createdAt desc){
     // "id": _id,
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
-    "summary": coalesce(description[$locale], description['${baseLanguage}'], summary[$locale], summary['${baseLanguage}'], null),
     "author": author-> { nickname, "slug": uri.current },
     "date": coalesce(publicationDate, null),
     "published": _createdAt,
     "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),
     "categoryUri": category->uri.current,
+    "summary": coalesce(summary[$locale], summary['${baseLanguage}'], summary, null),
     "link": url,
     "path": "/" + _type + "/" + category->uri.current + "/" + uri.current,
     "source": source,
