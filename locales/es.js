@@ -200,6 +200,7 @@ export default {
         username: 'Nombre de usuario',
         website: 'Sitio web',
       },
+      signIn: 'Iniciar Sesión Para Publicar',
     },
     auth: {
       description: 'Ingrese su dirección de correo electrónico para recibir un enlace de inicio de sesión',

@@ -201,6 +201,7 @@ export default {
         username: 'Nom d\'Utilisateur',
         website: 'Site Web',
       },
+      signIn: 'Connectez-vous Pour Publier',
     },
     auth: {
       description: 'Entrez votre addresse e-mail afin de recevoir un lien de connexion.',
