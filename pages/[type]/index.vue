@@ -187,7 +187,7 @@
   const selectedSource = ref(null)
 
   const filterLanguages = computed(() => {
-    if(isLibrary(type) && !isNews(type)) return [];
+    if(!isLibrary(type) && !isNews(type)) return [];
 
     const articles = selectedSource.value
       ? results.value.filter((r) => r.source === selectedSource.value)
