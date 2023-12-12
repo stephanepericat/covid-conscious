@@ -44,7 +44,7 @@
                   {{ article.author.nickname }}
                 </NuxtLink> &bullet;
               </span>
-              <span>{{ format(new Date(article.date ? `${article.date}T12:00:01Z` : article.published), DEFAULT_DATE_FORMAT) }}</span>
+              <span>{{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
         </IListGroupItem>
@@ -63,6 +63,7 @@
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
   import { isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { convertTs } from '~/assets/utils/convert-timestamp'
 
   const { locale, t } = useI18n()
   const route = useRoute()
