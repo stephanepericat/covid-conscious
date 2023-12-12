@@ -28,20 +28,20 @@
                 :placeholder="$t('list.filters.selectCity')"
               />
             </template>
-            <ISelect
-              v-if="isLibrary(type) || isNews(type)"
-              class="type-page__filters--select"
-              v-model="selectedSource"
-              :options="filterSources"
-              :placeholder="$t('list.filters.selectSource')"
-            />
-            <ISelect
-              v-if="isLibrary(type)"
-              class="type-page__filters--select"
-              v-model="selectedLanguage"
-              :options="filterLanguages"
-              :placeholder="$t('list.filters.selectLanguage')"
-            />
+            <template v-if="isLibrary(type) || isNews(type)">
+              <ISelect
+                class="type-page__filters--select"
+                v-model="selectedSource"
+                :options="filterSources"
+                :placeholder="$t('list.filters.selectSource')"
+              />
+              <ISelect
+                class="type-page__filters--select"
+                v-model="selectedLanguage"
+                :options="filterLanguages"
+                :placeholder="$t('list.filters.selectLanguage')"
+              />
+            </template>
           </div>
           <IButton @click="clearFilters">
             <Icon name="carbon:reset" />
@@ -85,7 +85,7 @@
             <em v-if="!isResource(article.type)">
               <span>{{ article.category }}</span>
               <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
-              <span> &bullet; {{ format(new Date(article.date ? `${article.date}T12:00:01Z` : article.published), DEFAULT_DATE_FORMAT) }}</span>
+              <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
           </IMedia>
         </IListGroupItem>
@@ -103,6 +103,7 @@
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { isCommunity, isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { convertTs } from '~/assets/utils/convert-timestamp'
 
   const { locale, t } = useI18n()
   const { getLanguages } = useLanguages()
@@ -186,7 +187,7 @@
   const selectedSource = ref(null)
 
   const filterLanguages = computed(() => {
-    if(type !== LIBRARY) return [];
+    if(isLibrary(type) && !isNews(type)) return [];
 
     const articles = selectedSource.value
       ? results.value.filter((r) => r.source === selectedSource.value)

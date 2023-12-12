@@ -30,7 +30,7 @@
                     <em>
                       <span>{{ article.category }} &bullet; </span>
                       <span><NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink> &bullet; </span>
-                      <span>{{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }}</span>
+                      <span>{{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
                     </em>
                   </IMedia>
                 </IListGroupItem>
@@ -197,6 +197,7 @@
   import { AUTHOR } from '~/assets/constants/types'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePosts } from '~/assets/composables/usePosts'
+  import { convertTs } from '~/assets/utils/convert-timestamp'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
