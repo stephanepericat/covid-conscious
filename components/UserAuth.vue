@@ -34,8 +34,9 @@
   import isEmail from 'validator/lib/isEmail'
 
   const emit = defineEmits(['success', 'error'])
+  const localePath = useLocalePath()
 
-  const redirectUrl = computed(() => `${window?.location?.origin}/callback`)
+  const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
 
   const client = useSupabaseClient()
   const loading = ref(false)
