@@ -38,10 +38,6 @@
 
   const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
 
-  if(window) {
-    console.log('redirectUrl', redirectUrl.value)
-  }
-
   const client = useSupabaseClient()
   const loading = ref(false)
   const email = ref('')
@@ -53,6 +49,7 @@
   const handleLogin = async () => {
     try {
       loading.value = true
+      console.log('redirectUrl', redirectUrl.value)
       const { error } = await client.auth.signInWithOtp({
         email: email.value,
         options: {
