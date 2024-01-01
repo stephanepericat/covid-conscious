@@ -1,7 +1,6 @@
 import { useToast } from '@inkline/inkline';
 
 export const useSignOut = (user) => {
-  const config = useRuntimeConfig()
   const localePath = useLocalePath()
   const router = useRouter()
   const supabase = useSupabaseClient()
@@ -10,7 +9,7 @@ export const useSignOut = (user) => {
 
   const onLogoutSuccess = () => {
     user.value = null
-    router.push(localePath(`${config.public.supabaseForum.rootPath}/login`));
+    router.push(localePath('/login'))
   }
 
   const onError = () => {
