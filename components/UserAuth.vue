@@ -49,7 +49,6 @@
   const handleLogin = async () => {
     try {
       loading.value = true
-      console.log('redirectUrl', redirectUrl.value)
       const { error } = await client.auth.signInWithOtp({
         email: email.value,
         options: {
