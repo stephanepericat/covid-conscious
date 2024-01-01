@@ -9,7 +9,7 @@ export const useSignOut = (user) => {
 
   const onLogoutSuccess = () => {
     user.value = null
-    router.push(localePath('/login'));
+    router.push(localePath('/login'))
   }
 
   const onError = () => {
