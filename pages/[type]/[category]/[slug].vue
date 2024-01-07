@@ -42,7 +42,17 @@
       </IMedia>
 
       <section class="article-page__body">
-        <SanityContent :blocks="article.body" :serializers="serializers" />
+        <!-- video content -->
+        <template v-if="type === VIDEO" class="article-page__body--video">
+          <p class="article-page__body--video-summary">{{ article.summary }}</p>
+          <div
+            v-if="article.embedCode"
+            v-html="article.embedCode"
+            class="article-page__body--video-player"
+          />
+        </template>
+
+        <SanityContent v-else :blocks="article.body" :serializers="serializers" />
 
         <!-- social media sharing -->
         <ShareButtons
@@ -128,7 +138,7 @@
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
-  import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
+  import { AUTHOR, COMMUNITY, PRODUCT, VIDEO } from '~/assets/constants/types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -263,6 +273,10 @@
   &__author {
     margin-bottom: 40px;
 
+    &--name {
+      margin: 0;
+    }
+
     &--placeholder {
       height: 50px;
       margin-right: var(--media--image--margin-right, var(--margin-right));
@@ -315,6 +329,12 @@
 
       &-product {
         margin-top: 40px;
+      }
+    }
+
+    &--video {
+      &-summary {
+        margin-bottom: 40px;
       }
     }
   }
