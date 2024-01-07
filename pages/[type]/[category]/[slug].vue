@@ -333,6 +333,10 @@
     }
 
     &--video {
+      &-player {
+        aspect-ratio: 16 / 9;
+      }
+
       &-summary {
         margin-bottom: 40px;
       }
@@ -355,5 +359,11 @@
       }
     }
   }
+}
+</style>
+<style>
+.article-page__body--video-player iframe {
+  height: 100% !important;
+  width: 100% !important;
 }
 </style>
