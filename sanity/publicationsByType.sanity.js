@@ -10,11 +10,11 @@ export default groq`
     "author": author-> { nickname, "slug": uri.current },
     "date": coalesce(publicationDate, null),
     "published": _createdAt,
-    "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),
-    "categoryUri": category->uri.current,
+    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], category->name[$locale], category->name['${baseLanguage}'], null),
+    "categoryUri": coalesce(tags[0]->uri.current, category->uri.current),
     "summary": coalesce(summary[$locale], summary['${baseLanguage}'], summary, null),
     "link": url,
-    "path": "/" + _type + "/" + category->uri.current + "/" + uri.current,
+    "path": "/" + _type + "/" + coalesce(tags[0]->uri.current, category->uri.current) + "/" + uri.current,
     "source": source,
     "thumbnail": visual.asset._ref,
     "type": _type,
@@ -22,7 +22,8 @@ export default groq`
     "countryCode": contactInfo.country->code,
     "countryName": coalesce(contactInfo.country->name[$locale], contactInfo.country->name['${baseLanguage}'], null),
     "city": contactInfo.city,
-    "language": coalesce(language, null)
+    "language": coalesce(language, null),
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
   },
   "total": count(*[_type == $articleType])
 }

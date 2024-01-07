@@ -130,6 +130,7 @@ export default {
       signOut: "Déconnexion",
     },
     userAccount: 'Compte d\'Utilisateur',
+    video: 'Vidéos',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",

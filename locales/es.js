@@ -130,6 +130,7 @@ export default {
       signOut: "Cerrar sesión",
     },
     userAccount: 'Cuenta de Usuario',
+    video: 'Vídeos',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
