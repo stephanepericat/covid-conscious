@@ -39,11 +39,14 @@
         <p class="article-page__info">
           <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), DEFAULT_DATE_FORMAT) }})</span>
         </p>
+        <div v-if="article.tags" class="article-page__tags">
+          <IBadge v-for="tag in article.tags" :key="tag.uri" class="article-page__tags--item">{{ tag.name }}</IBadge>
+        </div>
       </IMedia>
 
       <section class="article-page__body">
         <!-- video content -->
-        <template v-if="type === VIDEO" class="article-page__body--video">
+        <template v-if="isVideo(type)" class="article-page__body--video">
           <p class="article-page__body--video-summary">{{ article.summary }}</p>
           <div
             v-if="article.embedCode"
@@ -138,7 +141,8 @@
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
-  import { AUTHOR, COMMUNITY, PRODUCT, VIDEO } from '~/assets/constants/types'
+  import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
+  import { isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -357,6 +361,14 @@
       span {
         margin-left: 5px;
       }
+    }
+  }
+
+  &__tags {
+    &--item {
+      @include eyebrow();
+
+      margin-right: 10px;
     }
   }
 }
