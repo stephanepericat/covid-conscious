@@ -105,6 +105,9 @@
               <NuxtLink :to="localePath('/resource')">{{ $t('layout.resource') }}</NuxtLink>
             </li>
             <li>
+              <NuxtLink :to="localePath('/video')">{{ $t('layout.video') }}</NuxtLink>
+            </li>
+            <li>
               <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
             </li>
             <li>
