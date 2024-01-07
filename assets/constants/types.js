@@ -9,3 +9,4 @@ export const POST = "post";
 export const PRODUCT = "product";
 export const RESOURCE = "resource";
 export const USER = "user";
+export const VIDEO = "video";
