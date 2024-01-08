@@ -15,6 +15,7 @@ export default {
     },
     title: "That Covid Life - {title}",
     updated: "Mis à jour",
+    watchVideo: "Regarder la Vidéo",
     website: "Site Web",
   },
   comingSoon: "À venir...",
@@ -130,6 +131,7 @@ export default {
       signOut: "Déconnexion",
     },
     userAccount: 'Compte d\'Utilisateur',
+    video: 'Vidéos',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",

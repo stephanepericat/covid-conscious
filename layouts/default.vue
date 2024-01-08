@@ -105,6 +105,9 @@
               <NuxtLink :to="localePath('/resource')">{{ $t('layout.resource') }}</NuxtLink>
             </li>
             <li>
+              <NuxtLink :to="localePath('/video')">{{ $t('layout.video') }}</NuxtLink>
+            </li>
+            <li>
               <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
             </li>
             <li>
@@ -165,6 +168,7 @@
   const subNavItems = computed(() => [
     { label: t('layout.news'), url: localePath('/news') },
     { label: t('layout.resource'), url: localePath('/resource') },
+    { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
     { label: t('layout.community'), url: localePath('/community') },
     { label: t('layout.product'), url: localePath('/product') },

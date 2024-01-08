@@ -39,10 +39,29 @@
         <p class="article-page__info">
           <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), DEFAULT_DATE_FORMAT) }})</span>
         </p>
+        <div v-if="article.tags" class="article-page__tags">
+          <IBadge v-for="tag in article.tags" :key="tag.uri" class="article-page__tags--item">{{ tag.name }}</IBadge>
+        </div>
       </IMedia>
 
       <section class="article-page__body">
-        <SanityContent :blocks="article.body" :serializers="serializers" />
+        <!-- video content -->
+        <template v-if="isVideo(type)" class="article-page__body--video">
+          <p class="article-page__body--video-summary">{{ article.summary }}</p>
+          <div
+            v-if="article.embedCode"
+            v-html="article.embedCode"
+            class="article-page__body--video-player"
+          />
+          <IButton v-else :href="article.link" target="_blank">
+            <template #icon>
+              <Icon name="material-symbols:auto-videocam-outline-rounded" />
+            </template>
+            {{ $t('article.watchVideo') }}
+          </IButton>
+        </template>
+
+        <SanityContent v-else :blocks="article.body" :serializers="serializers" />
 
         <!-- social media sharing -->
         <ShareButtons
@@ -129,6 +148,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
+  import { isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -263,6 +283,10 @@
   &__author {
     margin-bottom: 40px;
 
+    &--name {
+      margin: 0;
+    }
+
     &--placeholder {
       height: 50px;
       margin-right: var(--media--image--margin-right, var(--margin-right));
@@ -317,6 +341,16 @@
         margin-top: 40px;
       }
     }
+
+    &--video {
+      &-player {
+        aspect-ratio: 16 / 9;
+      }
+
+      &-summary {
+        margin-bottom: 40px;
+      }
+    }
   }
 
   &__reviews {
@@ -335,5 +369,19 @@
       }
     }
   }
+
+  &__tags {
+    &--item {
+      @include eyebrow();
+
+      margin-right: 10px;
+    }
+  }
+}
+</style>
+<style>
+.article-page__body--video-player iframe {
+  height: 100% !important;
+  width: 100% !important;
 }
 </style>

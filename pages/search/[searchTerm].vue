@@ -29,9 +29,9 @@
               </NuxtLink>
             </h3>
             <p
-              v-if="(isResource(article.type) || isLibrary(article.type)) && article.summary"
+              v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type)) && article.summary"
               class="search-page__description"
-              :class="{ 'no-margin': isLibrary(article.type) }"
+              :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) }"
             >
               {{ article.summary }}
             </p>
@@ -62,7 +62,7 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
-  import { isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
 
   const { locale, t } = useI18n()

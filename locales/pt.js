@@ -15,6 +15,7 @@ export default {
     },
     title: "That Covid Life - {title}",
     updated: "Atualizado",
+    watchVideo: "Assista Vídeo",
     website: "Ir Para o Site",
   },
   comingSoon: "Em breve...",
@@ -130,6 +131,7 @@ export default {
       signOut: "Sair",
     },
     userAccount: 'Conta de Usuário',
+    video: 'Vídeos',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
