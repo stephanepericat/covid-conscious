@@ -37,7 +37,7 @@ export default groq`
     "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),
     "thumbnail": visual.asset._ref,
   },
-  "videos": *[_type == 'video' && defined(embedCode)] {
+  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) && defined(embedCode)] {
     "id": _id,
     title,
     embedCode,

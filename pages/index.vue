@@ -77,6 +77,9 @@
             <p v-else>{{ $t('layout.empty.forum') }}</p>
           </section>
         </div>
+        <!-- <div class="home-page__container--videos">
+          <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
+        </div> -->
         <div class="home-page__container--other">
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.product") }}</h3>
