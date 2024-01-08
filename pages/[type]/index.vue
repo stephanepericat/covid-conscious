@@ -76,7 +76,7 @@
               </NuxtLink>
             </h3>
             <p
-              v-if="(isResource(article.type) || isLibrary(article.type)) && article.summary"
+              v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
               class="type-page__description"
               :class="{ 'no-margin': isLibrary(article.type) }"
             >
@@ -102,7 +102,7 @@
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import { isCommunity, isExternalLink, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isCommunity, isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
 
   const { locale, t } = useI18n()
