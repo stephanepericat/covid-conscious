@@ -15,6 +15,7 @@ export default {
     },
     title: "That Covid Life - {title}",
     updated: "Updated",
+    watchVideo: "Watch Video",
     website: "Go To Website",
   },
   comingSoon: "Coming soon...",

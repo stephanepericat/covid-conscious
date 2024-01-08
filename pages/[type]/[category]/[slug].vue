@@ -53,6 +53,12 @@
             v-html="article.embedCode"
             class="article-page__body--video-player"
           />
+          <IButton v-else :href="article.link" target="_blank">
+            <template #icon>
+              <Icon name="material-symbols:auto-videocam-outline-rounded" />
+            </template>
+            {{ $t('article.watchVideo') }}
+          </IButton>
         </template>
 
         <SanityContent v-else :blocks="article.body" :serializers="serializers" />

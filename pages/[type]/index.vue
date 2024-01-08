@@ -98,7 +98,7 @@
   import { format } from 'date-fns'
   import _ from 'lodash'
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
-  import { AUTHOR, COMMUNITY, LIBRARY, LINK, NEWS } from '~/assets/constants/types'
+  import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
