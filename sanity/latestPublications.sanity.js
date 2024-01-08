@@ -37,5 +37,15 @@ export default groq`
     "category": coalesce(category->name[$locale], category->name['${baseLanguage}'], null),
     "thumbnail": visual.asset._ref,
   },
+  "videos": *[_type == 'video' && defined(embedCode)] {
+    "id": _id,
+    title,
+    embedCode,
+    "published": _createdAt,
+    "author": author-> { nickname, "slug": uri.current },
+    "date": publicationDate,
+    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
+    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current
+  }
 }
 `
