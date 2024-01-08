@@ -78,7 +78,7 @@
             <p
               v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
               class="type-page__description"
-              :class="{ 'no-margin': isLibrary(article.type) }"
+              :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) }"
             >
               {{ article.summary }}
             </p>
