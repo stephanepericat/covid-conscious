@@ -25,7 +25,13 @@
                       </div>
                     </template>
                     <h3 class="home-page__link">
-                      <NuxtLink :to="article.link" target="_blank">{{ article.source }}: {{ article.title }}</NuxtLink>
+                      <NuxtLink
+                        :to="article.link"
+                        target="_blank"
+                        @click="umTrackEvent('home-news-click', { title: article.title, url: article.link })"
+                      >
+                        {{ article.source }}: {{ article.title }}
+                      </NuxtLink>
                     </h3>
                     <em>
                       <span>{{ article.category }} &bullet; </span>
