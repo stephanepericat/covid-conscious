@@ -88,6 +88,8 @@
   })
   const totalItems = computed(() => searchResults?.value?.length || 0)
   const visibleItems = computed(() => searchResults?.value?.slice(startItem.value, endItem.value) || [])
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

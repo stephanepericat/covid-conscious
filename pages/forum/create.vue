@@ -29,6 +29,8 @@
     message: t('forum.create.toast.success.message', { title: payload.headline }),
     color: 'success'
   })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

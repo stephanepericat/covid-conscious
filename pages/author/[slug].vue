@@ -9,6 +9,8 @@
 </template>
 <script setup>
   const router = useRouter()
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

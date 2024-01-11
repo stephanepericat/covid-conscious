@@ -25,7 +25,13 @@
                       </div>
                     </template>
                     <h3 class="home-page__link">
-                      <NuxtLink :to="article.link" target="_blank">{{ article.source }}: {{ article.title }}</NuxtLink>
+                      <NuxtLink
+                        :to="article.link"
+                        target="_blank"
+                        @click="umTrackEvent('home-news-click', { title: article.title, url: article.link })"
+                      >
+                        {{ article.source }}: {{ article.title }}
+                      </NuxtLink>
                     </h3>
                     <em>
                       <span>{{ article.category }} &bullet; </span>
@@ -219,6 +225,8 @@
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
   posts.value = await getPosts(0, 4)
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

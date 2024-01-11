@@ -18,6 +18,8 @@
 
   const { locale } = useI18n()
   const { data: policy, pending } = useLazySanityQuery(policyQuery, { locale, policyType: "About" })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

@@ -59,6 +59,8 @@
 
   // get initial set of results on load
   onPageChange({ startItem: 0, endItem: 4 })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

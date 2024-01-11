@@ -241,6 +241,8 @@
     ratingsAverage.value = await getRatingsAverage(articleId.value)
     hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
   }, { immediate: true })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
