@@ -227,6 +227,8 @@
   watch(locale, () => {
     translationResults.value = null
   })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

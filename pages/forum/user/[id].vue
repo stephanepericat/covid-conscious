@@ -48,6 +48,8 @@
 
   const user = await getUserById(route.params.id)
   const avatar = await getAvatarUrl(user.avatar_url)
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 

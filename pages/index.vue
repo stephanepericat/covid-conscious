@@ -219,6 +219,8 @@
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
   posts.value = await getPosts(0, 4)
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

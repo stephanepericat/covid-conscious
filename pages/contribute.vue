@@ -184,6 +184,8 @@
     ],
     title: t('contribute.pageTitle')
   })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

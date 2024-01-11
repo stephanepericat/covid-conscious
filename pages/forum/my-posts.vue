@@ -181,6 +181,8 @@
 
   total.value = await getUserPostsCount()
   posts.value = await getUserPosts(user?.value?.id, 0, 4)
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";

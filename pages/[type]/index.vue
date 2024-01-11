@@ -250,6 +250,8 @@
     selectedLanguage.value = null
     selectedSource.value = null
   }
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

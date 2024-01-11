@@ -19,6 +19,8 @@
       return navigateTo(localePath('/account'))
     }
   }, { immediate: true })
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
   .sf-callback-page {

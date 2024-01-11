@@ -30,6 +30,8 @@
       color: 'danger'
     })
   }
+
+  umTrackView()
 </script>
 <style lang="scss" scoped>
 .sf-login-page {
