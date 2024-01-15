@@ -95,8 +95,7 @@
   const client = useSupabaseClient()
   const user = useSupabaseUser()
 
-  const { currentPage, itemsPerPage, setItemsPerPage, startItem, endItem } = usePagination()
-  setItemsPerPage(5)
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
   const total = ref(0)
 
