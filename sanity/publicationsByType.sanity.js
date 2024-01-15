@@ -12,7 +12,7 @@ export default groq`
     "published": _createdAt,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "categoryUri": tags[0]->uri.current,
-    "summary": coalesce(summary[$locale], summary['${baseLanguage}'], summary, null),
+    "summary": array::join(string::split(coalesce(summary[$locale], summary['${baseLanguage}'], summary, ""), "")[0..512], "") + "...",
     "link": url,
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "source": source,
