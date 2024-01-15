@@ -82,8 +82,12 @@
             >
               {{ article.summary }}
             </p>
-            <em v-if="!isResource(article.type)">
-              <span>{{ article.category }}</span>
+            <em class="type-page__metadata" v-if="!isResource(article.type)">
+              <ul class="type-page__tags">
+                <li v-for="{ uri, name } in article.tags" :key="uri" class="type-page__tags--item">
+                  <IBadge size="sm" @click="onTagClick({ uri })">{{ name }}</IBadge>
+                </li>
+              </ul>
               <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
               <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </em>
@@ -251,6 +255,8 @@
     selectedSource.value = null
   }
 
+  const onTagClick = ({ uri }) => console.log('tag clicked', uri)
+
   umTrackView()
 </script>
 <style lang="scss" scoped>
@@ -324,6 +330,29 @@
       &--select {
         margin-right: 0;
         margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__metadata {
+    display: block;
+    margin-top: 5px;
+  }
+
+  &__tags {
+    display: inline;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &--item {
+      cursor: pointer;
+      display: inline-block;
+      font-style: normal;
+      margin-right: 5px;
+
+      &:last-of-type {
+        margin-right: 1px;
       }
     }
   }
