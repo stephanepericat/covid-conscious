@@ -4,51 +4,19 @@
     <NotFound v-else-if="!pending && !results.length" :category="localeType" />
     <template v-else>
       <h1 class="type-page__title" v-text="localeType" />
-      <div class="type-page__filters">
-        <IForm class="type-page__filters--form">
-          <div class="type-page__filters--form-actions">
-            <ISelect
-              class="type-page__filters--select"
-              v-model="selectedCategory"
-              :options="filterCategories"
-              :placeholder="$t('list.filters.selectCategory')"
-            />
-            <template v-if="isCommunity(type)">
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedCountry"
-                :options="filterCountries"
-                :placeholder="$t('list.filters.selectCountry')"
-              />
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedCity"
-                :disabled="!selectedCountry"
-                :options="filterCities"
-                :placeholder="$t('list.filters.selectCity')"
-              />
-            </template>
-            <template v-if="isLibrary(type) || isNews(type)">
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedSource"
-                :options="filterSources"
-                :placeholder="$t('list.filters.selectSource')"
-              />
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedLanguage"
-                :options="filterLanguages"
-                :placeholder="$t('list.filters.selectLanguage')"
-              />
-            </template>
-          </div>
-          <IButton @click="clearFilters">
-            <Icon name="carbon:reset" />
-            <span class="type-page__filters--form-reset">{{ $t('list.filters.reset') }}</span>
-          </IButton>
-        </IForm>
-      </div>
+      <PublicationFilters
+        :categories="filterCategories"
+        :cities="filterCities"
+        :countries="filterCountries"
+        :languages="filterLanguages"
+        :sources="filterSources"
+        :type="type"
+        v-model:selected-category="selectedCategory"
+        v-model:selected-city="selectedCity"
+        v-model:selected-country="selectedCountry"
+        v-model:selected-language="selectedLanguage"
+        v-model:selected-source="selectedSource"
+      />
       <IListGroup size="sm" :border="false">
         <IListGroupItem v-for="article in visibleItems">
           <IMedia>
@@ -106,8 +74,9 @@
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import { isCommunity, isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
+  import PublicationFilters from '~/components/PublicationFilters.vue'
 
   const { locale, t } = useI18n()
   const { getLanguages } = useLanguages()
@@ -247,14 +216,6 @@
   const totalItems = computed(() => matches.value.length || 0)
   const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value))
 
-  const clearFilters = () => {
-    selectedCategory.value = null
-    selectedCity.value = null
-    selectedCountry.value = null
-    selectedLanguage.value = null
-    selectedSource.value = null
-  }
-
   const onTagClick = ({ uri }) => console.log('tag clicked', uri)
 
   umTrackView()
@@ -295,43 +256,6 @@
 
   &__pagination {
     @include pagination();
-  }
-
-  &__filters {
-    margin-bottom: 20px;
-
-    &--form {
-      display: flex;
-      justify-content: space-between;
-
-      &-actions {
-        display: flex;
-      }
-
-      &-reset {
-        margin-left: 5px;
-      }
-    }
-
-    &--select {
-      margin-right: 25px;
-      min-width: 230px;
-    }
-
-    @include breakpoint-down('md') {
-      &--form {
-        flex-direction: column;
-
-        &-actions {
-          flex-direction: column;
-        }
-      }
-
-      &--select {
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-    }
   }
 
   &__metadata {
