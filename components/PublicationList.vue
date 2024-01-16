@@ -12,6 +12,7 @@
               :h="80"
               :w="80"
             />
+            <img v-else-if="article.avatar" class="publication-list__avatar" :src="article.avatar" />
             <div v-else class="publication-list__thumbnail--fallback">
               <Icon class="publication-list__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
             </div>
@@ -29,18 +30,21 @@
           <p
             v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
             class="publication-list__description"
-            :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) }"
+            :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) || isResource(article.type) }"
           >
             {{ article.summary }}
           </p>
-          <em class="publication-list__metadata" v-if="!isResource(article.type)">
-            <ul class="publication-list__tags">
+          <em class="publication-list__metadata">
+            <IBadge size="sm" v-if="isForum(article.type)">{{ article.category }}</IBadge>
+            <ul v-else class="publication-list__tags">
               <li v-for="{ uri, name } in article.tags" :key="uri" class="publication-list__tags--item">
                 <IBadge size="sm" @click="onTagClick({ uri })">{{ name }}</IBadge>
               </li>
             </ul>
-            <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
-            <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
+            <template v-if="!isResource(article.type)">
+              <span> &bullet; <NuxtLink :to="localePath(isForum(article.type) ? `/${FORUM}/${USER}/${article.author.slug}` : `/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
+              <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
+            </template>
           </em>
         </IMedia>
       </IListGroupItem>
@@ -50,9 +54,9 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isExternalLink, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
-  import { AUTHOR } from '~/assets/constants/types'
+  import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
   const props = defineProps({
@@ -84,6 +88,7 @@
     margin-bottom: 5px;
   }
 
+  &__avatar,
   &__thumbnail {
     @include thumbnail();
   }

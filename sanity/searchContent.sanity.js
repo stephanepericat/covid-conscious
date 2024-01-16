@@ -19,6 +19,7 @@ export default groq`
     "thumbnail": visual.asset._ref,
     "type": _type,
     "uri": uri.current,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
   },
   "total": count(*[[coalesce(title[$locale], title['${baseLanguage}']), coalesce(summary[$locale], summary['${baseLanguage}'], summary, null), coalesce(description[$locale], description['${baseLanguage}'])[0].children[0].text] match $searchTerm])
 }
