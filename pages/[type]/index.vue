@@ -17,72 +17,29 @@
         v-model:selected-language="selectedLanguage"
         v-model:selected-source="selectedSource"
       />
-      <IListGroup size="sm" :border="false">
-        <IListGroupItem v-for="article in visibleItems">
-          <IMedia>
-            <template #image>
-              <SanityImage
-                v-if="article.thumbnail"
-                :asset-id="article.thumbnail"
-                fit="crop"
-                crop="entropy"
-                :h="80"
-                :w="80"
-              />
-              <div v-else class="type-page__thumbnail--fallback">
-                <Icon class="type-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-              </div>
-            </template>
-            <h3
-              class="type-page__link"
-            >
-              <NuxtLink
-                :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
-                :target="isExternalLink(article.type) ? '_blank' : '_self'"
-              >
-                <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
-              </NuxtLink>
-            </h3>
-            <p
-              v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
-              class="type-page__description"
-              :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) }"
-            >
-              {{ article.summary }}
-            </p>
-            <em class="type-page__metadata" v-if="!isResource(article.type)">
-              <ul class="type-page__tags">
-                <li v-for="{ uri, name } in article.tags" :key="uri" class="type-page__tags--item">
-                  <IBadge size="sm" @click="onTagClick({ uri })">{{ name }}</IBadge>
-                </li>
-              </ul>
-              <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
-              <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
-            </em>
-          </IMedia>
-        </IListGroupItem>
-      </IListGroup>
-      <IPagination v-model="currentPage" class="type-page__pagination" :items-total="totalItems" :items-per-page="itemsPerPage" />
+      <PublicationList
+        :items="visibleItems"
+        :items-per-page="itemsPerPage"
+        :total="totalItems"
+        v-model:current-page="currentPage"
+      />
     </template>
   </div>
 </template>
 <script setup>
-  import { format } from 'date-fns'
   import _ from 'lodash'
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
-  import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
+  import { COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import { isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
-  import { convertTs } from '~/assets/utils/convert-timestamp'
+  import { isLibrary, isNews } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
+  import PublicationList from '~/components/PublicationList.vue'
 
   const { locale, t } = useI18n()
   const { getLanguages } = useLanguages()
   const { params } = useRoute()
   const { type } = params
-  const localePath = useLocalePath()
   const localeType = computed(() => t(`layout.${type}`))
 
   useHead({
@@ -216,8 +173,6 @@
   const totalItems = computed(() => matches.value.length || 0)
   const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value))
 
-  const onTagClick = ({ uri }) => console.log('tag clicked', uri)
-
   umTrackView()
 </script>
 <style lang="scss" scoped>
@@ -234,51 +189,8 @@
     margin-bottom: 30px;
   }
 
-  &__description {
-    &.no-margin {
-      margin: 0;
-    }
-  }
-
   &__loader {
     @include loader();
-  }
-
-  &__link {
-    @include titleLink();
-
-    margin-bottom: 5px;
-  }
-
-  &__thumbnail {
-    @include thumbnail();
-  }
-
-  &__pagination {
-    @include pagination();
-  }
-
-  &__metadata {
-    display: block;
-    margin-top: 5px;
-  }
-
-  &__tags {
-    display: inline;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-
-    &--item {
-      cursor: pointer;
-      display: inline-block;
-      font-style: normal;
-      margin-right: 5px;
-
-      &:last-of-type {
-        margin-right: 1px;
-      }
-    }
   }
 }
 </style>
