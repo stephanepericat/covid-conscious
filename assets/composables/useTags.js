@@ -3,7 +3,6 @@ export const useTags = () => {
   const router = useRouter()
   
   const onTagClick = ({ uri }) => {
-    console.log('tag clicked: ', uri)
     router.push({ path: localePath(`/tags/${uri}`) })
   }
 
