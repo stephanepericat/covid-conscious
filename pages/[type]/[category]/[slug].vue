@@ -40,7 +40,14 @@
           <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), DEFAULT_DATE_FORMAT) }})</span>
         </p>
         <div v-if="article.tags" class="article-page__tags">
-          <IBadge v-for="tag in article.tags" :key="tag.uri" class="article-page__tags--item">{{ tag.name }}</IBadge>
+          <IBadge
+            v-for="{ name, uri } in article.tags"
+            :key="uri"
+            class="article-page__tags--item"
+            @click="onTagClick({ uri })"
+          >
+            {{ name }}
+          </IBadge>
         </div>
       </IMedia>
 
@@ -156,6 +163,7 @@
   import { useReviews } from '~/assets/composables/useReviews'
   import ShareButtons from '~/components/ShareButtons.vue'
   import { serializers } from '~/assets/constants/serializers'
+  import { useTags } from '~/assets/composables/useTags'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -163,6 +171,7 @@
   const { type, category, slug } = params
   const user = useSupabaseUser()
   const url = useRequestURL()
+  const { onTagClick } = useTags()
   const hashtag = computed(() => category.replace(/-/gi, ''))
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
@@ -376,6 +385,7 @@
     &--item {
       @include eyebrow();
 
+      cursor: pointer;
       margin-right: 10px;
     }
   }

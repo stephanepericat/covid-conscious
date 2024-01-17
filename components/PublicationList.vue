@@ -64,6 +64,7 @@
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { useTags } from '~/assets/composables/useTags'
 
   const props = defineProps({
     items: { type: Array, default: [] },
@@ -73,10 +74,9 @@
   })
 
   const localePath = useLocalePath()
+  const { onTagClick } = useTags()
 
   const currentPage = defineModel('currentPage')
-
-  const onTagClick = ({ uri }) => console.log('tag clicked', uri)
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
