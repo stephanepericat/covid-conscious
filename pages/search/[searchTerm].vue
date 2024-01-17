@@ -62,26 +62,5 @@
   &__loader {
     @include loader();
   }
-
-  // &__link {
-  //   @include titleLink();
-
-  //   margin-bottom: 5px;
-  // }
-
-  // &__description {
-  //   &.no-margin {
-  //     margin: 0;
-  //   }
-  // }
-
-  // &__thumbnail,
-  // &__avatar {
-  //   @include thumbnail();
-  // }
-
-  // &__pagination {
-  //   @include pagination();
-  // }
 }
 </style>
