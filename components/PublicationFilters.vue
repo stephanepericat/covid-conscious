@@ -3,7 +3,7 @@
     <IForm class="publication-filters--form">
       <div class="publication-filters--form-actions">
         <ISelect
-          v-if="!isTag(type)"
+          v-if="!isTag(type) && !isSearch(type)"
           class="publication-filters--select"
           v-model="selectedCategory"
           :options="categories"
@@ -38,7 +38,7 @@
             :placeholder="$t('list.filters.selectLanguage')"
           />
         </template>
-        <template v-if="isTag(type)">
+        <template v-if="isTag(type) || isSearch(type)">
           <ISelect
             class="publication-filters--select"
             v-model="selectedContentType"
@@ -61,7 +61,7 @@
   </div>
 </template>
 <script setup>
-  import { isCommunity, isLibrary, isNews, isTag } from '~/assets/utils/article-types'
+  import { isCommunity, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
 
   const props = defineProps({
     categories: { type: Array, default: [] },

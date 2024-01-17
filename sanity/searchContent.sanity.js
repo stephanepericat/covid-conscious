@@ -4,7 +4,7 @@ import { baseLanguage } from '~/assets/constants/base-language'
 // TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
 export default groq`
 {
-  "results": *[[coalesce(title[$locale], title['${baseLanguage}'], title, ''), coalesce(summary[$locale], summary['${baseLanguage}'], summary, null), coalesce(description[$locale], description['${baseLanguage}'], [])[0].children[0].text] match $searchTerm] | order(publicationDate desc, _createdAt desc){
+  "results": *[_type != "feedSettings" && [coalesce(title[$locale], title['${baseLanguage}'], title, ''), coalesce(summary[$locale], summary['${baseLanguage}'], summary, null), coalesce(description[$locale], description['${baseLanguage}'], [])[0].children[0].text] match $searchTerm] | order(publicationDate desc, _createdAt desc){
     // "id": _id,
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
     "author": author-> { nickname, "slug": uri.current },
@@ -19,6 +19,7 @@ export default groq`
     "thumbnail": visual.asset._ref,
     "type": _type,
     "uri": uri.current,
+    "language": coalesce(language, $locale),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
   },
   "total": count(*[[coalesce(title[$locale], title['${baseLanguage}']), coalesce(summary[$locale], summary['${baseLanguage}'], summary, null), coalesce(description[$locale], description['${baseLanguage}'])[0].children[0].text] match $searchTerm])

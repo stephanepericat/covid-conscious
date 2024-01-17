@@ -22,8 +22,8 @@
 </template>
 <script setup>
   import _ from 'lodash'
-  import PublicationList from '~/components/PublicationList.vue'
   import PublicationFilters from '~/components/PublicationFilters.vue'
+  import PublicationList from '~/components/PublicationList.vue'
   import publicationsByTagQuery from '~/sanity/publicationsByTag.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
