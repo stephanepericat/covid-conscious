@@ -188,7 +188,7 @@ export default {
   },
   search: {
     description: "That Covid Life - A platform for Covid advice",
-    pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",
+    pageTitle: "{totalItems} Search Result(s) for \"{searchTerm}\"",
     title: "That Covid Life - Search \"{searchTerm}\"",
   },
   tags: {
