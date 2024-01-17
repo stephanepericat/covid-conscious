@@ -10,6 +10,8 @@ export default groq`
     "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   },
   "learn": *[(_type == "education") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], null),
@@ -18,6 +20,8 @@ export default groq`
     "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   },
   "news": *[(_type == "link") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
@@ -28,6 +32,8 @@ export default groq`
     source,
     "date": publicationDate,
     "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   },
   "products": *[(_type == "product") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], null),
@@ -36,6 +42,8 @@ export default groq`
     "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   },
   "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) && defined(embedCode)] {
     "id": _id,
@@ -45,7 +53,9 @@ export default groq`
     "author": author-> { nickname, "slug": uri.current },
     "date": publicationDate,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
-    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current
+    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   }
 }
 `

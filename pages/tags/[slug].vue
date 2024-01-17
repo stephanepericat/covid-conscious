@@ -1,12 +1,12 @@
 <template>
-  <div class="search-page" :class="{ pending }">
-    <ILoader v-if="pending || loading" class="search-page__loader" />
+  <div class="tags-page" :class="{ pending }">
+    <ILoader v-if="pending" class="tags-page__loader" />
     <template v-else>
-      <h1 class="search-page__title">{{ $t("search.pageTitle", { searchTerm, totalItems }) }}</h1>
+      <h1 class="tags-page__title">{{ $t("tags.pageTitle", { tagName, totalItems }) }}</h1>
       <PublicationFilters
         :content-types="filterContentTypes"
         :languages="filterLanguages"
-        :type="SEARCH"
+        :type="TAG"
         v-model:selected-content-type="selectedContentType"
         v-model:selected-language="selectedLanguage"
       />
@@ -24,34 +24,20 @@
   import _ from 'lodash'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
-  import searchQuery from '~/sanity/searchContent.sanity'
+  import publicationsByTagQuery from '~/sanity/publicationsByTag.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { usePosts } from '~/assets/composables/usePosts'
-  import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
-  import { SEARCH } from '~/assets/constants/types'
+  import { TAG } from '~/assets/constants/types'
 
   const { getLanguages } = useLanguages()
+  const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
   const { locale, t } = useI18n()
   const route = useRoute()
-  const searchTerm = computed(() => route.params.searchTerm)
-  const { searchPosts, loading } = usePosts()
+  const slug = computed(() => route.params.slug)
 
-  useHead({
-    meta: [
-      { name: 'description', content: t('search.description') },
-    ],
-    title: t('search.title', { searchTerm: searchTerm.value })
-  })
-
-  const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
-
-  const { data, pending } = useSanityQuery(searchQuery, { locale, searchTerm })
-  const forumSearch = await searchPosts(searchTerm.value)
-  const searchResults = computed(() => {
-    const merged = [...forumSearch.map(mapForumSearchResult), ...data.value.results];
-    return _.orderBy(merged, 'published', 'desc')
-  })
+  const { data, pending } = useSanityQuery(publicationsByTagQuery, { locale, slug })
+  const searchResults = computed(() => data?.value?.results || [])
+  const tagName = computed(() => data?.value?.metadata?.label || '')
 
   const filterContentTypes = computed(() => {
     const contentTypes = searchResults.value.map((r) => r.type)
@@ -106,12 +92,19 @@
   const totalItems = computed(() => matches.value.length || 0)
   const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value) || [])
 
+  useHead({
+    meta: [
+      { name: 'description', content: t('tags.description') },
+    ],
+    title: t('tags.title', { tagName: tagName.value })
+  })
+
   umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
 
-.search-page {
+.tags-page {
   &.pending {
     @include pending();
   }

@@ -104,6 +104,7 @@ export default {
     forum: "Forum",
     forumGuidelines: "Forum Guidelines",
     legal: "Legal Information",
+    link: "News",
     more: {
       articles: 'More Articles',
       news: 'More News',
@@ -140,6 +141,7 @@ export default {
       reset: 'Reset Filters',
       selectCategory: 'Select a category...',
       selectCity: 'Select a city...',
+      selectContentType: 'Select a content type...',
       selectCountry: 'Select a country...',
       selectLanguage: 'Select a language...',
       selectSource: 'Select a source...',
@@ -188,6 +190,11 @@ export default {
     description: "That Covid Life - A platform for Covid advice",
     pageTitle: "{totalItems} Search Results for \"{searchTerm}\"",
     title: "That Covid Life - Search \"{searchTerm}\"",
+  },
+  tags: {
+    description: "That Covid Life - A platform for Covid advice",
+    pageTitle: "{totalItems} result(s) for \"{tagName}\"",
+    title: "That Covid Life - \"{tagName}\"",
   },
   forum: {
     account: {

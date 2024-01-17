@@ -4,112 +4,43 @@
     <NotFound v-else-if="!pending && !results.length" :category="localeType" />
     <template v-else>
       <h1 class="type-page__title" v-text="localeType" />
-      <div class="type-page__filters">
-        <IForm class="type-page__filters--form">
-          <div class="type-page__filters--form-actions">
-            <ISelect
-              class="type-page__filters--select"
-              v-model="selectedCategory"
-              :options="filterCategories"
-              :placeholder="$t('list.filters.selectCategory')"
-            />
-            <template v-if="isCommunity(type)">
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedCountry"
-                :options="filterCountries"
-                :placeholder="$t('list.filters.selectCountry')"
-              />
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedCity"
-                :disabled="!selectedCountry"
-                :options="filterCities"
-                :placeholder="$t('list.filters.selectCity')"
-              />
-            </template>
-            <template v-if="isLibrary(type) || isNews(type)">
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedSource"
-                :options="filterSources"
-                :placeholder="$t('list.filters.selectSource')"
-              />
-              <ISelect
-                class="type-page__filters--select"
-                v-model="selectedLanguage"
-                :options="filterLanguages"
-                :placeholder="$t('list.filters.selectLanguage')"
-              />
-            </template>
-          </div>
-          <IButton @click="clearFilters">
-            <Icon name="carbon:reset" />
-            <span class="type-page__filters--form-reset">{{ $t('list.filters.reset') }}</span>
-          </IButton>
-        </IForm>
-      </div>
-      <IListGroup size="sm" :border="false">
-        <IListGroupItem v-for="article in visibleItems">
-          <IMedia>
-            <template #image>
-              <SanityImage
-                v-if="article.thumbnail"
-                :asset-id="article.thumbnail"
-                fit="crop"
-                crop="entropy"
-                :h="80"
-                :w="80"
-              />
-              <div v-else class="type-page__thumbnail--fallback">
-                <Icon class="type-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-              </div>
-            </template>
-            <h3
-              class="type-page__link"
-            >
-              <NuxtLink
-                :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
-                :target="isExternalLink(article.type) ? '_blank' : '_self'"
-              >
-                <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
-              </NuxtLink>
-            </h3>
-            <p
-              v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
-              class="type-page__description"
-              :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) }"
-            >
-              {{ article.summary }}
-            </p>
-            <em v-if="!isResource(article.type)">
-              <span>{{ article.category }}</span>
-              <span> &bullet; <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
-              <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
-            </em>
-          </IMedia>
-        </IListGroupItem>
-      </IListGroup>
-      <IPagination v-model="currentPage" class="type-page__pagination" :items-total="totalItems" :items-per-page="itemsPerPage" />
+      <PublicationFilters
+        :categories="filterCategories"
+        :cities="filterCities"
+        :countries="filterCountries"
+        :languages="filterLanguages"
+        :sources="filterSources"
+        :type="type"
+        v-model:selected-category="selectedCategory"
+        v-model:selected-city="selectedCity"
+        v-model:selected-country="selectedCountry"
+        v-model:selected-language="selectedLanguage"
+        v-model:selected-source="selectedSource"
+      />
+      <PublicationList
+        :items="visibleItems"
+        :items-per-page="itemsPerPage"
+        :total="totalItems"
+        with-pagination
+        v-model:current-page="currentPage"
+      />
     </template>
   </div>
 </template>
 <script setup>
-  import { format } from 'date-fns'
   import _ from 'lodash'
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
-  import { AUTHOR, COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
+  import { COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import { isCommunity, isExternalLink, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
-  import { convertTs } from '~/assets/utils/convert-timestamp'
+  import { isLibrary, isNews } from '~/assets/utils/article-types'
+  import PublicationFilters from '~/components/PublicationFilters.vue'
+  import PublicationList from '~/components/PublicationList.vue'
 
   const { locale, t } = useI18n()
   const { getLanguages } = useLanguages()
   const { params } = useRoute()
   const { type } = params
-  const localePath = useLocalePath()
   const localeType = computed(() => t(`layout.${type}`))
 
   useHead({
@@ -243,14 +174,6 @@
   const totalItems = computed(() => matches.value.length || 0)
   const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value))
 
-  const clearFilters = () => {
-    selectedCategory.value = null
-    selectedCity.value = null
-    selectedCountry.value = null
-    selectedLanguage.value = null
-    selectedSource.value = null
-  }
-
   umTrackView()
 </script>
 <style lang="scss" scoped>
@@ -267,65 +190,8 @@
     margin-bottom: 30px;
   }
 
-  &__description {
-    &.no-margin {
-      margin: 0;
-    }
-  }
-
   &__loader {
     @include loader();
-  }
-
-  &__link {
-    @include titleLink();
-
-    margin-bottom: 5px;
-  }
-
-  &__thumbnail {
-    @include thumbnail();
-  }
-
-  &__pagination {
-    @include pagination();
-  }
-
-  &__filters {
-    margin-bottom: 20px;
-
-    &--form {
-      display: flex;
-      justify-content: space-between;
-
-      &-actions {
-        display: flex;
-      }
-
-      &-reset {
-        margin-left: 5px;
-      }
-    }
-
-    &--select {
-      margin-right: 25px;
-      min-width: 230px;
-    }
-
-    @include breakpoint-down('md') {
-      &--form {
-        flex-direction: column;
-
-        &-actions {
-          flex-direction: column;
-        }
-      }
-
-      &--select {
-        margin-right: 0;
-        margin-bottom: 20px;
-      }
-    }
   }
 }
 </style>
