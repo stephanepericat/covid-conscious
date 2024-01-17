@@ -42,7 +42,7 @@
               </li>
             </ul>
             <template v-if="!isResource(article.type)">
-              <span> &bullet; <NuxtLink :to="localePath(isForum(article.type) ? `/${FORUM}/${USER}/${article.author.slug}` : `/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
+              <span v-if="article.author"> &bullet; <NuxtLink :to="localePath(isForum(article.type) ? `/${FORUM}/${USER}/${article.author.slug}` : `/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
               <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </template>
           </em>
