@@ -20,8 +20,8 @@
       <PublicationList
         :items="visibleItems"
         :items-per-page="itemsPerPage"
-        pagination
         :total="totalItems"
+        with-pagination
         v-model:current-page="currentPage"
       />
     </template>

@@ -50,7 +50,7 @@
       </IListGroupItem>
     </IListGroup>
     <IPagination
-      v-if="pagination"
+      v-if="withPagination"
       v-model="currentPage"
       class="publication-list__pagination"
       :items-total="total"
@@ -69,7 +69,7 @@
     items: { type: Array, default: [] },
     itemsPerPage: { type: Number, default: 5 },
     total: { type: Number, default: 0},
-    pagination: Boolean,
+    withPagination: Boolean,
   })
 
   const localePath = useLocalePath()
