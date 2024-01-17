@@ -49,7 +49,13 @@
         </IMedia>
       </IListGroupItem>
     </IListGroup>
-    <IPagination v-model="currentPage" class="publication-list__pagination" :items-total="total" :items-per-page="itemsPerPage" />
+    <IPagination
+      v-if="pagination"
+      v-model="currentPage"
+      class="publication-list__pagination"
+      :items-total="total"
+      :items-per-page="itemsPerPage"
+    />
   </div>
 </template>
 <script setup>
@@ -63,6 +69,7 @@
     items: { type: Array, default: [] },
     itemsPerPage: { type: Number, default: 5 },
     total: { type: Number, default: 0},
+    pagination: Boolean,
   })
 
   const localePath = useLocalePath()

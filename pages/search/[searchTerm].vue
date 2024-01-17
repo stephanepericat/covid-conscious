@@ -6,6 +6,7 @@
       <PublicationList
         :items="visibleItems"
         :items-per-page="itemsPerPage"
+        pagination
         :total="totalItems"
         v-model:current-page="currentPage"
       />
