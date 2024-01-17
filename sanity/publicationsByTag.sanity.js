@@ -22,7 +22,7 @@ export default groq`
     "countryCode": contactInfo.country->code,
     "countryName": coalesce(contactInfo.country->name[$locale], contactInfo.country->name['${baseLanguage}'], null),
     "city": contactInfo.city,
-    "language": coalesce(language, null),
+    "language": coalesce(language, $locale),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
   },
   "metadata": *[_type == "tag" && uri.current == $slug][0] {

@@ -1,8 +1,15 @@
 <template>
   <div class="tags-page" :class="{ pending }">
-    <ILoader v-if="pending || loading" class="tags-page__loader" />
+    <ILoader v-if="pending" class="tags-page__loader" />
     <template v-else>
       <h1 class="tags-page__title">{{ $t("tags.pageTitle", { tagName, totalItems }) }}</h1>
+      <PublicationFilters
+        :content-types="filterContentTypes"
+        :languages="filterLanguages"
+        :type="TAG"
+        v-model:selected-content-type="selectedContentType"
+        v-model:selected-language="selectedLanguage"
+      />
       <PublicationList
         :items="visibleItems"
         :items-per-page="itemsPerPage"
@@ -14,9 +21,15 @@
   </div>
 </template>
 <script setup>
+  import _ from 'lodash'
+  import PublicationList from '~/components/PublicationList.vue'
+  import PublicationFilters from '~/components/PublicationFilters.vue'
   import publicationsByTagQuery from '~/sanity/publicationsByTag.sanity'
+  import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
+  import { TAG } from '~/assets/constants/types'
 
+  const { getLanguages } = useLanguages()
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
   const { locale, t } = useI18n()
   const route = useRoute()
@@ -25,8 +38,59 @@
   const { data, pending } = useSanityQuery(publicationsByTagQuery, { locale, slug })
   const searchResults = computed(() => data?.value?.results || [])
   const tagName = computed(() => data?.value?.metadata?.label || '')
-  const totalItems = computed(() => data?.value?.total || 0)
-  const visibleItems = computed(() => searchResults?.value?.slice(startItem.value, endItem.value) || [])
+
+  const filterContentTypes = computed(() => {
+    const contentTypes = searchResults.value.map((r) => r.type)
+
+    return _.sortBy(
+      _.uniqBy(
+        contentTypes.map((type) => ({ label: t(`layout.${type}`), id: type })),
+        'id'
+      ),
+    'label')
+  });
+  const selectedContentType = ref(null)
+
+  const filterLanguages = computed(() => {
+    const articles = selectedContentType.value
+      ? searchResults.value.filter((r) => r.type === selectedContentType.value)
+      : searchResults.value
+    const codes = articles.filter((r) => !!r.language).map((r) => r.language)
+    const matches = getLanguages(codes)
+
+    return _.sortBy(
+      _.uniqBy(
+        matches.map(({ code, name }) => ({ label: name, id: code })),
+        'id'
+      ),
+    'label')
+  });
+
+  const selectedLanguage = ref(null)
+
+  const matches = computed(() => {
+    let items = searchResults.value ? [...searchResults.value] : []
+
+    if(
+      !selectedLanguage.value &&
+      !selectedContentType.value
+    ) {
+      return items
+    }
+
+    if(selectedContentType.value) {
+      items = items.filter((result) => result.type === selectedContentType.value)
+    }
+
+    if(selectedLanguage.value) {
+      items = items.filter((result) => result.language === selectedLanguage.value)
+    }
+
+    return items
+  })
+
+  const totalItems = computed(() => matches.value.length || 0)
+  const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value) || [])
 
   useHead({
     meta: [

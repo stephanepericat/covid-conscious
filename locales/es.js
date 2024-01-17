@@ -104,6 +104,7 @@ export default {
     forum: "Foro",
     forumGuidelines: "Directrices Del Foro",
     legal: "Información Legal",
+    link: "Noticias",
     more: {
       articles: 'Más Artículos',
       news: 'Mas Noticias',
@@ -140,6 +141,7 @@ export default {
       reset: 'Restablecer Filtros',
       selectCategory: 'Seleccione una categoría...',
       selectCity: 'Selecciona una ciudad...',
+      selectContentType: 'Seleccione un tipo de contenido...',
       selectCountry: 'Seleccione un país...',
       selectLanguage: 'Selecciona un idioma...',
       selectSource: 'Seleccione una fuente...',
@@ -191,7 +193,7 @@ export default {
   },
   tags: {
     description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
-    pageTitle: "{totalItems} resultados para \"{tagName}\"",
+    pageTitle: "{totalItems} resultado(s) para \"{tagName}\"",
     title: "That Covid Life - \"{tagName}\"",
   },
   forum: {

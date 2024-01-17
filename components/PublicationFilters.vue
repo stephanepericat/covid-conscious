@@ -3,6 +3,7 @@
     <IForm class="publication-filters--form">
       <div class="publication-filters--form-actions">
         <ISelect
+          v-if="!isTag(type)"
           class="publication-filters--select"
           v-model="selectedCategory"
           :options="categories"
@@ -37,6 +38,20 @@
             :placeholder="$t('list.filters.selectLanguage')"
           />
         </template>
+        <template v-if="isTag(type)">
+          <ISelect
+            class="publication-filters--select"
+            v-model="selectedContentType"
+            :options="contentTypes"
+            :placeholder="$t('list.filters.selectContentType')"
+          />
+          <ISelect
+            class="publication-filters--select"
+            v-model="selectedLanguage"
+            :options="languages"
+            :placeholder="$t('list.filters.selectLanguage')"
+          />
+        </template>
       </div>
       <IButton @click="clearFilters">
         <Icon name="carbon:reset" />
@@ -46,19 +61,21 @@
   </div>
 </template>
 <script setup>
-  import { isCommunity, isLibrary, isNews } from '~/assets/utils/article-types'
+  import { isCommunity, isLibrary, isNews, isTag } from '~/assets/utils/article-types'
 
   const props = defineProps({
-    categories: { type: Array, defaukt: [] },
-    cities: { type: Array, defaukt: [] },
-    countries: { type: Array, defaukt: [] },
-    languages: { type: Array, defaukt: [] },
-    sources: { type: Array, defaukt: [] },
+    categories: { type: Array, default: [] },
+    cities: { type: Array, default: [] },
+    contentTypes: { type: Array, default: [] },
+    countries: { type: Array, default: [] },
+    languages: { type: Array, default: [] },
+    sources: { type: Array, default: [] },
     type: { type: String, required: true },
   })
 
   const selectedCategory = defineModel('selectedCategory')
   const selectedCity = defineModel('selectedCity')
+  const selectedContentType = defineModel('selectedContentType')
   const selectedCountry = defineModel('selectedCountry')
   const selectedLanguage = defineModel('selectedLanguage')
   const selectedSource = defineModel('selectedSource')
@@ -66,6 +83,7 @@
   const clearFilters = () => {
     selectedCategory.value = null
     selectedCity.value = null
+    selectedContentType.value = null
     selectedCountry.value = null
     selectedLanguage.value = null
     selectedSource.value = null

@@ -8,5 +8,6 @@ export const NEWS = "news";
 export const POST = "post";
 export const PRODUCT = "product";
 export const RESOURCE = "resource";
+export const TAG = "tag";
 export const USER = "user";
 export const VIDEO = "video";
