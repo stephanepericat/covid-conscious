@@ -189,6 +189,11 @@ export default {
     pageTitle: "{totalItems} Resultados da busca por \"{searchTerm}\"",
     title: "That Covid Life - Busca \"{searchTerm}\"",
   },
+  tags: {
+    description: "That Covid Life - Uma plataforma para conselhos sobre a Covid",
+    pageTitle: "{totalItems} resultados para \"{tagName}\"",
+    title: "That Covid Life - \"{tagName}\"",
+  },
   forum: {
     account: {
       back: 'Voltar',
