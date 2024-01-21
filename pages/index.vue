@@ -20,32 +20,11 @@
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
             <template v-if="posts?.length">
-              <IListGroup size="sm" :border="false">
-                <IListGroupItem v-for="post in posts">
-                  <IMedia>
-                    <template #image>
-                      <div class="home-page__thumbnail--fallback">
-                      <ClientOnly>
-                        <img
-                          v-if="post.avatar"
-                          class="home-page__thumbnail"
-                          :src="post.avatar"
-                        >
-                      </ClientOnly>
-                      <Icon v-if="!post.avatar || isSSR" class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-                    </div>
-                    </template>
-                    <h4 class="home-page__link">
-                      <NuxtLink :to="localePath(`${rootPath}/post/${post.id}`)">{{ post.headline }}</NuxtLink>
-                    </h4>
-                    <em>
-                      <IBadge class="home-page__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
-                      <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
-                      <span> &bullet; {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
-                    </em>
-                  </IMedia>
-                </IListGroupItem>
-              </IListGroup>
+              <ForumList
+                :posts="posts"
+                :root-path="rootPath"
+                :ssr="isSSR"
+              />
               <NuxtLink class="home-page__more" :to="localePath('/forum')">
                 {{ $t('layout.more.posts') }} &raquo;
               </NuxtLink>
@@ -131,11 +110,10 @@
   </div>
 </template>
 <script setup>
-  import { format } from 'date-fns'
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePosts } from '~/assets/composables/usePosts'
   import PublicationList from '~/components/PublicationList.vue'
+  import ForumList from '~/components/ForumList.vue'
 
   const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
@@ -177,13 +155,6 @@
     @include title();
   }
 
-  &__link,
-  &__sub-title {
-    @include titleLink();
-
-    margin-bottom: 5px;
-  }
-
   &__container {
     &--top,
     &--mid,
@@ -218,16 +189,8 @@
     margin: 30px 0 10px 0;
   }
 
-  &__thumbnail {
-    @include thumbnail();
-  }
-
   &__more {
     padding-left: var(--list-group--padding-left, var(--padding-left));
-  }
-
-  &__forum-tag {
-    font-style: normal;
   }
 
   @include breakpoint-down('md') {
@@ -244,10 +207,6 @@
         width: 100%;
       }
     }
-
-    // &__divider {
-    //   display: none;
-    // }
   }
 }
 </style>
