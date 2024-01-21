@@ -71,7 +71,7 @@
             <h3 class="home-page__sub-title">{{ $t("layout.resource") }}</h3>
             <template v-if="latestPublications?.resources?.length">
               <PublicationList
-                hide-thumbnail
+                :hide-thumbnail="$appSettings.HIDE_RESOURCES_THUMBNAIL"
                 :items="latestPublications.resources"
               />
               <NuxtLink class="home-page__more" :to="localePath('/resource')">

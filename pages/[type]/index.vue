@@ -18,6 +18,7 @@
         v-model:selected-source="selectedSource"
       />
       <PublicationList
+        :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
         :items="visibleItems"
         :items-per-page="itemsPerPage"
         :total="totalItems"
@@ -33,10 +34,11 @@
   import { COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { isLibrary, isNews } from '~/assets/utils/article-types'
+  import { isLibrary, isNews, isResource } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
 
+  const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
   const { getLanguages } = useLanguages()
   const { params } = useRoute()
