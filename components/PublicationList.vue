@@ -3,7 +3,7 @@
     <IListGroup size="sm" :border="false">
       <IListGroupItem v-for="article in items">
         <IMedia>
-          <template #image>
+          <template v-if="!hideThumbnail" #image>
             <SanityImage
               v-if="article.thumbnail"
               :asset-id="article.thumbnail"
@@ -67,6 +67,7 @@
   import { useTags } from '~/assets/composables/useTags'
 
   const props = defineProps({
+    hideThumbnail: Boolean,
     items: { type: Array, default: [] },
     itemsPerPage: { type: Number, default: 5 },
     total: { type: Number, default: 0},
