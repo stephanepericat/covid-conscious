@@ -35,9 +35,9 @@
                       <Icon v-if="!post.avatar || isSSR" class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
                     </div>
                     </template>
-                    <h3 class="home-page__link">
+                    <h4 class="home-page__link">
                       <NuxtLink :to="localePath(`${rootPath}/post/${post.id}`)">{{ post.headline }}</NuxtLink>
-                    </h3>
+                    </h4>
                     <em>
                       <IBadge class="home-page__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
                       <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
@@ -234,9 +234,9 @@
       }
     }
 
-    &__divider {
-      display: none;
-    }
+    // &__divider {
+    //   display: none;
+    // }
   }
 }
 </style>

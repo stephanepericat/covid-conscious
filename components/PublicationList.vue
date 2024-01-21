@@ -17,7 +17,7 @@
               <Icon class="publication-list__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
             </div>
           </template>
-          <h3
+          <h4
             class="publication-list__link"
           >
             <NuxtLink
@@ -26,7 +26,7 @@
             >
               <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
             </NuxtLink>
-          </h3>
+          </h4>
           <p
             v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
             class="publication-list__description"
