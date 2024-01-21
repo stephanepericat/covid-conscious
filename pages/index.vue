@@ -56,7 +56,7 @@
         <!-- <div class="home-page__container--videos">
           <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
         </div> -->
-        <div class="home-page__container--other">
+        <div v-if="showBottomBlock" class="home-page__container--other">
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.product") }}</h3>
             <template v-if="latestPublications?.products.length">
@@ -101,12 +101,11 @@
 <script setup>
   import { format } from 'date-fns'
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
-  import { AUTHOR } from '~/assets/constants/types'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePosts } from '~/assets/composables/usePosts'
-  import { convertTs } from '~/assets/utils/convert-timestamp'
   import PublicationList from '~/components/PublicationList.vue'
 
+  const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
   const { loading, getPosts } = usePosts()
@@ -121,6 +120,8 @@
     ],
     title: t('home.title')
   })
+
+  const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_COMMUNITY)
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
   posts.value = await getPosts(0, 4)

@@ -58,7 +58,14 @@
       <INavbar class="default-layout__sub-nav">
         <INavbarCollapsible>
           <INav>
-            <INavItem v-for="(item, index) in subNavItems" :key="index" :to="item.url"> {{ item.label }} </INavItem>
+            <INavItem
+              v-for="(item, index) in subNavItems"
+              :key="index"
+              :to="item.url"
+              v-show="!item.hidden"
+            >
+              {{ item.label }}
+            </INavItem>
           </INav>
         </INavbarCollapsible>
       </INavbar>
@@ -110,13 +117,13 @@
             <li>
               <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
             </li>
-            <li>
+            <li v-if="$appSettings.SHOW_COMMUNITY">
               <NuxtLink :to="localePath('/community')">{{ $t('layout.community') }}</NuxtLink>
             </li>
             <li>
               <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
             </li>
-            <li>
+            <li v-if="$appSettings.SHOW_EDUCATION">
               <NuxtLink :to="localePath('/education')">{{ $t('layout.education') }}</NuxtLink>
             </li>
             <li>
@@ -164,15 +171,16 @@
   const switchLocalePath = useSwitchLocalePath()
   const localePath = useLocalePath()
   const router = useRouter()
+  const { $appSettings } = useNuxtApp()
 
   const subNavItems = computed(() => [
     { label: t('layout.news'), url: localePath('/news') },
     { label: t('layout.resource'), url: localePath('/resource') },
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
-    { label: t('layout.community'), url: localePath('/community') },
+    { label: t('layout.community'), url: localePath('/community'), hidden: !$appSettings.SHOW_COMMUNITY },
     { label: t('layout.product'), url: localePath('/product') },
-    { label: t('layout.education'), url: localePath('/education') },
+    { label: t('layout.education'), url: localePath('/education'), hidden: !$appSettings.SHOW_EDUCATION },
     { label: t('layout.forum'), url: localePath('/forum') },
     { label: t('layout.submitContent'), url: localePath('/contribute') },
   ])
