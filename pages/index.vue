@@ -72,6 +72,7 @@
               </div>
               <div class="home-page__container--videos-desktop">
                 <VideoPlayer
+                  class="home-page__video-player"
                   :videos="latestPublications.videos"
                 />
               </div>
@@ -214,6 +215,10 @@
 
   &__more {
     padding-left: var(--list-group--padding-left, var(--padding-left));
+  }
+
+  &__video-player {
+    padding: 15px 0 20px 0;
   }
 
   @include breakpoint-down('md') {

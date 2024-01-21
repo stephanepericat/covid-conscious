@@ -56,7 +56,6 @@
 
 .video-player {
   display: flex;
-  margin-bottom: 20px;
 
   &__list {
     width: 33%;
