@@ -3,7 +3,7 @@
     <IListGroup size="sm" :border="false">
       <IListGroupItem v-for="article in items">
         <IMedia>
-          <template #image>
+          <template v-if="!hideThumbnail" #image>
             <SanityImage
               v-if="article.thumbnail"
               :asset-id="article.thumbnail"
@@ -17,7 +17,7 @@
               <Icon class="publication-list__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
             </div>
           </template>
-          <h3
+          <h4
             class="publication-list__link"
           >
             <NuxtLink
@@ -26,7 +26,7 @@
             >
               <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
             </NuxtLink>
-          </h3>
+          </h4>
           <p
             v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
             class="publication-list__description"
@@ -67,6 +67,7 @@
   import { useTags } from '~/assets/composables/useTags'
 
   const props = defineProps({
+    hideThumbnail: Boolean,
     items: { type: Array, default: [] },
     itemsPerPage: { type: Number, default: 5 },
     total: { type: Number, default: 0},

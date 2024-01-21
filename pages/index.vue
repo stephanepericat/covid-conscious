@@ -20,32 +20,11 @@
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
             <template v-if="posts?.length">
-              <IListGroup size="sm" :border="false">
-                <IListGroupItem v-for="post in posts">
-                  <IMedia>
-                    <template #image>
-                      <div class="home-page__thumbnail--fallback">
-                      <ClientOnly>
-                        <img
-                          v-if="post.avatar"
-                          class="home-page__thumbnail"
-                          :src="post.avatar"
-                        >
-                      </ClientOnly>
-                      <Icon v-if="!post.avatar || isSSR" class="home-page__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-                    </div>
-                    </template>
-                    <h3 class="home-page__link">
-                      <NuxtLink :to="localePath(`${rootPath}/post/${post.id}`)">{{ post.headline }}</NuxtLink>
-                    </h3>
-                    <em>
-                      <IBadge class="home-page__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
-                      <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
-                      <span> &bullet; {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
-                    </em>
-                  </IMedia>
-                </IListGroupItem>
-              </IListGroup>
+              <ForumList
+                :posts="posts"
+                :root-path="rootPath"
+                :ssr="isSSR"
+              />
               <NuxtLink class="home-page__more" :to="localePath('/forum')">
                 {{ $t('layout.more.posts') }} &raquo;
               </NuxtLink>
@@ -53,10 +32,59 @@
             <p v-else>{{ $t('layout.empty.forum') }}</p>
           </section>
         </div>
-        <!-- <div class="home-page__container--videos">
-          <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
-        </div> -->
-        <div class="home-page__container--other">
+        <div class="home-page__divider" />
+        <div class="home-page__container--mid">
+          <section class="home-page__container--library">
+            <h3 class="home-page__sub-title">{{ $t("layout.scientific-library") }}</h3>
+            <template v-if="latestPublications?.library?.length">
+              <PublicationList
+                :items="latestPublications.library"
+              />
+              <NuxtLink class="home-page__more" :to="localePath('/scientific-library')">
+                {{ $t('layout.more.articles') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.library') }}</p>
+          </section>
+          <section class="home-page__container--card">
+            <h3 class="home-page__sub-title">{{ $t("layout.resource") }}</h3>
+            <template v-if="latestPublications?.resources?.length">
+              <PublicationList
+                :hide-thumbnail="$appSettings.HIDE_RESOURCES_THUMBNAIL"
+                :items="latestPublications.resources"
+              />
+              <NuxtLink class="home-page__more" :to="localePath('/resource')">
+                {{ $t('layout.more.resources') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.resources') }}</p>
+          </section>
+        </div>
+        <div class="home-page__divider" />
+        <div class="home-page__container--videos">
+          <div class="home-page__container--videos-content">
+            <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
+            <template v-if="latestPublications?.videos?.length">
+              <div class="home-page__container--videos-mobile">
+                <PublicationList
+                  :items="latestPublications.videos"
+                />
+              </div>
+              <div class="home-page__container--videos-desktop">
+                <VideoPlayer
+                  class="home-page__video-player"
+                  :videos="latestPublications.videos"
+                />
+              </div>
+              <NuxtLink class="home-page__more" :to="localePath('/video')">
+                {{ $t('layout.more.videos') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.videos') }}</p>
+          </div>
+        </div>
+        <div v-if="showBottomBlock" class="home-page__divider" />
+        <div v-if="showBottomBlock" class="home-page__container--other">
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.product") }}</h3>
             <template v-if="latestPublications?.products.length">
@@ -99,14 +127,13 @@
   </div>
 </template>
 <script setup>
-  import { format } from 'date-fns'
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
-  import { AUTHOR } from '~/assets/constants/types'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePosts } from '~/assets/composables/usePosts'
-  import { convertTs } from '~/assets/utils/convert-timestamp'
   import PublicationList from '~/components/PublicationList.vue'
+  import ForumList from '~/components/ForumList.vue'
+  import VideoPlayer from '~/components/VideoPlayer.vue'
 
+  const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
   const { loading, getPosts } = usePosts()
@@ -121,6 +148,8 @@
     ],
     title: t('home.title')
   })
+
+  const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_COMMUNITY)
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
   posts.value = await getPosts(0, 4)
@@ -144,20 +173,16 @@
     @include title();
   }
 
-  &__link,
-  &__sub-title {
-    @include titleLink();
-
-    margin-bottom: 5px;
-  }
-
   &__container {
     &--top,
+    &--mid,
+    &--videos,
     &--other {
       display: flex;
     }
 
-    &--news {
+    &--news,
+    &--library {
       width: calc(67% - 10px);
     }
 
@@ -165,34 +190,59 @@
       width: calc(33% - 10px);
     }
 
+    &--videos {
+      &-content {
+        width: 100%;
+      }
+
+      &-mobile {
+        display: none;
+      }
+    }
+
     &--news,
-    &--card {
+    &--library,
+    &--card,
+    &--videos-content {
       margin: 10px;
     }
   }
 
-  &__thumbnail {
-    @include thumbnail();
+  &__divider {
+    border-bottom: 1px solid var(--list-group--border-bottom-color, var(--border-bottom-color));
+    margin: 30px 0 10px 0;
   }
 
   &__more {
     padding-left: var(--list-group--padding-left, var(--padding-left));
   }
 
-  &__forum-tag {
-    font-style: normal;
+  &__video-player {
+    padding: 15px 0 20px 0;
   }
 
   @include breakpoint-down('md') {
     &__container {
       &--top,
+      &--mid,
       &--other {
         flex-direction: column;
       }
 
       &--news,
+      &--library,
       &--card {
         width: 100%;
+      }
+
+      &--videos {
+        &-desktop {
+          display: none;
+        }
+
+        &-mobile {
+          display: block;
+        }
       }
     }
   }
