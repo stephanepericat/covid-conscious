@@ -9,44 +9,11 @@
     />
     <template v-else>
       <p v-text="$t('forum.list.description', { start, end, total })" />
-      <IListGroup
-        size="sm"
-        :border="false"
-      >
-        <IListGroupItem
-          v-for="post in posts"
-          :key="post.id"
-        >
-          <IMedia>
-            <template #image>
-              <img
-                v-if="post.avatar"
-                class="sf-post-list__thumbnail"
-                :src="post.avatar"
-              >
-              <div
-                v-else
-                class="sf-post-list__thumbnail--fallback"
-              >
-                <Icon
-                  class="sf-post-list__thumbnail--fallback-icon"
-                  name="material-symbols:account-circle-full"
-                />
-              </div>
-            </template>
-            <h3 class="sf-post-list__link">
-              <NuxtLink :to="localePath(`${rootPath}/post/${post.id}`)">
-                {{ post.headline }}
-              </NuxtLink>
-            </h3>
-            <em>
-              <span>{{ $t(`forum.create.categories.${post.topic}`) }} &bullet; </span>
-              <span><NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink> &bullet; </span>
-              <span>{{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
-            </em>
-          </IMedia>
-        </IListGroupItem>
-      </IListGroup>
+      <ForumList
+        :posts="posts"
+        :root-path="rootPath"
+        :ssr="isSSR"
+      />
       <IPagination
         v-model="currentPage"
         class="sf-post-list__pagination"
@@ -58,9 +25,8 @@
   </div>
 </template>
 <script setup>
-  import { format } from 'date-fns'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import ForumList from '~/components/ForumList.vue'
 
   const emit = defineEmits(['page-change'])
 
@@ -74,6 +40,7 @@
 
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
+  const isSSR = computed(() => !process.client)
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
   const start = computed(() => startItem.value + 1)
@@ -99,14 +66,6 @@
 
   &__loader {
     @include loader();
-  }
-
-  &__link {
-    @include titleLink();
-  }
-
-  &__thumbnail {
-    @include thumbnail($dimension: 80px);
   }
 
   &__pagination {
