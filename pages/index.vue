@@ -69,13 +69,15 @@
                 <PublicationList
                   :items="latestPublications.videos"
                 />
-                <NuxtLink class="home-page__more" :to="localePath('/video')">
-                  {{ $t('layout.more.videos') }} &raquo;
-                </NuxtLink>
               </div>
               <div class="home-page__container--videos-desktop">
-                <VideoPlayer />
+                <VideoPlayer
+                  :videos="latestPublications.videos"
+                />
               </div>
+              <NuxtLink class="home-page__more" :to="localePath('/video')">
+                {{ $t('layout.more.videos') }} &raquo;
+              </NuxtLink>
             </template>
             <p v-else>{{ $t('layout.empty.videos') }}</p>
           </div>
