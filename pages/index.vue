@@ -53,6 +53,33 @@
             <p v-else>{{ $t('layout.empty.forum') }}</p>
           </section>
         </div>
+        <div class="home-page__divider" />
+        <div class="home-page__container--mid">
+          <section class="home-page__container--library">
+            <h3 class="home-page__sub-title">{{ $t("layout.scientific-library") }}</h3>
+            <template v-if="latestPublications?.library?.length">
+              <PublicationList
+                :items="latestPublications.library"
+              />
+              <NuxtLink class="home-page__more" :to="localePath('/scientific-library')">
+                {{ $t('layout.more.articles') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.library') }}</p>
+          </section>
+          <section class="home-page__container--card">
+            <h3 class="home-page__sub-title">{{ $t("layout.resource") }}</h3>
+            <template v-if="latestPublications?.resources?.length">
+              <PublicationList
+                :items="latestPublications.resources"
+              />
+              <NuxtLink class="home-page__more" :to="localePath('/resource')">
+                {{ $t('layout.more.resources') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.resources') }}</p>
+          </section>
+        </div>
         <!-- <div class="home-page__container--videos">
           <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
         </div> -->
@@ -154,11 +181,13 @@
 
   &__container {
     &--top,
+    &--mid,
     &--other {
       display: flex;
     }
 
-    &--news {
+    &--news,
+    &--library {
       width: calc(67% - 10px);
     }
 
@@ -167,9 +196,15 @@
     }
 
     &--news,
+    &--library,
     &--card {
       margin: 10px;
     }
+  }
+
+  &__divider {
+    border-bottom: 1px solid var(--list-group--border-bottom-color, var(--border-bottom-color));
+    margin: 30px 0 10px 0;
   }
 
   &__thumbnail {
@@ -187,14 +222,20 @@
   @include breakpoint-down('md') {
     &__container {
       &--top,
+      &--mid,
       &--other {
         flex-direction: column;
       }
 
       &--news,
+      &--library,
       &--card {
         width: 100%;
       }
+    }
+
+    &__divider {
+      display: none;
     }
   }
 }
