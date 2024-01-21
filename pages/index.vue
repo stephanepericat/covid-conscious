@@ -64,6 +64,20 @@
         <div class="home-page__container--videos">
           <div class="home-page__container--videos-content">
             <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
+            <template v-if="latestPublications?.videos?.length">
+              <div class="home-page__container--videos-mobile">
+                <PublicationList
+                  :items="latestPublications.videos"
+                />
+                <NuxtLink class="home-page__more" :to="localePath('/video')">
+                  {{ $t('layout.more.videos') }} &raquo;
+                </NuxtLink>
+              </div>
+              <div class="home-page__container--videos-desktop">
+                <VideoPlayer />
+              </div>
+            </template>
+            <p v-else>{{ $t('layout.empty.videos') }}</p>
           </div>
         </div>
         <div v-if="showBottomBlock" class="home-page__divider" />
@@ -114,6 +128,7 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import PublicationList from '~/components/PublicationList.vue'
   import ForumList from '~/components/ForumList.vue'
+  import VideoPlayer from '~/components/VideoPlayer.vue'
 
   const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
@@ -172,8 +187,14 @@
       width: calc(33% - 10px);
     }
 
-    &--videos-content {
-      width: 100%;
+    &--videos {
+      &-content {
+        width: 100%;
+      }
+
+      &-mobile {
+        display: none;
+      }
     }
 
     &--news,
@@ -205,6 +226,16 @@
       &--library,
       &--card {
         width: 100%;
+      }
+
+      &--videos {
+        &-desktop {
+          display: none;
+        }
+
+        &-mobile {
+          display: block;
+        }
       }
     }
   }

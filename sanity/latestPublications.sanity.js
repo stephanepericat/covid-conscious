@@ -45,7 +45,7 @@ export default groq`
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
   },
-  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) && defined(embedCode)] | order(publicationDate desc, _createdAt desc)[0..4]{
+  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     "id": _id,
     title,
     embedCode,
@@ -56,6 +56,7 @@ export default groq`
     "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
+    "thumbnail": visual.asset._ref,
   },
   "library": *[(_type == "scientific-library") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
