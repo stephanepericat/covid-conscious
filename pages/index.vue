@@ -81,9 +81,13 @@
             <p v-else>{{ $t('layout.empty.resources') }}</p>
           </section>
         </div>
-        <!-- <div class="home-page__container--videos">
-          <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
-        </div> -->
+        <div class="home-page__divider" />
+        <div class="home-page__container--videos">
+          <div class="home-page__container--videos-content">
+            <h3 class="home-page__sub-title">{{ $t("layout.video") }}</h3>
+          </div>
+        </div>
+        <div v-if="showBottomBlock" class="home-page__divider" />
         <div v-if="showBottomBlock" class="home-page__container--other">
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.product") }}</h3>
@@ -183,6 +187,7 @@
   &__container {
     &--top,
     &--mid,
+    &--videos,
     &--other {
       display: flex;
     }
@@ -196,9 +201,14 @@
       width: calc(33% - 10px);
     }
 
+    &--videos-content {
+      width: 100%;
+    }
+
     &--news,
     &--library,
-    &--card {
+    &--card,
+    &--videos-content {
       margin: 10px;
     }
   }
