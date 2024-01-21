@@ -54,6 +54,7 @@ export default groq`
     "date": publicationDate,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "summary": coalesce(summary[$locale], summary['${baseLanguage}'], summary, ""),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
     "thumbnail": visual.asset._ref,

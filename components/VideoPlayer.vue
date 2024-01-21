@@ -13,7 +13,9 @@
         </IListGroupItem>
       </IListGroup>
     </div>
-    <div class="video-player__contents">&nbsp;</div>
+    <div class="video-player__contents">
+      <pre>{{ videoDetails }}</pre>
+    </div>
   </div>
 </template>
 <script setup>
@@ -31,13 +33,20 @@
 
   const activeVideo = ref(videoList.value[0]?.id || null)
 
-  const setActiveVideo = (id) => activeVideo.value = id 
+  const setActiveVideo = (id) => activeVideo.value = id
+
+  const videoDetails = computed(() => {
+    return videoList
+      .value
+      .find(({ id }) => id === activeVideo.value)
+  })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
 
 .video-player {
   display: flex;
+  margin-bottom: 20px;
 
   &__list {
     width: 33%;
@@ -52,6 +61,8 @@
   }
 
   &__contents {
+    border-left: 1px solid var(--list-group--border-bottom-color, var(--border-bottom-color));
+    padding-left: 20px;
     width: 67%;
   }
 }
