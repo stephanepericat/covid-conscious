@@ -41,9 +41,10 @@
                 <ITooltip size="sm" placement="bottom" class="publication-list__locked--tooltip">
                   <IBadge size="sm" color="danger" class="publication-list__locked--badge">
                     <Icon
+                      class="publication-list__locked--badge-icon"
                       name="material-symbols:lock"
                     />
-                    {{ $t('article.locked') }}
+                    <span>{{ $t('article.locked') }}</span>
                   </IBadge>
                   <template #body>
                     <div class="_xs:justify-content:center publication-list__locked--tooltip-label">
@@ -150,6 +151,15 @@
   }
 
   &__locked {
+    &--badge {
+      &-icon {
+        height: 0.7em;
+        width: 0.7em;
+        margin-right: 3px;
+        vertical-align: initial;
+      }
+    }
+
     &--tooltip {
       &-label {
         letter-spacing: normal;
