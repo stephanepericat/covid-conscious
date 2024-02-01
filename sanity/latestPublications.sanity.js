@@ -25,7 +25,6 @@ export default groq`
   },
   "news": *[(_type == "link") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
-    "author": author-> { nickname, "slug": uri.current },
     "published": _createdAt,
     "link": url,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
@@ -62,7 +61,6 @@ export default groq`
   },
   "library": *[(_type == "scientific-library") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
-    "author": author-> { nickname, "slug": uri.current },
     "published": _createdAt,
     "link": url,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
@@ -76,7 +74,6 @@ export default groq`
   },
   "resources": *[(_type == "resource") && !(_id in path('drafts.**')) && (language == $locale)] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
-    "author": author-> { nickname, "slug": uri.current },
     "published": _createdAt,
     "link": url,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
