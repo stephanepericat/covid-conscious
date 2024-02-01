@@ -89,6 +89,8 @@
       padding: 0;
 
       &-item {
+        @include eyebrow();
+
         cursor: pointer;
         display: inline-block;
         font-style: normal;

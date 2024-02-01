@@ -3,6 +3,8 @@ export default {
     call: "Call",
     contactInfo: "Contact Info",
     email: "Email",
+    locked: "Premium",
+    lockedDescription: "This publication is behind a paywall or subscription",
     moreInfo: "More Information",
     share: {
       facebook: 'Share on Facebook',

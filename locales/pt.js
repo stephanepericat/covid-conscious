@@ -3,6 +3,8 @@ export default {
     call: "Chamar",
     contactInfo: "Informações de Contato",
     email: "E-mail",
+    locked: "Premium",
+    lockedDescription: "Esta publicação está protegida por acesso pago ou assinatura",
     moreInfo: "Mais Informações",
     share: {
       facebook: 'Compartilhar no Facebook',
