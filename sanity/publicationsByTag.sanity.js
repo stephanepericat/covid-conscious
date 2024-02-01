@@ -24,6 +24,7 @@ export default groq`
     "city": contactInfo.city,
     "language": coalesce(language, $locale),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "locked": coalesce(!freeAccess, false),
   },
   "metadata": *[_type == "tag" && uri.current == $slug][0] {
     "label": coalesce(name[$locale], name['${baseLanguage}'], ''),

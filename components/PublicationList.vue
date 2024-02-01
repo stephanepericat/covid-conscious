@@ -37,6 +37,21 @@
           <em class="publication-list__metadata">
             <IBadge size="sm" v-if="isForum(article.type)">{{ article.category }}</IBadge>
             <ul v-else class="publication-list__tags">
+              <li v-if="article.locked" class="publication-list__tags--item locked">
+                <ITooltip size="sm" placement="bottom" class="publication-list__locked--tooltip">
+                  <IBadge size="sm" color="danger" class="publication-list__locked--badge">
+                    <Icon
+                      name="material-symbols:lock"
+                    />
+                    {{ $t('article.locked') }}
+                  </IBadge>
+                  <template #body>
+                    <div class="_xs:justify-content:center publication-list__locked--tooltip-label">
+                      {{ $t('article.lockedDescription') }}
+                    </div>
+                  </template>
+                </ITooltip>
+              </li>
               <li v-for="{ uri, name } in article.tags" :key="uri" class="publication-list__tags--item">
                 <IBadge size="sm" @click="onTagClick({ uri })">{{ name }}</IBadge>
               </li>
@@ -117,6 +132,8 @@
     padding: 0;
 
     &--item {
+      @include eyebrow();
+
       cursor: pointer;
       display: inline-block;
       font-style: normal;
@@ -124,6 +141,21 @@
 
       &:last-of-type {
         margin-right: 1px;
+      }
+
+      &.locked {
+        cursor: default;
+      }
+    }
+  }
+
+  &__locked {
+    &--tooltip {
+      &-label {
+        letter-spacing: normal;
+        text-transform: none;
+        white-space: normal;
+        width: 140px;
       }
     }
   }

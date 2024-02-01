@@ -24,6 +24,7 @@ export default groq`
     "city": contactInfo.city,
     "language": coalesce(language, null),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "locked": coalesce(!freeAccess, false),
   },
   "total": count(*[_type == $articleType])
 }

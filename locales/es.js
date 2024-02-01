@@ -3,6 +3,8 @@ export default {
     call: "Call",
     contactInfo: "Datos de Contacto",
     email: "Correo Electrónico",
+    locked: "Premium",
+    lockedDescription: "Esta publicación está detrás de un muro de pago o suscripción",
     moreInfo: "Más Información",
     share: {
       facebook: 'Compartir en Facebook',
