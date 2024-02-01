@@ -156,7 +156,7 @@
         height: 0.7em;
         width: 0.7em;
         margin-right: 3px;
-        vertical-align: initial;
+        vertical-align: initial !important;
       }
     }
 
