@@ -2,7 +2,7 @@ import { Feed } from "feed";
 import rssFeedQuery from "../../sanity/rssFeed.sanity";
 import { isExternalLink, isNews, isLibrary } from "~/assets/utils/article-types";
 
-export default eventHandler(async (event) => {
+export default eventHandler(async (event) => {  
   const { fetch } = useSanity();
 
   const query = getQuery(event);
@@ -33,6 +33,7 @@ export default eventHandler(async (event) => {
     entries.forEach((entry) => {
       const title = isNews(entry.type) || isLibrary(entry.type) ? `${entry.source}: ${entry.title}` : entry.title;
       const link = isExternalLink(entry.type) ? entry.link : `${BASE_URL}${entry.slug}`;
+      const author = entry.source || entry.author?.name || 'That Covid Life';
 
       feed.addItem({
         title,
@@ -42,7 +43,7 @@ export default eventHandler(async (event) => {
         link,
         date: new Date(entry.publishedAt),
         image: entry.image,
-        author: [entry.author.name],
+        author: [author],
         category: [{ name: entry.category }],
       });
     });
@@ -52,5 +53,8 @@ export default eventHandler(async (event) => {
     return feed.rss2();
   } catch(e) {
     console.log("error", e.message);
+    return {
+      error: e.message
+    }
   }
 });
