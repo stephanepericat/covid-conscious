@@ -34,10 +34,11 @@ export default eventHandler(async (event) => {
       const title = isNews(entry.type) || isLibrary(entry.type) ? `${entry.source}: ${entry.title}` : entry.title;
       const link = isExternalLink(entry.type) ? entry.link : `${BASE_URL}${entry.slug}`;
       const author = entry.source || entry.author?.name || 'That Covid Life';
+      const description = entry.description || entry. summary;
 
       feed.addItem({
         title,
-        description: entry.description || entry.summary,
+        description: description ? `${description}...` : null,
         published: new Date(entry.publishedAt),
         id: entry.id,
         link,

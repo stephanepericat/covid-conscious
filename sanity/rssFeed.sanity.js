@@ -3,13 +3,12 @@ import { baseLanguage } from '~/assets/constants/base-language'
 
 export default groq`
   {
-    "entries": *[_type in ["product", "link", "education", "community", "scientific-library", "video"]][0..50] | order(_updatedAt desc) {
+    "all_entries": *[(_type in ["link", "scientific-library", "video", "resources", "production", "community", "education"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
       "id": _id,
       "type": _type,
       "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
-      // TODO: fix description for library items
-      "description": array::join(string::split((pt::text(coalesce(description[$locale], description['${baseLanguage}'], null))), "")[0..255], "") + "...",
-      "summary": coalesce(summary[$locale], summary['${baseLanguage}'], summary, null),
+      "description": array::join(string::split((pt::text(coalesce(description[$locale], description['${baseLanguage}'], null))), "")[0..252], "") + "...",
+      "summary": array::join(string::split(coalesce(summary[$locale], summary['${baseLanguage}'], summary, ''), '')[0..252], ''),
       "publishedAt": _createdAt,
       "updatedAt": _updatedAt,
       "link": url,
@@ -28,5 +27,8 @@ export default groq`
         "name": author.name,
       },
     },
+  } | {
+    "entries": all_entries[0..20],
+    "settings": settings
   }
 `;
