@@ -12,7 +12,7 @@
                 :src="post.avatar"
               >
             </ClientOnly>
-            <Icon v-if="!post.avatar || ssr" class="forum-list__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
+            <img v-if="!post.avatar || ssr" class="forum-list__thumbnail" src="/tcl-logo-big-grey.jpeg" />
           </div>
           </template>
           <h4 class="forum-list__link">
@@ -59,7 +59,6 @@
     margin-bottom: 5px;
   }
 
-  &__avatar,
   &__thumbnail {
     @include thumbnail();
   }

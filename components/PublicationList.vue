@@ -13,7 +13,7 @@
               :h="80"
               :w="80"
             />
-            <img v-else-if="article.avatar" class="publication-list__avatar" :src="article.avatar" />
+            <img v-else-if="article.avatar" class="publication-list__thumbnail" :src="article.avatar" />
             <img v-else class="publication-list__thumbnail" src="/tcl-logo-big-grey.jpeg" />
           </template>
           <h4
@@ -111,7 +111,6 @@
     margin-bottom: 5px;
   }
 
-  &__avatar,
   &__thumbnail {
     @include thumbnail();
   }
