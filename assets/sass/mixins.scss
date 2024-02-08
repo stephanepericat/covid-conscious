@@ -23,6 +23,7 @@
 @mixin thumbnail($dimension: $thumbnailDimension) {
   width: $dimension;
   height: $dimension;
+  border-radius: 5px;
 
   &--fallback {
     flex: none;

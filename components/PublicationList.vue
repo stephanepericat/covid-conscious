@@ -6,6 +6,7 @@
           <template v-if="!hideThumbnail" #image>
             <SanityImage
               v-if="article.thumbnail"
+              class="publication-list__thumbnail"
               :asset-id="article.thumbnail"
               fit="crop"
               crop="entropy"
@@ -13,9 +14,7 @@
               :w="80"
             />
             <img v-else-if="article.avatar" class="publication-list__avatar" :src="article.avatar" />
-            <div v-else class="publication-list__thumbnail--fallback">
-              <Icon class="publication-list__thumbnail--fallback-icon" name="material-symbols:broken-image-outline" />
-            </div>
+            <img v-else class="publication-list__thumbnail" src="/tcl-logo-big-grey.jpeg" />
           </template>
           <h4
             class="publication-list__link"
