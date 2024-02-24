@@ -16,7 +16,7 @@
       <h4 class="post-preview__link">
         <NuxtLink :to="localePath(`${rootPath}/${POST}/${post.id}`)">{{ post.headline }}</NuxtLink>
       </h4>
-      <p class="post-preview__description">{{ cleanPostBody(post.body) }}</p>
+      <p class="post-preview__description" v-if="withPreview">{{ cleanPostBody(post.body) }}</p>
       <em>
         <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
         <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
@@ -36,7 +36,10 @@
     post: { type: Object, required: true },
     rootPath: { type: String, required: true },
     ssr: Boolean,
+    withPreview: Boolean,
   })
+
+  const localePath = useLocalePath()
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

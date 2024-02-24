@@ -87,12 +87,13 @@
               <div class="home-page__container--forum-posts">
                 <PostPreview
                   v-for="post in posts"
-                  :key="post.id"
                   class="home-page__container--forum-post"
                   hide-thumbnail
+                  :key="post.id"
                   :post="post"
+                  :root-path="rootPath"
                   :ssr="isSSR"
-                  :root-path="rootPath" 
+                  with-preview
                 />
               </div>
               <NuxtLink class="home-page__more" :to="localePath('/forum')">
