@@ -3,6 +3,7 @@ export default {
     call: "Call",
     contactInfo: "Contact Info",
     email: "Email",
+    free: "Free",
     locked: "Premium",
     lockedDescription: "This publication is behind a paywall or subscription",
     moreInfo: "More Information",

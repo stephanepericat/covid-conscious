@@ -3,6 +3,7 @@ export default {
     call: "Chamar",
     contactInfo: "Informações de Contato",
     email: "E-mail",
+    free: "Gratuito",
     locked: "Premium",
     lockedDescription: "Esta publicação está protegida por acesso pago ou assinatura",
     moreInfo: "Mais Informações",
@@ -100,7 +101,7 @@ export default {
     empty: {
       community: 'Ainda não há links de comunidade.',
       education: 'Ainda não há conteúdo educacional.',
-      events: 'Não há eventos futuros.',
+      events: 'Não há nenhum evento próximo.',
       forum: 'Nenhuma postagem no fórum ainda.',
       library: 'Ainda não há artigos científicos.',
       news: 'Nenhuma notícia ainda.',
