@@ -88,7 +88,7 @@ export default groq`
     "id": _id,
     title,
     "date": eventDate,
-    "summary": array::join(string::split(eventInfo, '')[0..255], '') + "...",
+    "summary": array::join(string::split(coalesce(eventInfo, ''), '')[0..255], '') + "...",
     isEventFree,
     language,
     "link": url,

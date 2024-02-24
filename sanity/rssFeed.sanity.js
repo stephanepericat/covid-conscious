@@ -3,12 +3,12 @@ import { baseLanguage } from '~/assets/constants/base-language'
 
 export default groq`
   {
-    "all_entries": *[(_type in ["link", "scientific-library", "video", "resource", "product", "community", "education"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
+    "all_entries": *[(_type in ["link", "scientific-library", "video", "resource", "event", "product", "community", "education"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
       "id": _id,
       "type": _type,
       "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
       "description": array::join(string::split((pt::text(coalesce(description[$locale], description['${baseLanguage}'], null))), "")[0..252], "") + "...",
-      "summary": array::join(string::split(coalesce(summary[$locale], summary['${baseLanguage}'], summary, ''), '')[0..252], ''),
+      "summary": array::join(string::split(coalesce(summary[$locale], summary['${baseLanguage}'], summary, eventInfo, ''), '')[0..252], ''),
       "publishedAt": _createdAt,
       "updatedAt": _updatedAt,
       "link": url,
