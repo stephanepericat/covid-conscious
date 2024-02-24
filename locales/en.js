@@ -4,6 +4,7 @@ export default {
     contactInfo: "Contact Info",
     email: "Email",
     free: "Free",
+    limited: "Limited Access",
     locked: "Premium",
     lockedDescription: "This publication is behind a paywall or subscription",
     moreInfo: "More Information",

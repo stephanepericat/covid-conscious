@@ -4,6 +4,7 @@ export default {
     contactInfo: "Coordonnées",
     email: "E-mail",
     free: "Gratuit",
+    limited: "Accès limité",
     locked: "Premium",
     lockedDescription: "Cette publication est derrière un paywall ou un abonnement",
     moreInfo: "Plus d'Information",

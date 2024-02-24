@@ -36,6 +36,15 @@
           <em class="publication-list__metadata">
             <IBadge size="sm" v-if="isForum(article.type)">{{ article.category }}</IBadge>
             <ul v-else class="publication-list__tags">
+              <li v-if="article.limited" class="publication-list__tags--item locked">
+                <IBadge color="warning" size="sm">
+                  <Icon
+                    class="publication-list__locked--badge-icon"
+                    name="line-md:alert-circle"
+                  />
+                  <span>{{ $t('article.limited') }}</span>
+                </IBadge>
+              </li>
               <li v-if="article.locked" class="publication-list__tags--item locked">
                 <ITooltip size="sm" placement="bottom" class="publication-list__locked--tooltip">
                   <IBadge size="sm" color="danger" class="publication-list__locked--badge">

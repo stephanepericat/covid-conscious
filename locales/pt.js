@@ -4,6 +4,7 @@ export default {
     contactInfo: "Informações de Contato",
     email: "E-mail",
     free: "Gratuito",
+    limited: "Acesso Limitado",
     locked: "Premium",
     lockedDescription: "Esta publicação está protegida por acesso pago ou assinatura",
     moreInfo: "Mais Informações",

@@ -33,7 +33,8 @@ export default groq`
     "thumbnail": visual.asset._ref,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
-    "locked": !freeAccess,
+    "locked": coalesce(premiumAccess, false),
+    "limited": coalesce(limitedAccess, false),
   },
   "products": *[(_type == "product") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], null),
@@ -70,7 +71,8 @@ export default groq`
     "thumbnail": visual.asset._ref,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
-    "locked": !freeAccess,
+    "locked": coalesce(premiumAccess, false),
+    "limited": coalesce(limitedAccess, false),
   },
   "resources": *[(_type == "resource") && !(_id in path('drafts.**')) && (language == $locale)] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[$locale], title['${baseLanguage}'], title, null),
