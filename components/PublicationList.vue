@@ -27,7 +27,7 @@
             </NuxtLink>
           </h4>
           <p
-            v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
+            v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
             class="publication-list__description"
             :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) || isResource(article.type) }"
           >
@@ -55,6 +55,9 @@
               <li v-for="{ uri, name } in article.tags" :key="uri" class="publication-list__tags--item">
                 <IBadge size="sm" @click="onTagClick({ uri })">{{ name }}</IBadge>
               </li>
+              <li v-if="isEvent(article.type) && article.isEventFree" class="publication-list__tags--item locked">
+                <IBadge size="sm">{{ $t('article.free') }}</IBadge>
+              </li>
             </ul>
             <template v-if="!isResource(article.type)">
               <span v-if="article.author"> &bullet; <NuxtLink :to="localePath(isForum(article.type) ? `/${FORUM}/${USER}/${article.author.slug}` : `/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
@@ -75,7 +78,7 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { isExternalLink, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isEvent, isExternalLink, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'

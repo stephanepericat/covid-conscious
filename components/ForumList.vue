@@ -1,37 +1,19 @@
 <template>
   <div class="forum-list">
     <IListGroup size="sm" :border="false">
-      <IListGroupItem v-for="post in posts">
-        <IMedia>
-          <template v-if="!hideThumbnail" #image>
-            <div class="forum-list__thumbnail--fallback">
-            <ClientOnly>
-              <img
-                v-if="post.avatar"
-                class="forum-list__thumbnail"
-                :src="post.avatar"
-              >
-            </ClientOnly>
-            <img v-if="!post.avatar || ssr" class="forum-list__thumbnail" src="/tcl-logo-big-grey.jpeg" />
-          </div>
-          </template>
-          <h4 class="forum-list__link">
-            <NuxtLink :to="localePath(`${rootPath}/${POST}/${post.id}`)">{{ post.headline }}</NuxtLink>
-          </h4>
-          <em>
-            <IBadge class="forum-list__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
-            <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
-            <span> &bullet; {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
-          </em>
-        </IMedia>
+      <IListGroupItem v-for="post in posts" :key="post.id">
+        <PostPreview
+          :hide-thumbnail="hideThumbnail"
+          :post="post"
+          :root-path="rootPath"
+          :ssr="ssr"
+        />
       </IListGroupItem>
     </IListGroup>
   </div>
 </template>
 <script setup>
-  import { format } from 'date-fns'
-  import { POST, USER } from '~/assets/constants/types'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import PostPreview from '~/components/PostPreview.vue'
 
   const props = defineProps({
     hideThumbnail: Boolean,
@@ -39,8 +21,6 @@
     rootPath: { type: String, required: true },
     ssr: Boolean,
   })
-
-  const localePath = useLocalePath()
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

@@ -18,18 +18,14 @@
             <p v-else>{{ $t('layout.empty.news') }}</p>
           </section>
           <section class="home-page__container--card">
-            <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
-            <template v-if="posts?.length">
-              <ForumList
-                :posts="posts"
-                :root-path="rootPath"
-                :ssr="isSSR"
+            <h3 class="home-page__sub-title">{{ $t("layout.events") }}</h3>
+            <template v-if="latestPublications?.events.length">
+              <PublicationList
+                hide-thumbnail
+                :items="latestPublications.events"
               />
-              <NuxtLink class="home-page__more" :to="localePath('/forum')">
-                {{ $t('layout.more.posts') }} &raquo;
-              </NuxtLink>
             </template>
-            <p v-else>{{ $t('layout.empty.forum') }}</p>
+            <p v-else>{{ $t('layout.empty.events') }}</p>
           </section>
         </div>
         <div class="home-page__divider" />
@@ -83,6 +79,30 @@
             <p v-else>{{ $t('layout.empty.videos') }}</p>
           </div>
         </div>
+        <div class="home-page__divider" />
+        <div class="home-page__container--forum">
+          <div class="home-page__container--forum-content">
+            <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
+            <template v-if="posts?.length">
+              <div class="home-page__container--forum-posts">
+                <PostPreview
+                  v-for="post in posts"
+                  class="home-page__container--forum-post"
+                  hide-thumbnail
+                  :key="post.id"
+                  :post="post"
+                  :root-path="rootPath"
+                  :ssr="isSSR"
+                  with-preview
+                />
+              </div>
+              <NuxtLink class="home-page__more" :to="localePath('/forum')">
+                {{ $t('layout.more.posts') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.forum') }}</p>
+          </div>
+        </div>
         <div v-if="showBottomBlock" class="home-page__divider" />
         <div v-if="showBottomBlock" class="home-page__container--other">
           <section class="home-page__container--card">
@@ -129,8 +149,8 @@
 <script setup>
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
   import { usePosts } from '~/assets/composables/usePosts'
+  import PostPreview from '~/components/PostPreview.vue'
   import PublicationList from '~/components/PublicationList.vue'
-  import ForumList from '~/components/ForumList.vue'
   import VideoPlayer from '~/components/VideoPlayer.vue'
 
   const { $appSettings } = useNuxtApp()
@@ -152,7 +172,7 @@
   const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_COMMUNITY)
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
-  posts.value = await getPosts(0, 4)
+  posts.value = await getPosts(0, 2)
 
   umTrackView()
 </script>
@@ -177,6 +197,7 @@
     &--top,
     &--mid,
     &--videos,
+    &--forum,
     &--other {
       display: flex;
     }
@@ -188,6 +209,23 @@
 
     &--card {
       width: calc(33% - 10px);
+    }
+
+    &--forum {
+      &-content {
+        width: 100%;
+      }
+
+      &-post {
+        width: 30%;
+      }
+
+      &-posts {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 20px 0;
+      }
     }
 
     &--videos {
@@ -203,6 +241,7 @@
     &--news,
     &--library,
     &--card,
+    &--forum-content,
     &--videos-content {
       margin: 10px;
     }
@@ -225,14 +264,20 @@
     &__container {
       &--top,
       &--mid,
-      &--other {
+      &--other,
+      &--forum-posts {
         flex-direction: column;
       }
 
       &--news,
       &--library,
-      &--card {
+      &--card,
+      &--forum-post {
         width: 100%;
+      }
+
+      &--forum-post {
+        margin-bottom: 40px;
       }
 
       &--videos {

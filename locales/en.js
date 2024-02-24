@@ -3,6 +3,7 @@ export default {
     call: "Call",
     contactInfo: "Contact Info",
     email: "Email",
+    free: "Free",
     locked: "Premium",
     lockedDescription: "This publication is behind a paywall or subscription",
     moreInfo: "More Information",
@@ -90,6 +91,7 @@ export default {
     bluesky: "Follow us on Bluesky",
     contents: "Contents",
     disclaimer: "Disclaimer",
+    events: "Upcoming Events",
     footerLegal: "© {year} All rights reserved.",
     here: "here",
     home: "Home",
@@ -99,6 +101,7 @@ export default {
     empty: {
       community: 'No community links yet.',
       education: 'No educational content yet.',
+      events: 'No upcoming events.',
       forum: 'No forum posts yet.',
       library: 'No scientific articles yet.',
       news: 'No news yet.',

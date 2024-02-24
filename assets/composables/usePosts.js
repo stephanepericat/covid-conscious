@@ -126,6 +126,7 @@ export const usePosts = () => {
         .select(`
           id,
           headline,
+          body,
           topic,
           created_at,
           profiles ( id, username, avatar_url )

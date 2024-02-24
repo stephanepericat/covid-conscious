@@ -3,6 +3,7 @@ export default {
     call: "Appeler",
     contactInfo: "Coordonnées",
     email: "E-mail",
+    free: "Gratuit",
     locked: "Premium",
     lockedDescription: "Cette publication est derrière un paywall ou un abonnement",
     moreInfo: "Plus d'Information",
@@ -90,6 +91,7 @@ export default {
     bluesky: "Suivez-nous sur Bluesky",
     contents: "Contenu",
     disclaimer: "Clause de non-responsabilité",
+    events: "Évènements à Venir",
     footerLegal: "© {year} Tous droits réservés.",
     here: "ici",
     home: "Accueil",
@@ -99,6 +101,7 @@ export default {
     empty: {
       community: 'Aucun lien de communauté pour l\'instant.',
       education: 'Pas encore de contenu éducatif.',
+      events: 'Aucun événement à venir.',
       forum: 'Aucun message sur le forum pour l\'instant.',
       library: 'Pas encore d\'articles scientifiques.',
       news: 'Pas encore de nouvelles.',
