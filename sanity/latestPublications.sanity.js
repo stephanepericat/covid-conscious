@@ -84,5 +84,16 @@ export default groq`
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
   },
+  "events": *[_type == 'event' && !(_id in path('drafts.**')) && string(eventDate) >= string::split(string(now()), "T")[0] && language == $locale] | order(eventDate desc) {
+    "id": _id,
+    title,
+    "date": eventDate,
+    "summary": array::join(string::split(eventInfo, '')[0..255], '') + "...",
+    isEventFree,
+    language,
+    "link": url,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
+  },
 }
 `

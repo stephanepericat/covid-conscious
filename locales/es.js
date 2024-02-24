@@ -90,6 +90,7 @@ export default {
     bluesky: "Síguenos en Bluesky",
     contents: "Contenido",
     disclaimer: "Descargo de responsabilidad",
+    events: "Próximos Eventos",
     footerLegal: "© {year} Reservados todos los derechos.",
     here: "aquí",
     home: "Página Principal",
@@ -99,6 +100,7 @@ export default {
     empty: {
       community: 'Aún no hay enlaces de la comunidad.',
       education: 'Aún no hay contenido educativo.',
+      events: 'No hay eventos próximos.',
       forum: 'Aún no hay publicaciones en el foro.',
       library: 'Aún no hay artículos científicos.',
       news: 'Aún no hay noticias.',

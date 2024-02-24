@@ -27,7 +27,7 @@
             </NuxtLink>
           </h4>
           <p
-            v-if="(isResource(article.type) || isLibrary(article.type)  || isVideo(article.type)) && article.summary"
+            v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
             class="publication-list__description"
             :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) || isResource(article.type) }"
           >
@@ -75,7 +75,7 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { isExternalLink, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isEvent, isExternalLink, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'

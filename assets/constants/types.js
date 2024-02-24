@@ -1,6 +1,7 @@
 export const AUTHOR = 'author'
 export const COMMUNITY = 'community'
 export const EDUCATION = 'education'
+export const EVENT = 'event'
 export const FORUM = 'forum'
 export const LIBRARY = 'scientific-library'
 export const LINK = 'link'

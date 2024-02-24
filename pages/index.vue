@@ -18,18 +18,22 @@
             <p v-else>{{ $t('layout.empty.news') }}</p>
           </section>
           <section class="home-page__container--card">
-            <h3 class="home-page__sub-title">{{ $t("layout.forum") }}</h3>
-            <template v-if="posts?.length">
-              <ForumList
+            <h3 class="home-page__sub-title">{{ $t("layout.events") }}</h3>
+            <template v-if="latestPublications?.events.length">
+              <!-- <ForumList
                 :posts="posts"
                 :root-path="rootPath"
                 :ssr="isSSR"
               />
               <NuxtLink class="home-page__more" :to="localePath('/forum')">
                 {{ $t('layout.more.posts') }} &raquo;
-              </NuxtLink>
+              </NuxtLink> -->
+              <PublicationList
+                hide-thumbnail
+                :items="latestPublications.events"
+              />
             </template>
-            <p v-else>{{ $t('layout.empty.forum') }}</p>
+            <p v-else>{{ $t('layout.empty.events') }}</p>
           </section>
         </div>
         <div class="home-page__divider" />
