@@ -92,6 +92,7 @@ export default {
     bluesky: "Síguenos en Bluesky",
     contents: "Contenido",
     disclaimer: "Descargo de responsabilidad",
+    event: "Próximos Eventos",
     events: "Próximos Eventos",
     footerLegal: "© {year} Reservados todos los derechos.",
     here: "aquí",
