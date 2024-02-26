@@ -92,6 +92,7 @@ export default {
     bluesky: "Suivez-nous sur Bluesky",
     contents: "Contenu",
     disclaimer: "Clause de non-responsabilité",
+    event: "Évènements à Venir",
     events: "Évènements à Venir",
     footerLegal: "© {year} Tous droits réservés.",
     here: "ici",
