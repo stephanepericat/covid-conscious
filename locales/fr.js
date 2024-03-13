@@ -8,6 +8,7 @@ export default {
     locked: "Premium",
     lockedDescription: "Cette publication est derrière un paywall ou un abonnement",
     moreInfo: "Plus d'Information",
+    readMore: "En Savoir Plus",
     share: {
       facebook: 'Partagez sur Facebook',
       mail: 'Partagez via email',

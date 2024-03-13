@@ -8,6 +8,7 @@ export default {
     locked: "Premium",
     lockedDescription: "Esta publicación está detrás de un muro de pago o suscripción",
     moreInfo: "Más Información",
+    readMore: "Lea Más",
     share: {
       facebook: 'Compartir en Facebook',
       mail: 'Compartir por correo electrónico',

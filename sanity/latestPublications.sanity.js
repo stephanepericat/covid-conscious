@@ -69,7 +69,7 @@ export default groq`
   "library": *[(_type == "scientific-library") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     title,
     "published": _createdAt,
-    "link": url,
+    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     source,
     "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""), "")[0..255], "") + "...",
@@ -84,7 +84,7 @@ export default groq`
   "resources": *[(_type == "resource") && !(_id in path('drafts.**')) && (language == $locale)] | order(_createdAt desc)[0..4]{
     title,
     "published": _createdAt,
-    "link": url,
+    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     source,
     "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""), "")[0..127], "") + "...",
@@ -101,7 +101,7 @@ export default groq`
     "summary": array::join(string::split(coalesce(eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''), '')[0..255], '') + "...",
     isEventFree,
     language,
-    "link": url,
+    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
   },

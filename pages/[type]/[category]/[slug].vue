@@ -16,7 +16,7 @@
         </div>
       </h1>
 
-      <IMedia class="article-page__author">
+      <IMedia class="article-page__author" v-if="article.author">
         <template #image>
           <SanityImage
             v-if="article.author.avatar"
@@ -47,6 +47,25 @@
         </div>
       </IMedia>
 
+      <IMedia class="article-page__author" v-else>
+        <template #image>
+          <img class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
+        </template>
+        <p class="article-page__info no-author">
+          <span class="article-page__info--category">{{ articleType }}<span v-if="article.date"> / {{ format(new Date(convertTs(article.date)), DEFAULT_DATE_FORMAT) }}</span></span>
+        </p>
+        <div v-if="article.tags" class="article-page__tags">
+          <IBadge
+            v-for="{ name, uri } in article.tags"
+            :key="uri"
+            class="article-page__tags--item"
+            @click="onTagClick({ uri })"
+          >
+            {{ name }}
+          </IBadge>
+        </div>
+      </IMedia>
+
       <section class="article-page__body">
         <!-- video content -->
         <template v-if="isVideo(type)" class="article-page__body--video">
@@ -61,6 +80,16 @@
               <Icon name="material-symbols:auto-videocam-outline-rounded" />
             </template>
             {{ $t('article.watchVideo') }}
+          </IButton>
+        </template>
+
+        <template v-else-if="isLibrary(type) || isEvent(type) || isResource(type)">
+          <p class="article-page__body--summary">{{ article.summary }}</p>
+          <IButton :href="article.link" target="_blank">
+            <template #icon>
+              <Icon name="material-symbols:info-outline-rounded" />
+            </template>
+            {{ isEvent(type) ? $t('article.moreInfo') : $t('article.readMore') }}
           </IButton>
         </template>
 
@@ -151,7 +180,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
-  import { isVideo } from '~/assets/utils/article-types'
+  import { isEvent, isLibrary, isResource, isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -160,6 +189,7 @@
   import ShareButtons from '~/components/ShareButtons.vue'
   import { serializers } from '~/assets/constants/serializers'
   import { useTags } from '~/assets/composables/useTags'
+  import { convertTs } from '~/assets/utils/convert-timestamp'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -310,6 +340,11 @@
     &--category {
       font-weight: 200;
     }
+
+    &.no-author {
+      margin-top: -5px;
+      margin-bottom: 5px;
+    }
   }
 
   &__body {
@@ -356,6 +391,10 @@
       &-summary {
         margin-bottom: 40px;
       }
+    }
+
+    &--summary {
+      margin-bottom: 40px;
     }
   }
 
