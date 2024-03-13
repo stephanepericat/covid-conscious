@@ -21,4 +21,5 @@ export const isSearch = (type) => type === SEARCH
 export const isTag = (type) => type == TAG
 export const isVideo = (type) => type === VIDEO
 
-export const isExternalLink = (type) => isNews(type) || isResource(type) || isLibrary(type) || isEvent(type)
+export const isExternalLink = (type) => isNews(type)
+//  || isResource(type) || isLibrary(type) || isEvent(type)

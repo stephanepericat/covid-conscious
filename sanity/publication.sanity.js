@@ -7,9 +7,10 @@ export default groq`
   "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
   "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },
   "published": _createdAt,
+  "date": coalesce(publicationDate, eventDate),
   "updated": _updatedAt,
   "body": coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, []),
-  "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ''),
+  "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''),
   "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
   "info": contactInfo {
     "street1": streetAdressOne,
