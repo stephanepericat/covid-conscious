@@ -29,6 +29,7 @@ export default defineNuxtConfig({
     'nuxt-security',
     'nuxt-vitest',
     '@nuxtjs/sitemap',
+    '@nuxt/image',
   ],
 
   runtimeConfig: {

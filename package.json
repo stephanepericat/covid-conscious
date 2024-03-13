@@ -28,6 +28,7 @@
     "@inkline/config": "^1.9.1",
     "@inkline/inkline": "^4.7.1",
     "@inkline/plugin": "^1.5.2",
+    "@nuxt/image": "^1.4.0",
     "@nuxtjs/i18n": "^8.0.0-rc.5",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/sanity": "^1.8.3",
