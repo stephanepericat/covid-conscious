@@ -29,9 +29,12 @@
           <p
             v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
             class="publication-list__description"
-            :class="{ 'no-margin': isLibrary(article.type) || isVideo(article.type) || isResource(article.type) }"
           >
             {{ article.summary }}
+          </p>
+          <p class="publication-list__date">
+            <span>{{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </p>
           <em class="publication-list__metadata">
             <IBadge size="sm" v-if="isForum(article.type)">{{ article.category }}</IBadge>
@@ -70,7 +73,6 @@
             </ul>
             <template v-if="!isResource(article.type)">
               <span v-if="article.author"> &bullet; <NuxtLink :to="localePath(isForum(article.type) ? `/${FORUM}/${USER}/${article.author.slug}` : `/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink></span>
-              <span> &bullet; {{ format(new Date(article.date ? convertTs(article.date) : article.published), DEFAULT_DATE_FORMAT) }}</span>
             </template>
           </em>
         </IMedia>
@@ -90,8 +92,9 @@
   import { isEvent, isExternalLink, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { useTags } from '~/assets/composables/useTags'
+  import { getDateLocale } from '~/assets/constants/date-locales'
 
   const props = defineProps({
     hideThumbnail: Boolean,
@@ -101,6 +104,7 @@
     withPagination: Boolean,
   })
 
+  const { locale } = useI18n()
   const localePath = useLocalePath()
   const { onTagClick } = useTags()
 
@@ -111,7 +115,15 @@
 @import "~/assets/sass/mixins.scss";
 
 .publication-list {
+  &__date {
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+  }
+
   &__description {
+    margin-bottom: 5px;
+
     &.no-margin {
       margin: 0;
     }

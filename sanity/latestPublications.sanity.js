@@ -98,6 +98,7 @@ export default groq`
     "id": _id,
     title,
     "date": eventDate,
+    "end": endDate,
     "summary": array::join(string::split(coalesce(eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''), '')[0..255], '') + "...",
     isEventFree,
     language,
