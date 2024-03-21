@@ -8,6 +8,7 @@ export default groq`
   "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },
   "published": _createdAt,
   "date": coalesce(publicationDate, eventDate),
+  "end": endDate,
   "updated": _updatedAt,
   "body": coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, []),
   "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''),

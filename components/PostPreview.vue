@@ -20,7 +20,7 @@
       <em>
         <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
         <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
-        <span> &bullet; {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</span>
+        <span class="post-preview__forum-date"> &bullet; {{ format(new Date(post.created_at), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
       </em>
     </IMedia>
   </div>
@@ -28,8 +28,9 @@
 <script setup>
   import { format } from 'date-fns'
   import { POST, USER } from '~/assets/constants/types'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { cleanPostBody } from '~/assets/utils/clean-post-body'
+  import { getDateLocale } from '~/assets/constants/date-locales'
 
   const props = defineProps({
     hideThumbnail: Boolean,
@@ -40,6 +41,7 @@
   })
 
   const localePath = useLocalePath()
+  const { locale } = useI18n()
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
@@ -60,8 +62,16 @@
     @include thumbnail();
   }
 
-  &__forum-tag {
-    font-style: normal;
+  &__forum {
+    &-date {
+      font-weight: 500;
+      letter-spacing: 0.1rem;
+      text-transform: uppercase;
+    }
+
+    &-tag {
+      font-style: normal;
+    }
   }
 }
 </style>

@@ -20,11 +20,11 @@
           <section class="home-page__container--card">
             <h3 class="home-page__sub-title">{{ $t("layout.events") }}</h3>
             <!-- TODO: remove this after 3/15 -->
-            <div style="display: flex; justify-content: center; margin: 30px auto;">
+            <!-- <div style="display: flex; justify-content: center; margin: 30px auto;">
               <a href="https://www.longcovidawareness.life/" target="_blank">
                 <NuxtImg src="/CONFRONTsmjpg.jpg" style="width: 100%" />
               </a>
-            </div>
+            </div> -->
             <template v-if="latestPublications?.events.length">
               <PublicationList
                 hide-thumbnail
