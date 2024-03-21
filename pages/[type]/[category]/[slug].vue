@@ -52,7 +52,11 @@
           <img class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
         </template>
         <p class="article-page__info no-author">
-          <span class="article-page__info--category">{{ articleType }}<span v-if="article.date"> / {{ format(new Date(convertTs(article.date)), DEFAULT_DATE_FORMAT) }}</span></span>
+          <span class="article-page__info--category">
+            {{ articleType }}
+            <span v-if="article.date"> / {{ format(new Date(convertTs(article.date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+          </span>
         </p>
         <div v-if="article.tags" class="article-page__tags">
           <IBadge
@@ -182,7 +186,7 @@
   import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
   import { isEvent, isLibrary, isResource, isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
   import ReviewList from '~/components/ReviewList.vue'
   import { useReviews } from '~/assets/composables/useReviews'
@@ -190,6 +194,7 @@
   import { serializers } from '~/assets/constants/serializers'
   import { useTags } from '~/assets/composables/useTags'
   import { convertTs } from '~/assets/utils/convert-timestamp'
+  import { getDateLocale } from '~/assets/constants/date-locales'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
