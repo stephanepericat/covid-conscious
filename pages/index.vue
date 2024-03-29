@@ -2,6 +2,9 @@
   <div class="home-page" :class="{ pending: pending || loading }">
     <ILoader v-if="pending || loading" class="home-page__loader" />
     <template v-else>
+      <a href="https://forms.gle/M1n55erbzoDdr8Vv5" target="_blank" style="margin-bottom: 24px; display: inline-block; width: 100%">
+        <NuxtImg src="/banner.png" style="width: 100%" />
+      </a>
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
       <div class="home-page__container">
         <div class="home-page__container--top">
