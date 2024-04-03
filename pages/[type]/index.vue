@@ -31,10 +31,9 @@
 <script setup>
   import _ from 'lodash'
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
-  import { COMMUNITY, LINK, NEWS } from '~/assets/constants/types'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isCommunity, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
 
@@ -54,7 +53,7 @@
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
-  const articleType = computed(() => type === NEWS ? LINK : type)
+  const articleType = computed(() => type)
   const { data, pending } = useLazySanityQuery(publicationsByTypeQuery, { locale, articleType: articleType.value })
   const results = computed(() => data?.value?.results || [])
 
@@ -71,7 +70,7 @@
   const selectedCategory = ref(null)
 
   const filterCountries = computed(() => {
-    if(type !== COMMUNITY) return []
+    if(!isCommunity(type)) return []
 
     const matches = selectedCategory.value
       ? results.value.filter((result) => result.categoryUri === selectedCategory.value)
@@ -88,7 +87,7 @@
   const selectedCountry = ref(null)
 
   const filterCities = computed(() => {
-    if(type !== COMMUNITY || !selectedCountry.value) return []
+    if(!isCommunity(type) || !selectedCountry.value) return []
 
     const matches = results.value.filter((result) => result.countryCode === selectedCountry.value)
 

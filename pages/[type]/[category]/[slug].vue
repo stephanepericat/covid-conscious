@@ -4,7 +4,7 @@
     <template v-else-if="!pending && article">
       <h1 class="article-page__title">
         <span>{{ article.title }}</span>
-        <div v-if="type === PRODUCT && ratingsAverage" class="article-page__title--info">
+        <div v-if="isProduct(type) && ratingsAverage" class="article-page__title--info">
           <StarRating
             :increment="0.01"
             :rating="parseFloat(ratingsAverage)"
@@ -107,7 +107,7 @@
         />
 
         <!-- community content -->
-        <template v-if="type === COMMUNITY && article.info">
+        <template v-if="isCommunity(type) && article.info">
           <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
           <div class="article-page__body--info-address">
             <div v-text="article.info.street1" />
@@ -132,7 +132,7 @@
           </div>
         </template>
         <!-- product content -->
-        <template v-if="type === PRODUCT">
+        <template v-if="isProduct(type)">
           <div class="article-page__body--info-product">
             <IButton v-if="article.link" class="article-page__body--info-product-button" :to="article.link" target="_blank">
               <Icon class="article-page__body--info-product-icon" name="material-symbols:info-outline-rounded" />
@@ -183,8 +183,8 @@
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
-  import { AUTHOR, COMMUNITY, PRODUCT } from '~/assets/constants/types'
-  import { isEvent, isLibrary, isResource, isVideo } from '~/assets/utils/article-types'
+  import { AUTHOR } from '~/assets/constants/types'
+  import { isCommunity, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -273,7 +273,7 @@
   }
 
   watch(articleId, async () => {
-    if(!articleId.value || type !== PRODUCT) return
+    if(!articleId.value || !isProduct(type)) return
 
     activePage.value = 1
     reviews.value = await getReviews(articleId.value)

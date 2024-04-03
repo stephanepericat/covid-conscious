@@ -26,7 +26,7 @@ export default groq`
     "type": _type,
   },
   // NEWS
-  "news": *[(_type == "link") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
+  "news": *[(_type == "news") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
     title,
     "published": _createdAt,
     "link": url,
