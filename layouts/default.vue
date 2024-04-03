@@ -80,29 +80,6 @@
     <ILayoutFooter class="default-layout__footer">
       <IContainer class="default-layout__footer--container">
         <div class="default-layout__footer--container-block">
-          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.tcl') }}</h5>
-          <ul class="default-layout__footer--list">
-            <li>
-              <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
-            </li>
-            <li>
-              <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
-            </li>
-            <li>
-              <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/thatcovidlife.bsky.social" target="_blank">{{ $t('layout.bluesky') }}</a>
-            </li>
-            <li>
-              <a href="https://twitter.com/thatcovidlife" target="_blank">{{ $t('layout.twitter') }}</a>
-            </li>
-          </ul>
-        </div>
-        <div class="default-layout__footer--container-block">
           <h5 class="default-layout__footer--container-block-title">{{ $t('layout.contents') }}</h5>
           <ul class="default-layout__footer--list">
             <li>
@@ -128,6 +105,52 @@
             </li>
             <li>
               <NuxtLink :to="localePath('/forum')">{{ $t('layout.forum') }}</NuxtLink>
+            </li>
+          </ul>
+        </div>
+        <div class="default-layout__footer--container-block">
+          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.tcl') }}</h5>
+          <ul class="default-layout__footer--list">
+            <li>
+              <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
+            </li>
+            <li>
+              <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
+            </li>
+            <li>
+              <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
+            </li>
+            <li>
+              <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="default-layout__footer--container-block">
+          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.social') }}</h5>
+          <ul class="default-layout__footer--list">
+            <li>
+              <a href="https://bsky.app/profile/thatcovidlife.bsky.social" target="_blank">
+                <icon name="tabler:brand-bluesky" />&nbsp;
+                Bluesky
+              </a>
+            </li>
+            <li>
+              <a href="https://facebook.com/thatcovidlife" target="_blank">
+                <icon name="tabler:brand-facebook" />&nbsp;
+                Facebook
+              </a>
+            </li>
+            <li>
+              <a href="https://www.reddit.com/r/thatcovidlife/" target="_blank">
+                <icon name="tabler:brand-reddit" />&nbsp;
+                Reddit
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/thatcovidlife" target="_blank">
+                <icon name="tabler:brand-twitter" />&nbsp;
+                Twitter
+              </a>
             </li>
           </ul>
         </div>
@@ -305,7 +328,7 @@
       padding: 0 60px;
 
       &-block {
-        flex-basis: 25%;
+        flex-basis: 20%;
 
         &.logo {
           display: flex;

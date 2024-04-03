@@ -130,6 +130,7 @@ export default {
     rss: "Flux RSS",
     "scientific-library": "Bibliothèque",
     search: "Rechercher",
+    social: "Réseaux Sociaux",
     submitContent: "Contribuer",
     switch: {
       darkMode: "Passer en mode sombre",

@@ -130,6 +130,7 @@ export default {
     resource: "Recursos",
     "scientific-library": "Biblioteca",
     search: "Procurar",
+    social: "Redes Sociais",
     submitContent: "Contribuir",
     switch: {
       darkMode: "Alternar para o modo escuro",

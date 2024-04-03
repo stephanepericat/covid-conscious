@@ -89,7 +89,7 @@ export default {
     title: "That Covid Life - Últimas Publicaciones",
   },
   layout: {
-    about: "Acerca De",
+    about: "Sobre Nosotros",
     bluesky: "Síguenos en Bluesky",
     contents: "Contenido",
     disclaimer: "Descargo de responsabilidad",
@@ -99,7 +99,7 @@ export default {
     here: "aquí",
     home: "Página Principal",
     community: "Comunidad",
-    contactUs: "Contacta con nosotros",
+    contactUs: "Contacta con Nosotros",
     education: "Educación",
     empty: {
       community: 'Aún no hay enlaces de la comunidad.',
@@ -130,6 +130,7 @@ export default {
     rss: "RSS Feed",
     "scientific-library": "Biblioteca",
     search: "Buscar",
+    social: "Redes Sociales",
     submitContent: "Contribuir",
     switch: {
       darkMode: "Cambiar al modo oscuro",

@@ -130,6 +130,7 @@ export default {
     rss: "RSS Feed",
     "scientific-library": "Library",
     search: "Search",
+    social: "Social Networks",
     submitContent: "Contribute",
     switch: {
       darkMode: "Switch To Dark Mode",
