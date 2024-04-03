@@ -3,7 +3,7 @@ import { baseLanguage } from '~/assets/constants/base-language'
 
 export default groq`
   {
-    "all_entries": *[(_type in ["link", "scientific-library", "video", "resource", "event", "product", "community", "education"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
+    "all_entries": *[(_type in ["news", "scientific-library", "video", "resource", "event", "product", "community", "education"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
       "id": _id,
       "type": _type,
       "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, null),

@@ -3,8 +3,8 @@ import {
   EVENT,
   FORUM,
   LIBRARY,
-  LINK,
   NEWS,
+  PRODUCT,
   RESOURCE,
   SEARCH,
   TAG,
@@ -15,7 +15,8 @@ export const isCommunity = (type) => type === COMMUNITY
 export const isEvent = (type) => type === EVENT
 export const isForum = (type) => type === FORUM
 export const isLibrary = (type) => type === LIBRARY
-export const isNews = (type) => type === LINK || type === NEWS
+export const isNews = (type) => type === NEWS
+export const isProduct = (type) => type === PRODUCT
 export const isResource = (type) => type === RESOURCE
 export const isSearch = (type) => type === SEARCH
 export const isTag = (type) => type == TAG
