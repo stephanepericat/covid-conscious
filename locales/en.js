@@ -132,6 +132,7 @@ export default {
     search: "Search",
     social: "Social Networks",
     submitContent: "Contribute",
+    support: 'Support',
     switch: {
       darkMode: "Switch To Dark Mode",
       lightMode: "Switch To Light Mode",
@@ -399,5 +400,9 @@ export default {
       label: 'Type a search term...',
       title: 'Search',
     },
+  },
+  support: {
+    pageTitle: 'Support',
+    description: 'Fill this form to let us know about any defect, or product enhancement suggestion you may have.',
   },
 };

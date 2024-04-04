@@ -132,6 +132,7 @@ export default {
     search: "Rechercher",
     social: "Réseaux Sociaux",
     submitContent: "Contribuer",
+    support: 'Support',
     switch: {
       darkMode: "Passer en mode sombre",
       lightMode: "Passer en mode lumière",
@@ -400,5 +401,9 @@ export default {
       label: 'Tapez votre terme de recherche...',
       title: 'Recherche',
     },
+  },
+  support: {
+    pageTitle: 'Support',
+    description: 'Remplissez ce formulaire pour nous informer de tout défaut ou de toute suggestion d\'amélioration du produit que vous pourriez avoir.',
   },
 };

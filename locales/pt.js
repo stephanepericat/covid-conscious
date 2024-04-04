@@ -132,6 +132,7 @@ export default {
     search: "Procurar",
     social: "Redes Sociais",
     submitContent: "Contribuir",
+    support: 'Suporte',
     switch: {
       darkMode: "Alternar para o modo escuro",
       lightMode: "Alternar para o modo de luz",
@@ -399,5 +400,9 @@ export default {
       label: 'igite um termo de busca...',
       title: 'Pesquisar',
     },
+  },
+  support: {
+    pageTitle: 'Suporte',
+    description: 'Preencha este formulário para nos informar sobre qualquer defeito ou sugestão de melhoria de produto que você possa ter.',
   },
 };

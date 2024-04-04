@@ -123,6 +123,9 @@
             <li>
               <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
             </li>
+            <li>
+              <NuxtLink :to="localePath('/support')">{{ $t('layout.support') }}</NuxtLink>
+            </li>
           </ul>
         </div>
         <div class="default-layout__footer--container-block">
