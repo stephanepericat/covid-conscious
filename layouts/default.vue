@@ -349,7 +349,7 @@
     }
 
     &--list {
-      line-height: 16px;
+      line-height: 20px;
       list-style: none;
       margin: 0;
       padding: 0;
