@@ -141,7 +141,7 @@
           </div>
           <div class="article-page__reviews" v-if="articleId">
             <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
-            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">
+            <div class="article-page__reviews--reviewed" v-if="user?.value && hasUserReviewed">
               <p>
                 <span v-text="$t('reviews.edit.already')" /> <a v-if="articleId" href="#" @click="onShowReviewEditor" v-text="$t('reviews.edit.click')" />
               </p>
@@ -167,6 +167,7 @@
               <span v-text="$t('reviews.title')" />
             </h2>
             <ReviewList
+              v-if="!reviewsPending"
               :pending="reviewsPending"
               :page="activePage"
               :reviews="reviews"
