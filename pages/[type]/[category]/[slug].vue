@@ -16,7 +16,7 @@
         </div>
       </h1>
 
-      <IMedia class="article-page__author" v-if="article.author">
+      <!-- <IMedia class="article-page__author" v-if="article.author">
         <template #image>
           <SanityImage
             v-if="article.author.avatar"
@@ -45,16 +45,16 @@
             {{ name }}
           </IBadge>
         </div>
-      </IMedia>
+      </IMedia> -->
 
-      <IMedia class="article-page__author" v-else>
+      <IMedia class="article-page__author">
         <template #image>
           <img class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
         </template>
         <p class="article-page__info no-author">
           <span class="article-page__info--category">
             {{ articleType }}
-            <span v-if="article.date"> / {{ format(new Date(convertTs(article.date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <span> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </span>
         </p>
@@ -141,7 +141,7 @@
           </div>
           <div class="article-page__reviews" v-if="articleId">
             <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
-            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">
+            <div class="article-page__reviews--reviewed" v-if="user?.value && hasUserReviewed">
               <p>
                 <span v-text="$t('reviews.edit.already')" /> <a v-if="articleId" href="#" @click="onShowReviewEditor" v-text="$t('reviews.edit.click')" />
               </p>
@@ -167,6 +167,7 @@
               <span v-text="$t('reviews.title')" />
             </h2>
             <ReviewList
+              v-if="!reviewsPending"
               :pending="reviewsPending"
               :page="activePage"
               :reviews="reviews"
