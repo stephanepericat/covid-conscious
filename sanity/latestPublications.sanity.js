@@ -106,5 +106,19 @@ export default groq`
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
   },
+  // PUBLIC HEALTH
+  "health": *[(_type == "public-health") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
+    title,
+    "published": _createdAt,
+    "link": url,
+    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
+    source,
+    "date": publicationDate,
+    "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
+    "locked": coalesce(premiumAccess, false),
+    "limited": coalesce(limitedAccess, false),
+  },
 }
 `
