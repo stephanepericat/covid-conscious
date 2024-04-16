@@ -94,6 +94,9 @@
             <li>
               <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
             </li>
+            <li>
+              <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
+            </li>
             <li v-if="$appSettings.SHOW_COMMUNITY">
               <NuxtLink :to="localePath('/community')">{{ $t('layout.community') }}</NuxtLink>
             </li>
@@ -204,6 +207,7 @@
     { label: t('layout.resource'), url: localePath('/resource') },
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
+    { label: t('layout.health'), url: localePath('/public-health') },
     { label: t('layout.community'), url: localePath('/community'), hidden: !$appSettings.SHOW_COMMUNITY },
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.education'), url: localePath('/education'), hidden: !$appSettings.SHOW_EDUCATION },
