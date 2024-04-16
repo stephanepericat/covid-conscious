@@ -285,6 +285,19 @@
         width: 100%;
       }
 
+      &--news,
+      &--library,
+      &--card,
+      &--health,
+      &--forum-content,
+      &--videos-content {
+        margin: 10px 0;
+      }
+      
+      &--forum-posts {
+        margin: 0 15px;
+      }
+
       &--forum-post {
         margin-bottom: 40px;
       }
