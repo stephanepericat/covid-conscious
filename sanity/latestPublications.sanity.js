@@ -51,7 +51,7 @@ export default groq`
     "type": _type,
   },
   // VIDEOS
-  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
+  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) && embedCode != null ] | order(publicationDate desc, _createdAt desc)[0..4]{
     "id": _id,
     title,
     embedCode,
@@ -105,6 +105,20 @@ export default groq`
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
+  },
+  // PUBLIC HEALTH
+  "health": *[(_type == "public-health") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
+    title,
+    "published": _createdAt,
+    "link": url,
+    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
+    source,
+    "date": publicationDate,
+    "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
+    "locked": coalesce(premiumAccess, false),
+    "limited": coalesce(limitedAccess, false),
   },
 }
 `

@@ -2,9 +2,9 @@
   <div class="home-page" :class="{ pending: pending || loading }">
     <ILoader v-if="pending || loading" class="home-page__loader" />
     <template v-else>
-      <a href="https://forms.gle/M1n55erbzoDdr8Vv5" target="_blank" style="margin-bottom: 24px; display: inline-block; width: 100%">
+      <!-- <a href="https://forms.gle/M1n55erbzoDdr8Vv5" target="_blank" style="margin-bottom: 24px; display: inline-block; width: 100%">
         <NuxtImg src="/banner.png" style="width: 100%" />
-      </a>
+      </a> -->
       <h1 class="home-page__title" v-text="$t('home.pageTitle')" />
       <div class="home-page__container">
         <div class="home-page__container--top">
@@ -87,6 +87,35 @@
             </template>
             <p v-else>{{ $t('layout.empty.videos') }}</p>
           </div>
+        </div>
+        <div class="home-page__divider" />
+        <div class="home-page__container--mid">
+          <section class="home-page__container--health">
+            <h3 class="home-page__sub-title">{{ $t("layout.health") }}</h3>
+            <template v-if="latestPublications?.health?.length">
+              <PublicationList
+                class="home-page__health-publications"
+                :items="latestPublications.health"
+              />
+              <NuxtLink class="home-page__more" :to="localePath('/public-health')">
+                {{ $t('layout.more.articles') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.health') }}</p>
+          </section>
+          <!-- <section class="home-page__container--card"> -->
+            <!-- <h3 class="home-page__sub-title">{{ $t("layout.resource") }}</h3>
+            <template v-if="latestPublications?.resources?.length">
+              <PublicationList
+                :hide-thumbnail="$appSettings.HIDE_RESOURCES_THUMBNAIL"
+                :items="latestPublications.resources"
+              />
+              <NuxtLink class="home-page__more" :to="localePath('/resource')">
+                {{ $t('layout.more.resources') }} &raquo;
+              </NuxtLink>
+            </template>
+            <p v-else>{{ $t('layout.empty.resources') }}</p> -->
+          <!-- </section> -->
         </div>
         <div class="home-page__divider" />
         <div class="home-page__container--forum">
@@ -211,6 +240,10 @@
       display: flex;
     }
 
+    &--health {
+      width: 100%;
+    }
+
     &--news,
     &--library {
       width: calc(67% - 10px);
@@ -250,6 +283,7 @@
     &--news,
     &--library,
     &--card,
+    &--health,
     &--forum-content,
     &--videos-content {
       margin: 10px;
@@ -283,6 +317,19 @@
       &--card,
       &--forum-post {
         width: 100%;
+      }
+
+      &--news,
+      &--library,
+      &--card,
+      &--health,
+      &--forum-content,
+      &--videos-content {
+        margin: 10px 0;
+      }
+      
+      &--forum-posts {
+        margin: 0 15px;
       }
 
       &--forum-post {

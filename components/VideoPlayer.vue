@@ -4,7 +4,7 @@
       <IListGroup size="sm" :border="false">
         <IListGroupItem
           class="video-player__list--item"
-          v-for="video in videoList"
+          v-for="video in vids"
           :key="video.id"
           :active="video.id === activeVideo"
           @click="setActiveVideo(video.id)"
@@ -35,18 +35,12 @@
 
   const { videos: vids } = toRefs(props)
 
-  const videoList = computed(() => {
-    return vids
-      .value
-      .filter((v) => v.embedCode !== null)
-  })
-
-  const activeVideo = ref(videoList.value[0]?.id || null)
+  const activeVideo = ref(vids.value[0]?.id || null)
 
   const setActiveVideo = (id) => activeVideo.value = id
 
   const videoDetails = computed(() => {
-    return videoList
+    return vids
       .value
       .find(({ id }) => id === activeVideo.value)
   })
