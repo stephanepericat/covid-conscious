@@ -51,7 +51,7 @@ export default groq`
     "type": _type,
   },
   // VIDEOS
-  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
+  "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) && embedCode != null ] | order(publicationDate desc, _createdAt desc)[0..4]{
     "id": _id,
     title,
     embedCode,

@@ -191,5 +191,11 @@
       }
     }
   }
+
+  @include breakpoint-down('md') {
+    &__thumbnail {
+      display: none;
+    }
+  }
 }
 </style>
