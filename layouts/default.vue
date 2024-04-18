@@ -368,6 +368,7 @@
     @include breakpoint-down('md') {
       &--container {
         flex-direction: column;
+        padding: 0 35px;
 
         &-block {
           margin-bottom: 20px;
