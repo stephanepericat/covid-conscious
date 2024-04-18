@@ -88,8 +88,8 @@
             <p v-else>{{ $t('layout.empty.videos') }}</p>
           </div>
         </div>
-        <div class="home-page__divider" />
-        <div class="home-page__container--mid">
+        <div v-if="$appSettings.SHOW_PUBLIC_HEALTH" class="home-page__divider" />
+        <div v-if="$appSettings.SHOW_PUBLIC_HEALTH" class="home-page__container--mid">
           <section class="home-page__container--health">
             <h3 class="home-page__sub-title">{{ $t("layout.health") }}</h3>
             <template v-if="latestPublications?.health?.length">
