@@ -59,7 +59,7 @@ export default groq`
     "author": author-> { nickname, "slug": uri.current },
     "date": publicationDate,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
-    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
