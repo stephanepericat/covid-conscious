@@ -148,6 +148,7 @@ export default {
       area: "User Area",
       createAccount: "Create an Account",
       signIn: "Sign In",
+      signUp: "Sign Up",
       signOut: "Sign Out",
     },
     userAccount: 'User Account',

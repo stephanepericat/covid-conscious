@@ -1,10 +1,9 @@
 <template>
-  <div class="sf-login-page">
-    <h1 class="sf-login-page__title">{{ t('layout.user.signIn') }}</h1>
+  <div class="login-page">
+    <h1 class="login-page__title">{{ t('layout.user.signIn') }}</h1>
     <Auth
-      class="sf-login-page__auth"
+      class="login-page__auth"
       @error="onError"
-      @success="onSuccess"
     />
     <IToastContainer />
   </div>
@@ -17,13 +16,6 @@
   const { t } = useI18n()
   const toast = useToast()
 
-  const onSuccess = () => {
-    toast.show({
-      title: t('forum.auth.toast.success.title'),
-      message: t('forum.auth.toast.success.message'),
-      color: 'success'
-    })
-  }
   const onError = () => {
     toast.show({
       title: t('forum.auth.toast.error.title'),
@@ -36,7 +28,7 @@
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
-.sf-login-page {
+.login-page {
   &__title {
     @include title();
 

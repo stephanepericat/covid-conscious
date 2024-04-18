@@ -148,6 +148,7 @@ export default {
       area: "Espace Utilisateur",
       createAccount: "Créer un Compte",
       signIn: "Connexion",
+      signUp: "S'inscrire",
       signOut: "Déconnexion",
     },
     userAccount: 'Compte d\'Utilisateur',

@@ -148,6 +148,7 @@ export default {
       createAccount: "Crie a sua Conta",
       area: "Área do Usuário",
       signIn: "Entrar",
+      signUp: "Inscrever-se",
       signOut: "Sair",
     },
     userAccount: 'Conta de Usuário',

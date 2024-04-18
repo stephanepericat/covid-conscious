@@ -1,7 +1,7 @@
 <template>
   <IForm
-    class="sf-auth"
-    @submit.prevent="handleLogin"
+    class="user-signup"
+    @submit.prevent="handleSignup"
   >
     <IFormGroup>
       <IFormLabel>{{ $t("login.labels.email") }}</IFormLabel>
@@ -34,7 +34,7 @@
           v-if="loading"
           name="eos-icons:loading"
         />
-        {{ $t('login.buttons.signin') }}
+        {{ $t('login.buttons.signup') }}
       </IButton>
     </IFormGroup>
   </IForm>
@@ -57,7 +57,7 @@
 
   const submitBtnEnabled = computed(() => tokenValidation.value && email.value && password.value && isEmail(email.value) && !loading.value)
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     try {
       loading.value = true
       // const { error } = await client.auth.signInWithOtp({
@@ -66,7 +66,7 @@
       //     emailRedirectTo: redirectUrl.value,
       //   },
       // })
-      const { data, error } = await client.auth.signInWithPassword({
+      const { data, error } = await client.auth.signUp({
         email: email.value,
         password: password.value,
       })
