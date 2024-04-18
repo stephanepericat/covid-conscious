@@ -77,6 +77,7 @@
       emit('error')
     } finally {
       email.value = ''
+      password.value = ''
       loading.value = false
     }
   }
