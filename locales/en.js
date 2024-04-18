@@ -408,4 +408,18 @@ export default {
     pageTitle: 'Support',
     description: 'Fill this form to let us know about any defect, or product enhancement suggestion you may have.',
   },
+  login: {
+    buttons: {
+      signin: 'Sign In',
+      signup: 'Sign Up',
+    },
+    labels: {
+      email: 'Email',
+      password: 'Password',
+    },
+    placeholders: {
+      email: 'Enter your email address',
+      password: 'Enter your password',
+    },
+  },
 };

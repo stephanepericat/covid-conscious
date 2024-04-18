@@ -36,7 +36,7 @@
 <style lang="scss" scoped>
 .sf-login-page {
   &__auth {
-    width: 50vh;
+    width: 300px;
     margin: 40px auto;
   }
 }

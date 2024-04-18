@@ -4,15 +4,22 @@
     @submit.prevent="handleLogin"
   >
     <IFormGroup>
-      <IFormLabel>{{ $t("forum.auth.description") }}</IFormLabel>
+      <IFormLabel>{{ $t("login.labels.email") }}</IFormLabel>
       <IInput
         v-model="email"
-        clearable
-        :placeholder="$t('forum.auth.label')"
+        :placeholder="$t('login.placeholders.email')"
       />
     </IFormGroup>
     <IFormGroup>
-      <NuxtTurnstile class="sf-auth__captcha" v-model="token" />
+      <IFormLabel>{{ $t("login.labels.password") }}</IFormLabel>
+      <IInput
+        v-model="password"
+        :placeholder="$t('login.placeholders.password')"
+        type="password"
+      />
+    </IFormGroup>
+    <IFormGroup class="sf-auth__captcha">
+      <NuxtTurnstile v-model="token" />
     </IFormGroup>
     <IFormGroup>
       <IButton
@@ -24,7 +31,7 @@
           v-if="loading"
           name="eos-icons:loading"
         />
-        {{ $t('forum.auth.submit') }}
+        {{ $t('login.buttons.signin') }}
       </IButton>
     </IFormGroup>
   </IForm>
@@ -36,26 +43,32 @@
   const emit = defineEmits(['success', 'error'])
   const localePath = useLocalePath()
 
-  const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
+  // const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
 
   const client = useSupabaseClient()
   const loading = ref(false)
   const email = ref('')
+  const password = ref('')
   const token = ref(null)
   const tokenValidation = computed(() => token.value || process.env.NODE_ENV === 'development')
 
-  const submitBtnEnabled = computed(() => tokenValidation.value && email.value && isEmail(email.value) && !loading.value)
+  const submitBtnEnabled = computed(() => tokenValidation.value && email.value && password.value && isEmail(email.value) && !loading.value)
 
   const handleLogin = async () => {
     try {
       loading.value = true
-      const { error } = await client.auth.signInWithOtp({
+      // const { error } = await client.auth.signInWithOtp({
+      //   email: email.value,
+      //   options: {
+      //     emailRedirectTo: redirectUrl.value,
+      //   },
+      // })
+      const { data, error } = await client.auth.signInWithPassword({
         email: email.value,
-        options: {
-          emailRedirectTo: redirectUrl.value,
-        },
+        password: password.value,
       })
       if (error) throw error
+      console.log('user data', data)
       emit('success')
     } catch (error) {
       emit('error')
@@ -65,3 +78,10 @@
     }
   }
 </script>
+<style lang="scss" scoped>
+ .sf-auth {
+  &__captcha {
+    margin-top: 20px;
+  }
+ } 
+</style>
