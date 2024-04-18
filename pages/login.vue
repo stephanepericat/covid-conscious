@@ -1,5 +1,6 @@
 <template>
   <div class="sf-login-page">
+    <h1 class="sf-login-page__title">{{ t('layout.user.signIn') }}</h1>
     <Auth
       class="sf-login-page__auth"
       @error="onError"
@@ -34,7 +35,15 @@
   umTrackView()
 </script>
 <style lang="scss" scoped>
+@import "~/assets/sass/mixins.scss";
 .sf-login-page {
+  &__title {
+    @include title();
+
+    margin: 0 auto;
+    width: 300px;
+  }
+
   &__auth {
     width: 300px;
     margin: 40px auto;
