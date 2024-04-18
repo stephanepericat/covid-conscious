@@ -324,6 +324,12 @@
     &--container {
       padding: 50px;
     }
+
+    @include breakpoint-down('md') {
+      &--container {
+        padding: 40px 20px;
+      }
+    }
   }
 
   &__footer {

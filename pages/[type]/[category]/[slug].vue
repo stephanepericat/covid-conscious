@@ -101,6 +101,7 @@
 
         <!-- social media sharing -->
         <ShareButtons
+          class="article-page__share"
           :title="article.title"
           :url="url.href"
           :hashtag="hashtag"
@@ -286,6 +287,7 @@
   umTrackView()
 </script>
 <style lang="scss" scoped>
+@import "@inkline/inkline/css/mixins";
 @import "~/assets/sass/mixins.scss";
 
 .article-page {
@@ -427,6 +429,12 @@
 
       cursor: pointer;
       margin-right: 10px;
+    }
+  }
+
+  @include breakpoint-down('md') {
+    &__share {
+      display: none;
     }
   }
 }
