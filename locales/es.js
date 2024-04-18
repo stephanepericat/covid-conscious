@@ -146,6 +146,7 @@ export default {
     user: {
       account: "Mi cuenta",
       area: "Área de Usuario",
+      createAccount: "Crea una Cuenta",
       signIn: "Iniciar sesión",
       signOut: "Cerrar sesión",
     },
@@ -407,5 +408,19 @@ export default {
   support: {
     pageTitle: 'Soporte',
     description: 'Rellene este formulario para informarnos sobre cualquier defecto o sugerencia de mejora del producto que pueda tener.',
+  },
+  login: {
+    buttons: {
+      signin: 'Iniciar sesión',
+      signup: 'Registrarse',
+    },
+    labels: {
+      email: 'Correo Electrónico',
+      password: 'Contraseña',
+    },
+    placeholders: {
+      email: 'Ingrese su dirección de correo electrónico',
+      password: 'Ingrese su contraseña',
+    },
   },
 };

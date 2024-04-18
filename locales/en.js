@@ -146,6 +146,7 @@ export default {
     user: {
       account: "My Account",
       area: "User Area",
+      createAccount: "Create an Account",
       signIn: "Sign In",
       signOut: "Sign Out",
     },

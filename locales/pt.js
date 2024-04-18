@@ -145,6 +145,7 @@ export default {
     twitter: "Siga-nos no Twitter",
     user: {
       account: "Minha Conta",
+      createAccount: "Crie a sua Conta",
       area: "Área do Usuário",
       signIn: "Entrar",
       signOut: "Sair",
@@ -407,5 +408,19 @@ export default {
   support: {
     pageTitle: 'Suporte',
     description: 'Preencha este formulário para nos informar sobre qualquer defeito ou sugestão de melhoria de produto que você possa ter.',
+  },
+  login: {
+    buttons: {
+      signin: 'Entrar',
+      signup: 'Registar-se',
+    },
+    labels: {
+      email: 'E-mail',
+      password: 'Senha',
+    },
+    placeholders: {
+      email: 'Digite seu e-mail',
+      password: 'Digite sua senha',
+    },
   },
 };

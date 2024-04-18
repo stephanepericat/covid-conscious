@@ -50,6 +50,9 @@
                 <IDropdownItem :to="localePath('/login')">
                   <span>{{ $t('layout.user.signIn') }}</span>
                 </IDropdownItem>
+                <IDropdownItem :to="localePath('/create-account')">
+                  <span>{{ $t('layout.user.createAccount') }}</span>
+                </IDropdownItem>
               </template>
             </template>
           </IDropdown>
