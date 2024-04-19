@@ -76,6 +76,9 @@ export default {
       },
     },
   },
+  directory: {
+    instructions: 'Select a category or a country to start searching the directory',
+  },
   disclaimer: {
     links: "EXTERNAL LINKS DISCLAIMER",
     professional: "PROFESSIONAL DISCLAIMER",

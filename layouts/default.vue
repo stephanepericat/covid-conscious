@@ -268,6 +268,10 @@
 
   &__user {
     &--label {
+      @include eyebrow();
+
+      font-size: 12px;
+      font-weight: 600;
       margin-left: 5px;
     }
   }
@@ -284,6 +288,14 @@
   &__sub-nav {
     :deep(.navbar-collapsible) {
       justify-content: center;
+    }
+
+    :deep(.nav-item) {
+      @include eyebrow();
+
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12rem;
     }
 
     @include breakpoint-down('md') {
@@ -353,12 +365,15 @@
         &-title {
           @include eyebrow();
 
-          font-size: 16px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: .1rem;
         }
       }
     }
 
     &--list {
+      font-size: 14px;
       line-height: 20px;
       list-style: none;
       margin: 0;

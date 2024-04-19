@@ -17,7 +17,12 @@
         v-model:selected-language="selectedLanguage"
         v-model:selected-source="selectedSource"
       />
+      <div v-if="showInstructions" class="type-page__instructions">
+        <Icon name="material-symbols:person-search-rounded" size="100" />
+        <p class="type-page__instructions--message">{{ t('directory.instructions') }}</p>
+      </div>
       <PublicationList
+        v-else
         :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
         :items="visibleItems"
         :items-per-page="itemsPerPage"
@@ -175,6 +180,14 @@
   const totalItems = computed(() => matches.value.length || 0)
   const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value))
 
+  const showInstructions = computed(() => {
+    if(!isDirectory(articleType.value)) {
+      return false
+    }
+
+    return true
+  })
+
   umTrackView()
 </script>
 <style lang="scss" scoped>
@@ -193,6 +206,13 @@
 
   &__loader {
     @include loader();
+  }
+
+  &__instructions {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
   }
 }
 </style>

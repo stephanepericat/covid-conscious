@@ -40,8 +40,11 @@
 }
 
 @mixin title() {
-  font-family: 'Abril Fatface', cursive;
-  font-weight: 400;
+  font-family: 'Oswald', sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  letter-spacing: .05rem;
+  text-transform: uppercase;
 }
 
 @mixin titleLink() {

@@ -14,7 +14,6 @@ export default groq`
   //   "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
   //   "type": _type,
   // },
-  community: [],
   // EDUCATION
   "learn": *[(_type == "education") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, null),

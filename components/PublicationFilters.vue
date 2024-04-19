@@ -91,6 +91,7 @@
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
+@import "~/assets/sass/mixins.scss";
 
 .publication-filters {
   margin-bottom: 20px;
@@ -104,6 +105,10 @@
     }
 
     &-reset {
+      @include eyebrow();
+
+      font-size: 12px;
+      font-weight: 600;
       margin-left: 5px;
     }
   }
