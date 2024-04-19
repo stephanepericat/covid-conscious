@@ -55,14 +55,14 @@
 <script setup>
   import { useForm, useToast } from '@inkline/inkline'
   import { urlValidator } from '~/assets/utils/url-validator'
-  import { COMMUNITY, NEWS, PRODUCT } from '~/assets/constants/types'
+  import { DIRECTORY, NEWS, PRODUCT } from '~/assets/constants/types'
 
   const { t } = useI18n()
   const localePath = useLocalePath()
   const toast = useToast()
 
   const categories = [
-    { id: COMMUNITY, label: t(`layout.${COMMUNITY}`) },
+    { id: DIRECTORY, label: t(`layout.${DIRECTORY}`) },
     { id: NEWS, label: t(`layout.${NEWS}`) },
     { id: PRODUCT, label: t(`layout.${PRODUCT}`) },
   ]

@@ -33,7 +33,7 @@
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { isCommunity, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isDirectory, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
 
@@ -70,7 +70,7 @@
   const selectedCategory = ref(null)
 
   const filterCountries = computed(() => {
-    if(!isCommunity(type)) return []
+    if(!isDirectory(type)) return []
 
     const matches = selectedCategory.value
       ? results.value.filter((result) => result.categoryUri === selectedCategory.value)
@@ -87,7 +87,7 @@
   const selectedCountry = ref(null)
 
   const filterCities = computed(() => {
-    if(!isCommunity(type) || !selectedCountry.value) return []
+    if(!isDirectory(type) || !selectedCountry.value) return []
 
     const matches = results.value.filter((result) => result.countryCode === selectedCountry.value)
 

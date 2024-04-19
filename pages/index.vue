@@ -207,7 +207,7 @@
     title: t('home.title')
   })
 
-  const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_COMMUNITY)
+  const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_DIRECTORY)
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
   posts.value = await getPosts(0, 2)

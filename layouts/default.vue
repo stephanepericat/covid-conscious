@@ -97,8 +97,8 @@
             <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
               <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
             </li>
-            <li v-if="$appSettings.SHOW_COMMUNITY">
-              <NuxtLink :to="localePath('/community')">{{ $t('layout.community') }}</NuxtLink>
+            <li v-if="$appSettings.SHOW_DIRECTORY">
+              <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
             </li>
             <li>
               <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
@@ -208,7 +208,7 @@
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
     { label: t('layout.health'), url: localePath('/public-health'), hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
-    { label: t('layout.community'), url: localePath('/community'), hidden: !$appSettings.SHOW_COMMUNITY },
+    { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.education'), url: localePath('/education'), hidden: !$appSettings.SHOW_EDUCATION },
     { label: t('layout.forum'), url: localePath('/forum') },

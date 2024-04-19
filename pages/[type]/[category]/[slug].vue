@@ -108,7 +108,7 @@
         />
 
         <!-- community content -->
-        <template v-if="isCommunity(type) && article.info">
+        <template v-if="isDirectory(type) && article.info">
           <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
           <div class="article-page__body--info-address">
             <div v-text="article.info.street1" />
@@ -186,7 +186,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   import { AUTHOR } from '~/assets/constants/types'
-  import { isCommunity, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'

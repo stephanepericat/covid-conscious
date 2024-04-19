@@ -92,6 +92,7 @@ export default {
     about: "About",
     bluesky: "Follow us on Bluesky",
     contents: "Contents",
+    directory: "Directory",
     disclaimer: "Disclaimer",
     event: "Upcoming Events",
     events: "Upcoming Events",

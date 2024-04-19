@@ -92,6 +92,7 @@ export default {
     about: "Sobre Nosotros",
     bluesky: "Síguenos en Bluesky",
     contents: "Contenido",
+    directory: "Directorio",
     disclaimer: "Descargo de responsabilidad",
     event: "Próximos Eventos",
     events: "Próximos Eventos",

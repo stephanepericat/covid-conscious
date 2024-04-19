@@ -9,7 +9,7 @@
           :options="categories"
           :placeholder="$t('list.filters.selectCategory')"
         />
-        <template v-if="isCommunity(type)">
+        <template v-if="isDirectory(type)">
           <ISelect
             class="publication-filters--select"
             v-model="selectedCountry"
@@ -61,7 +61,7 @@
   </div>
 </template>
 <script setup>
-  import { isCommunity, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
+  import { isDirectory, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
 
   const props = defineProps({
     categories: { type: Array, default: [] },
