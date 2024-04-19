@@ -118,7 +118,7 @@
     min-width: 230px;
   }
 
-  @include breakpoint-down('md') {
+  @include breakpoint-down('lg') {
     &--form {
       flex-direction: column;
 

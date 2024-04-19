@@ -175,8 +175,6 @@
             <li>
               <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
             </li>
-            <li>&nbsp</li>
-            <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
           </ul>
         </div>
         <div class="default-layout__footer--container-block logo">
@@ -184,6 +182,9 @@
             <img class="default-layout__logo-footer" :src="logoFile" />
           </INavbarBrand>
         </div>
+      </IContainer>
+      <IContainer class="default-layout__footer--container">
+        <div class="default-layout__footer--year">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</div>
       </IContainer>
     </ILayoutFooter>
   </ILayout>
@@ -378,6 +379,26 @@
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    &--year {
+      border-top: 1px solid var(--border-bottom-color);
+      font-size: 13px;
+      margin-top: 15px;
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    @include breakpoint-down('lg') {
+      &--container {
+        &-block {
+          flex-basis: 25%;
+
+          &.logo {
+            display: none;
+          }
+        }
+      }
     }
 
     @include breakpoint-down('md') {
