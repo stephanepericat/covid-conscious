@@ -76,6 +76,10 @@ export default {
       },
     },
   },
+  directory: {
+    instructions: 'Sélectionnez une catégorie ou un pays pour lancer la recherche dans l\'annuaire',
+    results: '{totalItems} résultat(s) trouvé(s).',
+  },
   disclaimer: {
     links: "AVIS DE NON-RESPONSABILITÉ LIENS EXTERNES",
     professional: "AVIS DE NON-RESPONSABILITÉ PROFESSIONNEL",

@@ -76,6 +76,10 @@ export default {
       },
     },
   },
+  directory: {
+    instructions: 'Seleccione una categoría o un país para comenzar a buscar en el directorio',
+    results: '{totalItems} esultado(s) encontrado(s).',
+  },
   disclaimer: {
     links: "RENUNCIA DE ENLACES EXTERNOS",
     professional: "RENUNCIA PROFESIONAL",
