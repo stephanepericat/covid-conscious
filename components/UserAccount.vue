@@ -4,13 +4,13 @@
       class="sf-account__form"
       @submit.prevent="updateUser"
     >
-      <IFormGroup>
+      <!-- <IFormGroup>
         <Avatar
           v-model:path="avatar_path"
           @error="emit('error')"
           @upload="updateUser"
         />
-      </IFormGroup>
+      </IFormGroup> -->
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.email") }}</IFormLabel>
         <IInput
@@ -69,7 +69,7 @@
 </template>
 <script setup>
   import { usePosts } from '~/assets/composables/usePosts'
-  import Avatar from './UserAvatar.vue'
+  // import Avatar from './UserAvatar.vue'
 
   const emit = defineEmits(['success', 'error'])
 
@@ -82,7 +82,6 @@
   const username = ref('')
   const fullName = ref('')
   const website = ref('')
-  const avatar_path = ref('')
   const about = ref('')
 
   const updateUser = async () => {
@@ -91,10 +90,10 @@
     try {
       const updates = {
         id: user.value.id,
-        username: username.value || null,
+        username: username.value || null, // TODO: validate username
         full_name: fullName.value || null,
         website: website.value || null,
-        avatar_url: avatar_path.value || null,
+        avatar_url: null,
         about: about.value || null,
         updated_at: new Date(),
       }
@@ -118,7 +117,6 @@
       username.value = data.username || ''
       fullName.value = data.full_name || ''
       website.value = data.website || ''
-      avatar_path.value = data.avatar_url || ''
       about.value = data.about || ''
     }
 
