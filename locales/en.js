@@ -152,6 +152,7 @@ export default {
       account: "My Account",
       area: "User Area",
       createAccount: "Create an Account",
+      resetPassword: 'Reset Password',
       signIn: "Sign In",
       signUp: "Sign Up",
       signOut: "Sign Out",
@@ -417,6 +418,7 @@ export default {
   },
   login: {
     buttons: {
+      resetPassword: 'Reset Password',
       signin: 'Sign In',
       signup: 'Sign Up',
     },
@@ -432,6 +434,10 @@ export default {
       error: {
         title: 'Something went wrong',
         message: 'Please try again later.',
+      },
+      reset: {
+        title: 'Request successful!',
+        message: 'Check your email for a reset link.',
       },
       signup: {
         title: 'Sign up successful!',

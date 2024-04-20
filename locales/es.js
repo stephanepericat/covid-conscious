@@ -152,6 +152,7 @@ export default {
       account: "Mi cuenta",
       area: "Área de Usuario",
       createAccount: "Crea una Cuenta",
+      resetPassword: 'Restablecer la contraseña',
       signIn: "Iniciar sesión",
       signUp: "Registrate",
       signOut: "Cerrar sesión",
@@ -417,6 +418,7 @@ export default {
   },
   login: {
     buttons: {
+      resetPassword: 'Restablecer la contraseña',
       signin: 'Iniciar sesión',
       signup: 'Registrarse',
     },
@@ -432,6 +434,10 @@ export default {
       error: {
         title: 'Algo salió mal',
         message: 'Por favor, inténtelo de nuevo más tarde.',
+      },
+      reset: {
+        title: '¡Solicitud exitosa!',
+        message: 'Revise su correo electrónico para ver si hay un enlace de reinicio.',
       },
       signup: {
         title: '¡Regístrese exitosamente!',

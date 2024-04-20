@@ -152,6 +152,7 @@ export default {
       account: "Mon Compte",
       area: "Espace Utilisateur",
       createAccount: "Créer un Compte",
+      resetPassword: 'Réinitialiser le mot de passe',
       signIn: "Connexion",
       signUp: "S'inscrire",
       signOut: "Déconnexion",
@@ -418,6 +419,7 @@ export default {
   },
   login: {
     buttons: {
+      resetPassword: 'Réinitialiser le mot de passe',
       signin: 'Se Connecter',
       signup: 'S\'inscrire',
     },
@@ -433,6 +435,10 @@ export default {
       error: {
         title: 'Une erreur s\'est produite',
         message: 'Veuillez réessayer ultérieurement.',
+      },
+      reset: {
+        title: 'Demande réussie !',
+        message: 'Vérifiez votre boite mail pour un courrier contenant un lien de réinitialisation.',
       },
       signup: {
         title: 'Inscription réussie !',

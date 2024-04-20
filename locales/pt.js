@@ -152,6 +152,7 @@ export default {
       account: "Minha Conta",
       createAccount: "Crie a sua Conta",
       area: "Área do Usuário",
+      resetPassword: 'Redefinir senha',
       signIn: "Entrar",
       signUp: "Inscrever-se",
       signOut: "Sair",
@@ -417,6 +418,7 @@ export default {
   },
   login: {
     buttons: {
+      resetPassword: 'Redefinir senha',
       signin: 'Entrar',
       signup: 'Registar-se',
     },
@@ -432,6 +434,10 @@ export default {
       error: {
         title: 'Algo deu errado',
         message: 'Tente novamente mais tarde.',
+      },
+      reset: {
+        title: 'Solicitação bem-sucedida!',
+        message: 'Verifique seu e-mail para obter um link de redefinição.',
       },
       signup: {
         title: 'Inscreva-se com sucesso!',

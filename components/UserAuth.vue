@@ -1,6 +1,6 @@
 <template>
   <IForm
-    class="sf-auth"
+    class="user-login"
     @submit.prevent="handleLogin"
   >
     <IFormGroup>
@@ -21,7 +21,7 @@
         required
       />
     </IFormGroup>
-    <IFormGroup class="sf-auth__captcha">
+    <IFormGroup class="user-login__captcha">
       <NuxtTurnstile v-model="token" />
     </IFormGroup>
     <IFormGroup>
@@ -73,7 +73,7 @@
   }
 </script>
 <style lang="scss" scoped>
- .sf-auth {
+.user-login {
   &__captcha {
     margin-top: 20px;
   }

@@ -1,7 +1,7 @@
 <template>
   <IForm
-    class="user-signup"
-    @submit.prevent="handleSignup"
+    class="password-reset-request"
+    @submit.prevent="handleResetRequest"
   >
     <IFormGroup>
       <IFormLabel>{{ $t("login.labels.email") }}</IFormLabel>
@@ -12,16 +12,7 @@
         required
       />
     </IFormGroup>
-    <IFormGroup>
-      <IFormLabel>{{ $t("login.labels.password") }}</IFormLabel>
-      <IInput
-        v-model="password"
-        :placeholder="$t('login.placeholders.password')"
-        type="password"
-        required
-      />
-    </IFormGroup>
-    <IFormGroup class="user-signup__captcha">
+    <IFormGroup class="password-reset-request__captcha">
       <NuxtTurnstile v-model="token" />
     </IFormGroup>
     <IFormGroup>
@@ -34,7 +25,7 @@
           v-if="loading"
           name="eos-icons:loading"
         />
-        {{ $t('login.buttons.signup') }}
+        {{ $t('login.buttons.resetPassword') }}
       </IButton>
     </IFormGroup>
   </IForm>
@@ -46,7 +37,7 @@
   const emit = defineEmits(['success', 'error'])
   const localePath = useLocalePath()
 
-  const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
+  const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/update-password')}`)
 
   const client = useSupabaseClient()
   const loading = ref(false)
@@ -57,16 +48,12 @@
 
   const submitBtnEnabled = computed(() => tokenValidation.value && email.value && password.value && isEmail(email.value) && !loading.value)
 
-  const handleSignup = async () => {
+  const handleResetRequest = async () => {
     try {
       loading.value = true
 
-      const { error } = await client.auth.signUp({
-        email: email.value,
-        password: password.value,
-        options: {
-          emailRedirectTo: redirectUrl.value
-        }
+      const { error } = await client.auth.resetPasswordForEmail(email.value, {
+        redirectTo: redirectUrl.value,
       })
       if (error) throw error
       emit('success')
@@ -75,13 +62,12 @@
       emit('error')
     } finally {
       email.value = ''
-      password.value = ''
       loading.value = false
     }
   }
 </script>
 <style lang="scss" scoped>
-.user-signup {
+.password-reset-request {
   &__captcha {
     margin-top: 20px;
   }
