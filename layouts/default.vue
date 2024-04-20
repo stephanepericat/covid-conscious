@@ -255,7 +255,7 @@
   &__header {
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 10000;
 
     &--auth {
       &:hover {
