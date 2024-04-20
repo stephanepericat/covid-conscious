@@ -54,7 +54,7 @@
         <p class="article-page__info no-author">
           <span class="article-page__info--category">
             {{ articleType }}
-            <span> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <span v-if="!isDirectory(type) && !isResource(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </span>
         </p>
@@ -440,6 +440,18 @@
       &-text {
         font-size: 18px;
         line-height: 28px;
+      }
+    }
+
+    @include breakpoint-down('md') {
+      &--contents {
+        flex-direction: column;
+
+        &-info {
+          flex-basis: 100%;
+          margin-left: 0;
+          margin-top: 20px;
+        }
       }
     }
   }
