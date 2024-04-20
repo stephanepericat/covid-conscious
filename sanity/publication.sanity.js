@@ -26,6 +26,7 @@ export default groq`
   "link": url,
   embedCode,
   language,
+  location,
   "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
 }
 `

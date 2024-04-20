@@ -217,6 +217,10 @@
     display: flex;
     flex-direction: column;
     padding-top: 40px;
+
+    &--message {
+      margin-top: 20px;
+    }
   }
 
   &__results {

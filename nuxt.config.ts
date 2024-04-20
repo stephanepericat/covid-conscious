@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     'nuxt-vitest',
     '@nuxtjs/sitemap',
     '@nuxt/image',
+    'nuxt3-leaflet',
   ],
 
   runtimeConfig: {

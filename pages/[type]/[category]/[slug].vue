@@ -97,7 +97,48 @@
           </IButton>
         </template>
 
-        <SanityContent v-else :blocks="article.body" :serializers="serializers" />
+        <section v-else class="article-page__body--contents">
+          <div class="article-page__body--contents-text">
+            <SanityContent :blocks="article.body" :serializers="serializers" />
+          </div>
+          <!-- community content -->
+          <div v-if="isDirectory(type) && article.info" class="article-page__body--contents-info">
+            <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
+            <div class="article-page__body--info-address">
+              <div v-text="article.title" />
+              <div v-text="article.info.street1" />
+              <div v-text="article.info.street2" />
+              <div v-text="article.info.city" />
+              <div v-text="article.info.zipCode" />
+              <div v-text="article.info.country" />
+              <br/>
+              <div v-if="article.info.phone">
+                <a :href="`tel:${article.info.phone}`">{{ article.info.phone }}</a>
+              </div>
+              <div v-if="article.info.email">
+                <a :href="`mailto:${article.info.email}`">{{ article.info.email }}</a>
+              </div>
+              <div v-if="article.info.website">
+                <a :href="article.info.website" target="_blank">{{ article.info.website }}</a>
+              </div>
+            </div>
+            <div class="article-page__body--info-contact">
+              <IButton v-if="article.info.phone" class="article-page__body--info-contact-button" :to="`tel:${article.info.phone}`">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
+                {{ $t("article.call") }}
+              </IButton>
+              <IButton v-if="article.info.email" class="article-page__body--info-contact-button" :to="`mailto:${article.info.email}`">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
+                {{ $t("article.email") }}
+              </IButton>
+              <IButton v-if="article.info.website" class="article-page__body--info-contact-button" :to="article.info.website" target="_blank">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
+                {{ $t("article.website") }}
+              </IButton>
+            </div>
+          </div>
+        </section>
+        
 
         <!-- social media sharing -->
         <ShareButtons
@@ -107,31 +148,6 @@
           :hashtag="hashtag"
         />
 
-        <!-- community content -->
-        <template v-if="isDirectory(type) && article.info">
-          <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
-          <div class="article-page__body--info-address">
-            <div v-text="article.info.street1" />
-            <div v-text="article.info.street2" />
-            <div v-text="article.info.city" />
-            <div v-text="article.info.zipCode" />
-            <div v-text="article.info.country" />
-          </div>
-          <div class="article-page__body--info-contact">
-            <IButton v-if="article.info.phone" class="article-page__body--info-contact-button" :to="`tel:${article.info.phone}`">
-              <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
-              {{ $t("article.call") }}
-            </IButton>
-            <IButton v-if="article.info.email" class="article-page__body--info-contact-button" :to="`mailto:${article.info.email}`">
-              <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
-              {{ $t("article.email") }}
-            </IButton>
-            <IButton v-if="article.info.website" class="article-page__body--info-contact-button" :to="article.info.website" target="_blank">
-              <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
-              {{ $t("article.website") }}
-            </IButton>
-          </div>
-        </template>
         <!-- product content -->
         <template v-if="isProduct(type)">
           <div class="article-page__body--info-product">
@@ -346,7 +362,8 @@
 
   &__info {
     &--category {
-      font-weight: 200;
+      font-size: 14px;
+      font-weight: 300;
     }
 
     &.no-author {
@@ -366,11 +383,12 @@
     &--info {
       @include eyebrow();
 
-      font-weight: 400;
-      margin-top: 40px;
+      font-size: 20px;
+      font-weight: 700;
 
       &-address {
         font-size: 1.1rem;
+        margin-bottom: 30px;
       }
 
       &-contact,
@@ -378,7 +396,8 @@
         margin-top: 20px;
 
         &-button {
-          margin-right: 10px;
+          margin-bottom: 15px;
+          width: 100%;
         }
 
         &-icon {
@@ -397,12 +416,31 @@
       }
 
       &-summary {
+        font-size: 18px;
+        line-height: 28px;
         margin-bottom: 40px;
       }
     }
 
     &--summary {
+      font-size: 18px;
+      line-height: 28px;
       margin-bottom: 40px;
+    }
+
+    &--contents {
+      display: flex;
+      
+      &-info {
+        flex-basis: 350px;
+        flex-shrink: 0;
+        margin-left: 30px;
+      }
+
+      &-text {
+        font-size: 18px;
+        line-height: 28px;
+      }
     }
   }
 
