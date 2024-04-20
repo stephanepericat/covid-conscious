@@ -10,7 +10,7 @@ export default groq`
   "date": coalesce(publicationDate, eventDate),
   "end": endDate,
   "updated": _updatedAt,
-  "body": coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, []),
+  "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == '${baseLanguage}'][0].value, []),
   "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''),
   "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
   "info": contactInfo {
