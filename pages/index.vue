@@ -304,7 +304,9 @@
   }
 
   &__more {
-    padding-left: var(--list-group--padding-left, var(--padding-left));
+    &.padded {
+      padding-left: var(--list-group--padding-left, var(--padding-left));
+    }
   }
 
   &__video-player {
