@@ -106,6 +106,9 @@
                   :zoom="zoom"
                   :center="[article.location.lat, article.location.lng]"
                 >
+                  <LMarker
+                    :latLng="[article.location.lat, article.location.lng]"
+                  />
                   <LTileLayer
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
@@ -205,7 +208,7 @@
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
-  import { AUTHOR } from '~/assets/constants/types'
+  // import { AUTHOR } from '~/assets/constants/types'
   import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
