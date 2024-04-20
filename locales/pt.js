@@ -428,5 +428,15 @@ export default {
       email: 'Digite seu e-mail',
       password: 'Digite sua senha',
     },
+    toast: {
+      error: {
+        title: 'Algo deu errado',
+        message: 'Tente novamente mais tarde.'
+      },
+      signup: {
+        title: 'Inscreva-se com sucesso!',
+        message: 'Verifique seu e-mail para obter um link de confirmação.'
+      }
+    },
   },
 };

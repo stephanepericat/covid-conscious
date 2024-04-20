@@ -46,7 +46,7 @@
   const emit = defineEmits(['success', 'error'])
   const localePath = useLocalePath()
 
-  // const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
+  const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
 
   const client = useSupabaseClient()
   const loading = ref(false)
@@ -60,20 +60,18 @@
   const handleSignup = async () => {
     try {
       loading.value = true
-      // const { error } = await client.auth.signInWithOtp({
-      //   email: email.value,
-      //   options: {
-      //     emailRedirectTo: redirectUrl.value,
-      //   },
-      // })
-      const { data, error } = await client.auth.signUp({
+
+      const { error } = await client.auth.signUp({
         email: email.value,
         password: password.value,
+        options: {
+          emailRedirectTo: redirectUrl.value
+        }
       })
       if (error) throw error
-      console.log('user data', data)
       emit('success')
     } catch (error) {
+      console.log('error', error)
       emit('error')
     } finally {
       email.value = ''

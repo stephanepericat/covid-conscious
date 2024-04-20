@@ -429,5 +429,15 @@ export default {
       email: 'Entrez votre adresse e-mail',
       password: 'Entrez votre mot de passe',
     },
+    toast: {
+      error: {
+        title: 'Une erreur s\'est produite',
+        message: 'Veuillez réessayer plus tard.'
+      },
+      signup: {
+        title: 'Inscription réussie !',
+        message: 'Vérifiez votre courrier électronique pour un lien de confirmation.'
+      }
+    },
   },
 };

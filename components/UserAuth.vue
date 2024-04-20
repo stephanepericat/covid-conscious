@@ -44,9 +44,6 @@
   import isEmail from 'validator/lib/isEmail'
 
   const emit = defineEmits(['success', 'error'])
-  const localePath = useLocalePath()
-
-  // const redirectUrl = computed(() => `${window?.location?.origin}${localePath('/callback')}`)
 
   const client = useSupabaseClient()
   const loading = ref(false)
@@ -60,18 +57,11 @@
   const handleLogin = async () => {
     try {
       loading.value = true
-      // const { error } = await client.auth.signInWithOtp({
-      //   email: email.value,
-      //   options: {
-      //     emailRedirectTo: redirectUrl.value,
-      //   },
-      // })
-      const { data, error } = await client.auth.signInWithPassword({
+      const { error } = await client.auth.signInWithPassword({
         email: email.value,
         password: password.value,
       })
       if (error) throw error
-      console.log('user data', data)
       emit('success')
     } catch (error) {
       emit('error')

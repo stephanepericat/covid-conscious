@@ -18,15 +18,15 @@
 
   const onSuccess = () => {
     toast.show({
-      title: t('forum.auth.toast.success.title'),
-      message: t('forum.auth.toast.success.message'),
+      title: t('login.toast.signup.title'),
+      message: t('login.toast.signup.message'),
       color: 'success'
     })
   }
   const onError = () => {
     toast.show({
-      title: t('forum.auth.toast.error.title'),
-      message: t('forum.auth.toast.error.message'),
+      title: t('login.toast.error.title'),
+      message: t('login.toast.error.message'),
       color: 'danger'
     })
   }

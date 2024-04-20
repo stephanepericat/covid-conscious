@@ -4,24 +4,30 @@
     <Auth
       class="login-page__auth"
       @error="onError"
+      @success="onLoginSuccess"
     />
     <IToastContainer />
   </div>
 </template>
 <script setup>
   import { useToast } from '@inkline/inkline'
-
   import Auth from '../components/UserAuth.vue'
 
   const { t } = useI18n()
   const toast = useToast()
+  const router = useRouter()
+  const localePath = useLocalePath()
 
   const onError = () => {
     toast.show({
-      title: t('forum.auth.toast.error.title'),
-      message: t('forum.auth.toast.error.message'),
+      title: t('login.toast.error.title'),
+      message: t('login.toast.error.message'),
       color: 'danger'
     })
+  }
+
+  const onLoginSuccess = () => {
+    router.push(localePath('/account'))
   }
 
   umTrackView()

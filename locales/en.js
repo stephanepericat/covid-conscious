@@ -428,5 +428,15 @@ export default {
       email: 'Enter your email address',
       password: 'Enter your password',
     },
+    toast: {
+      error: {
+        title: 'Something went wrong',
+        message: 'Please try again later.'
+      },
+      signup: {
+        title: 'Sign up successful!',
+        message: 'Check your email for a confirmation link.'
+      }
+    },
   },
 };
