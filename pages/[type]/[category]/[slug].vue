@@ -100,6 +100,9 @@
         <section v-else class="article-page__body--contents">
           <div class="article-page__body--contents-text">
             <SanityContent :blocks="article.body" :serializers="serializers" />
+            <div v-if="isDirectory(type) && article.location">
+              lat: {{ article.location.lat }}, lng: {{ article.location.lng }}
+            </div>
           </div>
           <!-- community content -->
           <div v-if="isDirectory(type) && article.info" class="article-page__body--contents-info">
@@ -113,28 +116,17 @@
               <div v-text="article.info.country" />
               <br/>
               <div v-if="article.info.phone">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
                 <a :href="`tel:${article.info.phone}`">{{ article.info.phone }}</a>
               </div>
               <div v-if="article.info.email">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
                 <a :href="`mailto:${article.info.email}`">{{ article.info.email }}</a>
               </div>
               <div v-if="article.info.website">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
                 <a :href="article.info.website" target="_blank">{{ article.info.website }}</a>
               </div>
-            </div>
-            <div class="article-page__body--info-contact">
-              <IButton v-if="article.info.phone" class="article-page__body--info-contact-button" :to="`tel:${article.info.phone}`">
-                <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
-                {{ $t("article.call") }}
-              </IButton>
-              <IButton v-if="article.info.email" class="article-page__body--info-contact-button" :to="`mailto:${article.info.email}`">
-                <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
-                {{ $t("article.email") }}
-              </IButton>
-              <IButton v-if="article.info.website" class="article-page__body--info-contact-button" :to="article.info.website" target="_blank">
-                <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
-                {{ $t("article.website") }}
-              </IButton>
             </div>
           </div>
         </section>
@@ -397,7 +389,6 @@
 
         &-button {
           margin-bottom: 15px;
-          width: 100%;
         }
 
         &-icon {
