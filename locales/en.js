@@ -26,7 +26,7 @@ export default {
   comingSoon: "Coming soon...",
   contribute: {
     back: 'Go Home',
-    description: "You can use this form to submit a piece of news, suggest a product to review, or share a community tip.",
+    description: "You can use this form to submit a piece of news, suggest a product to review, or share a directory tip.",
     errors: {
       category: {
         required: "Please select a category.",

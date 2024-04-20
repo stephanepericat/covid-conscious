@@ -26,7 +26,7 @@ export default {
   comingSoon: "Muy pronto...",
   contribute: {
     back: 'Ir a la página de inicio',
-    description: "Puede usar este formulario para enviar una noticia, sugerir un producto para revisar o compartir un consejo de la comunidad.",
+    description: "Puede usar este formulario para enviar una noticia, sugerir un producto para revisar o compartir un consejo de lo directorio.",
     errors: {
       category: {
         required: "Porfavor seleccione una categoría.",

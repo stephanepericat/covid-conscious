@@ -26,7 +26,7 @@ export default {
   comingSoon: "À venir...",
   contribute: {
     back: 'Aller à la page d\'accueil',
-    description: "Vous pouvez utiliser ce formulaire pour soumettre une nouvelle, suggérer un produit à évaluer ou partager une astuce communautaire.",
+    description: "Vous pouvez utiliser ce formulaire pour soumettre une nouvelle, suggérer un produit à évaluer ou partager un contact pour l'annuaire.",
     errors: {
       category: {
         required: "Veuillez sélectionner une catégorie.",

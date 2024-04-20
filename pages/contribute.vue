@@ -192,12 +192,11 @@
 @import '@inkline/inkline/css/mixins';
 
 .contribute-page {
+  max-width: 34rem;
+  margin: 0 auto;
+
   &__title {
     @include title();
-  }
-
-  &__form {
-    width: 50%;
   }
 
   &__captcha {
