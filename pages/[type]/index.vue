@@ -21,15 +21,17 @@
         <Icon name="material-symbols:person-search-rounded" size="100" />
         <p class="type-page__instructions--message">{{ t('directory.instructions') }}</p>
       </div>
-      <PublicationList
-        v-else
-        :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
-        :items="visibleItems"
-        :items-per-page="itemsPerPage"
-        :total="totalItems"
-        with-pagination
-        v-model:current-page="currentPage"
-      />
+      <template v-else>
+        <div v-if="isDirectory(type)">{{ t('directory.results', { totalItems }) }}</div>
+        <PublicationList
+          :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
+          :items="visibleItems"
+          :items-per-page="itemsPerPage"
+          :total="totalItems"
+          with-pagination
+          v-model:current-page="currentPage"
+        />
+      </template>
     </template>
   </div>
 </template>
@@ -185,7 +187,7 @@
       return false
     }
 
-    return true
+    return !selectedCategory.value && !selectedCountry.value
   })
 
   umTrackView()

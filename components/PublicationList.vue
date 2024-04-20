@@ -118,6 +118,7 @@
   &__date {
     font-weight: 500;
     letter-spacing: 0.1rem;
+    margin-bottom: 10px;
     text-transform: uppercase;
   }
 

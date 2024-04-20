@@ -231,6 +231,14 @@
     @include title();
   }
 
+  &__sub-title {
+    @include eyebrow();
+
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .1rem;
+  }
+
   &__container {
     &--top,
     &--mid,

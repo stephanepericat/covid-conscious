@@ -73,6 +73,7 @@
     }
 
     &--summary {
+      font-size: 13.33px;
       margin: 10px 0;
     }
 

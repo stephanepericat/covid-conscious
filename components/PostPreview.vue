@@ -17,9 +17,9 @@
         <NuxtLink :to="localePath(`${rootPath}/${POST}/${post.id}`)">{{ post.headline }}</NuxtLink>
       </h4>
       <p class="post-preview__description" v-if="withPreview">{{ cleanPostBody(post.body) }}</p>
-      <em>
+      <em class="post-preview__metadata">
         <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
-        <span> &bullet; <NuxtLink :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
+        <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
         <span class="post-preview__forum-date"> &bullet; {{ format(new Date(post.created_at), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
       </em>
     </IMedia>
@@ -49,7 +49,9 @@
 
 .post-preview {
   &__description {
-    margin: 0;
+    font-size: 13.33px;
+    // margin: 0;
+    margin-bottom: 10px;
   }
   
   &__link {
@@ -62,15 +64,21 @@
     @include thumbnail();
   }
 
+  &__metadata {
+    font-style: normal;
+  }
+
   &__forum {
+    &-author,
     &-date {
-      font-weight: 500;
-      letter-spacing: 0.1rem;
-      text-transform: uppercase;
+      @include eyebrow();
+
+      font-size: 12px;
+      font-weight: 600;
     }
 
     &-tag {
-      font-style: normal;
+      @include eyebrow();
     }
   }
 }
