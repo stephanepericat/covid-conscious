@@ -431,12 +431,12 @@ export default {
     toast: {
       error: {
         title: 'Algo deu errado',
-        message: 'Tente novamente mais tarde.'
+        message: 'Tente novamente mais tarde.',
       },
       signup: {
         title: 'Inscreva-se com sucesso!',
-        message: 'Verifique seu e-mail para obter um link de confirmação.'
-      }
+        message: 'Verifique seu e-mail para obter um link de confirmação.',
+      },
     },
   },
 };

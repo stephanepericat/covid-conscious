@@ -432,12 +432,12 @@ export default {
     toast: {
       error: {
         title: 'Une erreur s\'est produite',
-        message: 'Veuillez réessayer plus tard.'
+        message: 'Veuillez réessayer ultérieurement.',
       },
       signup: {
         title: 'Inscription réussie !',
-        message: 'Vérifiez votre courrier électronique pour un lien de confirmation.'
-      }
+        message: 'Vérifiez votre boite mail pour un courrier contenant un lien de confirmation.',
+      },
     },
   },
 };

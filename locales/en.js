@@ -431,12 +431,12 @@ export default {
     toast: {
       error: {
         title: 'Something went wrong',
-        message: 'Please try again later.'
+        message: 'Please try again later.',
       },
       signup: {
         title: 'Sign up successful!',
-        message: 'Check your email for a confirmation link.'
-      }
+        message: 'Check your email for a confirmation link.',
+      },
     },
   },
 };
