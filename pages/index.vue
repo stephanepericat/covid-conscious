@@ -304,6 +304,11 @@
   }
 
   &__more {
+    @include eyebrow();
+
+    font-size: 12px;
+    font-weight: 600;
+
     &.padded {
       padding-left: var(--list-group--padding-left, var(--padding-left));
     }
