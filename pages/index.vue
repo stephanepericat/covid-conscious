@@ -207,7 +207,7 @@
     title: t('home.title')
   })
 
-  const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_COMMUNITY)
+  const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_DIRECTORY)
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
   posts.value = await getPosts(0, 2)
@@ -229,6 +229,14 @@
 
   &__title {
     @include title();
+  }
+
+  &__sub-title {
+    @include eyebrow();
+
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: .1rem;
   }
 
   &__container {
@@ -296,7 +304,14 @@
   }
 
   &__more {
-    padding-left: var(--list-group--padding-left, var(--padding-left));
+    @include eyebrow();
+
+    font-size: 12px;
+    font-weight: 600;
+
+    &.padded {
+      padding-left: var(--list-group--padding-left, var(--padding-left));
+    }
   }
 
   &__video-player {

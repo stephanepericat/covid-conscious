@@ -100,8 +100,8 @@
             <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
               <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
             </li>
-            <li v-if="$appSettings.SHOW_COMMUNITY">
-              <NuxtLink :to="localePath('/community')">{{ $t('layout.community') }}</NuxtLink>
+            <li v-if="$appSettings.SHOW_DIRECTORY">
+              <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
             </li>
             <li>
               <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
@@ -178,8 +178,6 @@
             <li>
               <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
             </li>
-            <li>&nbsp</li>
-            <li>{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</li>
           </ul>
         </div>
         <div class="default-layout__footer--container-block logo">
@@ -187,6 +185,9 @@
             <img class="default-layout__logo-footer" :src="logoFile" />
           </INavbarBrand>
         </div>
+      </IContainer>
+      <IContainer class="default-layout__footer--container">
+        <div class="default-layout__footer--year">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</div>
       </IContainer>
     </ILayoutFooter>
   </ILayout>
@@ -211,7 +212,7 @@
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
     { label: t('layout.health'), url: localePath('/public-health'), hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
-    { label: t('layout.community'), url: localePath('/community'), hidden: !$appSettings.SHOW_COMMUNITY },
+    { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.education'), url: localePath('/education'), hidden: !$appSettings.SHOW_EDUCATION },
     { label: t('layout.forum'), url: localePath('/forum') },
@@ -271,6 +272,10 @@
 
   &__user {
     &--label {
+      @include eyebrow();
+
+      font-size: 12px;
+      font-weight: 600;
       margin-left: 5px;
     }
   }
@@ -287,6 +292,14 @@
   &__sub-nav {
     :deep(.navbar-collapsible) {
       justify-content: center;
+    }
+
+    :deep(.nav-item) {
+      @include eyebrow();
+
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .12rem;
     }
 
     @include breakpoint-down('md') {
@@ -356,16 +369,39 @@
         &-title {
           @include eyebrow();
 
-          font-size: 16px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: .1rem;
         }
       }
     }
 
     &--list {
+      font-size: 14px;
       line-height: 20px;
       list-style: none;
       margin: 0;
       padding: 0;
+    }
+
+    &--year {
+      border-top: 1px solid var(--border-bottom-color);
+      font-size: 13px;
+      margin-top: 15px;
+      padding-top: 20px;
+      width: 100%;
+    }
+
+    @include breakpoint-down('lg') {
+      &--container {
+        &-block {
+          flex-basis: 25%;
+
+          &.logo {
+            display: none;
+          }
+        }
+      }
     }
 
     @include breakpoint-down('md') {

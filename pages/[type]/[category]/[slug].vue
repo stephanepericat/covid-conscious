@@ -54,7 +54,7 @@
         <p class="article-page__info no-author">
           <span class="article-page__info--category">
             {{ articleType }}
-            <span> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <span v-if="!isDirectory(type) && !isResource(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </span>
         </p>
@@ -97,7 +97,55 @@
           </IButton>
         </template>
 
-        <SanityContent v-else :blocks="article.body" :serializers="serializers" />
+        <section v-else class="article-page__body--contents">
+          <div class="article-page__body--contents-text">
+            <SanityContent :blocks="article.body" :serializers="serializers" />
+            <div v-if="isDirectory(type) && article.location" class="article-page__body--contents-map">
+              <ClientOnly>
+                <LMap
+                  :zoom="zoom"
+                  :center="[article.location.lat, article.location.lng]"
+                >
+                  <LMarker
+                    :latLng="[article.location.lat, article.location.lng]"
+                  />
+                  <LTileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                    layer-type="base"
+                    name="OpenStreetMap"
+                  />
+                </LMap>
+              </ClientOnly>
+            </div>
+          </div>
+          <!-- community content -->
+          <div v-if="isDirectory(type) && article.info" class="article-page__body--contents-info">
+            <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
+            <div class="article-page__body--info-address">
+              <div v-text="article.title" />
+              <div v-text="article.info.street1" />
+              <div v-text="article.info.street2" />
+              <div v-text="article.info.city" />
+              <div v-text="article.info.zipCode" />
+              <div v-text="article.info.country" />
+              <br/>
+              <div v-if="article.info.phone">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
+                <a :href="`tel:${article.info.phone}`">{{ article.info.phone }}</a>
+              </div>
+              <div v-if="article.info.email">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
+                <a :href="`mailto:${article.info.email}`">{{ article.info.email }}</a>
+              </div>
+              <div v-if="article.info.website">
+                <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
+                <a :href="article.info.website" target="_blank">{{ article.info.website }}</a>
+              </div>
+            </div>
+          </div>
+        </section>
+        
 
         <!-- social media sharing -->
         <ShareButtons
@@ -107,31 +155,6 @@
           :hashtag="hashtag"
         />
 
-        <!-- community content -->
-        <template v-if="isCommunity(type) && article.info">
-          <h4 class="article-page__body--info" v-text="$t('article.contactInfo')" />
-          <div class="article-page__body--info-address">
-            <div v-text="article.info.street1" />
-            <div v-text="article.info.street2" />
-            <div v-text="article.info.city" />
-            <div v-text="article.info.zipCode" />
-            <div v-text="article.info.country" />
-          </div>
-          <div class="article-page__body--info-contact">
-            <IButton v-if="article.info.phone" class="article-page__body--info-contact-button" :to="`tel:${article.info.phone}`">
-              <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
-              {{ $t("article.call") }}
-            </IButton>
-            <IButton v-if="article.info.email" class="article-page__body--info-contact-button" :to="`mailto:${article.info.email}`">
-              <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
-              {{ $t("article.email") }}
-            </IButton>
-            <IButton v-if="article.info.website" class="article-page__body--info-contact-button" :to="article.info.website" target="_blank">
-              <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
-              {{ $t("article.website") }}
-            </IButton>
-          </div>
-        </template>
         <!-- product content -->
         <template v-if="isProduct(type)">
           <div class="article-page__body--info-product">
@@ -185,8 +208,8 @@
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
-  import { AUTHOR } from '~/assets/constants/types'
-  import { isCommunity, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
+  // import { AUTHOR } from '~/assets/constants/types'
+  import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -274,6 +297,8 @@
     showReviewEditor.value = true
   }
 
+  const zoom = ref(6)
+
   watch(articleId, async () => {
     if(!articleId.value || !isProduct(type)) return
 
@@ -346,7 +371,8 @@
 
   &__info {
     &--category {
-      font-weight: 200;
+      font-size: 14px;
+      font-weight: 300;
     }
 
     &.no-author {
@@ -366,11 +392,12 @@
     &--info {
       @include eyebrow();
 
-      font-weight: 400;
-      margin-top: 40px;
+      font-size: 20px;
+      font-weight: 700;
 
       &-address {
         font-size: 1.1rem;
+        margin-bottom: 30px;
       }
 
       &-contact,
@@ -378,11 +405,17 @@
         margin-top: 20px;
 
         &-button {
-          margin-right: 10px;
+          margin-bottom: 15px;
         }
 
         &-icon {
           margin-right: 5px;
+        }
+
+        @include breakpoint-down('sm') {
+          &-button {
+            width: 100%;
+          }
         }
       }
 
@@ -397,12 +430,50 @@
       }
 
       &-summary {
+        font-size: 18px;
+        line-height: 28px;
         margin-bottom: 40px;
       }
     }
 
     &--summary {
+      font-size: 18px;
+      line-height: 28px;
       margin-bottom: 40px;
+    }
+
+    &--contents {
+      display: flex;
+      
+      &-info {
+        flex-basis: 350px;
+        flex-shrink: 0;
+        margin-left: 30px;
+      }
+
+      &-text {
+        font-size: 18px;
+        line-height: 28px;
+      }
+
+      &-map {
+        aspect-ratio: 16 / 9;
+        border-radius: .5rem;
+        margin-top: 30px;
+        overflow: hidden;
+      }
+    }
+
+    @include breakpoint-down('md') {
+      &--contents {
+        flex-direction: column;
+
+        &-info {
+          flex-basis: 100%;
+          margin-left: 0;
+          margin-top: 20px;
+        }
+      }
     }
   }
 

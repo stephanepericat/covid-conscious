@@ -1,5 +1,6 @@
 export const AUTHOR = 'author'
 export const COMMUNITY = 'community'
+export const DIRECTORY = 'directory'
 export const EDUCATION = 'education'
 export const EVENT = 'event'
 export const FORUM = 'forum'

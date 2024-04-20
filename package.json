@@ -20,6 +20,7 @@
     "happy-dom": "^12.9.1",
     "nuxt-security": "^1.0.0-rc.2",
     "nuxt-vitest": "^0.11.5",
+    "nuxt3-leaflet": "^1.0.12",
     "sass": "^1.0.0",
     "vitest": "^0.33.0"
   },

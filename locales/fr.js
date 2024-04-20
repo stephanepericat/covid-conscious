@@ -26,7 +26,7 @@ export default {
   comingSoon: "À venir...",
   contribute: {
     back: 'Aller à la page d\'accueil',
-    description: "Vous pouvez utiliser ce formulaire pour soumettre une nouvelle, suggérer un produit à évaluer ou partager une astuce communautaire.",
+    description: "Vous pouvez utiliser ce formulaire pour soumettre une nouvelle, suggérer un produit à évaluer ou partager un contact pour l'annuaire.",
     errors: {
       category: {
         required: "Veuillez sélectionner une catégorie.",
@@ -76,6 +76,10 @@ export default {
       },
     },
   },
+  directory: {
+    instructions: 'Sélectionnez une catégorie ou un pays pour lancer la recherche dans l\'annuaire',
+    results: '{totalItems} résultat(s) trouvé(s).',
+  },
   disclaimer: {
     links: "AVIS DE NON-RESPONSABILITÉ LIENS EXTERNES",
     professional: "AVIS DE NON-RESPONSABILITÉ PROFESSIONNEL",
@@ -92,6 +96,7 @@ export default {
     about: "À Propos",
     bluesky: "Suivez-nous sur Bluesky",
     contents: "Contenu",
+    directory: "Annuaire",
     disclaimer: "Clause de non-responsabilité",
     event: "Évènements à Venir",
     events: "Évènements à Venir",

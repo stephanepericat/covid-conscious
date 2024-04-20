@@ -17,14 +17,23 @@
         v-model:selected-language="selectedLanguage"
         v-model:selected-source="selectedSource"
       />
-      <PublicationList
-        :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
-        :items="visibleItems"
-        :items-per-page="itemsPerPage"
-        :total="totalItems"
-        with-pagination
-        v-model:current-page="currentPage"
-      />
+      <div v-if="showInstructions" class="type-page__instructions">
+        <Icon name="material-symbols:person-search-rounded" size="100" />
+        <p class="type-page__instructions--message">{{ t('directory.instructions') }}</p>
+      </div>
+      <template v-else>
+        <div v-if="isDirectory(type)" class="type-page__results">
+          {{ t('directory.results', { totalItems }) }}
+        </div>
+        <PublicationList
+          :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
+          :items="visibleItems"
+          :items-per-page="itemsPerPage"
+          :total="totalItems"
+          with-pagination
+          v-model:current-page="currentPage"
+        />
+      </template>
     </template>
   </div>
 </template>
@@ -33,7 +42,7 @@
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { isCommunity, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isDirectory, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
 
@@ -70,7 +79,7 @@
   const selectedCategory = ref(null)
 
   const filterCountries = computed(() => {
-    if(!isCommunity(type)) return []
+    if(!isDirectory(type)) return []
 
     const matches = selectedCategory.value
       ? results.value.filter((result) => result.categoryUri === selectedCategory.value)
@@ -87,7 +96,7 @@
   const selectedCountry = ref(null)
 
   const filterCities = computed(() => {
-    if(!isCommunity(type) || !selectedCountry.value) return []
+    if(!isDirectory(type) || !selectedCountry.value) return []
 
     const matches = results.value.filter((result) => result.countryCode === selectedCountry.value)
 
@@ -175,6 +184,14 @@
   const totalItems = computed(() => matches.value.length || 0)
   const visibleItems = computed(() => matches.value.slice(startItem.value, endItem.value))
 
+  const showInstructions = computed(() => {
+    if(!isDirectory(articleType.value)) {
+      return false
+    }
+
+    return !selectedCategory.value && !selectedCountry.value
+  })
+
   umTrackView()
 </script>
 <style lang="scss" scoped>
@@ -193,6 +210,25 @@
 
   &__loader {
     @include loader();
+  }
+
+  &__instructions {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
+
+    &--message {
+      margin-top: 20px;
+    }
+  }
+
+  &__results {
+    @include eyebrow();
+
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
   }
 }
 </style>
