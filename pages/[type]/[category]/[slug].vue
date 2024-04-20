@@ -394,6 +394,12 @@
         &-icon {
           margin-right: 5px;
         }
+
+        @include breakpoint-down('sm') {
+          &-button {
+            width: 100%;
+          }
+        }
       }
 
       &-product {
