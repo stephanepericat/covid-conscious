@@ -458,7 +458,9 @@
 
       &-map {
         aspect-ratio: 16 / 9;
+        border-radius: .5rem;
         margin-top: 30px;
+        overflow: hidden;
       }
     }
 
