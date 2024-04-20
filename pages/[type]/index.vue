@@ -22,7 +22,9 @@
         <p class="type-page__instructions--message">{{ t('directory.instructions') }}</p>
       </div>
       <template v-else>
-        <div v-if="isDirectory(type)">{{ t('directory.results', { totalItems }) }}</div>
+        <div v-if="isDirectory(type)" class="type-page__results">
+          {{ t('directory.results', { totalItems }) }}
+        </div>
         <PublicationList
           :hide-thumbnail="isResource(type) && $appSettings.HIDE_RESOURCES_THUMBNAIL"
           :items="visibleItems"
@@ -215,6 +217,14 @@
     display: flex;
     flex-direction: column;
     padding-top: 40px;
+  }
+
+  &__results {
+    @include eyebrow();
+
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 0;
   }
 }
 </style>
