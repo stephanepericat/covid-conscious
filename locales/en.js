@@ -26,7 +26,7 @@ export default {
   comingSoon: "Coming soon...",
   contribute: {
     back: 'Go Home',
-    description: "You can use this form to submit a piece of news, suggest a product to review, or share a community tip.",
+    description: "You can use this form to submit a piece of news, suggest a product to review, or share a directory tip.",
     errors: {
       category: {
         required: "Please select a category.",
@@ -76,6 +76,10 @@ export default {
       },
     },
   },
+  directory: {
+    instructions: 'Select a category or a country to start searching the directory',
+    results: '{totalItems} result(s) found.',
+  },
   disclaimer: {
     links: "EXTERNAL LINKS DISCLAIMER",
     professional: "PROFESSIONAL DISCLAIMER",
@@ -92,6 +96,7 @@ export default {
     about: "About",
     bluesky: "Follow us on Bluesky",
     contents: "Contents",
+    directory: "Directory",
     disclaimer: "Disclaimer",
     event: "Upcoming Events",
     events: "Upcoming Events",

@@ -9,7 +9,7 @@
           :options="categories"
           :placeholder="$t('list.filters.selectCategory')"
         />
-        <template v-if="isCommunity(type)">
+        <template v-if="isDirectory(type)">
           <ISelect
             class="publication-filters--select"
             v-model="selectedCountry"
@@ -61,7 +61,7 @@
   </div>
 </template>
 <script setup>
-  import { isCommunity, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
+  import { isDirectory, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
 
   const props = defineProps({
     categories: { type: Array, default: [] },
@@ -91,6 +91,7 @@
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
+@import "~/assets/sass/mixins.scss";
 
 .publication-filters {
   margin-bottom: 20px;
@@ -104,6 +105,10 @@
     }
 
     &-reset {
+      @include eyebrow();
+
+      font-size: 12px;
+      font-weight: 600;
       margin-left: 5px;
     }
   }
@@ -113,7 +118,7 @@
     min-width: 230px;
   }
 
-  @include breakpoint-down('md') {
+  @include breakpoint-down('lg') {
     &--form {
       flex-direction: column;
 

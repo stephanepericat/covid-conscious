@@ -26,7 +26,7 @@ export default {
   comingSoon: "Em breve...",
   contribute: {
     back: 'Vá para a página inicial',
-    description: "Você pode usar este formulário para enviar uma notícia, sugerir um produto para avaliação ou compartilhar uma dica da comunidade.",
+    description: "Você pode usar este formulário para enviar uma notícia, sugerir um produto para avaliação ou compartilhar uma dica do diretório.",
     errors: {
       category: {
         required: "Por favor, selecione uma categoria.",
@@ -76,6 +76,10 @@ export default {
       },
     },
   },
+  directory: {
+    instructions: 'Selecione uma categoria ou país para começar a pesquisar no diretório',
+    results: '{totalItems} resultado(s) encontrado(s).',
+  },
   disclaimer: {
     links: "AVISO DE LINKS EXTERNOS",
     professional: "ISENÇÃO DE RESPONSABILIDADE PROFISSIONAL",
@@ -92,6 +96,7 @@ export default {
     about: "Sobre",
     bluesky: "Siga-nos no Bluesky",
     contents: "Conteúdo",
+    directory: "Diretório",
     disclaimer: "Isenção de responsabilidade",
     event: "Próximos Eventos",
     events: "Próximos Eventos",
