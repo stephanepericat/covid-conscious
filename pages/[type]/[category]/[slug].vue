@@ -100,8 +100,20 @@
         <section v-else class="article-page__body--contents">
           <div class="article-page__body--contents-text">
             <SanityContent :blocks="article.body" :serializers="serializers" />
-            <div v-if="isDirectory(type) && article.location">
-              lat: {{ article.location.lat }}, lng: {{ article.location.lng }}
+            <div v-if="isDirectory(type) && article.location" class="article-page__body--contents-map">
+              <ClientOnly>
+                <LMap
+                  :zoom="zoom"
+                  :center="[article.location.lat, article.location.lng]"
+                >
+                  <LTileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution="&amp;copy; <a href=&quot;https://www.openstreetmap.org/&quot;>OpenStreetMap</a> contributors"
+                    layer-type="base"
+                    name="OpenStreetMap"
+                  />
+                </LMap>
+              </ClientOnly>
             </div>
           </div>
           <!-- community content -->
@@ -282,6 +294,8 @@
     showReviewEditor.value = true
   }
 
+  const zoom = ref(6)
+
   watch(articleId, async () => {
     if(!articleId.value || !isProduct(type)) return
 
@@ -437,6 +451,11 @@
       &-text {
         font-size: 18px;
         line-height: 28px;
+      }
+
+      &-map {
+        aspect-ratio: 16 / 9;
+        margin-top: 30px;
       }
     }
 
