@@ -25,7 +25,7 @@
         </template>
         <h5 class="sf-post-page__author--name">
           <NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">
-            {{ post.profiles.username }}
+            @{{ post.profiles.username || 'USER' }}
           </NuxtLink>
         </h5>
         <p class="sf-post-page__info">
@@ -278,7 +278,8 @@
     margin-bottom: 0;
 
     &--category {
-      font-weight: 200;
+      font-size: 14px;
+      font-weight: 300;
     }
   }
 
