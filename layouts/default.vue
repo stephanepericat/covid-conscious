@@ -41,7 +41,7 @@
               <div class="default-layout__user--info">
                 <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
                 <div>
-                  <p class="default-layout__user--info-detail username">@{{ username }}</p>
+                  <p class="default-layout__user--info-detail username">@{{ username || 'USER' }}</p>
                   <p class="default-layout__user--info-detail email">{{ user.email }}</p>
                 </div>
               </div>
@@ -61,6 +61,9 @@
                 </IDropdownItem>
                 <IDropdownItem :to="localePath('/create-account')">
                   <span>{{ $t('layout.user.createAccount') }}</span>
+                </IDropdownItem>
+                <IDropdownItem :to="localePath('/reset-password')">
+                  <span>{{ $t('layout.user.resetPassword') }}</span>
                 </IDropdownItem>
               </template>
             </template>
