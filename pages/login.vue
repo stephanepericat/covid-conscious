@@ -6,6 +6,10 @@
       @error="onError"
       @success="onLoginSuccess"
     />
+    <div class="login-page__actions">
+      <NuxtLink class="login-page__actions--link" :to="localePath('/create-account')">{{ t('layout.user.createAccount') }}</NuxtLink>
+      <NuxtLink class="login-page__actions--link" :to="localePath('/reset-password')">{{ t('layout.user.resetPassword') }}</NuxtLink>
+    </div>
     <IToastContainer />
   </div>
 </template>
@@ -35,16 +39,29 @@
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
 .login-page {
+  margin: 0 auto;
+  width: 300px;
+
   &__title {
     @include title();
-
-    margin: 0 auto;
-    width: 300px;
   }
 
   &__auth {
-    width: 300px;
-    margin: 40px auto;
+    margin: 40px 0;
+  }
+  
+  &__actions {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    &--link {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1rem;
+      margin: 5px 0;
+      text-transform: uppercase;
+    }
   }
 }
 </style>

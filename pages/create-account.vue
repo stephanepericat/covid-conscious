@@ -6,6 +6,9 @@
       @error="onError"
       @success="onSuccess"
     />
+    <div class="create-account-page__actions">
+      <NuxtLink class="create-account-page__actions--link" :to="localePath('/login')">{{ t('layout.user.signIn') }}</NuxtLink>
+    </div>
   </div>
 </template>
 <script setup>
@@ -36,16 +39,29 @@
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
 .create-account-page {
+  margin: 0 auto;
+  width: 300px;
+
   &__title {
     @include title();
-
-    margin: 0 auto;
-    width: 300px;
   }
 
   &__auth {
-    width: 300px;
-    margin: 40px auto;
+    margin: 40px 0;
+  }
+
+  &__actions {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
+    &--link {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: .1rem;
+      margin: 5px 0;
+      text-transform: uppercase;
+    }
   }
 }
 </style>
