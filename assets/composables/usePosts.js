@@ -3,6 +3,16 @@
 export const usePosts = () => {
   const supabase = useSupabaseClient()
 
+  const getEmailById = async (id) => {
+    try {
+      const { data, error } = await supabase.rpc('get_user_email_by_id', { id })
+      if(error) throw error
+      return data
+    } catch(e) {
+      return null
+    }
+  }
+
   const getAvatarUrl = async (filePath) => {
     if(!filePath) return null
 
@@ -313,6 +323,7 @@ export const usePosts = () => {
     getAvatars,
     getComments,
     getCommentsCount,
+    getEmailById,
     getPost,
     getPosts,
     getTotalCount,
