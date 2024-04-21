@@ -28,7 +28,9 @@
           v-model="username"
           type="text"
           name="username"
-        />
+        >
+          <template #prefix>@</template>
+        </IInput>
       </IFormGroup>
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.fullName") }}</IFormLabel>
@@ -44,7 +46,11 @@
           v-model="website"
           type="text"
           name="website"
-        />
+        >
+          <template #prepend>
+              <span>https://</span>
+          </template>
+        </IInput>
       </IFormGroup>
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.about") }}</IFormLabel>
@@ -94,7 +100,7 @@
         id: user.value.id,
         username: username.value || null, // TODO: validate username
         full_name: fullName.value || null,
-        website: website.value || null,
+        website: website.value ? `https://${website.value}` : null,
         avatar_url: null,
         about: about.value || null,
         updated_at: new Date(),
