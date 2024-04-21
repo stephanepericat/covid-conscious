@@ -463,5 +463,9 @@ import { getGravatarUrl } from '~/assets/utils/gravatar';
   .default-layout__footer {
     background: var(--color-dark);
   }
+
+  .default-layout__user--info-detail.email {
+    color: #ccc;
+  }
 }
 </style>
