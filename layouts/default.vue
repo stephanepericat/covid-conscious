@@ -67,7 +67,7 @@
           </IDropdown>
       </INav>
       </INavbar>
-      <INavbar class="default-layout__sub-nav">
+      <INavbar class="default-layout__sub-nav" size="sm">
         <INavbarCollapsible>
           <INav>
             <INavItem
@@ -335,9 +335,8 @@
     :deep(.nav-item) {
       @include eyebrow();
 
-      font-size: 13px;
       font-weight: 700;
-      letter-spacing: .12rem;
+      letter-spacing: .1rem;
     }
 
     @include breakpoint-down('md') {
