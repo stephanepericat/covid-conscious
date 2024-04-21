@@ -27,32 +27,16 @@ mockNuxtImport('useSupabaseClient', () => useSupabaseClientMock)
 
 describe('Composables > usePosts', () => {
   describe('getAvatarUrl', () => {
-    it("should return null, if no file path is provided", async () => {
+    it("should return null, if no id is provided", async () => {
       const { getAvatarUrl } = usePosts()
       const url = await getAvatarUrl()
-      expect(url).toBeNull()
-    })
-
-    it("should return null, if the data is not a blob", async () => {
-      useSupabaseClientMock.mockImplementationOnce(() => {
-        return {
-          storage: {
-            from: vi.fn(() => ({ download: vi.fn(async () => ({ data: 'foobar', error: null })) }))
-          },
-        }
-      })
-
-      const { getAvatarUrl } = usePosts()
-      const url = await getAvatarUrl('/')
       expect(url).toBeNull()
     })
 
     it("should throw an error, if there is any", async () => {
       useSupabaseClientMock.mockImplementationOnce(() => {
         return {
-          storage: {
-            from: vi.fn(() => ({ download: vi.fn(async () => ({ data: null, error: 'Something went wrong' })) }))
-          },
+          rpc: vi.fn(async () => ({ data: null, error: 'Something went wrong' })),
         }
       })
 
@@ -64,21 +48,32 @@ describe('Composables > usePosts', () => {
       }
     })
 
-    it("should return an image blob", async () => {
+    it("should return an image url", async () => {
+      useSupabaseClientMock.mockImplementationOnce(() => {
+        return {
+          rpc: vi.fn(async () => ({ data: 'sppericat@gmail.com', error: null })),
+        }
+      })
+
       const { getAvatarUrl } = usePosts()
-      const url = await getAvatarUrl('/')
-      expect(url).toBeTypeOf('string')
-      expect(url).toContain('blob:nodedata:')
+      const url = await getAvatarUrl('1234')
+      expect(url).toEqual('https://gravatar.com/avatar/bd7dadffb7880f8feb02775df8b960e54f3f725b84409b8e38b23bba0bfee642?s=100')
     })
   })
 
   describe('getAvatars', () => {
     it("should return a list of avatars", async () => {
+      useSupabaseClientMock.mockImplementationOnce(() => {
+        return {
+          rpc: vi.fn(async () => ({ data: 'sppericat@gmail.com', error: null })),
+        }
+      })
+
       const { getAvatars } = usePosts()
-      const avatars = await getAvatars([{profiles: { id: "foo", avatar_url: '/' }}])
+      const avatars = await getAvatars([{profiles: { id: "foo" }}])
       expect(avatars).toBeTypeOf('object')
       // @ts-ignore
-      expect(avatars.foo).toContain('blob:nodedata:')
+      expect(avatars.foo).toEqual('https://gravatar.com/avatar/bd7dadffb7880f8feb02775df8b960e54f3f725b84409b8e38b23bba0bfee642?s=100')
     })
   })
 
@@ -242,6 +237,7 @@ describe('Composables > usePosts', () => {
           storage: {
             from: vi.fn(() => ({ download: vi.fn(async () => ({ data: new Blob(), error: null })) }))
           },
+          rpc: vi.fn(async () => ({ data: 'sppericat@gmail.com', error: null })),
         }
       })
 
