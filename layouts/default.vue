@@ -37,6 +37,15 @@
               <Icon name="material-symbols:account-circle" />
               <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
             </INavItem>
+            <template #header v-if="isLoggedIn">
+              <div class="default-layout__user--info">
+                <NuxtImg src="/tcl-logo-big-grey.jpeg" width="40" height="40" class="default-layout__user--info-visual" />
+                <div>
+                  <p class="default-layout__user--info-detail username">@username</p>
+                  <p class="default-layout__user--info-detail email">{{ user.email }}</p>
+                </div>
+              </div>
+            </template>
             <template #body>
               <template v-if="isLoggedIn">
                 <IDropdownItem :to="localePath('/account')">
@@ -277,6 +286,35 @@
       font-size: 12px;
       font-weight: 600;
       margin-left: 5px;
+    }
+
+    &--info {
+      display: flex;
+
+      &-visual {
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      &-detail {
+        font-size: 13px;
+        margin: 0;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &.username {
+          font-weight: 700;
+          letter-spacing: .05rem;
+          text-transform: uppercase;
+        }
+
+        &.email {
+          color: #555;
+          font-weight: 500;
+        }
+      }
     }
   }
 
