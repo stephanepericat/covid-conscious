@@ -41,7 +41,7 @@
               <div class="default-layout__user--info">
                 <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
                 <div>
-                  <p class="default-layout__user--info-detail username">@username</p>
+                  <p class="default-layout__user--info-detail username">@{{ username }}</p>
                   <p class="default-layout__user--info-detail email">{{ user.email }}</p>
                 </div>
               </div>
@@ -206,7 +206,8 @@
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { useLanguages } from '~/assets/composables/useLanguages'
-import { getGravatarUrl } from '~/assets/utils/gravatar';
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
+  import { usePosts } from '~/assets/composables/usePosts'
 
   const inkline = useInkline()
   const { t } = useI18n()
@@ -215,6 +216,7 @@ import { getGravatarUrl } from '~/assets/utils/gravatar';
   const localePath = useLocalePath()
   const router = useRouter()
   const { $appSettings } = useNuxtApp()
+  const { getUsernameById } = usePosts()
 
   const subNavItems = computed(() => [
     { label: t('layout.news'), url: localePath('/news') },
@@ -254,6 +256,10 @@ import { getGravatarUrl } from '~/assets/utils/gravatar';
   const isLoggedIn = computed(() => !!user?.value?.id)
   const avatar = computedAsync(
     async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
+    null
+  )
+  const username = computedAsync(
+    async () => !user?.value?.id ? null : await getUsernameById(user.value.id),
     null
   )
   const { signOut } = useSignOut(user)

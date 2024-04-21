@@ -58,3 +58,12 @@ begin
   return(select au.email from auth.users au where au.id = $1);
 end;
 $$ LANGUAGE plpgsql;
+
+-- create function to get user name by id
+create function public.get_user_name_by_id(id uuid)
+returns text
+as $$
+begin
+  return(select p.username from public.profiles p where p.id = $1);
+end;
+$$ LANGUAGE plpgsql;

@@ -16,6 +16,16 @@ export const usePosts = () => {
     }
   }
 
+  const getUsernameById = async (id) => {
+    try {
+      const { data, error } = await supabase.rpc('get_user_name_by_id', { id })
+      if(error) throw error
+      return data
+    } catch(e) {
+      return null
+    }
+  }
+
   const getAvatarUrl = async (id) => {
     if(!id) return null
 
@@ -323,6 +333,7 @@ export const usePosts = () => {
     getTotalCount,
     getTopics,
     getUserById,
+    getUsernameById,
     getUserPosts,
     getUserPostsCount,
     loading,

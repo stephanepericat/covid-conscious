@@ -51,6 +51,8 @@
 
   &__title {
     @include title();
+
+    text-align: center;
   }
 
   &__account {
