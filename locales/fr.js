@@ -230,7 +230,7 @@ export default {
       title: 'Mon Compte',
       labels: {
         about: 'À Propos',
-        avatar: 'Avatar',
+        avatar: 'Vous pouvez créer ou mettre à jour votre avatar sur',
         email: 'Addresse E-mail',
         fullName: 'Nom Légal',
         update: 'Mettre à Jour',

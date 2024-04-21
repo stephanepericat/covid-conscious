@@ -1,16 +1,18 @@
 <template>
-  <div class="sf-account">
+  <div class="user-account">
+    <div class="user-account__avatar" v-if="avatar">
+      <NuxtImg
+        class="user-account__avatar--visual"
+        :src="avatar"
+      />
+      <p class="user-account__avatar--description">
+        {{ $t("forum.account.labels.avatar") }} <a href="https://gravatar.com" target="_blank">gravatar.com</a>
+      </p>
+    </div>
     <IForm
-      class="sf-account__form"
+      class="user-account__form"
       @submit.prevent="updateUser"
     >
-      <!-- <IFormGroup>
-        <Avatar
-          v-model:path="avatar_path"
-          @error="emit('error')"
-          @upload="updateUser"
-        />
-      </IFormGroup> -->
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.email") }}</IFormLabel>
         <IInput
@@ -51,7 +53,7 @@
           name="about"
         />
       </IFormGroup>
-      <IFormGroup class="sf-account__submit">
+      <IFormGroup class="user-account__submit">
         <IButton
           type="submit"
           block
@@ -69,7 +71,7 @@
 </template>
 <script setup>
   import { usePosts } from '~/assets/composables/usePosts'
-  // import Avatar from './UserAvatar.vue'
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
 
   const emit = defineEmits(['success', 'error'])
 
@@ -110,6 +112,8 @@
     }
   }
 
+  const avatar = ref(null)
+
   onMounted(async () => {
     const data = await getUserById(user.value.id)
 
@@ -120,11 +124,31 @@
       about.value = data.about || ''
     }
 
+    avatar.value = await getGravatarUrl(user.value.email)
+
     initLoading.value = false
   })
 </script>
 <style lang="scss" scoped>
-.sf-account {
+.user-account {
+  &__avatar {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    &--visual {
+      border-radius: 50%;
+      height: 150px;
+      width: 150px;
+    }
+
+    &--description {
+      font-size: 14px;
+      margin: 20px auto 10px auto;
+    }
+  }
+
   &__submit {
     margin-top: 40px;
   }

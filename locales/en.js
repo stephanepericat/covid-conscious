@@ -229,7 +229,7 @@ export default {
       title: 'My Account',
       labels: {
         about: 'About Me',
-        avatar: 'Avatar',
+        avatar: 'You can create or update your avatar at',
         email: 'Email Address',
         fullName: 'Full Name',
         update: 'Update',
