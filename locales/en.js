@@ -156,6 +156,7 @@ export default {
       signIn: "Sign In",
       signUp: "Sign Up",
       signOut: "Sign Out",
+      updatePassword: 'Update Password'
     },
     userAccount: 'User Account',
     video: 'Videos',
@@ -421,6 +422,7 @@ export default {
       resetPassword: 'Reset Password',
       signin: 'Sign In',
       signup: 'Sign Up',
+      updatePassword: 'Update Password'
     },
     labels: {
       email: 'Email',
@@ -428,6 +430,7 @@ export default {
     },
     placeholders: {
       email: 'Enter your email address',
+      newPassword: 'Enter your new password',
       password: 'Enter your password',
     },
     toast: {
@@ -442,6 +445,10 @@ export default {
       signup: {
         title: 'Sign up successful!',
         message: 'Check your email for a confirmation link.',
+      },
+      update: {
+        title: 'Update successful!',
+        message: 'You can now sign in with your new password.',
       },
     },
   },

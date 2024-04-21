@@ -156,6 +156,7 @@ export default {
       signIn: "Entrar",
       signUp: "Inscrever-se",
       signOut: "Sair",
+      updatePassword: 'Atualizar Senha'
     },
     userAccount: 'Conta de Usuário',
     video: 'Vídeos',
@@ -418,9 +419,10 @@ export default {
   },
   login: {
     buttons: {
-      resetPassword: 'Redefinir senha',
+      resetPassword: 'Redefinir Senha',
       signin: 'Entrar',
       signup: 'Registar-se',
+      updatePassword: 'Atualizar Senha'
     },
     labels: {
       email: 'E-mail',
@@ -428,6 +430,7 @@ export default {
     },
     placeholders: {
       email: 'Digite seu e-mail',
+      newPassword: 'Digite sua nova senha',
       password: 'Digite sua senha',
     },
     toast: {
@@ -442,6 +445,10 @@ export default {
       signup: {
         title: 'Inscreva-se com sucesso!',
         message: 'Verifique seu e-mail para obter um link de confirmação.',
+      },
+      update: {
+        title: 'Atualização bem-sucedida!',
+        message: 'Agora você pode entrar com sua nova senha.',
       },
     },
   },

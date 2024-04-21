@@ -156,6 +156,7 @@ export default {
       signIn: "Iniciar sesión",
       signUp: "Registrate",
       signOut: "Cerrar sesión",
+      updatePassword: 'Actualiza Contraseña'
     },
     userAccount: 'Cuenta de Usuario',
     video: 'Vídeos',
@@ -421,6 +422,7 @@ export default {
       resetPassword: 'Restablecer la contraseña',
       signin: 'Iniciar sesión',
       signup: 'Registrarse',
+      updatePassword: 'Actualiza Contraseña'
     },
     labels: {
       email: 'Correo Electrónico',
@@ -428,6 +430,7 @@ export default {
     },
     placeholders: {
       email: 'Ingrese su dirección de correo electrónico',
+      newPassword: 'Ingrese su nueva contraseña',
       password: 'Ingrese su contraseña',
     },
     toast: {
@@ -442,6 +445,10 @@ export default {
       signup: {
         title: '¡Regístrese exitosamente!',
         message: 'Revise su correo electrónico para obtener un enlace de confirmación.',
+      },
+      update: {
+        title: '¡Actualización exitosa!',
+        message: 'Ahora puedes iniciar sesión con tu nueva contraseña.',
       },
     },
   },

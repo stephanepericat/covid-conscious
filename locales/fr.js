@@ -156,6 +156,7 @@ export default {
       signIn: "Connexion",
       signUp: "S'inscrire",
       signOut: "Déconnexion",
+      updatePassword: 'Mettre à jour le mot de passe'
     },
     userAccount: 'Compte d\'Utilisateur',
     video: 'Vidéos',
@@ -422,6 +423,7 @@ export default {
       resetPassword: 'Réinitialiser le mot de passe',
       signin: 'Se Connecter',
       signup: 'S\'inscrire',
+      updatePassword: 'Mettre à jour le mot de passe'
     },
     labels: {
       email: 'Adresse E-mail',
@@ -429,6 +431,7 @@ export default {
     },
     placeholders: {
       email: 'Entrez votre adresse e-mail',
+      newPassword: 'Entrez votre nouveau mot de passe',
       password: 'Entrez votre mot de passe',
     },
     toast: {
@@ -443,6 +446,10 @@ export default {
       signup: {
         title: 'Inscription réussie !',
         message: 'Vérifiez votre boite mail pour un courrier contenant un lien de confirmation.',
+      },
+      update: {
+        title: 'Mise à jour réussie !',
+        message: 'Vous pouvez désormais vous connecter avec votre nouveau mot de passe.',
       },
     },
   },
