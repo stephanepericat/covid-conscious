@@ -22,6 +22,7 @@ export default defineNuxtConfig({
   },
   
   modules: [
+    '@vueuse/nuxt',
     '@inkline/plugin/nuxt',
     '@nuxtjs/i18n',
     '@nuxtjs/sanity',
@@ -83,7 +84,7 @@ export default defineNuxtConfig({
   security: {
     headers: {
       contentSecurityPolicy: {
-        'img-src': ["'self'", 'data:', 'blob:', 'cdn.sanity.io', 'a.tile.openstreetmap.org', 'b.tile.openstreetmap.org', 'c.tile.openstreetmap.org'],
+        'img-src': ["'self'", 'data:', 'blob:', 'cdn.sanity.io', 'a.tile.openstreetmap.org', 'b.tile.openstreetmap.org', 'c.tile.openstreetmap.org', 'gravatar.com'],
       },
       crossOriginEmbedderPolicy: 'unsafe-none',
     }

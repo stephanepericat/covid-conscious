@@ -38,6 +38,7 @@
     "@sanity/client": "^6.15.19",
     "@supabase/gotrue-js": "^2.62.2",
     "@vueup/vue-quill": "^1.2.0",
+    "@vueuse/nuxt": "^10.9.0",
     "consola": "^3.2.3",
     "date-fns": "^2.30.0",
     "debounce": "^1.2.1",
