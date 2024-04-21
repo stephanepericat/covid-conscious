@@ -3,7 +3,7 @@
     <IMedia class="sf-user-page__info">
       <template #image>
         <img
-          v-if="user.avatar_url"
+          v-if="avatar"
           class="sf-user-page__thumbnail"
           :src="avatar"
         >
@@ -47,7 +47,11 @@
   const { getAvatarUrl, getUserById } = usePosts()
 
   const user = await getUserById(route.params.id)
-  const avatar = await getAvatarUrl(user.avatar_url)
+  
+  const avatar = computedAsync(
+    async () => await getAvatarUrl(route.params.id),
+    null
+  )
 
   umTrackView()
 </script>
@@ -62,6 +66,7 @@
 
   &__thumbnail {
     @include thumbnail($dimension: 120px);
+    border-radius: 50%;
   }
 
   &__title {
