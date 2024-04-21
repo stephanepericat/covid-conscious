@@ -1,16 +1,18 @@
 <template>
-  <div class="sf-account">
+  <div class="user-account">
+    <div class="user-account__avatar" v-if="avatar">
+      <NuxtImg
+        class="user-account__avatar--visual"
+        :src="avatar"
+      />
+      <p class="user-account__avatar--description">
+        {{ $t("forum.account.labels.avatar") }} <a href="https://gravatar.com" target="_blank">gravatar.com</a>
+      </p>
+    </div>
     <IForm
-      class="sf-account__form"
+      class="user-account__form"
       @submit.prevent="updateUser"
     >
-      <IFormGroup>
-        <Avatar
-          v-model:path="avatar_path"
-          @error="emit('error')"
-          @upload="updateUser"
-        />
-      </IFormGroup>
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.email") }}</IFormLabel>
         <IInput
@@ -26,7 +28,9 @@
           v-model="username"
           type="text"
           name="username"
-        />
+        >
+          <template #prefix>@</template>
+        </IInput>
       </IFormGroup>
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.fullName") }}</IFormLabel>
@@ -42,7 +46,11 @@
           v-model="website"
           type="text"
           name="website"
-        />
+        >
+          <template #prepend>
+              <span>https://</span>
+          </template>
+        </IInput>
       </IFormGroup>
       <IFormGroup>
         <IFormLabel>{{ $t("forum.account.labels.about") }}</IFormLabel>
@@ -51,7 +59,7 @@
           name="about"
         />
       </IFormGroup>
-      <IFormGroup class="sf-account__submit">
+      <IFormGroup class="user-account__submit">
         <IButton
           type="submit"
           block
@@ -69,7 +77,7 @@
 </template>
 <script setup>
   import { usePosts } from '~/assets/composables/usePosts'
-  import Avatar from './UserAvatar.vue'
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
 
   const emit = defineEmits(['success', 'error'])
 
@@ -82,7 +90,6 @@
   const username = ref('')
   const fullName = ref('')
   const website = ref('')
-  const avatar_path = ref('')
   const about = ref('')
 
   const updateUser = async () => {
@@ -91,10 +98,10 @@
     try {
       const updates = {
         id: user.value.id,
-        username: username.value || null,
+        username: username.value || null, // TODO: validate username
         full_name: fullName.value || null,
-        website: website.value || null,
-        avatar_url: avatar_path.value || null,
+        website: website.value ? `https://${website.value}` : null,
+        avatar_url: null,
         about: about.value || null,
         updated_at: new Date(),
       }
@@ -111,6 +118,8 @@
     }
   }
 
+  const avatar = ref(null)
+
   onMounted(async () => {
     const data = await getUserById(user.value.id)
 
@@ -118,15 +127,34 @@
       username.value = data.username || ''
       fullName.value = data.full_name || ''
       website.value = data.website || ''
-      avatar_path.value = data.avatar_url || ''
       about.value = data.about || ''
     }
+
+    avatar.value = await getGravatarUrl(user.value.email)
 
     initLoading.value = false
   })
 </script>
 <style lang="scss" scoped>
-.sf-account {
+.user-account {
+  &__avatar {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    &--visual {
+      border-radius: 50%;
+      height: 150px;
+      width: 150px;
+    }
+
+    &--description {
+      font-size: 14px;
+      margin: 20px auto 10px auto;
+    }
+  }
+
   &__submit {
     margin-top: 40px;
   }

@@ -37,6 +37,15 @@
               <Icon name="material-symbols:account-circle" />
               <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
             </INavItem>
+            <template #header v-if="isLoggedIn">
+              <div class="default-layout__user--info">
+                <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
+                <div>
+                  <p class="default-layout__user--info-detail username">@{{ username || 'USER' }}</p>
+                  <p class="default-layout__user--info-detail email">{{ user.email }}</p>
+                </div>
+              </div>
+            </template>
             <template #body>
               <template v-if="isLoggedIn">
                 <IDropdownItem :to="localePath('/account')">
@@ -50,12 +59,18 @@
                 <IDropdownItem :to="localePath('/login')">
                   <span>{{ $t('layout.user.signIn') }}</span>
                 </IDropdownItem>
+                <IDropdownItem :to="localePath('/create-account')">
+                  <span>{{ $t('layout.user.createAccount') }}</span>
+                </IDropdownItem>
+                <IDropdownItem :to="localePath('/reset-password')">
+                  <span>{{ $t('layout.user.resetPassword') }}</span>
+                </IDropdownItem>
               </template>
             </template>
           </IDropdown>
       </INav>
       </INavbar>
-      <INavbar class="default-layout__sub-nav">
+      <INavbar class="default-layout__sub-nav" size="sm">
         <INavbarCollapsible>
           <INav>
             <INavItem
@@ -194,6 +209,8 @@
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { useLanguages } from '~/assets/composables/useLanguages'
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
+  import { usePosts } from '~/assets/composables/usePosts'
 
   const inkline = useInkline()
   const { t } = useI18n()
@@ -202,6 +219,7 @@
   const localePath = useLocalePath()
   const router = useRouter()
   const { $appSettings } = useNuxtApp()
+  const { getUsernameById } = usePosts()
 
   const subNavItems = computed(() => [
     { label: t('layout.news'), url: localePath('/news') },
@@ -239,6 +257,14 @@
   // User Menu
   const user = useSupabaseUser()
   const isLoggedIn = computed(() => !!user?.value?.id)
+  const avatar = computedAsync(
+    async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
+    null
+  )
+  const username = computedAsync(
+    async () => !user?.value?.id ? null : await getUsernameById(user.value.id),
+    null
+  )
   const { signOut } = useSignOut(user)
 </script>
 <style lang="scss" scoped>
@@ -275,6 +301,35 @@
       font-weight: 600;
       margin-left: 5px;
     }
+
+    &--info {
+      display: flex;
+
+      &-visual {
+        margin-right: 10px;
+        border-radius: 50%;
+      }
+
+      &-detail {
+        font-size: 13px;
+        margin: 0;
+        max-width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &.username {
+          font-weight: 700;
+          letter-spacing: .05rem;
+          text-transform: uppercase;
+        }
+
+        &.email {
+          color: #555;
+          font-weight: 500;
+        }
+      }
+    }
   }
 
   &__logo {
@@ -294,9 +349,8 @@
     :deep(.nav-item) {
       @include eyebrow();
 
-      font-size: 13px;
       font-weight: 700;
-      letter-spacing: .12rem;
+      letter-spacing: .1rem;
     }
 
     @include breakpoint-down('md') {
@@ -417,6 +471,10 @@
 .dark-theme {
   .default-layout__footer {
     background: var(--color-dark);
+  }
+
+  .default-layout__user--info-detail.email {
+    color: #ccc;
   }
 }
 </style>

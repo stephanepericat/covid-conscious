@@ -1,27 +1,18 @@
 <template>
   <IForm
-    class="user-login"
-    @submit.prevent="handleLogin"
+    class="user-password-update"
+    @submit.prevent="handleUpdatePassword"
   >
-    <IFormGroup>
-      <IFormLabel>{{ $t("login.labels.email") }}</IFormLabel>
-      <IInput
-        v-model="email"
-        :placeholder="$t('login.placeholders.email')"
-        type="email"
-        required
-      />
-    </IFormGroup>
     <IFormGroup>
       <IFormLabel>{{ $t("login.labels.password") }}</IFormLabel>
       <IInput
         v-model="password"
-        :placeholder="$t('login.placeholders.password')"
+        :placeholder="$t('login.placeholders.newPassword')"
         type="password"
         required
       />
     </IFormGroup>
-    <IFormGroup class="user-login__captcha">
+    <IFormGroup class="user-password-update__captcha">
       <NuxtTurnstile v-model="token" />
     </IFormGroup>
     <IFormGroup>
@@ -34,46 +25,43 @@
           v-if="loading"
           name="eos-icons:loading"
         />
-        {{ $t('login.buttons.signin') }}
+        {{ $t('login.buttons.updatePassword') }}
       </IButton>
     </IFormGroup>
   </IForm>
 </template>
 
 <script setup>
-  import isEmail from 'validator/lib/isEmail'
-
   const emit = defineEmits(['success', 'error'])
 
   const client = useSupabaseClient()
   const loading = ref(false)
-  const email = ref('')
   const password = ref('')
   const token = ref(null)
   const tokenValidation = computed(() => token.value || process.env.NODE_ENV === 'development')
 
-  const submitBtnEnabled = computed(() => tokenValidation.value && email.value && password.value && isEmail(email.value) && !loading.value)
+  const submitBtnEnabled = computed(() => tokenValidation.value && password.value && !loading.value)
 
-  const handleLogin = async () => {
+  const handleUpdatePassword = async () => {
     try {
       loading.value = true
-      const { error } = await client.auth.signInWithPassword({
-        email: email.value,
-        password: password.value,
+
+      const { error } = await client.auth.updateUser({
+        password: password.value
       })
       if (error) throw error
       emit('success')
     } catch (error) {
+      console.log('error', error)
       emit('error')
     } finally {
-      email.value = ''
       password.value = ''
       loading.value = false
     }
   }
 </script>
 <style lang="scss" scoped>
-.user-login {
+.user-password-update {
   &__captcha {
     margin-top: 20px;
   }

@@ -1,40 +1,55 @@
 /* eslint-disable no-useless-escape */
 
+import _ from "lodash"
+import { getGravatarUrl } from "../utils/gravatar"
+
 export const usePosts = () => {
   const supabase = useSupabaseClient()
 
-  const getAvatarUrl = async (filePath) => {
-    if(!filePath) return null
+  const getEmailById = async (id) => {
+    try {
+      const { data, error } = await supabase.rpc('get_user_email_by_id', { id })
+      if(error) throw error
+      return data
+    } catch(e) {
+      return null
+    }
+  }
+
+  const getUsernameById = async (id) => {
+    try {
+      const { data, error } = await supabase.rpc('get_user_name_by_id', { id })
+      if(error) throw error
+      return data
+    } catch(e) {
+      return null
+    }
+  }
+
+  const getAvatarUrl = async (id) => {
+    if(!id) return null
 
     try {
-      const { data, error } = await supabase.storage.from('avatars').download(filePath)
-      if (error) throw error
-      
-      return (data instanceof Blob) ? URL.createObjectURL(data) : null
+      const userEmail = await getEmailById(id)
+      const url = await getGravatarUrl(userEmail)
+
+      return url
     } catch(e) {
       console.error(e)
     }
   }
 
   const getAvatars = async (data) =>  {
-    const profiles = data.reduce((acc, val) => {
-      /* istanbul ignore else */
-      if(!acc[val.profiles.id]) {
-        acc[val.profiles.id] = val.profiles.avatar_url
-      }
+    const profiles = _.uniq(data.map(({profiles}) => profiles.id))
 
-      return acc
-    }, {})
-
-    const profileKeys = Object.keys(profiles)
-
-    const urls = await Promise.all(profileKeys.map((userId) => getAvatarUrl(profiles[userId])))
-    return profileKeys.reduce((acc, userId, idx) => {
-      acc[userId] = urls[idx]
-
+    return await profiles.reduce(async (acc, userId) => {
+      console.log('userId', userId)
+      acc[userId] = await getAvatarUrl(userId)
       return acc
     }, {})
   }
+
+
 
   const createComment = async (payload) => {
     return await supabase
@@ -100,14 +115,14 @@ export const usePosts = () => {
           body,
           topic,
           created_at,
-          profiles ( id, username, avatar_url )
+          profiles ( id, username )
         `)
         .eq('id', postId)
         .single()
 
       if (error) throw error
 
-      const avatar = data?.profiles?.avatar_url ? await getAvatarUrl(data.profiles.avatar_url) : null
+      const avatar = await getAvatarUrl(data.profiles.id)
 
       return { ...data, avatar }
     } catch (e) {
@@ -129,7 +144,7 @@ export const usePosts = () => {
           body,
           topic,
           created_at,
-          profiles ( id, username, avatar_url )
+          profiles ( id, username )
         `)
         .order('created_at', { ascending: false })
         .range(start, end)
@@ -277,14 +292,13 @@ export const usePosts = () => {
       if(error) throw error
 
       const posts = data.map((post) => {
-        const { id, headline, created_at, topic, author_id, username, avatar_url } = post
+        const { id, headline, created_at, topic, author_id, username } = post
         return {
           created_at,
           headline,
           id,
           topic,
           profiles: {
-            avatar_url,
             id: author_id,
             username,
           },
@@ -313,11 +327,13 @@ export const usePosts = () => {
     getAvatars,
     getComments,
     getCommentsCount,
+    getEmailById,
     getPost,
     getPosts,
     getTotalCount,
     getTopics,
     getUserById,
+    getUsernameById,
     getUserPosts,
     getUserPostsCount,
     loading,

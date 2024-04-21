@@ -1,27 +1,31 @@
 <template>
-  <div class="login-page">
-    <h1 class="login-page__title">{{ t('layout.user.signIn') }}</h1>
-    <Auth
-      class="login-page__auth"
+  <div class="create-account-page">
+    <h1 class="create-account-page__title">{{ t('layout.user.signUp') }}</h1>
+    <Signup
+      class="create-account-page__auth"
       @error="onError"
-      @success="onLoginSuccess"
+      @success="onSuccess"
     />
-    <div class="login-page__actions">
-      <NuxtLink class="login-page__actions--link" :to="localePath('/create-account')">{{ t('layout.user.createAccount') }}</NuxtLink>
-      <NuxtLink class="login-page__actions--link" :to="localePath('/reset-password')">{{ t('layout.user.resetPassword') }}</NuxtLink>
+    <div class="create-account-page__actions">
+      <NuxtLink class="create-account-page__actions--link" :to="localePath('/login')">{{ t('layout.user.signIn') }}</NuxtLink>
     </div>
-    <IToastContainer />
   </div>
 </template>
 <script setup>
   import { useToast } from '@inkline/inkline'
-  import Auth from '../components/UserAuth.vue'
+
+  import Signup from '~/components/UserSignup.vue'
 
   const { t } = useI18n()
   const toast = useToast()
-  const router = useRouter()
-  const localePath = useLocalePath()
 
+  const onSuccess = () => {
+    toast.show({
+      title: t('login.toast.signup.title'),
+      message: t('login.toast.signup.message'),
+      color: 'success'
+    })
+  }
   const onError = () => {
     toast.show({
       title: t('login.toast.error.title'),
@@ -30,15 +34,11 @@
     })
   }
 
-  const onLoginSuccess = () => {
-    router.push(localePath('/account'))
-  }
-
   umTrackView()
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
-.login-page {
+.create-account-page {
   margin: 0 auto;
   width: 300px;
 
@@ -49,7 +49,7 @@
   &__auth {
     margin: 40px 0;
   }
-  
+
   &__actions {
     align-items: center;
     display: flex;

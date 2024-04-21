@@ -48,3 +48,22 @@ create policy "Avatar images are publicly accessible." on storage.objects
 
 create policy "Anyone can upload an avatar." on storage.objects
   for insert with check (bucket_id = 'avatars');
+
+-- create function to get email by user id
+create function public.get_user_email_by_id(id uuid)
+returns text
+security definer
+as $$
+begin
+  return(select au.email from auth.users au where au.id = $1);
+end;
+$$ LANGUAGE plpgsql;
+
+-- create function to get user name by id
+create function public.get_user_name_by_id(id uuid)
+returns text
+as $$
+begin
+  return(select p.username from public.profiles p where p.id = $1);
+end;
+$$ LANGUAGE plpgsql;

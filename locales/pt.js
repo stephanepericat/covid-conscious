@@ -150,9 +150,13 @@ export default {
     twitter: "Siga-nos no Twitter",
     user: {
       account: "Minha Conta",
+      createAccount: "Crie a sua Conta",
       area: "Área do Usuário",
+      resetPassword: 'Redefinir senha',
       signIn: "Entrar",
+      signUp: "Inscrever-se",
       signOut: "Sair",
+      updatePassword: 'Atualizar Senha'
     },
     userAccount: 'Conta de Usuário',
     video: 'Vídeos',
@@ -225,7 +229,7 @@ export default {
       title: 'Minha conta',
       labels: {
         about: 'Sobre mim',
-        avatar: 'Avatar',
+        avatar: 'Você pode criar ou atualizar seu avatar em',
         email: 'Endereço de e-mail',
         fullName: 'Nome Completo',
         update: 'Atualizar',
@@ -412,5 +416,40 @@ export default {
   support: {
     pageTitle: 'Suporte',
     description: 'Preencha este formulário para nos informar sobre qualquer defeito ou sugestão de melhoria de produto que você possa ter.',
+  },
+  login: {
+    buttons: {
+      resetPassword: 'Redefinir Senha',
+      signin: 'Entrar',
+      signup: 'Registar-se',
+      updatePassword: 'Atualizar Senha'
+    },
+    labels: {
+      email: 'E-mail',
+      password: 'Senha',
+    },
+    placeholders: {
+      email: 'Digite seu e-mail',
+      newPassword: 'Digite sua nova senha',
+      password: 'Digite sua senha',
+    },
+    toast: {
+      error: {
+        title: 'Algo deu errado',
+        message: 'Tente novamente mais tarde.',
+      },
+      reset: {
+        title: 'Solicitação bem-sucedida!',
+        message: 'Verifique seu e-mail para obter um link de redefinição.',
+      },
+      signup: {
+        title: 'Inscreva-se com sucesso!',
+        message: 'Verifique seu e-mail para obter um link de confirmação.',
+      },
+      update: {
+        title: 'Atualização bem-sucedida!',
+        message: 'Agora você pode entrar com sua nova senha.',
+      },
+    },
   },
 };

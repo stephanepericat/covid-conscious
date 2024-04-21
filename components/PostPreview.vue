@@ -19,7 +19,7 @@
       <p class="post-preview__description" v-if="withPreview">{{ cleanPostBody(post.body) }}</p>
       <em class="post-preview__metadata">
         <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
-        <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">{{ post.profiles.username }}</NuxtLink></span>
+        <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">@{{ post.profiles.username|| 'USER' }}</NuxtLink></span>
         <span class="post-preview__forum-date"> &bullet; {{ format(new Date(post.created_at), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
       </em>
     </IMedia>

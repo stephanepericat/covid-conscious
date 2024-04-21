@@ -151,8 +151,12 @@ export default {
     user: {
       account: "Mon Compte",
       area: "Espace Utilisateur",
+      createAccount: "Créer un Compte",
+      resetPassword: 'Réinitialiser le mot de passe',
       signIn: "Connexion",
+      signUp: "S'inscrire",
       signOut: "Déconnexion",
+      updatePassword: 'Mettre à jour le mot de passe'
     },
     userAccount: 'Compte d\'Utilisateur',
     video: 'Vidéos',
@@ -226,7 +230,7 @@ export default {
       title: 'Mon Compte',
       labels: {
         about: 'À Propos',
-        avatar: 'Avatar',
+        avatar: 'Vous pouvez créer ou mettre à jour votre avatar sur',
         email: 'Addresse E-mail',
         fullName: 'Nom Légal',
         update: 'Mettre à Jour',
@@ -413,5 +417,40 @@ export default {
   support: {
     pageTitle: 'Support',
     description: 'Remplissez ce formulaire pour nous informer de tout défaut ou de toute suggestion d\'amélioration du produit que vous pourriez avoir.',
+  },
+  login: {
+    buttons: {
+      resetPassword: 'Réinitialiser le mot de passe',
+      signin: 'Se Connecter',
+      signup: 'S\'inscrire',
+      updatePassword: 'Mettre à jour le mot de passe'
+    },
+    labels: {
+      email: 'Adresse E-mail',
+      password: 'Mot de Passe',
+    },
+    placeholders: {
+      email: 'Entrez votre adresse e-mail',
+      newPassword: 'Entrez votre nouveau mot de passe',
+      password: 'Entrez votre mot de passe',
+    },
+    toast: {
+      error: {
+        title: 'Une erreur s\'est produite',
+        message: 'Veuillez réessayer ultérieurement.',
+      },
+      reset: {
+        title: 'Demande réussie !',
+        message: 'Vérifiez votre boite mail pour un courrier contenant un lien de réinitialisation.',
+      },
+      signup: {
+        title: 'Inscription réussie !',
+        message: 'Vérifiez votre boite mail pour un courrier contenant un lien de confirmation.',
+      },
+      update: {
+        title: 'Mise à jour réussie !',
+        message: 'Vous pouvez désormais vous connecter avec votre nouveau mot de passe.',
+      },
+    },
   },
 };

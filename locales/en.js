@@ -151,8 +151,12 @@ export default {
     user: {
       account: "My Account",
       area: "User Area",
+      createAccount: "Create an Account",
+      resetPassword: 'Reset Password',
       signIn: "Sign In",
+      signUp: "Sign Up",
       signOut: "Sign Out",
+      updatePassword: 'Update Password'
     },
     userAccount: 'User Account',
     video: 'Videos',
@@ -225,7 +229,7 @@ export default {
       title: 'My Account',
       labels: {
         about: 'About Me',
-        avatar: 'Avatar',
+        avatar: 'You can create or update your avatar at',
         email: 'Email Address',
         fullName: 'Full Name',
         update: 'Update',
@@ -412,5 +416,40 @@ export default {
   support: {
     pageTitle: 'Support',
     description: 'Fill this form to let us know about any defect, or product enhancement suggestion you may have.',
+  },
+  login: {
+    buttons: {
+      resetPassword: 'Reset Password',
+      signin: 'Sign In',
+      signup: 'Sign Up',
+      updatePassword: 'Update Password'
+    },
+    labels: {
+      email: 'Email',
+      password: 'Password',
+    },
+    placeholders: {
+      email: 'Enter your email address',
+      newPassword: 'Enter your new password',
+      password: 'Enter your password',
+    },
+    toast: {
+      error: {
+        title: 'Something went wrong',
+        message: 'Please try again later.',
+      },
+      reset: {
+        title: 'Request successful!',
+        message: 'Check your email for a reset link.',
+      },
+      signup: {
+        title: 'Sign up successful!',
+        message: 'Check your email for a confirmation link.',
+      },
+      update: {
+        title: 'Update successful!',
+        message: 'You can now sign in with your new password.',
+      },
+    },
   },
 };

@@ -1,16 +1,16 @@
 <template>
-  <div class="sf-account-page">
+  <div class="account-page">
     <h1
-      class="sf-account-page__title"
+      class="account-page__title"
       v-text="$t('forum.account.title')"
     />
-    <template v-if="user">
+    <div v-if="user">
       <Account
-        class="sf-account-page__account"
+        class="account-page__account"
         @error="onError"
         @success="onUpdateSuccess"
       />
-      <IFormGroup class="sf-account-page__logout">
+      <IFormGroup class="account-page__logout">
         <IButton
           link
           color="danger"
@@ -19,7 +19,7 @@
           Sign Out
         </IButton>
       </IFormGroup>
-    </template>
+    </div>
   </div>
 </template>
 <script setup>
@@ -45,15 +45,15 @@
 <style lang="scss" scoped>
 @import "../assets/sass/mixins.scss";
 
-.sf-account-page {
+.account-page {
+  margin: 0 auto;
+  max-width: 34rem;
+
   &__title {
     @include title();
-  }
 
-  // &__account,
-  // &__logout {
-  //   width: 50%;
-  // }
+    text-align: center;
+  }
 
   &__account {
     margin: 40px 0;

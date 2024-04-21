@@ -151,8 +151,12 @@ export default {
     user: {
       account: "Mi cuenta",
       area: "Área de Usuario",
+      createAccount: "Crea una Cuenta",
+      resetPassword: 'Restablecer la contraseña',
       signIn: "Iniciar sesión",
+      signUp: "Registrate",
       signOut: "Cerrar sesión",
+      updatePassword: 'Actualiza Contraseña'
     },
     userAccount: 'Cuenta de Usuario',
     video: 'Vídeos',
@@ -225,7 +229,7 @@ export default {
       title: 'Mi Cuenta',
       labels: {
         about: 'Acerca de mí',
-        avatar: 'Avatar',
+        avatar: 'Puedes crear o actualizar tu avatar en',
         email: 'Dirección de correo electrónico',
         fullName: 'Nombre completo',
         update: 'Actualizar',
@@ -412,5 +416,40 @@ export default {
   support: {
     pageTitle: 'Soporte',
     description: 'Rellene este formulario para informarnos sobre cualquier defecto o sugerencia de mejora del producto que pueda tener.',
+  },
+  login: {
+    buttons: {
+      resetPassword: 'Restablecer la contraseña',
+      signin: 'Iniciar sesión',
+      signup: 'Registrarse',
+      updatePassword: 'Actualiza Contraseña'
+    },
+    labels: {
+      email: 'Correo Electrónico',
+      password: 'Contraseña',
+    },
+    placeholders: {
+      email: 'Ingrese su dirección de correo electrónico',
+      newPassword: 'Ingrese su nueva contraseña',
+      password: 'Ingrese su contraseña',
+    },
+    toast: {
+      error: {
+        title: 'Algo salió mal',
+        message: 'Por favor, inténtelo de nuevo más tarde.',
+      },
+      reset: {
+        title: '¡Solicitud exitosa!',
+        message: 'Revise su correo electrónico para ver si hay un enlace de reinicio.',
+      },
+      signup: {
+        title: '¡Regístrese exitosamente!',
+        message: 'Revise su correo electrónico para obtener un enlace de confirmación.',
+      },
+      update: {
+        title: '¡Actualización exitosa!',
+        message: 'Ahora puedes iniciar sesión con tu nueva contraseña.',
+      },
+    },
   },
 };
