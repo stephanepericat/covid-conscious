@@ -57,7 +57,7 @@ describe('Composables > usePosts', () => {
 
       const { getAvatarUrl } = usePosts()
       const url = await getAvatarUrl('1234')
-      expect(url).toEqual('https://gravatar.com/avatar/bd7dadffb7880f8feb02775df8b960e54f3f725b84409b8e38b23bba0bfee642?s=100')
+      expect(url).toEqual('https://gravatar.com/avatar/bd7dadffb7880f8feb02775df8b960e54f3f725b84409b8e38b23bba0bfee642?s=200')
     })
   })
 
@@ -73,7 +73,7 @@ describe('Composables > usePosts', () => {
       const avatars = await getAvatars([{profiles: { id: "foo" }}])
       expect(avatars).toBeTypeOf('object')
       // @ts-ignore
-      expect(avatars.foo).toEqual('https://gravatar.com/avatar/bd7dadffb7880f8feb02775df8b960e54f3f725b84409b8e38b23bba0bfee642?s=100')
+      expect(avatars.foo).toEqual('https://gravatar.com/avatar/bd7dadffb7880f8feb02775df8b960e54f3f725b84409b8e38b23bba0bfee642?s=200')
     })
   })
 
