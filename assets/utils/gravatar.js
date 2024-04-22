@@ -1,6 +1,6 @@
-import { getSHA256Hash } from './encryption'
+import { sha256 } from 'crypto-hash'
 
 export const getGravatarUrl = async (email, size = 200) => {
-  const hash = await getSHA256Hash(email.trim().toLowerCase())
+  const hash = await sha256(email.trim().toLowerCase())
   return `https://gravatar.com/avatar/${hash}?s=${size}`
 }
