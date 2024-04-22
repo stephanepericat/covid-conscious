@@ -285,12 +285,6 @@
 
   &__body {
     padding-bottom: 30px;
-
-    &--contents {
-      a {
-        color: var(--link--color,var(--color-primary-500)) !important;
-      }
-    }
   }
 
   &__comments {
@@ -327,5 +321,14 @@
       @include eyebrow()
     }
   }
+}
+</style>
+<style>
+.sf-post-page__body--contents a {
+  color: var(--link--color, var(--color-primary-500)) !important;
+}
+
+.sf-post-page__body--contents a:hover {
+  color: var(--link--color, var(--color-primary-600)) !important;
 }
 </style>
