@@ -285,6 +285,12 @@
 
   &__body {
     padding-bottom: 30px;
+
+    &--contents {
+      a {
+        color: var(--link--color,var(--color-primary-500)) !important;
+      }
+    }
   }
 
   &__comments {
