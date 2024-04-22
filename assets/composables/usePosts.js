@@ -43,7 +43,6 @@ export const usePosts = () => {
     const profiles = _.uniq(data.map(({profiles}) => profiles.id))
 
     return await profiles.reduce(async (acc, userId) => {
-      console.log('userId', userId)
       acc[userId] = await getAvatarUrl(userId)
       return acc
     }, {})
