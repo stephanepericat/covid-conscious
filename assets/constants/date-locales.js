@@ -1,4 +1,4 @@
-import { enUS, fr, es, ptBR } from 'date-fns/locale/index.js'
+import { enUS, fr, es, ptBR } from 'date-fns/locale'
 import { baseLanguage } from './base-language'
 
 export const locales = {
