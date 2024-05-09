@@ -30,11 +30,15 @@
             v-if="isEvent(article.type) && article.visual"
             class="publication-list__event--visual"
           >
-            <SanityImage
-              :asset-id="article.visual"
-              :alt="article.title"
-              class="publication-list__event--visual-img"
-            />
+            <NuxtLink
+              :to="localePath(article.path)"
+            >
+              <SanityImage
+                :asset-id="article.visual"
+                :alt="article.title"
+                class="publication-list__event--visual-img"
+              />
+            </NuxtLink>
           </div>
           <p
             v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
