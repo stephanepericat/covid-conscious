@@ -26,6 +26,20 @@
               <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
             </NuxtLink>
           </h4>
+          <div
+            v-if="isEvent(article.type) && article.visual"
+            class="publication-list__event--visual"
+          >
+            <NuxtLink
+              :to="localePath(article.path)"
+            >
+              <SanityImage
+                :asset-id="article.visual"
+                :alt="article.title"
+                class="publication-list__event--visual-img"
+              />
+            </NuxtLink>
+          </div>
           <p
             v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
             class="publication-list__description"
@@ -189,6 +203,17 @@
         text-transform: none;
         white-space: normal;
         width: 140px;
+      }
+    }
+  }
+
+  &__event {
+    &--visual {
+      margin: 15px auto;
+
+      &-img {
+        width: 100%;
+        height: auto;
       }
     }
   }

@@ -105,6 +105,7 @@ export default groq`
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
+    "visual": visual.asset._ref,
   },
   // PUBLIC HEALTH
   "health": *[(_type == "public-health") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc, _createdAt desc)[0..4]{
