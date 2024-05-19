@@ -3,8 +3,8 @@
     <section class="mobile-page__main">
       <div class="mobile-page__main--text">
         <h1 class="mobile-page__main--title">
-          All your Covid-19 information.<br />
-          In one place.
+          {{ $t('mobile.header') }}<br />
+          {{ $t('mobile.subheader') }}
         </h1>
         <div class="mobile-page__main--links">
           <NuxtLink :to="`https://play.google.com/store/apps/details?id=com.shortwavlabs.tclmobile&hl=${locale}`" target="_blank">
@@ -14,7 +14,7 @@
               :class="locale"
             />
           </NuxtLink>
-          <span>* Available soon on iOS</span>
+          <span v-text="$t('mobile.availableSoonIOS')" />
         </div>
       </div>
       <div>

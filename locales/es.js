@@ -123,6 +123,7 @@ export default {
     forumGuidelines: "Directrices Del Foro",
     legal: "Información Legal",
     link: "Noticias",
+    mobile: "Aplicación Movil",
     more: {
       articles: 'Más Artículos',
       news: 'Mas Noticias',
@@ -451,5 +452,10 @@ export default {
         message: 'Ahora puedes iniciar sesión con tu nueva contraseña.',
       },
     },
+  },
+  mobile: {
+    availableSoonIOS: "* Disponible pronto en iOS",
+    header: "Toda tu información de Covid-19.",
+    subheader: "En un solo lugar.",
   },
 };

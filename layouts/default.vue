@@ -139,6 +139,9 @@
               <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
             </li>
             <li>
+              <NuxtLink :to="localePath('/mobile')">{{ $t('layout.mobile') }}</NuxtLink>
+            </li>
+            <li>
               <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
             </li>
             <li>

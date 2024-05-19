@@ -123,6 +123,7 @@ export default {
     forumGuidelines: "Diretrizes do Fórum",
     legal: "Informações Legais",
     link: "Notícias",
+    mobile: "Aplicativo Móvel",
     more: {
       articles: 'Mais Artigos',
       news: 'Mais Notícias',
@@ -451,5 +452,10 @@ export default {
         message: 'Agora você pode entrar com sua nova senha.',
       },
     },
+  },
+  mobile: {
+    availableSoonIOS: "* Disponível em breve no iOS",
+    header: "Todas as suas informações sobre a Covid-19.",
+    subheader: "Em um só lugar.",
   },
 };

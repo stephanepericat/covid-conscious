@@ -123,6 +123,7 @@ export default {
     forumGuidelines: "Forum Guidelines",
     legal: "Legal Information",
     link: "News",
+    mobile: "Mobile App",
     more: {
       articles: 'More Articles',
       news: 'More News',
@@ -451,5 +452,10 @@ export default {
         message: 'You can now sign in with your new password.',
       },
     },
+  },
+  mobile: {
+    availableSoonIOS: "* Available soon on iOS",
+    header: "All your Covid-19 information.",
+    subheader: "In one place.",
   },
 };
