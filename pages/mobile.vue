@@ -2,7 +2,20 @@
   <div class="mobile-page">
     <section class="mobile-page__main">
       <div class="mobile-page__main--text">
-        <h1 class="mobile-page__main--title">Text Goes Here</h1>
+        <h1 class="mobile-page__main--title">
+          All your Covid-19 information.<br />
+          In one place.
+        </h1>
+        <div class="mobile-page__main--links">
+          <NuxtLink :to="`https://play.google.com/store/apps/details?id=com.shortwavlabs.tclmobile&hl=${locale}`" target="_blank">
+            <NuxtImg
+              :src="googlePlayBtn"
+              class="mobile-page__main--button android"
+              :class="locale"
+            />
+          </NuxtLink>
+          <span>* Available soon on iOS</span>
+        </div>
       </div>
       <div>
         <NuxtImg
@@ -14,10 +27,9 @@
   </div>
 </template>
 <script setup>
-  // import { useInkline } from '@inkline/inkline'
+  const { locale } = useI18n()
 
-  // const inkline = useInkline()
-  // const visual = computed(() => `/app-promo-${inkline.options.colorMode}.png`)          
+  const googlePlayBtn = computed(() => `/google-play-badge-${locale.value}.png`)
 </script>
 <style lang="scss">
 @import "~/assets/sass/mixins.scss";
@@ -34,9 +46,32 @@
     }
 
     &--text {
-      background: #ccc;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    &--links {
       display: flex;
       align-items: center;
+    }
+
+    &--button {
+      height: 60px;
+      
+      &.android {
+        margin-bottom: 5px;
+        margin-right: 12px;
+        margin-top: 5px;
+
+        &.en {
+          height: 69px;
+          margin-bottom: 0;
+          margin-left: -12px;
+          margin-right: 0;
+          margin-top: 0;
+        }
+      }
     }
 
     &--visual {
