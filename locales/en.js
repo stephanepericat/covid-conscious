@@ -455,6 +455,20 @@ export default {
   },
   mobile: {
     availableSoonIOS: "* Available soon on iOS",
+    details: {
+      archive: {
+        title: "Access Our Entire Archive",
+        description: "You have access to our entire database of articles, scientific papers, resources, videos, products and upcoming events, in all supported languages.",
+      },
+      contribute: {
+        title: "Contribute To Our Platform",
+        description: "You can send us links, product tips, and even submit some of your original content, via our built-in contribution form.",
+      },
+      informed: {
+        title: "Stay Informed On The Go",
+        description: "With our app, you can stay informed on the latest updates and scientific discoveries around the Covid-19 pandemic.",
+      },
+    },
     header: "All your Covid-19 information.",
     subheader: "In one place.",
   },

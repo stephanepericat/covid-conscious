@@ -3,8 +3,8 @@
     <section class="mobile-page__main">
       <div class="mobile-page__main--text">
         <h1 class="mobile-page__main--title">
-          {{ $t('mobile.header') }}<br />
-          {{ $t('mobile.subheader') }}
+          <span v-text="$t('mobile.header')" /><br />
+          <span class="subheader" v-text="$t('mobile.subheader')"  />
         </h1>
         <div class="mobile-page__main--links">
           <NuxtLink :to="`https://play.google.com/store/apps/details?id=com.shortwavlabs.tclmobile&hl=${locale}`" target="_blank">
@@ -22,6 +22,20 @@
           class="mobile-page__main--visual"
           src="/app-promo-transparent.png"
         />
+      </div>
+    </section>
+    <section class="mobile-page__details">
+      <div>
+        <h3 v-text="$t('mobile.details.informed.title')" />
+        <p v-text="$t('mobile.details.informed.description')" />
+      </div>
+      <div>
+        <h3 v-text="$t('mobile.details.archive.title')" />
+        <p v-text="$t('mobile.details.archive.description')" />
+      </div>
+      <div>
+        <h3 v-text="$t('mobile.details.contribute.title')" />
+        <p v-text="$t('mobile.details.contribute.description')" />
       </div>
     </section>
   </div>
@@ -43,6 +57,10 @@
 
     &--title {
       @include title();
+
+      .subheader {
+        color: var(--color-primary-500);
+      }
     }
 
     &--text {
@@ -77,6 +95,13 @@
     &--visual {
       width: 100%;
     }
+  }
+
+  &__details {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 40px 0;
   }
 }
 </style>
