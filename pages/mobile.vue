@@ -25,15 +25,15 @@
       </div>
     </section>
     <section class="mobile-page__details">
-      <div>
+      <div class="mobile-page__details--section">
         <h3 v-text="$t('mobile.details.informed.title')" />
         <p v-text="$t('mobile.details.informed.description')" />
       </div>
-      <div>
+      <div class="mobile-page__details--section">
         <h3 v-text="$t('mobile.details.archive.title')" />
         <p v-text="$t('mobile.details.archive.description')" />
       </div>
-      <div>
+      <div class="mobile-page__details--section">
         <h3 v-text="$t('mobile.details.contribute.title')" />
         <p v-text="$t('mobile.details.contribute.description')" />
       </div>
@@ -120,8 +120,22 @@
       }
 
       &--title {
-        font-size: 36px;
+        font-size: 48px;
         text-align: center;
+      }
+    }
+
+    &__details {
+      &--section {
+        text-align: center;
+      }
+    }
+  }
+
+  @include breakpoint-down('xs') {
+    &__main {
+      &--title {
+        font-size: 36px;
       }
     }
   }
