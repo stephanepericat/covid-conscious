@@ -104,5 +104,26 @@
     grid-template-columns: repeat(3, 1fr);
     margin: 40px 0;
   }
+
+  @include breakpoint-down('md') {
+    &__details {
+      grid-template-columns: auto;
+    }
+  }
+
+  @include breakpoint-down('sm') {
+    &__main {
+      grid-template-columns: auto;
+
+      &--links {
+        flex-direction: column;
+      }
+
+      &--title {
+        font-size: 36px;
+        text-align: center;
+      }
+    }
+  }
 }
 </style>
