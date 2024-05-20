@@ -120,7 +120,6 @@
       }
 
       &--title {
-        font-size: 48px;
         text-align: center;
       }
     }
