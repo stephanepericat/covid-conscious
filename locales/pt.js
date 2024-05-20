@@ -123,6 +123,7 @@ export default {
     forumGuidelines: "Diretrizes do Fórum",
     legal: "Informações Legais",
     link: "Notícias",
+    mobile: "Aplicativo Móvel",
     more: {
       articles: 'Mais Artigos',
       news: 'Mais Notícias',
@@ -451,5 +452,24 @@ export default {
         message: 'Agora você pode entrar com sua nova senha.',
       },
     },
+  },
+  mobile: {
+    availableSoonIOS: "* Disponível em breve no iOS",
+    details: {
+      archive: {
+        title: "Acesse todo o nosso arquivo",
+        description: "Você tem acesso a todo o nosso banco de dados de artigos, trabalhos científicos, recursos, vídeos, produtos e eventos futuros, em todos os idiomas suportados.",
+      },
+      contribute: {
+        title: "Contribua para nossa plataforma",
+        description: "Você pode nos enviar links, dicas de produtos e até mesmo enviar alguns de seus conteúdos originais por meio de nosso formulário de contribuição integrado.",
+      },
+      informed: {
+        title: "Mantenha-se informado em qualquer lugar",
+        description: "Com nosso aplicativo, você pode se manter informado sobre as últimas atualizações e descobertas científicas sobre a pandemia de Covid-19.",
+      },
+    },
+    header: "Todas as suas informações sobre a Covid-19.",
+    subheader: "Em um só lugar.",
   },
 };
