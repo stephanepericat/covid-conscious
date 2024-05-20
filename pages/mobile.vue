@@ -7,7 +7,7 @@
           <span class="subheader" v-text="$t('mobile.subheader')"  />
         </h1>
         <div class="mobile-page__main--links">
-          <NuxtLink :to="`https://play.google.com/store/apps/details?id=com.shortwavlabs.tclmobile&hl=${locale}`" target="_blank">
+          <NuxtLink :to="`${$appSettings.ANDROID_URL}${locale}`" target="_blank">
             <NuxtImg
               :src="googlePlayBtn"
               class="mobile-page__main--button android"
@@ -42,6 +42,7 @@
 </template>
 <script setup>
   const { locale } = useI18n()
+  const { $appSettings } = useNuxtApp()
 
   const googlePlayBtn = computed(() => `/google-play-badge-${locale.value}.png`)
 </script>

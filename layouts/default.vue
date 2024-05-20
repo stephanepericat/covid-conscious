@@ -138,7 +138,7 @@
             <li>
               <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
             </li>
-            <li>
+            <li v-if="$appSettings.SHOW_MOBILE">
               <NuxtLink :to="localePath('/mobile')">{{ $t('layout.mobile') }}</NuxtLink>
             </li>
             <li>
