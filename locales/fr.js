@@ -470,7 +470,7 @@ export default {
         description: "Grâce à notre application, vous pouvez rester informé des dernières mises à jour et des développements scientifiques concernant la pandémie de COVID-19.",
       },
     },
-    header: "Toutes vos informations sur la COVID-19.",
+    header: "Toutes vos informations sur la pandémie de COVID-19.",
     subheader: "En un seul endroit.",
   },
 };
