@@ -457,19 +457,19 @@ export default {
     availableSoonIOS: "* Disponível em breve no iOS",
     details: {
       archive: {
-        title: "Acesse todo o nosso arquivo",
-        description: "Você tem acesso a todo o nosso banco de dados de artigos, trabalhos científicos, recursos, vídeos, produtos e eventos futuros, em todos os idiomas suportados.",
+        title: "Acesse todo o nosso acervo",
+        description: "Você pode acessar toda a nossa coleção de notícias, artigos científicos, recursos, vídeos, produtos e eventos futuros em todos os idiomas suportados.",
       },
       contribute: {
         title: "Contribua para nossa plataforma",
-        description: "Você pode nos enviar links, dicas de produtos e até mesmo enviar alguns de seus conteúdos originais por meio de nosso formulário de contribuição integrado.",
+        description: "Você pode nos enviar links, dicas de produtos e até mesmo algum conteúdo original por meio de nosso formulário de contribuição.",
       },
       informed: {
         title: "Mantenha-se informado em qualquer lugar",
-        description: "Com nosso aplicativo, você pode se manter informado sobre as últimas atualizações e descobertas científicas sobre a pandemia de Covid-19.",
+        description: "Com nosso aplicativo, você pode se manter informado sobre as últimas atualizações e achados científicos sobre a pandemia de COVID-19.",
       },
     },
-    header: "Todas as suas informações sobre a Covid-19.",
+    header: "Todas as informações sobre a COVID-19 de que você precisa.",
     subheader: "Em um só lugar.",
   },
 };

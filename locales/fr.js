@@ -459,7 +459,7 @@ export default {
     details: {
       archive: {
         title: "Accédez à l'intégralité de nos archives",
-        description: "Vous avez accès à l'ensemble de notre base de données d'articles, de documents scientifiques, de ressources, de vidéos, de produits et d'événements à venir, dans toutes les langues prises en charge.",
+        description: "Vous pouvez accéder à notre entière base de données d'actualités, de documents scientifiques, de ressources, de vidéos, de produits et d'événements à venir dans toutes les langues prises en charge.",
       },
       contribute: {
         title: "Contribuez à notre plateforme",
@@ -467,10 +467,10 @@ export default {
       },
       informed: {
         title: "Restez informé en déplacement",
-        description: "Grâce à notre application, vous pouvez rester informé des dernières mises à jour et découvertes scientifiques concernant la pandémie de Covid-19.",
+        description: "Grâce à notre application, vous pouvez rester informé des dernières mises à jour et des développements scientifiques concernant la pandémie de COVID-19.",
       },
     },
-    header: "Toutes vos informations Covid-19.",
+    header: "Toutes vos informations sur la COVID-19.",
     subheader: "En un seul endroit.",
   },
 };

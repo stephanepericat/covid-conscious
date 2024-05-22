@@ -454,21 +454,21 @@ export default {
     },
   },
   mobile: {
-    availableSoonIOS: "* Disponible pronto en iOS",details: {
+    availableSoonIOS: "* Pronto disponible para iOS",details: {
       archive: {
         title: "Acceda a todo nuestro archivo",
-        description: "Tiene acceso a toda nuestra base de datos de artículos, documentos científicos, recursos, vídeos, productos y próximos eventos, en todos los idiomas admitidos.",
+        description: "Puedes acceder a toda nuestra colección de noticias, documentos científicos, recursos, videos, productos y próximos eventos en todos los idiomas compatibles.",
       },
       contribute: {
         title: "Contribuya a nuestra plataforma",
-        description: "Puedes enviarnos enlaces, consejos sobre productos, e incluso enviar algunos de tus contenidos originales, a través de nuestro formulario de contribución incorporado.",
+        description: "Puedes enviarnos enlaces, información sobre productos e incluso contenidos originales a través de nuestro formulario de contribución.",
       },
       informed: {
-        title: "Manténgase informado sobre la march",
-        description: "Con nuestra app, puedes mantenerte informado sobre las últimas actualizaciones y descubrimientos científicos en torno a la pandemia del Covid-19.",
+        title: "Manténgase informado en cualquier lugar",
+        description: "Con nuestra aplicación, puedes mantenerte informado sobre las últimas actualizaciones y avances científicos en torno a la pandemia de COVID-19.",
       },
     },
-    header: "Toda tu información de Covid-19.",
+    header: "Toda la información sobre el COVID-19 que necesitas.",
     subheader: "En un solo lugar.",
   },
 };

@@ -458,7 +458,7 @@ export default {
     details: {
       archive: {
         title: "Access Our Entire Archive",
-        description: "You have access to our entire database of articles, scientific papers, resources, videos, products and upcoming events, in all supported languages.",
+        description: "You can access our entire database of news articles, scientific papers, resources, videos, products, and upcoming events in all supported languages.",
       },
       contribute: {
         title: "Contribute To Our Platform",
@@ -466,10 +466,10 @@ export default {
       },
       informed: {
         title: "Stay Informed On The Go",
-        description: "With our app, you can stay informed on the latest updates and scientific discoveries around the Covid-19 pandemic.",
+        description: "With our app, you can stay informed on the latest updates and scientific developments around the COVID-19 pandemic.",
       },
     },
-    header: "All your Covid-19 information.",
+    header: "All your COVID-19 information.",
     subheader: "In one place.",
   },
 };
