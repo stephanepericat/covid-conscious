@@ -24,6 +24,7 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@inkline/plugin/nuxt',
+    '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     '@nuxtjs/sanity',
     '@nuxtjs/turnstile',
