@@ -3,8 +3,42 @@
     <ILoader v-if="pending || loading" class="home-page__loader" />
     <template v-else>
       <div>
-        <div>
-          TOP
+        <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
+          <div class="lg:col-span-2">
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.news") }}
+            </h3>
+          </div>
+          <div>
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.events") }}
+            </h3>
+          </div>
+          <div class="lg:col-span-2">
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.scientific-library") }}
+            </h3>
+          </div>
+          <div>
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.resource") }}
+            </h3>
+          </div>
+          <div class="lg:col-span-2">
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.health") }}
+            </h3>
+          </div>
+          <div>
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.directory") }}
+            </h3>
+          </div>
+          <div class="lg:col-span-3">
+            <h3 class="uppercase font-base font-bold text-base tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.video") }}
+            </h3>
+          </div>
         </div>
         <div class="home-page__divider" />
         <div>
@@ -38,10 +72,11 @@
     </template>
   </div>
 </template>
-<script setup lang="ts">
+<script setup>
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
   import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
+  import Card from '~/components/Card.vue'
   // import PublicationList from '~/components/PublicationList.vue'
 
   // const { $appSettings } = useNuxtApp()
