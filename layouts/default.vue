@@ -88,7 +88,7 @@
                 <!-- {{ $t('layout.more.label') }} -->
               </InavItem>
               <template #body>
-                <IDropdownItem :to="localePath('/products')">
+                <IDropdownItem :to="localePath('/product')">
                   <span>{{ $t('layout.product') }}</span>
                 </IDropdownItem>
                 <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
