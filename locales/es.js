@@ -127,6 +127,7 @@ export default {
     mobile: "Aplicación Movil",
     more: {
       articles: 'Más Artículos',
+      label: 'Más...',
       news: 'Mas Noticias',
       posts: 'Más Publicaciones',
       resources: 'Más recursos',

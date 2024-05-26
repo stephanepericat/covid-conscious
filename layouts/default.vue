@@ -82,10 +82,11 @@
             >
               {{ item.label }}
             </INavItem>
-            <IDropdown class="ml-3 default-layout__sub-nav--more" placement="bottom-end" events="hover">
-              <InavIten>
+            <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
+              <INavItem>
                 <Icon :size="22" name="mdi:dots-horizontal-circle-outline" />
-              </InavIten>
+                <!-- {{ $t('layout.more.label') }} -->
+              </InavItem>
               <template #body>
                 <IDropdownItem :to="localePath('/products')">
                   <span>{{ $t('layout.product') }}</span>
@@ -228,7 +229,7 @@
   </ILayout>
 </template>
 <script setup>
-  import { useInkline } from '@inkline/inkline'
+  import { INavItem, useInkline } from '@inkline/inkline'
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { useLanguages } from '~/assets/composables/useLanguages'
