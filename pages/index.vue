@@ -8,42 +8,50 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.news") }}
             </h3>
+            <p v-text="$t('layout.empty.news')" />
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.events") }}
             </h3>
+            <p v-text="$t('layout.empty.events')" />
           </div>
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.scientific-library") }}
             </h3>
+            <p v-text="$t('layout.empty.library')" />
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.resource") }}
             </h3>
+            <p v-text="$t('layout.empty.resources')" />
           </div>
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.health") }}
             </h3>
+            <p v-text="$t('layout.empty.health')" />
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.directory") }}
             </h3>
+            <p v-text="$t('layout.empty.directory')" />
           </div>
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.video") }}
             </h3>
+            <p v-text="$t('layout.empty.videos')" />
           </div>
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.forum") }}
             </h3>
-            <template v-if="posts?.length">
+            <p v-text="$t('layout.empty.forum')" v-if="!posts?.length" />
+            <template v-else>
               <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
                 <PostPreview
                   v-for="post in posts"
@@ -64,7 +72,6 @@
                 </NuxtLink>
               </div> -->
             </template>
-            <p v-else>{{ $t('layout.empty.forum') }}</p>
           </div>
         </div>
       </div>

@@ -109,6 +109,7 @@ export default {
     education: "Éducation",
     empty: {
       community: 'Aucun lien de communauté pour l\'instant.',
+      directory: 'Aucune inscription dans l\'annuaire pour l\'instant.',
       education: 'Pas encore de contenu éducatif.',
       events: 'Aucun événement à venir.',
       forum: 'Aucun message sur le forum pour l\'instant.',
