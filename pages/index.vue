@@ -8,7 +8,40 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.news") }}
             </h3>
-            <p v-text="$t('layout.empty.news')" />
+            <p v-if="!latestPublications?.news?.length" v-text="$t('layout.empty.news')" />
+            <templatr v-else>
+              <div class="grid grid-rows-4 grid-cols-2 gap-x-8 gap-y-4">
+                <div
+                  v-for="(item, index) in latestPublications.news"
+                  :key="item.id"
+                  :class="{'row-span-4': index === 0}"
+                >
+                  <Card
+                    v-if="index === 0"
+                    :date="item.date"
+                    :tags="item.tags"
+                    target="_blank"
+                    :title="item.title"
+                    :url="item.link"
+                    :visual="item.thumbnail"
+                  />
+                  <div v-else>
+                    <h5>
+                      <NuxtLink
+                        target="_blank"
+                        :to="item.link"
+                      >
+                        {{ item.title }}
+                      </NuxtLink>
+                    </h5>
+                  </div>
+                </div>
+                <!-- <div>other item</div>
+                <div>other item</div>
+                <div>other item</div>
+                <div>other item</div> -->
+              </div>
+            </templatr>
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
