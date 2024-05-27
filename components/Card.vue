@@ -3,16 +3,22 @@
     class="tcl-card rounded-lg overflow-hidden"
   >
     <div class="aspect-video">
-      <SanityImage
-        v-if="visual"
-        :asset-id="visual"
-        :alt="title"
-        fit="crop"
-        crop="entropy"
-        :h="450"
-        :w="800"
-      />
-      <NuxtImg v-else src="/tcl-fallback-169.jpg" />
+      <NuxtLink
+          class="no-underline"
+          :target="target"
+          :to="url"
+        >
+        <SanityImage
+          v-if="visual"
+          :asset-id="visual"
+          :alt="title"
+          fit="crop"
+          crop="entropy"
+          :h="450"
+          :w="800"
+        />
+        <NuxtImg v-else src="/tcl-fallback-169.jpg" />
+        </NuxtLink>
     </div>
     <div class="p-6">
       <h4 class="leading-snug">
