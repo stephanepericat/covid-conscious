@@ -34,7 +34,7 @@
       <p v-if="description">descrtiption</p>
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">
-          <li v-for="tag in tags" :key="tag.uri" class="mr-2 mb-2 mt-0 ml-0">
+          <li v-for="tag in tags" :key="tag.uri" class="mr-1 mb-1 mt-0 ml-0">
             <IBadge
               class="uppercase tracking-widest cursor-pointer mb-0"
               @click="onTagClick({ uri: tag.uri })"
