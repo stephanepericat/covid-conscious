@@ -1,6 +1,6 @@
 <template>
   <div
-    class="tcl-card rounded-lg overflow-hidden"
+    class="tcl-card rounded-lg overflow-hidden shadow-md"
   >
     <div class="aspect-video">
       <NuxtLink
@@ -13,7 +13,7 @@
           :asset-id="visual"
           :alt="title"
           fit="crop"
-          crop="entropy"
+          crop="entropy" 
           :h="576"
           :w="1024"
         />
