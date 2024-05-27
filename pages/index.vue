@@ -26,7 +26,7 @@
                     :visual="item.thumbnail"
                   />
                   <div v-else>
-                    <h5>
+                    <h5 class="leading-snug">
                       <NuxtLink
                         target="_blank"
                         :to="item.link"

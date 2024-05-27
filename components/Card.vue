@@ -15,7 +15,7 @@
       <NuxtImg v-else src="/tcl-fallback-169.jpg" />
     </div>
     <div class="p-6">
-      <h4>
+      <h4 class="leading-snug">
         <NuxtLink
           class="no-underline"
           :target="target"
@@ -24,7 +24,7 @@
           {{ title }}
         </NuxtLink>
       </h4>
-      <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date )), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
+      <p v-if="date" class="text-sm uppercase tracking-widest mb-3">{{ format(new Date(convertTs(date )), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
       <p v-if="description">descrtiption</p>
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">
