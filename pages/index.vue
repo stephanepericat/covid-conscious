@@ -10,10 +10,11 @@
             </h3>
             <p v-if="!latestPublications?.news?.length" v-text="$t('layout.empty.news')" />
             <template v-else>
-              <div class="grid xl:grid-cols-2 gap-x-8 gap-y-8 xl:gap-y-4">
+              <div :class="`grid xl:grid-rows-${latestPublications.news.length - 1} xl:grid-cols-2 gap-x-8 gap-y-8 xl:gap-y-4`">
                 <div
                   v-for="(item, index) in latestPublications.news"
                   :key="item.id"
+                  :class="{[`row-span-${latestPublications.news.length - 1}`]: index === 0}"
                 >
                   <Card
                     v-if="index === 0"

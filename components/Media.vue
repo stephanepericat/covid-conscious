@@ -37,7 +37,7 @@
     free: Boolean,
     limited: Boolean,
     premium: Boolean,
-    tags: { type: String, default: [] },
+    tags: { type: Array, default: [] },
     target: { type: String, default: null },
     title: { type: String, required: true },
     url: { type: String, required: true },

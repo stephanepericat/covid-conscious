@@ -12,12 +12,16 @@
           v-if="visual"
           :asset-id="visual"
           :alt="title"
+          class="w-full"
           fit="crop"
           crop="entropy" 
           :h="576"
           :w="1024"
         />
-        <NuxtImg v-else src="/tcl-fallback-169.jpg" />
+        <NuxtImg
+          v-else src="/tcl-fallback-169.jpg"
+          class="w-full"
+        />
       </NuxtLink>
     </div>
     <div class="p-6">
@@ -60,7 +64,7 @@
     free: Boolean,
     limited: Boolean,
     premium: Boolean,
-    tags: { type: String, default: [] },
+    tags: { type: Array, default: [] },
     target: { type: String, default: null },
     title: { type: String, required: true },
     url: { type: String, required: true },
