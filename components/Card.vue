@@ -30,7 +30,7 @@
           {{ title }}
         </NuxtLink>
       </h4>
-      <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date )), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
+      <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
       <p v-if="description">descrtiption</p>
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">

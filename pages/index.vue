@@ -9,12 +9,11 @@
               {{ $t("layout.news") }}
             </h3>
             <p v-if="!latestPublications?.news?.length" v-text="$t('layout.empty.news')" />
-            <templatr v-else>
-              <div class="grid xl:grid-rows-4 xl:grid-cols-2 gap-x-8 gap-y-8 xl:gap-y-4">
+            <template v-else>
+              <div class="grid xl:grid-cols-2 gap-x-8 gap-y-8 xl:gap-y-4">
                 <div
                   v-for="(item, index) in latestPublications.news"
                   :key="item.id"
-                  :class="{'row-span-4': index === 0}"
                 >
                   <Card
                     v-if="index === 0"
@@ -26,18 +25,17 @@
                     :visual="item.thumbnail"
                   />
                   <div v-else>
-                    <h5 class="leading-snug">
-                      <NuxtLink
-                        target="_blank"
-                        :to="item.link"
-                      >
-                        {{ item.title }}
-                      </NuxtLink>
-                    </h5>
+                    <Media
+                      :date="item.date"
+                      :tags="item.tags"
+                      target="_blank"
+                      :title="item.title"
+                      :url="item.link"
+                    />
                   </div>
                 </div>
               </div>
-            </templatr>
+            </template>
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
@@ -112,6 +110,7 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
   import Card from '~/components/Card.vue'
+  import Media from '~/components/Media.vue'
   // import PublicationList from '~/components/PublicationList.vue'
 
   // const { $appSettings } = useNuxtApp()
