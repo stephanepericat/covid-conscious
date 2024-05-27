@@ -10,7 +10,7 @@
             </h3>
             <p v-if="!latestPublications?.news?.length" v-text="$t('layout.empty.news')" />
             <templatr v-else>
-              <div class="grid grid-rows-4 grid-cols-2 gap-x-8 gap-y-4">
+              <div class="grid xl:grid-rows-4 xl:grid-cols-2 gap-x-8 gap-y-8 xl:gap-y-4">
                 <div
                   v-for="(item, index) in latestPublications.news"
                   :key="item.id"
@@ -36,10 +36,6 @@
                     </h5>
                   </div>
                 </div>
-                <!-- <div>other item</div>
-                <div>other item</div>
-                <div>other item</div>
-                <div>other item</div> -->
               </div>
             </templatr>
           </div>

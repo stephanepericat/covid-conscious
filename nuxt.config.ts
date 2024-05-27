@@ -123,6 +123,10 @@ export default defineNuxtConfig({
     // },
   },
 
+  tailwindcss: {
+    viewer: false,
+  },
+
   turnstile: {
     siteKey: process.env.TURNSTILE_SITE_KEY,
   },

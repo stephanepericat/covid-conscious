@@ -14,8 +14,8 @@
           :alt="title"
           fit="crop"
           crop="entropy"
-          :h="450"
-          :w="800"
+          :h="576"
+          :w="1024"
         />
         <NuxtImg v-else src="/tcl-fallback-169.jpg" />
       </NuxtLink>
