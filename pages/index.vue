@@ -10,32 +10,10 @@
             </h3>
             <p v-if="!latestPublications?.news?.length" v-text="$t('layout.empty.news')" />
             <template v-else>
-              <div :class="`grid xl:grid-rows-${latestPublications.news.length - 1} xl:grid-cols-2 gap-x-8 gap-y-8 xl:gap-y-4`">
-                <div
-                  v-for="(item, index) in latestPublications.news"
-                  :key="item.id"
-                  :class="{[`row-span-${latestPublications.news.length - 1}`]: index === 0}"
-                >
-                  <Card
-                    v-if="index === 0"
-                    :date="item.date"
-                    :tags="item.tags"
-                    target="_blank"
-                    :title="item.title"
-                    :url="item.link"
-                    :visual="item.thumbnail"
-                  />
-                  <div v-else>
-                    <Media
-                      :date="item.date"
-                      :tags="item.tags"
-                      target="_blank"
-                      :title="item.title"
-                      :url="item.link"
-                    />
-                  </div>
-                </div>
-              </div>
+              <PublicationBlock
+                :publications="latestPublications.news"
+                target="_blank"
+              />
             </template>
           </div>
           <div>
@@ -48,7 +26,12 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.scientific-library") }}
             </h3>
-            <p v-text="$t('layout.empty.library')" />
+            <p v-if="!latestPublications?.library?.length" v-text="$t('layout.empty.library')" />
+            <template v-else>
+              <PublicationBlock
+                :publications="latestPublications.library"
+              />
+            </template>
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
@@ -60,7 +43,13 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.health") }}
             </h3>
-            <p v-text="$t('layout.empty.health')" />
+            <p v-if="!latestPublications?.health?.length" v-text="$t('layout.empty.health')" />
+            <template v-else>
+              <PublicationBlock
+                :publications="latestPublications.health"
+                target="_blank"
+              />
+            </template>
           </div>
           <div>
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
@@ -110,13 +99,13 @@
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
   import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
-  import Card from '~/components/Card.vue'
-  import Media from '~/components/Media.vue'
-  // import PublicationList from '~/components/PublicationList.vue'
+  import PublicationBlock from '~/components/PublicationBlock.vue'
+  // import Card from '~/components/Card.vue'
+  // import Media from '~/components/Media.vue'
 
   // const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
-  const localePath = useLocalePath()
+  // const localePath = useLocalePath()
   const { loading, getPosts } = usePosts()
   const posts = ref([])
   const config = useRuntimeConfig()

@@ -84,7 +84,7 @@
             </INavItem>
             <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
               <INavItem>
-                <Icon :size="22" name="mdi:dots-horizontal-circle-outline" />
+                <Icon size="22" name="mdi:dots-horizontal-circle-outline" />
                 <!-- {{ $t('layout.more.label') }} -->
               </InavItem>
               <template #body>

@@ -35,7 +35,7 @@
         </NuxtLink>
       </h4>
       <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
-      <p v-if="description">descrtiption</p>
+      <p v-if="description" v-html="description" />
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">
           <li v-for="tag in tags" :key="tag.uri" class="mr-2 mb-2 mt-0 ml-0">
