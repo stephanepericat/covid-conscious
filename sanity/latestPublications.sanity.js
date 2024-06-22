@@ -81,14 +81,13 @@ export default groq`
     "limited": coalesce(limitedAccess, false),
   },
   // RESOURCES
-  "resources": *[(_type == "resource") && !(_id in path('drafts.**')) && (language == $locale)] | order(_createdAt desc)[0..4]{
+  "resources": *[(_type == "resource") && !(_id in path('drafts.**')) && (language == $locale)] | order(title asc)[0..4]{
     title,
     "published": _createdAt,
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     source,
     "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""), "")[0..127], "") + "...",
-    "date": publicationDate,
     "thumbnail": visual.asset._ref,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
@@ -120,6 +119,17 @@ export default groq`
     "type": _type,
     "locked": coalesce(premiumAccess, false),
     "limited": coalesce(limitedAccess, false),
+  },
+  "directory": *[(_type == "directory") && !(_id in path('drafts.**')) && (language == $locale)] | order(title asc)[0..4]{
+    title,
+    "published": _createdAt,
+    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
+    source,
+    "summary": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, description[_key == ^.language][0].value, null)), "")[0..127], "") + "...",
+    "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   },
 }
 `

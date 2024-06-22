@@ -49,7 +49,17 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.resource") }}
             </h3>
-            <p v-text="$t('layout.empty.resources')" />
+            <p v-if="!latestPublications?.resources?.length" v-text="$t('layout.empty.resources')" />
+            <div class="grid gap-4" v-else>
+              <Media
+                v-for="resource in latestPublications?.resources"
+                :key="resource.id"
+                :summary="resource.summary"
+                :tags="resource.tags"
+                :title="resource.title"
+                :url="localePath(resource.path)"
+              />
+            </div>
           </div>
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
@@ -67,7 +77,17 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.directory") }}
             </h3>
-            <p v-text="$t('layout.empty.directory')" />
+            <p v-if="!latestPublications?.directory?.length" v-text="$t('layout.empty.directory')" />
+            <div class="grid gap-4" v-else>
+              <Media
+                v-for="entry in latestPublications?.directory"
+                :key="entry.id"
+                :summary="entry.summary"
+                :tags="entry.tags"
+                :title="entry.title"
+                :url="localePath(entry.path)"
+              />
+            </div>
           </div>
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
@@ -113,11 +133,11 @@
   import PostPreview from '~/components/PostPreview.vue'
   import PublicationBlock from '~/components/PublicationBlock.vue'
   import Card from '~/components/Card.vue'
-  // import Media from '~/components/Media.vue'
+  import Media from '~/components/Media.vue'
 
   // const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
-  // const localePath = useLocalePath()
+  const localePath = useLocalePath()
   const { loading, getPosts } = usePosts()
   const posts = ref([])
   const config = useRuntimeConfig()
