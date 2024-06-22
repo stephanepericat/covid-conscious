@@ -40,7 +40,7 @@
           {{ title }}
         </NuxtLink>
       </h4>
-      <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
+      <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}<span v-if="end"> - {{ format(new Date(convertTs(end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span></p>
       <p v-if="description" v-html="description" />
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">
@@ -67,6 +67,7 @@
   defineProps({
     date: { type: String, default: null },
     description: { type: String, default: null },
+    end: { type: String, default: null },
     free: Boolean,
     isVideo: Boolean,
     limited: Boolean,
