@@ -88,8 +88,8 @@
                 <!-- {{ $t('layout.more.label') }} -->
               </InavItem>
               <template #body>
-                <IDropdownItem :to="localePath('/product')">
-                  <span>{{ $t('layout.product') }}</span>
+                <IDropdownItem :to="localePath('/public-health')" v-if="$appSettings.SHOW_PUBLIC_HEALTH">
+                  <span>{{ $t('layout.health') }}</span>
                 </IDropdownItem>
                 <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
                   <span>{{ $t('layout.education') }}</span>
@@ -250,9 +250,9 @@
     { label: t('layout.resource'), url: localePath('/resource') },
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
-    { label: t('layout.health'), url: localePath('/public-health'), hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
     { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
-    { label: t('layout.product'), url: localePath('/product'), class: 'optional' },
+    { label: t('layout.product'), url: localePath('/product') },
+    { label: t('layout.health'), url: localePath('/public-health'), class: 'optional', hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
     { label: t('layout.education'), url: localePath('/education'), class: 'optional', hidden: !$appSettings.SHOW_EDUCATION },
     { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
     { label: t('layout.submitContent'), url: localePath('/contribute'), class: 'optional' },
