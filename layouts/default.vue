@@ -77,10 +77,31 @@
               v-for="(item, index) in subNavItems"
               :key="index"
               :to="item.url"
+              :class="item.class || ''"
               v-show="!item.hidden"
             >
               {{ item.label }}
             </INavItem>
+            <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
+              <INavItem>
+                <Icon size="22" name="mdi:dots-horizontal-circle-outline" />
+                <!-- {{ $t('layout.more.label') }} -->
+              </InavItem>
+              <template #body>
+                <IDropdownItem :to="localePath('/public-health')" v-if="$appSettings.SHOW_PUBLIC_HEALTH">
+                  <span>{{ $t('layout.health') }}</span>
+                </IDropdownItem>
+                <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
+                  <span>{{ $t('layout.education') }}</span>
+                </IDropdownItem>
+                <IDropdownItem :to="localePath('/forum')">
+                  <span>{{ $t('layout.forum') }}</span>
+                </IDropdownItem>
+                <IDropdownItem :to="localePath('/contribute')">
+                  <span>{{ $t('layout.submitContent') }}</span>
+                </IDropdownItem>
+              </template>
+            </IDropdown>
           </INav>
         </INavbarCollapsible>
       </INavbar>
@@ -208,7 +229,7 @@
   </ILayout>
 </template>
 <script setup>
-  import { useInkline } from '@inkline/inkline'
+  import { INavItem, useInkline } from '@inkline/inkline'
   import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { useLanguages } from '~/assets/composables/useLanguages'
@@ -229,12 +250,12 @@
     { label: t('layout.resource'), url: localePath('/resource') },
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
-    { label: t('layout.health'), url: localePath('/public-health'), hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
     { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
     { label: t('layout.product'), url: localePath('/product') },
-    { label: t('layout.education'), url: localePath('/education'), hidden: !$appSettings.SHOW_EDUCATION },
-    { label: t('layout.forum'), url: localePath('/forum') },
-    { label: t('layout.submitContent'), url: localePath('/contribute') },
+    { label: t('layout.health'), url: localePath('/public-health'), class: 'optional', hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
+    { label: t('layout.education'), url: localePath('/education'), class: 'optional', hidden: !$appSettings.SHOW_EDUCATION },
+    { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
+    { label: t('layout.submitContent'), url: localePath('/contribute'), class: 'optional' },
   ])
 
   // Inkline color mode
@@ -356,6 +377,10 @@
       letter-spacing: .1rem;
     }
 
+    .optional {
+      display: none;
+    }
+
     @include breakpoint-down('md') {
       :deep(.collapse-toggle) {
         margin-left: 10px;
@@ -363,6 +388,14 @@
 
       :deep(.navbar-collapsible) {
         margin-top: 10px;
+      }
+
+      &--more {
+        display: none;
+      }
+
+      .optional {
+        display: initial;
       }
     }
   }
@@ -461,7 +494,7 @@
     @include breakpoint-down('md') {
       &--container {
         flex-direction: column;
-        padding: 0 35px;
+        padding: 0 20px;
 
         &-block {
           margin-bottom: 20px;

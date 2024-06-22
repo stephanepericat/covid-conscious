@@ -101,7 +101,7 @@ export default {
     event: "Upcoming Events",
     events: "Upcoming Events",
     footerLegal: "© {year} All rights reserved.",
-    health: "Public Health",
+    health: "Public Health Watch",
     here: "here",
     home: "Home",
     community: "Community",
@@ -109,6 +109,7 @@ export default {
     education: "Education",
     empty: {
       community: 'No community links yet.',
+      directory: 'No directory listings yet.',
       education: 'No educational content yet.',
       events: 'No upcoming events.',
       forum: 'No forum posts yet.',
@@ -126,6 +127,7 @@ export default {
     mobile: "Mobile App",
     more: {
       articles: 'More Articles',
+      label: 'More...',
       news: 'More News',
       posts: 'More Posts',
       resources: 'More resources',
@@ -134,7 +136,7 @@ export default {
     news: "News",
     privacyPolicy: "Privacy Policy",
     product: "Products",
-    "public-health": "Public Health",
+    "public-health": "Public Health Watch",
     resource: "Resources",
     rss: "RSS Feed",
     "scientific-library": "Library",

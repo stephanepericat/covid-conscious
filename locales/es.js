@@ -101,7 +101,7 @@ export default {
     event: "Próximos Eventos",
     events: "Próximos Eventos",
     footerLegal: "© {year} Reservados todos los derechos.",
-    health: "Salud Pública",
+    health: "Vigilancia de la Salud Pública",
     here: "aquí",
     home: "Página Principal",
     community: "Comunidad",
@@ -109,6 +109,7 @@ export default {
     education: "Educación",
     empty: {
       community: 'Aún no hay enlaces de la comunidad.',
+      directory: 'Aún no hay listados en el directorio.',
       education: 'Aún no hay contenido educativo.',
       events: 'No hay eventos próximos.',
       forum: 'Aún no hay publicaciones en el foro.',
@@ -126,6 +127,7 @@ export default {
     mobile: "Aplicación Movil",
     more: {
       articles: 'Más Artículos',
+      label: 'Más...',
       news: 'Mas Noticias',
       posts: 'Más Publicaciones',
       resources: 'Más recursos',
@@ -134,7 +136,7 @@ export default {
     news: "Noticias",
     privacyPolicy: "Política de Privacidad",
     product: "Productos",
-    "public-health": "Salud Pública",
+    "public-health": "Vigilancia de la Salud Pública",
     resource: "Recursos",
     rss: "RSS Feed",
     "scientific-library": "Biblioteca",

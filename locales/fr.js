@@ -101,7 +101,7 @@ export default {
     event: "Évènements à Venir",
     events: "Évènements à Venir",
     footerLegal: "© {year} Tous droits réservés.",
-    health: "Santé Publique",
+    health: "Veille Sanitaire",
     here: "ici",
     home: "Accueil",
     community: "Communauté",
@@ -109,6 +109,7 @@ export default {
     education: "Éducation",
     empty: {
       community: 'Aucun lien de communauté pour l\'instant.',
+      directory: 'Aucune inscription dans l\'annuaire pour l\'instant.',
       education: 'Pas encore de contenu éducatif.',
       events: 'Aucun événement à venir.',
       forum: 'Aucun message sur le forum pour l\'instant.',
@@ -126,6 +127,7 @@ export default {
     mobile: "Application Mobile",
     more: {
       articles: 'Plus d\'Articles',
+      label: 'Plus...',
       news: 'Plus de Nouvelles',
       posts: 'Plus de Messages',
       resources: 'Plus de ressources',
@@ -134,7 +136,7 @@ export default {
     news: "Actualités",
     privacyPolicy: "Politique de Confidentialité",
     product: "Produits",
-    "public-health": "Santé Publique",
+    "public-health": "Veille Sanitaire",
     resource: "Ressources",
     rss: "Flux RSS",
     "scientific-library": "Bibliothèque",
