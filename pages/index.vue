@@ -20,7 +20,19 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.events") }}
             </h3>
-            <p v-text="$t('layout.empty.events')" />
+            <p v-if="!latestPublications?.events?.length" v-text="$t('layout.empty.events')" />
+            <div class="grid gap-4 lg:gap-8" v-else>
+              <Card
+                v-for="event in latestPublications.events"
+                :key="event.id"
+                :date="event.date"
+                :description="event.summary"
+                :tags="event.tags"
+                :title="event.title"
+                :url="localePath(event.path)"
+                :visual="event.visual"
+              />
+            </div>
           </div>
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
@@ -100,7 +112,7 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
   import PublicationBlock from '~/components/PublicationBlock.vue'
-  // import Card from '~/components/Card.vue'
+  import Card from '~/components/Card.vue'
   // import Media from '~/components/Media.vue'
 
   // const { $appSettings } = useNuxtApp()
