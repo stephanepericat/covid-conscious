@@ -60,7 +60,7 @@ export default groq`
     "date": publicationDate,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
-    "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""),
+    "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""), "")[0..255], "") + "...",
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
     "thumbnail": visual.asset._ref,
@@ -120,6 +120,7 @@ export default groq`
     "locked": coalesce(premiumAccess, false),
     "limited": coalesce(limitedAccess, false),
   },
+  // DIRECTORY
   "directory": *[(_type == "directory") && !(_id in path('drafts.**')) && (language == $locale)] | order(title asc)[0..4]{
     title,
     "published": _createdAt,
