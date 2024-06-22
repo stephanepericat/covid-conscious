@@ -8,7 +8,7 @@
         {{ title }}
       </NuxtLink>
     </h5>
-    <p v-if="summary" class="text-xs mb-2">{{ summary }}</p>
+    <p v-if="summary" class="text-sm mb-2">{{ summary }}</p>
     <p v-if="date" class="text-xs uppercase tracking-widest mb-2">{{ format(new Date(convertTs(date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</p>
     <div v-if="tags.length">
       <ul class="m-0 p-0 flex flex-wrap">

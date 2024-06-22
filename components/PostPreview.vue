@@ -16,7 +16,7 @@
       <h4 class="post-preview__link">
         <NuxtLink :to="localePath(`${rootPath}/${POST}/${post.id}`)">{{ post.headline }}</NuxtLink>
       </h4>
-      <p class="post-preview__description" v-if="withPreview">{{ cleanPostBody(post.body) }}</p>
+      <p class="post-preview__description text-sm" v-if="withPreview">{{ cleanPostBody(post.body) }}</p>
       <em class="post-preview__metadata">
         <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
         <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">@{{ post.profiles.username|| 'USER' }}</NuxtLink></span>
@@ -49,7 +49,7 @@
 
 .post-preview {
   &__description {
-    font-size: 13.33px;
+    // font-size: 13.33px;
     // margin: 0;
     margin-bottom: 10px;
   }
