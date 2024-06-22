@@ -93,7 +93,20 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.video") }}
             </h3>
-            <p v-text="$t('layout.empty.videos')" />
+            <p v-if="!latestPublications?.videos?.length" v-text="$t('layout.empty.videos')" />
+            <div class="grid lg:grid-cols-3 gap-4 lg:gap-8" v-else>
+              <Card
+                v-for="video in latestPublications.videos"
+                :key="video.id"
+                :date="video.date"
+                :description="video.summary"
+                is-video
+                :tags="video.tags"
+                :title="video.title"
+                :url="localePath(video.path)"
+                :visual="video.thumbnail"
+              />
+            </div>
           </div>
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">

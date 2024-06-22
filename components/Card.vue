@@ -4,7 +4,7 @@
   >
     <div class="aspect-video">
       <NuxtLink
-        class="no-underline"
+        class="no-underline relative"
         :target="target"
         :to="url"
       >
@@ -21,6 +21,12 @@
         <NuxtImg
           v-else src="/tcl-fallback-169.jpg"
           class="w-full"
+        />
+        <Icon
+          v-if="isVideo"
+          name="material-symbols:play-circle-outline-rounded"
+          class="absolute top-4 left-4 opacity-75"
+          size="56"
         />
       </NuxtLink>
     </div>
@@ -62,6 +68,7 @@
     date: { type: String, default: null },
     description: { type: String, default: null },
     free: Boolean,
+    isVideo: Boolean,
     limited: Boolean,
     premium: Boolean,
     tags: { type: Array, default: [] },
