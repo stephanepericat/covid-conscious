@@ -100,7 +100,7 @@ export default {
     disclaimer: "Clause de non-responsabilité",
     event: "Évènements à Venir",
     events: "Évènements à Venir",
-    footerLegal: "© {year} Tous droits réservés.",
+    footerLegal: "© 2023 - {year} Tous droits réservés.",
     health: "Veille Sanitaire",
     here: "ici",
     home: "Accueil",

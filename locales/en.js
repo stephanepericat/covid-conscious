@@ -100,7 +100,7 @@ export default {
     disclaimer: "Disclaimer",
     event: "Upcoming Events",
     events: "Upcoming Events",
-    footerLegal: "© {year} All rights reserved.",
+    footerLegal: "© 2023 - {year} All rights reserved.",
     health: "Public Health Watch",
     here: "here",
     home: "Home",

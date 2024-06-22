@@ -100,7 +100,7 @@ export default {
     disclaimer: "Isenção de responsabilidade",
     event: "Próximos Eventos",
     events: "Próximos Eventos",
-    footerLegal: "© {year} Todos os direitos reservados.",
+    footerLegal: "© 2023 - {year} Todos os direitos reservados.",
     health: "Vigilância da Saúde Pública",
     here: "aqui",
     home: "Pagina Inicial",
