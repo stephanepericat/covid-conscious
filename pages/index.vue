@@ -27,6 +27,7 @@
                 :key="event.id"
                 :date="event.date"
                 :description="event.summary"
+                :free="event.isEventFree"
                 :end="event.end"
                 :tags="event.tags"
                 :title="event.title"

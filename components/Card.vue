@@ -44,6 +44,12 @@
       <p v-if="description" v-html="description" />
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">
+          <BaseTags
+            :free="free"
+            :limited="limited"
+            :premium="premium"
+            size="md"
+          />
           <li v-for="tag in tags" :key="tag.uri" class="mr-2 mb-2 mt-0 ml-0">
             <IBadge
               class="uppercase tracking-widest cursor-pointer mb-0"
@@ -63,6 +69,7 @@
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { getDateLocale } from '~/assets/constants/date-locales'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import BaseTags from '~/components/BaseTags.vue'
 
   defineProps({
     date: { type: String, default: null },

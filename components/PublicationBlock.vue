@@ -3,6 +3,8 @@
     <Card
       :date="top.date"
       :description="top.summary"
+      :limited="top.limited"
+      :premium="top.locked"
       :tags="top.tags"
       :target="target"
       :title="top.title"
@@ -14,6 +16,8 @@
         v-for="item in others"
         :key="item.id"
         :date="item.date"
+        :limited="item.limited"
+        :premium="item.locked"
         :tags="item.tags"
         :target="target"
         :title="item.title"
