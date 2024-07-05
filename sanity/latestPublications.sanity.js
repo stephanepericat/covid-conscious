@@ -94,7 +94,7 @@ export default groq`
     "type": _type,
   },
   // EVENTS
-  "events": *[_type == 'event' && !(_id in path('drafts.**')) && string(eventDate) >= string::split(string(now()), "T")[0]] | order(eventDate desc) {
+  "events": *[_type == 'event' && !(_id in path('drafts.**')) && (string(eventDate) >= string::split(string(now()), "T")[0] || string(endDate) >= string::split(string(now()), "T")[0])] | order(eventDate desc) {
     "id": _id,
     title,
     "date": eventDate,
