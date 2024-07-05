@@ -87,7 +87,9 @@
 
     return _.sortBy(
       _.uniqBy(
-        matches.map(({ countryCode, countryName }) => ({ label: countryName, id: countryCode })),
+        matches
+          .filter(({ countryCode }) => countryCode !== null)
+          .map(({ countryCode, countryName }) => ({ label: countryName, id: countryCode })),
         'id'
       ),
     'label')
