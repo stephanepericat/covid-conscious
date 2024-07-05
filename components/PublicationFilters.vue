@@ -24,7 +24,7 @@
             :placeholder="$t('list.filters.selectCity')"
           />
         </template>
-        <template v-if="isLibrary(type) || isNews(type)">
+        <template v-if="isLibrary(type) || isNews(type) || isHealth(type)">
           <ISelect
             class="publication-filters--select"
             v-model="selectedSource"
@@ -61,7 +61,7 @@
   </div>
 </template>
 <script setup>
-  import { isDirectory, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
+  import { isDirectory, isHealth, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
 
   const props = defineProps({
     categories: { type: Array, default: [] },
