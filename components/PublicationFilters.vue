@@ -14,6 +14,7 @@
           <ISelect
             class="publication-filters--select"
             v-model="selectedCountry"
+            :disabled="onlineOnly"
             :options="countries"
             :placeholder="$t('list.filters.selectCountry')"
             clearable
@@ -26,6 +27,7 @@
             :placeholder="$t('list.filters.selectCity')"
             clearable
           />
+          <ICheckbox v-model="onlineOnly">{{ $t('article.online') }}</ICheckbox>
         </template>
         <template v-if="isLibrary(type) || isNews(type) || isHealth(type)">
           <ISelect
@@ -86,6 +88,7 @@
   const selectedCountry = defineModel('selectedCountry')
   const selectedLanguage = defineModel('selectedLanguage')
   const selectedSource = defineModel('selectedSource')
+  const onlineOnly = defineModel('onlineOnly')
 
   const clearFilters = () => {
     selectedCategory.value = null
@@ -94,6 +97,7 @@
     selectedCountry.value = null
     selectedLanguage.value = null
     selectedSource.value = null
+    onlineOnly.value = false
   }
 </script>
 <style lang="scss" scoped>

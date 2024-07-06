@@ -11,6 +11,7 @@
         :languages="filterLanguages"
         :sources="filterSources"
         :type="type"
+        v-model:online-only="onlineOnly"
         v-model:selected-category="selectedCategory"
         v-model:selected-city="selectedCity"
         v-model:selected-country="selectedCountry"
@@ -66,12 +67,18 @@
   const { data, pending } = useLazySanityQuery(publicationsByTypeQuery, { locale, articleType: articleType.value })
   const results = computed(() => data?.value?.results || [])
 
+  const onlineOnly = ref(false)
+
   // FILTERS
   const filterCategories = computed(() => {
     return _.sortBy(
       _.uniqBy(
         results
           .value
+          .filter((result) => {
+            if(!onlineOnly.value) return true
+            return result.onlineOnly === onlineOnly.value
+          })
           .map(({ category, categoryUri }) => ({ label: category, id: categoryUri })),
       'id'),
     'label')
@@ -156,7 +163,8 @@
       !selectedCountry.value &&
       !selectedCity.value &&
       !selectedLanguage.value &&
-      !selectedSource.value
+      !selectedSource.value &&
+      !onlineOnly.value
     ) {
       return items
     }
@@ -179,6 +187,10 @@
 
     if(selectedSource.value) {
       items = items.filter((result) => result.source === selectedSource.value)
+    }
+
+    if(onlineOnly.value) {
+      items = items.filter((result) => result.onlineOnly === onlineOnly.value)
     }
 
     return items
