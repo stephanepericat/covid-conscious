@@ -84,6 +84,7 @@
               <Media
                 v-for="entry in latestPublications?.directory"
                 :key="entry.id"
+                :online-only="entry.onlineOnly"
                 :summary="entry.summary"
                 :tags="entry.tags"
                 :title="entry.title"

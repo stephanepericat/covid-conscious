@@ -11,6 +11,18 @@
       />{{ $t('article.free') }}
     </IBadge>
   </li>
+  <li v-if="onlineOnly" class="mr-2 mb-2 mt-0 ml-0">
+    <IBadge
+      class="uppercase tracking-widest mb-0"
+      color="secondary"
+      :size="size"
+    >
+      <Icon
+        class="icon"
+        name="oui:online"
+      />{{ $t('article.online') }}
+    </IBadge>
+  </li>
   <li v-if="limited" class="mr-2 mb-2 mt-0 ml-0">
     <IBadge
       class="uppercase tracking-widest mb-0"
@@ -40,6 +52,7 @@
   defineProps({
     free: Boolean,
     limited: Boolean,
+    onlineOnly: Boolean,
     premium: Boolean,
     size: { type: String, default: 'md' },
   })

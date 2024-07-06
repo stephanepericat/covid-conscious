@@ -129,6 +129,17 @@
               <div v-text="article.info.city" />
               <div v-text="article.info.zipCode" />
               <div v-text="article.info.country" />
+              <div v-if="article.onlineOnly">
+                <IBadge
+                  class="uppercase tracking-widest mb-0"
+                  color="secondary"
+                >
+                  <Icon
+                    class="icon"
+                    name="oui:online"
+                  />{{ $t('article.online') }}
+                </IBadge>
+              </div>
               <br/>
               <div v-if="article.info.phone">
                 <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
@@ -507,6 +518,11 @@
     &__share {
       display: none;
     }
+  }
+
+  .icon {
+    margin-right: 3px;
+    vertical-align: top !important;
   }
 }
 </style>

@@ -15,6 +15,7 @@
         <BaseTags
           :free="free"
           :limited="limited"
+          :online-only="onlineOnly"
           :premium="premium"
           size="sm"
         />
@@ -44,6 +45,7 @@
     description: { type: String, default: null },
     free: Boolean,
     limited: Boolean,
+    onlineOnly: Boolean,
     premium: Boolean,
     summary: { type: String, default: null },
     tags: { type: Array, default: [] },
