@@ -27,6 +27,8 @@ export default groq`
   embedCode,
   language,
   location,
+  onlineOnly,
+  "free": isEventFree,
   "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
 }
 `

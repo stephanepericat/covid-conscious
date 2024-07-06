@@ -127,6 +127,7 @@ export default groq`
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     source,
+    onlineOnly,
     "summary": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, description[_key == ^.language][0].value, null)), "")[0..127], "") + "...",
     "thumbnail": visual.asset._ref,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },

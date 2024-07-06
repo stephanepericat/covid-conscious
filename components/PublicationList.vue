@@ -53,6 +53,24 @@
           <em class="publication-list__metadata">
             <IBadge size="sm" v-if="isForum(article.type)">{{ article.category }}</IBadge>
             <ul v-else class="publication-list__tags">
+              <li v-if="article.onlineOnly" class="publication-list__tags--item locked">
+                <IBadge color="secondary" size="sm">
+                  <Icon
+                    class="publication-list__locked--badge-icon"
+                    name="oui:online"
+                  />
+                  <span>{{ $t('article.online') }}</span>
+                </IBadge>
+              </li>
+              <li v-if="article.free" class="publication-list__tags--item locked">
+                <IBadge color="secondary" size="sm">
+                  <Icon
+                    class="publication-list__locked--badge-icon"
+                    name="material-symbols:free-cancellation-outline-rounded"
+                  />
+                  <span>{{ $t('article.free') }}</span>
+                </IBadge>
+              </li>
               <li v-if="article.limited" class="publication-list__tags--item locked">
                 <IBadge color="warning" size="sm">
                   <Icon
@@ -190,10 +208,8 @@
   &__locked {
     &--badge {
       &-icon {
-        height: 0.7em;
-        width: 0.7em;
         margin-right: 3px;
-        vertical-align: initial !important;
+        vertical-align: top !important;
       }
     }
 

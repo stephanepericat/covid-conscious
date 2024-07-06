@@ -13,7 +13,7 @@ export default groq`
     "published": _createdAt,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     "categoryUri": tags[0]->uri.current,
-    "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""), "")[0..512], "") + "...",
+    "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ""), "")[0..512], "") + "...",
     "link": url,
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "source": source,
@@ -27,6 +27,8 @@ export default groq`
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "locked": coalesce(premiumAccess, false),
     "limited": coalesce(limitedAccess, false),
+    "onlineOnly": onlineOnly,
+    "free": isEventFree,
   },
   "total": count(*[_type == $articleType])
 }

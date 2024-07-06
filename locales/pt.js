@@ -8,6 +8,7 @@ export default {
     locked: "Premium",
     lockedDescription: "Esta publicação está protegida por acesso pago ou assinatura",
     moreInfo: "Mais Informações",
+    online: "On-line",
     readMore: "Leia Mais",
     share: {
       facebook: 'Compartilhar no Facebook',
