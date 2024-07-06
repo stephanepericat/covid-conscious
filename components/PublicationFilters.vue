@@ -8,6 +8,7 @@
           v-model="selectedCategory"
           :options="categories"
           :placeholder="$t('list.filters.selectCategory')"
+          clearable
         />
         <template v-if="isDirectory(type)">
           <ISelect
@@ -15,6 +16,7 @@
             v-model="selectedCountry"
             :options="countries"
             :placeholder="$t('list.filters.selectCountry')"
+            clearable
           />
           <ISelect
             class="publication-filters--select"
@@ -22,6 +24,7 @@
             :disabled="!selectedCountry"
             :options="cities"
             :placeholder="$t('list.filters.selectCity')"
+            clearable
           />
         </template>
         <template v-if="isLibrary(type) || isNews(type) || isHealth(type)">
@@ -30,12 +33,14 @@
             v-model="selectedSource"
             :options="sources"
             :placeholder="$t('list.filters.selectSource')"
+            clearable
           />
           <ISelect
             class="publication-filters--select"
             v-model="selectedLanguage"
             :options="languages"
             :placeholder="$t('list.filters.selectLanguage')"
+            clearable
           />
         </template>
         <template v-if="isTag(type) || isSearch(type)">
@@ -44,19 +49,21 @@
             v-model="selectedContentType"
             :options="contentTypes"
             :placeholder="$t('list.filters.selectContentType')"
+            clearable
           />
           <ISelect
             class="publication-filters--select"
             v-model="selectedLanguage"
             :options="languages"
             :placeholder="$t('list.filters.selectLanguage')"
+            clearable
           />
         </template>
       </div>
-      <IButton @click="clearFilters">
+      <!-- <IButton @click="clearFilters">
         <Icon name="carbon:reset" />
         <span class="publication-filters--form-reset">{{ $t('list.filters.reset') }}</span>
-      </IButton>
+      </IButton> -->
     </IForm>
   </div>
 </template>
