@@ -141,15 +141,15 @@
                 </IBadge>
               </div>
               <br/>
-              <div v-if="article.info.phone">
+              <div v-if="article.info.phone" class="article-page__body--info-contact-row">
                 <Icon class="article-page__body--info-contact-icon" name="material-symbols:add-call-rounded" />
                 <a :href="`tel:${article.info.phone}`">{{ article.info.phone }}</a>
               </div>
-              <div v-if="article.info.email">
+              <div v-if="article.info.email" class="article-page__body--info-contact-row">
                 <Icon class="article-page__body--info-contact-icon" name="material-symbols:alternate-email-rounded" />
                 <a :href="`mailto:${article.info.email}`">{{ article.info.email }}</a>
               </div>
-              <div v-if="article.info.website">
+              <div v-if="article.info.website" class="article-page__body--info-contact-row">
                 <Icon class="article-page__body--info-contact-icon" name="material-symbols:web-sharp" />
                 <a :href="article.info.website" target="_blank">{{ article.info.website }}</a>
               </div>
@@ -421,6 +421,11 @@
 
         &-icon {
           margin-right: 5px;
+        }
+
+        &-row {
+          display: flex;
+          align-items: center;
         }
 
         @include breakpoint-down('sm') {
