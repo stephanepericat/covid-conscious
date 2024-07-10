@@ -7,7 +7,7 @@
           <span class="subheader" v-text="$t('mobile.subheader')"  />
         </h1>
         <div class="mobile-page__main--links">
-          <NuxtLink :to="`${$appSettings.ANDROID_URL}${locale}`" target="_blank">
+          <NuxtLink :to="$appSettings.ANDROID_URL" target="_blank">
             <NuxtImg
               :src="googlePlayBtn"
               class="mobile-page__main--button android"
