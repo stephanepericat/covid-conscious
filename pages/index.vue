@@ -4,6 +4,11 @@
     <template v-else>
       <div>
         <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
+          <PromoZone
+            class="lg:col-span-3"
+            :zone-id="HP_ZONE_1"
+            :zones="latestPublications?.promos"
+          />
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.news") }}
@@ -150,6 +155,8 @@
   import PublicationBlock from '~/components/PublicationBlock.vue'
   import Card from '~/components/Card.vue'
   import Media from '~/components/Media.vue'
+  import PromoZone from '~/components/PromoZone.vue'
+  import { HP_ZONE_1 } from '~/assets/constants/promo-zones'
 
   // const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()

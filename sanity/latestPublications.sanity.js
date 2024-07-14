@@ -133,5 +133,12 @@ export default groq`
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "type": _type,
   },
+  // PROMOTIONAL ZONES
+  "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {
+    name,
+    url,
+    "visual": visual.asset._ref,
+    "zoneId": zoneId.current,
+  }
 }
 `
