@@ -1,6 +1,9 @@
 <template>
   <div v-if="promo">
-    <NuxtLink :target="promo.external ? '_blank': '_self'" :to="promo.url">
+    <NuxtLink
+      :target="promo.external ? '_blank': '_self'"
+      :to="promo.external ? promo.url : localePath(promo.url)"
+    >
       <SanityImage
         v-if="promo.visual"
         :asset-id="promo.visual"
@@ -21,6 +24,8 @@
     zoneId: { type: String, required: true },
     zones: { type: Array, default: [] },
   })
+
+  const localePath = useLocalePath()
 
   const promo = computed(() => props.zones.find((z) => z.zoneId === props.zoneId))
 </script>

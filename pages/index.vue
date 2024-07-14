@@ -6,6 +6,7 @@
         <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
           <PromoZone
             class="lg:col-span-3"
+            :height="300"
             :zone-id="HP_ZONE_1"
             :zones="latestPublications?.promos"
           />
@@ -22,6 +23,12 @@
             </template>
           </div>
           <div>
+            <PromoZone
+              :height="800"
+              :width="800"
+              :zone-id="HP_ZONE_7"
+              :zones="latestPublications?.promos"
+            />
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.events") }}
             </h3>
@@ -41,6 +48,12 @@
               />
             </div>
           </div>
+          <PromoZone
+            class="lg:col-span-3"
+            :height="300"
+            :zone-id="HP_ZONE_2"
+            :zones="latestPublications?.promos"
+          />
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.scientific-library") }}
@@ -68,6 +81,12 @@
               />
             </div>
           </div>
+          <PromoZone
+            class="lg:col-span-3"
+            :height="300"
+            :zone-id="HP_ZONE_3"
+            :zones="latestPublications?.promos"
+          />
           <div class="lg:col-span-2">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.health") }}
@@ -97,6 +116,12 @@
               />
             </div>
           </div>
+          <PromoZone
+            class="lg:col-span-3"
+            :height="300"
+            :zone-id="HP_ZONE_4"
+            :zones="latestPublications?.promos"
+          />
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.video") }}
@@ -116,6 +141,12 @@
               />
             </div>
           </div>
+          <PromoZone
+            class="lg:col-span-3"
+            :height="300"
+            :zone-id="HP_ZONE_5"
+            :zones="latestPublications?.promos"
+          />
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.forum") }}
@@ -143,6 +174,12 @@
               </div> -->
             </template>
           </div>
+          <PromoZone
+            class="lg:col-span-3"
+            :height="300"
+            :zone-id="HP_ZONE_6"
+            :zones="latestPublications?.promos"
+          />
         </div>
       </div>
     </template>
@@ -156,7 +193,15 @@
   import Card from '~/components/Card.vue'
   import Media from '~/components/Media.vue'
   import PromoZone from '~/components/PromoZone.vue'
-  import { HP_ZONE_1 } from '~/assets/constants/promo-zones'
+  import { 
+    HP_ZONE_1,
+    HP_ZONE_2,
+    HP_ZONE_3,
+    HP_ZONE_4,
+    HP_ZONE_5,
+    HP_ZONE_6,
+    HP_ZONE_7
+  } from '~/assets/constants/promo-zones'
 
   // const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
