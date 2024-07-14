@@ -135,6 +135,7 @@ export default groq`
   },
   // PROMOTIONAL ZONES
   "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {
+    "external": isExternalLink,
     name,
     url,
     "visual": visual.asset._ref,

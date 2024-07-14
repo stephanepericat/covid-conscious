@@ -1,15 +1,17 @@
 <template>
   <div v-if="promo">
-    <SanityImage
-      v-if="promo.visual"
-      :asset-id="promo.visual"
-      :alt="promo.name"
-      class="w-full"
-      fit="crop"
-      crop="entropy" 
-      :h="height"
-      :w="width"
-    />
+    <NuxtLink :target="promo.external ? '_blank': '_self'" :to="promo.url">
+      <SanityImage
+        v-if="promo.visual"
+        :asset-id="promo.visual"
+        :alt="promo.name"
+        class="w-full"
+        fit="crop"
+        crop="entropy" 
+        :h="height"
+        :w="width"
+      />
+    </NuxtLink>
   </div>
 </template>
 <script setup>
