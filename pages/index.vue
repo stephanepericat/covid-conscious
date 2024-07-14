@@ -24,8 +24,8 @@
           </div>
           <div>
             <PromoZone
-              :height="800"
-              :width="800"
+              :height="900"
+              :width="900"
               :zone-id="HP_ZONE_7"
               :zones="latestPublications?.promos"
             />
