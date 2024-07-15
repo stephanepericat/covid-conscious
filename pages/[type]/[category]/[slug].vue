@@ -71,6 +71,12 @@
       </IMedia>
 
       <section class="article-page__body">
+        <PromoZone
+          class="mb-8"
+          :height="300"
+          :zone-id="ART_ZONE_1"
+          :zones="article?.promos"
+        />
         <!-- video content -->
         <template v-if="isVideo(type)" class="article-page__body--video">
           <p class="article-page__body--video-summary">{{ article.summary }}</p>
@@ -212,6 +218,12 @@
           </div>
         </template>
       </section>
+      <PromoZone
+        class="mt-12"
+        :height="300"
+        :zone-id="ART_ZONE_2"
+        :zones="article?.promos"
+      />
     </template>
     <IToastContainer />
   </div>
@@ -231,9 +243,14 @@
   import { useTags } from '~/assets/composables/useTags'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { getDateLocale } from '~/assets/constants/date-locales'
+  import PromoZone from '~/components/PromoZone.vue'
+  import { 
+    ART_ZONE_1,
+    ART_ZONE_2,
+  } from '~/assets/constants/promo-zones'
 
   const { locale, t } = useI18n()
-  const localePath = useLocalePath()
+  // const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
   const user = useSupabaseUser()
