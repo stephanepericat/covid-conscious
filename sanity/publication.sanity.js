@@ -30,5 +30,12 @@ export default groq`
   onlineOnly,
   "free": isEventFree,
   "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+  "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {
+    "external": isExternalLink,
+    name,
+    url,
+    "visual": visual.asset._ref,
+    "zoneId": zoneId.current,
+  },
 }
 `
