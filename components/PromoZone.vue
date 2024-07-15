@@ -1,5 +1,5 @@
 <template>
-  <div v-if="promo">
+  <div class="rounded-lg overflow-hidden shadow-md" v-if="promo">
     <NuxtLink
       :target="promo.external ? '_blank': '_self'"
       :to="promo.external ? promo.url : localePath(promo.url)"
