@@ -90,10 +90,6 @@
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePagination } from '~/assets/composables/usePagination'
   import { usePosts } from '~/assets/composables/usePosts'
-  import { useRobotsRule } from '#imports'
-
-  const rule = useRobotsRule()
-  rule.value = 'noindex, nofollow'
 
   const { t } = useI18n()
   const user = useSupabaseUser()

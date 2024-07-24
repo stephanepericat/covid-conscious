@@ -14,10 +14,6 @@
 <script setup>
   import { useToast } from '@inkline/inkline'
   import PostEditor from '~/components/PostEditor.vue'
-  import { useRobotsRule } from '#imports'
-
-  const rule = useRobotsRule()
-  rule.value = 'noindex, nofollow'
 
   const { t } = useI18n()
   const toast = useToast()

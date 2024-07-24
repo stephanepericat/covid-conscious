@@ -91,6 +91,10 @@ export default defineNuxtConfig({
     }
   },
 
+  robots: {
+    disallow: ['/account', '/forum/my-posts', '/forum/create'],
+  },
+
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL,
     name: 'That Covid Life',
