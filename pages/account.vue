@@ -26,6 +26,10 @@
   import { useSignOut } from '../assets/composables/useSignOut'
   import { useToast } from '@inkline/inkline'
   import Account from '../components/UserAccount.vue'
+  import { useRobotsRule } from '#imports'
+
+  const rule = useRobotsRule()
+  rule.value = 'noindex, nofollow'
 
   const toast = useToast()
   const user = useSupabaseUser()
