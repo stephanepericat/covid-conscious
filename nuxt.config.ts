@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     }
   },
   
+  // @ts-ignore
   modules: [
     '@vueuse/nuxt',
     '@inkline/plugin/nuxt',
@@ -31,12 +32,11 @@ export default defineNuxtConfig({
     'nuxt-cloudflare-analytics',
     'nuxt-icon',
     '@nuxtjs/supabase',
-    '@nuxtjs/robots',
     'nuxt-security',
     'nuxt-vitest',
-    '@nuxtjs/sitemap',
     '@nuxt/image',
     'nuxt3-leaflet',
+    '@nuxtjs/seo'
   ],
 
   runtimeConfig: {
@@ -91,36 +91,14 @@ export default defineNuxtConfig({
     }
   },
 
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL,
+    name: 'That Covid Life',
+    description: 'That Covid Life serves as an educational tool that gathers links to news, research, and other resources relative to COVID-19.',
+  },
+
   supabase: {
     redirect: false,
-    // redirectOptions: {
-    //   callback: '/callback',
-    //   exclude: [
-    //     '/',
-    //     '/fr',
-    //     '/es',
-    //     '/pt',
-    //     '*/about',
-    //     '*/forum',
-    //     '*/forum/post/*',
-    //     '*/forum/user/*',
-    //     '*/forum-guidelines',
-    //     '*/news',
-    //     '*/community*',
-    //     '*/education*',
-    //     '*/scientific-library*',
-    //     '*/product*',
-    //     '*/resource*',
-    //     '*/contribute',
-    //     '*/search*',
-    //     '*/author/*',
-    //     '*/disclaimer',
-    //     '*/privacy-policy',
-    //     '*/terms-conditions',
-    //     '*/login',
-    //   ],
-    //   login: '/login',
-    // },
   },
 
   tailwindcss: {
