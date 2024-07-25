@@ -92,13 +92,28 @@ export default defineNuxtConfig({
   },
 
   robots: {
-    disallow: ['/account', '/forum/my-posts', '/forum/create'],
+    disallow: [
+      '/account',
+      '/forum/create',
+      '/forum/my-posts',
+    ],
   },
 
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL,
     name: 'That Covid Life',
     description: 'That Covid Life serves as an educational tool that gathers links to news, research, and other resources relative to COVID-19.',
+  },
+
+  sitemap: {
+    exclude: [
+      '/account',
+      '/forum/create',
+      '/forum/my-posts',
+    ],
+    sources: [
+      '/api/__sitemap__/urls',
+    ],
   },
 
   supabase: {
