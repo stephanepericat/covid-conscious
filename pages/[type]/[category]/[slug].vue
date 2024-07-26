@@ -1,6 +1,27 @@
 <template>
   <div class="article-page" :class="{ pending }">
+
+    <!-- HEAD METADATA AND TITLE -->
+    <Head>
+      <Title>{{ pageTitle }}</Title>
+      <Meta name="description" :content="pageDescription" />
+      <Meta name="og:title" :content="pageTitle" />
+      <Meta name="og:description" :content="pageDescription" />
+      <Meta name="og:image" :content="ogImage" />
+      <Meta name="og:image:secure_url" :content="ogImage" />
+      <Meta name="og:image:type" :content="ogImageType" />
+      <Meta name="og:image:alt" :content="pageTitle" />
+      <Meta name="og:locale" :content="locale" />
+      <Meta name="og:site_name" :content="$t('layout.tcl')" />
+      <Meta name="twitter:title" :content="pageTitle" />
+      <Meta name="twitter:description" :content="pageDescription" />
+      <Meta name="twitter:image" :content="ogImage" />
+      <Meta name="twitter:site" content="@thatcovidlife" />
+      <Meta name="twitter:card" content="summary_large_image" />
+    </Head>
+
     <ILoader v-if="pending" class="article-page__loader" />
+
     <template v-else-if="!pending && article">
       <h1 class="article-page__title">
         <span>{{ article.title }}</span>
@@ -267,15 +288,14 @@
 
   const articleId = computed(() => article?.value?.id || null)
 
-  const pageTitle = computed(() => t('article.title', { title: article?.value?.title || '' }))
-  const articleType = computed(() => t(`layout.${type}`))
-
-  useHead({
-    meta: [
-      { name: 'description', content: t('home.description') },
-    ],
-    title: pageTitle.value
+  const pageTitle = computed(() => article?.value?.title || '')
+  const pageDescription = computed(() =>  article?.value?.summary || t('home.description'))
+  const ogImage = computed(() => article?.value?.image ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800` : '/tcl-fallback-169.jpg')
+  const ogImageType = computed(() => {
+    const extension = ogImage.value.split('.').pop().split('?').shift()
+    return `image/${extension}`
   })
+  const articleType = computed(() => t(`layout.${type}`))
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()

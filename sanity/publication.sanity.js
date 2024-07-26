@@ -37,5 +37,6 @@ export default groq`
     "visual": visual.asset._ref,
     "zoneId": zoneId.current,
   },
+  "image": visual.asset->url,
 }
 `
