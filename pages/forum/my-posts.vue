@@ -92,7 +92,6 @@
   import { usePosts } from '~/assets/composables/usePosts'
 
   const { t } = useI18n()
-  const client = useSupabaseClient()
   const user = useSupabaseUser()
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()

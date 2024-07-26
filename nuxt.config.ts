@@ -21,6 +21,7 @@ export default defineNuxtConfig({
     }
   },
   
+  // @ts-ignore
   modules: [
     '@vueuse/nuxt',
     '@inkline/plugin/nuxt',
@@ -31,12 +32,11 @@ export default defineNuxtConfig({
     'nuxt-cloudflare-analytics',
     'nuxt-icon',
     '@nuxtjs/supabase',
-    '@nuxtjs/robots',
     'nuxt-security',
     'nuxt-vitest',
-    '@nuxtjs/sitemap',
     '@nuxt/image',
     'nuxt3-leaflet',
+    '@nuxtjs/seo'
   ],
 
   runtimeConfig: {
@@ -76,10 +76,35 @@ export default defineNuxtConfig({
     ],
   },
 
+  linkChecker: {
+    enabled: false
+  },
+
+  ogImage: {
+    enabled: false,
+  },
+
+  robots: {
+    disallow: [
+      '/account',
+      '/forum/create',
+      '/forum/my-posts',
+    ],
+  },
+
   sanity: {
     apiVersion: '2021-10-21',
     dataset: process.env.SANITY_DATASET,
     projectId: process.env.SANITY_PROJECTID,
+  },
+
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'That Covid Life',
+      url: 'https://thatcovid.life',
+      logo: 'https://thatcovid.life/tcl-icon.png',
+    },
   },
 
   security: {
@@ -91,36 +116,43 @@ export default defineNuxtConfig({
     }
   },
 
+  seoExperiments: {
+    enabled: false
+  },
+
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL,
+    name: 'That Covid Life',
+    description: 'That Covid Life serves as an educational tool that gathers links to news, research, and other resources relative to COVID-19.',
+  },
+
+  sitemap: {
+    sitemaps: {
+      'en-US': {
+        sources: [
+          '/api/__sitemap__/urls',
+        ],
+      },
+      'es-MX': {
+        sources: [
+          '/api/__sitemap__/urls?locale=es',
+        ],
+      },
+      'fr-FR': {
+        sources: [
+          '/api/__sitemap__/urls?locale=fr',
+        ],
+      },
+      'pt-BR': {
+        sources: [
+          '/api/__sitemap__/urls?locale=pt',
+        ],
+      },
+    },
+  },
+
   supabase: {
     redirect: false,
-    // redirectOptions: {
-    //   callback: '/callback',
-    //   exclude: [
-    //     '/',
-    //     '/fr',
-    //     '/es',
-    //     '/pt',
-    //     '*/about',
-    //     '*/forum',
-    //     '*/forum/post/*',
-    //     '*/forum/user/*',
-    //     '*/forum-guidelines',
-    //     '*/news',
-    //     '*/community*',
-    //     '*/education*',
-    //     '*/scientific-library*',
-    //     '*/product*',
-    //     '*/resource*',
-    //     '*/contribute',
-    //     '*/search*',
-    //     '*/author/*',
-    //     '*/disclaimer',
-    //     '*/privacy-policy',
-    //     '*/terms-conditions',
-    //     '*/login',
-    //   ],
-    //   login: '/login',
-    // },
   },
 
   tailwindcss: {
