@@ -76,10 +76,30 @@ export default defineNuxtConfig({
     ],
   },
 
+  linkChecker: {
+    enabled: false
+  },
+
+  ogImage: {
+    enabled: false,
+  },
+
+  robots: {
+    disallow: [
+      '/account',
+      '/forum/create',
+      '/forum/my-posts',
+    ],
+  },
+
   sanity: {
     apiVersion: '2021-10-21',
     dataset: process.env.SANITY_DATASET,
     projectId: process.env.SANITY_PROJECTID,
+  },
+
+  schemaOrg: {
+    enabled: false
   },
 
   security: {
@@ -91,12 +111,8 @@ export default defineNuxtConfig({
     }
   },
 
-  robots: {
-    disallow: [
-      '/account',
-      '/forum/create',
-      '/forum/my-posts',
-    ],
+  seoExperiments: {
+    enabled: false
   },
 
   site: {
