@@ -106,14 +106,28 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    exclude: [
-      '/account',
-      '/forum/create',
-      '/forum/my-posts',
-    ],
-    sources: [
-      '/api/__sitemap__/urls',
-    ],
+    sitemaps: {
+      'en-US': {
+        sources: [
+          '/api/__sitemap__/urls',
+        ],
+      },
+      'es-MX': {
+        sources: [
+          '/api/__sitemap__/urls?locale=es',
+        ],
+      },
+      'fr-FR': {
+        sources: [
+          '/api/__sitemap__/urls?locale=fr',
+        ],
+      },
+      'pt-BR': {
+        sources: [
+          '/api/__sitemap__/urls?locale=pt',
+        ],
+      },
+    },
   },
 
   supabase: {
