@@ -6,5 +6,8 @@ export default groq`
   "id": _id,
   "lastmod": _updatedAt,
   "loc": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+  "images": *[_type == ^._type && _id == ^._id && defined(visual.asset)] {
+    "loc": visual.asset->url,
+  },
 }
 `
