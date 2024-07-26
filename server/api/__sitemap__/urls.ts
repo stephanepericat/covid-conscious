@@ -35,7 +35,7 @@ export default defineSitemapEventHandler(async (event) => {
     const posts: SitemapUrl[] = await fetch(sitemapQuery)
     return [
       ...pages.map((p) => ({ loc: formatUrl(p, origin, locale as string | null) })),
-      ...posts.map((p) => ({ loc: formatUrl(p.loc, origin, locale as string | null), images: p.images || [] })),
+      ...posts.map((p) => ({ lastmod: p.lastmod, loc: formatUrl(p.loc, origin, locale as string | null), images: p.images || [] })),
     ]
   } catch (e) {
     consola.error(e)
