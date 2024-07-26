@@ -99,7 +99,12 @@ export default defineNuxtConfig({
   },
 
   schemaOrg: {
-    enabled: false
+    identity: {
+      type: 'Organization',
+      name: 'That Covid Life',
+      url: 'https://thatcovid.life',
+      logo: 'https://thatcovid.life/tcl-icon.png',
+    },
   },
 
   security: {
