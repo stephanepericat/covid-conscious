@@ -1,243 +1,276 @@
 <template>
   <ILayout class="default-layout">
-    <!-- header -->
-    <ILayoutHeader class="default-layout__header">
-      <INavbar class="default-layout__main-nav" :collapse="false">
-        <INavbarBrand :to="localePath('/')">
-          <img class="default-layout__logo" :src="logoFile" />
-        </INavbarBrand>
-        <INav>
-          <IInput
-            v-model="searchTerm"
-            @keydown.enter="onSearch"
-            class="default-layout__search"
-            :placeholder="`${$t('layout.search')}...`"
+    <template v-if="$appSettings.PASSWORD_PROTECT && !authorized">
+      <div class="h-screen w-screen flex justify-center	items-center">
+        <div>
+          <IForm
+            @submit.prevent="handleLogin"
           >
-            <template #append>
-              <IButton color="primary" :disabled="!searchTerm.length" @click="onSearch">
-                <IIcon name="ink-search" />
+            <IFormGroup>
+              <IInput
+                v-model="password"
+                :placeholder="$t('login.labels.password')"
+                type="password"
+                required
+              />
+            </IFormGroup>
+            <IFormGroup>
+              <IButton
+                block
+                type="submit"
+              >
+                <Icon
+                  v-if="loading"
+                  name="eos-icons:loading"
+                />
+                {{ $t('login.buttons.signin') }}
               </IButton>
-            </template>
-          </IInput>
-          <IDropdown placement="bottom-end" events="hover">
-            <INavItem>
-              <Icon :name="currentLocale.flag" />
-            </INavItem>
-            <template #body>
-              <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
-                <span>{{ locale.name }}</span>
-              </IDropdownItem>
-            </template>
-          </IDropdown>
-          <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
-            <Icon :name="colorModeIcon" />
-          </INavItem>
-          <IDropdown placement="bottom-end" events="hover">
-            <INavItem>
-              <Icon name="material-symbols:account-circle" />
-              <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
-            </INavItem>
-            <template #header v-if="isLoggedIn">
-              <div class="default-layout__user--info">
-                <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
-                <div>
-                  <p class="default-layout__user--info-detail username">@{{ username || 'USER' }}</p>
-                  <p class="default-layout__user--info-detail email">{{ user.email }}</p>
-                </div>
-              </div>
-            </template>
-            <template #body>
-              <template v-if="isLoggedIn">
-                <IDropdownItem :to="localePath('/account')">
-                  <span>{{ $t('layout.user.account') }}</span>
-                </IDropdownItem>
-                <IDropdownItem @click.prevent="signOut">
-                  <span>{{ $t('layout.user.signOut') }}</span>
-                </IDropdownItem>
-              </template>
-              <template v-else>
-                <IDropdownItem :to="localePath('/login')">
-                  <span>{{ $t('layout.user.signIn') }}</span>
-                </IDropdownItem>
-                <IDropdownItem :to="localePath('/create-account')">
-                  <span>{{ $t('layout.user.createAccount') }}</span>
-                </IDropdownItem>
-                <IDropdownItem :to="localePath('/reset-password')">
-                  <span>{{ $t('layout.user.resetPassword') }}</span>
-                </IDropdownItem>
-              </template>
-            </template>
-          </IDropdown>
-      </INav>
-      </INavbar>
-      <INavbar class="default-layout__sub-nav" size="sm">
-        <INavbarCollapsible>
+            </IFormGroup>
+          </IForm>
+        </div>
+      </div>
+    </template>
+
+    <template v-else>
+      <!-- header -->
+      <ILayoutHeader class="default-layout__header">
+        <INavbar class="default-layout__main-nav" :collapse="false">
+          <INavbarBrand :to="localePath('/')">
+            <img class="default-layout__logo" :src="logoFile" />
+          </INavbarBrand>
           <INav>
-            <INavItem
-              v-for="(item, index) in subNavItems"
-              :key="index"
-              :to="item.url"
-              :class="item.class || ''"
-              v-show="!item.hidden"
+            <IInput
+              v-model="searchTerm"
+              @keydown.enter="onSearch"
+              class="default-layout__search"
+              :placeholder="`${$t('layout.search')}...`"
             >
-              {{ item.label }}
-            </INavItem>
-            <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
+              <template #append>
+                <IButton color="primary" :disabled="!searchTerm.length" @click="onSearch">
+                  <IIcon name="ink-search" />
+                </IButton>
+              </template>
+            </IInput>
+            <IDropdown placement="bottom-end" events="hover">
               <INavItem>
-                <Icon size="22" name="mdi:dots-horizontal-circle-outline" />
-                <!-- {{ $t('layout.more.label') }} -->
-              </InavItem>
+                <Icon :name="currentLocale.flag" />
+              </INavItem>
               <template #body>
-                <IDropdownItem :to="localePath('/public-health')" v-if="$appSettings.SHOW_PUBLIC_HEALTH">
-                  <span>{{ $t('layout.health') }}</span>
-                </IDropdownItem>
-                <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
-                  <span>{{ $t('layout.education') }}</span>
-                </IDropdownItem>
-                <IDropdownItem :to="localePath('/forum')">
-                  <span>{{ $t('layout.forum') }}</span>
-                </IDropdownItem>
-                <IDropdownItem :to="localePath('/contribute')">
-                  <span>{{ $t('layout.submitContent') }}</span>
+                <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
+                  <span>{{ locale.name }}</span>
                 </IDropdownItem>
               </template>
             </IDropdown>
-          </INav>
-        </INavbarCollapsible>
-      </INavbar>
-    </ILayoutHeader>
-    <!-- content -->
-    <ILayoutContent class="default-layout__content">
-      <IContainer class="default-layout__content--container">
-        <NuxtPage />
-      </IContainer>
-    </ILayoutContent>
-    <!-- footer -->
-    <ILayoutFooter class="default-layout__footer">
-      <IContainer class="default-layout__footer--container">
-        <div class="default-layout__footer--container-block">
-          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.contents') }}</h5>
-          <ul class="default-layout__footer--list">
-            <li>
-              <NuxtLink :to="localePath('/news')">{{ $t('layout.news') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/resource')">{{ $t('layout.resource') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/video')">{{ $t('layout.video') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
-            </li>
-            <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
-              <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
-            </li>
-            <li v-if="$appSettings.SHOW_DIRECTORY">
-              <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
-            </li>
-            <li v-if="$appSettings.SHOW_EDUCATION">
-              <NuxtLink :to="localePath('/education')">{{ $t('layout.education') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/forum')">{{ $t('layout.forum') }}</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div class="default-layout__footer--container-block">
-          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.tcl') }}</h5>
-          <ul class="default-layout__footer--list">
-            <li>
-              <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
-            </li>
-            <li>
-              <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
-            </li>
-            <li v-if="$appSettings.SHOW_MOBILE">
-              <NuxtLink :to="localePath('/mobile')">{{ $t('layout.mobile') }}</NuxtLink>
-            </li>
-            <li>
-              <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/support')">{{ $t('layout.support') }}</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div class="default-layout__footer--container-block">
-          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.social') }}</h5>
-          <ul class="default-layout__footer--list">
-            <li>
-              <a href="https://bsky.app/profile/thatcovidlife.bsky.social" target="_blank">
-                <icon name="tabler:brand-bluesky" />&nbsp;
-                Bluesky
-              </a>
-            </li>
-            <li>
-              <a href="https://facebook.com/thatcovidlife" target="_blank">
-                <icon name="tabler:brand-facebook" />&nbsp;
-                Facebook
-              </a>
-            </li>
-            <li>
-              <a href="https://www.instagram.com/thatcovid.life" target="_blank">
-                <icon name="tabler:brand-instagram" />&nbsp;
-                Instagram
-              </a>
-            </li>
-            <li>
-              <a href="https://www.reddit.com/r/thatcovidlife/" target="_blank">
-                <icon name="tabler:brand-reddit" />&nbsp;
-                Reddit
-              </a>
-            </li>
-            <li>
-              <a href="https://www.threads.net/@thatcovid.life" target="_blank">
-                <icon name="tabler:brand-threads" />&nbsp;
-                Threads
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com/thatcovidlife" target="_blank">
-                <icon name="tabler:brand-twitter" />&nbsp;
-                Twitter
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="default-layout__footer--container-block">
-          <h5 class="default-layout__footer--container-block-title">{{ $t('layout.legal') }}</h5>
-          <ul class="default-layout__footer--list">
-            <li>
-              <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/forum-guidelines')">{{ $t('layout.forumGuidelines') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/privacy-policy')">{{ $t('layout.privacyPolicy') }}</NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
-            </li>
-          </ul>
-        </div>
-        <div class="default-layout__footer--container-block logo">
-          <INavbarBrand :to="localePath('/')">
-            <img class="default-layout__logo-footer" :src="logoFile" />
-          </INavbarBrand>
-        </div>
-      </IContainer>
-      <IContainer class="default-layout__footer--container">
-        <div class="default-layout__footer--year">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</div>
-      </IContainer>
-    </ILayoutFooter>
+            <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
+              <Icon :name="colorModeIcon" />
+            </INavItem>
+            <IDropdown placement="bottom-end" events="hover">
+              <INavItem>
+                <Icon name="material-symbols:account-circle" />
+                <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
+              </INavItem>
+              <template #header v-if="isLoggedIn">
+                <div class="default-layout__user--info">
+                  <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
+                  <div>
+                    <p class="default-layout__user--info-detail username">@{{ username || 'USER' }}</p>
+                    <p class="default-layout__user--info-detail email">{{ user.email }}</p>
+                  </div>
+                </div>
+              </template>
+              <template #body>
+                <template v-if="isLoggedIn">
+                  <IDropdownItem :to="localePath('/account')">
+                    <span>{{ $t('layout.user.account') }}</span>
+                  </IDropdownItem>
+                  <IDropdownItem @click.prevent="signOut">
+                    <span>{{ $t('layout.user.signOut') }}</span>
+                  </IDropdownItem>
+                </template>
+                <template v-else>
+                  <IDropdownItem :to="localePath('/login')">
+                    <span>{{ $t('layout.user.signIn') }}</span>
+                  </IDropdownItem>
+                  <IDropdownItem :to="localePath('/create-account')">
+                    <span>{{ $t('layout.user.createAccount') }}</span>
+                  </IDropdownItem>
+                  <IDropdownItem :to="localePath('/reset-password')">
+                    <span>{{ $t('layout.user.resetPassword') }}</span>
+                  </IDropdownItem>
+                </template>
+              </template>
+            </IDropdown>
+        </INav>
+        </INavbar>
+        <INavbar class="default-layout__sub-nav" size="sm">
+          <INavbarCollapsible>
+            <INav>
+              <INavItem
+                v-for="(item, index) in subNavItems"
+                :key="index"
+                :to="item.url"
+                :class="item.class || ''"
+                v-show="!item.hidden"
+              >
+                {{ item.label }}
+              </INavItem>
+              <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
+                <INavItem>
+                  <Icon size="22" name="mdi:dots-horizontal-circle-outline" />
+                  <!-- {{ $t('layout.more.label') }} -->
+                </InavItem>
+                <template #body>
+                  <IDropdownItem :to="localePath('/public-health')" v-if="$appSettings.SHOW_PUBLIC_HEALTH">
+                    <span>{{ $t('layout.health') }}</span>
+                  </IDropdownItem>
+                  <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
+                    <span>{{ $t('layout.education') }}</span>
+                  </IDropdownItem>
+                  <IDropdownItem :to="localePath('/forum')">
+                    <span>{{ $t('layout.forum') }}</span>
+                  </IDropdownItem>
+                  <IDropdownItem :to="localePath('/contribute')">
+                    <span>{{ $t('layout.submitContent') }}</span>
+                  </IDropdownItem>
+                </template>
+              </IDropdown>
+            </INav>
+          </INavbarCollapsible>
+        </INavbar>
+      </ILayoutHeader>
+      <!-- content -->
+      <ILayoutContent class="default-layout__content">
+        <IContainer class="default-layout__content--container">
+          <NuxtPage />
+        </IContainer>
+      </ILayoutContent>
+      <!-- footer -->
+      <ILayoutFooter class="default-layout__footer">
+        <IContainer class="default-layout__footer--container">
+          <div class="default-layout__footer--container-block">
+            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.contents') }}</h5>
+            <ul class="default-layout__footer--list">
+              <li>
+                <NuxtLink :to="localePath('/news')">{{ $t('layout.news') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/resource')">{{ $t('layout.resource') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/video')">{{ $t('layout.video') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
+              </li>
+              <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
+                <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
+              </li>
+              <li v-if="$appSettings.SHOW_DIRECTORY">
+                <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
+              </li>
+              <li v-if="$appSettings.SHOW_EDUCATION">
+                <NuxtLink :to="localePath('/education')">{{ $t('layout.education') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/forum')">{{ $t('layout.forum') }}</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="default-layout__footer--container-block">
+            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.tcl') }}</h5>
+            <ul class="default-layout__footer--list">
+              <li>
+                <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
+              </li>
+              <li>
+                <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
+              </li>
+              <li v-if="$appSettings.SHOW_MOBILE">
+                <NuxtLink :to="localePath('/mobile')">{{ $t('layout.mobile') }}</NuxtLink>
+              </li>
+              <li>
+                <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/support')">{{ $t('layout.support') }}</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="default-layout__footer--container-block">
+            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.social') }}</h5>
+            <ul class="default-layout__footer--list">
+              <li>
+                <a href="https://bsky.app/profile/thatcovidlife.bsky.social" target="_blank">
+                  <icon name="tabler:brand-bluesky" />&nbsp;
+                  Bluesky
+                </a>
+              </li>
+              <li>
+                <a href="https://facebook.com/thatcovidlife" target="_blank">
+                  <icon name="tabler:brand-facebook" />&nbsp;
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/thatcovid.life" target="_blank">
+                  <icon name="tabler:brand-instagram" />&nbsp;
+                  Instagram
+                </a>
+              </li>
+              <li>
+                <a href="https://www.reddit.com/r/thatcovidlife/" target="_blank">
+                  <icon name="tabler:brand-reddit" />&nbsp;
+                  Reddit
+                </a>
+              </li>
+              <li>
+                <a href="https://www.threads.net/@thatcovid.life" target="_blank">
+                  <icon name="tabler:brand-threads" />&nbsp;
+                  Threads
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/thatcovidlife" target="_blank">
+                  <icon name="tabler:brand-twitter" />&nbsp;
+                  Twitter
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="default-layout__footer--container-block">
+            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.legal') }}</h5>
+            <ul class="default-layout__footer--list">
+              <li>
+                <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/forum-guidelines')">{{ $t('layout.forumGuidelines') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/privacy-policy')">{{ $t('layout.privacyPolicy') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
+              </li>
+            </ul>
+          </div>
+          <div class="default-layout__footer--container-block logo">
+            <INavbarBrand :to="localePath('/')">
+              <img class="default-layout__logo-footer" :src="logoFile" />
+            </INavbarBrand>
+          </div>
+        </IContainer>
+        <IContainer class="default-layout__footer--container">
+          <div class="default-layout__footer--year">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</div>
+        </IContainer>
+      </ILayoutFooter>
+    </template>
   </ILayout>
 </template>
 <script setup>
@@ -256,6 +289,41 @@
   const router = useRouter()
   const { $appSettings } = useNuxtApp()
   const { getUsernameById } = usePosts()
+  const loading = ref(false)
+  const password = ref('')
+  const authCookie = useCookie('tcl-auth', {default: null, watch: true})
+  const authorized = ref(false)
+
+  const handleLogin = async () => {
+    loading.value = true
+    try {
+      await $fetch('/api/login', {
+        method: 'POST',
+        body: {
+          password: password.value
+        }
+      })
+    } catch(e) {
+      console.error(e)
+    } finally {
+      password.value = ''
+      loading.value = false
+    }
+  }
+
+  const verifyToken = async () => {
+    try {
+      const data = await $fetch('/api/verify', {
+        method: 'POST',
+        body: {
+          token: authCookie.value
+        }
+      })
+      authorized.value = data.ok
+    } catch(e) {
+      console.error(e)
+    }
+  } 
 
   const subNavItems = computed(() => [
     { label: t('layout.news'), url: localePath('/news') },
@@ -302,6 +370,12 @@
     null
   )
   const { signOut } = useSignOut(user)
+
+  watch(authCookie, () => {
+    if(authCookie.value) {
+      verifyToken()
+    }
+  }, { immediate: true })
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
