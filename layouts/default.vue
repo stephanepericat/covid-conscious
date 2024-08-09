@@ -291,7 +291,7 @@
   const { getUsernameById } = usePosts()
   const loading = ref(false)
   const password = ref('')
-  const authCookie = useCookie('tcl-auth', {default: null, watch: true})
+  const authCookie = useCookie('tcl-auth', { default: null, watch: true })
   const authorized = ref(false)
 
   const handleLogin = async () => {
