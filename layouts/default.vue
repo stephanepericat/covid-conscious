@@ -186,9 +186,21 @@
               </a>
             </li>
             <li>
+              <a href="https://www.instagram.com/thatcovid.life" target="_blank">
+                <icon name="tabler:brand-instagram" />&nbsp;
+                Instagram
+              </a>
+            </li>
+            <li>
               <a href="https://www.reddit.com/r/thatcovidlife/" target="_blank">
                 <icon name="tabler:brand-reddit" />&nbsp;
                 Reddit
+              </a>
+            </li>
+            <li>
+              <a href="https://www.threads.net/@thatcovid.life" target="_blank">
+                <icon name="tabler:brand-threads" />&nbsp;
+                Threads
               </a>
             </li>
             <li>
