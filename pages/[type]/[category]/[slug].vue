@@ -115,7 +115,8 @@
         </template>
 
         <template v-else-if="isLibrary(type) || isEvent(type) || isResource(type)">
-          <p class="article-page__body--summary">{{ article.summary }}</p>
+          <SanityContent v-if="isLibrary(type)" :blocks="article.summary" :serializers="serializers" />
+          <p v-else class="article-page__body--summary">{{ article.summary }}</p>
           <IButton :href="article.link" target="_blank">
             <template #icon>
               <Icon name="material-symbols:info-outline-rounded" />
@@ -289,7 +290,7 @@
   const articleId = computed(() => article?.value?.id || null)
 
   const pageTitle = computed(() => article?.value?.title || '')
-  const pageDescription = computed(() =>  article?.value?.description || article?.value?.summary || t('home.description'))
+  const pageDescription = computed(() =>  article?.value?.description || article?.value?.richSummary || article?.value?.summary || t('home.description'))
   const ogImage = computed(() => article?.value?.image ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800` : '/tcl-fallback-169.jpg')
   const ogImageType = computed(() => {
     const extension = ogImage.value.split('.').pop().split('?').shift()

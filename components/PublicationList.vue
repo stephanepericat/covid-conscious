@@ -41,11 +41,17 @@
             </NuxtLink>
           </div>
           <p
-            v-if="(isResource(article.type) || isLibrary(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
+            v-if="(isResource(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
             class="publication-list__description"
           >
             {{ article.summary }}
           </p>
+           <p
+           v-if="isLibrary(article.type) && article.richSummary"
+           class="publication-list__description"
+         >
+           {{ article.richSummary }}
+         </p>
           <p v-if="!isDirectory(article.type) && !isResource(article.type)" class="publication-list__date">
             <span>{{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
