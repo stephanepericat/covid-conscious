@@ -72,7 +72,7 @@ export default groq`
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
     source,
-    "summary": array::join(string::split(pt::text(coalesce(summary[_key == $locale][0].value, summary[_key == ^.language][0].value, summary[_key == '${baseLanguage}'][0].value, "")), "")[0..255], "") + "...",
+    "summary": array::join(string::split(pt::text(coalesce(summary[_key == $locale][0].value, summary[_key == ^.language][0].value, summary[_key == '${baseLanguage}'][0].value, [])), "")[0..255], "") + "...",
     "date": publicationDate,
     "thumbnail": visual.asset._ref,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },

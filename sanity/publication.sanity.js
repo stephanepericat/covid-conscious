@@ -12,6 +12,7 @@ export default groq`
   "updated": _updatedAt,
   "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == '${baseLanguage}'][0].value, []),
   "summary": coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''),
+  "richSummary": array::join(string::split(pt::text(coalesce(summary[_key == $locale][0].value, summary[_key == ^.language][0].value, summary[_key == '${baseLanguage}'][0].value, [])), "")[0..252], ""),
   "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, null))), "")[0..252], ""),
   "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
   "info": contactInfo {
