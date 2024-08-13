@@ -69,10 +69,10 @@ export default defineNuxtConfig({
     defaultLocale: 'en',
     langDir: 'locales',
     locales: [
-      { code: 'en', iso: 'en-US', name: 'English (US)', flag: 'flag:us-1x1', file: 'en.js' },
-      { code: 'es', iso: 'es-MX', name: 'Español (MX)', flag: 'flag:mx-1x1', file: 'es.js' },
-      { code: 'fr', iso: 'fr-FR', name: 'Français (FR)', flag: 'flag:fr-1x1', file: 'fr.js' },
-      { code: 'pt', iso: 'pt-BR', name: 'Português (BR)', flag: 'flag:br-1x1', file: 'pt.js' },
+      { code: 'en', iso: 'en-US', name: 'English', flag: 'flag:us-1x1', file: 'en.js' },
+      { code: 'es', iso: 'es-MX', name: 'Español', flag: 'flag:mx-1x1', file: 'es.js' },
+      { code: 'fr', iso: 'fr-FR', name: 'Français', flag: 'flag:fr-1x1', file: 'fr.js' },
+      { code: 'pt', iso: 'pt-BR', name: 'Português', flag: 'flag:br-1x1', file: 'pt.js' },
     ],
   },
 
