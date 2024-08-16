@@ -1,10 +1,12 @@
 <script setup>
-  import Card from './Card.vue';
+  import Card from './Card.vue'
 
   defineProps({
     articles: { type: Array, default: [] },
     title: { type: String, required: true },
   })
+
+  const localePath = useLocalePath()
 </script>
 
 <template>
@@ -17,7 +19,7 @@
         :date="article.date"
         :tags="article.tags"
         :title="article.title"
-        :url="article.url"
+        :url="localePath(article.url)"
         :visual="article.visual"
       />
     </div>
