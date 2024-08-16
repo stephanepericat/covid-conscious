@@ -43,7 +43,8 @@ export default groq`
   "related": *[
     _type == ^._type &&
     _id != ^._id &&
-    tags[]->uri.current match ^.tags[]->uri.current &&
+    !(_id in path('drafts.**')) &&
+    (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&
     language == $locale
   ] {
     "id": _id,
