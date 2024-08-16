@@ -48,8 +48,8 @@ export default groq`
   ] {
     "id": _id,
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
-    "image": visual.asset->url,
-    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "visual": visual.asset._ref,
+    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "date": coalesce(publicationDate, eventDate),
   }

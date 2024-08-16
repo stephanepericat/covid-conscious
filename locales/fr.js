@@ -10,6 +10,7 @@ export default {
     moreInfo: "Plus d'Information",
     online: "En ligne",
     readMore: "En Savoir Plus",
+    related: "Articles Supplémentaires",
     share: {
       facebook: 'Partagez sur Facebook',
       mail: 'Partagez via email',
