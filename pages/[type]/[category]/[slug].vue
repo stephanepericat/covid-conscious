@@ -185,6 +185,14 @@
           </div>
         </section>
         
+        <template v-if="relatedArticles.length">
+          <h3>Related</h3>
+          <ul>
+            <li v-for="a in relatedArticles" :key="a.id">
+              {{ a.title }}
+            </li>
+          </ul>
+        </template>
 
         <!-- social media sharing -->
         <ShareButtons
@@ -288,6 +296,7 @@
   })
 
   const articleId = computed(() => article?.value?.id || null)
+  const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 4) || [])
 
   const pageTitle = computed(() => article?.value?.title || '')
   const pageDescription = computed(() =>  article?.value?.description || article?.value?.richSummary || article?.value?.summary || t('home.description'))
