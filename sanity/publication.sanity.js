@@ -46,7 +46,7 @@ export default groq`
     !(_id in path('drafts.**')) &&
     (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&
     language == $locale
-  ] {
+  ] [0...8] {
     "id": _id,
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
     "visual": visual.asset._ref,
