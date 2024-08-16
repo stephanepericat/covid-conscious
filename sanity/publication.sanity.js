@@ -40,5 +40,18 @@ export default groq`
     "zoneId": zoneId.current,
   },
   "image": visual.asset->url,
+  "related": *[
+    _type == ^._type &&
+    _id != ^._id &&
+    tags[]->uri.current match ^.tags[]->uri.current &&
+    language == $locale
+  ] {
+    "id": _id,
+    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
+    "visual": visual.asset._ref,
+    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "date": coalesce(publicationDate, eventDate),
+  }
 }
 `

@@ -185,6 +185,13 @@
           </div>
         </section>
         
+        <!-- related articles -->
+        <RelatedArticles
+          v-if="relatedArticles.length"
+          class="mt-8 mb-4"
+          :articles="relatedArticles"
+          :title="$t('article.related')"
+        />
 
         <!-- social media sharing -->
         <ShareButtons
@@ -270,6 +277,7 @@
     ART_ZONE_1,
     ART_ZONE_2,
   } from '~/assets/constants/promo-zones'
+  import RelatedArticles from '~/components/RelatedArticles.vue'
 
   const { locale, t } = useI18n()
   // const localePath = useLocalePath()
@@ -288,6 +296,7 @@
   })
 
   const articleId = computed(() => article?.value?.id || null)
+  const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 3) || [])
 
   const pageTitle = computed(() => article?.value?.title || '')
   const pageDescription = computed(() =>  article?.value?.description || article?.value?.richSummary || article?.value?.summary || t('home.description'))
