@@ -54,7 +54,7 @@
             <IDropdown placement="bottom-end" events="hover">
               <INavItem>
                 <!-- <Icon :name="currentLocale.flag" /> -->
-                 <span v-text="languageLabel" class="inline-block align-text-top" />
+                <span v-text="languageLabel" class="inline-block align-text-top" />
               </INavItem>
               <template #body>
                 <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
