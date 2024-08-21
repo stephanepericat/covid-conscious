@@ -53,7 +53,8 @@
             </IInput>
             <IDropdown placement="bottom-end" events="hover">
               <INavItem>
-                <Icon :name="currentLocale.flag" />
+                <!-- <Icon :name="currentLocale.flag" /> -->
+                <span v-text="languageLabel" class="inline-block align-text-top" />
               </INavItem>
               <template #body>
                 <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
@@ -357,6 +358,9 @@
 
   // Feed URL
   const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`)
+
+  // Language
+  const languageLabel = computed(() => currentLocale.value.code.toUpperCase())
 
   // User Menu
   const user = useSupabaseUser()
