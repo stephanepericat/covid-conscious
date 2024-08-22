@@ -14,7 +14,13 @@
               :class="locale"
             />
           </NuxtLink>
-          <span v-text="$t('mobile.availableSoonIOS')" />
+          <NuxtLink :to="$appSettings.IOS_URL" target="_blank">
+            <NuxtImg
+              :src="appleStoreBtn"
+              class="mobile-page__main--button ios"
+              :class="locale"
+            />
+          </NuxtLink>
         </div>
       </div>
       <div>
@@ -45,6 +51,7 @@
   const { $appSettings } = useNuxtApp()
 
   const googlePlayBtn = computed(() => `/google-play-badge-${locale.value}.png`)
+  const appleStoreBtn = computed(() => `/apple-store-badge-${locale.value}.svg`)
 </script>
 <style lang="scss">
 @import "~/assets/sass/mixins.scss";
@@ -90,6 +97,10 @@
           margin-right: 0;
           margin-top: 0;
         }
+      }
+
+      &.ios {
+        height: 47px;
       }
     }
 
