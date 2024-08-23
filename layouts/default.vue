@@ -133,6 +133,9 @@
                   <IDropdownItem :to="localePath('/contribute')">
                     <span>{{ $t('layout.submitContent') }}</span>
                   </IDropdownItem>
+                  <IDropdownItem :to="localePath('/mobile')">
+                    <span>{{ $t('layout.mobile') }}</span>
+                  </IDropdownItem>
                 </template>
               </IDropdown>
             </INav>
@@ -337,6 +340,7 @@
     { label: t('layout.education'), url: localePath('/education'), class: 'optional', hidden: !$appSettings.SHOW_EDUCATION },
     { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
     { label: t('layout.submitContent'), url: localePath('/contribute'), class: 'optional' },
+    { label: t('layout.mobile'), url: localePath('/mobile'), class: 'optional' },
   ])
 
   // Inkline color mode
