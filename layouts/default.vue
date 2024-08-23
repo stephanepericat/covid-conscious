@@ -262,6 +262,27 @@
               <li>
                 <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
               </li>
+              <li>
+                &nbsp;
+              </li>
+              <li>
+                <NuxtLink :to="ANDROID_URL" target="_blank">
+                  <NuxtImg
+                    :src="googlePlayBtn"
+                    class="h-12 w-auto"
+                    :class="locale"
+                  />
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="IOS_URL" target="_blank">
+                  <NuxtImg
+                    :src="appleStoreBtn"
+                    class="h-12 w-auto"
+                    :class="locale"
+                  />
+                </NuxtLink>
+              </li>
             </ul>
           </div>
           <div class="default-layout__footer--container-block logo">
@@ -284,6 +305,7 @@
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
   import { usePosts } from '~/assets/composables/usePosts'
+  import { useMobileButtons } from '~/assets/composables/useMobileButtons'
 
   const inkline = useInkline()
   const { t } = useI18n()
@@ -293,6 +315,7 @@
   const router = useRouter()
   const { $appSettings } = useNuxtApp()
   const { getUsernameById } = usePosts()
+  const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } = useMobileButtons()
   const loading = ref(false)
   const password = ref('')
   const authCookie = useCookie('tcl-auth', { default: null, watch: true })
