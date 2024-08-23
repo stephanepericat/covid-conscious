@@ -7,14 +7,14 @@
           <span class="subheader" v-text="$t('mobile.subheader')"  />
         </h1>
         <div class="mobile-page__main--links">
-          <NuxtLink :to="$appSettings.ANDROID_URL" target="_blank">
+          <NuxtLink :to="ANDROID_URL" target="_blank">
             <NuxtImg
               :src="googlePlayBtn"
               class="mobile-page__main--button android"
               :class="locale"
             />
           </NuxtLink>
-          <NuxtLink :to="$appSettings.IOS_URL" target="_blank">
+          <NuxtLink :to="IOS_URL" target="_blank">
             <NuxtImg
               :src="appleStoreBtn"
               class="mobile-page__main--button ios"
@@ -47,11 +47,10 @@
   </div>
 </template>
 <script setup>
-  const { locale } = useI18n()
-  const { $appSettings } = useNuxtApp()
+  import { useMobileButtons } from '~/assets/composables/useMobileButtons'
 
-  const googlePlayBtn = computed(() => `/google-play-badge-${locale.value}.svg`)
-  const appleStoreBtn = computed(() => `/apple-store-badge-${locale.value}.svg`)
+  const { locale } = useI18n()
+  const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } = useMobileButtons()
 </script>
 <style lang="scss">
 @import "~/assets/sass/mixins.scss";
