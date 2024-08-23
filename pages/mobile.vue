@@ -50,7 +50,7 @@
   const { locale } = useI18n()
   const { $appSettings } = useNuxtApp()
 
-  const googlePlayBtn = computed(() => `/google-play-badge-${locale.value}.png`)
+  const googlePlayBtn = computed(() => `/google-play-badge-${locale.value}.svg`)
   const appleStoreBtn = computed(() => `/apple-store-badge-${locale.value}.svg`)
 </script>
 <style lang="scss">
@@ -86,22 +86,15 @@
       height: 60px;
       
       &.android {
-        margin-bottom: 5px;
+        height: 63px;
         margin-right: 12px;
-        margin-top: 5px;
 
-        &.en {
-          height: 69px;
-          margin-bottom: 0;
-          margin-left: -12px;
-          margin-right: 0;
-          margin-top: 0;
+        &.es {
+          height: 62px;
         }
       }
 
-      &.ios {
-        height: 47px;
-      }
+      &.ios {}
     }
 
     &--visual {
@@ -132,6 +125,12 @@
 
       &--title {
         text-align: center;
+      }
+
+      .android {
+        margin-bottom: 20px;
+        margin-right: 0;
+        margin-top: 8px;
       }
     }
 
