@@ -46,13 +46,19 @@
           >
             {{ article.summary }}
           </p>
-           <p
-           v-if="isLibrary(article.type) && article.richSummary"
-           class="publication-list__description"
-         >
+          <p
+            v-if="isLibrary(article.type) && article.richSummary"
+            class="publication-list__description"
+          >
            {{ article.richSummary }}
          </p>
-          <p v-if="!isDirectory(article.type) && !isResource(article.type)" class="publication-list__date">
+         <p
+            v-if="isCovidnet(article.type) && article.shortDescription"
+            class="publication-list__description"
+          >
+           {{ article.shortDescription }}
+         </p>
+          <p v-if="showPublicationDate(article.type)" class="publication-list__date">
             <span>{{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </p>
@@ -127,7 +133,7 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { isEvent, isExternalLink, isDirectory, isForum, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isEvent, isExternalLink, isDirectory, isForum, isLibrary, isNews, isResource, isVideo, isCovidnet, showPublicationDate } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'

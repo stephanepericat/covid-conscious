@@ -98,6 +98,7 @@ export default {
     about: "Sobre Nosotros",
     bluesky: "Síguenos en Bluesky",
     contents: "Contenido",
+    covidnet: "Covidnet",
     directory: "Directorio",
     disclaimer: "Descargo de responsabilidad",
     event: "Próximos Eventos",
