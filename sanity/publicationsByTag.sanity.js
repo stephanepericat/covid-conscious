@@ -15,6 +15,7 @@ export default groq`
     "categoryUri": tags[0]->uri.current,
     "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key =='${baseLanguage}'][0].value, summary[_key == ^.language][0].value, ""), "")[0..512], "") + "...",
     "richSummary": array::join(string::split(pt::text(coalesce(summary[_key == $locale][0].value, summary[_key == ^.language][0].value, summary[_key == '${baseLanguage}'][0].value, [])), "")[0..512], "") + "...",
+    "shortDescription": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == '${baseLanguage}'][0].value, [])), "")[0..512], "") + "...",
     "link": url,
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "source": source,
