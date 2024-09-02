@@ -162,6 +162,9 @@
                 <div v-if="hasFeaturedContent(article.covidnet)">
                   featured
                 </div>
+                <div v-if="channelFeed.data">
+                  <pre>{{ channelFeed.data }}</pre>
+                </div>
              </div>
           </div>
           <!-- community content -->
@@ -326,7 +329,14 @@
   const articleType = computed(() => t(`layout.${type}`))
 
   // COVIDNET
-  const { hasFeaturedContent } = useCovidnet()
+  const { getChannelFeed, hasFeaturedContent } = useCovidnet()
+  const channelFeed = await useAsyncData('channelFeed', () => {
+    if(isCovidnet(type) && article?.value?.covidnet?.channelID) {
+      return getChannelFeed(article.value.covidnet.channelID)
+    } else {
+      return { data: null }
+    }
+  }, { watch: [article]})
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
