@@ -137,6 +137,7 @@
         <section v-else class="article-page__body--contents">
           <div class="article-page__body--contents-text">
             <SanityContent :blocks="article.body" :serializers="serializers" />
+            <!-- directory map -->
             <div v-if="isDirectory(type) && article.location" class="article-page__body--contents-map">
               <ClientOnly>
                 <LMap
@@ -155,6 +156,13 @@
                 </LMap>
               </ClientOnly>
             </div>
+            <!-- covidnet content -->
+             <div v-if="isCovidnet(type)">
+                {{ article.covidnet }}
+                <div v-if="hasFeaturedContent(article.covidnet)">
+                  featured
+                </div>
+             </div>
           </div>
           <!-- community content -->
           <div v-if="isDirectory(type) && article.info" class="article-page__body--contents-info">
@@ -270,7 +278,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   // import { AUTHOR } from '~/assets/constants/types'
-  import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
+  import { isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -278,6 +286,7 @@
   import { useReviews } from '~/assets/composables/useReviews'
   import ShareButtons from '~/components/ShareButtons.vue'
   import { serializers } from '~/assets/constants/serializers'
+  import { useCovidnet } from '~/assets/composables/useCovidnet'
   import { useTags } from '~/assets/composables/useTags'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { getDateLocale } from '~/assets/constants/date-locales'
@@ -315,6 +324,9 @@
     return `image/${extension}`
   })
   const articleType = computed(() => t(`layout.${type}`))
+
+  // COVIDNET
+  const { hasFeaturedContent } = useCovidnet()
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
