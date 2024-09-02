@@ -166,14 +166,17 @@
               <li>
                 <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
               </li>
-              <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
-                <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
+              <li v-if="$appSettings.SHOW_COVIDNET">
+                <NuxtLink :to="localePath('/covidnet')">{{ $t('layout.covidnet') }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_DIRECTORY">
                 <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
               </li>
               <li>
                 <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
+              </li>
+              <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
+                <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_EDUCATION">
                 <NuxtLink :to="localePath('/education')">{{ $t('layout.education') }}</NuxtLink>
@@ -357,6 +360,7 @@
     { label: t('layout.resource'), url: localePath('/resource') },
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
+    { label: t('layout.covidnet'), url: localePath('/covidnet'), hidden: !$appSettings.SHOW_COVIDNET },
     { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.health'), url: localePath('/public-health'), class: 'optional', hidden: !$appSettings.SHOW_PUBLIC_HEALTH },

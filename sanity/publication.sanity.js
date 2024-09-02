@@ -55,5 +55,16 @@ export default groq`
     "date": coalesce(publicationDate, eventDate),
   },
   "contentType": coalesce(contentType, null),
+  "thumbnail": coalesce(visual.asset._ref, null),
+  "covidnet": {
+    blogFeaturedURLs,
+    blogRssURL,
+    blogURL,
+    channelID,
+    channelURL,
+    contentType,
+    twitterFeaturedPosts,
+    twitterUsername,
+  },
 }
 `

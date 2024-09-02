@@ -70,12 +70,21 @@
 
       <IMedia class="article-page__author">
         <template #image>
-          <img class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
+          <SanityImage
+            v-if="article.thumbnail"
+            class="article-page__author--avatar"
+            :asset-id="article.thumbnail"
+            fit="crop"
+            crop="entropy"
+            :h="50"
+            :w="50"
+          />
+          <img v-else class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
         </template>
         <p class="article-page__info no-author">
           <span class="article-page__info--category">
             {{ articleType }}
-            <span v-if="!isDirectory(type) && !isResource(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <span v-if="showPublicationDate(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </span>
         </p>
@@ -261,7 +270,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   // import { AUTHOR } from '~/assets/constants/types'
-  import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
