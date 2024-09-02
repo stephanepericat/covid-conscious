@@ -21,6 +21,7 @@ export default groq`
     "source": source,
     "thumbnail": visual.asset._ref,
     "type": _type,
+    "contentType": coalesce(contentType, null),
     "uri": uri.current,
     "language": coalesce(language, $locale),
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },

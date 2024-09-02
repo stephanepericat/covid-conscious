@@ -53,6 +53,7 @@ export default groq`
     "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "date": coalesce(publicationDate, eventDate),
-  }
+  },
+  "contentType": coalesce(contentType, null),
 }
 `

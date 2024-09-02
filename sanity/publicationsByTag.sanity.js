@@ -21,6 +21,7 @@ export default groq`
     "source": source,
     "thumbnail": visual.asset._ref,
     "type": _type,
+    "contentType": coalesce(contentType, null),
     "uri": uri.current,
     "countryCode": contactInfo.country->code,
     "countryName": coalesce(contactInfo.country->name[_key == $locale][0].value, contactInfo.country->name[_key == '${baseLanguage}'][0].value, null),

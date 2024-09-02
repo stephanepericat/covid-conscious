@@ -18,6 +18,7 @@ export default groq`
       "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
       "image": visual.asset->url,
       "author": author-> { "name": nickname },
+      "contentType": coalesce(contentType, null),
     },
     "settings": *[_type == "feedSettings"][0] {
       "title": title,
