@@ -158,12 +158,16 @@
             </div>
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
-                {{ article.covidnet }}
+                <!-- {{ article.covidnet }} -->
                 <div v-if="hasFeaturedContent(article.covidnet)">
                   featured
                 </div>
-                <div v-if="channelFeed.data">
-                  <pre>{{ channelFeed.data }}</pre>
+                <div v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE && channelVideos.length > 0">
+                  <ul>
+                    <li v-for="video in channelVideos" :key="video.id[0]">
+                      {{ video.title[0] }}
+                    </li>
+                  </ul>
                 </div>
              </div>
           </div>
@@ -329,14 +333,13 @@
   const articleType = computed(() => t(`layout.${type}`))
 
   // COVIDNET
-  const { getChannelFeed, hasFeaturedContent } = useCovidnet()
+  const { covidnetTypes, getChannelFeed, hasFeaturedContent } = useCovidnet()
   const channelFeed = await useAsyncData('channelFeed', () => {
-    if(isCovidnet(type) && article?.value?.covidnet?.channelID) {
-      return getChannelFeed(article.value.covidnet.channelID)
-    } else {
-      return { data: null }
-    }
+    return isCovidnet(type) && article?.value?.covidnet?.channelID
+      ? getChannelFeed(article.value.covidnet.channelID)
+      : []
   }, { watch: [article]})
+  const channelVideos = computed(() => channelFeed?.data?.value || [])
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
