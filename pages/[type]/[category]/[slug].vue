@@ -83,7 +83,7 @@
         </template>
         <p class="article-page__info no-author">
           <span class="article-page__info--category">
-            {{ articleType }}
+            <NuxtLink :to="localePath(`/${type}`)">{{ articleType }}</NuxtLink>
             <span v-if="showPublicationDate(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </span>
@@ -289,7 +289,7 @@
   import RelatedArticles from '~/components/RelatedArticles.vue'
 
   const { locale, t } = useI18n()
-  // const localePath = useLocalePath()
+  const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
   const user = useSupabaseUser()
