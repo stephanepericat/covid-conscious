@@ -161,12 +161,20 @@
                 <div v-if="hasFeaturedContent(article.covidnet)">
                   featured
                 </div>
-                <div v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE && channelVideos.length > 0">
+                <template v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE">
+                  <IButton :to="article.covidnet.channelURL" target="_blank">
+                    <template #icon>
+                      <Icon name="logos:youtube-icon" />
+                    </template>
+                    {{ $t('covidnet.videos.channel') }}
+                  </IButton>
                   <ChannelVideos
+                    v-if="channelVideos.length > 0"
+                    class="mt-8"
                     :title="$t('covidnet.videos.latest')"
                     :videos="channelVideos"
                   />
-                </div>
+                </template>
              </div>
           </div>
           <!-- community content -->

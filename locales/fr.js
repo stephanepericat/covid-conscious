@@ -80,6 +80,7 @@ export default {
   },
   covidnet: {
     videos: {
+      channel: 'Voir la Chaîne',
       latest: 'Dernières Vidéos',
     },
   },
