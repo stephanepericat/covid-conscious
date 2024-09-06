@@ -163,11 +163,10 @@
                   featured
                 </div>
                 <div v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE && channelVideos.length > 0">
-                  <ul>
-                    <li v-for="video in channelVideos" :key="video.id[0]">
-                      {{ video.title[0] }}
-                    </li>
-                  </ul>
+                  <ChannelVideos
+                    title="Latest Videos"
+                    :videos="channelVideos"
+                  />
                 </div>
              </div>
           </div>
@@ -303,6 +302,7 @@
     ART_ZONE_2,
   } from '~/assets/constants/promo-zones'
   import RelatedArticles from '~/components/RelatedArticles.vue'
+  import ChannelVideos from '~/components/ChannelVideos.vue'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()

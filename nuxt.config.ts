@@ -110,7 +110,7 @@ export default defineNuxtConfig({
   security: {
     headers: {
       contentSecurityPolicy: {
-        'img-src': ["'self'", 'data:', 'blob:', 'cdn.sanity.io', 'a.tile.openstreetmap.org', 'b.tile.openstreetmap.org', 'c.tile.openstreetmap.org', 'gravatar.com'],
+        'img-src': ["'self'", 'data:', 'blob:', 'cdn.sanity.io', 'a.tile.openstreetmap.org', 'b.tile.openstreetmap.org', 'c.tile.openstreetmap.org', 'gravatar.com', '*.ytimg.com'],
       },
       crossOriginEmbedderPolicy: 'unsafe-none',
     }

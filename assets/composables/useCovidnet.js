@@ -3,12 +3,11 @@ import { covidnetTypes } from "../constants/covidnet-types"
 export const useCovidnet = () => {
   const videosMapper = (v) => ({
     id: v['yt:videoId'][0],
-    author: v.author[0].name[0],
+    date: v.published[0].split('T')[0],
     description: v['media:group'][0]['media:description'][0].substr(0, 255) + '...',
-    link: v.link[0].$.href,
-    published: v.published[0],
-    thumbnail: v['media:group'][0]['media:thumbnail'][0].$,
+    thumbnail: v['media:group'][0]['media:thumbnail'][0].$.url,
     title: v.title[0],
+    url: v.link[0].$.href,
   })
 
   const getChannelFeed = async (channelID, maxLength = 3) => {

@@ -18,6 +18,7 @@
           :h="576"
           :w="1024"
         />
+        <NuxtImg v-else-if="thumbnail" :src="thumbnail" class="w-full h-auto" />
         <NuxtImg
           v-else src="/tcl-fallback-169.jpg"
           class="w-full"
@@ -81,6 +82,7 @@
     premium: Boolean,
     tags: { type: Array, default: [] },
     target: { type: String, default: null },
+    thumbnail: { type: String, default: null },
     title: { type: String, required: true },
     url: { type: String, required: true },
     visual: { type: String, default: null }
