@@ -164,7 +164,7 @@
                 </div>
                 <div v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE && channelVideos.length > 0">
                   <ChannelVideos
-                    title="Latest Videos"
+                    :title="$t('covidnet.videos.latest')"
                     :videos="channelVideos"
                   />
                 </div>

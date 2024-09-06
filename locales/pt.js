@@ -78,6 +78,11 @@ export default {
       },
     },
   },
+  covidnet: {
+    videos: {
+      latest: 'Últimos Vídeos',
+    },
+  },
   directory: {
     instructions: 'Selecione uma categoria ou país para começar a pesquisar no diretório',
     results: '{totalItems} resultado(s) encontrado(s).',
