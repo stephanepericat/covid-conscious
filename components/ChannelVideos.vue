@@ -2,11 +2,9 @@
   import Card from './Card.vue'
 
   defineProps({
-    videos: { type: Array, default: [] },
     title: { type: String, required: true },
+    videos: { type: Array, default: [] },
   })
-
-  const localePath = useLocalePath()
 </script>
 
 <template>

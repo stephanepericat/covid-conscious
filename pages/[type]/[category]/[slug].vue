@@ -158,7 +158,6 @@
             </div>
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
-                <!-- {{ article.covidnet }} -->
                 <div v-if="hasFeaturedContent(article.covidnet)">
                   featured
                 </div>
