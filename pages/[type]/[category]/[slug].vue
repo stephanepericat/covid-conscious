@@ -158,8 +158,12 @@
             </div>
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
-                <div v-if="hasFeaturedContent(article.covidnet)">
-                  featured
+                <div v-if="hasFeaturedContent(article.covidnet) && featuredPosts.length > 0">
+                  <FeaturedPosts
+                    :content-type="article.covidnet.contentType"
+                    :posts="featuredPosts"
+                    title="Featured Posts"
+                  />
                 </div>
                 <template v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE">
                   <IButton :to="article.covidnet.channelURL" target="_blank">
@@ -310,6 +314,7 @@
   } from '~/assets/constants/promo-zones'
   import RelatedArticles from '~/components/RelatedArticles.vue'
   import ChannelVideos from '~/components/ChannelVideos.vue'
+  import FeaturedPosts from '~/components/FeaturedPosts.vue'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -340,13 +345,19 @@
   const articleType = computed(() => t(`layout.${type}`))
 
   // COVIDNET
-  const { covidnetTypes, getChannelFeed, hasFeaturedContent } = useCovidnet()
+  const { covidnetTypes, getChannelFeed, getFeaturedContent, hasFeaturedContent } = useCovidnet()
   const channelFeed = await useAsyncData('channelFeed', () => {
     return isCovidnet(type) && article?.value?.covidnet?.channelID
       ? getChannelFeed(article.value.covidnet.channelID)
       : []
   }, { watch: [article]})
   const channelVideos = computed(() => channelFeed?.data?.value || [])
+  const ftdPosts = await useAsyncData('ftdPosts', () => {
+    return isCovidnet(type) && article?.value?.covidnet && hasFeaturedContent(article.value.covidnet)
+      ? getFeaturedContent(article.value.covidnet)
+      : []
+  })
+  const featuredPosts = computed(() => ftdPosts?.data?.value || [])
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
