@@ -80,7 +80,7 @@ export default {
   },
   covidnet: {
     blog: {
-      featured: 'Featured Posts(s)',
+      featured: 'Featured Post(s)',
       link: 'View Website',
     },
     videos: {
