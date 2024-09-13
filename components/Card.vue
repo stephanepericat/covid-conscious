@@ -2,7 +2,7 @@
   <div
     class="tcl-card rounded-lg overflow-hidden shadow-md"
   >
-    <div class="aspect-video">
+    <div v-if="!hideThumbnail" class="aspect-video">
       <NuxtLink
         class="no-underline relative"
         :target="target"
@@ -77,6 +77,7 @@
     description: { type: String, default: null },
     end: { type: String, default: null },
     free: Boolean,
+    hideThumbnail: Boolean,
     isVideo: Boolean,
     limited: Boolean,
     premium: Boolean,

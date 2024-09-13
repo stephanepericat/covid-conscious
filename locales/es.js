@@ -79,6 +79,10 @@ export default {
     },
   },
   covidnet: {
+    blog: {
+      featured: 'Publicación(es) Destacada(s)',
+      link: 'Ver el Sitio Web',
+    },
     videos: {
       channel: 'Ver Canal',
       latest: 'Últimos Vídeos',

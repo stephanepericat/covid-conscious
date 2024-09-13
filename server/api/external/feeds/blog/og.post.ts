@@ -12,11 +12,11 @@ export default defineEventHandler(async (event) => {
       .map(({ result }) => result || null)
       .filter((r) => r !== null && r.success)
       .map((info) => ({
-        title: info.ogTitle,
         description: info.ogDescription,
-        image: info.ogImage,
+        image: info.ogImage[0],
         locale: info.ogLocale,
         siteName: info.ogSiteName,
+        title: info.ogTitle,
         type: info.ogType,
         url: info.ogUrl,
       }))

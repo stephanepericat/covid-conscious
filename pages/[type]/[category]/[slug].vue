@@ -159,10 +159,17 @@
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
                 <div v-if="hasFeaturedContent(article.covidnet) && featuredPosts.length > 0">
+                  <IButton :to="article.covidnet.channelURL" target="_blank">
+                    <template #icon>
+                      <Icon name="gg:website" />
+                    </template>
+                    {{ $t('covidnet.blog.link') }}
+                  </IButton>
                   <FeaturedPosts
+                    class="mt-8"
                     :content-type="article.covidnet.contentType"
                     :posts="featuredPosts"
-                    title="Featured Posts"
+                    :title="$t('covidnet.blog.featured')"
                   />
                 </div>
                 <template v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE">

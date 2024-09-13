@@ -17,19 +17,17 @@
   <div>
     <h3 class="mb-8" v-text="title" />
     <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
-      <!-- <Card
+      <Card
+        v-if="contentType === covidnetTypes.BLOG"
         v-for="post in posts"
         :key="post.id"
         :date="post.date"
         :description="post.description"
+        hide-thumbnail
         target="blank"
-        :thumbnail="post.thumbnail"
         :title="post.title"
         :url="post.url"
-      /> -->
-      <template v-if="contentType == covidnetTypes.BLOG">
-        {{ posts }}
-      </template>
+      />
     </div>
   </div>
 </template>

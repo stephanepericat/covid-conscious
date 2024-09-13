@@ -23,12 +23,12 @@ export const useCovidnet = () => {
     }
   }
 
-  const getFeaturedContent = async ({ blogFeaturedURLs, contentType, twitterFeaturedPosts }) => {
+  const getBlogOg = async (posts = []) => {
     try {
       const { data, error } = await useFetch('/api/external/feeds/blog/og', {
         method: 'POST',
         body: {
-          posts: blogFeaturedURLs || []
+          posts
         }
       })
 
@@ -39,6 +39,18 @@ export const useCovidnet = () => {
       console.error(e)
       return []
     }
+  } 
+
+  const getFeaturedContent = async ({ blogFeaturedURLs, contentType, twitterFeaturedPosts }) => {
+    let content = [];
+
+    switch (contentType) {
+      case covidnetTypes.BLOG:
+        content = await getBlogOg(blogFeaturedURLs)
+        break;
+    }
+
+    return content
   }
 
   const hasBlogRssURL = ({ contentType, blogRssURL }) => contentType === covidnetTypes.BLOG && blogRssURL
