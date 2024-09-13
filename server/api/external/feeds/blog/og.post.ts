@@ -10,8 +10,8 @@ export default defineEventHandler(async (event) => {
   
     return info
       .map(({ result }) => result || null)
-      .filter(r => r !== null)
-      .map(info => ({
+      .filter((r) => r !== null && r.success)
+      .map((info) => ({
         title: info.ogTitle,
         description: info.ogDescription,
         image: info.ogImage,

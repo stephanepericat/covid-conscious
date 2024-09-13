@@ -353,10 +353,10 @@
   }, { watch: [article]})
   const channelVideos = computed(() => channelFeed?.data?.value || [])
   const ftdPosts = await useAsyncData('ftdPosts', () => {
-    return isCovidnet(type) && article?.value?.covidnet && hasFeaturedContent(article.value.covidnet)
+    return isCovidnet(type) && article?.value?.covidnet && hasFeaturedContent(article?.value?.covidnet)
       ? getFeaturedContent(article.value.covidnet)
       : []
-  })
+  }, { watch: [article]})
   const featuredPosts = computed(() => ftdPosts?.data?.value || [])
 
   // PRODUCT REVIEWS
