@@ -83,6 +83,9 @@ export default {
       featured: 'Featured Post(s)',
       link: 'View Website',
     },
+    twitter: {
+      link: 'View X/Twitter Profile',
+    },
     videos: {
       channel: 'View Channel',
       latest: 'Latest Videos',

@@ -83,6 +83,9 @@ export default {
       featured: 'Article(s) en Vedette',
       link: 'Voir le Site Web',
     },
+    twitter: {
+      link: 'Voir le Profil X/Twitter',
+    },
     videos: {
       channel: 'Voir la Chaîne',
       latest: 'Dernières Vidéos',

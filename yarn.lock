@@ -8819,6 +8819,11 @@ vue-star-rating@^2.1.0:
   dependencies:
     vue "^3.0.0"
 
+vue-tweet@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/vue-tweet/-/vue-tweet-2.3.1.tgz#50867ce62bb016f62e4d0a695c347f44c6a0845c"
+  integrity sha512-n8dKawDjEkNk4pkoiETGjB9s0OIT51i37zcgkrf2JnVx0NLGvLYesedVz3UHG7krAPGjGQ7pm1QZkTJC2oGs6w==
+
 vue@^3.0.0:
   version "3.3.6"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.3.6.tgz#bc1b129a73705db16da90aa1edde539d7401ca9d"

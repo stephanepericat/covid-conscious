@@ -39,7 +39,7 @@ export const useCovidnet = () => {
       console.error(e)
       return []
     }
-  } 
+  }
 
   const getFeaturedContent = async ({ blogFeaturedURLs, contentType, twitterFeaturedPosts }) => {
     let content = [];
@@ -47,6 +47,9 @@ export const useCovidnet = () => {
     switch (contentType) {
       case covidnetTypes.BLOG:
         content = await getBlogOg(blogFeaturedURLs)
+        break;
+      case covidnetTypes.TWITTER:
+        content = twitterFeaturedPosts
         break;
     }
 

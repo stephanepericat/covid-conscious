@@ -83,6 +83,9 @@ export default {
       featured: 'Publicación(es) Destacada(s)',
       link: 'Ver el Sitio Web',
     },
+    twitter: {
+      link: 'Ver Perfil de X/Twitter',
+    },
     videos: {
       channel: 'Ver Canal',
       latest: 'Últimos Vídeos',

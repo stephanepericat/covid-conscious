@@ -83,6 +83,9 @@ export default {
       featured: 'Postagem(ns) em Destaque',
       link: 'Exibir Site',
     },
+    twitter: {
+      link: 'Ver Perfil no X/Twitter',
+    },
     videos: {
       channel: 'Exibir Canal',
       latest: 'Últimos Vídeos',

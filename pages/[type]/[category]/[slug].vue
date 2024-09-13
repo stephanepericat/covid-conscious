@@ -159,11 +159,29 @@
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
                 <div v-if="hasFeaturedContent(article.covidnet) && featuredPosts.length > 0">
-                  <IButton :to="article.covidnet.channelURL" target="_blank">
+                  <IButton
+                    v-if="article.covidnet.contentType === covidnetTypes.BLOG"
+                    :to="article.covidnet.blogURL"
+                    target="_blank"
+                  >
                     <template #icon>
-                      <Icon name="gg:website" />
+                      <Icon
+                        name="gg:website"
+                      />
                     </template>
                     {{ $t('covidnet.blog.link') }}
+                  </IButton>
+                  <IButton
+                    v-if="article.covidnet.contentType === covidnetTypes.TWITTER"
+                    :to="`https://x.com/${article.covidnet.twitterUsername}`"
+                    target="_blank"
+                  >
+                    <template #icon>
+                      <Icon
+                        name="logos:twitter"
+                      />
+                    </template>
+                    {{ $t('covidnet.twitter.link') }}
                   </IButton>
                   <FeaturedPosts
                     class="mt-8"

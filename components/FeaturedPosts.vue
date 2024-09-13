@@ -1,6 +1,7 @@
 <script setup>
+  import Tweet from 'vue-tweet'
   import Card from './Card.vue'
-  import { covidnetTypes } from '~/assets/constants/covidnet-types';
+  import { covidnetTypes } from '~/assets/constants/covidnet-types'
 
   defineProps({
     contentType: {
@@ -27,6 +28,12 @@
         target="blank"
         :title="post.title"
         :url="post.url"
+      />
+      <Tweet
+        v-if="contentType === covidnetTypes.TWITTER"
+        v-for="post in posts"
+        :key="post"
+        :tweet-url="post"
       />
     </div>
   </div>
