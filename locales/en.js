@@ -10,7 +10,7 @@ export default {
     moreInfo: "More Information",
     online: "Online",
     readMore: "Read More",
-    related: "More Articles",
+    related: "Related Content",
     share: {
       facebook: 'Share on Facebook',
       mail: 'Share via e-mail',
