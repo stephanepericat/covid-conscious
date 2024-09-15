@@ -110,10 +110,12 @@
                 v-for="(item, index) in subNavItems"
                 :key="index"
                 :to="item.url"
+                class="flex"
                 :class="item.class || ''"
                 v-show="!item.hidden"
               >
                 {{ item.label }}
+                <IBadge size="sm" color="secondary" :style="{fontSize: '8px', verticalAlign: 'text-top'}" v-if="item.showNew">NEW</IBadge>
               </INavItem>
               <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
                 <INavItem>
@@ -167,7 +169,10 @@
                 <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_COVIDNET">
-                <NuxtLink :to="localePath('/covidnet')">{{ $t('layout.covidnet') }}</NuxtLink>
+                <NuxtLink :to="localePath('/covidnet')">
+                  {{ $t('layout.covidnet') }}
+                  <IBadge size="sm" color="secondary" v-if="$appSettings.SHOW_COVIDNET_NEW">NEW</IBadge>
+                </NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_DIRECTORY">
                 <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
@@ -360,7 +365,7 @@
     { label: t('layout.resource'), url: localePath('/resource') },
     { label: t('layout.video'), url: localePath('/video') },
     { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
-    { label: t('layout.covidnet'), url: localePath('/covidnet'), hidden: !$appSettings.SHOW_COVIDNET },
+    { label: t('layout.covidnet'), url: localePath('/covidnet'), hidden: !$appSettings.SHOW_COVIDNET, showNew: $appSettings.SHOW_COVIDNET_NEW },
     { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.health'), url: localePath('/public-health'), class: 'optional', hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
