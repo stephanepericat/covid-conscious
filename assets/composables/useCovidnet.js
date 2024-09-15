@@ -41,8 +41,12 @@ export const useCovidnet = () => {
     }
   }
 
+  const isFeaturedContentLoading = ref(false)
+
   const getFeaturedContent = async ({ blogFeaturedURLs, contentType, twitterFeaturedPosts }) => {
     let content = [];
+
+    isFeaturedContentLoading.value = true
 
     switch (contentType) {
       case covidnetTypes.BLOG:
@@ -52,6 +56,8 @@ export const useCovidnet = () => {
         content = twitterFeaturedPosts
         break;
     }
+
+    isFeaturedContentLoading.value = false
 
     return content
   }
@@ -66,5 +72,6 @@ export const useCovidnet = () => {
     getFeaturedContent,
     hasBlogRssURL,
     hasFeaturedContent,
+    isFeaturedContentLoading,
   }
 }

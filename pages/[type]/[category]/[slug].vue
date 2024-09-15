@@ -158,32 +158,34 @@
             </div>
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
-                <div v-if="hasFeaturedContent(article.covidnet) && featuredPosts.length > 0">
-                  <IButton
-                    v-if="article.covidnet.contentType === covidnetTypes.BLOG"
-                    :to="article.covidnet.blogURL"
-                    target="_blank"
-                  >
-                    <template #icon>
-                      <Icon
-                        name="gg:website"
-                      />
-                    </template>
-                    {{ $t('covidnet.blog.link') }}
-                  </IButton>
-                  <IButton
-                    v-if="article.covidnet.contentType === covidnetTypes.TWITTER"
-                    :to="`https://x.com/${article.covidnet.twitterUsername}`"
-                    target="_blank"
-                  >
-                    <template #icon>
-                      <Icon
-                        name="logos:twitter"
-                      />
-                    </template>
-                    {{ $t('covidnet.twitter.link') }}
-                  </IButton>
+                <IButton
+                  v-if="article.covidnet.contentType === covidnetTypes.BLOG"
+                  :to="article.covidnet.blogURL"
+                  target="_blank"
+                >
+                  <template #icon>
+                    <Icon
+                      name="gg:website"
+                    />
+                  </template>
+                  {{ $t('covidnet.blog.link') }}
+                </IButton>
+                <IButton
+                  v-if="article.covidnet.contentType === covidnetTypes.TWITTER"
+                  :to="`https://x.com/${article.covidnet.twitterUsername}`"
+                  target="_blank"
+                >
+                  <template #icon>
+                    <Icon
+                      name="logos:twitter"
+                    />
+                  </template>
+                  {{ $t('covidnet.twitter.link') }}
+                </IButton>
+                <div v-if="hasFeaturedContent(article.covidnet)" class="grid">
+                  <ILoader v-if="isFeaturedContentLoading" class="article-page__loader" size="sm" />
                   <FeaturedPosts
+                    v-if="!isFeaturedContentLoading && featuredPosts.length > 0"
                     class="mt-8"
                     :content-type="article.covidnet.contentType"
                     :posts="featuredPosts"
@@ -370,7 +372,7 @@
   const articleType = computed(() => t(`layout.${type}`))
 
   // COVIDNET
-  const { covidnetTypes, getChannelFeed, getFeaturedContent, hasFeaturedContent } = useCovidnet()
+  const { covidnetTypes, getChannelFeed, getFeaturedContent, hasFeaturedContent, isFeaturedContentLoading } = useCovidnet()
   const channelFeed = await useAsyncData('channelFeed', () => {
     return isCovidnet(type) && article?.value?.covidnet?.channelID
       ? getChannelFeed(article.value.covidnet.channelID)
