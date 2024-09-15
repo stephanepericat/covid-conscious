@@ -46,10 +46,9 @@ export const useCovidnet = () => {
   const getFeaturedContent = async ({ blogFeaturedURLs, contentType, twitterFeaturedPosts }) => {
     let content = [];
 
-    isFeaturedContentLoading.value = true
-
     switch (contentType) {
       case covidnetTypes.BLOG:
+        isFeaturedContentLoading.value = true
         content = await getBlogOg(blogFeaturedURLs)
         break;
       case covidnetTypes.TWITTER:
