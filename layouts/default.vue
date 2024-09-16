@@ -171,7 +171,7 @@
               <li v-if="$appSettings.SHOW_COVIDNET">
                 <NuxtLink :to="localePath('/covidnet')">
                   {{ $t('layout.covidnet') }}
-                  <IBadge size="sm" color="secondary" v-if="$appSettings.SHOW_COVIDNET_NEW">NEW</IBadge>
+                  <IBadge size="sm" color="secondary" :style="{ fontSize: '8px', verticalAlign: 'text-top' }" v-if="$appSettings.SHOW_COVIDNET_NEW">NEW</IBadge>
                 </NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_DIRECTORY">

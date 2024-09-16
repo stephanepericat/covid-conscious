@@ -86,6 +86,11 @@ export default {
     twitter: {
       link: 'Ver Perfil no X/Twitter',
     },
+    types: {
+      blog: 'Blog / Site',
+      twitter: 'Twitter',
+      youtube: 'YouTube',
+    },
     videos: {
       channel: 'Exibir Canal',
       latest: 'Últimos Vídeos',

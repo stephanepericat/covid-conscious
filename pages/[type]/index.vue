@@ -7,6 +7,7 @@
       <PublicationFilters
         :categories="filterCategories"
         :cities="filterCities"
+        :content-types="filterContentTypes"
         :countries="filterCountries"
         :languages="filterLanguages"
         :sources="filterSources"
@@ -14,6 +15,7 @@
         v-model:online-only="onlineOnly"
         v-model:selected-category="selectedCategory"
         v-model:selected-city="selectedCity"
+        v-model:selected-content-type="selectedContentType"
         v-model:selected-country="selectedCountry"
         v-model:selected-language="selectedLanguage"
         v-model:selected-source="selectedSource"
@@ -43,7 +45,7 @@
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { isDirectory, isHealth, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
 
@@ -136,12 +138,27 @@
 
   const selectedSource = ref(null)
 
+  const filterContentTypes = computed(() => {
+    if(!isCovidnet(type)) return [];
+    const contentTypes = results.value.map((r) => r.contentType)
+
+    return _.sortBy(
+      _.uniqBy(
+        contentTypes.map((type) => ({ label: t(`covidnet.types.${type.toLowerCase()}`), id: type })),
+        'id'
+      ),
+    'label')
+  });
+  const selectedContentType = ref(null)
+
   const filterLanguages = computed(() => {
-    if(!isLibrary(type) && !isNews(type) && !isHealth(type)) return [];
+    if(!isLibrary(type) && !isNews(type) && !isHealth(type) && !isCovidnet(type)) return [];
 
     const articles = selectedSource.value
       ? results.value.filter((r) => r.source === selectedSource.value)
-      : results.value
+      : selectedContentType.value
+          ? results.value.filter((r) => r.contentType === selectedContentType.value)
+          : results.value
     const codes = articles.filter((r) => !!r.language).map((r) => r.language)
     const matches = getLanguages(codes)
 
@@ -162,6 +179,7 @@
       !selectedCategory.value &&
       !selectedCountry.value &&
       !selectedCity.value &&
+      !selectedContentType.value &&
       !selectedLanguage.value &&
       !selectedSource.value &&
       !onlineOnly.value
@@ -179,6 +197,10 @@
 
     if(selectedCity.value) {
       items = items.filter((result) => result.city === selectedCity.value)
+    }
+
+    if(isCovidnet(type) && selectedContentType.value) {
+      items = items.filter((result) => result.contentType === selectedContentType.value)
     }
 
     if(selectedLanguage.value) {
