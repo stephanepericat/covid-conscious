@@ -159,7 +159,7 @@
             <!-- covidnet content -->
              <div v-if="isCovidnet(type)">
                 <IButton
-                  v-if="article.covidnet.contentType === covidnetTypes.BLOG"
+                  v-if="article.covidnet.contentType === covidnetTypes.BLOG && article.covidnet.blogURL"
                   :to="article.covidnet.blogURL"
                   target="_blank"
                 >
