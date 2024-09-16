@@ -45,7 +45,7 @@
             clearable
           />
         </template>
-        <template v-if="isTag(type) || isSearch(type)">
+        <template v-if="isTag(type) || isSearch(type) || isCovidnet(type)">
           <ISelect
             class="publication-filters--select"
             v-model="selectedContentType"
@@ -70,7 +70,7 @@
   </div>
 </template>
 <script setup>
-  import { isDirectory, isHealth, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
+  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
 
   const props = defineProps({
     categories: { type: Array, default: [] },

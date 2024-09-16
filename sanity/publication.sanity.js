@@ -53,6 +53,18 @@ export default groq`
     "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
     "date": coalesce(publicationDate, eventDate),
-  }
+  },
+  "contentType": coalesce(contentType, null),
+  "thumbnail": coalesce(visual.asset._ref, null),
+  "covidnet": {
+    blogFeaturedURLs,
+    blogRssURL,
+    blogURL,
+    channelID,
+    channelURL,
+    contentType,
+    twitterFeaturedPosts,
+    twitterUsername,
+  },
 }
 `

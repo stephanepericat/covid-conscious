@@ -10,7 +10,7 @@ export default {
     moreInfo: "Plus d'Information",
     online: "En ligne",
     readMore: "En Savoir Plus",
-    related: "Articles Supplémentaires",
+    related: "Contenu Associé",
     share: {
       facebook: 'Partagez sur Facebook',
       mail: 'Partagez via email',
@@ -78,6 +78,24 @@ export default {
       },
     },
   },
+  covidnet: {
+    blog: {
+      featured: 'Article(s) en Vedette',
+      link: 'Voir le Site Web',
+    },
+    twitter: {
+      link: 'Voir le Profil X/Twitter',
+    },
+    types: {
+      blog: 'Blog / Site Web',
+      twitter: 'Twitter',
+      youtube: 'YouTube',
+    },
+    videos: {
+      channel: 'Voir la Chaîne',
+      latest: 'Dernières Vidéos',
+    },
+  },
   directory: {
     instructions: 'Sélectionnez une catégorie ou un pays pour lancer la recherche dans l\'annuaire',
     results: '{totalItems} résultat(s) trouvé(s).',
@@ -98,6 +116,7 @@ export default {
     about: "À Propos",
     bluesky: "Suivez-nous sur Bluesky",
     contents: "Contenu",
+    covidnet: "Covidnet",
     directory: "Annuaire",
     disclaimer: "Clause de non-responsabilité",
     event: "Évènements à Venir",

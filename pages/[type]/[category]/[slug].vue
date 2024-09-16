@@ -70,12 +70,21 @@
 
       <IMedia class="article-page__author">
         <template #image>
-          <img class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
+          <SanityImage
+            v-if="article.thumbnail"
+            class="article-page__author--avatar"
+            :asset-id="article.thumbnail"
+            fit="crop"
+            crop="entropy"
+            :h="50"
+            :w="50"
+          />
+          <img v-else class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
         </template>
         <p class="article-page__info no-author">
           <span class="article-page__info--category">
-            {{ articleType }}
-            <span v-if="!isDirectory(type) && !isResource(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+            <NuxtLink :to="localePath(`/${type}`)">{{ articleType }}</NuxtLink>
+            <span v-if="showPublicationDate(type)"> / {{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
           </span>
         </p>
@@ -128,6 +137,7 @@
         <section v-else class="article-page__body--contents">
           <div class="article-page__body--contents-text">
             <SanityContent :blocks="article.body" :serializers="serializers" />
+            <!-- directory map -->
             <div v-if="isDirectory(type) && article.location" class="article-page__body--contents-map">
               <ClientOnly>
                 <LMap
@@ -146,6 +156,57 @@
                 </LMap>
               </ClientOnly>
             </div>
+            <!-- covidnet content -->
+             <div v-if="isCovidnet(type)">
+                <IButton
+                  v-if="article.covidnet.contentType === covidnetTypes.BLOG && article.covidnet.blogURL"
+                  :to="article.covidnet.blogURL"
+                  target="_blank"
+                >
+                  <template #icon>
+                    <Icon
+                      name="gg:website"
+                    />
+                  </template>
+                  {{ $t('covidnet.blog.link') }}
+                </IButton>
+                <IButton
+                  v-if="article.covidnet.contentType === covidnetTypes.TWITTER"
+                  :to="`https://x.com/${article.covidnet.twitterUsername}`"
+                  target="_blank"
+                >
+                  <template #icon>
+                    <Icon
+                      name="logos:twitter"
+                    />
+                  </template>
+                  {{ $t('covidnet.twitter.link') }}
+                </IButton>
+                <div v-if="hasFeaturedContent(article.covidnet)" class="grid">
+                  <ILoader v-if="isFeaturedContentLoading" class="article-page__loader" size="sm" />
+                  <FeaturedPosts
+                    v-if="!isFeaturedContentLoading && featuredPosts.length > 0"
+                    class="mt-8"
+                    :content-type="article.covidnet.contentType"
+                    :posts="featuredPosts"
+                    :title="$t('covidnet.blog.featured')"
+                  />
+                </div>
+                <template v-if="article.covidnet.contentType === covidnetTypes.YOUTUBE">
+                  <IButton :to="article.covidnet.channelURL" target="_blank">
+                    <template #icon>
+                      <Icon name="logos:youtube-icon" />
+                    </template>
+                    {{ $t('covidnet.videos.channel') }}
+                  </IButton>
+                  <ChannelVideos
+                    v-if="channelVideos.length > 0"
+                    class="mt-8"
+                    :title="$t('covidnet.videos.latest')"
+                    :videos="channelVideos"
+                  />
+                </template>
+             </div>
           </div>
           <!-- community content -->
           <div v-if="isDirectory(type) && article.info" class="article-page__body--contents-info">
@@ -261,7 +322,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   // import { AUTHOR } from '~/assets/constants/types'
-  import { isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo } from '~/assets/utils/article-types'
+  import { isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -269,6 +330,7 @@
   import { useReviews } from '~/assets/composables/useReviews'
   import ShareButtons from '~/components/ShareButtons.vue'
   import { serializers } from '~/assets/constants/serializers'
+  import { useCovidnet } from '~/assets/composables/useCovidnet'
   import { useTags } from '~/assets/composables/useTags'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { getDateLocale } from '~/assets/constants/date-locales'
@@ -278,9 +340,11 @@
     ART_ZONE_2,
   } from '~/assets/constants/promo-zones'
   import RelatedArticles from '~/components/RelatedArticles.vue'
+  import ChannelVideos from '~/components/ChannelVideos.vue'
+  import FeaturedPosts from '~/components/FeaturedPosts.vue'
 
   const { locale, t } = useI18n()
-  // const localePath = useLocalePath()
+  const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
   const user = useSupabaseUser()
@@ -306,6 +370,21 @@
     return `image/${extension}`
   })
   const articleType = computed(() => t(`layout.${type}`))
+
+  // COVIDNET
+  const { covidnetTypes, getChannelFeed, getFeaturedContent, hasFeaturedContent, isFeaturedContentLoading } = useCovidnet()
+  const channelFeed = await useAsyncData('channelFeed', () => {
+    return isCovidnet(type) && article?.value?.covidnet?.channelID
+      ? getChannelFeed(article.value.covidnet.channelID)
+      : []
+  }, { watch: [article]})
+  const channelVideos = computed(() => channelFeed?.data?.value || [])
+  const ftdPosts = await useAsyncData('ftdPosts', () => {
+    return isCovidnet(type) && article?.value?.covidnet && hasFeaturedContent(article?.value?.covidnet)
+      ? getFeaturedContent(article.value.covidnet)
+      : []
+  }, { watch: [article]})
+  const featuredPosts = computed(() => ftdPosts?.data?.value || [])
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()

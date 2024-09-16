@@ -3,7 +3,7 @@ import { baseLanguage } from '~/assets/constants/base-language'
 
 export default groq`
   {
-    "all_entries": *[(_type in ["news", "scientific-library", "video", "resource", "event", "product", "directory", "education", "public-health"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
+    "all_entries": *[(_type in ["news", "scientific-library", "video", "resource", "event", "product", "directory", "education", "public-health", "covidnet"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
       "id": _id,
       "type": _type,
       "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, null),
@@ -18,6 +18,7 @@ export default groq`
       "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
       "image": visual.asset->url,
       "author": author-> { "name": nickname },
+      "contentType": coalesce(contentType, null),
     },
     "settings": *[_type == "feedSettings"][0] {
       "title": title,

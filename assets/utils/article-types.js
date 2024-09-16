@@ -1,5 +1,6 @@
 import {
   COMMUNITY,
+  COVIDNET,
   DIRECTORY,
   EVENT,
   FORUM,
@@ -14,6 +15,7 @@ import {
 } from '../constants/types'
 
 export const isCommunity = (type) => type === COMMUNITY
+export const isCovidnet = (type) => type === COVIDNET
 export const isDirectory = (type) => type === DIRECTORY
 export const isEvent = (type) => type === EVENT
 export const isForum = (type) => type === FORUM
@@ -27,4 +29,5 @@ export const isTag = (type) => type == TAG
 export const isVideo = (type) => type === VIDEO
 
 export const isExternalLink = (type) => isNews(type) || isHealth(type)
+export const showPublicationDate = (type) => !isCovidnet(type) && !isDirectory(type) && !isResource(type)
 //  || isResource(type) || isLibrary(type) || isEvent(type)

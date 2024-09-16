@@ -2,7 +2,7 @@
   <div
     class="tcl-card rounded-lg overflow-hidden shadow-md"
   >
-    <div class="aspect-video">
+    <div v-if="!hideThumbnail" class="aspect-video">
       <NuxtLink
         class="no-underline relative"
         :target="target"
@@ -18,6 +18,7 @@
           :h="576"
           :w="1024"
         />
+        <NuxtImg v-else-if="thumbnail" :src="thumbnail" class="w-full h-auto" />
         <NuxtImg
           v-else src="/tcl-fallback-169.jpg"
           class="w-full"
@@ -41,7 +42,7 @@
         </NuxtLink>
       </h4>
       <p v-if="date" class="text-sm uppercase tracking-widest">{{ format(new Date(convertTs(date)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}<span v-if="end"> - {{ format(new Date(convertTs(end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span></p>
-      <p v-if="description" v-html="description" />
+      <p v-if="description" v-html="description" class="text-base" />
       <div v-if="tags.length">
         <ul class="m-0 p-0 flex flex-wrap">
           <BaseTags
@@ -76,11 +77,13 @@
     description: { type: String, default: null },
     end: { type: String, default: null },
     free: Boolean,
+    hideThumbnail: Boolean,
     isVideo: Boolean,
     limited: Boolean,
     premium: Boolean,
     tags: { type: Array, default: [] },
     target: { type: String, default: null },
+    thumbnail: { type: String, default: null },
     title: { type: String, required: true },
     url: { type: String, required: true },
     visual: { type: String, default: null }
