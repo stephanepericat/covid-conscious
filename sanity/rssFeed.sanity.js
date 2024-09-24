@@ -8,7 +8,6 @@ export default groq`
       "type": _type,
       "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, null),
       "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, null))), "")[0..252], ""),
-      "summary": array::join(string::split(coalesce(summary[_key == $locale][0].value, summary[_key == '${baseLanguage}'][0].value, summary[_key == ^.language][0].value, eventInfo[_key == ^.language][0].value, summary, ''), '')[0..252], ''),
       "publishedAt": _createdAt,
       "updatedAt": _updatedAt,
       "link": url,

@@ -109,7 +109,9 @@
         />
         <!-- video content -->
         <template v-if="isVideo(type)" class="article-page__body--video">
-          <p class="article-page__body--video-summary">{{ article.summary }}</p>
+          <p class="article-page__body--video-summary">
+            <SanityContent :blocks="article.body" :serializers="serializers" />
+          </p>
           <div
             v-if="article.embedCode"
             v-html="article.embedCode"
@@ -124,7 +126,9 @@
         </template>
 
         <template v-else-if="isEvent(type) || isResource(type)">
-          <p class="article-page__body--summary">{{ article.summary }}</p>
+          <p class="article-page__body--summary">
+            <SanityContent :blocks="article.body" :serializers="serializers" />
+          </p>
           <IButton :href="article.link" target="_blank">
             <template #icon>
               <Icon name="material-symbols:info-outline-rounded" />
@@ -369,7 +373,7 @@
   const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 3) || [])
 
   const pageTitle = computed(() => article?.value?.title || '')
-  const pageDescription = computed(() =>  article?.value?.description || article?.value?.summary || t('home.description'))
+  const pageDescription = computed(() =>  article?.value?.description || article?.value?.eventInfo || t('home.description'))
   const ogImage = computed(() => article?.value?.image ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800` : '/tcl-fallback-169.jpg')
   const ogImageType = computed(() => {
     const extension = ogImage.value.split('.').pop().split('?').shift()
