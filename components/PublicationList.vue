@@ -47,17 +47,11 @@
             {{ article.summary }}
           </p>
           <p
-            v-if="isLibrary(article.type) && article.richSummary"
+            v-if="(isLibrary(article.type) || isCovidnet(article.type)) && article.shortDescription"
             class="publication-list__description"
           >
-           {{ article.richSummary }}
-         </p>
-         <p
-            v-if="isCovidnet(article.type) && article.shortDescription"
-            class="publication-list__description"
-          >
-           {{ article.shortDescription }}
-         </p>
+            {{ article.shortDescription }}
+          </p>
           <p v-if="showPublicationDate(article.type)" class="publication-list__date">
             <span>{{ format(new Date(article.date ? convertTs(article.date) : article.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
             <span v-if="article.end"> - {{ format(new Date(convertTs(article.end)), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
