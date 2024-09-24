@@ -373,7 +373,7 @@
   const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 3) || [])
 
   const pageTitle = computed(() => article?.value?.title || '')
-  const pageDescription = computed(() =>  article?.value?.description || article?.value?.eventInfo || t('home.description'))
+  const pageDescription = computed(() =>  article?.value?.description || t('home.description'))
   const ogImage = computed(() => article?.value?.image ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800` : '/tcl-fallback-169.jpg')
   const ogImageType = computed(() => {
     const extension = ogImage.value.split('.').pop().split('?').shift()

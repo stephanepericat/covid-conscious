@@ -98,7 +98,7 @@ export default groq`
     title,
     "date": eventDate,
     "end": endDate,
-    "summary": array::join(string::split(coalesce(eventInfo[_key == $locale][0].value, eventInfo[_key == ^.language][0].value, ''), '')[0..255], '') + "...",
+    "summary": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value)), '')[0..255], '') + "...",
     isEventFree,
     language,
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
