@@ -41,13 +41,7 @@
             </NuxtLink>
           </div>
           <p
-            v-if="(isResource(article.type) || isVideo(article.type) || isEvent(article.type)) && article.summary"
-            class="publication-list__description"
-          >
-            {{ article.summary }}
-          </p>
-          <p
-            v-if="(isLibrary(article.type) || isCovidnet(article.type)) && article.shortDescription"
+            v-if="article.shortDescription"
             class="publication-list__description"
           >
             {{ article.shortDescription }}
