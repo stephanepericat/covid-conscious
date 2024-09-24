@@ -123,9 +123,8 @@
           </IButton>
         </template>
 
-        <template v-else-if="isLibrary(type) || isEvent(type) || isResource(type)">
-          <SanityContent v-if="isLibrary(type)" :blocks="article.summary" :serializers="serializers" />
-          <p v-else class="article-page__body--summary">{{ article.summary }}</p>
+        <template v-else-if="isEvent(type) || isResource(type)">
+          <p class="article-page__body--summary">{{ article.summary }}</p>
           <IButton :href="article.link" target="_blank">
             <template #icon>
               <Icon name="material-symbols:info-outline-rounded" />
@@ -137,6 +136,13 @@
         <section v-else class="article-page__body--contents">
           <div class="article-page__body--contents-text">
             <SanityContent :blocks="article.body" :serializers="serializers" />
+            <!-- library -->
+            <IButton v-if="isLibrary(type)" :href="article.link" target="_blank" class="mt-4">
+              <template #icon>
+                <Icon name="material-symbols:info-outline-rounded" />
+              </template>
+              {{ $t('article.readMore') }}
+            </IButton>
             <!-- directory map -->
             <div v-if="isDirectory(type) && article.location" class="article-page__body--contents-map">
               <ClientOnly>
@@ -363,7 +369,7 @@
   const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 3) || [])
 
   const pageTitle = computed(() => article?.value?.title || '')
-  const pageDescription = computed(() =>  article?.value?.description || article?.value?.richSummary || article?.value?.summary || t('home.description'))
+  const pageDescription = computed(() =>  article?.value?.description || article?.value?.summary || t('home.description'))
   const ogImage = computed(() => article?.value?.image ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800` : '/tcl-fallback-169.jpg')
   const ogImageType = computed(() => {
     const extension = ogImage.value.split('.').pop().split('?').shift()
