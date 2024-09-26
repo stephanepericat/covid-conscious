@@ -137,7 +137,7 @@ export default {
       health: 'Ainda não há artigos sobre a saúde pública',
       library: 'Ainda não há artigos científicos.',
       news: 'Nenhuma notícia ainda.',
-      product: 'Ainda não há avaliações de produtos.',
+      product: 'Ainda não há avaliações de EPI.',
       resources: 'Ainda não há recursos.',
       videos: 'Ainda não há vídeos.',
     },
@@ -156,7 +156,7 @@ export default {
     },
     news: "Notícias",
     privacyPolicy: "Política de Privacidade",
-    product: "Produtos",
+    product: "EPI",
     "public-health": "Vigilância da Saúde Pública",
     rss: "Feed RSS",
     resource: "Recursos",
@@ -321,7 +321,7 @@ export default {
       categories: {
         lifestyle: 'Estilo de Vida',
         'long-covid': 'Covid Longa',
-        products: 'Produtos',
+        products: 'EPI',
         recovery: 'Recuperação',
         relationships: 'Relacionamentos',
         'self-care': 'Autocuidado',
@@ -481,11 +481,11 @@ export default {
     details: {
       archive: {
         title: "Acesse todo o nosso acervo",
-        description: "Você pode acessar toda a nossa coleção de notícias, artigos científicos, recursos, vídeos, produtos e eventos futuros em todos os idiomas suportados.",
+        description: "Você pode acessar toda a nossa coleção de notícias, artigos científicos, recursos, vídeos, EPI e eventos futuros em todos os idiomas suportados.",
       },
       contribute: {
         title: "Contribua para nossa plataforma",
-        description: "Você pode nos enviar links, dicas de produtos e até mesmo algum conteúdo original por meio de nosso formulário de contribuição.",
+        description: "Você pode nos enviar links, dicas de EPI e até mesmo algum conteúdo original por meio de nosso formulário de contribuição.",
       },
       informed: {
         title: "Mantenha-se informado em qualquer lugar",

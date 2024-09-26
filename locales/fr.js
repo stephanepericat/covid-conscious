@@ -156,7 +156,7 @@ export default {
     },
     news: "Actualités",
     privacyPolicy: "Politique de Confidentialité",
-    product: "Produits",
+    product: "EPI",
     "public-health": "Veille Sanitaire",
     resource: "Ressources",
     rss: "Flux RSS",
@@ -322,7 +322,7 @@ export default {
       categories: {
         lifestyle: 'Mode de Vie',
         'long-covid': 'Covid Long',
-        products: 'Produits',
+        products: 'EPI',
         recovery: 'Rétablissement',
         relationships: 'Relations',
         'self-care': 'Soins Personnels',
@@ -482,11 +482,11 @@ export default {
     details: {
       archive: {
         title: "Accédez à l'intégralité de nos archives",
-        description: "Vous pouvez accéder à notre entière base de données d'actualités, de documents scientifiques, de ressources, de vidéos, de produits et d'événements à venir dans toutes les langues prises en charge.",
+        description: "Vous pouvez accéder à notre entière base de données d'actualités, de documents scientifiques, de ressources, de vidéos, d'EPI et d'événements à venir dans toutes les langues prises en charge.",
       },
       contribute: {
         title: "Contribuez à notre plateforme",
-        description: "Vous pouvez nous envoyer des liens, des conseils sur les produits, et même soumettre votre contenu original, via notre formulaire de contribution intégré.",
+        description: "Vous pouvez nous envoyer des liens, des conseils sur les EPI, et même soumettre votre contenu original, via notre formulaire de contribution intégré.",
       },
       informed: {
         title: "Restez informé en déplacement",

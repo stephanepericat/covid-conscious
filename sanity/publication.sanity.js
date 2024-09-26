@@ -64,5 +64,10 @@ export default groq`
     twitterFeaturedPosts,
     twitterUsername,
   },
+  "brand": brand-> {
+    name,
+    url,
+    "path": '/brand/' + tags[0]->uri.current + '/' + uri.current,
+  },
 }
 `

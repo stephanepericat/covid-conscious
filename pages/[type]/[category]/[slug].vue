@@ -396,6 +396,9 @@
   }, { watch: [article]})
   const featuredPosts = computed(() => ftdPosts?.data?.value || [])
 
+  // PRODUCT BRAND
+  const brand = computed(() => isProduct(type) && article?.value?.brand || false)
+
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
   const totalReviews = ref(0)

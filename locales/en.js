@@ -156,7 +156,7 @@ export default {
     },
     news: "News",
     privacyPolicy: "Privacy Policy",
-    product: "Products",
+    product: "PPE",
     "public-health": "Public Health Watch",
     resource: "Resources",
     rss: "RSS Feed",
@@ -321,7 +321,7 @@ export default {
       categories: {
         lifestyle: 'Lifestyle',
         'long-covid': 'Long Covid',
-        products: 'Products',
+        products: 'PPE',
         recovery: 'Recovery',
         relationships: 'Relationships',
         'self-care': 'Self-Care',
@@ -481,11 +481,11 @@ export default {
     details: {
       archive: {
         title: "Access Our Entire Archive",
-        description: "You can access our entire database of news articles, scientific papers, resources, videos, products, and upcoming events in all supported languages.",
+        description: "You can access our entire database of news articles, scientific papers, resources, videos, PPE, and upcoming events in all supported languages.",
       },
       contribute: {
         title: "Contribute To Our Platform",
-        description: "You can send us links, product tips, and even submit some of your original content, via our built-in contribution form.",
+        description: "You can send us links, PPE tips, and even submit some of your original content, via our built-in contribution form.",
       },
       informed: {
         title: "Stay Informed On The Go",
