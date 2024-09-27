@@ -116,6 +116,7 @@ export default {
   layout: {
     about: "Sobre Nosotros",
     bluesky: "Síguenos en Bluesky",
+    brand: "Marcas",
     contents: "Contenido",
     covidnet: "Covidnet",
     directory: "Directorio",

@@ -116,6 +116,7 @@ export default {
   layout: {
     about: "About",
     bluesky: "Follow us on Bluesky",
+    brand: "Brands",
     contents: "Contents",
     covidnet: "Covidnet",
     directory: "Directory",

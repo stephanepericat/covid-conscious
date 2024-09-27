@@ -5,6 +5,7 @@ export default groq`
 *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {
   "id": _id,
   "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
+  name,
   "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },
   "published": _createdAt,
   "date": coalesce(publicationDate, eventDate),
@@ -68,6 +69,14 @@ export default groq`
     name,
     url,
     "path": '/brand/' + tags[0]->uri.current + '/' + uri.current,
+  },
+  "products": *[^._type == 'brand' && _type == 'product' && brand->name == ^.name] | order(coalesce(title[_key == $locale].value, title[_key == '${baseLanguage}'].value)[0] asc) {
+    "id": _id,
+    "url": '/product/' + tags[0]->uri.current + '/' + uri.current,
+    "title": coalesce(title[_key == $locale].value, title[_key == '${baseLanguage}'].value)[0],
+    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == '${baseLanguage}'].value)), '')[0..255], '') + '...',
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "visual": coalesce(visual.asset._ref, null),
   },
 }
 `

@@ -1,4 +1,5 @@
 import {
+  BRAND,
   COMMUNITY,
   COVIDNET,
   DIRECTORY,
@@ -14,6 +15,7 @@ import {
   VIDEO
 } from '../constants/types'
 
+export const isBrand = (type) => type === BRAND
 export const isCommunity = (type) => type === COMMUNITY
 export const isCovidnet = (type) => type === COVIDNET
 export const isDirectory = (type) => type === DIRECTORY
@@ -29,5 +31,5 @@ export const isTag = (type) => type == TAG
 export const isVideo = (type) => type === VIDEO
 
 export const isExternalLink = (type) => isNews(type) || isHealth(type)
-export const showPublicationDate = (type) => !isCovidnet(type) && !isDirectory(type) && !isResource(type)
+export const showPublicationDate = (type) => !isBrand(type) && !isCovidnet(type) && !isDirectory(type) && !isResource(type)
 //  || isResource(type) || isLibrary(type) || isEvent(type)

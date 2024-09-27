@@ -24,7 +24,7 @@
 
     <template v-else-if="!pending && article">
       <h1 class="article-page__title" :class="{ 'with-brand': brand?.name}">
-        <span>{{ article.title }}</span>
+        <span>{{ isBrand(type) ? article.name : article.title }}</span>
         <div v-if="isProduct(type) && ratingsAverage" class="article-page__title--info">
           <StarRating
             :increment="0.01"
@@ -275,6 +275,22 @@
           :hashtag="hashtag"
         />
 
+        <!-- brand content -->
+        <template v-if="isBrand(type)">
+          <div class="article-page__body--info-product">
+            <IButton v-if="article.link" class="article-page__body--info-product-button" :to="article.link" target="_blank">
+              <Icon class="article-page__body--info-product-icon" name="gg:website" />
+              {{ $t("article.manufacturerWebsite") }}
+            </IButton>
+          </div>
+          <ListedProducts
+            v-if="listedProducts"
+            class="mt-8"
+            :products="listedProducts"
+            title="Listed Products"
+          />
+        </template>
+
         <!-- product content -->
         <template v-if="isProduct(type)">
           <div class="article-page__body--info-product">
@@ -339,7 +355,7 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   // import { AUTHOR } from '~/assets/constants/types'
-  import { isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
+  import { isBrand, isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
@@ -359,6 +375,7 @@
   import RelatedArticles from '~/components/RelatedArticles.vue'
   import ChannelVideos from '~/components/ChannelVideos.vue'
   import FeaturedPosts from '~/components/FeaturedPosts.vue'
+  import ListedProducts from '~/components/ListedProducts.vue'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -379,7 +396,7 @@
   const articleId = computed(() => article?.value?.id || null)
   const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 3) || [])
 
-  const pageTitle = computed(() => article?.value?.title || '')
+  const pageTitle = computed(() => article?.value?.title || article?.value?.name || '')
   const pageDescription = computed(() =>  article?.value?.description || t('home.description'))
   const ogImage = computed(() => article?.value?.image ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800` : '/tcl-fallback-169.jpg')
   const ogImageType = computed(() => {
@@ -405,6 +422,7 @@
 
   // PRODUCT BRAND
   const brand = computed(() => isProduct(type) && article?.value?.brand || false)
+  const listedProducts = computed(() => isBrand(type) && article?.value?.products || false)
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
