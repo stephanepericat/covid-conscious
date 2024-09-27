@@ -5,8 +5,10 @@ export default {
     email: "Correo Electrónico",
     free: "Gratis",
     limited: "Acceso Limitado",
+    listedProducts: "Productos Listados",
     locked: "Premium",
     lockedDescription: "Esta publicación está detrás de un muro de pago o suscripción",
+    manufacturerWebsite: "Sitio Web del Fabricante",
     moreInfo: "Más Información",
     online: "En línea",
     readMore: "Lea Más",
@@ -115,6 +117,7 @@ export default {
   layout: {
     about: "Sobre Nosotros",
     bluesky: "Síguenos en Bluesky",
+    brand: "Marcas",
     contents: "Contenido",
     covidnet: "Covidnet",
     directory: "Directorio",
@@ -137,7 +140,7 @@ export default {
       health: 'Aún no hay artículos sobre la salud pública.',
       library: 'Aún no hay artículos científicos.',
       news: 'Aún no hay noticias.',
-      product: 'Aún no hay reseñas de productos.',
+      product: 'Aún no hay reseñas de EPI.',
       resources: 'Aún no hay recursos.',
       videos: 'Aún no hay vídeos.',
     },
@@ -156,7 +159,7 @@ export default {
     },
     news: "Noticias",
     privacyPolicy: "Política de Privacidad",
-    product: "Productos",
+    product: "EPI",
     "public-health": "Vigilancia de la Salud Pública",
     resource: "Recursos",
     rss: "RSS Feed",
@@ -321,7 +324,7 @@ export default {
       categories: {
         lifestyle: 'Estilo de Vida',
         'long-covid': 'Largo Covid',
-        products: 'Productos',
+        products: 'EPI',
         recovery: 'Recuperación',
         relationships: 'Relaciones',
         'self-care': 'Autocuidado',
@@ -480,11 +483,11 @@ export default {
     availableSoonIOS: "* Pronto disponible para iOS",details: {
       archive: {
         title: "Acceda a todo nuestro archivo",
-        description: "Puedes acceder a toda nuestra colección de noticias, documentos científicos, recursos, videos, productos y próximos eventos en todos los idiomas compatibles.",
+        description: "Puedes acceder a toda nuestra colección de noticias, documentos científicos, recursos, videos, EPI y próximos eventos en todos los idiomas compatibles.",
       },
       contribute: {
         title: "Contribuya a nuestra plataforma",
-        description: "Puedes enviarnos enlaces, información sobre productos e incluso contenidos originales a través de nuestro formulario de contribución.",
+        description: "Puedes enviarnos enlaces, información sobre EPI e incluso contenidos originales a través de nuestro formulario de contribución.",
       },
       informed: {
         title: "Manténgase informado en cualquier lugar",

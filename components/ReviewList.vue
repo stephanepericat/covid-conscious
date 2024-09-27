@@ -7,7 +7,7 @@
       v-if="pending"
       class="review-list__loader"
     />
-    <p v-else-if="!pending && !total" v-text="$t('reviews.noReviews')" />
+    <p v-else-if="!pending && !total" v-text="$t('reviews.noReviews')" class="text-lg" />
     <template v-else>
       <p v-text="$t('reviews.list.description', { start, end, total })" />
       <IListGroup

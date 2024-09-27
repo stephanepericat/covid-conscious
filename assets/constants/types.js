@@ -1,4 +1,5 @@
 export const AUTHOR = 'author'
+export const BRAND = 'brand'
 export const COMMUNITY = 'community'
 export const COVIDNET = 'covidnet'
 export const DIRECTORY = 'directory'

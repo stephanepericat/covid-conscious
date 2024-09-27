@@ -23,7 +23,7 @@
               :to="isExternalLink(article.type) ? article.link : localePath(article.path)"
               :target="isExternalLink(article.type) ? '_blank' : '_self'"
             >
-              <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ article.title }}
+              <span v-if="isNews(article.type) || isLibrary(article.type)">{{ article.source }}: </span>{{ isBrand(article.type) ? article.name : article.title }}
             </NuxtLink>
           </h4>
           <div
@@ -121,7 +121,7 @@
 </template>
 <script setup>
   import { format } from 'date-fns'
-  import { isEvent, isExternalLink, isDirectory, isForum, isLibrary, isNews, isResource, isVideo, isCovidnet, showPublicationDate } from '~/assets/utils/article-types'
+  import {  isBrand, isEvent, isExternalLink, isDirectory, isForum, isLibrary, isNews, isResource, isVideo, isCovidnet, showPublicationDate } from '~/assets/utils/article-types'
   import { convertTs } from '~/assets/utils/convert-timestamp'
   import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
