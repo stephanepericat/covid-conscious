@@ -23,7 +23,7 @@
     <ILoader v-if="pending" class="article-page__loader" />
 
     <template v-else-if="!pending && article">
-      <h1 class="article-page__title">
+      <h1 class="article-page__title" :class="{ 'with-brand': brand?.name}">
         <span>{{ article.title }}</span>
         <div v-if="isProduct(type) && ratingsAverage" class="article-page__title--info">
           <StarRating
@@ -36,6 +36,9 @@
           <em class="article-page__title--average">({{ $t('reviews.average') }}: {{ ratingsAverage }})</em>
         </div>
       </h1>
+      <h2 v-if="brand?.name" class="text-lg font-bold uppercase tracking-widest mb-8">
+        <NuxtLink :to="brand.path">{{ brand.name }}</NuxtLink>
+      </h2>
 
       <!-- <IMedia class="article-page__author" v-if="article.author">
         <template #image>
@@ -279,6 +282,10 @@
               <Icon class="article-page__body--info-product-icon" name="material-symbols:info-outline-rounded" />
               {{ $t("article.moreInfo") }}
             </IButton>
+            <IButton v-if="brand?.url" class="article-page__body--info-product-button brand" :to="brand.url" target="_blank">
+              <Icon class="article-page__body--info-product-icon" name="gg:website" />
+              {{ $t("article.manufacturerWebsite") }}
+            </IButton>
           </div>
           <div class="article-page__reviews" v-if="articleId">
             <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
@@ -478,6 +485,10 @@
     @include title();
     margin-bottom: 40px;
 
+    &.with-brand {
+      margin-bottom: 0px;
+    }
+
     &--info {
       display: flex;
       height: 48px;
@@ -556,6 +567,10 @@
 
         &-button {
           margin-bottom: 15px;
+
+          &.brand {
+            margin-left: 12px;
+          }
         }
 
         &-icon {

@@ -8,6 +8,7 @@ export default {
     locked: "Premium",
     lockedDescription: "Cette publication est derrière un paywall ou un abonnement",
     moreInfo: "Plus d'Information",
+    manufacturerWebsite: "Site Web du Fabricant",
     online: "En ligne",
     readMore: "En Savoir Plus",
     related: "Contenu Associé",

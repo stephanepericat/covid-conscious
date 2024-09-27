@@ -7,6 +7,7 @@ export default {
     limited: "Acceso Limitado",
     locked: "Premium",
     lockedDescription: "Esta publicación está detrás de un muro de pago o suscripción",
+    manufacturerWebsite: "Sitio Web del Fabricante",
     moreInfo: "Más Información",
     online: "En línea",
     readMore: "Lea Más",

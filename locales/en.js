@@ -7,6 +7,7 @@ export default {
     limited: "Limited Access",
     locked: "Premium",
     lockedDescription: "This publication is behind a paywall or subscription",
+    manufacturerWebsite: "Manufacturer's Website",
     moreInfo: "More Information",
     online: "Online",
     readMore: "Read More",
