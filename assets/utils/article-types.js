@@ -31,5 +31,5 @@ export const isTag = (type) => type == TAG
 export const isVideo = (type) => type === VIDEO
 
 export const isExternalLink = (type) => isNews(type) || isHealth(type)
-export const showPublicationDate = (type) => !isBrand(type) && !isCovidnet(type) && !isDirectory(type) && !isResource(type)
+export const showPublicationDate = (type) => !isBrand(type) && !isProduct(type) && !isCovidnet(type) && !isDirectory(type) && !isResource(type)
 //  || isResource(type) || isLibrary(type) || isEvent(type)

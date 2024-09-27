@@ -37,7 +37,7 @@
         </div>
       </h1>
       <h2 v-if="brand?.name" class="text-lg font-bold uppercase tracking-widest mb-8">
-        <NuxtLink :to="brand.path">{{ brand.name }}</NuxtLink>
+        <NuxtLink :to="localePath(brand.path)">{{ brand.name }}</NuxtLink>
       </h2>
 
       <!-- <IMedia class="article-page__author" v-if="article.author">
