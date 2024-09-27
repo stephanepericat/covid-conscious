@@ -286,7 +286,7 @@
           <ListedProducts
             v-if="listedProducts"
             class="mt-8"
-            :products="listedProducts"
+            :products="$t('article.listedProducts')"
             title="Listed Products"
           />
         </template>

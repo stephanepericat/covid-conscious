@@ -5,6 +5,7 @@ export default {
     email: "E-mail",
     free: "Gratuito",
     limited: "Acesso Limitado",
+    listedProducts: "Produtos Listados",
     locked: "Premium",
     lockedDescription: "Esta publicação está protegida por acesso pago ou assinatura",
     manufacturerWebsite: "Site do Fabricante",

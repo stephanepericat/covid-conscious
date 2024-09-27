@@ -5,6 +5,7 @@ export default {
     email: "E-mail",
     free: "Gratuit",
     limited: "Accès limité",
+    listedProducts: "Produits Listés",
     locked: "Premium",
     lockedDescription: "Cette publication est derrière un paywall ou un abonnement",
     moreInfo: "Plus d'Information",
