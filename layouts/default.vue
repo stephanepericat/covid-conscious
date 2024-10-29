@@ -397,8 +397,7 @@
   const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`)
 
   // User Menu
-  const user = useSupabaseUser()
-  const isLoggedIn = computed(() => !!user?.value?.id)
+  const { loggedIn: isLoggedIn, user } = useUserSession()
   const avatar = computedAsync(
     async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
     null

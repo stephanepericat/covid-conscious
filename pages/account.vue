@@ -5,11 +5,12 @@
       v-text="$t('forum.account.title')"
     />
     <div v-if="user">
-      <Account
+      <!-- <Account
         class="account-page__account"
         @error="onError"
         @success="onUpdateSuccess"
-      />
+      /> -->
+      <p className="text-center">{{ user.email }}</p>
       <IFormGroup class="account-page__logout">
         <IButton
           link
@@ -27,8 +28,10 @@
   import { useToast } from '@inkline/inkline'
   import Account from '../components/UserAccount.vue'
 
+  const { user } = useUserSession()
+
   const toast = useToast()
-  const user = useSupabaseUser()
+  // const user = useSupabaseUser()
   const { t } = useI18n()
   const { onError, signOut } = useSignOut(user)
 
