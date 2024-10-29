@@ -4,7 +4,7 @@ export default defineOAuthAuth0EventHandler({
   },
   async onSuccess(event, { user }) {
     const locale = getCookie(event, 'i18n_redirected')
-    console.log('locale', locale)
+
     await setUserSession(event, {
       user,
       loggedInAt: Date.now(),
