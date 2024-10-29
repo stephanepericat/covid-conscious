@@ -36,11 +36,13 @@ export default defineNuxtConfig({
     'nuxt-vitest',
     '@nuxt/image',
     'nuxt3-leaflet',
-    '@nuxtjs/seo'
+    '@nuxtjs/seo',
+    'nuxt-auth-utils',
   ],
 
   runtimeConfig: {
     public: {
+      bypassLogin: process.env.APP_BYPASS_LOGIN === '1' || false,
       supabaseForum: {
         rootPath: '/forum',
       },

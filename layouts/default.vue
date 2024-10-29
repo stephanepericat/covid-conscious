@@ -1,6 +1,6 @@
 <template>
   <ILayout class="default-layout">
-    <template v-if="$appSettings.PASSWORD_PROTECT && !authorized">
+    <template v-if="$appSettings.PASSWORD_PROTECT && !authorized && !runtimeConfig.public.bypassLogin">
       <div class="h-screen w-screen flex justify-center	items-center">
         <div>
           <IForm
@@ -328,6 +328,7 @@
   const password = ref('')
   const authCookie = useCookie('tcl-auth', { default: null, watch: true })
   const authorized = ref(false)
+  const runtimeConfig = useRuntimeConfig()
 
   const handleLogin = async () => {
     loading.value = true
