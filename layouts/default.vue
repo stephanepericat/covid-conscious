@@ -89,7 +89,7 @@
                   </IDropdownItem>
                 </template>
                 <template v-else>
-                  <IDropdownItem :to="localePath('/login')">
+                  <IDropdownItem href="/auth/auth0">
                     <span>{{ $t('layout.user.signIn') }}</span>
                   </IDropdownItem>
                   <IDropdownItem :to="localePath('/create-account')">
@@ -397,7 +397,8 @@
   const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`)
 
   // User Menu
-  const { loggedIn: isLoggedIn, user } = useUserSession()
+  const { clear, loggedIn: isLoggedIn, user } = useUserSession()
+
   const avatar = computedAsync(
     async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
     null
