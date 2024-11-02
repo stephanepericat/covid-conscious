@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     'nuxt3-leaflet',
     '@nuxtjs/seo',
     'nuxt-auth-utils',
+    '@prisma/nuxt',
   ],
 
   runtimeConfig: {
