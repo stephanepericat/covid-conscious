@@ -4,7 +4,6 @@ export default defineOAuthAuth0EventHandler({
   },
   async onSuccess(event, { user }) {
     const locale = getCookie(event, 'i18n_redirected')
-    console.log('user', user)
 
     await setUserSession(event, {
       user,
@@ -17,6 +16,7 @@ export default defineOAuthAuth0EventHandler({
   onError(event, error) {
     console.error('Auth0 OAuth error:', error)
     const locale = getCookie(event, 'i18n_redirected')
+    // TODO: redirect to error page?
     return sendRedirect(event, `${locale && locale !== 'en' ? `/${locale}` : '/'}`)
   },
 })
