@@ -13,7 +13,12 @@ export const usePrisma = () => {
     }
   }
 
+  const getOrCreateUser = async (email: string) => {
+    
+  }
+
   return {
+    getOrCreateUser,
     getUser,
   }
 }
