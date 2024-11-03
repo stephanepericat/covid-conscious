@@ -12,6 +12,7 @@
       /> -->
       <p className="text-center">{{ user.email }}</p>
       <p className="text-center">{{ user.sub }}</p>
+      <p>info: {{ userInfo }}</p>
       <IFormGroup class="account-page__logout">
         <IButton
           link
@@ -27,9 +28,16 @@
 <script setup>
   import { useSignOut } from '../assets/composables/useSignOut'
   import { useToast } from '@inkline/inkline'
-  import Account from '../components/UserAccount.vue'
+  // import Account from '../components/UserAccount.vue'
+  import { usePrisma } from '~/assets/composables/usePrisma';
+
+  const { getUser } = usePrisma()
 
   const { user } = useUserSession()
+  const userInfo = computedAsync(
+    async () => !user?.value?.email ? null : await getUser(user.value.email),
+    null
+  )
 
   const toast = useToast()
   // const user = useSupabaseUser()
