@@ -53,6 +53,14 @@ export default defineNuxtConfig({
     },
   },
 
+  vite: {
+    resolve: {
+      alias: {
+        '.prisma/client/index-browser': './node_modules/.prisma/client/index-browser.js',
+      },
+    },
+  },
+
   // module options
 
   cloudflareAnalytics: {
@@ -85,6 +93,12 @@ export default defineNuxtConfig({
 
   ogImage: {
     enabled: false,
+  },
+
+  prisma: {
+    installCLI: process.env.NODE_ENV === 'development',
+    installClient: process.env.NODE_ENV === 'development',
+    installStudio: false
   },
 
   robots: {
