@@ -8,19 +8,22 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  role    Role     @default(USER)
-  posts   Post[]
-  profile Profile?
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  sub       String?
+  verified  Boolean? @default(false)
+  role      Role     @default(USER)
+  posts     Post[]
+  profile   Profile?
 }
 
 model Profile {
-  id     Int    @id @default(autoincrement())
-  bio    String
-  user   User   @relation(fields: [userId], references: [id])
-  userId Int    @unique
+  id      Int     @id @default(autoincrement())
+  name    String?
+  bio     String?
+  website String?
+  user    User    @relation(fields: [userId], references: [id])
+  userId  Int     @unique
 }
 
 model Post {

@@ -11,6 +11,7 @@
         @success="onUpdateSuccess"
       /> -->
       <p className="text-center">{{ user.email }}</p>
+      <p className="text-center">{{ user.sub }}</p>
       <IFormGroup class="account-page__logout">
         <IButton
           link
