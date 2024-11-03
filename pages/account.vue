@@ -31,11 +31,11 @@
   // import Account from '../components/UserAccount.vue'
   import { usePrisma } from '~/assets/composables/usePrisma';
 
-  const { getUser } = usePrisma()
+  const { getOrCreateUser } = usePrisma()
 
   const { user } = useUserSession()
   const userInfo = computedAsync(
-    async () => !user?.value?.email ? null : await getUser(user.value.email),
+    async () => !user?.value?.email ? null : await getOrCreateUser(user.value.email),
     null
   )
 

@@ -22,9 +22,12 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        email
+    const user = await prisma.user.create({
+      data: {
+        email: email,
+        profile: {
+          create: {}
+        }
       }
     })
 
