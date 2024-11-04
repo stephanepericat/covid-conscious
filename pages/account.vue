@@ -101,7 +101,9 @@
       <IForm v-if="userInfo" v-model="schema" class="my-12" @submit="onSubmit">
         <div class="flex flex-row mb-8">
           <ITooltip placement="top" size="sm" interactable>
-            <NuxtImg :src="avatar" class="w-[120px] h-[120px] rounded-full hover:cursor-pointer" />
+            <NuxtLink href="https://gravatar.com" target="_blank">
+              <NuxtImg :src="avatar" class="w-[120px] h-[120px] rounded-full" />
+            </NuxtLink>
             <template #body>
               <div class="max-w-[120px] whitespace-normal">
                 {{ $t("forum.account.labels.avatar") }} <a href="https://gravatar.com" target="_blank">gravatar.com</a>
