@@ -25,16 +25,13 @@ export default defineEventHandler(async (event) => {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
         email
+      },
+      include: {
+        profile: true,
       }
     })
 
-    const profile = await prisma.profile.findUniqueOrThrow({
-      where: {
-        userId: user.id
-      }
-    })
-
-    return { ...user, profile }
+    return user
   } catch (e) {
     consola.error(e)
     return null

@@ -52,9 +52,10 @@
           <IButton
             type="submit"
             block
-            :disabled="!schema.dirty || !schema.valid"
+            :disabled="!schema.dirty || !schema.valid || loading"
           >
             <Icon
+              v-if="loading"
               name="eos-icons:loading"
             />
             {{ $t("forum.account.labels.update") }}
@@ -127,6 +128,7 @@
   // const user = useSupabaseUser()
   const { t } = useI18n()
   const { onError, signOut } = useSignOut(user)
+  const loading = ref(false)
 
   const onUpdateSuccess = () => {
     toast.show({
@@ -137,7 +139,12 @@
   }
 
   const onSubmit = () => {
-    console.log('submit', form.value)
+    const payload = {
+      ...form.value,
+      id: userInfo?.value.profile?.id,
+      userId: userInfo?.value?.id,
+    }
+    console.log('submit', payload)
   }
 
   watch(userInfo, () => {
@@ -148,8 +155,6 @@
       schema.value.name.value = profile.name || ''
       schema.value.website.value = profile.website || ''
     }
-
-    console.log('schame', schema.value)
   }, { immediate: true })
 
   umTrackView()
