@@ -1,3 +1,92 @@
+<script setup>
+  import isURL from 'validator/lib/isURL'
+  import { useSignOut } from '~/assets/composables/useSignOut'
+  import { ITooltip, useToast } from '@inkline/inkline'
+  // import Account from '../components/UserAccount.vue'
+  import { usePrisma } from '~/assets/composables/usePrisma'
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
+  import { useForm } from '@inkline/inkline/composables'
+
+  const { form, schema } = useForm({
+    bio: {
+      validators: [{ name: 'maxLength', value: 512 }],
+    },
+    name: {
+      validators: [
+        { name: 'required' },
+        { name: 'alphanumeric' },
+        { name: 'minLength', value: 5 },
+      ],
+    },
+    website: {
+      validators: [
+        {
+          name: 'custom',
+          message: 'Please enter a valid URL.',
+          validator: (value) => {
+            if (!value) return true
+            return isURL(value)
+          },
+        },
+      ],
+    },
+  })
+
+  const { getOrCreateUser } = usePrisma()
+
+  const { user } = useUserSession()
+  const userInfo = computedAsync(
+    async () =>
+      user?.value?.email ? await getOrCreateUser(user.value.email) : null,
+    null,
+  )
+
+  const avatar = computedAsync(
+    async () =>
+      user?.value?.email ? await getGravatarUrl(user.value.email) : null,
+    null,
+  )
+
+  const toast = useToast()
+  // const user = useSupabaseUser()
+  const { t } = useI18n()
+  const { onError, signOut } = useSignOut(user)
+  const loading = ref(false)
+
+  const onUpdateSuccess = () => {
+    toast.show({
+      title: t('forum.auth.toast.update.title'),
+      message: t('forum.auth.toast.update.message'),
+      color: 'success',
+    })
+  }
+
+  const onSubmit = () => {
+    const payload = {
+      ...form.value,
+      id: userInfo?.value.profile?.id,
+      userId: userInfo?.value?.id,
+    }
+    console.log('submit', payload)
+  }
+
+  watch(
+    userInfo,
+    () => {
+      const { profile = null } = userInfo.value || {}
+
+      if (profile) {
+        schema.value.bio.value = profile.bio || ''
+        schema.value.name.value = profile.name || ''
+        schema.value.website.value = profile.website || ''
+      }
+    },
+    { immediate: true },
+  )
+
+  umTrackView()
+</script>
+
 <template>
   <div class="account-page">
     <h1 class="account-page__title" v-text="$t('forum.account.title')" />
@@ -11,7 +100,14 @@
       <!-- <UserProfile v-if="userInfo" :info="userInfo" /> -->
       <IForm v-if="userInfo" v-model="schema" class="my-12" @submit="onSubmit">
         <div class="flex flex-row mb-8">
-          <NuxtImg :src="avatar" class="w-[120px] h-[120px] rounded-full" />
+          <ITooltip placement="top" size="sm" interactable>
+            <NuxtImg :src="avatar" class="w-[120px] h-[120px] rounded-full hover:cursor-pointer" />
+            <template #body>
+              <div class="max-w-[120px] whitespace-normal">
+                {{ $t("forum.account.labels.avatar") }} <a href="https://gravatar.com" target="_blank">gravatar.com</a>
+              </div>
+            </template>
+          </ITooltip>
           <div class="ml-6 flex-grow flex flex-col justify-center">
             <h4
               class="text-sm md:text-xl font-bold uppercase tracking-widest mb-4 text-ellipsis overflow-hidden max-w-[230px] md:max-w-[400px]"
@@ -68,94 +164,7 @@
     </div>
   </div>
 </template>
-<script setup>
-import isURL from 'validator/lib/isURL'
-import { useSignOut } from '~/assets/composables/useSignOut'
-import { useToast } from '@inkline/inkline'
-// import Account from '../components/UserAccount.vue'
-import { usePrisma } from '~/assets/composables/usePrisma'
-import { getGravatarUrl } from '~/assets/utils/gravatar'
-import { useForm } from '@inkline/inkline/composables'
 
-const { form, schema } = useForm({
-  bio: {
-    validators: [{ name: 'maxLength', value: 512 }],
-  },
-  name: {
-    validators: [
-      { name: 'required' },
-      { name: 'alphanumeric' },
-      { name: 'minLength', value: 5 },
-    ],
-  },
-  website: {
-    validators: [
-      {
-        name: 'custom',
-        message: 'Please enter a valid URL.',
-        validator: (value) => {
-          if (!value) return true
-          return isURL(value)
-        },
-      },
-    ],
-  },
-})
-
-const { getOrCreateUser } = usePrisma()
-
-const { user } = useUserSession()
-const userInfo = computedAsync(
-  async () =>
-    user?.value?.email ? await getOrCreateUser(user.value.email) : null,
-  null,
-)
-
-const avatar = computedAsync(
-  async () =>
-    user?.value?.email ? await getGravatarUrl(user.value.email) : null,
-  null,
-)
-
-const toast = useToast()
-// const user = useSupabaseUser()
-const { t } = useI18n()
-const { onError, signOut } = useSignOut(user)
-const loading = ref(false)
-
-const onUpdateSuccess = () => {
-  toast.show({
-    title: t('forum.auth.toast.update.title'),
-    message: t('forum.auth.toast.update.message'),
-    color: 'success',
-  })
-}
-
-const onSubmit = () => {
-  const payload = {
-    ...form.value,
-    id: userInfo?.value.profile?.id,
-    userId: userInfo?.value?.id,
-  }
-  console.log('submit', payload)
-}
-
-watch(
-  userInfo,
-  () => {
-    const { profile = null } = userInfo.value || {}
-
-    if (profile) {
-      schema.value.bio.value = profile.bio || ''
-      schema.value.name.value = profile.name || ''
-      schema.value.website.value = profile.website || ''
-    }
-  },
-  { immediate: true },
-)
-
-umTrackView()
-</script>
 <style lang="scss" scoped>
 @import '../assets/sass/mixins.scss';
 
