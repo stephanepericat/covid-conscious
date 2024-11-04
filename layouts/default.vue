@@ -92,12 +92,12 @@
                   <IDropdownItem href="/auth/auth0">
                     <span>{{ $t('layout.user.signIn') }}</span>
                   </IDropdownItem>
-                  <IDropdownItem :to="localePath('/create-account')">
+                  <!-- <IDropdownItem :to="localePath('/create-account')">
                     <span>{{ $t('layout.user.createAccount') }}</span>
                   </IDropdownItem>
                   <IDropdownItem :to="localePath('/reset-password')">
                     <span>{{ $t('layout.user.resetPassword') }}</span>
-                  </IDropdownItem>
+                  </IDropdownItem> -->
                 </template>
               </template>
             </IDropdown>
