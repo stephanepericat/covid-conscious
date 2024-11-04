@@ -21,7 +21,7 @@
         <div class="flex flex-row mb-8">
           <NuxtImg :src="avatar" class="w-[120px] h-[120px] rounded-full" />
           <div class="ml-6 flex-grow flex flex-col justify-center">
-            <h4 class="text-xl font-bold uppercase tracking-widest mb-4 text-ellipsis overflow-hidden max-w-[400px]">{{ userInfo.email }}</h4>
+            <h4 class="text-sm md:text-xl font-bold uppercase tracking-widest mb-4 text-ellipsis overflow-hidden max-w-[230px] md:max-w-[400px]">{{ userInfo.email }}</h4>
             <IFormGroup>
               <IInput
                 type="text"
