@@ -1,10 +1,15 @@
-import { PrismaClient as BasePrismaClient } from '@prisma/client'
+// import { PrismaClient as BasePrismaClient } from '@prisma/client'
 // import { beforeEach } from 'vitest'
-import { mockDeep /*, mockReset */ } from 'vitest-mock-extended'
+// import { mockDeep /*, mockReset */ } from 'vitest-mock-extended'
 
 // beforeEach(() => {
 //   mockReset(prismaMock)
 // })
 
-const PrismaClient = mockDeep(BasePrismaClient)
+// const PrismaClient = mockDeep(BasePrismaClient)
+
+class PrismaClient {
+
+}
+
 export { PrismaClient }
