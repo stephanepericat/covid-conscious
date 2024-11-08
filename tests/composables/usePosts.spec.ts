@@ -8,6 +8,7 @@ import mockCreateComment from '~/tests/__fixtures__/createComment.json'
 import mockPost from '~/tests/__fixtures__/getPost.json'
 import mockPostPayload from '~/tests/__fixtures__/createPostPayload.json'
 import mockTopics from '~/tests/__fixtures__/topics.json'
+import { PrismaClient } from '@prisma/client'
 
 const { useSupabaseClientMock } = vi.hoisted(() => {
   return {
@@ -25,7 +26,11 @@ const { useSupabaseClientMock } = vi.hoisted(() => {
 
 mockNuxtImport('useSupabaseClient', () => useSupabaseClientMock)
 
-vi.mock('~/libs/prisma')
+vi.mock('@prisma/client', () => {
+  return {
+    PrismaClient: () => {}
+  }
+})
 
 describe('Composables > usePosts', () => {
   describe('getAvatarUrl', () => {
