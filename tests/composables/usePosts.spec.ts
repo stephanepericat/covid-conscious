@@ -25,6 +25,8 @@ const { useSupabaseClientMock } = vi.hoisted(() => {
 
 mockNuxtImport('useSupabaseClient', () => useSupabaseClientMock)
 
+vi.mock('~/libs/prisma')
+
 describe('Composables > usePosts', () => {
   describe('getAvatarUrl', () => {
     it("should return null, if no id is provided", async () => {

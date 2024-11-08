@@ -17,6 +17,8 @@ const { useFetchMock } = vi.hoisted(() => {
 
 mockNuxtImport('useFetch', () => useFetchMock)
 
+vi.mock('~/libs/prisma')
+
 describe('Composables > useTranslation', () => {
   it('should make an api call to get a translation', async () => {
     const { translateText } = useTranslation()
