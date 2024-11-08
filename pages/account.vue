@@ -32,7 +32,7 @@
     },
   })
 
-  const { getOrCreateUser } = usePrisma()
+  const { getOrCreateUser, updateUserProfile } = usePrisma()
 
   const { user } = useUserSession()
   const userInfo = computedAsync(
@@ -61,13 +61,22 @@
     })
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
+    loading.value = true
     const payload = {
-      ...form.value,
-      id: userInfo?.value.profile?.id,
-      userId: userInfo?.value?.id,
+      data: form.value,
+      profileId: userInfo?.value.profile?.id,
     }
-    console.log('submit', payload)
+
+    try {
+      await updateUserProfile(payload)
+      onUpdateSuccess()
+    } catch(e) {
+      console.error(e)
+      onError(e)
+    } finally {
+      loading.value = false
+    }
   }
 
   watch(
@@ -97,7 +106,6 @@
         @error="onError"
         @success="onUpdateSuccess"
       /> -->
-      <!-- <UserProfile v-if="userInfo" :info="userInfo" /> -->
       <IForm v-if="userInfo" v-model="schema" class="my-12" @submit="onSubmit">
         <div class="flex flex-row mb-8">
           <ITooltip placement="top" size="sm" interactable>

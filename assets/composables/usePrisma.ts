@@ -37,9 +37,22 @@ export const usePrisma = () => {
     }
   }
 
+  const updateUserProfile = async (body: { data: any, profileId: number }) => {
+    try {
+      return await $fetch('/api/forum/user/update-profile', {
+        method: 'POST',
+        body,
+      })
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
   return {
     createUser,
     getOrCreateUser,
     getUser,
+    updateUserProfile,
   }
 }
