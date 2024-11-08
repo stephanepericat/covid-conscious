@@ -25,6 +25,24 @@ export const usePrisma = () => {
     }
   }
 
+  const getUsername = async (email: string) => {
+    try {
+      const user = await $fetch('/api/forum/user/get-user', {
+        method: 'POST',
+        body: { email }
+      })
+
+      if(!user) {
+        return null
+      }
+
+      return user.profile?.name || null;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
   const getOrCreateUser = async (email: string) => {
     try {
       const user = await getUser(email)
@@ -53,6 +71,7 @@ export const usePrisma = () => {
     createUser,
     getOrCreateUser,
     getUser,
+    getUsername,
     updateUserProfile,
   }
 }

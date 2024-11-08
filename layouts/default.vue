@@ -312,8 +312,9 @@
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
   import { useMobileButtons } from '~/assets/composables/useMobileButtons'
+  import { usePrisma } from '~/assets/composables/usePrisma'
 
   const inkline = useInkline()
   const { t } = useI18n()
@@ -322,7 +323,8 @@
   const localePath = useLocalePath()
   const router = useRouter()
   const { $appSettings } = useNuxtApp()
-  const { getUsernameById } = usePosts()
+  // const { getUsernameById } = usePosts()
+  const { getUsername } = usePrisma()
   const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } = useMobileButtons()
   const loading = ref(false)
   const password = ref('')
@@ -403,10 +405,17 @@
     async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
     null
   )
+
   const username = computedAsync(
-    async () => !user?.value?.id ? null : await getUsernameById(user.value.id),
-    null
+    async () =>
+      user?.value?.email ? await getUsername(user.value.email) : null,
+    null,
   )
+
+  // const username = computedAsync(
+  //   async () => !user?.value?.id ? null : await getUsernameById(user.value.id),
+  //   null
+  // )
   const { signOut } = useSignOut(user)
 
   watch(authCookie, () => {
