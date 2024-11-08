@@ -33,7 +33,7 @@ export const usePrisma = () => {
       })
 
       if(!user) {
-        return null
+        throw new Error('User not found')
       }
 
       return user.profile?.name || null;
