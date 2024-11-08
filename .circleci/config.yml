@@ -15,5 +15,4 @@ jobs:
 workflows:
   test-workflow:
     jobs:
-      - run-tests:
-        context: tcl
+      - run-tests
