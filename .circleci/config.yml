@@ -9,9 +9,11 @@ jobs:
     steps:
       - checkout
       - run: "yarn --immutable"
-      - run: "yarn prisma:generate && yarn test:ci"
+      - run: "yarn prisma:generate"
+      - run: "yarn test:ci"
 
 workflows:
   test-workflow:
     jobs:
-      - run-tests
+      - run-tests:
+        context: tcl
