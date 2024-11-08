@@ -28,8 +28,13 @@ export default defineEventHandler(async (event) => {
       },
       include: {
         profile: true,
+      },
+      cacheStrategy: {
+        ttl: 60,
+        tags: ['get_user']
       }
     })
+    .withAccelerateInfo()
 
     return user
   } catch (e) {

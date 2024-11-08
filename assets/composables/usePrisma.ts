@@ -15,10 +15,12 @@ export const usePrisma = () => {
 
   const getUser = async (email: string) => {
     try {
-      return await $fetch('/api/forum/user/get-user', {
+      const res = await $fetch('/api/forum/user/get-user', {
         method: 'POST',
         body: { email }
       })
+
+      return res?.data
     } catch(e) {
       consola.error(e)
       return null
@@ -27,16 +29,16 @@ export const usePrisma = () => {
 
   const getUsername = async (email: string) => {
     try {
-      const user = await $fetch('/api/forum/user/get-user', {
+      const res = await $fetch('/api/forum/user/get-user', {
         method: 'POST',
         body: { email }
       })
 
-      if(!user) {
+      if(!res?.data) {
         throw new Error('User not found')
       }
 
-      return user.profile?.name || null;
+      return res.data.profile?.name || null;
     } catch(e) {
       consola.error(e)
       return null

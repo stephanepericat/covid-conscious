@@ -38,10 +38,17 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    return await prisma.profile.update({
+    const update = await prisma.profile.update({
       where: { id: profileId },
       data,
     })
+
+    // invalidate get user cache on profile update
+    await prisma.$accelerate.invalidate({
+      tags: ["get_user"],
+    })
+
+    return update
   } catch (e) {
     consola.error(e)
     return null
