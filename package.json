@@ -27,8 +27,7 @@
     "nuxt-vitest": "^0.11.5",
     "prisma": "^5.22.0",
     "sass": "^1.0.0",
-    "vitest": "^0.33.0",
-    "vitest-mock-extended": "^2.0.2"
+    "vitest": "^0.33.0"
   },
   "dependencies": {
     "@emailjs/nodejs": "^2.2.0",
