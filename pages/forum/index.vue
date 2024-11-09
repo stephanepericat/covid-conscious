@@ -38,19 +38,22 @@
 </template>
 <script setup>
   import PostList from '~/components/PostList.vue'
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
+  import { usePrisma } from '~/assets/composables/usePrisma';
   import { FORUM } from '~/assets/constants/types'
 
   const user = useSupabaseUser()
   const isLoggedIn = computed(() => !!user?.value?.id)
 
-  const {
-    getPosts,
-    getTotalCount,
-    loading,
-  } = usePosts()
+  // const {
+  //   getPosts,
+  //   getTotalCount,
+  //   loading,
+  // } = usePosts()
 
-  const total = await getTotalCount()
+  const { getPosts } = usePrisma()
+
+  // const total = await getTotalCount()
   const posts = ref(null)
 
   const onPageChange = async ({ endItem, startItem }) => {

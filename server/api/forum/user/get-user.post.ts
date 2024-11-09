@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const user = await prisma.user.findUniqueOrThrow({
+    return await prisma.user.findUniqueOrThrow({
       where: {
         email
       },
@@ -35,8 +35,6 @@ export default defineEventHandler(async (event) => {
       }
     })
     .withAccelerateInfo()
-
-    return user
   } catch (e) {
     consola.error(e)
     return null

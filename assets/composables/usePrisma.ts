@@ -57,6 +57,23 @@ export const usePrisma = () => {
     }
   }
 
+  const getPosts = async () => {
+    try {
+      const res = await $fetch('/api/forum/post/get-posts', {
+        method: 'POST',
+      })
+
+      if(!res?.data) {
+        throw new Error('User not found')
+      }
+
+      return res.data || null;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
   const updateUserProfile = async (body: { data: any, profileId: number }) => {
     try {
       return await $fetch('/api/forum/user/update-profile', {
@@ -72,6 +89,7 @@ export const usePrisma = () => {
   return {
     createUser,
     getOrCreateUser,
+    getPosts,
     getUser,
     getUsername,
     updateUserProfile,

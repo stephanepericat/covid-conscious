@@ -44,9 +44,9 @@ export default defineEventHandler(async (event) => {
     })
 
     // invalidate get user cache on profile update
-    await prisma.$accelerate.invalidate({
-      tags: ["get_user"],
-    })
+    // await prisma.$accelerate.invalidate({
+    //   tags: ["get_user"],
+    // })
 
     return update
   } catch (e) {
