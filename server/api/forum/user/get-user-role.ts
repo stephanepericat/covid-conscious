@@ -27,19 +27,19 @@ export default defineEventHandler(async (event) => {
       where: {
         email
       },
-      include: {
-        profile: true,
+      select: {
+        role: true
       },
       cacheStrategy: {
-        ttl: 60,
-        tags: ['get_user']
+        ttl: 30,
+        tags: ['get_user_role']
       }
     })
     .withAccelerateInfo()
 
-    consola.info('GET USER - ', user.info)
+    consola.info('GET USER ROLE - ', user.info)
 
-    return user.data || null
+    return user.data?.role || null
   } catch (e) {
     consola.error(e)
     return null

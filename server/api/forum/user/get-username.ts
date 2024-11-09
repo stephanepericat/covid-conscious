@@ -2,7 +2,6 @@ import consola from 'consola'
 import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
-  const { user } = await getUserSession(event)
   const { email } = await readBody(event)
 
   if(!email) {
@@ -13,33 +12,28 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  // TODO: see if this is needed?
-  if(!user || user.email !== email) {
-    throw createError({
-      status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
-    })
-  }
-
   try {
     const user = await prisma.user.findUniqueOrThrow({
       where: {
         email
       },
       include: {
-        profile: true,
+        profile: {
+          select: {
+            name: true
+          }
+        },
       },
       cacheStrategy: {
-        ttl: 60,
-        tags: ['get_user']
+        ttl: 30,
+        tags: ['get_username']
       }
     })
     .withAccelerateInfo()
 
-    consola.info('GET USER - ', user.info)
+    consola.info('GET USERNAME - ', user.info)
 
-    return user.data || null
+    return user.data?.profile?.name || null
   } catch (e) {
     consola.error(e)
     return null

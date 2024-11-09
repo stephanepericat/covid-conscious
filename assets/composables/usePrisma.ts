@@ -29,16 +29,34 @@ export const usePrisma = () => {
 
   const getUsername = async (email: string) => {
     try {
-      const res = await $fetch('/api/forum/user/get-user', {
+      const res = await $fetch('/api/forum/user/get-username', {
         method: 'POST',
         body: { email }
       })
 
       if(!res) {
-        throw new Error('User not found')
+        throw new Error('Username not found')
       }
 
-      return res.profile?.name || null;
+      return res;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
+  const getUserRole = async (email: string) => {
+    try {
+      const res = await $fetch('/api/forum/user/get-user-role', {
+        method: 'POST',
+        body: { email }
+      })
+
+      if(!res) {
+        throw new Error('User role not found')
+      }
+
+      return res;
     } catch(e) {
       consola.error(e)
       return null
@@ -111,6 +129,7 @@ export const usePrisma = () => {
     getPosts,
     getUser,
     getUsername,
+    getUserRole,
     updateUserProfile,
   }
 }

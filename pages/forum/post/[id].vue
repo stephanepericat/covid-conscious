@@ -59,7 +59,7 @@
           <div v-html="translationResults.text" />
         </div>
       </section>
-      <!-- <section class="sf-post-page__comments">
+      <section class="sf-post-page__comments">
         <CommentBox
           class="sf-post-page__comments--box"
           :post-id="parseInt(route.params.id)"
@@ -70,14 +70,14 @@
           <Icon name="icon-park-outline:comments" />
           <span>{{ $t("forum.post.comments") }}</span>
         </h2>
-        <CommentList
+        <!-- <CommentList
           :comments="comments"
           :page="activePage"
           :pending="commentsLoading"
           :total-items="totalComments"
           @delete-comment="onDeleteComment"
           @page-change="onCommentsPageChange"
-        />
+        /> -->
         <IModal
         class="sf-post-page__modal"
           v-model="commentDeletionModalVisible"
@@ -106,7 +106,7 @@
             </div>
           </template>
         </IModal>
-      </section> -->
+      </section>
     </template>
     <IToastContainer />
   </div>
@@ -141,8 +141,10 @@ import { cleanPostBody } from '~/assets/utils/clean-post-body'
   const pageDescription = computed(() => post.value ? cleanPostBody(post.value.content) : null)
   const postBody = ref(null)
 
-  const totalComments = ref(0)
-  const comments = ref([])
+  // const totalComments = ref(0)
+  // const comments = ref([])
+  const comments = computed(() => post.value?.comments || [])
+  const totalComments = computed(() => comments.value?.length || 0)
   const activePage = ref(1)
 
   const onCommentsPageChange = async ({ currentPage, startItem, endItem }) => {

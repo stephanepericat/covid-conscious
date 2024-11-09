@@ -24,6 +24,11 @@ export default defineEventHandler(async (event) => {
           }
         },
         categories: true,
+        comments: {
+          include: {
+            author: true
+          }
+        }
       },
       cacheStrategy: {
         ttl: 180,
