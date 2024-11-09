@@ -9,38 +9,37 @@
         class="sf-post-page__title"
         v-text="post.title"
       />
-      {{ post }}
-      <!-- <IMedia class="sf-post-page__author">
+      <IMedia class="sf-post-page__author">
         <template #image>
-          <div class="sf-post-page__avatar--placeholder" v-if="!post.avatar || isSSR">
+          <div class="sf-post-page__avatar--placeholder" v-if="!avatar || isSSR">
             <Icon
               class="sf-post-page__avatar--placeholder-icon"
               name="material-symbols:account-circle-full"
             />
           </div>
           <img
-            v-else-if="post.avatar && !isSSR"
+            v-else-if="avatar && !isSSR"
             class="sf-post-page__avatar"
-            :src="post.avatar"
+            :src="avatar"
           >
         </template>
         <h5 class="sf-post-page__author--name">
-          <NuxtLink :to="localePath(`${rootPath}/user/${post.profiles.id}`)">
-            @{{ post.profiles.username || 'USER' }}
+          <NuxtLink :to="localePath(`${rootPath}/user/${post.author.id}`)">
+            @{{ post.author.profile.name || 'USER' }}
           </NuxtLink>
         </h5>
         <p class="sf-post-page__info">
           <span class="sf-post-page__info--category">
-            {{ $t(`forum.create.categories.${post.topic}`) }} / {{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}
+            <span v-if="post.categories.length">{{ $t(`forum.create.categories.${post.categories[0].name}`) }} / </span>{{ format(new Date(post.createdAt), LOCALIZED_DATE_FORMAT) }}
           </span>
         </p>
       </IMedia>
       <section class="sf-post-page__body">
-        <div class="sf-post-page__body--contents" ref="postBody" v-html="post.body"></div>
+        <div class="sf-post-page__body--contents" ref="postBody" v-html="post.content"></div>
         <a
           v-if="showTranslateButton"
           class="sf-post-page__translate--button"
-          href="#" 
+          href="#"
           @click="onTranslateClick"
         >
           {{ $t('forum.post.translate') }} &raquo;
@@ -51,7 +50,7 @@
           <div v-html="translationResults.text" />
         </div>
       </section>
-      <section class="sf-post-page__comments">
+      <!-- <section class="sf-post-page__comments">
         <CommentBox
           class="sf-post-page__comments--box"
           :post-id="parseInt(route.params.id)"
@@ -112,7 +111,8 @@
   import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { useTranslation } from '~/assets/composables/useTranslation'
-  import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
+  import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
+import { getGravatarUrl } from '~/assets/utils/gravatar'
 
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
@@ -126,6 +126,7 @@
 
   // const post = await getPost(route.params.id)
   const post = computedAsync(async () => await getPostById(route.params.id), null)
+  const avatar = computedAsync(async () => post.value ? await getGravatarUrl(post.value.author.email) : null, null)
   const postBody = ref(null)
 
   const totalComments = ref(0)

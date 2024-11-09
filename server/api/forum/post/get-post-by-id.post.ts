@@ -22,7 +22,8 @@ export default defineEventHandler(async (event) => {
           include: {
             profile: true
           }
-        }
+        },
+        categories: true,
       },
       cacheStrategy: {
         ttl: 180,
