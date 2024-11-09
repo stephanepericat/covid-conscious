@@ -78,6 +78,7 @@
           @delete-comment="onDeleteComment"
           @page-change="onCommentsPageChange"
         /> -->
+        <p>{{ post.comments }}</p>
         <IModal
         class="sf-post-page__modal"
           v-model="commentDeletionModalVisible"

@@ -17,18 +17,57 @@ export default defineEventHandler(async (event) => {
       where: {
         id: parseInt(id),
       },
+      omit: {
+        authorId: true,
+        updatedAt: true,
+      },
       include: {
         author: {
+          omit: {
+            email: true,
+            role: true,
+          },
           include: {
-            profile: true
-          }
+            profile: {
+              omit: {
+                id: true,
+                bio: true,
+                userId: true,
+                website: true,
+              },
+            },
+          },
         },
         categories: true,
         comments: {
+          where: {
+            published: true,
+          },
+          omit: {
+            authorId: true,
+            postId: true,
+            published: true,
+            updatedAt: true,
+          },
           include: {
-            author: true
-          }
-        }
+            author: {
+              omit: {
+                email: true,
+                role: true,
+              },
+              include: {
+                profile: {
+                  omit: {
+                    id: true,
+                    bio: true,
+                    userId: true,
+                    website: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
       cacheStrategy: {
         ttl: 180,
