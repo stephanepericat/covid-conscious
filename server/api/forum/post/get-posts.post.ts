@@ -1,17 +1,7 @@
 import consola from 'consola'
 import prisma from '~/lib/prisma'
 
-export default defineEventHandler(async (event) => {
-  const { user } = await getUserSession(event) 
-
-  if(!user) {
-    throw createError({
-      status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
-    });
-  }
-
+export default defineEventHandler(async () => {
   try {
     const posts = await prisma
       .post
@@ -50,7 +40,9 @@ export default defineEventHandler(async (event) => {
           swr: 5,
           tags: ['get_posts']
         },
-      })
+      }).withAccelerateInfo()
+
+      consola.info('GET POSTS - ', posts.info)
 
       const postCount = await prisma.post.count({
         where: {
@@ -61,9 +53,11 @@ export default defineEventHandler(async (event) => {
           swr: 5,
           tags: ['get_posts']
         },
-      })
+      }).withAccelerateInfo()
 
-      return { entries: posts || [], total: postCount }
+      consola.info('GET POSTS COUNT - ', postCount.info)
+
+      return { entries: posts.data || [], total: postCount.data || 0 }
   } catch (e) {
     consola.error(e)
     return null

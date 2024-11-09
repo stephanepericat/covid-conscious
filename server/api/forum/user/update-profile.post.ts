@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
       status: 400,
       message: "Bad request",
       statusMessage: "Email is missing",
-    });
+    })
   }
 
   if(!user) {
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       status: 403,
       message: "Unauthorized",
       statusMessage: "You are not authorized to access this resource",
-    });
+    })
   }
 
   try {
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
         status: 403,
         message: "Unauthorized",
         statusMessage: "You are not authorized to access this resource",
-      });
+      })
     }
 
     const update = await prisma.profile.update({

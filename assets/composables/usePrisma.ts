@@ -20,7 +20,7 @@ export const usePrisma = () => {
         body: { email }
       })
 
-      return res?.data
+      return res || null
     } catch(e) {
       consola.error(e)
       return null
@@ -34,11 +34,11 @@ export const usePrisma = () => {
         body: { email }
       })
 
-      if(!res?.data) {
+      if(!res) {
         throw new Error('User not found')
       }
 
-      return res.data.profile?.name || null;
+      return res.profile?.name || null;
     } catch(e) {
       consola.error(e)
       return null
@@ -51,6 +51,24 @@ export const usePrisma = () => {
       if(user) return user
 
       return await createUser(email)
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
+  const getPostById = async (id: number) => {
+    try {
+      const res = await $fetch('/api/forum/post/get-post-by-id', {
+        method: 'POST',
+        body: { id }
+      })
+
+      if(!res) {
+        throw new Error('Post not found')
+      }
+
+      return res || null;
     } catch(e) {
       consola.error(e)
       return null
@@ -89,6 +107,7 @@ export const usePrisma = () => {
   return {
     createUser,
     getOrCreateUser,
+    getPostById,
     getPosts,
     getUser,
     getUsername,

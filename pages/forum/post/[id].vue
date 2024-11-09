@@ -1,15 +1,16 @@
 <template>
   <div class="sf-post-page">
     <ILoader
-      v-if="loading"
+      v-if="!post"
       class="sf-post-page__loader"
     />
     <template v-else>
       <h1
         class="sf-post-page__title"
-        v-text="post.headline"
+        v-text="post.title"
       />
-      <IMedia class="sf-post-page__author">
+      {{ post }}
+      <!-- <IMedia class="sf-post-page__author">
         <template #image>
           <div class="sf-post-page__avatar--placeholder" v-if="!post.avatar || isSSR">
             <Icon
@@ -97,7 +98,7 @@
             </div>
           </template>
         </IModal>
-      </section>
+      </section> -->
     </template>
     <IToastContainer />
   </div>
@@ -109,6 +110,7 @@
   import CommentBox from '~/components/CommentBox.vue'
   import CommentList from '~/components/CommentList.vue'
   import { usePosts } from '~/assets/composables/usePosts'
+  import { usePrisma } from '~/assets/composables/usePrisma'
   import { useTranslation } from '~/assets/composables/useTranslation'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
@@ -119,9 +121,11 @@
   const toast = useToast()
   const { t, locale, localeProperties } = useI18n()
   const { commentsLoading, deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
+  const { getPostById } = usePrisma()
   const isSSR = computed(() => !process.client)
 
-  const post = await getPost(route.params.id)
+  // const post = await getPost(route.params.id)
+  const post = computedAsync(async () => await getPostById(route.params.id), null)
   const postBody = ref(null)
 
   const totalComments = ref(0)
@@ -221,8 +225,8 @@
     }
   }
 
-  totalComments.value = await getCommentsCount(route.params.id)
-  comments.value = await getComments(route.params.id)
+  // totalComments.value = await getCommentsCount(route.params.id)
+  // comments.value = await getComments(route.params.id)
 
   watch(locale, () => {
     translationResults.value = null
@@ -236,6 +240,8 @@
 .sf-post-page {
   &__loader {
     @include loader();
+
+    display: flex;
   }
 
   &__title {

@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
       status: 400,
       message: "Bad request",
       statusMessage: "Email is missing",
-    });
+    })
   }
 
   if(!user || user.email !== email) {
@@ -18,11 +18,11 @@ export default defineEventHandler(async (event) => {
       status: 403,
       message: "Unauthorized",
       statusMessage: "You are not authorized to access this resource",
-    });
+    })
   }
 
   try {
-    return await prisma.user.findUniqueOrThrow({
+    const user = await prisma.user.findUniqueOrThrow({
       where: {
         email
       },
@@ -35,6 +35,10 @@ export default defineEventHandler(async (event) => {
       }
     })
     .withAccelerateInfo()
+
+    consola.info('GET USER - ', user.info)
+
+    return user.data || null
   } catch (e) {
     consola.error(e)
     return null
