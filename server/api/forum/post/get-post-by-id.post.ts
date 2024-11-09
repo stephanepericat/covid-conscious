@@ -23,7 +23,12 @@ export default defineEventHandler(async (event) => {
             profile: true
           }
         }
-      }
+      },
+      cacheStrategy: {
+        ttl: 180,
+        swr: 30,
+        tags: ['get_post_by_id']
+      },
     })
     .withAccelerateInfo()
 
