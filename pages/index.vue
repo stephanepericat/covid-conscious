@@ -154,7 +154,7 @@
             <p v-text="$t('layout.empty.forum')" v-if="!posts?.length" />
             <template v-else>
               <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
-                <PostPreview
+                <!-- <PostPreview
                   v-for="post in posts"
                   :key="post.id"
                   hide-thumbnail
@@ -162,7 +162,8 @@
                   :root-path="rootPath"
                   :ssr="isSSR"
                   with-preview
-                />
+                /> -->
+                post
               </div>
               <!-- <div class="mt-4">
                 <NuxtLink

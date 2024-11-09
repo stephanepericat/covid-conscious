@@ -8,12 +8,11 @@
     />
     <template v-else>
       <p v-text="$t('forum.list.description', { start, end, total })" />
-      <!-- <ForumList
+      <ForumList
         :posts="posts"
         :root-path="rootPath"
         :ssr="isSSR"
-      /> -->
-      <p>{{ posts }}</p>
+      />
       <IPagination
         v-model="currentPage"
         class="sf-post-list__pagination"
@@ -40,7 +39,7 @@
 
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
-  const isSSR = computed(() => !process.client)
+  const isSSR = computed(() => !import.meta.client)
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
   const start = computed(() => startItem.value + 1)

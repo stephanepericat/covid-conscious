@@ -5,22 +5,23 @@
         <div class="post-preview__thumbnail--fallback">
         <ClientOnly>
           <img
-            v-if="post.avatar"
+            v-if="post.thumbnail"
             class="post-preview__thumbnail"
-            :src="post.avatar"
+            :src="post.thumbnail"
           >
         </ClientOnly>
-        <img v-if="!post.avatar || ssr" class="post-preview__thumbnail" src="/tcl-logo-big-grey.jpeg" />
+        <img v-if="!post.thumbnail || ssr" class="post-preview__thumbnail" src="/tcl-logo-big-grey.jpeg" />
       </div>
       </template>
       <h4 class="post-preview__link">
-        <NuxtLink :to="localePath(`${rootPath}/${POST}/${post.id}`)">{{ post.headline }}</NuxtLink>
+        <NuxtLink :to="localePath(`${rootPath}/${POST}/${post.id}`)">{{ post.title }}</NuxtLink>
       </h4>
-      <p class="post-preview__description text-sm" v-if="withPreview">{{ cleanPostBody(post.body) }}</p>
+      <p class="post-preview__description text-xs" v-if="withPreview">{{ cleanPostBody(post.description) }}</p>
       <em class="post-preview__metadata">
-        <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge>
-        <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.profiles.id}`)">@{{ post.profiles.username|| 'USER' }}</NuxtLink></span>
-        <span class="post-preview__forum-date"> &bullet; {{ format(new Date(post.created_at), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
+        <!-- <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge> -->
+        <IBadge class="post-preview__forum-tag" size="sm" v-for="tag in post.tags" :key="tag.id">{{ tag.name }}</IBadge>
+        <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.author.id}`)">@{{ post.author.username || 'USER' }}</NuxtLink></span>
+        <span class="post-preview__forum-date"> &bullet; {{ format(new Date(post.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
       </em>
     </IMedia>
   </div>
