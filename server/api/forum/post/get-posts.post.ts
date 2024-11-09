@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    return await prisma
+    const posts = await prisma
       .post
       .findMany({
         where: {
@@ -50,9 +50,21 @@ export default defineEventHandler(async (event) => {
           ttl: 60,
           swr: 5,
           tags: ['get_posts']
-        }
+        },
       })
-      .withAccelerateInfo()
+
+      const postCount = await prisma.post.count({
+        where: {
+          published: true,
+        },
+        cacheStrategy: {
+          ttl: 60,
+          swr: 5,
+          tags: ['get_posts']
+        },
+      })
+
+      return { entries: posts || [], total: postCount }
   } catch (e) {
     consola.error(e)
     return null

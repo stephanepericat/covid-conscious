@@ -63,11 +63,11 @@ export const usePrisma = () => {
         method: 'POST',
       })
 
-      if(!res?.data) {
+      if(!res) {
         throw new Error('User not found')
       }
 
-      return res.data || null;
+      return res || null;
     } catch(e) {
       consola.error(e)
       return null

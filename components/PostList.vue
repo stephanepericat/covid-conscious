@@ -1,7 +1,6 @@
 <template>
   <div
     class="sf-post-list"
-    :class="{ pending }"
   >
     <ILoader
       v-if="pending"
@@ -9,11 +8,12 @@
     />
     <template v-else>
       <p v-text="$t('forum.list.description', { start, end, total })" />
-      <ForumList
+      <!-- <ForumList
         :posts="posts"
         :root-path="rootPath"
         :ssr="isSSR"
-      />
+      /> -->
+      <p>{{ posts }}</p>
       <IPagination
         v-model="currentPage"
         class="sf-post-list__pagination"
@@ -66,6 +66,8 @@
 
   &__loader {
     @include loader();
+
+    display: flex;
   }
 
   &__pagination {

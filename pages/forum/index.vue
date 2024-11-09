@@ -54,10 +54,16 @@
   const { getPosts } = usePrisma()
 
   // const total = await getTotalCount()
+  const total = ref(0)
   const posts = ref(null)
+  const loading = ref(false)
 
   const onPageChange = async ({ endItem, startItem }) => {
-    posts.value = await getPosts(startItem, endItem - 1)
+    loading.value = true
+    const results = await getPosts(startItem, endItem - 1)
+    posts.value = results?.entries || []
+    total.value = results?.total || 0
+    loading.value = false
   }
 
   // get initial set of results on load
