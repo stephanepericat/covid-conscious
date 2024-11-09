@@ -113,6 +113,7 @@
   const { t } = useI18n()
   const { createPost, getTopics, getUserById } = usePosts()
 
+  // TODO ! Add introduction topic
   const topics = await getTopics()
 
   const categories = computed(

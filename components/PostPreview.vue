@@ -19,7 +19,8 @@
       <p class="post-preview__description text-xs" v-if="withPreview">{{ cleanPostBody(post.description) }}</p>
       <em class="post-preview__metadata">
         <!-- <IBadge class="post-preview__forum-tag" size="sm">{{ $t(`forum.create.categories.${post.topic}`) }}</IBadge> -->
-        <IBadge class="post-preview__forum-tag" size="sm" v-for="tag in post.tags" :key="tag.id">{{ tag.name }}</IBadge>
+         <!-- TODO: make forum topic clickable -->
+        <IBadge class="post-preview__forum-tag" size="sm" v-for="tag in post.tags" :key="tag.id">{{ $t(`forum.create.categories.${tag.name}`) }}</IBadge>
         <span> &bullet; <NuxtLink class="post-preview__forum-author" :to="localePath(`${rootPath}/${USER}/${post.author.id}`)">@{{ post.author.username || 'USER' }}</NuxtLink></span>
         <span class="post-preview__forum-date"> &bullet; {{ format(new Date(post.published), LOCALIZED_DATE_FORMAT, { locale: getDateLocale(locale)}) }}</span>
       </em>

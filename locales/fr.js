@@ -323,6 +323,7 @@ export default {
     },
     create: {
       categories: {
+        introduction: 'Introduction',
         lifestyle: 'Mode de Vie',
         'long-covid': 'Covid Long',
         products: 'EPI',

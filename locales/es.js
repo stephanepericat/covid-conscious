@@ -322,6 +322,7 @@ export default {
     },
     create: {
       categories: {
+        introduction: 'Introducción',
         lifestyle: 'Estilo de Vida',
         'long-covid': 'Largo Covid',
         products: 'EPI',
