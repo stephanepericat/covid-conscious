@@ -1,5 +1,14 @@
 <template>
   <div class="sf-post-page">
+    <Head>
+      <Title>{{ pageTitle }}</Title>
+      <Meta name="description" :content="pageDescription" />
+      <Meta name="og:title" :content="pageTitle" />
+      <Meta name="og:description" :content="pageDescription" />
+      <Meta name="twitter:title" :content="pageTitle" />
+      <Meta name="twitter:description" :content="pageDescription" />
+    </Head>
+
     <ILoader
       v-if="!post"
       class="sf-post-page__loader"
@@ -113,6 +122,7 @@
   import { useTranslation } from '~/assets/composables/useTranslation'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
 import { getGravatarUrl } from '~/assets/utils/gravatar'
+import { cleanPostBody } from '~/assets/utils/clean-post-body'
 
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
@@ -127,6 +137,8 @@ import { getGravatarUrl } from '~/assets/utils/gravatar'
   // const post = await getPost(route.params.id)
   const post = computedAsync(async () => await getPostById(route.params.id), null)
   const avatar = computedAsync(async () => post.value ? await getGravatarUrl(post.value.author.email) : null, null)
+  const pageTitle = computed(() => post.value?.title || null)
+  const pageDescription = computed(() => post.value ? cleanPostBody(post.value.content) : null)
   const postBody = ref(null)
 
   const totalComments = ref(0)
