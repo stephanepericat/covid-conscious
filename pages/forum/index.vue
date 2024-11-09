@@ -42,8 +42,9 @@
   import { usePrisma } from '~/assets/composables/usePrisma';
   import { FORUM } from '~/assets/constants/types'
 
-  const user = useSupabaseUser()
-  const isLoggedIn = computed(() => !!user?.value?.id)
+  // const user = useSupabaseUser()
+  // const isLoggedIn = computed(() => !!user?.value?.id)
+  const { loggedIn: isLoggedIn } = useUserSession() 
 
   // const {
   //   getPosts,
