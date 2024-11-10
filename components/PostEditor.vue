@@ -104,23 +104,26 @@
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
   import { useForm } from '@inkline/inkline'
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
+  import { usePrisma } from '~/assets/composables/usePrisma'
   import PostDisabled from './PostDisabled.vue'
 
   const emit = defineEmits(['error', 'success'])
 
-  const user = useSupabaseUser()
+  // const user = useSupabaseUser()
+  const { user } = useUserSession()
   const { t } = useI18n()
-  const { createPost, getTopics, getUserById } = usePosts()
+  // const { createPost, getTopics, getUserById } = usePosts()
+  const { getTopics, getUsername } = usePrisma()
 
-  // TODO ! Add introduction topic
-  const topics = await getTopics()
+  const topics = computedAsync(async () => await getTopics(), [])
 
   const categories = computed(
-    () => topics?.map((topic) => ({ id: topic, label: t(`forum.create.categories.${topic}`) })) || []
+    () => topics.value?.map(({ id, name }) => ({ id, label: t(`forum.create.categories.${name}`) })) || []
   );
 
-  const { username } = await getUserById(user.value.id)
+  // const { username } = await getUserById(user.value.id)
+  const username = computedAsync(async () => user.value?.email ? await getUsername(user.value.email): null, null)
   const canPost = computed(() => username !== null)
 
   const isValidContent = (v) => v.length > 0 && v !== '\n'
@@ -195,14 +198,14 @@
     isSubmitting.value = true
 
     const payload = {
-      headline: form.value.title.value,
-      body: htmlContents.value,
-      topic: form.value.category.value,
-      author_id: user.value.id
+      title: form.value.title.value,
+      content: htmlContents.value,
+      category: form.value.category.value,
+      authorId: user.value.id
     }
 
     try {
-      const { error } = await createPost(payload)
+      // const { error } = await createPost(payload)
 
       if(error) throw error
       emit('success', payload)

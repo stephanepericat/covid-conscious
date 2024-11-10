@@ -13,6 +13,66 @@ export const usePrisma = () => {
     }
   }
 
+  const getOrCreateUser = async (email: string) => {
+    try {
+      const user = await getUser(email)
+      if(user) return user
+
+      return await createUser(email)
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
+  const getPostById = async (id: number) => {
+    try {
+      const res = await $fetch('/api/forum/post/get-post-by-id', {
+        method: 'POST',
+        body: { id }
+      })
+
+      if(!res) {
+        throw new Error('Post not found')
+      }
+
+      return res || null;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
+  const getPosts = async () => {
+    try {
+      const res = await $fetch('/api/forum/post/get-posts', {
+        method: 'POST',
+      })
+
+      if(!res) {
+        throw new Error('User not found')
+      }
+
+      return res || null;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
+  const getTopics = async () => {
+    try {
+      const topics = await $fetch('/api/forum/post/get-categories', {
+        method: 'POST',
+      })
+
+      return topics || []
+    } catch(e) {
+      consola.error(e)
+      return []
+    }
+  }
+
   const getUser = async (email: string) => {
     try {
       const res = await $fetch('/api/forum/user/get-user', {
@@ -99,53 +159,6 @@ export const usePrisma = () => {
     }
   }
 
-  const getOrCreateUser = async (email: string) => {
-    try {
-      const user = await getUser(email)
-      if(user) return user
-
-      return await createUser(email)
-    } catch(e) {
-      consola.error(e)
-      return null
-    }
-  }
-
-  const getPostById = async (id: number) => {
-    try {
-      const res = await $fetch('/api/forum/post/get-post-by-id', {
-        method: 'POST',
-        body: { id }
-      })
-
-      if(!res) {
-        throw new Error('Post not found')
-      }
-
-      return res || null;
-    } catch(e) {
-      consola.error(e)
-      return null
-    }
-  }
-
-  const getPosts = async () => {
-    try {
-      const res = await $fetch('/api/forum/post/get-posts', {
-        method: 'POST',
-      })
-
-      if(!res) {
-        throw new Error('User not found')
-      }
-
-      return res || null;
-    } catch(e) {
-      consola.error(e)
-      return null
-    }
-  }
-
   const updateUserProfile = async (body: { data: any, profileId: number }) => {
     try {
       return await $fetch('/api/forum/user/update-profile', {
@@ -163,6 +176,7 @@ export const usePrisma = () => {
     getOrCreateUser,
     getPostById,
     getPosts,
+    getTopics,
     getUser,
     getUserComments,
     getUsername,
