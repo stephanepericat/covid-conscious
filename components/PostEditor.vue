@@ -111,10 +111,15 @@
   const emit = defineEmits(['error', 'success'])
 
   // const user = useSupabaseUser()
+  const { createPost, getTopics, getUser, getUsername } = usePrisma()
   const { user } = useUserSession()
+  const userInfo = computedAsync(
+    async () =>
+      user?.value?.email ? await getUser(user.value.email) : null,
+    null,
+  )
   const { t } = useI18n()
   // const { createPost, getTopics, getUserById } = usePosts()
-  const { getTopics, getUsername } = usePrisma()
 
   const topics = computedAsync(async () => await getTopics(), [])
 
@@ -183,7 +188,7 @@
 
   const isSubmitting = ref(false)
   // const token = ref(null)
-  const buttonDisabled = computed(() => form?.value?.untouched || form?.value?.invalid || !hasContent.value || isSubmitting.value)
+  const buttonDisabled = computed(() => form?.value?.untouched || form?.value?.invalid || !hasContent.value || isSubmitting.value || !userInfo.value?.id)
 
   const clearForm = () =>  {
     form.value.title.value = ''
@@ -201,15 +206,16 @@
       title: form.value.title.value,
       content: htmlContents.value,
       category: form.value.category.value,
-      authorId: user.value.id
+      authorId: userInfo.value.id
     }
 
     try {
-      // const { error } = await createPost(payload)
+      const { error } = await createPost(payload)
 
       if(error) throw error
       emit('success', payload)
     } catch(e) {
+      console.error(e)
       emit('error', e)
     } finally {
       clearForm()

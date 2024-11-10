@@ -15,7 +15,7 @@ export default defineEventHandler(async () => {
         },
         take: 5,
         orderBy: {
-          published: 'desc',
+          createdAt: 'desc',
         },
         include: {
           author: {

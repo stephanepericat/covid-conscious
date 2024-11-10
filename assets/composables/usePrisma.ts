@@ -1,6 +1,18 @@
 import consola from 'consola'
 
 export const usePrisma = () => {
+  const createPost = async (payload: any) => {
+    try {
+      return await $fetch('/api/forum/post/create-post', {
+        method: 'POST',
+        body: { payload }
+      })
+    } catch(e) {
+      consola.error(e)
+      return { error: e }
+    }
+  }
+
   const createUser = async (email: string) => {
     try {
       return await $fetch('/api/forum/user/create-user', {
@@ -172,6 +184,7 @@ export const usePrisma = () => {
   }
 
   return {
+    createPost,
     createUser,
     getOrCreateUser,
     getPostById,

@@ -2,7 +2,7 @@ import consola from 'consola'
 import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
-  const { user } = await getUserSession(event)
+  // const { user } = await getUserSession(event)
   const { email } = await readBody(event)
 
   if(!email) {

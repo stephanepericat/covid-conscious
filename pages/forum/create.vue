@@ -26,7 +26,7 @@
 
   const onSuccess = (payload) => toast.show({
     title: t('forum.create.toast.success.title'),
-    message: t('forum.create.toast.success.message', { title: payload.headline }),
+    message: t('forum.create.toast.success.message', { title: payload.title }),
     color: 'success'
   })
 
