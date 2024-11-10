@@ -136,7 +136,7 @@ import { cleanPostBody } from '~/assets/utils/clean-post-body'
 
   // const post = await getPost(route.params.id)
   const post = computedAsync(async () => await getPostById(route.params.id), null)
-  const avatar = computedAsync(async () => post.value ? await getGravatarUrl(post.value.author.email) : null, null)
+  const avatar = computedAsync(async () => post.value?.author?.email ? await getGravatarUrl(post.value.author.email) : null, null)
   const pageTitle = computed(() => post.value?.title || null)
   const pageDescription = computed(() => post.value ? cleanPostBody(post.value.content) : null)
   const postBody = ref(null)

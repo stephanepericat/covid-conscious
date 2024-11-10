@@ -24,7 +24,6 @@ export default defineEventHandler(async (event) => {
       include: {
         author: {
           omit: {
-            email: true,
             role: true,
           },
           include: {
