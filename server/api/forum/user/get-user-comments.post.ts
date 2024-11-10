@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         email
       },
       include: {
-        posts: {
+        comments: {
           where: {
             published: true,
           },
@@ -48,14 +48,14 @@ export default defineEventHandler(async (event) => {
       },
       cacheStrategy: {
         ttl: 60,
-        tags: ['get_user_posts']
+        tags: ['get_user_comments']
       }
     })
     .withAccelerateInfo()
 
-    consola.info('GET USER POSTS - ', user.info)
+    consola.info('GET USER COMMENTS - ', user.info)
 
-    return user.data?.posts || []
+    return user.data?.comments || []
   } catch (e) {
     consola.error(e)
     return []

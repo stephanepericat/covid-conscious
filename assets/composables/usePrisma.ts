@@ -63,6 +63,24 @@ export const usePrisma = () => {
     }
   }
 
+  const getUserComments = async (email: string) => {
+    try {
+      const res = await $fetch('/api/forum/user/get-user-comments', {
+        method: 'POST',
+        body: { email }
+      })
+
+      if(!res) {
+        throw new Error('User comments not found')
+      }
+
+      return res;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
   const getUserPosts = async (email: string) => {
     try {
       const res = await $fetch('/api/forum/user/get-user-posts', {
@@ -146,6 +164,7 @@ export const usePrisma = () => {
     getPostById,
     getPosts,
     getUser,
+    getUserComments,
     getUsername,
     getUserRole,
     getUserPosts,
