@@ -22,11 +22,11 @@
           <div class="sf-comment-list__item--contents">
             <p
               class="sf-comment-list__body"
-              v-text="comment.body"
+              v-text="comment.content"
             />
             <nav class="sf-comment-list__actions">
               <a
-                v-if="showDeleteAction(comment.profiles.id)"
+                v-if="showDeleteAction(comment.author.id)"
                 href="#"
                 @click="(e) => onDeleteComment(e, comment.id)"
               >
@@ -37,8 +37,8 @@
             </nav>
           </div>
           <em>
-            <span><NuxtLink :to="localePath(`${rootPath}/user/${comment.profiles.id}`)">{{ comment.profiles.username }}</NuxtLink> &bullet; </span>
-            <span>{{ format(new Date(comment.created_at), DEFAULT_DATE_FORMAT) }}</span>
+            <span><NuxtLink :to="localePath(`${rootPath}/user/${comment.author.id}`)">{{ comment.author.profile.name }}</NuxtLink> &bullet; </span>
+            <span>{{ format(new Date(comment.createdAt), DEFAULT_DATE_FORMAT) }}</span>
           </em>
         </IListGroupItem>
       </IListGroup>
@@ -58,7 +58,8 @@
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
 
   const emit = defineEmits(['page-change', 'delete-comment'])
-  const user = useSupabaseUser()
+  // const user = useSupabaseUser()
+  const { user } = useUserSession()
 
   const props = defineProps({
     comments: { type: Array, default: () => [] },

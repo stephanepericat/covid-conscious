@@ -70,15 +70,14 @@
           <Icon name="icon-park-outline:comments" />
           <span>{{ $t("forum.post.comments") }}</span>
         </h2>
-        <!-- <CommentList
+        <CommentList
           :comments="comments"
           :page="activePage"
           :pending="commentsLoading"
           :total-items="totalComments"
           @delete-comment="onDeleteComment"
           @page-change="onCommentsPageChange"
-        /> -->
-        <p>{{ post.comments }}</p>
+        />
         <IModal
         class="sf-post-page__modal"
           v-model="commentDeletionModalVisible"
