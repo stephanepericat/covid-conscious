@@ -14,13 +14,13 @@ export default defineEventHandler(async (event) => {
   }
 
   // TODO: see if this is needed?
-  if(!user || user.email !== email) {
-    throw createError({
-      status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
-    })
-  }
+  // if(!user || user.email !== email) {
+  //   throw createError({
+  //     status: 403,
+  //     message: "Unauthorized",
+  //     statusMessage: "You are not authorized to access this resource",
+  //   })
+  // }
 
   try {
     const user = await prisma.user.findUniqueOrThrow({
