@@ -12,6 +12,7 @@
     "prisma:generate": "prisma generate",
     "prisma:migrate:deploy": "prisma migrate deploy",
     "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio",
     "test": "vitest --watch",
     "test:ci": "vitest run"
@@ -21,13 +22,15 @@
     "@prisma/client": "^5.22.0",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/lodash": "^4.17.9",
-    "@types/node": "^18",
+    "@types/node": "^22.9.0",
     "@types/xml2js": "^0.4.14",
     "@vitest/coverage-istanbul": "^0.34.6",
     "happy-dom": "^12.9.1",
     "nuxt-vitest": "^0.11.5",
     "prisma": "^5.22.0",
     "sass": "^1.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
     "vitest": "^0.33.0"
   },
   "dependencies": {
@@ -70,5 +73,8 @@
     "vue-star-rating": "^2.1.0",
     "vue-tweet": "^2.3.1",
     "xml2js": "^0.6.2"
+  },
+  "prisma": {
+    "seed": "ts-node --transpile-only prisma/seed.ts"
   }
 }

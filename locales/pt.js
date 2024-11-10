@@ -325,6 +325,7 @@ export default {
         introduction: 'Introdução',
         lifestyle: 'Estilo de Vida',
         'long-covid': 'Covid Longa',
+        misc: 'Diversos',
         products: 'EPI',
         recovery: 'Recuperação',
         relationships: 'Relacionamentos',
