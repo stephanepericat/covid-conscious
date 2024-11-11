@@ -67,6 +67,18 @@ export const usePrisma = () => {
     }
   }
 
+  const getPostComments = async (id: number) => {
+    try {
+      return await $fetch('/api/forum/comment/get-comments', {
+        method: 'POST',
+        body: { id }
+      })
+    } catch(e) {
+      consola.error(e)
+      return []
+    }
+  }
+
   const getPosts = async () => {
     try {
       const res = await $fetch('/api/forum/post/get-posts', {
@@ -201,6 +213,7 @@ export const usePrisma = () => {
     createUser,
     getOrCreateUser,
     getPostById,
+    getPostComments,
     getPosts,
     getTopics,
     getUser,

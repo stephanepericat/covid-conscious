@@ -71,7 +71,7 @@
           <span>{{ $t("forum.post.comments") }}</span>
         </h2>
         <CommentList
-          :comments="comments"
+          :comments="comments.entries"
           :page="activePage"
           :pending="commentsLoading"
           :total-items="totalComments"
@@ -121,8 +121,8 @@
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { useTranslation } from '~/assets/composables/useTranslation'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
-import { getGravatarUrl } from '~/assets/utils/gravatar'
-import { cleanPostBody } from '~/assets/utils/clean-post-body'
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
+  import { cleanPostBody } from '~/assets/utils/clean-post-body'
 
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
@@ -131,7 +131,7 @@ import { cleanPostBody } from '~/assets/utils/clean-post-body'
   const toast = useToast()
   const { t, locale, localeProperties } = useI18n()
   const { commentsLoading, deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
-  const { getPostById } = usePrisma()
+  const { getPostComments, getPostById } = usePrisma()
   const isSSR = computed(() => !process.client)
 
   // const post = await getPost(route.params.id)
@@ -142,9 +142,10 @@ import { cleanPostBody } from '~/assets/utils/clean-post-body'
   const postBody = ref(null)
 
   // const totalComments = ref(0)
-  // const comments = ref([])
-  const comments = computed(() => post.value?.comments || [])
-  const totalComments = computed(() => comments.value?.length || 0)
+  const comments = ref([])
+  // const comments = computed(() => post.value?.comments || [])
+  comments.value = await getPostComments(route.params.id)
+  const totalComments = computed(() => comments.value?.total || 0)
   const activePage = ref(1)
 
   const onCommentsPageChange = async ({ currentPage, startItem, endItem }) => {
