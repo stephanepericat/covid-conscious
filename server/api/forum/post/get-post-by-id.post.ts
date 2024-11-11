@@ -42,6 +42,9 @@ export default defineEventHandler(async (event) => {
           where: {
             published: true,
           },
+          orderBy: {
+            createdAt: 'desc',
+          },
           omit: {
             authorId: true,
             postId: true,

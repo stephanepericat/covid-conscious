@@ -163,8 +163,8 @@ import { cleanPostBody } from '~/assets/utils/clean-post-body'
     })
 
     activePage.value = 1
-    comments.value = await getComments(route.params.id)
-    totalComments.value = await getCommentsCount(route.params.id)
+    // comments.value = await getComments(route.params.id)
+    // totalComments.value = await getCommentsCount(route.params.id)
   }
 
   const onCommentPostError = () => toast.show({
@@ -207,8 +207,8 @@ import { cleanPostBody } from '~/assets/utils/clean-post-body'
     })
 
     activePage.value = 1
-    comments.value = await getComments(route.params.id)
-    totalComments.value = await getCommentsCount(route.params.id)
+    // comments.value = await getComments(route.params.id)
+    // totalComments.value = await getCommentsCount(route.params.id)
   }
 
   const onCommentDeletionPostError = () => toast.show({

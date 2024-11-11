@@ -111,7 +111,7 @@
   const emit = defineEmits(['error', 'success'])
 
   // const user = useSupabaseUser()
-  const { createPost, getTopics, getUser, getUsername } = usePrisma()
+  const { createPost, getTopics, getUser } = usePrisma()
   const { user } = useUserSession()
   const userInfo = computedAsync(
     async () =>
@@ -128,7 +128,7 @@
   );
 
   // const { username } = await getUserById(user.value.id)
-  const username = computedAsync(async () => user.value?.email ? await getUsername(user.value.email): null, null)
+  const username = computed(() => userInfo.value?.profile.name || null)
   const canPost = computed(() => username !== null)
 
   const isValidContent = (v) => v.length > 0 && v !== '\n'

@@ -3,9 +3,9 @@ import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
-  const { payload } = await readBody(event)
+  const { payload, postId } = await readBody(event)
 
-  if(!payload) {
+  if(!payload || !postId) {
     throw createError({
       status: 400,
       message: "Bad request",
@@ -22,16 +22,17 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const { title, content, category, authorId } = payload
+    const { content, authorId } = payload
 
-    await prisma.post.create({
+    await prisma.comment.create({
       data: {
-        title,
         content,
-        authorId,
-        categories: {
-          connect: [{ id: category }]
-        }
+        author: {
+          connect: {id: authorId},
+        },
+        post: {
+          connect: {id: postId},
+        },
       }
     })
 
@@ -41,7 +42,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       status: 500,
       message: "Something went wrong",
-      statusMessage: "Unable to create post",
+      statusMessage: "Unable to create comment",
     })
   }
 })
