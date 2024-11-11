@@ -130,7 +130,7 @@
   const route = useRoute()
   const toast = useToast()
   const { t, locale, localeProperties } = useI18n()
-  const { commentsLoading, deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
+  const { /* commentsLoading, */ deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
   const { getPostComments, getPostById } = usePrisma()
   const isSSR = computed(() => !process.client)
 
@@ -143,15 +143,17 @@
 
   // const totalComments = ref(0)
   const comments = ref([])
+  const commentsLoading = ref(true)
   // const comments = computed(() => post.value?.comments || [])
-  comments.value = await getPostComments(route.params.id)
   const totalComments = computed(() => comments.value?.total || 0)
   const activePage = ref(1)
 
   const onCommentsPageChange = async ({ currentPage, startItem }) => {
     if(activePage.value !== currentPage) {
       activePage.value = currentPage
+      commentsLoading.value = true
       comments.value = await getPostComments(route.params.id, startItem)
+      commentsLoading.value = false
       // totalComments.value = await getCommentsCount(route.params.id)
     }
   }
@@ -164,7 +166,9 @@
     })
 
     activePage.value = 1
+    commentsLoading.value = true
     comments.value = await getPostComments(route.params.id)
+    commentsLoading.value = false
     // comments.value = await getComments(route.params.id)
     // totalComments.value = await getCommentsCount(route.params.id)
   }
@@ -209,7 +213,9 @@
     })
 
     activePage.value = 1
+    commentsLoading.value = true
     comments.value = await getPostComments(route.params.id)
+    commentsLoading.value = false
     // comments.value = await getComments(route.params.id)
     // totalComments.value = await getCommentsCount(route.params.id)
   }
@@ -248,6 +254,11 @@
 
   watch(locale, () => {
     translationResults.value = null
+  })
+
+  onMounted(async () => {
+    comments.value = await getPostComments(route.params.id)
+    commentsLoading.value = false
   })
 
   umTrackView()
