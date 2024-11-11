@@ -67,11 +67,11 @@ export const usePrisma = () => {
     }
   }
 
-  const getPostComments = async (id: number) => {
+  const getPostComments = async (id: number, skip = 0) => {
     try {
       return await $fetch('/api/forum/comment/get-comments', {
         method: 'POST',
-        body: { id }
+        body: { id, skip }
       })
     } catch(e) {
       consola.error(e)

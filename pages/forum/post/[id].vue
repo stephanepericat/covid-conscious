@@ -148,11 +148,11 @@
   const totalComments = computed(() => comments.value?.total || 0)
   const activePage = ref(1)
 
-  const onCommentsPageChange = async ({ currentPage, startItem, endItem }) => {
+  const onCommentsPageChange = async ({ currentPage, startItem }) => {
     if(activePage.value !== currentPage) {
       activePage.value = currentPage
-      comments.value = await getComments(route.params.id, startItem, endItem - 1)
-      totalComments.value = await getCommentsCount(route.params.id)
+      comments.value = await getPostComments(route.params.id, startItem)
+      // totalComments.value = await getCommentsCount(route.params.id)
     }
   }
 
@@ -164,6 +164,7 @@
     })
 
     activePage.value = 1
+    comments.value = await getPostComments(route.params.id)
     // comments.value = await getComments(route.params.id)
     // totalComments.value = await getCommentsCount(route.params.id)
   }
@@ -208,6 +209,7 @@
     })
 
     activePage.value = 1
+    comments.value = await getPostComments(route.params.id)
     // comments.value = await getComments(route.params.id)
     // totalComments.value = await getCommentsCount(route.params.id)
   }

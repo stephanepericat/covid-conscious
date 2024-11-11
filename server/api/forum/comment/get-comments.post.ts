@@ -2,7 +2,7 @@ import consola from 'consola'
 import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
-  const { id } = await readBody(event)
+  const { id, skip } = await readBody(event)
 
   if(!id) {
     throw createError({
@@ -11,6 +11,8 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Post ID is missing",
     })
   }
+
+  console.log('skip', skip)
 
   try {
     const comments = await prisma.comment.findMany({
@@ -22,6 +24,7 @@ export default defineEventHandler(async (event) => {
         createdAt: 'desc',
       },
       take: 5,
+      skip,
       omit: {
         authorId: true,
         postId: true,
