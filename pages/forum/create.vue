@@ -16,6 +16,8 @@
   import PostEditor from '~/components/PostEditor.vue'
 
   const { t } = useI18n()
+  const router = useRouter()
+  const localePath = useLocalePath()
   const toast = useToast()
 
   const onError = () => toast.show({
@@ -24,11 +26,17 @@
     color: 'danger'
   })
 
-  const onSuccess = (payload) => toast.show({
-    title: t('forum.create.toast.success.title'),
-    message: t('forum.create.toast.success.message', { title: payload.title }),
-    color: 'success'
-  })
+  const onSuccess = (payload) => {
+    toast.show({
+      title: t('forum.create.toast.success.title'),
+      message: t('forum.create.toast.success.message', { title: payload.title }),
+      color: 'success'
+    })
+
+    useTimeoutFn(() => {
+      router.replace(localePath('/forum'))
+    }, 1000)
+  }
 
   umTrackView()
 </script>
