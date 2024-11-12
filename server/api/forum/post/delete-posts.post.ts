@@ -49,8 +49,7 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    console.log('matches', matches)
-
+    // TODO: see if this is needed
     // if(post.id !== postId || post.author?.id !== authorId) {
     //   throw createError({
     //     status: 403,
@@ -66,7 +65,7 @@ export default defineEventHandler(async (event) => {
         },
       },
       data: {
-        published: false, // unpublish the post
+        published: false, // unpublish the posts
       },
     })
 
