@@ -61,6 +61,23 @@ export const usePrisma = () => {
     }
   }
 
+  const getLatestPosts = async () => {
+    try {
+      const res = await $fetch('/api/forum/post/get-latest-posts', {
+        method: 'POST',
+      })
+
+      if(!res) {
+        throw new Error('No posts found')
+      }
+
+      return res || null;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
   const getOrCreateUser = async (email: string) => {
     try {
       const user = await getUser(email)
@@ -111,7 +128,7 @@ export const usePrisma = () => {
       })
 
       if(!res) {
-        throw new Error('User not found')
+        throw new Error('No posts found')
       }
 
       return res || null;
@@ -238,6 +255,7 @@ export const usePrisma = () => {
     createUser,
     deleteComment,
     deletePosts,
+    getLatestPosts,
     getOrCreateUser,
     getPostById,
     getPostComments,

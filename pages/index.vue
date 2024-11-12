@@ -151,19 +151,18 @@
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.forum") }}
             </h3>
-            <p v-text="$t('layout.empty.forum')" v-if="!posts?.length" />
+            <p v-text="$t('layout.empty.forum')" v-if="!forumPosts?.length" />
             <template v-else>
               <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
-                <!-- <PostPreview
-                  v-for="post in posts"
+                <PostPreview
+                  v-for="post in forumPosts"
                   :key="post.id"
                   hide-thumbnail
                   :post="post"
                   :root-path="rootPath"
                   :ssr="isSSR"
                   with-preview
-                /> -->
-                post
+                />
               </div>
               <!-- <div class="mt-4">
                 <NuxtLink
@@ -188,7 +187,7 @@
 </template>
 <script setup>
   import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
   import PublicationBlock from '~/components/PublicationBlock.vue'
   import Card from '~/components/Card.vue'
@@ -203,12 +202,57 @@
     HP_ZONE_6,
     HP_ZONE_7
   } from '~/assets/constants/promo-zones'
+  import { usePrisma } from '~/assets/composables/usePrisma'
+  import { getGravatarUrl } from '~/assets/utils/gravatar'
 
   // const { $appSettings } = useNuxtApp()
+  const loading = ref(true)
+  const { getLatestPosts } = usePrisma()
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
-  const { loading, getPosts } = usePosts()
+  // const { loading, getPosts } = usePosts()
   const posts = ref([])
+  const forumPosts = computedAsync(async() => {
+    if(!posts.value) {
+      return []
+    }
+
+    const emails = posts.value.map(({ author }) => author.email)
+    const thumbnails = await Promise.all(
+      emails.map((email) => new Promise(async (resolve) => {
+        const avatar = await getGravatarUrl(email)
+        resolve([email, avatar])
+      }))
+    );
+
+    const thumbnailMap = thumbnails.reduce((acc, val) => {
+      const [email, avatar] = val;
+
+      if(!acc[email]) {
+        acc[email] = avatar
+      }
+
+      return acc
+    }, {})
+
+    return posts
+      .value
+      .map(({ author, categories, content, createdAt, id, title }) => {
+        return {
+          id,
+          author: {
+            id: author.id,
+            username: author.profile?.name || 'USER',
+          },
+          description: content ? content.substr(0, 255) : null,
+          published: createdAt,
+          tags: categories || [],
+          thumbnail: thumbnailMap[author.email] || null,
+          title,
+        }
+      })
+  }, [])
+
   const config = useRuntimeConfig()
   const rootPath = computed(() => config.public.supabaseForum.rootPath)
   const isSSR = computed(() => !process.client)
@@ -223,7 +267,18 @@
   // const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_DIRECTORY)
 
   const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
-  posts.value = await getPosts(0, 2)
+  // posts.value = await getPosts(0, 2)
+
+  onMounted(async () => {
+    try {
+      posts.value = await getLatestPosts()
+    } catch (e) {
+      console.error(e)
+      posts.value = []
+    } finally {
+      loading.value = false
+    }
+  })
 
   umTrackView()
 </script>
