@@ -90,11 +90,11 @@
   import { useToast } from '@inkline/inkline'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
 
   const { t } = useI18n()
-  const { deletePost, getUser, getUserPosts } = usePrisma()
+  const { deletePosts, getUser, getUserPosts } = usePrisma()
   // const user = useSupabaseUser()
   const { user } = useUserSession()
   const userInfo = computedAsync(
@@ -111,12 +111,12 @@
   const end = computed(() => endItem.value > total ? total : endItem.value)
   const loading = ref(true)
 
-  const {
+  // const {
     // deleteUserPosts,
     // getUserPosts,
     // getUserPostsCount,
     // loading,
-  } = usePosts()
+  // } = usePosts()
 
   const posts = ref([])
   const total = computed(() => posts.value?.total || 0)
@@ -149,19 +149,22 @@
 
   const onDelete = async () => {
     try {
-      const posts = Object.values(selection.value)
-      console.log('selected post ids', posts)
-      // const deleted = await deleteUserPosts(selection.value)
+      const payload = {
+        authorId: userInfo.value?.id,
+        posts: Object.values(selection.value)
+      } 
+      console.log('selected post ids', payload)
+      const deleted = await deletePosts(payload)
 
-      // if (!deleted) throw new Error("Not deleted")
+      if (!deleted) throw new Error("Not deleted")
 
-      // onDeleteSuccess()
+      onDeleteSuccess()
 
-      // reloading.value = true
-      // currentPage.value = 1
-      // selection.value = []
+      reloading.value = true
+      currentPage.value = 1
+      selection.value = []
       // total.value = await getUserPostsCount()
-      // posts.value = await getUserPosts(user?.value?.id, 0, 4)
+      posts.value = await getUserPosts(user.value.email)
     } catch(e) {
       console.error(e)
       onDeleteError()
@@ -186,8 +189,17 @@
   })
 
   const onPageChange = async () => {
-    // posts.value = await getUserPosts(userInfo.value?.id, startItem.value, endItem.value - 1)
-    // selection.value = []
+    loading.value = true
+
+    try {
+      
+      posts.value = await getUserPosts(userInfo.value?.id, startItem.value)
+    selection.value = []
+    } catch (e) {
+      console.error(e)
+    } finally {
+      loading.value = false
+    }
   }
 
   // total.value = await getUserPostsCount()
@@ -198,8 +210,13 @@
       return
     }
 
-    posts.value = await getUserPosts(user.value.email)
-    loading.value = false
+    try {
+      posts.value = await getUserPosts(user.value.email)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      loading.value = false
+    }
   })
 
   umTrackView()

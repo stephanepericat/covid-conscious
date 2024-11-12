@@ -3,9 +3,9 @@ import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
-  const { authorId, postId } = await readBody(event)
+  const { authorId, posts } = await readBody(event)
 
-  if(!postId || !authorId) {
+  if(!posts || !authorId) {
     throw createError({
       status: 400,
       message: "Bad request",
@@ -22,9 +22,11 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
+    const matches = await prisma.post.findMany({
       where: {
-        id: postId,
+        id: {
+          in: posts,
+        },
         author: {
           email: user.email,
         },
@@ -39,25 +41,29 @@ export default defineEventHandler(async (event) => {
       }
     })
 
-    if (!post) {
+    if (!matches || !matches.length) {
       throw createError({
         status: 404,
         message: "Not Found",
-        statusMessage: "This post is not in our database",
+        statusMessage: "These posts are not in our database",
       })
     }
 
-    if(post.id !== postId || post.author?.id !== authorId) {
-      throw createError({
-        status: 403,
-        message: "Unauthorized",
-        statusMessage: "You are not authorized to access this resource",
-      })
-    }
+    console.log('matches', matches)
 
-    await prisma.post.update({
+    // if(post.id !== postId || post.author?.id !== authorId) {
+    //   throw createError({
+    //     status: 403,
+    //     message: "Unauthorized",
+    //     statusMessage: "You are not authorized to access this resource",
+    //   })
+    // }
+
+    await prisma.post.updateMany({
       where: {
-        id: post.id,
+        id: {
+          in: matches.map(({ id }) => id),
+        },
       },
       data: {
         published: false, // unpublish the post

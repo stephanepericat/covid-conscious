@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
         }
       },
       cacheStrategy: {
-        ttl: 60,
+        ttl: 15,
         tags: ['get_user_posts']
       }
     }).withAccelerateInfo()
@@ -54,7 +54,7 @@ export default defineEventHandler(async (event) => {
         published: true,
       },
       cacheStrategy: {
-        ttl: 60,
+        ttl: 15,
         tags: ['get_user_posts']
       }
     }).withAccelerateInfo()
