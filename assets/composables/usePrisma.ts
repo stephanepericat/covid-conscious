@@ -45,7 +45,7 @@ export const usePrisma = () => {
       })
     } catch(e) {
       consola.error(e)
-      return []
+      return false
     }
   }
 

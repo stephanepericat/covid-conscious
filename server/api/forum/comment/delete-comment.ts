@@ -64,9 +64,9 @@ export default defineEventHandler(async (event) => {
       },
     })
 
-    return { error: null }
+    return true
   } catch (e) {
     consola.error(e)
-    return { error: e }
+    return false
   }
 })
