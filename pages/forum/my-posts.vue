@@ -4,8 +4,9 @@
       class="sf-my-posts-page__title"
       v-text="$t('forum.posts.title')"
     />
+    <!-- <p>{{  posts.entries }}</p> -->
     <ILoader v-if="loading || reloading" class="sf-my-posts-page__loader" size="sm" />
-    <p v-else-if="!loading && !reloading && !posts.length" v-text="$t('forum.posts.noPosts')" />
+    <p v-else-if="!loading && !reloading && !posts.entries?.length" v-text="$t('forum.posts.noPosts')" />
     <template v-else>
       <p v-text="$t(`forum.posts.description`)" />
       <div class="sf-my-posts-page__tools">
@@ -43,7 +44,7 @@
           </tr>
         </thead>
         <tbody class="sf-my-posts-page__table--body">
-          <tr v-for="post in posts" :key="post.id">
+          <tr v-for="post in posts.entries" :key="post.id">
             <td class="sf-my-posts-page__table--body-selection">
               <ICheckbox
                 size="lg"
@@ -51,9 +52,9 @@
                 @change="(e) => onSelection(e.target, post.id)"
               />
             </td>
-            <td>{{ post.headline }}</td>
-            <td>{{ $t(`forum.create.categories.${post.topic}`) }}</td>
-            <td>{{ format(new Date(post.created_at), DEFAULT_DATE_FORMAT) }}</td>
+            <td>{{ post.title }}</td>
+            <td v-if="post.categories.length > 0">{{ $t(`forum.create.categories.${post.categories[0].name}`) }}</td>
+            <td>{{ format(new Date(post.createdAt), DEFAULT_DATE_FORMAT) }}</td>
           </tr>
         </tbody>
       </ITable>
@@ -90,25 +91,35 @@
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePagination } from '~/assets/composables/usePagination'
   import { usePosts } from '~/assets/composables/usePosts'
+  import { usePrisma } from '~/assets/composables/usePrisma'
 
   const { t } = useI18n()
-  const user = useSupabaseUser()
+  const { deletePost, getUser, getUserPosts } = usePrisma()
+  // const user = useSupabaseUser()
+  const { user } = useUserSession()
+  const userInfo = computedAsync(
+    async () =>
+      user?.value?.email ? await getUser(user.value.email) : null,
+    null,
+  )
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
-  const total = ref(0)
+  // const total = ref(0)
 
   const start = computed(() => startItem.value + 1)
   const end = computed(() => endItem.value > total ? total : endItem.value)
+  const loading = ref(true)
 
   const {
-    deleteUserPosts,
-    getUserPosts,
-    getUserPostsCount,
-    loading,
+    // deleteUserPosts,
+    // getUserPosts,
+    // getUserPostsCount,
+    // loading,
   } = usePosts()
 
   const posts = ref([])
+  const total = computed(() => posts.value?.total || 0)
   const selection = ref([]);
 
   const selectedNone = computed(() => selection.value.length === 0)
@@ -125,7 +136,7 @@
 
   const onMultiSelection = ({ target }) => {
     if(target.checked) {
-      selection.value = posts.value.map((p) => p.id)
+      selection.value = posts.value.entries.map((p) => p.id)
     } else {
       selection.value = []
     }
@@ -138,17 +149,19 @@
 
   const onDelete = async () => {
     try {
-      const deleted = await deleteUserPosts(selection.value)
+      const posts = Object.values(selection.value)
+      console.log('selected post ids', posts)
+      // const deleted = await deleteUserPosts(selection.value)
 
-      if (!deleted) throw new Error("Not deleted")
+      // if (!deleted) throw new Error("Not deleted")
 
-      onDeleteSuccess()
+      // onDeleteSuccess()
 
-      reloading.value = true
-      currentPage.value = 1
-      selection.value = []
-      total.value = await getUserPostsCount()
-      posts.value = await getUserPosts(user?.value?.id, 0, 4)
+      // reloading.value = true
+      // currentPage.value = 1
+      // selection.value = []
+      // total.value = await getUserPostsCount()
+      // posts.value = await getUserPosts(user?.value?.id, 0, 4)
     } catch(e) {
       console.error(e)
       onDeleteError()
@@ -173,12 +186,21 @@
   })
 
   const onPageChange = async () => {
-    posts.value = await getUserPosts(user?.value?.id, startItem.value, endItem.value - 1)
-    selection.value = []
+    // posts.value = await getUserPosts(userInfo.value?.id, startItem.value, endItem.value - 1)
+    // selection.value = []
   }
 
-  total.value = await getUserPostsCount()
-  posts.value = await getUserPosts(user?.value?.id, 0, 4)
+  // total.value = await getUserPostsCount()
+  // posts.value = await getUserPosts(userInfo.value?.id, 0, 4)
+
+  onMounted(async () => {
+    if(!user.value?.email) {
+      return
+    }
+
+    posts.value = await getUserPosts(user.value.email)
+    loading.value = false
+  })
 
   umTrackView()
 </script>

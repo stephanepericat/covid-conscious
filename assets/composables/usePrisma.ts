@@ -49,6 +49,18 @@ export const usePrisma = () => {
     }
   }
 
+  const deletePosts = async (body: { authorId: number, posts: number[] }) => {
+    try {
+      return await $fetch('/api/forum/post/delete-posts', {
+        method: 'POST',
+        body,
+      })
+    } catch(e) {
+      consola.error(e)
+      return false
+    }
+  }
+
   const getOrCreateUser = async (email: string) => {
     try {
       const user = await getUser(email)
@@ -189,11 +201,11 @@ export const usePrisma = () => {
     }
   }
 
-  const getUserPosts = async (email: string) => {
+  const getUserPosts = async (email: string, skip = 0) => {
     try {
       const res = await $fetch('/api/forum/user/get-user-posts', {
         method: 'POST',
-        body: { email }
+        body: { email, skip }
       })
 
       if(!res) {
@@ -224,6 +236,7 @@ export const usePrisma = () => {
     createPost,
     createUser,
     deleteComment,
+    deletePosts,
     getOrCreateUser,
     getPostById,
     getPostComments,

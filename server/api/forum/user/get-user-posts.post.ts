@@ -2,7 +2,7 @@ import consola from 'consola'
 import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
-  const { email } = await readBody(event)
+  const { email, skip } = await readBody(event)
 
   if(!email) {
     throw createError({
@@ -13,49 +13,55 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const user = await prisma.user.findUniqueOrThrow({
+    const posts = await prisma.post.findMany({
       where: {
-        email
+        author: {
+          email: email,
+        },
+        published: true,
       },
-      include: {
-        posts: {
-          where: {
-            published: true,
-          },
-          include: {
-            author: {
-              omit: {
-                role: true,
-              },
-              include: {
-                profile: {
-                  omit: {
-                    id: true,
-                    bio: true,
-                    website: true,
-                    userId: true,
-                  },
-                },
+      take: 5,
+      skip,
+      select: {
+        id: true,
+        createdAt: true,
+        title: true,
+        categories: true,
+        author: {
+          select: {
+            id: true,
+            profile: {
+              select: {
+                name: true,
               },
             },
           },
-          omit: {
-            authorId: true,
-            updatedAt: true,
-            published: true,
-          },
-        },
+        }
       },
       cacheStrategy: {
         ttl: 60,
         tags: ['get_user_posts']
       }
-    })
-    .withAccelerateInfo()
+    }).withAccelerateInfo()
 
-    consola.info('GET USER POSTS - ', user.info)
+    consola.info('GET USER POSTS - ', posts.info)
 
-    return user.data?.posts || []
+    const postCount = await prisma.post.count({
+      where: {
+        author: {
+          email: email,
+        },
+        published: true,
+      },
+      cacheStrategy: {
+        ttl: 60,
+        tags: ['get_user_posts']
+      }
+    }).withAccelerateInfo()
+
+    consola.info('GET USER POSTS COUNT - ', postCount.info)
+
+    return { entries: posts.data || [], total: postCount.data || 0 }
   } catch (e) {
     consola.error(e)
     return []
