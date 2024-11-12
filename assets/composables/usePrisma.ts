@@ -103,10 +103,11 @@ export const usePrisma = () => {
     }
   }
 
-  const getPosts = async () => {
+  const getPosts = async (skip = 0) => {
     try {
       const res = await $fetch('/api/forum/post/get-posts', {
         method: 'POST',
+        body: { skip },
       })
 
       if(!res) {

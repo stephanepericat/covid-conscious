@@ -192,9 +192,8 @@
     loading.value = true
 
     try {
-      
-      posts.value = await getUserPosts(userInfo.value?.id, startItem.value)
-    selection.value = []
+      posts.value = await getUserPosts(user.value?.email, startItem.value)
+      selection.value = []
     } catch (e) {
       console.error(e)
     } finally {

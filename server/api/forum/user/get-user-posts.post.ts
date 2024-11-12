@@ -22,6 +22,9 @@ export default defineEventHandler(async (event) => {
       },
       take: 5,
       skip,
+      orderBy: {
+        createdAt: 'desc',
+      },
       select: {
         id: true,
         createdAt: true,

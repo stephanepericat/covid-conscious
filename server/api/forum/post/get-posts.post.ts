@@ -1,7 +1,9 @@
 import consola from 'consola'
 import prisma from '~/lib/prisma'
 
-export default defineEventHandler(async () => {
+export default defineEventHandler(async (event) => {
+  const { skip } = await readBody(event)
+
   try {
     const posts = await prisma
       .post
@@ -14,6 +16,7 @@ export default defineEventHandler(async () => {
           published: true,
         },
         take: 5,
+        skip,
         orderBy: {
           createdAt: 'desc',
         },

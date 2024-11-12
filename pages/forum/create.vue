@@ -34,7 +34,7 @@
     })
 
     useTimeoutFn(() => {
-      router.replace(localePath('/forum'))
+      router.push(localePath('/forum'))
     }, 1000)
   }
 
