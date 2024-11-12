@@ -130,8 +130,8 @@
   const route = useRoute()
   const toast = useToast()
   const { t, locale, localeProperties } = useI18n()
-  const { /* commentsLoading, */ deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
-  const { getPostComments, getPostById } = usePrisma()
+  // const { /* commentsLoading, */ deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
+  const { deleteComment, getPostComments, getPostById } = usePrisma()
   const isSSR = computed(() => !process.client)
 
   // const post = await getPost(route.params.id)
@@ -182,9 +182,9 @@
   const commentDeletionModalVisible = ref(false)
   const commentToDelete = ref(null)
 
-  const onDeleteComment = ({ id }) => {
-    console.log(`deleting comment id: ${id}`)
-    commentToDelete.value = id
+  const onDeleteComment = ({ id, author }) => {
+    // console.log(`deleting comment id: ${id}`)
+    commentToDelete.value = { commentId: id, authorId: author?.id }
     commentDeletionModalVisible.value = true
   }
 

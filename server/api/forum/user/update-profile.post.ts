@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       status: 400,
       message: "Bad request",
-      statusMessage: "Email is missing",
+      statusMessage: "Profile data is missing",
     })
   }
 

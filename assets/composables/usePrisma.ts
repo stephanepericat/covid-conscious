@@ -37,6 +37,18 @@ export const usePrisma = () => {
     }
   }
 
+  const deleteComment = async (body: { authorId: number, commentId: number }) => {
+    try {
+      return await $fetch('/api/forum/comment/delete-comment', {
+        method: 'POST',
+        body,
+      })
+    } catch(e) {
+      consola.error(e)
+      return []
+    }
+  }
+
   const getOrCreateUser = async (email: string) => {
     try {
       const user = await getUser(email)
@@ -211,6 +223,7 @@ export const usePrisma = () => {
     createComment,
     createPost,
     createUser,
+    deleteComment,
     getOrCreateUser,
     getPostById,
     getPostComments,

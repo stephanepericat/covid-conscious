@@ -28,7 +28,7 @@
               <a
                 v-if="showDeleteAction(comment.author.id)"
                 href="#"
-                @click="(e) => onDeleteComment(e, comment.id)"
+                @click="(e) => onDeleteComment(e, comment)"
               >
                 {{ $t('forum.comments.delete') }}
               </a>
@@ -37,7 +37,7 @@
             </nav>
           </div>
           <em>
-            <span><NuxtLink :to="localePath(`${rootPath}/user/${comment.author.id}`)">{{ comment.author.profile.name }}</NuxtLink> &bullet; </span>
+            <span><NuxtLink :to="localePath(`${rootPath}/user/${comment.author.id}`)">@{{ comment.author.profile.name }}</NuxtLink> &bullet; </span>
             <span>{{ format(new Date(comment.createdAt), DEFAULT_DATE_FORMAT) }}</span>
           </em>
         </IListGroupItem>
@@ -92,9 +92,9 @@
 
   const showDeleteAction = (userId) => userInfo.value && userId === userInfo.value.id
 
-  const onDeleteComment = (e, commentId) => {
+  const onDeleteComment = (e, comment) => {
     e.preventDefault()
-    emit('delete-comment', { id: commentId,  user: user.value.id })
+    emit('delete-comment', comment)
   }
 
   watch(activePage, () => {
