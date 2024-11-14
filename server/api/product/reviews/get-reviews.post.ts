@@ -57,6 +57,7 @@ export default defineEventHandler(async (event) => {
 
       const reviewCount = await prisma.review.count({
         where: {
+          productId,
           published: true,
         },
         cacheStrategy: {
@@ -68,9 +69,26 @@ export default defineEventHandler(async (event) => {
 
       consola.info('GET REVIEWS COUNT - ', reviewCount.info)
 
-      return { entries: reviews.data || [], total: reviewCount.data || 0 }
+      const ratingAverage = await prisma.review.aggregate({
+        where: {
+          productId,
+          published: true,
+        },
+        _avg: {
+          rating: true,
+        },
+        cacheStrategy: {
+          ttl: 60,
+          swr: 5,
+          tags: ['get_rating_average']
+        },
+      }).withAccelerateInfo()
+
+      consola.info('GET RATING AVERAGE - ', ratingAverage.info)
+
+      return { entries: reviews.data || [], total: reviewCount.data || 0, average: ratingAverage.data._avg?.rating || null }
   } catch (e) {
     consola.error(e)
-    return { entries: [], total: 0 }
+    return { entries: [], total: 0, average: null }
   }
 })

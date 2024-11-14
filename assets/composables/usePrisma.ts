@@ -152,7 +152,7 @@ export const usePrisma = () => {
       return res || [];
     } catch(e) {
       consola.error(e)
-      return { entries: [], total: 0 }
+      return { entries: [], total: 0, average: null }
     }
   }
 
