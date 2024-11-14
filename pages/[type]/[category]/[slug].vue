@@ -334,7 +334,7 @@
               v-if="!reviewsPending"
               :pending="reviewsPending"
               :page="activePage"
-              :reviews="reviews"
+              :reviews="reviews.entries"
               :total-items="totalReviews"
               @page-change="onReviewsPageChange"
             />
@@ -376,6 +376,7 @@
   import ChannelVideos from '~/components/ChannelVideos.vue'
   import FeaturedPosts from '~/components/FeaturedPosts.vue'
   import ListedProducts from '~/components/ListedProducts.vue'
+  import { usePrisma } from '~/assets/composables/usePrisma'
 
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
@@ -426,8 +427,11 @@
 
   // PRODUCT REVIEWS
   const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
-  const totalReviews = ref(0)
-  const reviews = ref([])
+  const { getProductReviews } = usePrisma()
+  // const totalReviews = ref(0)
+  // const reviews = ref([])
+  const reviews = ref({})
+  const totalReviews = computed(() => reviews.value?.total || 0)
   const ratingsAverage = ref("")
   const activePage = ref(1)
   const hasUserReviewed = ref(true)
@@ -478,10 +482,11 @@
     if(!articleId.value || !isProduct(type)) return
 
     activePage.value = 1
-    reviews.value = await getReviews(articleId.value)
-    totalReviews.value = await getReviewsCount(articleId.value)
-    ratingsAverage.value = await getRatingsAverage(articleId.value)
-    hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
+    // reviews.value = await getReviews(articleId.value)
+    // totalReviews.value = await getReviewsCount(articleId.value)
+    // ratingsAverage.value = await getRatingsAverage(articleId.value)
+    // hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
+    reviews.value = await getProductReviews(articleId.value)
   }, { immediate: true })
 
   umTrackView()

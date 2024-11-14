@@ -15,6 +15,7 @@ model User {
   comments  Comment[]
   posts     Post[]
   profile   Profile?
+  reviews   Review[]
 }
 
 model Profile {
@@ -52,6 +53,18 @@ model Comment {
   content     String
   post        Post      @relation(fields: [postId], references: [id])
   postId      Int
+  published   Boolean   @default(true)
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    Int
+}
+
+model Review {
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  content     String
+  rating      Int
+  productId   String    @db.Uuid
   published   Boolean   @default(true)
   author      User      @relation(fields: [authorId], references: [id])
   authorId    Int

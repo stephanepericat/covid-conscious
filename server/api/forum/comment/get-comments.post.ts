@@ -74,6 +74,6 @@ export default defineEventHandler(async (event) => {
     return { entries: comments.data || [], total: commentsCount.data || 0 }
   } catch (e) {
     consola.error(e)
-    throw e
+    return { entries: [], total: 0 }
   }
 })

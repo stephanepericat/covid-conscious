@@ -20,7 +20,7 @@
         >
           <p
             class="review-list__body"
-            v-text="review.body"
+            v-text="review.content"
           />
           <ClientOnly>
             <StarRating
@@ -31,9 +31,9 @@
             />
           </ClientOnly>
           <em>
-            <span><NuxtLink :to="localePath(`${rootPath}/user/${review.profiles.id}`)">{{ review.profiles.username }}</NuxtLink> &bullet; </span>
-            <span>{{ format(new Date(review.updated_at), DEFAULT_DATE_FORMAT) }}</span>
-            <span v-if="review.updated_at > review.created_at"> &bullet; {{ $t('reviews.edited') }}</span>
+            <span><NuxtLink :to="localePath(`${rootPath}/user/${review.author.id}`)">@{{ review.author.profile.name }}</NuxtLink> &bullet; </span>
+            <span>{{ format(new Date(review.updatedAt), DEFAULT_DATE_FORMAT) }}</span>
+            <span v-if="review.updatedAt > review.createdAt"> &bullet; {{ $t('reviews.edited') }}</span>
           </em>
         </IListGroupItem>
       </IListGroup>

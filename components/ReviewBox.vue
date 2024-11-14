@@ -30,7 +30,8 @@
   </div>
 </template>
 <script setup>
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
+  import { usePrisma } from '~/assets/composables/usePrisma';
   import { useReviews } from '~/assets/composables/useReviews'
 
   const props = defineProps({
@@ -45,12 +46,20 @@
 
   const { t } = useI18n()
   const localePath = useLocalePath()
-  const user = useSupabaseUser()
-  const { getUserById } = usePosts()
+  // const user = useSupabaseUser()
+  const { user } = useUserSession()
+  // const { getUserById } = usePosts()
+  const { getUsername } = usePrisma()
   const { createReview, updateReview } = useReviews()
 
-  const userInfo = await getUserById(user?.value?.id || null)
-  const canReview = computed(() => userInfo && userInfo.username !== null)
+  // const userInfo = await getUserById(user?.value?.id || null)
+  // const canReview = computed(() => userInfo && userInfo.username !== null)
+  const username = computedAsync(
+    async () =>
+      user?.value?.email ? await getUsername(user.value.email) : null,
+    null,
+  )
+  const canReview = computed(() => username.value !== null)
 
   const reviewContent = ref(update.value ? userReview.value.body : '')
   const reviewRating = ref(update.value ? userReview.value.rating : 0)

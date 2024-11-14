@@ -2,13 +2,22 @@ import consola from 'consola'
 import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async (event) => {
-  const { skip } = await readBody(event)
+  const { productId, skip } = await readBody(event)
+
+  if(!productId) {
+    throw createError({
+      status: 400,
+      message: "Bad request",
+      statusMessage: "Product ID is missing",
+    })
+  }
 
   try {
-    const posts = await prisma
-      .post
+    const reviews = await prisma
+      .review
       .findMany({
         where: {
+          productId,
           published: true, // only get published posts
         },
         omit: {
@@ -36,31 +45,30 @@ export default defineEventHandler(async (event) => {
               },
             },
           },
-          categories: true,
         },
         cacheStrategy: {
           ttl: 60,
           swr: 5,
-          tags: ['get_posts']
+          tags: ['get_reviews']
         },
       }).withAccelerateInfo()
 
-      consola.info('GET POSTS - ', posts.info)
+      consola.info('GET REVIEWS - ', reviews.info)
 
-      const postCount = await prisma.post.count({
+      const reviewCount = await prisma.review.count({
         where: {
           published: true,
         },
         cacheStrategy: {
           ttl: 60,
           swr: 5,
-          tags: ['get_posts_count']
+          tags: ['get_reviews_count']
         },
       }).withAccelerateInfo()
 
-      consola.info('GET POSTS COUNT - ', postCount.info)
+      consola.info('GET REVIEWS COUNT - ', reviewCount.info)
 
-      return { entries: posts.data || [], total: postCount.data || 0 }
+      return { entries: reviews.data || [], total: reviewCount.data || 0 }
   } catch (e) {
     consola.error(e)
     return { entries: [], total: 0 }

@@ -117,7 +117,7 @@
   import { ILoader, useToast } from '@inkline/inkline'
   import CommentBox from '~/components/CommentBox.vue'
   import CommentList from '~/components/CommentList.vue'
-  import { usePosts } from '~/assets/composables/usePosts'
+  // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { useTranslation } from '~/assets/composables/useTranslation'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'

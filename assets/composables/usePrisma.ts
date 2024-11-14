@@ -138,6 +138,24 @@ export const usePrisma = () => {
     }
   }
 
+  const getProductReviews = async (productId: string, skip = 0) => {
+    try {
+      const res = await $fetch('/api/product/reviews/get-reviews', {
+        method: 'POST',
+        body: { productId, skip },
+      })
+
+      if(!res) {
+        throw new Error('No product reviews found')
+      }
+
+      return res || [];
+    } catch(e) {
+      consola.error(e)
+      return { entries: [], total: 0 }
+    }
+  }
+
   const getTopics = async () => {
     try {
       const topics = await $fetch('/api/forum/post/get-categories', {
@@ -174,6 +192,24 @@ export const usePrisma = () => {
 
       if(!res) {
         throw new Error('Username not found')
+      }
+
+      return res;
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
+  const getUserReview = async (email: string, productId: string) => {
+    try {
+      const res = await $fetch('/api/forum/user/get-user-review', {
+        method: 'POST',
+        body: { email, productId }
+      })
+
+      if(!res) {
+        throw new Error('User review not found')
       }
 
       return res;
@@ -260,10 +296,12 @@ export const usePrisma = () => {
     getPostById,
     getPostComments,
     getPosts,
+    getProductReviews,
     getTopics,
     getUser,
     getUserComments,
     getUsername,
+    getUserReview,
     getUserRole,
     getUserPosts,
     updateUserProfile,
