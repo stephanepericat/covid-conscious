@@ -20,6 +20,8 @@
       <Meta name="twitter:card" content="summary_large_image" />
     </Head>
 
+    isMobile {{ isMobile }}
+
     <ILoader v-if="pending" class="article-page__loader" />
 
     <template v-else-if="!pending && article">
@@ -31,7 +33,7 @@
             :rating="parseFloat(ratingsAverage)"
             read-only
             :show-rating="false"
-            :star-size="30"
+            :star-size="isMobile ? 24 : 30"
           />
           <em class="article-page__title--average">({{ $t('reviews.average') }}: {{ ratingsAverage }})</em>
         </div>
@@ -355,6 +357,7 @@
 <script setup>
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
+  import { useMediaQuery } from '@vueuse/core'
   // import { AUTHOR } from '~/assets/constants/types'
   import { isBrand, isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
@@ -388,6 +391,7 @@
   const url = useRequestURL()
   const { onTagClick } = useTags()
   const hashtag = computed(() => category.replace(/-/gi, ''))
+  const isMobile = useMediaQuery('(max-width: 576px)')
 
   const { data: article, pending } = useLazySanityQuery(publicationQuery, {
     category,
@@ -532,6 +536,7 @@
 
     &--info {
       display: flex;
+      align-items: flex-end;
       height: 48px;
       margin-bottom: 10px;
     }
@@ -540,7 +545,8 @@
       align-items: flex-end;
       display: flex;
       font-family: var(--body--font-family, var(--font-family-primary-base));
-      font-size: 16px;
+      font-size: 13px;
+      font-style: normal;
       margin-left: 5px;
       padding-bottom: 8px;
     }
@@ -715,19 +721,19 @@
     }
   }
 
-  @include breakpoint-down('md') {
-    &__share {
-      display: none;
-    }
-  }
-
   .icon {
     margin-right: 3px;
     vertical-align: top !important;
   }
 
-  .vue-star-rating {
-    align-items: flex-end;
+  // .vue-star-rating {
+  //   align-items: flex-end;
+  // }
+
+  @include breakpoint-down('md') {
+    &__share {
+      display: none;
+    }
   }
 }
 </style>
