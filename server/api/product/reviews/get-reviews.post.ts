@@ -86,7 +86,11 @@ export default defineEventHandler(async (event) => {
 
       consola.info('GET RATING AVERAGE - ', ratingAverage.info)
 
-      return { entries: reviews.data || [], total: reviewCount.data || 0, average: ratingAverage.data._avg?.rating || null }
+      return {
+        entries: reviews.data || [],
+        total: reviewCount.data || 0,
+        average: ratingAverage.data._avg?.rating?.toFixed(2) || null,
+      }
   } catch (e) {
     consola.error(e)
     return { entries: [], total: 0, average: null }

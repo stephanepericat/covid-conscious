@@ -1,13 +1,11 @@
 <template>
   <div
     class="review-list"
-    :class="{ pending }"
   >
     <ILoader
       v-if="pending"
       class="review-list__loader"
     />
-    <p v-else-if="!pending && !total" v-text="$t('reviews.noReviews')" class="text-lg" />
     <template v-else>
       <p v-text="$t('reviews.list.description', { start, end, total })" />
       <IListGroup
@@ -79,9 +77,10 @@
 
   watch(activePage, () => {
     if(activePage.value !== currentPage.value) {
+      console.log(activePage.value, currentPage.value)
       currentPage.value = activePage.value
     }
-  })
+  }, { immediate: true })
 </script>
 <style lang="scss" scoped>
 @import "~/assets/sass/mixins.scss";
@@ -97,6 +96,7 @@
 
   &__loader {
     @include loader();
+    display: flex;
   }
 
   &__body {

@@ -331,13 +331,14 @@
               <span v-text="$t('reviews.title')" />
             </h2>
             <ReviewList
-              v-if="!reviewsPending"
+              v-if="totalReviews > 0"
               :pending="reviewsPending"
               :page="activePage"
               :reviews="reviews.entries"
               :total-items="totalReviews"
               @page-change="onReviewsPageChange"
             />
+            <p v-else-if="!initialLoad && totalReviews === 0" v-text="$t('reviews.noReviews')" class="text-lg" />
           </div>
         </template>
       </section>
@@ -382,7 +383,8 @@
   const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
-  const user = useSupabaseUser()
+  // const user = useSupabaseUser()
+  const { user } = useUserSession()
   const url = useRequestURL()
   const { onTagClick } = useTags()
   const hashtag = computed(() => category.replace(/-/gi, ''))
@@ -394,6 +396,7 @@
     type,
   })
 
+  const initialLoad = ref(true)
   const articleId = computed(() => article?.value?.id || null)
   const relatedArticles = computed(() => article?.value?.related.sort(() => Math.random() - 0.5).slice(0, 3) || [])
 
@@ -426,12 +429,13 @@
   const listedProducts = computed(() => isBrand(type) && article?.value?.products || false)
 
   // PRODUCT REVIEWS
-  const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
-  const { getProductReviews } = usePrisma()
+  // const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
+  const { getProductReviews, getUserReview } = usePrisma()
   // const totalReviews = ref(0)
   // const reviews = ref([])
   // const ratingsAverage = ref("")
   const reviews = ref({})
+  const reviewsLoading = ref(false)
   const totalReviews = computed(() => reviews.value?.total || 0)
   const ratingsAverage = computed(() => reviews.value.average || null)
   const activePage = ref(1)
@@ -440,13 +444,12 @@
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
   const userReview = ref(null)
 
-  const onReviewsPageChange = async ({ currentPage, startItem, endItem }) => {
+  const onReviewsPageChange = async ({ currentPage, startItem }) => {
     if(activePage.value !== currentPage) {
       activePage.value = currentPage
-      reviews.value = await getReviews(articleId.value, startItem, endItem - 1)
-      totalReviews.value = await getReviewsCount(articleId.value)
-      ratingsAverage.value = await getRatingsAverage(articleId.value)
-      hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
+      reviewsLoading.value = true
+      reviews.value = await getProductReviews(articleId.value, startItem)
+      reviewsLoading.value = false
     }
   }
 
@@ -460,10 +463,13 @@
     })
 
     activePage.value = 1
-    reviews.value = await getReviews(articleId.value)
-    totalReviews.value = await getReviewsCount(articleId.value)
-    ratingsAverage.value = await getRatingsAverage(articleId.value)
+    // reviews.value = await getReviews(articleId.value)
+    // totalReviews.value = await getReviewsCount(articleId.value)
+    // ratingsAverage.value = await getRatingsAverage(articleId.value)
+    reviewsLoading.value = true
+    reviews.value = await getProductReviews(articleId.value)
     hasUserReviewed.value = true
+    reviewsLoading.value = false
   }
 
   const onReviewPostError = () => toast.show({
@@ -473,7 +479,7 @@
   })
 
   const onShowReviewEditor = async () => {
-    userReview.value = await getUserReview(articleId.value, user.value.id)
+    // userReview.value = await getUserReview(articleId.value, user.value.id)
     showReviewEditor.value = true
   }
 
@@ -482,12 +488,23 @@
   watch(articleId, async () => {
     if(!articleId.value || !isProduct(type)) return
 
-    activePage.value = 1
+    // activePage.value = 1
     // reviews.value = await getReviews(articleId.value)
     // totalReviews.value = await getReviewsCount(articleId.value)
     // ratingsAverage.value = await getRatingsAverage(articleId.value)
     // hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
-    reviews.value = await getProductReviews(articleId.value)
+    try {
+      reviewsLoading.value = true
+      reviews.value = await getProductReviews(articleId.value)
+      if(user.value?.email) {
+        userReview.value = await getUserReview(user.value?.email, articleId.value)
+      }
+    } catch(e) {
+      console.error(e)
+    } finally {
+      reviewsLoading.value = false
+      initialLoad.value = false
+    }
   }, { immediate: true })
 
   umTrackView()
