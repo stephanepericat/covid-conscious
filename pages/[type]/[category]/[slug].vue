@@ -20,8 +20,6 @@
       <Meta name="twitter:card" content="summary_large_image" />
     </Head>
 
-    isMobile {{ isMobile }}
-
     <ILoader v-if="pending" class="article-page__loader" />
 
     <template v-else-if="!pending && article">
@@ -691,6 +689,11 @@
           margin-left: 0;
           margin-top: 20px;
         }
+      }
+
+      .brand {
+        margin-left: 0;
+        margin-top: 15px;
       }
     }
   }

@@ -7,7 +7,7 @@
       class="review-list__loader"
     />
     <template v-else>
-      <p v-text="$t('reviews.list.description', { start, end, total })" />
+      <p class="text-base" v-text="$t('reviews.list.description', { start, end, total })" />
       <IListGroup
         size="sm"
         :border="false"
