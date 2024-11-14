@@ -533,6 +533,7 @@
     &--info {
       display: flex;
       height: 48px;
+      margin-bottom: 10px;
     }
 
     &--average {
@@ -723,6 +724,10 @@
   .icon {
     margin-right: 3px;
     vertical-align: top !important;
+  }
+
+  .vue-star-rating {
+    align-items: flex-end;
   }
 }
 </style>
