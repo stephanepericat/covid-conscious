@@ -36,32 +36,35 @@
 
   const props = defineProps({
     articleId: { type: String, default: null },
+    canReview: Boolean,
     update: Boolean,
+    userId: { type: Number, default: null },
+    userName: { type: String, default: null },
     userReview: { type: Object, default: () => ({})},
   })
 
   const emit = defineEmits(['error', 'success'])
 
-  const { articleId, update, userReview } = toRefs(props)
+  const { articleId, update, userId, userName, userReview } = toRefs(props)
 
   const { t } = useI18n()
   const localePath = useLocalePath()
   // const user = useSupabaseUser()
-  const { user } = useUserSession()
+  // const { user } = useUserSession()
   // const { getUserById } = usePosts()
-  const { getUsername } = usePrisma()
-  const { createReview, updateReview } = useReviews()
+  // const { getUsername } = usePrisma()
+  // const { createReview, updateReview } = useReviews()
 
   // const userInfo = await getUserById(user?.value?.id || null)
   // const canReview = computed(() => userInfo && userInfo.username !== null)
-  const username = computedAsync(
-    async () =>
-      user?.value?.email ? await getUsername(user.value.email) : null,
-    null,
-  )
-  const canReview = computed(() => username.value !== null)
+  // const username = computedAsync(
+  //   async () =>
+  //     user?.value?.email ? await getUsername(user.value.email) : null,
+  //   null,
+  // )
+  const canReview = computed(() => userName.value !== null)
 
-  const reviewContent = ref(update.value ? userReview.value.body : '')
+  const reviewContent = ref(update.value ? userReview.value.content : '')
   const reviewRating = ref(update.value ? userReview.value.rating : 0)
 
   const clearForm = () => {
@@ -77,31 +80,33 @@
 
   const onSubmit = async () => {
     const payload = {
-      body: reviewContent.value,
+      content: reviewContent.value,
       rating: reviewRating.value,
-      author_id: user.value.id,
-      product_id: articleId.value,
+      authorId: userId.value,
+      productId: articleId.value,
     }
 
-    submitting.value = true
+    console.log('payload', payload)
 
-    try {
-      const { data, error } = update.value
-        ? await updateReview({ ...payload, updated_at: new Date() }, userReview.value.id)
-        : await createReview(payload)
+    // submitting.value = true
 
-      if(error) throw error
+    // try {
+    //   // const { data, error } = update.value
+    //   //   ? await updateReview({ ...payload, updated_at: new Date() }, userReview.value.id)
+    //   //   : await createReview(payload)
 
-      if(data?.id) {
-        emit('success', { updated: update.value })
-      }
-    } catch(e) {
-      console.error(e)
-      emit('error')
-    } finally {
-      if(!update.value) clearForm()
-      submitting.value = false
-    }
+    //   if(error) throw error
+
+    //   if(data?.id) {
+    //     emit('success', { updated: update.value })
+    //   }
+    // } catch(e) {
+    //   console.error(e)
+    //   emit('error')
+    // } finally {
+    //   if(!update.value) clearForm()
+    //   submitting.value = false
+    // }
   }
 </script>
 <style lang="scss" scoped>

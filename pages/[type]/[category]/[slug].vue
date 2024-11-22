@@ -305,8 +305,8 @@
           </div>
           <div class="article-page__reviews" v-if="articleId">
             <h3 v-text="$t('reviews.add')" class="article-page__reviews--title" />
-            <div class="article-page__reviews--reviewed" v-if="user?.value && hasUserReviewed">
-              <p>
+            <div class="article-page__reviews--reviewed" v-if="hasUserReviewed">
+              <p class="text-base" v-if="!showReviewEditor">
                 <span v-text="$t('reviews.edit.already')" /> <a v-if="articleId" href="#" @click="onShowReviewEditor" v-text="$t('reviews.edit.click')" />
               </p>
               <ReviewBox
@@ -314,6 +314,8 @@
                 class="article-page__reviews--box"
                 :article-id="articleId"
                 update
+                :user-id="userId"
+                :user-name="userName"
                 :user-review="userReview"
                 @error="onReviewPostError"
                 @success="onReviewPostSuccess"
@@ -323,6 +325,8 @@
               v-else
               class="article-page__reviews--box"
               :article-id="articleId"
+              :user-id="userId"
+              :user-name="userName"
               @error="onReviewPostError"
               @success="onReviewPostSuccess"
             />
@@ -432,7 +436,7 @@
 
   // PRODUCT REVIEWS
   // const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
-  const { getProductReviews, getUserReview } = usePrisma()
+  const { getProductReviews, getUserReview, getUser } = usePrisma()
   // const totalReviews = ref(0)
   // const reviews = ref([])
   // const ratingsAverage = ref("")
@@ -441,10 +445,24 @@
   const totalReviews = computed(() => reviews.value?.total || 0)
   const ratingsAverage = computed(() => reviews.value.average || null)
   const activePage = ref(1)
-  const hasUserReviewed = ref(true)
+  // const hasUserReviewed = ref(true)
   const showReviewEditor = ref(false)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
-  const userReview = ref(null)
+  // const userReview = ref(null)
+  const userInfo = computedAsync(
+    async () =>
+      user?.value?.email && isProduct(type) ? await getUser(user.value.email) : null,
+    null,
+  )
+  const userId = computed(() => userInfo.value?.id || null)
+  const userName = computed(() => userInfo.value?.profile?.name || null)
+  const userReview = computedAsync(async () => {
+    return articleId.value && user.value?.email && isProduct(type)
+      ? await getUserReview(user.value.email, articleId.value)
+      : {}
+  }, {})
+  // const hasUserReviewed = computed(() => !!userReview.value?.id)
+  const hasUserReviewed = ref(false)
 
   const onReviewsPageChange = async ({ currentPage, startItem }) => {
     if(activePage.value !== currentPage) {
@@ -480,8 +498,9 @@
     color: 'danger'
   })
 
-  const onShowReviewEditor = async () => {
-    // userReview.value = await getUserReview(articleId.value, user.value.id)
+  const onShowReviewEditor = async (e) => {
+    e.preventDefault()
+    // userReview.value = await getUserReview(user.value?.email, articleId.value)
     showReviewEditor.value = true
   }
 
@@ -498,15 +517,16 @@
     try {
       reviewsLoading.value = true
       reviews.value = await getProductReviews(articleId.value)
-      if(user.value?.email) {
-        userReview.value = await getUserReview(user.value?.email, articleId.value)
-      }
     } catch(e) {
-      console.error(e)
+      console.error('reviews error', e)
     } finally {
       reviewsLoading.value = false
       initialLoad.value = false
     }
+  }, { immediate: true })
+
+  watch(userReview, () => {
+    hasUserReviewed.value = !!userReview.value?.id
   }, { immediate: true })
 
   umTrackView()
