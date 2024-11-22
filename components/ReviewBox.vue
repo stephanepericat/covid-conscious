@@ -32,7 +32,7 @@
 <script setup>
   // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma';
-  import { useReviews } from '~/assets/composables/useReviews'
+  // import { useReviews } from '~/assets/composables/useReviews'
 
   const props = defineProps({
     articleId: { type: String, default: null },
@@ -49,6 +49,7 @@
 
   const { t } = useI18n()
   const localePath = useLocalePath()
+  const { createProductReview, updateProductReview } = usePrisma()
   // const user = useSupabaseUser()
   // const { user } = useUserSession()
   // const { getUserById } = usePosts()
@@ -88,25 +89,23 @@
 
     console.log('payload', payload)
 
-    // submitting.value = true
+    submitting.value = true
 
-    // try {
-    //   // const { data, error } = update.value
-    //   //   ? await updateReview({ ...payload, updated_at: new Date() }, userReview.value.id)
-    //   //   : await createReview(payload)
+    try {
+      const data = update.value
+        ? await updateProductReview({ payload, reviewId: userReview.value?.id })
+        : await createProductReview(payload)
 
-    //   if(error) throw error
-
-    //   if(data?.id) {
-    //     emit('success', { updated: update.value })
-    //   }
-    // } catch(e) {
-    //   console.error(e)
-    //   emit('error')
-    // } finally {
-    //   if(!update.value) clearForm()
-    //   submitting.value = false
-    // }
+      if(data?.id) {
+        emit('success', { data, updated: update.value })
+      }
+    } catch(e) {
+      console.error(e)
+      emit('error')
+    } finally {
+      if(!update.value) clearForm()
+      submitting.value = false
+    }
   }
 </script>
 <style lang="scss" scoped>

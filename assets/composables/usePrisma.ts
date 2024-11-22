@@ -25,6 +25,18 @@ export const usePrisma = () => {
     }
   }
 
+  const createProductReview = async (payload: any) => {
+    try {
+      return await $fetch('/api/product/reviews/create-review', {
+        method: 'POST',
+        body: { payload }
+      })
+    } catch(e) {
+      consola.error(e)
+      throw e
+    }
+  }
+
   const createUser = async (email: string) => {
     try {
       return await $fetch('/api/forum/user/create-user', {
@@ -273,6 +285,18 @@ export const usePrisma = () => {
     }
   }
 
+  const updateProductReview = async (body: { payload: any, reviewId: number }) => {
+    try {
+      return await $fetch('/api/product/reviews/update-review', {
+        method: 'POST',
+        body,
+      })
+    } catch(e) {
+      consola.error(e)
+      throw e
+    }
+  }
+
   const updateUserProfile = async (body: { data: any, profileId: number }) => {
     try {
       return await $fetch('/api/forum/user/update-profile', {
@@ -288,6 +312,7 @@ export const usePrisma = () => {
   return {
     createComment,
     createPost,
+    createProductReview,
     createUser,
     deleteComment,
     deletePosts,
@@ -304,6 +329,7 @@ export const usePrisma = () => {
     getUserReview,
     getUserRole,
     getUserPosts,
+    updateProductReview,
     updateUserProfile,
   }
 }

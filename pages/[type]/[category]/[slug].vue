@@ -448,7 +448,7 @@
   // const hasUserReviewed = ref(true)
   const showReviewEditor = ref(false)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
-  // const userReview = ref(null)
+  const userReview = ref(null)
   const userInfo = computedAsync(
     async () =>
       user?.value?.email && isProduct(type) ? await getUser(user.value.email) : null,
@@ -456,11 +456,6 @@
   )
   const userId = computed(() => userInfo.value?.id || null)
   const userName = computed(() => userInfo.value?.profile?.name || null)
-  const userReview = computedAsync(async () => {
-    return articleId.value && user.value?.email && isProduct(type)
-      ? await getUserReview(user.value.email, articleId.value)
-      : {}
-  }, {})
   // const hasUserReviewed = computed(() => !!userReview.value?.id)
   const hasUserReviewed = ref(false)
 
@@ -475,19 +470,23 @@
 
   const toast = useToast()
 
-  const onReviewPostSuccess = async ({ updated }) => {
+  const onReviewPostSuccess = async ({ data, updated }) => {
     toast.show({
       title: t(`reviews.toast.${updated ? 'update' : 'success'}.title`),
       message: t(`reviews.toast.${updated ? 'update' : 'success'}.message`),
       color: 'success'
     })
 
+    reviewsLoading.value = true
     activePage.value = 1
     // reviews.value = await getReviews(articleId.value)
     // totalReviews.value = await getReviewsCount(articleId.value)
     // ratingsAverage.value = await getRatingsAverage(articleId.value)
-    reviewsLoading.value = true
+
+    // TODO; update cache instead...
     reviews.value = await getProductReviews(articleId.value)
+    userReview.value = await getUserReview(user.value.email, articleId.value)
+
     hasUserReviewed.value = true
     reviewsLoading.value = false
   }
@@ -517,6 +516,10 @@
     try {
       reviewsLoading.value = true
       reviews.value = await getProductReviews(articleId.value)
+
+      if(user.value?.email) {
+        userReview.value = await getUserReview(user.value.email, articleId.value)
+      }
     } catch(e) {
       console.error('reviews error', e)
     } finally {
