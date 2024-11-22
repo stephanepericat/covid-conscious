@@ -366,7 +366,7 @@
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
   import ReviewList from '~/components/ReviewList.vue'
-  import { useReviews } from '~/assets/composables/useReviews'
+  // import { useReviews } from '~/assets/composables/useReviews'
   import ShareButtons from '~/components/ShareButtons.vue'
   import { serializers } from '~/assets/constants/serializers'
   import { useCovidnet } from '~/assets/composables/useCovidnet'
