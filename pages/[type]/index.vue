@@ -45,7 +45,7 @@
   import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource } from '~/assets/utils/article-types'
+  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
 
@@ -152,7 +152,7 @@
   const selectedContentType = ref(null)
 
   const filterLanguages = computed(() => {
-    if(!isLibrary(type) && !isNews(type) && !isHealth(type) && !isCovidnet(type)) return [];
+    if(!isLibrary(type) && !isNews(type) && !isHealth(type) && !isCovidnet(type) && !isVideo(type) && !isResource(type)) return [];
 
     const articles = selectedSource.value
       ? results.value.filter((r) => r.source === selectedSource.value)

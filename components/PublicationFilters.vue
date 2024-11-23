@@ -61,6 +61,15 @@
             clearable
           />
         </template>
+        <template v-if="isVideo(type) || isResource(type)">
+          <ISelect
+            class="publication-filters--select"
+            v-model="selectedLanguage"
+            :options="languages"
+            :placeholder="$t('list.filters.selectLanguage')"
+            clearable
+          />
+        </template>
       </div>
       <!-- <IButton @click="clearFilters">
         <Icon name="carbon:reset" />
@@ -70,7 +79,7 @@
   </div>
 </template>
 <script setup>
-  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isSearch, isTag } from '~/assets/utils/article-types'
+  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource, isSearch, isTag, isVideo } from '~/assets/utils/article-types'
 
   const props = defineProps({
     categories: { type: Array, default: [] },
