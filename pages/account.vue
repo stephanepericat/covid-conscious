@@ -6,6 +6,18 @@
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
   import { useForm } from '@inkline/inkline/composables'
+  import _ from 'lodash'
+
+  const { getOrCreateUser, findUsername, updateUserProfile } = usePrisma()
+  const router = useRouter()
+  const localePath = useLocalePath()
+
+  const { user } = useUserSession()
+  const userInfo = computedAsync(
+    async () =>
+      user?.value?.email ? await getOrCreateUser(user.value.email) : null,
+    null,
+  )
 
   const { form, schema } = useForm({
     bio: {
@@ -16,6 +28,21 @@
         { name: 'required' },
         { name: 'alphanumeric' },
         { name: 'minLength', value: 5 },
+        {
+          name: 'custom',
+          message: 'This username is already in use',
+          validator: _.debounce(async (value) => {
+            if(!value || value === userInfo.value?.profile?.name) {
+              return true
+            }
+
+            const { data, error } = await findUsername(value)
+
+            if(error) return false
+
+            return data.available
+          }, 300)
+        }
       ],
     },
     website: {
@@ -31,15 +58,6 @@
       ],
     },
   })
-
-  const { getOrCreateUser, updateUserProfile } = usePrisma()
-
-  const { user } = useUserSession()
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email ? await getOrCreateUser(user.value.email) : null,
-    null,
-  )
 
   const avatar = computedAsync(
     async () =>
@@ -59,6 +77,8 @@
       message: t('forum.auth.toast.update.message'),
       color: 'success',
     })
+
+    // TODO: reload user profile?
   }
 
   const onSubmit = async () => {

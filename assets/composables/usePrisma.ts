@@ -73,6 +73,20 @@ export const usePrisma = () => {
     }
   }
 
+  const findUsername = async (username: string) => {
+    try {
+      const available = await $fetch('/api/forum/user/find-username', {
+        method: 'POST',
+        body: { username },
+      })
+
+      return { data: { available }, error: null }
+    } catch(e) {
+      consola.error(e)
+      return { error: e, data: null }
+    }
+  } 
+
   const getLatestPosts = async () => {
     try {
       const res = await $fetch('/api/forum/post/get-latest-posts', {
@@ -316,6 +330,7 @@ export const usePrisma = () => {
     createUser,
     deleteComment,
     deletePosts,
+    findUsername,
     getLatestPosts,
     getOrCreateUser,
     getPostById,
