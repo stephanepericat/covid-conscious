@@ -315,7 +315,9 @@
   // import { usePosts } from '~/assets/composables/usePosts'
   import { useMobileButtons } from '~/assets/composables/useMobileButtons'
   import { usePrisma } from '~/assets/composables/usePrisma'
+  import { useUserStore } from '~/assets/stores/user'
 
+  const userStore = useUserStore()
   const inkline = useInkline()
   const { t } = useI18n()
   const { currentLocale, availableLocales, locale } = useLanguages()
@@ -423,6 +425,8 @@
       verifyToken()
     }
   }, { immediate: true })
+
+  useAsyncData( async () => await userStore.updateUserInfo())
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';

@@ -23,6 +23,7 @@ export default defineNuxtConfig({
   
   // @ts-ignore
   modules: [
+    '@pinia/nuxt',
     '@vueuse/nuxt',
     '@inkline/plugin/nuxt',
     '@nuxtjs/tailwindcss',
@@ -93,6 +94,10 @@ export default defineNuxtConfig({
 
   ogImage: {
     enabled: false,
+  },
+
+  pinia: {
+    storesDirs: ['./assets/stores/**'],
   },
 
   prisma: {
