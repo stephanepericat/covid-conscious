@@ -74,8 +74,8 @@
                 <div class="default-layout__user--info">
                   <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
                   <div>
-                    <p class="default-layout__user--info-detail username">@{{ username || 'USER' }}</p>
-                    <p class="default-layout__user--info-detail email">{{ user.email }}</p>
+                    <p class="default-layout__user--info-detail username">@{{ userStore.username || 'USER' }}</p>
+                    <p class="default-layout__user--info-detail email">{{ userStore.email }}</p>
                   </div>
                 </div>
               </template>

@@ -24,6 +24,7 @@ export const useUserStore = defineStore('user', {
 
       return !!info?.profile?.name
     },
+    email: ({ info }) => info?.email || null,
     username: ({ info }) => info?.profile?.name || null,
   },
   actions: {
@@ -40,10 +41,10 @@ export const useUserStore = defineStore('user', {
         return
       }
 
-      const { getUser } = usePrisma()
+      const { getOrCreateUser } = usePrisma()
 
       try {
-        const info = await getUser(user.value.email as string)
+        const info = await getOrCreateUser(user.value.email as string)
         this.info = info
       } catch(e) {
         consola.error(e)

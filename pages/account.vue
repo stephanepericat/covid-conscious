@@ -6,18 +6,22 @@
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
   import { useForm } from '@inkline/inkline/composables'
+  import { useUserStore } from '~/assets/stores/user'
   import _ from 'lodash'
 
   const { getOrCreateUser, findUsername, updateUserProfile } = usePrisma()
-  const router = useRouter()
-  const localePath = useLocalePath()
+  // const router = useRouter()
+  // const localePath = useLocalePath()
+
+  const userStore = useUserStore()
 
   const { user } = useUserSession()
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email ? await getOrCreateUser(user.value.email) : null,
-    null,
-  )
+  // const userInfo = computedAsync(
+  //   async () =>
+  //     user?.value?.email ? await getOrCreateUser(user.value.email) : null,
+  //   null,
+  // )
+  const userInfo = computed(() => userStore.info)
 
   const { form, schema } = useForm({
     bio: {
