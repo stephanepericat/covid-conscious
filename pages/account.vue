@@ -65,14 +65,14 @@
   const { onError, signOut } = useSignOut(user)
   const loading = ref(false)
 
-  const onUpdateSuccess = () => {
+  const onUpdateSuccess = (data) => {
     toast.show({
       title: t('forum.auth.toast.update.title'),
       message: t('forum.auth.toast.update.message'),
       color: 'success',
     })
 
-    // TODO: reload user profile?
+    userStore.updateUserInfo(data)
   }
 
   const onSubmit = async () => {
@@ -84,7 +84,7 @@
 
     try {
       await updateUserProfile(payload)
-      onUpdateSuccess()
+      onUpdateSuccess(payload.data)
     } catch(e) {
       console.error(e)
       onError(e)

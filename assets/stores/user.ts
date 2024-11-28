@@ -28,7 +28,7 @@ export const useUserStore = defineStore('user', {
     username: ({ info }) => info?.profile?.name || null,
   },
   actions: {
-    async updateUserInfo(payload: UserInfo | undefined) {
+    async updateUserInfo(payload: UserInfo["profile"] | undefined) {
       const { user } = useUserSession()
 
       if (!user.value) {
@@ -37,7 +37,7 @@ export const useUserStore = defineStore('user', {
       }
 
       if(payload) {
-        this.info = { ...this.info, ...payload }
+        this.info = { ...this.info, profile: { ...this.info?.profile, ...payload }}
         return
       }
 
