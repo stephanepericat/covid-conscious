@@ -1,6 +1,6 @@
 <template>
   <div class="sf-post-editor">
-    <PostDisabled  v-if="!canPost" type="post" />
+    <PostDisabled  v-if="!userStore.canPost" type="post" />
     <IForm
       v-else
       v-model="form"
@@ -104,32 +104,21 @@
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
   import { useForm } from '@inkline/inkline'
-  // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
+  import { useUserStore } from '~/assets/stores/user'
   import PostDisabled from './PostDisabled.vue'
 
   const emit = defineEmits(['error', 'success'])
 
-  // const user = useSupabaseUser()
-  const { createPost, getTopics, getUser } = usePrisma()
-  const { user } = useUserSession()
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email ? await getUser(user.value.email) : null,
-    null,
-  )
+  const userStore = useUserStore()
+  const { createPost, getTopics } = usePrisma()
   const { t } = useI18n()
-  // const { createPost, getTopics, getUserById } = usePosts()
 
   const topics = computedAsync(async () => await getTopics(), [])
 
   const categories = computed(
     () => topics.value?.map(({ id, name }) => ({ id, label: t(`forum.create.categories.${name}`) })) || []
   );
-
-  // const { username } = await getUserById(user.value.id)
-  const username = computed(() => userInfo.value?.profile.name || null)
-  const canPost = computed(() => username !== null)
 
   const isValidContent = (v) => v.length > 0 && v !== '\n'
 
@@ -188,7 +177,7 @@
 
   const isSubmitting = ref(false)
   // const token = ref(null)
-  const buttonDisabled = computed(() => form?.value?.untouched || form?.value?.invalid || !hasContent.value || isSubmitting.value || !userInfo.value?.id)
+  const buttonDisabled = computed(() => form?.value?.untouched || form?.value?.invalid || !hasContent.value || isSubmitting.value || !userStore.info?.id)
 
   const clearForm = () =>  {
     form.value.title.value = ''
@@ -206,7 +195,7 @@
       title: form.value.title.value,
       content: htmlContents.value,
       category: form.value.category.value,
-      authorId: userInfo.value.id
+      authorId: userStore.info?.id
     }
 
     try {

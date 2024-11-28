@@ -2,26 +2,17 @@
   import isURL from 'validator/lib/isURL'
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { ITooltip, useToast } from '@inkline/inkline'
-  // import Account from '../components/UserAccount.vue'
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
   import { useForm } from '@inkline/inkline/composables'
   import { useUserStore } from '~/assets/stores/user'
   import _ from 'lodash'
 
-  const { getOrCreateUser, findUsername, updateUserProfile } = usePrisma()
-  // const router = useRouter()
-  // const localePath = useLocalePath()
+  const { findUsername, updateUserProfile } = usePrisma()
 
   const userStore = useUserStore()
 
   const { user } = useUserSession()
-  // const userInfo = computedAsync(
-  //   async () =>
-  //     user?.value?.email ? await getOrCreateUser(user.value.email) : null,
-  //   null,
-  // )
-  const userInfo = computed(() => userStore.info)
 
   const { form, schema } = useForm({
     bio: {
@@ -36,7 +27,7 @@
           name: 'custom',
           message: 'This username is already in use',
           validator: _.debounce(async (value) => {
-            if(!value || value === userInfo.value?.profile?.name) {
+            if(!value || value === userStore.info?.profile?.name) {
               return true
             }
 
@@ -65,12 +56,11 @@
 
   const avatar = computedAsync(
     async () =>
-      user?.value?.email ? await getGravatarUrl(user.value.email) : null,
+      userStore.email ? await getGravatarUrl(userStore.email) : null,
     null,
   )
 
   const toast = useToast()
-  // const user = useSupabaseUser()
   const { t } = useI18n()
   const { onError, signOut } = useSignOut(user)
   const loading = ref(false)
@@ -89,7 +79,7 @@
     loading.value = true
     const payload = {
       data: form.value,
-      profileId: userInfo?.value.profile?.id,
+      profileId: userStore.info?.profile?.id,
     }
 
     try {
@@ -104,9 +94,9 @@
   }
 
   watch(
-    userInfo,
+    userStore,
     () => {
-      const { profile = null } = userInfo.value || {}
+      const { profile = null } = userStore.info || {}
 
       if (profile) {
         schema.value.bio.value = profile.bio || ''
@@ -124,13 +114,7 @@
   <div class="account-page">
     <h1 class="account-page__title" v-text="$t('forum.account.title')" />
     <div v-if="user" class="flex flex-col">
-      <!-- <Account
-        class="account-page__account"
-        :info="userInfo"
-        @error="onError"
-        @success="onUpdateSuccess"
-      /> -->
-      <IForm v-if="userInfo" v-model="schema" class="my-12" @submit="onSubmit">
+      <IForm v-if="userStore.info?.id" v-model="schema" class="my-12" @submit="onSubmit">
         <div class="flex flex-row mb-8">
           <ITooltip placement="top" size="sm" interactable>
             <NuxtLink href="https://gravatar.com" target="_blank">
@@ -146,7 +130,7 @@
             <h4
               class="text-sm md:text-xl font-bold uppercase tracking-widest mb-4 text-ellipsis overflow-hidden max-w-[230px] md:max-w-[400px]"
             >
-              {{ userInfo.email }}
+              {{ userStore.email }}
             </h4>
             <IFormGroup>
               <IInput

@@ -56,17 +56,10 @@
   import { format } from 'date-fns'
   import { usePagination } from '~/assets/composables/usePagination'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
-  import { usePrisma } from '~/assets/composables/usePrisma'
+  import { useUserStore } from '~/assets/stores/user'
 
   const emit = defineEmits(['page-change', 'delete-comment'])
-  // const user = useSupabaseUser()
-  const { getUser } = usePrisma()
-  const { user } = useUserSession()
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email ? await getUser(user.value.email) : null,
-    null,
-  )
+  const userStore = useUserStore()
 
   const props = defineProps({
     comments: { type: Array, default: () => [] },
@@ -90,7 +83,7 @@
     startItem: startItem.value,
   })
 
-  const showDeleteAction = (userId) => userInfo.value && userId === userInfo.value.id
+  const showDeleteAction = (userId) => userStore.info?.id && userId === userStore.info.id
 
   const onDeleteComment = (e, comment) => {
     e.preventDefault()

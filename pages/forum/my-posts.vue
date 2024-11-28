@@ -90,33 +90,18 @@
   import { useToast } from '@inkline/inkline'
   import { DEFAULT_DATE_FORMAT } from '~/assets/constants/date-formats'
   import { usePagination } from '~/assets/composables/usePagination'
-  // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
+  import { useUserStore } from '~/assets/stores/user'
 
   const { t } = useI18n()
-  const { deletePosts, getUser, getUserPosts } = usePrisma()
-  // const user = useSupabaseUser()
-  const { user } = useUserSession()
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email ? await getUser(user.value.email) : null,
-    null,
-  )
+  const { deletePosts, getUserPosts } = usePrisma()
+  const userStore = useUserStore()
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
-
-  // const total = ref(0)
 
   const start = computed(() => startItem.value + 1)
   const end = computed(() => endItem.value > total ? total : endItem.value)
   const loading = ref(true)
-
-  // const {
-    // deleteUserPosts,
-    // getUserPosts,
-    // getUserPostsCount,
-    // loading,
-  // } = usePosts()
 
   const posts = ref([])
   const total = computed(() => posts.value?.total || 0)
@@ -150,7 +135,7 @@
   const onDelete = async () => {
     try {
       const payload = {
-        authorId: userInfo.value?.id,
+        authorId: userStore.info?.id,
         posts: Object.values(selection.value)
       } 
       console.log('selected post ids', payload)
@@ -163,8 +148,7 @@
       reloading.value = true
       currentPage.value = 1
       selection.value = []
-      // total.value = await getUserPostsCount()
-      posts.value = await getUserPosts(user.value.email)
+      posts.value = await getUserPosts(userStore.email)
     } catch(e) {
       console.error(e)
       onDeleteError()
@@ -192,7 +176,7 @@
     loading.value = true
 
     try {
-      posts.value = await getUserPosts(user.value?.email, startItem.value)
+      posts.value = await getUserPosts(userStore.email, startItem.value)
       selection.value = []
     } catch (e) {
       console.error(e)
@@ -201,16 +185,13 @@
     }
   }
 
-  // total.value = await getUserPostsCount()
-  // posts.value = await getUserPosts(userInfo.value?.id, 0, 4)
-
   onMounted(async () => {
-    if(!user.value?.email) {
+    if(!userStore.email) {
       return
     }
 
     try {
-      posts.value = await getUserPosts(user.value.email)
+      posts.value = await getUserPosts(userStore.email)
     } catch (e) {
       console.error(e)
     } finally {

@@ -360,13 +360,11 @@
   import { format } from 'date-fns'
   import { useToast } from '@inkline/inkline'
   import { useMediaQuery } from '@vueuse/core'
-  // import { AUTHOR } from '~/assets/constants/types'
   import { isBrand, isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
   import publicationQuery from '~/sanity/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
   import ReviewList from '~/components/ReviewList.vue'
-  // import { useReviews } from '~/assets/composables/useReviews'
   import ShareButtons from '~/components/ShareButtons.vue'
   import { serializers } from '~/assets/constants/serializers'
   import { useCovidnet } from '~/assets/composables/useCovidnet'
@@ -383,13 +381,13 @@
   import FeaturedPosts from '~/components/FeaturedPosts.vue'
   import ListedProducts from '~/components/ListedProducts.vue'
   import { usePrisma } from '~/assets/composables/usePrisma'
+  import { useUserStore } from '~/assets/stores/user'
 
+  const userStore = useUserStore()
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
   const { params } = useRoute()
   const { type, category, slug } = params
-  // const user = useSupabaseUser()
-  const { user } = useUserSession()
   const url = useRequestURL()
   const { onTagClick } = useTags()
   const hashtag = computed(() => category.replace(/-/gi, ''))
@@ -435,28 +433,17 @@
   const listedProducts = computed(() => isBrand(type) && article?.value?.products || false)
 
   // PRODUCT REVIEWS
-  // const { checkUserReview, getRatingsAverage, getReviews, getReviewsCount, getUserReview, reviewsLoading } = useReviews()
   const { getProductReviews, getUserReview, getUser } = usePrisma()
-  // const totalReviews = ref(0)
-  // const reviews = ref([])
-  // const ratingsAverage = ref("")
   const reviews = ref({})
   const reviewsLoading = ref(false)
   const totalReviews = computed(() => reviews.value?.total || 0)
   const ratingsAverage = computed(() => reviews.value.average || null)
   const activePage = ref(1)
-  // const hasUserReviewed = ref(true)
   const showReviewEditor = ref(false)
   const reviewsPending = computed(() => !articleId.value || reviewsLoading.value)
   const userReview = ref(null)
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email && isProduct(type) ? await getUser(user.value.email) : null,
-    null,
-  )
-  const userId = computed(() => userInfo.value?.id || null)
-  const userName = computed(() => userInfo.value?.profile?.name || null)
-  // const hasUserReviewed = computed(() => !!userReview.value?.id)
+  const userId = computed(() => userStore.info?.id || null)
+  const userName = computed(() => userStore.info?.profile?.name || null)
   const hasUserReviewed = ref(false)
 
   const onReviewsPageChange = async ({ currentPage, startItem }) => {
@@ -479,13 +466,10 @@
 
     reviewsLoading.value = true
     activePage.value = 1
-    // reviews.value = await getReviews(articleId.value)
-    // totalReviews.value = await getReviewsCount(articleId.value)
-    // ratingsAverage.value = await getRatingsAverage(articleId.value)
 
     // TODO; update cache instead...
     reviews.value = await getProductReviews(articleId.value)
-    userReview.value = await getUserReview(user.value.email, articleId.value)
+    userReview.value = await getUserReview(userStore.email, articleId.value)
 
     hasUserReviewed.value = true
     reviewsLoading.value = false
@@ -499,7 +483,6 @@
 
   const onShowReviewEditor = async (e) => {
     e.preventDefault()
-    // userReview.value = await getUserReview(user.value?.email, articleId.value)
     showReviewEditor.value = true
   }
 
@@ -508,17 +491,12 @@
   watch(articleId, async () => {
     if(!articleId.value || !isProduct(type)) return
 
-    // activePage.value = 1
-    // reviews.value = await getReviews(articleId.value)
-    // totalReviews.value = await getReviewsCount(articleId.value)
-    // ratingsAverage.value = await getRatingsAverage(articleId.value)
-    // hasUserReviewed.value = await checkUserReview(articleId.value, user?.value?.id || null)
     try {
       reviewsLoading.value = true
       reviews.value = await getProductReviews(articleId.value)
 
-      if(user.value?.email) {
-        userReview.value = await getUserReview(user.value.email, articleId.value)
+      if(userStore.email) {
+        userReview.value = await getUserReview(userStore.email, articleId.value)
       }
     } catch(e) {
       console.error('reviews error', e)

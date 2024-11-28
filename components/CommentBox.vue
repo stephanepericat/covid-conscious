@@ -4,7 +4,7 @@
 
     <p v-if="!loggedIn" v-text="$t('forum.comments.box.loggedIn')" />
 
-    <PostDisabled v-else-if="loggedIn && !canComment" type="comment" />
+    <PostDisabled v-else-if="loggedIn && !userStore.canPost" type="comment" />
 
     <template v-else>
       <IFormGroup>
@@ -23,9 +23,9 @@
   </IForm>
 </template>
 <script setup>
-  // import { usePosts } from '~/assets/composables/usePosts'
   import PostDisabled from './PostDisabled.vue'
   import { usePrisma } from '~/assets/composables/usePrisma'
+  import { useUserStore } from '~/assets/stores/user'
 
   const emit = defineEmits(['success', 'error'])
 
@@ -35,22 +35,9 @@
 
   const { postId } = toRefs(props)
 
-  // const user = useSupabaseUser()
-  const { createComment, getUser } = usePrisma()
-  const { user } = useUserSession()
-  const userInfo = computedAsync(
-    async () =>
-      user?.value?.email ? await getUser(user.value.email) : null,
-    null,
-  )
-  const username = computed(() => userInfo.value?.profile.name || null)
-  const loggedIn = computed(() => !!user.value)
-  const canComment = computed(() => username !== null)
-
-  // const { createComment, getUserById } = usePosts()
-
-  // const userInfo = await getUserById(user?.value?.id || null);
-  // const canComment = computed(() => userInfo && userInfo.username !== null)
+  const userStore = useUserStore()
+  const { createComment } = usePrisma()
+  const { loggedIn } = useUserSession()
 
   const comment = ref('')
   const buttonDisabled = computed(() => !comment.value.length)
@@ -58,7 +45,7 @@
 
   const onSubmit = async () => {
     const payload = {
-      authorId: userInfo.value.id,
+      authorId: userStore.info?.id,
       content: comment.value,
     }
 

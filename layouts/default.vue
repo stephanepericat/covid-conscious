@@ -70,7 +70,7 @@
                 <Icon name="material-symbols:account-circle" />
                 <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
               </INavItem>
-              <template #header v-if="isLoggedIn">
+              <template #header v-if="loggedIn">
                 <div class="default-layout__user--info">
                   <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
                   <div>
@@ -80,7 +80,7 @@
                 </div>
               </template>
               <template #body>
-                <template v-if="isLoggedIn">
+                <template v-if="loggedIn">
                   <IDropdownItem :to="localePath('/account')">
                     <span>{{ $t('layout.user.account') }}</span>
                   </IDropdownItem>
@@ -312,9 +312,7 @@
   import { useSignOut } from '~/assets/composables/useSignOut'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
-  // import { usePosts } from '~/assets/composables/usePosts'
   import { useMobileButtons } from '~/assets/composables/useMobileButtons'
-  import { usePrisma } from '~/assets/composables/usePrisma'
   import { useUserStore } from '~/assets/stores/user'
 
   const userStore = useUserStore()
@@ -325,8 +323,6 @@
   const localePath = useLocalePath()
   const router = useRouter()
   const { $appSettings } = useNuxtApp()
-  // const { getUsernameById } = usePosts()
-  const { getUsername } = usePrisma()
   const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } = useMobileButtons()
   const loading = ref(false)
   const password = ref('')
@@ -401,23 +397,13 @@
   const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`)
 
   // User Menu
-  const { loggedIn: isLoggedIn, user } = useUserSession()
+  const { loggedIn, user } = useUserSession()
 
   const avatar = computedAsync(
     async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
     null
   )
 
-  const username = computedAsync(
-    async () =>
-      user?.value?.email ? await getUsername(user.value.email) : null,
-    null,
-  )
-
-  // const username = computedAsync(
-  //   async () => !user?.value?.id ? null : await getUsernameById(user.value.id),
-  //   null
-  // )
   const { signOut } = useSignOut(user)
 
   watch(authCookie, () => {
