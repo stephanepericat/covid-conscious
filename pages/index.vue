@@ -187,7 +187,6 @@
 </template>
 <script setup>
   import latestPublicationsQuery from '~/sanity/queries/latestPublications.sanity'
-  // import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
   import PublicationBlock from '~/components/PublicationBlock.vue'
   import Card from '~/components/Card.vue'
@@ -205,12 +204,10 @@
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { getGravatarUrl } from '~/assets/utils/gravatar'
 
-  // const { $appSettings } = useNuxtApp()
   const loading = ref(true)
   const { getLatestPosts } = usePrisma()
   const { locale, t } = useI18n()
   const localePath = useLocalePath()
-  // const { loading, getPosts } = usePosts()
   const posts = ref([])
   const forumPosts = computedAsync(async() => {
     if(!posts.value) {

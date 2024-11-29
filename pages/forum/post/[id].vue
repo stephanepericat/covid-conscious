@@ -117,7 +117,6 @@
   import { ILoader, useToast } from '@inkline/inkline'
   import CommentBox from '~/components/CommentBox.vue'
   import CommentList from '~/components/CommentList.vue'
-  // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { useTranslation } from '~/assets/composables/useTranslation'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
@@ -130,7 +129,6 @@
   const route = useRoute()
   const toast = useToast()
   const { t, locale, localeProperties } = useI18n()
-  // const { /* commentsLoading, */ deleteComment, getComments, getCommentsCount, getPost, loading } = usePosts()
   const { deleteComment, getPostComments, getPostById } = usePrisma()
   const isSSR = computed(() => !process.client)
 

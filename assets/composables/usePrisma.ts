@@ -209,6 +209,20 @@ export const usePrisma = () => {
     }
   }
 
+  const getUserById = async (id: number) => {
+    try {
+      const res = await $fetch('/api/forum/user/get-user-by-id', {
+        method: 'POST',
+        body: { id }
+      })
+
+      return res || null
+    } catch(e) {
+      consola.error(e)
+      return null
+    }
+  }
+
   const getUsername = async (email: string) => {
     try {
       const res = await $fetch('/api/forum/user/get-username', {
@@ -339,6 +353,7 @@ export const usePrisma = () => {
     getProductReviews,
     getTopics,
     getUser,
+    getUserById,
     getUserComments,
     getUsername,
     getUserReview,
