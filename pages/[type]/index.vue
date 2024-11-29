@@ -42,7 +42,7 @@
 </template>
 <script setup>
   import _ from 'lodash'
-  import publicationsByTypeQuery from '~/sanity/publicationsByType.sanity'
+  import publicationsByTypeQuery from '~/sanity/queries/publicationsByType.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'

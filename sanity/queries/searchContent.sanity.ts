@@ -1,8 +1,8 @@
 import groq from 'groq'
-import { baseLanguage } from '~/assets/constants/base-language'
+import { baseLanguage } from '../../assets/constants/base-language'
 
 // TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
-export default groq`
+const SEARCH_QUERY = groq`
 {
   "results": *[_type != "feedSettings" && [coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title, null), coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, [])[0].children[0].text] match $searchTerm] | order(publicationDate desc, _createdAt desc){
     "id": _id,
@@ -28,3 +28,7 @@ export default groq`
   "total": count(*[_type != "feedSettings" && [coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title, null), coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, [])[0].children[0].text] match $searchTerm])
 }
 `
+
+export {
+  SEARCH_QUERY as default
+}

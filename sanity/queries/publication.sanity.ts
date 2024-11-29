@@ -1,7 +1,7 @@
 import groq from 'groq'
-import { baseLanguage } from '~/assets/constants/base-language'
+import { baseLanguage } from '../../assets/constants/base-language'
 
-export default groq`
+const PUBLICATION_QUERY = groq`
 *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {
   "id": _id,
   "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
@@ -80,3 +80,7 @@ export default groq`
   },
 }
 `
+
+export {
+  PUBLICATION_QUERY as default
+}

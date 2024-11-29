@@ -13,7 +13,7 @@
   </div>
 </template>
 <script setup>
-  import policyQuery from '~/sanity/policy.sanity'
+  import policyQuery from '~/sanity/queries/policy.sanity'
   import { serializers } from '~/assets/constants/serializers'
 
   const { locale } = useI18n()

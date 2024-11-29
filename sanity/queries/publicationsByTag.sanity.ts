@@ -1,8 +1,8 @@
 import groq from 'groq'
-import { baseLanguage } from '~/assets/constants/base-language'
+import { baseLanguage } from '../../assets/constants/base-language'
 
 // TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
-export default groq`
+const PUBLICATION_BY_TAG_QUERY = groq`
 {
   "results": *[$slug in tags[]->uri.current] | order(publicationDate desc, _createdAt desc){
     // "id": _id,
@@ -36,3 +36,7 @@ export default groq`
   "total": count(*[$slug in tags[]->uri.current])
 }
 `
+
+export {
+  PUBLICATION_BY_TAG_QUERY as default
+}

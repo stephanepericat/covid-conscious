@@ -186,7 +186,7 @@
   </div>
 </template>
 <script setup>
-  import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
+  import latestPublicationsQuery from '~/sanity/queries/latestPublications.sanity'
   // import { usePosts } from '~/assets/composables/usePosts'
   import PostPreview from '~/components/PostPreview.vue'
   import PublicationBlock from '~/components/PublicationBlock.vue'

@@ -1,7 +1,7 @@
 import groq from 'groq'
-import { baseLanguage } from '~/assets/constants/base-language'
+import { baseLanguage } from '../../assets/constants/base-language'
 
-export default groq`
+const RSS_FEED_QUERY = groq`
   {
     "all_entries": *[(_type in ["news", "scientific-library", "video", "resource", "event", "product", "directory", "education", "public-health", "covidnet"]) && !(_id in path('drafts.**'))]| order(_createdAt desc) {
       "id": _id,
@@ -32,3 +32,7 @@ export default groq`
     "settings": settings
   }
 `;
+
+export {
+  RSS_FEED_QUERY as default
+}

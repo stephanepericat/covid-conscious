@@ -3,11 +3,12 @@ import { Feed } from 'feed';
 import { parseStringPromise } from 'xml2js'
 import _ from 'lodash'
 
-import ytFeedQuery from '~/sanity/ytFeed.sanity'
+import ytFeedQuery from '~/sanity/queries/ytFeed.sanity'
+import { YT_FEED_QUERYResult } from '~/sanity/types'
 
-type YtFeed = {
-  feedURL: string;
-}
+// type YtFeed = {
+//   feedURL: string;
+// }
 
 type Entry = {
   author: {
@@ -42,10 +43,10 @@ export default defineEventHandler(async (event) => {
   const { origin: BASE_URL } = getRequestURL(event)
 
   try {
-    const feedUrls: YtFeed[] = await sanityFetch(ytFeedQuery)
+    const feedUrls = await sanityFetch<YT_FEED_QUERYResult>(ytFeedQuery)
     const calls = feedUrls.map(async ({ feedURL }) => {
       try {
-        const data = await fetch(feedURL);
+        const data = await fetch(feedURL as string);
         const xml = await data.text()
         const { feed } = await parseStringPromise(xml)
         return feed.entry.map(mapEntries)

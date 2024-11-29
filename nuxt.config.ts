@@ -118,6 +118,7 @@ export default defineNuxtConfig({
     apiVersion: '2021-10-21',
     dataset: process.env.SANITY_DATASET,
     projectId: process.env.SANITY_PROJECTID,
+    token: process.env.SANITY_TOKEN,
     useCdn: true,
   },
 

@@ -14,12 +14,14 @@
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:seed": "prisma db seed",
     "prisma:studio": "prisma studio",
+    "sanity:gen": "sanity typegen generate",
     "test": "vitest --watch",
     "test:ci": "vitest run"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.0.8",
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^6.0.0",
+    "@sanity/cli": "^3.65.1",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/lodash": "^4.17.9",
     "@types/node": "^22.9.0",

@@ -24,7 +24,7 @@
   import _ from 'lodash'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
-  import publicationsByTagQuery from '~/sanity/publicationsByTag.sanity'
+  import publicationsByTagQuery from '~/sanity/queries/publicationsByTag.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { TAG } from '~/assets/constants/types'

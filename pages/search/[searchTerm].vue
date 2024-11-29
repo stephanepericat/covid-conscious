@@ -24,7 +24,7 @@
   import _ from 'lodash'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
-  import searchQuery from '~/sanity/searchContent.sanity'
+  import searchQuery from '~/sanity/queries/searchContent.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
   import { usePosts } from '~/assets/composables/usePosts'

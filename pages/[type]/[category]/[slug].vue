@@ -361,7 +361,7 @@
   import { useToast } from '@inkline/inkline'
   import { useMediaQuery } from '@vueuse/core'
   import { isBrand, isCovidnet, isDirectory, isEvent, isLibrary, isProduct, isResource, isVideo, showPublicationDate } from '~/assets/utils/article-types'
-  import publicationQuery from '~/sanity/publication.sanity'
+  import publicationQuery from '~/sanity/queries/publication.sanity'
   import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
   import ReviewBox from '~/components/ReviewBox.vue'
   import ReviewList from '~/components/ReviewList.vue'

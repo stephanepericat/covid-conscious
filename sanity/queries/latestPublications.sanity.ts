@@ -1,19 +1,8 @@
 import groq from 'groq'
-import { baseLanguage } from '~/assets/constants/base-language'
+import { baseLanguage } from '../../assets/constants/base-language'
 
-export default groq`
+const LATEST_PUBLICATIONS_QUERY = groq`
 {
-  //COMMUNITY
-  // "community": *[(_type == "community") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
-  //   "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, null),
-  //   "author": author-> { nickname, "slug": uri.current },
-  //   "published": _createdAt,
-  //   "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
-  //   "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
-  //   "thumbnail": visual.asset._ref,
-  //   "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
-  //   "type": _type,
-  // },
   // EDUCATION
   "learn": *[(_type == "education") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, null),
@@ -40,16 +29,16 @@ export default groq`
     "limited": coalesce(limitedAccess, false),
   },
   // PRODUCTS
-  "products": *[(_type == "product") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
-    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, ''),
-    "author": author-> { nickname, "slug": uri.current },
-    "published": _createdAt,
-    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
-    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
-    "thumbnail": visual.asset._ref,
-    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
-    "type": _type,
-  },
+  // "products": *[(_type == "product") && !(_id in path('drafts.**'))] | order(_createdAt desc)[0..4]{
+  //   "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, ''),
+  //   "author": author-> { nickname, "slug": uri.current },
+  //   "published": _createdAt,
+  //   "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+  //   "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
+  //   "thumbnail": visual.asset._ref,
+  //   "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+  //   "type": _type,
+  // },
   // VIDEOS
   "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) ] | order(publicationDate desc, _createdAt desc)[0..2]{
     "id": _id,
@@ -143,3 +132,7 @@ export default groq`
   }
 }
 `
+
+export {
+  LATEST_PUBLICATIONS_QUERY as default
+}

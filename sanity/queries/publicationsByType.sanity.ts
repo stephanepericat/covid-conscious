@@ -1,8 +1,8 @@
 import groq from 'groq'
-import { baseLanguage } from '~/assets/constants/base-language'
+import { baseLanguage } from '../../assets/constants/base-language'
 
 // TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
-export default groq`
+const PUBLICATION_BY_TYPE_QUERY = groq`
 {
   "results": *[_type == $articleType] | order(publicationDate desc, _createdAt desc){
     // "id": _id,
@@ -35,3 +35,7 @@ export default groq`
   "total": count(*[_type == $articleType])
 }
 `
+
+export {
+  PUBLICATION_BY_TYPE_QUERY as default
+}
