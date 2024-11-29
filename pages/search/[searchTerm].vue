@@ -27,7 +27,6 @@
   import searchQuery from '~/sanity/queries/searchContent.sanity'
   import { useLanguages } from '~/assets/composables/useLanguages'
   import { usePagination } from '~/assets/composables/usePagination'
-  // import { usePosts } from '~/assets/composables/usePosts'
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { mapForumSearchResult } from '~/assets/utils/map-forum-results'
   import { SEARCH } from '~/assets/constants/types'
@@ -37,7 +36,6 @@
   const route = useRoute()
   const searchTerm = computed(() => decodeURIComponent(route.params.searchTerm))
   const { searchPosts } = usePrisma()
-  // const { searchPosts, loading } = usePosts()
 
   useHead({
     meta: [
@@ -50,10 +48,6 @@
 
   const { data, pending } = useSanityQuery(searchQuery, { locale, searchTerm })
 
-  // const forumSearch = computedAsync(
-  //   async () => await searchPosts(searchTerm.value),
-  //   { entries: [], total: 0 }
-  // )
   const forumSearch = ref({ entries: [], total: 0 })
   const loading = ref(true)
   const searchResults = computed(() => {
