@@ -71,7 +71,7 @@
   const { page: activePage, totalItems: total } = toRefs(props)
 
   const config = useRuntimeConfig()
-  const rootPath = computed(() => config.public.supabaseForum.rootPath)
+  const rootPath = computed(() => config.public.forum.rootPath)
 
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
   const start = computed(() => startItem.value + 1)

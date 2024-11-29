@@ -125,7 +125,7 @@
   import { cleanPostBody } from '~/assets/utils/clean-post-body'
 
   const config = useRuntimeConfig()
-  const rootPath = computed(() => config.public.supabaseForum.rootPath)
+  const rootPath = computed(() => config.public.forum.rootPath)
 
   const route = useRoute()
   const toast = useToast()

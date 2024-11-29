@@ -32,7 +32,6 @@ export default defineNuxtConfig({
     '@nuxtjs/turnstile',
     'nuxt-cloudflare-analytics',
     'nuxt-icon',
-    '@nuxtjs/supabase',
     'nuxt-security',
     'nuxt-vitest',
     '@nuxt/image',
@@ -45,7 +44,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       bypassLogin: process.env.APP_BYPASS_LOGIN === '1' || false,
-      supabaseForum: {
+      forum: {
         rootPath: '/forum',
       },
     },
@@ -173,10 +172,6 @@ export default defineNuxtConfig({
         ],
       },
     },
-  },
-
-  supabase: {
-    redirect: false,
   },
 
   tailwindcss: {

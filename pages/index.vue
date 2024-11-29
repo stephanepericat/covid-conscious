@@ -254,8 +254,8 @@
   }, [])
 
   const config = useRuntimeConfig()
-  const rootPath = computed(() => config.public.supabaseForum.rootPath)
-  const isSSR = computed(() => !process.client)
+  const rootPath = computed(() => config.public.forum.rootPath)
+  const isSSR = computed(() => !import.meta.client)
 
   useHead({
     meta: [

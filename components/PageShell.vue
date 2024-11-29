@@ -60,10 +60,10 @@
   import { useSignOut } from '~/assets/composables/useSignOut'
 
   const config = useRuntimeConfig()
-  const user = useSupabaseUser()
+  const { user } = useUserSession()
   const localePath = useLocalePath()
 
-  const rootPath = computed(() => config.public.supabaseForum.rootPath)
+  const rootPath = computed(() => config.public.forum.rootPath)
 
   const { signOut } = useSignOut(user)
 </script>
