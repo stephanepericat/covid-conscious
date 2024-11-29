@@ -313,6 +313,18 @@ export const usePrisma = () => {
     }
   }
 
+  const searchPosts = async (query: string, skip = 0) => {
+    try {
+      return await $fetch('/api/forum/post/search', {
+        method: 'POST',
+        body: { query, skip }
+      })
+    } catch(e) {
+      consola.error(e)
+      return { entries: [], total: 0 }
+    }
+  }
+
   const updateProductReview = async (body: { payload: any, reviewId: number }) => {
     try {
       return await $fetch('/api/product/reviews/update-review', {
@@ -359,6 +371,7 @@ export const usePrisma = () => {
     getUserReview,
     getUserRole,
     getUserPosts,
+    searchPosts,
     updateProductReview,
     updateUserProfile,
   }
