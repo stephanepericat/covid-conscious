@@ -35,7 +35,7 @@
                 class="sf-user-page__website--icon"
                 name="mdi:web"
               />
-              <a :href="user.profile.website" target="_blank">{{ $t('forum.account.labels.website') }}</a>
+              <a :href="`https://${user.profile.website}`" target="_blank">{{ $t('forum.account.labels.website') }}</a>
             </div>
           </div>
         </template>

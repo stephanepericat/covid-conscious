@@ -11,21 +11,22 @@ export default eventHandler(async (event) => {
 
   try {
     await emailjs.send(
-      process.env.EMAILJS_SERVICE_ID,
-      process.env.EMAILJS_TEMPLATE_ID,
+      process.env.EMAILJS_SERVICE_ID as string,
+      process.env.EMAILJS_TEMPLATE_ID as string,
       body,
       {
-        publicKey: process.env.EMAILJS_PUBLIC_KEY,
-        privateKey: process.env.EMAILJS_PRIVATE_KEY,
+        publicKey: process.env.EMAILJS_PUBLIC_KEY as string,
+        privateKey: process.env.EMAILJS_PRIVATE_KEY as string,
       },
     )
 
     return { ok: true }
   } catch(e) {
-    console.error(e?.text || null, body)
+    const { message } = e as Error
+    console.error(message, body)
     sendError(
       event,
-      createError({ statusCode: 500, statusMessage: e?.text || null, data: body })
+      createError({ statusCode: 500, statusMessage: message, data: body })
     )
   }
 })
