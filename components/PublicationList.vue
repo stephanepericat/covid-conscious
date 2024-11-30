@@ -80,10 +80,14 @@
               }}</span
             >
           </p>
-          <em class="publication-list__metadata">
-            <IBadge size="sm" v-if="isForum(article.type)">{{
-              article.category
-            }}</IBadge>
+          <em class="publication-list__metadata not-italic">
+            <IBadge
+              size="sm"
+              v-if="isForum(article.type)"
+              class="uppercase tracking-widest"
+            >
+              {{ article.category }}</IBadge
+            >
             <ul v-else class="publication-list__tags">
               <li
                 v-if="article.onlineOnly"
@@ -166,21 +170,6 @@
                 <IBadge size="sm">{{ $t('article.free') }}</IBadge>
               </li>
             </ul>
-            <template v-if="!isResource(article.type)">
-              <span v-if="article.author">
-                &bullet;
-                <NuxtLink
-                  :to="
-                    localePath(
-                      isForum(article.type)
-                        ? `/${FORUM}/${USER}/${article.author.slug}`
-                        : `/${AUTHOR}/${article.author.slug}`,
-                    )
-                  "
-                  >{{ article.author.nickname }}</NuxtLink
-                ></span
-              >
-            </template>
           </em>
         </IMedia>
       </IListGroupItem>
@@ -200,17 +189,12 @@ import {
   isBrand,
   isEvent,
   isExternalLink,
-  isDirectory,
   isForum,
   isLibrary,
   isNews,
-  isResource,
-  isVideo,
-  isCovidnet,
   showPublicationDate,
 } from '~/assets/utils/article-types'
 import { convertTs } from '~/assets/utils/convert-timestamp'
-import { AUTHOR, FORUM, USER } from '~/assets/constants/types'
 import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
 import { useTags } from '~/assets/composables/useTags'
 import { getDateLocale } from '~/assets/constants/date-locales'
