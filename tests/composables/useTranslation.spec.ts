@@ -1,7 +1,7 @@
 // @vitest-environment nuxt
 
 import { describe, it, expect, vi } from 'vitest'
-import { mockNuxtImport } from 'nuxt-vitest/utils'
+import { mockNuxtImport } from '@nuxt/test-utils/runtime'
 import { useTranslation } from '~/assets/composables/useTranslation'
 
 const { useFetchMock } = vi.hoisted(() => {

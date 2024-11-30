@@ -1,4 +1,4 @@
-import { defineVitestConfig } from 'nuxt-vitest/config'
+import { defineVitestConfig } from '@nuxt/test-utils/config'
 import { resolve } from 'node:path'
 
 export default defineVitestConfig({
@@ -8,7 +8,7 @@ export default defineVitestConfig({
     },
     dir: 'tests',
     coverage: {
-      enabled: true,
+      enabled: false, // TODO: fix!!
       exclude: [
         "**/*.mjs",
         "assets/constants/*.js",

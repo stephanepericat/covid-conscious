@@ -63,7 +63,7 @@
   const { type } = params
   const localeType = computed(() => t(`layout.${type}`))
   const { loggedIn } = useUserSession()
-  const disableRendering = computed(() => loggedIn && isDirectory(type))
+  const disableRendering = computed(() => !loggedIn.value && isDirectory(type))
 
   useHead({
     meta: [

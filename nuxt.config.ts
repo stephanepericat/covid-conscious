@@ -33,12 +33,12 @@ export default defineNuxtConfig({
     'nuxt-cloudflare-analytics',
     'nuxt-icon',
     'nuxt-security',
-    'nuxt-vitest',
     '@nuxt/image',
     'nuxt3-leaflet',
     '@nuxtjs/seo',
     'nuxt-auth-utils',
     '@prisma/nuxt',
+    '@nuxt/test-utils/module',
   ],
 
   runtimeConfig: {
@@ -52,6 +52,8 @@ export default defineNuxtConfig({
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
   },
+
+  testUtils: {},
 
   vite: {
     resolve: {
