@@ -10,7 +10,11 @@
   </IAlert>
 </template>
 <script setup>
-  const props = defineProps({
-    type: { type: String, required: true, validator: (val) => ['comment', 'post'].includes(val) },
-  })
+const props = defineProps({
+  type: {
+    type: String,
+    required: true,
+    validator: (val) => ['comment', 'post'].includes(val),
+  },
+})
 </script>

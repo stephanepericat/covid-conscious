@@ -4,7 +4,9 @@ export default defineEventHandler(async (event) => {
   const { id } = getRouterParams(event)
 
   try {
-    const data = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${id}`)
+    const data = await fetch(
+      `https://www.youtube.com/feeds/videos.xml?channel_id=${id}`,
+    )
     const xml = await data.text()
     const json = await parseStringPromise(xml)
     if (json?.feed) {

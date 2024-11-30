@@ -30,70 +30,76 @@
   </div>
 </template>
 <script setup>
-  import { usePosts } from '~/assets/composables/usePosts'
-  import { useReviews } from '~/assets/composables/useReviews'
+import { usePrisma } from '~/assets/composables/usePrisma'
 
-  const props = defineProps({
-    articleId: { type: String, default: null },
-    update: Boolean,
-    userReview: { type: Object, default: () => ({})},
-  })
+const props = defineProps({
+  articleId: { type: String, default: null },
+  canReview: Boolean,
+  update: Boolean,
+  userId: { type: Number, default: null },
+  userName: { type: String, default: null },
+  userReview: { type: Object, default: () => ({}) },
+})
 
-  const emit = defineEmits(['error', 'success'])
+const emit = defineEmits(['error', 'success'])
 
-  const { articleId, update, userReview } = toRefs(props)
+const { articleId, update, userId, userName, userReview } = toRefs(props)
 
-  const { t } = useI18n()
-  const localePath = useLocalePath()
-  const user = useSupabaseUser()
-  const { getUserById } = usePosts()
-  const { createReview, updateReview } = useReviews()
+const { t } = useI18n()
+const localePath = useLocalePath()
+const { createProductReview, updateProductReview } = usePrisma()
+const canReview = computed(() => userName.value !== null)
 
-  const userInfo = await getUserById(user?.value?.id || null)
-  const canReview = computed(() => userInfo && userInfo.username !== null)
+const reviewContent = ref(update.value ? userReview.value.content : '')
+const reviewRating = ref(update.value ? userReview.value.rating : 0)
 
-  const reviewContent = ref(update.value ? userReview.value.body : '')
-  const reviewRating = ref(update.value ? userReview.value.rating : 0)
+const clearForm = () => {
+  reviewContent.value = ''
+  reviewRating.value = 0
+}
 
-  const clearForm = () => {
-    reviewContent.value = ''
-    reviewRating.value = 0
+const canSubmit = computed(
+  () =>
+    articleId.value &&
+    canReview.value &&
+    reviewContent.value &&
+    reviewRating.value,
+)
+
+const submitting = ref(false)
+
+const buttonLabel = ref(
+  update.value ? t('reviews.update') : t('reviews.submit'),
+)
+
+const onSubmit = async () => {
+  const payload = {
+    content: reviewContent.value,
+    rating: reviewRating.value,
+    authorId: userId.value,
+    productId: articleId.value,
   }
 
-  const canSubmit = computed(() => articleId.value && canReview.value && reviewContent.value && reviewRating.value)
+  console.log('payload', payload)
 
-  const submitting = ref(false)
+  submitting.value = true
 
-  const buttonLabel = ref(update.value ? t('reviews.update') : t('reviews.submit'))
+  try {
+    const data = update.value
+      ? await updateProductReview({ payload, reviewId: userReview.value?.id })
+      : await createProductReview(payload)
 
-  const onSubmit = async () => {
-    const payload = {
-      body: reviewContent.value,
-      rating: reviewRating.value,
-      author_id: user.value.id,
-      product_id: articleId.value,
+    if (data?.id) {
+      emit('success', { data, updated: update.value })
     }
-
-    submitting.value = true
-
-    try {
-      const { data, error } = update.value
-        ? await updateReview({ ...payload, updated_at: new Date() }, userReview.value.id)
-        : await createReview(payload)
-
-      if(error) throw error
-
-      if(data?.id) {
-        emit('success', { updated: update.value })
-      }
-    } catch(e) {
-      console.error(e)
-      emit('error')
-    } finally {
-      if(!update.value) clearForm()
-      submitting.value = false
-    }
+  } catch (e) {
+    console.error(e)
+    emit('error')
+  } finally {
+    if (!update.value) clearForm()
+    submitting.value = false
   }
+}
 </script>
 <style lang="scss" scoped>
 .review-box {

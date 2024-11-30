@@ -5,11 +5,12 @@ version: 2.1
 jobs:
   run-tests:
     docker:
-      - image: node:18-alpine
+      - image: node:20-alpine
     steps:
       - checkout
-      - run: "yarn --immutable"
-      - run: "yarn test:ci"
+      - run: 'yarn --immutable'
+      - run: 'yarn prisma:generate'
+      - run: 'yarn test:ci'
 
 workflows:
   test-workflow:

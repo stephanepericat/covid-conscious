@@ -1,4 +1,3 @@
-
 export const useMobileButtons = () => {
   const { locale } = useI18n()
   const { $appSettings } = useNuxtApp()

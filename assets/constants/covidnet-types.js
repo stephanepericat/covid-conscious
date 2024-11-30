@@ -1,5 +1,5 @@
 export const covidnetTypes = {
-  BLOG: "Blog",
-  TWITTER: "Twitter",
-  YOUTUBE: "YouTube",
+  BLOG: 'Blog',
+  TWITTER: 'Twitter',
+  YOUTUBE: 'YouTube',
 }

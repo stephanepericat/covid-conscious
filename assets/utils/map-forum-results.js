@@ -1,20 +1,21 @@
-import { FORUM, POST } from "../constants/types";
+import { FORUM, POST } from '../constants/types'
 
 export const mapForumSearchResult = (result) => {
   const { t } = useI18n()
-  const [year, month, day] = result.created_at.split("-");
+  const topic = result.categories[0].name || ''
 
   return {
-    categoryUri: result.topic,
-    type: FORUM,
     author: {
-      nickname: result.profiles.username,
-      slug: result.profiles.id,
+      nickname: `@${result.author?.profile?.name}`,
+      slug: result.author?.authorId,
     },
-    published: `${year}-${month}-${day}T12:00:01Z`,
-    category: t(`forum.create.categories.${result.topic}`),
-    avatar: result.avatar,
-    title: result.headline,
+    avatar: null, //TODO: fix
+    category: t(`forum.create.categories.${topic}`),
+    categoryUri: topic,
+    description: result.content.substr(0, 255) + '...',
     path: `/${FORUM}/${POST}/${result.id}`,
+    published: result.createdAt,
+    title: result.title,
+    type: FORUM,
   }
 }

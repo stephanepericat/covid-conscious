@@ -1,25 +1,26 @@
-import consola from 'consola';
-import { Feed } from 'feed';
+import consola from 'consola'
+import { Feed } from 'feed'
 import { parseStringPromise } from 'xml2js'
 import _ from 'lodash'
 
-import ytFeedQuery from '~/sanity/ytFeed.sanity'
+import ytFeedQuery from '~/sanity/queries/ytFeed.sanity'
+import { YT_FEED_QUERYResult } from '~/sanity/types'
 
-type YtFeed = {
-  feedURL: string;
-}
+// type YtFeed = {
+//   feedURL: string;
+// }
 
 type Entry = {
   author: {
-    link: string;
-    name: string;
-  };
-  description: string;
-  id: string,
-  link: string;
-  publicationDate: Date;
-  title: string;
-  thumbnail: string;
+    link: string
+    name: string
+  }
+  description: string
+  id: string
+  link: string
+  publicationDate: Date
+  title: string
+  thumbnail: string
 }
 
 const mapEntries = (entry: any): Entry => {
@@ -28,7 +29,11 @@ const mapEntries = (entry: any): Entry => {
       link: entry.author[0].uri[0],
       name: entry.author[0].name[0],
     },
-    description: entry['media:group'][0]['media:description'][0].split('').slice(0, 252).join('') + '...',
+    description:
+      entry['media:group'][0]['media:description'][0]
+        .split('')
+        .slice(0, 252)
+        .join('') + '...',
     id: entry.id[0],
     link: entry.link[0].$.href,
     publicationDate: new Date(entry.published[0]),
@@ -42,14 +47,14 @@ export default defineEventHandler(async (event) => {
   const { origin: BASE_URL } = getRequestURL(event)
 
   try {
-    const feedUrls: YtFeed[] = await sanityFetch(ytFeedQuery)
+    const feedUrls = await sanityFetch<YT_FEED_QUERYResult>(ytFeedQuery)
     const calls = feedUrls.map(async ({ feedURL }) => {
       try {
-        const data = await fetch(feedURL);
+        const data = await fetch(feedURL as string)
         const xml = await data.text()
         const { feed } = await parseStringPromise(xml)
         return feed.entry.map(mapEntries)
-      } catch(e) {
+      } catch (e) {
         consola.error(e)
         return {}
       }
@@ -57,17 +62,20 @@ export default defineEventHandler(async (event) => {
     const feeds = await Promise.all(calls)
     const sorted = _.orderBy(feeds.flat(), 'publicationDate', 'desc')
     const feedEntries = sorted.slice(0, 20)
-    
+
     const feed = new Feed({
       title: 'Covidnet Feed',
       description: 'RSS Feed for Covidnet videos',
       id: `${BASE_URL}/`,
       link: `${BASE_URL}/`,
       language: 'en',
-      image: 'https://cdn.sanity.io/images/yt0dcu6v/production/def76fe97d0b33358120bd7da553abba52a939d2-1080x1080.jpg',
-      favicon: BASE_URL + "/favicon.ico",
+      image:
+        'https://cdn.sanity.io/images/yt0dcu6v/production/def76fe97d0b33358120bd7da553abba52a939d2-1080x1080.jpg',
+      favicon: BASE_URL + '/favicon.ico',
       copyright: `All rights reserved ${new Date().getFullYear()}, That Covid Life.`,
-      updated: feedEntries?.[0] ? new Date(feedEntries[0]?.publicationDate) : undefined,
+      updated: feedEntries?.[0]
+        ? new Date(feedEntries[0]?.publicationDate)
+        : undefined,
       author: {
         email: 'contact@thatcovid.life',
         link: BASE_URL,
@@ -88,7 +96,7 @@ export default defineEventHandler(async (event) => {
         category: [
           { name: 'YouTube' },
           { name: 'Video' },
-          { name: 'Covid-19' }
+          { name: 'Covid-19' },
         ],
       })
     })
@@ -96,7 +104,7 @@ export default defineEventHandler(async (event) => {
     setHeader(event, 'Content-Type', 'application/xml')
 
     return feed.rss2()
-  } catch(e) {
+  } catch (e) {
     consola.error(e)
     return null
   }

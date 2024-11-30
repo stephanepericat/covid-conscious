@@ -11,10 +11,15 @@
             :zones="latestPublications?.promos"
           />
           <div class="lg:col-span-2">
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.news") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.news') }}
             </h3>
-            <p v-if="!latestPublications?.news?.length" v-text="$t('layout.empty.news')" />
+            <p
+              v-if="!latestPublications?.news?.length"
+              v-text="$t('layout.empty.news')"
+            />
             <template v-else>
               <PublicationBlock
                 :publications="latestPublications.news"
@@ -29,10 +34,15 @@
               :zone-id="HP_ZONE_7"
               :zones="latestPublications?.promos"
             />
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.events") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.events') }}
             </h3>
-            <p v-if="!latestPublications?.events?.length" v-text="$t('layout.empty.events')" />
+            <p
+              v-if="!latestPublications?.events?.length"
+              v-text="$t('layout.empty.events')"
+            />
             <div class="grid gap-4 lg:gap-8" v-else>
               <Card
                 v-for="event in latestPublications.events"
@@ -55,21 +65,29 @@
             :zones="latestPublications?.promos"
           />
           <div class="lg:col-span-2">
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.scientific-library") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.scientific-library') }}
             </h3>
-            <p v-if="!latestPublications?.library?.length" v-text="$t('layout.empty.library')" />
+            <p
+              v-if="!latestPublications?.library?.length"
+              v-text="$t('layout.empty.library')"
+            />
             <template v-else>
-              <PublicationBlock
-                :publications="latestPublications.library"
-              />
+              <PublicationBlock :publications="latestPublications.library" />
             </template>
           </div>
           <div>
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.resource") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.resource') }}
             </h3>
-            <p v-if="!latestPublications?.resources?.length" v-text="$t('layout.empty.resources')" />
+            <p
+              v-if="!latestPublications?.resources?.length"
+              v-text="$t('layout.empty.resources')"
+            />
             <div class="grid gap-4" v-else>
               <Media
                 v-for="resource in latestPublications?.resources"
@@ -88,10 +106,15 @@
             :zones="latestPublications?.promos"
           />
           <div class="lg:col-span-2">
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.health") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.health') }}
             </h3>
-            <p v-if="!latestPublications?.health?.length" v-text="$t('layout.empty.health')" />
+            <p
+              v-if="!latestPublications?.health?.length"
+              v-text="$t('layout.empty.health')"
+            />
             <template v-else>
               <PublicationBlock
                 :publications="latestPublications.health"
@@ -100,10 +123,15 @@
             </template>
           </div>
           <div>
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.directory") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.directory') }}
             </h3>
-            <p v-if="!latestPublications?.directory?.length" v-text="$t('layout.empty.directory')" />
+            <p
+              v-if="!latestPublications?.directory?.length"
+              v-text="$t('layout.empty.directory')"
+            />
             <div class="grid gap-4" v-else>
               <Media
                 v-for="entry in latestPublications?.directory"
@@ -123,10 +151,15 @@
             :zones="latestPublications?.promos"
           />
           <div class="lg:col-span-3">
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.video") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.video') }}
             </h3>
-            <p v-if="!latestPublications?.videos?.length" v-text="$t('layout.empty.videos')" />
+            <p
+              v-if="!latestPublications?.videos?.length"
+              v-text="$t('layout.empty.videos')"
+            />
             <div class="grid lg:grid-cols-3 gap-4 lg:gap-8" v-else>
               <Card
                 v-for="video in latestPublications.videos"
@@ -148,14 +181,16 @@
             :zones="latestPublications?.promos"
           />
           <div class="lg:col-span-3">
-            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
-              {{ $t("layout.forum") }}
+            <h3
+              class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4"
+            >
+              {{ $t('layout.forum') }}
             </h3>
-            <p v-text="$t('layout.empty.forum')" v-if="!posts?.length" />
+            <p v-text="$t('layout.empty.forum')" v-if="!forumPosts?.length" />
             <template v-else>
               <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
                 <PostPreview
-                  v-for="post in posts"
+                  v-for="post in forumPosts"
                   :key="post.id"
                   hide-thumbnail
                   :post="post"
@@ -164,14 +199,6 @@
                   with-preview
                 />
               </div>
-              <!-- <div class="mt-4">
-                <NuxtLink
-                  :to="localePath('/forum')"
-                  class="uppercase font-semibold text-xs tracking-widest hover:no-underline"
-                >
-                  {{ $t('layout.more.posts') }} &raquo;
-                </NuxtLink>
-              </div> -->
             </template>
           </div>
           <PromoZone
@@ -186,48 +213,102 @@
   </div>
 </template>
 <script setup>
-  import latestPublicationsQuery from '~/sanity/latestPublications.sanity'
-  import { usePosts } from '~/assets/composables/usePosts'
-  import PostPreview from '~/components/PostPreview.vue'
-  import PublicationBlock from '~/components/PublicationBlock.vue'
-  import Card from '~/components/Card.vue'
-  import Media from '~/components/Media.vue'
-  import PromoZone from '~/components/PromoZone.vue'
-  import { 
-    HP_ZONE_1,
-    HP_ZONE_2,
-    HP_ZONE_3,
-    HP_ZONE_4,
-    HP_ZONE_5,
-    HP_ZONE_6,
-    HP_ZONE_7
-  } from '~/assets/constants/promo-zones'
+import latestPublicationsQuery from '~/sanity/queries/latestPublications.sanity'
+import PostPreview from '~/components/PostPreview.vue'
+import PublicationBlock from '~/components/PublicationBlock.vue'
+import Card from '~/components/Card.vue'
+import Media from '~/components/Media.vue'
+import PromoZone from '~/components/PromoZone.vue'
+import {
+  HP_ZONE_1,
+  HP_ZONE_2,
+  HP_ZONE_3,
+  HP_ZONE_4,
+  HP_ZONE_5,
+  HP_ZONE_6,
+  HP_ZONE_7,
+} from '~/assets/constants/promo-zones'
+import { usePrisma } from '~/assets/composables/usePrisma'
+import { getGravatarUrl } from '~/assets/utils/gravatar'
 
-  // const { $appSettings } = useNuxtApp()
-  const { locale, t } = useI18n()
-  const localePath = useLocalePath()
-  const { loading, getPosts } = usePosts()
-  const posts = ref([])
-  const config = useRuntimeConfig()
-  const rootPath = computed(() => config.public.supabaseForum.rootPath)
-  const isSSR = computed(() => !process.client)
+const loading = ref(true)
+const { getLatestPosts } = usePrisma()
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+const posts = ref([])
+const forumPosts = computedAsync(async () => {
+  if (!posts.value) {
+    return []
+  }
 
-  useHead({
-    meta: [
-      { name: 'description', content: t('home.description') },
-    ],
-    title: t('home.title')
-  })
+  const emails = posts.value.map(({ author }) => author.email)
+  const thumbnails = await Promise.all(
+    emails.map(
+      (email) =>
+        new Promise(async (resolve) => {
+          const avatar = await getGravatarUrl(email)
+          resolve([email, avatar])
+        }),
+    ),
+  )
 
-  // const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_DIRECTORY)
+  const thumbnailMap = thumbnails.reduce((acc, val) => {
+    const [email, avatar] = val
 
-  const { data: latestPublications, pending } = useLazySanityQuery(latestPublicationsQuery, { locale })
-  posts.value = await getPosts(0, 2)
+    if (!acc[email]) {
+      acc[email] = avatar
+    }
 
-  umTrackView()
+    return acc
+  }, {})
+
+  return posts.value.map(
+    ({ author, categories, content, createdAt, id, title }) => {
+      return {
+        id,
+        author: {
+          id: author.id,
+          username: author.profile?.name || 'USER',
+        },
+        description: content ? content.substr(0, 255) : null,
+        published: createdAt,
+        tags: categories || [],
+        thumbnail: thumbnailMap[author.email] || null,
+        title,
+      }
+    },
+  )
+}, [])
+
+const config = useRuntimeConfig()
+const rootPath = computed(() => config.public.forum.rootPath)
+const isSSR = computed(() => !import.meta.client)
+
+useHead({
+  meta: [{ name: 'description', content: t('home.description') }],
+  title: t('home.title'),
+})
+
+const { data: latestPublications, pending } = useLazySanityQuery(
+  latestPublicationsQuery,
+  { locale },
+)
+
+onMounted(async () => {
+  try {
+    posts.value = await getLatestPosts()
+  } catch (e) {
+    console.error(e)
+    posts.value = []
+  } finally {
+    loading.value = false
+  }
+})
+
+umTrackView()
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .home-page {
   &.pending {

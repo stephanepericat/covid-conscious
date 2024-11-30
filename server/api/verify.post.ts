@@ -7,7 +7,7 @@ type Payload = {
 export default defineEventHandler(async (event) => {
   const { token } = await readBody(event)
 
-  if(!token) {
+  if (!token) {
     return {
       ok: false,
     }

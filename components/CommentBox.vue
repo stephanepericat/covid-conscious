@@ -4,18 +4,19 @@
 
     <p v-if="!loggedIn" v-text="$t('forum.comments.box.loggedIn')" />
 
-    <PostDisabled v-else-if="loggedIn && !canComment" type="comment" />
+    <PostDisabled v-else-if="loggedIn && !userStore.canPost" type="comment" />
 
     <template v-else>
       <IFormGroup>
-        <ITextarea v-model="comment" :disabled="loading" :placeholder="$t('forum.comments.box.placeholder')" />
+        <ITextarea
+          v-model="comment"
+          :disabled="loading"
+          :placeholder="$t('forum.comments.box.placeholder')"
+        />
       </IFormGroup>
       <IFormGroup>
         <IButton :disabled="buttonDisabled || loading" type="submit">
-          <Icon
-            v-if="loading"
-            name="eos-icons:loading"
-          />
+          <Icon v-if="loading" name="eos-icons:loading" />
           {{ $t('forum.comments.box.button') }}
         </IButton>
       </IFormGroup>
@@ -23,53 +24,49 @@
   </IForm>
 </template>
 <script setup>
-  import { usePosts } from '~/assets/composables/usePosts'
-  import PostDisabled from './PostDisabled.vue'
+import PostDisabled from './PostDisabled.vue'
+import { usePrisma } from '~/assets/composables/usePrisma'
+import { useUserStore } from '~/assets/stores/user'
 
-  const emit = defineEmits(['success', 'error'])
+const emit = defineEmits(['success', 'error'])
 
-  const props = defineProps({
-    postId: { type: Number, required: true },
-  })
+const props = defineProps({
+  postId: { type: Number, required: true },
+})
 
-  const { postId } = toRefs(props)
+const { postId } = toRefs(props)
 
-  const user = useSupabaseUser()
-  const loggedIn = computed(() => !!user.value)
+const userStore = useUserStore()
+const { createComment } = usePrisma()
+const { loggedIn } = useUserSession()
 
-  const { createComment, getUserById } = usePosts()
+const comment = ref('')
+const buttonDisabled = computed(() => !comment.value.length)
+const loading = ref(false)
 
-  const userInfo = await getUserById(user?.value?.id || null);
-  const canComment = computed(() => userInfo && userInfo.username !== null)
-
-  const comment = ref('')
-  const buttonDisabled = computed(() => !comment.value.length)
-  const loading = ref(false)
-
-  const onSubmit = async () => {
-    const payload = {
-      author_id: user.value.id,
-      post_id: postId.value,
-      body: comment.value,
-    }
-
-    loading.value = true
-
-    try {
-      const { data, error } = await createComment(payload)
-      if(error) throw error
-      emit('success', data)
-    } catch(e) {
-      console.error(e)
-      emit('error')
-    } finally {
-      comment.value = ''
-      loading.value = false
-    }
+const onSubmit = async () => {
+  const payload = {
+    authorId: userStore.info?.id,
+    content: comment.value,
   }
+
+  loading.value = true
+
+  try {
+    const { data, error } = await createComment(postId.value, payload)
+    if (error) throw error
+    emit('success', data)
+  } catch (e) {
+    console.error(e)
+    emit('error')
+  } finally {
+    comment.value = ''
+    loading.value = false
+  }
+}
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .sf-comment-box {
   &__title {

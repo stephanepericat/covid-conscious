@@ -5,24 +5,30 @@
       <h1 class="terms-conditions-page__title">
         {{ policy[0].title }}
       </h1>
-      
+
       <div class="terms-conditions-page__contents">
-        <SanityContent :blocks="policy[0].contents" :serializers="serializers" />
+        <SanityContent
+          :blocks="policy[0].contents"
+          :serializers="serializers"
+        />
       </div>
     </template>
   </div>
 </template>
 <script setup>
-  import policyQuery from '~/sanity/policy.sanity'
-  import { serializers } from '~/assets/constants/serializers'
+import policyQuery from '~/sanity/queries/policy.sanity'
+import { serializers } from '~/assets/constants/serializers'
 
-  const { locale } = useI18n()
-  const { data: policy, pending } = useLazySanityQuery(policyQuery, { locale, policyType: "Terms & Conditions" })
+const { locale } = useI18n()
+const { data: policy, pending } = useLazySanityQuery(policyQuery, {
+  locale,
+  policyType: 'Terms & Conditions',
+})
 
-  umTrackView()
+umTrackView()
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .terms-conditions-page {
   &.pending {

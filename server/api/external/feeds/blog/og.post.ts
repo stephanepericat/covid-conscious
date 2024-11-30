@@ -4,10 +4,8 @@ export default defineEventHandler(async (event) => {
   const { posts } = await readBody(event)
 
   try {
-    const info = await Promise.all(
-      posts.map((url: string) => ogs({ url }))
-    )
-  
+    const info = await Promise.all(posts.map((url: string) => ogs({ url })))
+
     return info
       .map(({ result }) => result || null)
       .filter((r) => r !== null && r.success)

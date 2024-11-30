@@ -27,16 +27,16 @@
   </div>
 </template>
 <script setup>
-  import Card from '~/components/Card.vue'
-  import Media from '~/components/Media.vue'
+import Card from '~/components/Card.vue'
+import Media from '~/components/Media.vue'
 
-  const props = defineProps({
-    publications: { type: Array, default: [] },
-    target: { type: String, default: null },
-  })
+const props = defineProps({
+  publications: { type: Array, default: [] },
+  target: { type: String, default: null },
+})
 
-  const localePath = useLocalePath()
+const localePath = useLocalePath()
 
-  const top = computed(() => props.publications[0])
-  const others = computed(() => props.publications.slice(1))
+const top = computed(() => props.publications[0])
+const others = computed(() => props.publications.slice(1))
 </script>

@@ -1,18 +1,19 @@
 export default {
   article: {
-    call: "Call",
-    contactInfo: "Datos de Contacto",
-    email: "Correo Electrónico",
-    free: "Gratis",
-    limited: "Acceso Limitado",
-    listedProducts: "Productos Listados",
-    locked: "Premium",
-    lockedDescription: "Esta publicación está detrás de un muro de pago o suscripción",
-    manufacturerWebsite: "Sitio Web del Fabricante",
-    moreInfo: "Más Información",
-    online: "En línea",
-    readMore: "Lea Más",
-    related: "Contenido Relacionado",
+    call: 'Call',
+    contactInfo: 'Datos de Contacto',
+    email: 'Correo Electrónico',
+    free: 'Gratis',
+    limited: 'Acceso Limitado',
+    listedProducts: 'Productos Listados',
+    locked: 'Premium',
+    lockedDescription:
+      'Esta publicación está detrás de un muro de pago o suscripción',
+    manufacturerWebsite: 'Sitio Web del Fabricante',
+    moreInfo: 'Más Información',
+    online: 'En línea',
+    readMore: 'Lea Más',
+    related: 'Contenido Relacionado',
     share: {
       facebook: 'Compartir en Facebook',
       mail: 'Compartir por correo electrónico',
@@ -22,61 +23,63 @@ export default {
       twitter: 'Compartir en Twitter',
       whatsapp: 'Compartir en WhatsApp',
     },
-    title: "That Covid Life - {title}",
-    updated: "Actualizado",
-    watchVideo: "Ver Video",
-    website: "Ir al Sitio Web",
+    title: 'That Covid Life - {title}',
+    updated: 'Actualizado',
+    watchVideo: 'Ver Video',
+    website: 'Ir al Sitio Web',
   },
-  comingSoon: "Muy pronto...",
+  comingSoon: 'Muy pronto...',
   contribute: {
     back: 'Ir a la página de inicio',
-    description: "Puede usar este formulario para enviar una noticia, sugerir un producto para revisar o compartir un consejo de lo directorio.",
+    description:
+      'Puede usar este formulario para enviar una noticia, sugerir un producto para revisar o compartir un consejo de lo directorio.',
     errors: {
       category: {
-        required: "Porfavor seleccione una categoría.",
+        required: 'Porfavor seleccione una categoría.',
       },
       description: {
-        required: "Por favor introduzca una descripción.",
-        min: "La descripción debe tener al menos 20 caracteres.",
+        required: 'Por favor introduzca una descripción.',
+        min: 'La descripción debe tener al menos 20 caracteres.',
       },
       email: {
-        required: "Por favor introduzca una dirección de correo eléctronico.",
-        invalid: "Por favor, introduce una dirección de correo electrónico válida.",
+        required: 'Por favor introduzca una dirección de correo eléctronico.',
+        invalid:
+          'Por favor, introduce una dirección de correo electrónico válida.',
       },
       from_name: {
-        required: "Introduce un nombre.",
-        min: "El nombre debe tener al menos 3 caracteres.",
+        required: 'Introduce un nombre.',
+        min: 'El nombre debe tener al menos 3 caracteres.',
       },
       link: {
-        invalid: "Introduce un enlace válido.",
+        invalid: 'Introduce un enlace válido.',
       },
     },
     labels: {
-      category: "Categoría",
-      description: "Descripción",
-      email: "Correo Electrónico",
-      link: "Enlace",
-      name: "Nombre",
-      submit: "Entregar",
+      category: 'Categoría',
+      description: 'Descripción',
+      email: 'Correo Electrónico',
+      link: 'Enlace',
+      name: 'Nombre',
+      submit: 'Entregar',
     },
-    pageTitle: "That Covid Life - Contribuir",
+    pageTitle: 'That Covid Life - Contribuir',
     placeholders: {
-      category: "Seleccione una categoría",
-      description: "Introduzca una descripción",
-      email: "Introduzca su dirección de correo electrónico",
-      link: "Introduzca un enlace",
-      name: "Introduzca su nombre",
+      category: 'Seleccione una categoría',
+      description: 'Introduzca una descripción',
+      email: 'Introduzca su dirección de correo electrónico',
+      link: 'Introduzca un enlace',
+      name: 'Introduzca su nombre',
     },
     sent: 'Tu contribución ha sido enviada. Lo revisaremos y nos comunicaremos con usted en breve a la dirección de correo electrónico que proporcionó.',
-    title: "Contribuir",
+    title: 'Contribuir',
     toast: {
       error: {
-        title: "Algo salió mal.",
-        message: "Por favor, inténtelo de nuevo más tarde.",
+        title: 'Algo salió mal.',
+        message: 'Por favor, inténtelo de nuevo más tarde.',
       },
       success: {
-        title: "¡Enviado!",
-        message: "Recibimos su envío y lo revisaremos pronto.",
+        title: '¡Enviado!',
+        message: 'Recibimos su envío y lo revisaremos pronto.',
       },
     },
   },
@@ -99,38 +102,40 @@ export default {
     },
   },
   directory: {
-    instructions: 'Seleccione una categoría o un país para comenzar a buscar en el directorio',
+    instructions:
+      'Seleccione una categoría o un país para comenzar a buscar en el directorio',
     results: '{totalItems} esultado(s) encontrado(s).',
   },
   disclaimer: {
-    links: "RENUNCIA DE ENLACES EXTERNOS",
-    professional: "RENUNCIA PROFESIONAL",
-    testimonials: "RENUNCIA DE RESPONSABILIDAD DE TESTIMONIOS",
-    website: "EXENCIÓN DE RESPONSABILIDAD DEL SITIO WEB",
-    updated: "Última actualización",
+    links: 'RENUNCIA DE ENLACES EXTERNOS',
+    professional: 'RENUNCIA PROFESIONAL',
+    testimonials: 'RENUNCIA DE RESPONSABILIDAD DE TESTIMONIOS',
+    website: 'EXENCIÓN DE RESPONSABILIDAD DEL SITIO WEB',
+    updated: 'Última actualización',
   },
   home: {
-    description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
-    pageTitle: "Últimas Publicaciones",
-    title: "That Covid Life - Últimas Publicaciones",
+    description:
+      'That Covid Life - Una plataforma para el asesoramiento de Covid',
+    pageTitle: 'Últimas Publicaciones',
+    title: 'That Covid Life - Últimas Publicaciones',
   },
   layout: {
-    about: "Sobre Nosotros",
-    bluesky: "Síguenos en Bluesky",
-    brand: "Marcas",
-    contents: "Contenido",
-    covidnet: "Covidnet",
-    directory: "Directorio",
-    disclaimer: "Descargo de responsabilidad",
-    event: "Próximos Eventos",
-    events: "Próximos Eventos",
-    footerLegal: "© 2023 - {year} Reservados todos los derechos.",
-    health: "Vigilancia de la Salud Pública",
-    here: "aquí",
-    home: "Página Principal",
-    community: "Comunidad",
-    contactUs: "Contacta con Nosotros",
-    education: "Educación",
+    about: 'Sobre Nosotros',
+    bluesky: 'Síguenos en Bluesky',
+    brand: 'Marcas',
+    contents: 'Contenido',
+    covidnet: 'Covidnet',
+    directory: 'Directorio',
+    disclaimer: 'Descargo de responsabilidad',
+    event: 'Próximos Eventos',
+    events: 'Próximos Eventos',
+    footerLegal: '© 2023 - {year} Reservados todos los derechos.',
+    health: 'Vigilancia de la Salud Pública',
+    here: 'aquí',
+    home: 'Página Principal',
+    community: 'Comunidad',
+    contactUs: 'Contacta con Nosotros',
+    education: 'Educación',
     empty: {
       community: 'Aún no hay enlaces de la comunidad.',
       directory: 'Aún no hay listados en el directorio.',
@@ -144,11 +149,11 @@ export default {
       resources: 'Aún no hay recursos.',
       videos: 'Aún no hay vídeos.',
     },
-    forum: "Foro",
-    forumGuidelines: "Directrices Del Foro",
-    legal: "Información Legal",
-    link: "Noticias",
-    mobile: "Aplicación Movil",
+    forum: 'Foro',
+    forumGuidelines: 'Directrices Del Foro',
+    legal: 'Información Legal',
+    link: 'Noticias',
+    mobile: 'Aplicación Movil',
     more: {
       articles: 'Más Artículos',
       label: 'Más...',
@@ -157,40 +162,41 @@ export default {
       resources: 'Más recursos',
       videos: 'Más vídeos',
     },
-    news: "Noticias",
-    privacyPolicy: "Política de Privacidad",
-    product: "EPI",
-    "public-health": "Vigilancia de la Salud Pública",
-    resource: "Recursos",
-    rss: "RSS Feed",
-    "scientific-library": "Biblioteca",
-    search: "Buscar",
-    social: "Redes Sociales",
-    submitContent: "Contribuir",
+    news: 'Noticias',
+    privacyPolicy: 'Política de Privacidad',
+    product: 'EPI',
+    'public-health': 'Vigilancia de la Salud Pública',
+    resource: 'Recursos',
+    rss: 'RSS Feed',
+    'scientific-library': 'Biblioteca',
+    search: 'Buscar',
+    social: 'Redes Sociales',
+    submitContent: 'Contribuir',
     support: 'Soporte',
     switch: {
-      darkMode: "Cambiar al modo oscuro",
-      lightMode: "Cambiar al modo de luz",
+      darkMode: 'Cambiar al modo oscuro',
+      lightMode: 'Cambiar al modo de luz',
     },
     tcl: 'That Covid Life',
     terms: 'Términos y Condiciones',
-    twitter: "Síganos en Twitter",
+    twitter: 'Síganos en Twitter',
     user: {
-      account: "Mi cuenta",
-      area: "Área de Usuario",
-      createAccount: "Crea una Cuenta",
+      account: 'Mi cuenta',
+      area: 'Área de Usuario',
+      createAccount: 'Crea una Cuenta',
       resetPassword: 'Restablecer la contraseña',
-      signIn: "Iniciar sesión",
-      signUp: "Registrate",
-      signOut: "Cerrar sesión",
-      updatePassword: 'Actualiza Contraseña'
+      signIn: 'Iniciar sesión',
+      signUp: 'Registrate',
+      signOut: 'Cerrar sesión',
+      updatePassword: 'Actualiza Contraseña',
     },
     userAccount: 'Cuenta de Usuario',
     video: 'Vídeos',
   },
   list: {
-    categoryTitle: "That Covid Life - {type} - {category}",
-    description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
+    categoryTitle: 'That Covid Life - {type} - {category}',
+    description:
+      'That Covid Life - Una plataforma para el asesoramiento de Covid',
     filters: {
       reset: 'Restablecer Filtros',
       selectCategory: 'Seleccione una categoría...',
@@ -200,10 +206,18 @@ export default {
       selectLanguage: 'Selecciona un idioma...',
       selectSource: 'Seleccione una fuente...',
     },
-    typeTitle: "That Covid Life - {type}",
+    typeTitle: 'That Covid Life - {type}',
+  },
+  needLogin: {
+    cta: {
+      login: 'Iniciar sesión',
+      signup: 'Crear una cuenta',
+    },
+    description: 'Crear una cuenta es gratis, fácil y seguro.',
+    title: 'Debe estar registrado para acceder a este contenido',
   },
   notFound: {
-    title: "No Encontrado",
+    title: 'No Encontrado',
     description: "Aún no hay publicaciones para '{category}'.",
   },
   reviews: {
@@ -211,11 +225,12 @@ export default {
     average: 'Average Rating',
     edit: {
       already: 'Ya revisaste este producto.',
-      click: 'Haga clic aquí para editar su reseña.'
+      click: 'Haga clic aquí para editar su reseña.',
     },
     edited: 'editado',
     list: {
-      description: 'Estás viendo reseñas desde el {start} hasta el {end} de {total}.',
+      description:
+        'Estás viendo reseñas desde el {start} hasta el {end} de {total}.',
     },
     notLoggedIn: 'Debes iniciar sesión para publicar una reseña del producto.',
     noReviews: 'Aún no hay reseñas para este producto.',
@@ -241,14 +256,16 @@ export default {
     update: 'Actualiza tu reseña',
   },
   search: {
-    description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
-    pageTitle: "{totalItems} Resultado(s) de la búsqueda de \"{searchTerm}\"",
-    title: "That Covid Life - Búsqueda \"{searchTerm}\"",
+    description:
+      'That Covid Life - Una plataforma para el asesoramiento de Covid',
+    pageTitle: '{totalItems} Resultado(s) de la búsqueda de "{searchTerm}"',
+    title: 'That Covid Life - Búsqueda "{searchTerm}"',
   },
   tags: {
-    description: "That Covid Life - Una plataforma para el asesoramiento de Covid",
-    pageTitle: "{totalItems} resultado(s) para \"{tagName}\"",
-    title: "That Covid Life - \"{tagName}\"",
+    description:
+      'That Covid Life - Una plataforma para el asesoramiento de Covid',
+    pageTitle: '{totalItems} resultado(s) para "{tagName}"',
+    title: 'That Covid Life - "{tagName}"',
   },
   forum: {
     account: {
@@ -266,7 +283,8 @@ export default {
       signIn: 'Iniciar Sesión Para Publicar',
     },
     auth: {
-      description: 'Ingrese su dirección de correo electrónico para recibir un enlace de inicio de sesión',
+      description:
+        'Ingrese su dirección de correo electrónico para recibir un enlace de inicio de sesión',
       label: 'Introduzca su dirección de correo electrónico...',
       submit: '¡Envíame un enlace de inicio de sesión!',
       toast: {
@@ -275,7 +293,8 @@ export default {
           title: 'Algo salió mal',
         },
         success: {
-          message: 'Revise su correo electrónico para el enlace de inicio de sesión.',
+          message:
+            'Revise su correo electrónico para el enlace de inicio de sesión.',
           title: '¡Enlace enviado!',
         },
         update: {
@@ -295,9 +314,11 @@ export default {
       delete: 'Suprimir',
       deletion: {
         title: 'Confirmar la eliminación del comentario',
-        description: 'Estás a punto de eliminar tu comentario. Esto no se puede deshacer.',
+        description:
+          'Estás a punto de eliminar tu comentario. Esto no se puede deshacer.',
       },
-      description: 'Estás viendo los comentarios desde el {start} hasta el {end} de {total}.',
+      description:
+        'Estás viendo los comentarios desde el {start} hasta el {end} de {total}.',
       noComments: 'Todavía no hay comentarios en esta publicación.',
       toast: {
         deletion: {
@@ -318,12 +339,14 @@ export default {
           message: 'Tu comentario ha sido publicado.',
           title: '¡Comentario añadido!',
         },
-      }
+      },
     },
     create: {
       categories: {
+        introduction: 'Introducción',
         lifestyle: 'Estilo de Vida',
         'long-covid': 'Largo Covid',
+        misc: 'Varios',
         products: 'EPI',
         recovery: 'Recuperación',
         relationships: 'Relaciones',
@@ -350,8 +373,9 @@ export default {
       },
       modal: {
         title: 'Confirmar publicación',
-        description: 'Estás a punto de publicar esta publicación. No se puede editar más tarde.',
-        confirmation: 
+        description:
+          'Estás a punto de publicar esta publicación. No se puede editar más tarde.',
+        confirmation:
           'Verifique que todo esté bien y haga clic en "publicar" si está listo, o "cancelar" si necesita editar esta publicación.',
         buttons: {
           cancel: 'Cancelar',
@@ -377,8 +401,9 @@ export default {
     },
     disabled: {
       message: {
-        comment: 'Necesitas configurar un nombre de usuario antes de poder comentar.',
-        post: 'Necesitas configurar un nombre de usuario antes de poder publicar.'
+        comment:
+          'Necesitas configurar un nombre de usuario antes de poder comentar.',
+        post: 'Necesitas configurar un nombre de usuario antes de poder publicar.',
       },
       redirect: 'Ve a tu cuenta para configurar una ahora.',
     },
@@ -397,7 +422,8 @@ export default {
       title: 'Últimas publicaciones',
     },
     list: {
-      description: 'Estás viendo la(s) publicación(es) desde el {start} hasta el {end} de {total}.',
+      description:
+        'Estás viendo la(s) publicación(es) desde el {start} hasta el {end} de {total}.',
     },
     post: {
       comments: 'Comentarios',
@@ -409,7 +435,8 @@ export default {
       description: 'Selecciona las publicaciones que deseas eliminar.',
       modal: {
         title: 'Confirmar eliminación',
-        description: 'Estás a punto de eliminar {amount} publicación(es). Esto no se puede deshacer.',
+        description:
+          'Estás a punto de eliminar {amount} publicación(es). Esto no se puede deshacer.',
         confirmation: '¿Está seguro de que desea continuar?',
         buttons: {
           cancel: 'Cancelar',
@@ -420,7 +447,7 @@ export default {
       table: {
         published: 'Fecha de publicación',
         title: 'Título de la publicación',
-        topic: 'Tema'
+        topic: 'Tema',
       },
       title: 'Mis publicaciones',
       toast: {
@@ -435,21 +462,23 @@ export default {
       },
     },
     search: {
-      description: 'Busca publicaciones ingresando un término de búsqueda a continuación.',
+      description:
+        'Busca publicaciones ingresando un término de búsqueda a continuación.',
       label: 'Escriba un término de búsqueda...',
       title: 'Buscar',
     },
   },
   support: {
     pageTitle: 'Soporte',
-    description: 'Rellene este formulario para informarnos sobre cualquier defecto o sugerencia de mejora del producto que pueda tener.',
+    description:
+      'Rellene este formulario para informarnos sobre cualquier defecto o sugerencia de mejora del producto que pueda tener.',
   },
   login: {
     buttons: {
       resetPassword: 'Restablecer la contraseña',
       signin: 'Iniciar sesión',
       signup: 'Registrarse',
-      updatePassword: 'Actualiza Contraseña'
+      updatePassword: 'Actualiza Contraseña',
     },
     labels: {
       email: 'Correo Electrónico',
@@ -467,11 +496,13 @@ export default {
       },
       reset: {
         title: '¡Solicitud exitosa!',
-        message: 'Revise su correo electrónico para ver si hay un enlace de reinicio.',
+        message:
+          'Revise su correo electrónico para ver si hay un enlace de reinicio.',
       },
       signup: {
         title: '¡Regístrese exitosamente!',
-        message: 'Revise su correo electrónico para obtener un enlace de confirmación.',
+        message:
+          'Revise su correo electrónico para obtener un enlace de confirmación.',
       },
       update: {
         title: '¡Actualización exitosa!',
@@ -480,21 +511,25 @@ export default {
     },
   },
   mobile: {
-    availableSoonIOS: "* Pronto disponible para iOS",details: {
+    availableSoonIOS: '* Pronto disponible para iOS',
+    details: {
       archive: {
-        title: "Acceda a todo nuestro archivo",
-        description: "Puedes acceder a toda nuestra colección de noticias, documentos científicos, recursos, videos, EPI y próximos eventos en todos los idiomas compatibles.",
+        title: 'Acceda a todo nuestro archivo',
+        description:
+          'Puedes acceder a toda nuestra colección de noticias, documentos científicos, recursos, videos, EPI y próximos eventos en todos los idiomas compatibles.',
       },
       contribute: {
-        title: "Contribuya a nuestra plataforma",
-        description: "Puedes enviarnos enlaces, información sobre EPI e incluso contenidos originales a través de nuestro formulario de contribución.",
+        title: 'Contribuya a nuestra plataforma',
+        description:
+          'Puedes enviarnos enlaces, información sobre EPI e incluso contenidos originales a través de nuestro formulario de contribución.',
       },
       informed: {
-        title: "Manténgase informado en cualquier lugar",
-        description: "Con nuestra aplicación, puedes mantenerte informado sobre las últimas actualizaciones y avances científicos en torno a la pandemia de COVID-19.",
+        title: 'Manténgase informado en cualquier lugar',
+        description:
+          'Con nuestra aplicación, puedes mantenerte informado sobre las últimas actualizaciones y avances científicos en torno a la pandemia de COVID-19.',
       },
     },
-    header: "Toda la información sobre el COVID-19 que necesitas.",
-    subheader: "En un solo lugar.",
+    header: 'Toda la información sobre el COVID-19 que necesitas.',
+    subheader: 'En un solo lugar.',
   },
-};
+}

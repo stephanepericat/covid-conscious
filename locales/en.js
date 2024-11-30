@@ -1,18 +1,18 @@
 export default {
   article: {
-    call: "Call",
-    contactInfo: "Contact Info",
-    email: "Email",
-    free: "Free",
-    limited: "Limited Access",
-    listedProducts: "Listed Products",
-    locked: "Premium",
-    lockedDescription: "This publication is behind a paywall or subscription",
+    call: 'Call',
+    contactInfo: 'Contact Info',
+    email: 'Email',
+    free: 'Free',
+    limited: 'Limited Access',
+    listedProducts: 'Listed Products',
+    locked: 'Premium',
+    lockedDescription: 'This publication is behind a paywall or subscription',
     manufacturerWebsite: "Manufacturer's Website",
-    moreInfo: "More Information",
-    online: "Online",
-    readMore: "Read More",
-    related: "Related Content",
+    moreInfo: 'More Information',
+    online: 'Online',
+    readMore: 'Read More',
+    related: 'Related Content',
     share: {
       facebook: 'Share on Facebook',
       mail: 'Share via e-mail',
@@ -22,61 +22,62 @@ export default {
       twitter: 'Share on Twitter',
       whatsapp: 'Share on WhatsApp',
     },
-    title: "That Covid Life - {title}",
-    updated: "Updated",
-    watchVideo: "Watch Video",
-    website: "Go To Website",
+    title: 'That Covid Life - {title}',
+    updated: 'Updated',
+    watchVideo: 'Watch Video',
+    website: 'Go To Website',
   },
-  comingSoon: "Coming soon...",
+  comingSoon: 'Coming soon...',
   contribute: {
     back: 'Go Home',
-    description: "You can use this form to submit a piece of news, suggest a product to review, or share a directory tip.",
+    description:
+      'You can use this form to submit a piece of news, suggest a product to review, or share a directory tip.',
     errors: {
       category: {
-        required: "Please select a category.",
+        required: 'Please select a category.',
       },
       description: {
-        required: "Please enter a description.",
-        min: "The description needs to be at least 20 characters.",
+        required: 'Please enter a description.',
+        min: 'The description needs to be at least 20 characters.',
       },
       email: {
-        required: "Please enter an email address.",
-        invalid: "Please enter a valid email address.",
+        required: 'Please enter an email address.',
+        invalid: 'Please enter a valid email address.',
       },
       from_name: {
-        required: "Please enter a name.",
-        min: "The name needs to be at least 3 characters.",
+        required: 'Please enter a name.',
+        min: 'The name needs to be at least 3 characters.',
       },
       link: {
-        invalid: "Please enter a valid link.",
+        invalid: 'Please enter a valid link.',
       },
     },
     labels: {
-      category: "Category",
-      description: "Description",
-      email: "Email Address",
-      link: "Link",
-      name: "Name",
-      submit: "Submit",
+      category: 'Category',
+      description: 'Description',
+      email: 'Email Address',
+      link: 'Link',
+      name: 'Name',
+      submit: 'Submit',
     },
-    pageTitle: "That Covid Life - Contribute",
+    pageTitle: 'That Covid Life - Contribute',
     placeholders: {
-      category: "Select a category",
-      description: "Enter a description",
-      email: "Enter your email address",
-      link: "Enter a link",
-      name: "Enter your name",
+      category: 'Select a category',
+      description: 'Enter a description',
+      email: 'Enter your email address',
+      link: 'Enter a link',
+      name: 'Enter your name',
     },
     sent: 'Your contribution has been sent. We will review it, and get back to you shortly at the email address you provided.',
-    title: "Contribute",
+    title: 'Contribute',
     toast: {
       error: {
-        title: "Something went wrong.",
-        message: "Please try again later.",
+        title: 'Something went wrong.',
+        message: 'Please try again later.',
       },
       success: {
-        title: "Submitted!",
-        message: "We received your submission, and will review it soon.",
+        title: 'Submitted!',
+        message: 'We received your submission, and will review it soon.',
       },
     },
   },
@@ -99,38 +100,39 @@ export default {
     },
   },
   directory: {
-    instructions: 'Select a category or a country to start searching the directory',
+    instructions:
+      'Select a category or a country to start searching the directory',
     results: '{totalItems} result(s) found.',
   },
   disclaimer: {
-    links: "EXTERNAL LINKS DISCLAIMER",
-    professional: "PROFESSIONAL DISCLAIMER",
-    testimonials: "TESTIMONIALS DISCLAIMER",
-    website: "WEBSITE DISCLAIMER",
-    updated: "Last Updated",
+    links: 'EXTERNAL LINKS DISCLAIMER',
+    professional: 'PROFESSIONAL DISCLAIMER',
+    testimonials: 'TESTIMONIALS DISCLAIMER',
+    website: 'WEBSITE DISCLAIMER',
+    updated: 'Last Updated',
   },
   home: {
-    description: "That Covid Life - A platform for Covid advice",
-    pageTitle: "Latest Publications",
-    title: "That Covid Life - Latest Publications",
+    description: 'That Covid Life - A platform for Covid advice',
+    pageTitle: 'Latest Publications',
+    title: 'That Covid Life - Latest Publications',
   },
   layout: {
-    about: "About",
-    bluesky: "Follow us on Bluesky",
-    brand: "Brands",
-    contents: "Contents",
-    covidnet: "Covidnet",
-    directory: "Directory",
-    disclaimer: "Disclaimer",
-    event: "Upcoming Events",
-    events: "Upcoming Events",
-    footerLegal: "© 2023 - {year} All rights reserved.",
-    health: "Public Health Watch",
-    here: "here",
-    home: "Home",
-    community: "Community",
-    contactUs: "Contact Us",
-    education: "Education",
+    about: 'About',
+    bluesky: 'Follow us on Bluesky',
+    brand: 'Brands',
+    contents: 'Contents',
+    covidnet: 'Covidnet',
+    directory: 'Directory',
+    disclaimer: 'Disclaimer',
+    event: 'Upcoming Events',
+    events: 'Upcoming Events',
+    footerLegal: '© 2023 - {year} All rights reserved.',
+    health: 'Public Health Watch',
+    here: 'here',
+    home: 'Home',
+    community: 'Community',
+    contactUs: 'Contact Us',
+    education: 'Education',
     empty: {
       community: 'No community links yet.',
       directory: 'No directory listings yet.',
@@ -144,11 +146,11 @@ export default {
       resources: 'No resources yet.',
       videos: 'No videos yet.',
     },
-    forum: "Forum",
-    forumGuidelines: "Forum Guidelines",
-    legal: "Legal Information",
-    link: "News",
-    mobile: "Mobile App",
+    forum: 'Forum',
+    forumGuidelines: 'Forum Guidelines',
+    legal: 'Legal Information',
+    link: 'News',
+    mobile: 'Mobile App',
     more: {
       articles: 'More Articles',
       label: 'More...',
@@ -157,40 +159,40 @@ export default {
       resources: 'More resources',
       videos: 'More videos',
     },
-    news: "News",
-    privacyPolicy: "Privacy Policy",
-    product: "PPE",
-    "public-health": "Public Health Watch",
-    resource: "Resources",
-    rss: "RSS Feed",
-    "scientific-library": "Library",
-    search: "Search",
-    social: "Social Networks",
-    submitContent: "Contribute",
+    news: 'News',
+    privacyPolicy: 'Privacy Policy',
+    product: 'PPE',
+    'public-health': 'Public Health Watch',
+    resource: 'Resources',
+    rss: 'RSS Feed',
+    'scientific-library': 'Library',
+    search: 'Search',
+    social: 'Social Networks',
+    submitContent: 'Contribute',
     support: 'Support',
     switch: {
-      darkMode: "Switch To Dark Mode",
-      lightMode: "Switch To Light Mode",
+      darkMode: 'Switch To Dark Mode',
+      lightMode: 'Switch To Light Mode',
     },
     tcl: 'That Covid Life',
     terms: 'Terms & Conditions',
-    twitter: "Follow us on Twitter",
+    twitter: 'Follow us on Twitter',
     user: {
-      account: "My Account",
-      area: "User Area",
-      createAccount: "Create an Account",
+      account: 'My Account',
+      area: 'User Area',
+      createAccount: 'Create an Account',
       resetPassword: 'Reset Password',
-      signIn: "Sign In",
-      signUp: "Sign Up",
-      signOut: "Sign Out",
-      updatePassword: 'Update Password'
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
+      signOut: 'Sign Out',
+      updatePassword: 'Update Password',
     },
     userAccount: 'User Account',
     video: 'Videos',
   },
   list: {
-    categoryTitle: "That Covid Life - {type} - {category}",
-    description: "That Covid Life - A platform for Covid advice",
+    categoryTitle: 'That Covid Life - {type} - {category}',
+    description: 'That Covid Life - A platform for Covid advice',
     filters: {
       reset: 'Reset Filters',
       selectCategory: 'Select a category...',
@@ -200,10 +202,18 @@ export default {
       selectLanguage: 'Select a language...',
       selectSource: 'Select a source...',
     },
-    typeTitle: "That Covid Life - {type}",
+    typeTitle: 'That Covid Life - {type}',
+  },
+  needLogin: {
+    cta: {
+      login: 'Sign In',
+      signup: 'Create an account',
+    },
+    description: 'Creating an account is free, easy and safe.',
+    title: 'You need to be logged in to access this content',
   },
   notFound: {
-    title: "Not Found",
+    title: 'Not Found',
     description: "There are no publications yet for '{category}'.",
   },
   reviews: {
@@ -211,11 +221,12 @@ export default {
     average: 'Average Rating',
     edit: {
       already: 'You already reviewed this product.',
-      click: 'Click here to edit your review.'
+      click: 'Click here to edit your review.',
     },
     edited: 'edited',
     list: {
-      description: 'You are viewing review(s) {start} through {end} of {total}.',
+      description:
+        'You are viewing review(s) {start} through {end} of {total}.',
     },
     notLoggedIn: 'You must be logged in to post a product review.',
     noReviews: 'There are no reviews for this product yet.',
@@ -241,14 +252,14 @@ export default {
     update: 'Update your review',
   },
   search: {
-    description: "That Covid Life - A platform for Covid advice",
-    pageTitle: "{totalItems} Search Result(s) for \"{searchTerm}\"",
-    title: "That Covid Life - Search \"{searchTerm}\"",
+    description: 'That Covid Life - A platform for Covid advice',
+    pageTitle: '{totalItems} Search Result(s) for "{searchTerm}"',
+    title: 'That Covid Life - Search "{searchTerm}"',
   },
   tags: {
-    description: "That Covid Life - A platform for Covid advice",
-    pageTitle: "{totalItems} result(s) for \"{tagName}\"",
-    title: "That Covid Life - \"{tagName}\"",
+    description: 'That Covid Life - A platform for Covid advice',
+    pageTitle: '{totalItems} result(s) for "{tagName}"',
+    title: 'That Covid Life - "{tagName}"',
   },
   forum: {
     account: {
@@ -295,9 +306,11 @@ export default {
       delete: 'Delete',
       deletion: {
         title: 'Confirm Comment Deletion',
-        description: 'You are about to delete your comment. This cannot be undone.',
+        description:
+          'You are about to delete your comment. This cannot be undone.',
       },
-      description: 'You are viewing comment(s) {start} through {end} of {total}.',
+      description:
+        'You are viewing comment(s) {start} through {end} of {total}.',
       noComments: 'There are no comments on this post yet.',
       toast: {
         deletion: {
@@ -318,12 +331,14 @@ export default {
           message: 'Your comment has been published.',
           title: 'Comment Added!',
         },
-      }
+      },
     },
     create: {
       categories: {
+        introduction: 'Introduction',
         lifestyle: 'Lifestyle',
         'long-covid': 'Long Covid',
+        misc: 'Miscellaneous',
         products: 'PPE',
         recovery: 'Recovery',
         relationships: 'Relationships',
@@ -350,8 +365,9 @@ export default {
       },
       modal: {
         title: 'Confirm Publication',
-        description: 'You are about to publish this post. It cannot be edited later.',
-        confirmation: 
+        description:
+          'You are about to publish this post. It cannot be edited later.',
+        confirmation:
           'Please verify everything is ok, and click "publish" if you are ready, or "cancel" if you need to edit this post.',
         buttons: {
           cancel: 'Cancel',
@@ -378,7 +394,7 @@ export default {
     disabled: {
       message: {
         comment: 'You need to set up a username before you can comment.',
-        post: 'You need to set up a username before you can post.'
+        post: 'You need to set up a username before you can post.',
       },
       redirect: 'Go to your account to set one up now.',
     },
@@ -409,7 +425,8 @@ export default {
       description: 'Select the post(s) you wish to delete.',
       modal: {
         title: 'Confirm Deletion',
-        description: 'You are about to delete {amount} post(s). This cannot be undone.',
+        description:
+          'You are about to delete {amount} post(s). This cannot be undone.',
         confirmation: 'Are you sure you want to proceed?',
         buttons: {
           cancel: 'Cancel',
@@ -420,7 +437,7 @@ export default {
       table: {
         published: 'Publication Date',
         title: 'Post Title',
-        topic: 'Topic'
+        topic: 'Topic',
       },
       title: 'My Posts',
       toast: {
@@ -442,14 +459,15 @@ export default {
   },
   support: {
     pageTitle: 'Support',
-    description: 'Fill this form to let us know about any defect, or product enhancement suggestion you may have.',
+    description:
+      'Fill this form to let us know about any defect, or product enhancement suggestion you may have.',
   },
   login: {
     buttons: {
       resetPassword: 'Reset Password',
       signin: 'Sign In',
       signup: 'Sign Up',
-      updatePassword: 'Update Password'
+      updatePassword: 'Update Password',
     },
     labels: {
       email: 'Email',
@@ -480,22 +498,25 @@ export default {
     },
   },
   mobile: {
-    availableSoonIOS: "* Available soon on iOS",
+    availableSoonIOS: '* Available soon on iOS',
     details: {
       archive: {
-        title: "Access Our Entire Archive",
-        description: "You can access our entire database of news articles, scientific papers, resources, videos, PPE, and upcoming events in all supported languages.",
+        title: 'Access Our Entire Archive',
+        description:
+          'You can access our entire database of news articles, scientific papers, resources, videos, PPE, and upcoming events in all supported languages.',
       },
       contribute: {
-        title: "Contribute To Our Platform",
-        description: "You can send us links, PPE tips, and even submit some of your original content, via our built-in contribution form.",
+        title: 'Contribute To Our Platform',
+        description:
+          'You can send us links, PPE tips, and even submit some of your original content, via our built-in contribution form.',
       },
       informed: {
-        title: "Stay Informed On The Go",
-        description: "With our app, you can stay informed on the latest updates and scientific developments around the COVID-19 pandemic.",
+        title: 'Stay Informed On The Go',
+        description:
+          'With our app, you can stay informed on the latest updates and scientific developments around the COVID-19 pandemic.',
       },
     },
-    header: "All your COVID-19 information.",
-    subheader: "In one place.",
+    header: 'All your COVID-19 information.',
+    subheader: 'In one place.',
   },
-};
+}

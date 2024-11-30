@@ -1,7 +1,7 @@
 import consola from 'consola'
 import { defineSitemapEventHandler } from '#imports'
-import sitemapQuery from '~/sanity/sitemap.sanity'
-import { SitemapUrl } from '#sitemap'
+import sitemapQuery from '~/sanity/queries/sitemap.sanity'
+import { SITEMAP_QUERYResult } from '~/sanity/types'
 
 const pages = [
   '/',
@@ -20,11 +20,8 @@ const pages = [
   '/update-password',
 ]
 
-const formatUrl = (
-  path: string,
-  origin: string,
-  locale: string | null
-) => `${origin}${locale ? `/${locale}` : ''}${path}`
+const formatUrl = (path: string, origin: string, locale: string | null) =>
+  `${origin}${locale ? `/${locale}` : ''}${path}`
 
 export default defineSitemapEventHandler(async (event) => {
   const { locale = null } = getQuery(event)
@@ -32,10 +29,16 @@ export default defineSitemapEventHandler(async (event) => {
   const { fetch } = useSanity()
 
   try {
-    const posts: SitemapUrl[] = await fetch(sitemapQuery)
+    const posts = await fetch<SITEMAP_QUERYResult>(sitemapQuery)
     return [
-      ...pages.map((p) => ({ loc: formatUrl(p, origin, locale as string | null) })),
-      ...posts.map((p) => ({ lastmod: p.lastmod, loc: formatUrl(p.loc, origin, locale as string | null), images: p.images || [] })),
+      ...pages.map((p) => ({
+        loc: formatUrl(p, origin, locale as string | null),
+      })),
+      ...posts.map((p) => ({
+        lastmod: p.lastmod,
+        loc: formatUrl(p.loc as string, origin, locale as string | null),
+        images: p.images || [],
+      })),
     ]
   } catch (e) {
     consola.error(e)

@@ -6,12 +6,12 @@
   </div>
 </template>
 <script setup>
-  defineProps({
-    category: { type: String, required: true },
-  });
+defineProps({
+  category: { type: String, required: true },
+})
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .not-found {
   display: flex;
@@ -25,7 +25,7 @@
   &__icon {
     height: 80px;
     margin-bottom: 50px;
-    opacity: .4;
+    opacity: 0.4;
     width: 80px;
   }
 }
