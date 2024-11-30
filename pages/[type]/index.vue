@@ -1,6 +1,12 @@
 <template>
   <div class="type-page" :class="{ pending, type }">
-    <ILoader v-if="pending" class="type-page__loader" />
+    <div class="flex justify-center" v-if="disableRendering">
+      <NeedLogin
+        class="my-8 md:my-16"
+        url="/auth/auth0"
+      />
+    </div>
+    <ILoader v-else-if="pending" class="type-page__loader" />
     <NotFound v-else-if="!pending && !results.length" :category="localeType" />
     <template v-else>
       <h1 class="type-page__title" v-text="localeType" />
@@ -48,6 +54,7 @@
   import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource, isVideo } from '~/assets/utils/article-types'
   import PublicationFilters from '~/components/PublicationFilters.vue'
   import PublicationList from '~/components/PublicationList.vue'
+  import NeedLogin from '~/components/NeedLogin.vue'
 
   const { $appSettings } = useNuxtApp()
   const { locale, t } = useI18n()
@@ -55,6 +62,8 @@
   const { params } = useRoute()
   const { type } = params
   const localeType = computed(() => t(`layout.${type}`))
+  const { loggedIn } = useUserSession()
+  const disableRendering = computed(() => loggedIn && isDirectory(type))
 
   useHead({
     meta: [
@@ -66,7 +75,9 @@
   const { currentPage, itemsPerPage, startItem, endItem } = usePagination()
 
   const articleType = computed(() => type)
-  const { data, pending } = useLazySanityQuery(publicationsByTypeQuery, { locale, articleType: articleType.value })
+  const { data, pending } = disableRendering.value
+    ? { data: null, pending: false }
+    : useLazySanityQuery(publicationsByTypeQuery, { locale, articleType: articleType.value })
   const results = computed(() => data?.value?.results || [])
 
   const onlineOnly = ref(false)
