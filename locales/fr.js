@@ -203,6 +203,14 @@ export default {
     },
     typeTitle: "That Covid Life - {type}",
   },
+  needLogin: {
+    cta: {
+      login: 'S\'identifier',
+      signup: 'Créer un compte',
+    },
+    description: 'La création d\'un compte est rapide, facile et sûre.',
+    title: 'Vous devez être connecté pour accéder à ce contenu',
+  },
   notFound: {
     title: "Non Trouvé",
     description: "Il n'y a pas encore de publications pour '{category}'.",

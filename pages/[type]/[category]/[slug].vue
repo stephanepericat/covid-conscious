@@ -20,9 +20,15 @@
       <Meta name="twitter:card" content="summary_large_image" />
     </Head>
 
-    <ILoader v-if="pending" class="article-page__loader" />
+    <NeedLogin
+      class="my-8 md:my-16"
+      v-if="!loggedIn"
+      url="/auth/auth0"
+    />
 
-    <template v-else-if="!pending && article">
+    <ILoader v-if="loggedIn && pending" class="article-page__loader" />
+
+    <template v-else-if="loggedIn && !pending && article">
       <h1 class="article-page__title" :class="{ 'with-brand': brand?.name}">
         <span>{{ isBrand(type) ? article.name : article.title }}</span>
         <div v-if="isProduct(type) && ratingsAverage" class="article-page__title--info">
@@ -380,6 +386,7 @@
   import ChannelVideos from '~/components/ChannelVideos.vue'
   import FeaturedPosts from '~/components/FeaturedPosts.vue'
   import ListedProducts from '~/components/ListedProducts.vue'
+  import NeedLogin from '~/components/NeedLogin.vue'
   import { usePrisma } from '~/assets/composables/usePrisma'
   import { useUserStore } from '~/assets/stores/user'
 
@@ -392,13 +399,16 @@
   const { onTagClick } = useTags()
   const hashtag = computed(() => category.replace(/-/gi, ''))
   const isMobile = useMediaQuery('(max-width: 576px)')
+  const { loggedIn } = useUserSession()
 
-  const { data: article, pending } = useLazySanityQuery(publicationQuery, {
-    category,
-    locale,
-    slug,
-    type,
-  })
+  const { data: article, pending } = loggedIn.value 
+    ? useLazySanityQuery(publicationQuery, {
+        category,
+        locale,
+        slug,
+        type,
+      })
+    : { data: {}, pending: false }
 
   const initialLoad = ref(true)
   const articleId = computed(() => article?.value?.id || null)
@@ -489,7 +499,7 @@
   const zoom = ref(6)
 
   watch(articleId, async () => {
-    if(!articleId.value || !isProduct(type)) return
+    if(!articleId.value || !isProduct(type) || !loggedIn) return
 
     try {
       reviewsLoading.value = true

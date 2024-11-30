@@ -202,6 +202,14 @@ export default {
     },
     typeTitle: "That Covid Life - {type}",
   },
+  needLogin: {
+    cta: {
+      login: 'Iniciar sesión',
+      signup: 'Crear una cuenta',
+    },
+    description: 'Crear una cuenta es rápido, fácil y seguro.',
+    title: 'Debe estar registrado para acceder a este contenido',
+  },
   notFound: {
     title: "No Encontrado",
     description: "Aún no hay publicaciones para '{category}'.",
