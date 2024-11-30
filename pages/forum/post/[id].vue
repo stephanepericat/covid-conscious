@@ -137,7 +137,6 @@ const { t, locale, localeProperties } = useI18n()
 const { deleteComment, getPostComments, getPostById } = usePrisma()
 const isSSR = computed(() => !process.client)
 
-// const post = await getPost(route.params.id)
 const post = computedAsync(async () => await getPostById(route.params.id), null)
 const avatar = computedAsync(
   async () =>
@@ -152,10 +151,8 @@ const pageDescription = computed(() =>
 )
 const postBody = ref(null)
 
-// const totalComments = ref(0)
 const comments = ref([])
 const commentsLoading = ref(true)
-// const comments = computed(() => post.value?.comments || [])
 const totalComments = computed(() => comments.value?.total || 0)
 const activePage = ref(1)
 
@@ -165,7 +162,6 @@ const onCommentsPageChange = async ({ currentPage, startItem }) => {
     commentsLoading.value = true
     comments.value = await getPostComments(route.params.id, startItem)
     commentsLoading.value = false
-    // totalComments.value = await getCommentsCount(route.params.id)
   }
 }
 
@@ -180,8 +176,6 @@ const onCommentPostSuccess = async () => {
   commentsLoading.value = true
   comments.value = await getPostComments(route.params.id)
   commentsLoading.value = false
-  // comments.value = await getComments(route.params.id)
-  // totalComments.value = await getCommentsCount(route.params.id)
 }
 
 const onCommentPostError = () =>
@@ -195,7 +189,6 @@ const commentDeletionModalVisible = ref(false)
 const commentToDelete = ref(null)
 
 const onDeleteComment = ({ id, author }) => {
-  // console.log(`deleting comment id: ${id}`)
   commentToDelete.value = { commentId: id, authorId: author?.id }
   commentDeletionModalVisible.value = true
 }
@@ -228,8 +221,6 @@ const onCommentDeletionPostSuccess = async () => {
   commentsLoading.value = true
   comments.value = await getPostComments(route.params.id)
   commentsLoading.value = false
-  // comments.value = await getComments(route.params.id)
-  // totalComments.value = await getCommentsCount(route.params.id)
 }
 
 const onCommentDeletionPostError = () =>
@@ -272,9 +263,6 @@ const onTranslateClick = async (e) => {
     isTranslating.value = false
   }
 }
-
-// totalComments.value = await getCommentsCount(route.params.id)
-// comments.value = await getComments(route.params.id)
 
 watch(locale, () => {
   translationResults.value = null

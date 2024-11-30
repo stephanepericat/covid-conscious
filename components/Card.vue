@@ -97,7 +97,6 @@ const { locale } = useI18n()
 @import '~/assets/sass/mixins.scss';
 
 .tcl-card {
-  // background-color: #f5f5f5;
   border: 1px solid var(--color-light);
 }
 

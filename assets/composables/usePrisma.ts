@@ -233,10 +233,6 @@ export const usePrisma = () => {
         body: { email },
       })
 
-      // if(!res) {
-      //   throw new Error('Username not found')
-      // }
-
       return res
     } catch (e) {
       consola.error(e)

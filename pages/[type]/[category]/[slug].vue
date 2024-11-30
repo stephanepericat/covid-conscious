@@ -49,37 +49,6 @@
         <NuxtLink :to="localePath(brand.path)">{{ brand.name }}</NuxtLink>
       </h2>
 
-      <!-- <IMedia class="article-page__author" v-if="article.author">
-        <template #image>
-          <SanityImage
-            v-if="article.author.avatar"
-            class="article-page__author--avatar"
-            :asset-id="article.author.avatar"
-            fit="crop"
-            crop="entropy"
-            :h="50"
-            :w="50"
-          />
-          <img v-else class="article-page__author--placeholder" src="/tcl-logo-big-grey.jpeg" />
-        </template>
-        <h5 class="article-page__author--name">
-          <NuxtLink :to="localePath(`/${AUTHOR}/${article.author.slug}`)">{{ article.author.nickname }}</NuxtLink>
-        </h5>
-        <p class="article-page__info">
-          <span class="article-page__info--category">{{ articleType }} / {{ article.category }} / {{ format(new Date(article.published), DEFAULT_DATE_FORMAT) }} ({{ $t("article.updated") }}: {{ format(new Date(article.updated), DEFAULT_DATE_FORMAT) }})</span>
-        </p>
-        <div v-if="article.tags" class="article-page__tags">
-          <IBadge
-            v-for="{ name, uri } in article.tags"
-            :key="uri"
-            class="article-page__tags--item"
-            @click="onTagClick({ uri })"
-          >
-            {{ name }}
-          </IBadge>
-        </div>
-      </IMedia> -->
-
       <IMedia class="article-page__author">
         <template #image>
           <SanityImage
@@ -894,10 +863,6 @@ umTrackView()
     margin-right: 3px;
     vertical-align: top !important;
   }
-
-  // .vue-star-rating {
-  //   align-items: flex-end;
-  // }
 
   @include breakpoint-down('md') {
     &__share {

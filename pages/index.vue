@@ -199,14 +199,6 @@
                   with-preview
                 />
               </div>
-              <!-- <div class="mt-4">
-                <NuxtLink
-                  :to="localePath('/forum')"
-                  class="uppercase font-semibold text-xs tracking-widest hover:no-underline"
-                >
-                  {{ $t('layout.more.posts') }} &raquo;
-                </NuxtLink>
-              </div> -->
             </template>
           </div>
           <PromoZone
@@ -297,13 +289,10 @@ useHead({
   title: t('home.title'),
 })
 
-// const showBottomBlock = computed(() => $appSettings.SHOW_EDUCATION && $appSettings.SHOW_DIRECTORY)
-
 const { data: latestPublications, pending } = useLazySanityQuery(
   latestPublicationsQuery,
   { locale },
 )
-// posts.value = await getPosts(0, 2)
 
 onMounted(async () => {
   try {

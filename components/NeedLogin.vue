@@ -17,7 +17,7 @@ defineProps({
         <template #icon>
           <Icon name="material-symbols:login-rounded" />
         </template>
-        {{ $t('needLogin.cta.login') }}
+        {{ $t('needLogin.cta.login') }} / {{ $t('needLogin.cta.signup') }}
       </IButton>
     </div>
   </div>

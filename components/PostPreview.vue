@@ -79,8 +79,6 @@ const { locale } = useI18n()
 
 .post-preview {
   &__description {
-    // font-size: 13.33px;
-    // margin: 0;
     margin-bottom: 10px;
   }
 

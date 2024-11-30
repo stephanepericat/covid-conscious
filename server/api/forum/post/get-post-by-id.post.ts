@@ -39,38 +39,6 @@ export default defineEventHandler(async (event) => {
             },
           },
           categories: true,
-          // comments: {
-          //   where: {
-          //     published: true,
-          //   },
-          //   orderBy: {
-          //     createdAt: 'desc',
-          //   },
-          //   omit: {
-          //     authorId: true,
-          //     postId: true,
-          //     published: true,
-          //     updatedAt: true,
-          //   },
-          //   include: {
-          //     author: {
-          //       omit: {
-          //         email: true,
-          //         role: true,
-          //       },
-          //       include: {
-          //         profile: {
-          //           omit: {
-          //             id: true,
-          //             bio: true,
-          //             userId: true,
-          //             website: true,
-          //           },
-          //         },
-          //       },
-          //     },
-          //   },
-          // },
         },
         cacheStrategy: {
           ttl: 180,

@@ -209,7 +209,7 @@ export default {
       login: 'Sign In',
       signup: 'Create an account',
     },
-    description: 'Creating an account is fast, easy and safe.',
+    description: 'Creating an account is free, easy and safe.',
     title: 'You need to be logged in to access this content',
   },
   notFound: {

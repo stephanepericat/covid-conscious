@@ -212,7 +212,7 @@ export default {
       login: 'Entrar',
       signup: 'Criar uma conta',
     },
-    description: 'Criar uma conta é rápido, fácil e seguro.',
+    description: 'A criação de uma conta é gratuita, fácil e segura.',
     title: 'Você precisa estar conectado para acessar este conteúdo',
   },
   notFound: {
