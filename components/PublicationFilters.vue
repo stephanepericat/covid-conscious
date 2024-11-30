@@ -79,39 +79,49 @@
   </div>
 </template>
 <script setup>
-  import { isCovidnet, isDirectory, isHealth, isLibrary, isNews, isResource, isSearch, isTag, isVideo } from '~/assets/utils/article-types'
+import {
+  isCovidnet,
+  isDirectory,
+  isHealth,
+  isLibrary,
+  isNews,
+  isResource,
+  isSearch,
+  isTag,
+  isVideo,
+} from '~/assets/utils/article-types'
 
-  const props = defineProps({
-    categories: { type: Array, default: [] },
-    cities: { type: Array, default: [] },
-    contentTypes: { type: Array, default: [] },
-    countries: { type: Array, default: [] },
-    languages: { type: Array, default: [] },
-    sources: { type: Array, default: [] },
-    type: { type: String, required: true },
-  })
+const props = defineProps({
+  categories: { type: Array, default: [] },
+  cities: { type: Array, default: [] },
+  contentTypes: { type: Array, default: [] },
+  countries: { type: Array, default: [] },
+  languages: { type: Array, default: [] },
+  sources: { type: Array, default: [] },
+  type: { type: String, required: true },
+})
 
-  const selectedCategory = defineModel('selectedCategory')
-  const selectedCity = defineModel('selectedCity')
-  const selectedContentType = defineModel('selectedContentType')
-  const selectedCountry = defineModel('selectedCountry')
-  const selectedLanguage = defineModel('selectedLanguage')
-  const selectedSource = defineModel('selectedSource')
-  const onlineOnly = defineModel('onlineOnly')
+const selectedCategory = defineModel('selectedCategory')
+const selectedCity = defineModel('selectedCity')
+const selectedContentType = defineModel('selectedContentType')
+const selectedCountry = defineModel('selectedCountry')
+const selectedLanguage = defineModel('selectedLanguage')
+const selectedSource = defineModel('selectedSource')
+const onlineOnly = defineModel('onlineOnly')
 
-  const clearFilters = () => {
-    selectedCategory.value = null
-    selectedCity.value = null
-    selectedContentType.value = null
-    selectedCountry.value = null
-    selectedLanguage.value = null
-    selectedSource.value = null
-    onlineOnly.value = false
-  }
+const clearFilters = () => {
+  selectedCategory.value = null
+  selectedCity.value = null
+  selectedContentType.value = null
+  selectedCountry.value = null
+  selectedLanguage.value = null
+  selectedSource.value = null
+  onlineOnly.value = false
+}
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .publication-filters {
   margin-bottom: 20px;

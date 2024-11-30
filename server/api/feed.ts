@@ -12,7 +12,10 @@ export default eventHandler(async (event) => {
   const { origin: BASE_URL } = getRequestURL(event)
 
   try {
-    const { entries, settings } = await fetch<RSS_FEED_QUERYResult>(rssFeedQuery, { locale })
+    const { entries, settings } = await fetch<RSS_FEED_QUERYResult>(
+      rssFeedQuery,
+      { locale },
+    )
 
     const feed = new Feed({
       title: settings?.title as string,

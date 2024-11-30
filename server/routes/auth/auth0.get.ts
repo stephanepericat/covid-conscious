@@ -10,13 +10,19 @@ export default defineOAuthAuth0EventHandler({
       loggedInAt: Date.now(),
     })
 
-    return sendRedirect(event, `${locale && locale !== 'en' ? `/${locale}` : ''}/account`)
+    return sendRedirect(
+      event,
+      `${locale && locale !== 'en' ? `/${locale}` : ''}/account`,
+    )
   },
   // Optional, will return a json error and 401 status code by default
   onError(event, error) {
     console.error('Auth0 OAuth error:', error)
     const locale = getCookie(event, 'i18n_redirected')
     // TODO: redirect to error page?
-    return sendRedirect(event, `${locale && locale !== 'en' ? `/${locale}` : '/'}`)
+    return sendRedirect(
+      event,
+      `${locale && locale !== 'en' ? `/${locale}` : '/'}`,
+    )
   },
 })

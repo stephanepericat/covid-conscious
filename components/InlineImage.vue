@@ -1,13 +1,10 @@
 <template>
-  <SanityImage
-    class="cc-inline-image"
-    :asset-id="asset._ref"
-  />
+  <SanityImage class="cc-inline-image" :asset-id="asset._ref" />
 </template>
 <script setup>
-  const props = defineProps({
-    asset: Object
-  })
+const props = defineProps({
+  asset: Object,
+})
 </script>
 <style>
 .cc-inline-image {

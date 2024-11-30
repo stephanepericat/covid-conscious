@@ -3,8 +3,7 @@ import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async () => {
   try {
-    const posts = await prisma
-      .post
+    const posts = await prisma.post
       .findMany({
         where: {
           published: true, // only get published posts
@@ -29,7 +28,7 @@ export default defineEventHandler(async () => {
                   website: true,
                   id: true,
                   userId: true,
-                }
+                },
               },
             },
           },
@@ -38,13 +37,14 @@ export default defineEventHandler(async () => {
         cacheStrategy: {
           ttl: 60,
           swr: 5,
-          tags: ['get_latest_posts']
+          tags: ['get_latest_posts'],
         },
-      }).withAccelerateInfo()
+      })
+      .withAccelerateInfo()
 
-      consola.info('GET LATEST POSTS - ', posts.info)
+    consola.info('GET LATEST POSTS - ', posts.info)
 
-      return posts.data || []
+    return posts.data || []
   } catch (e) {
     consola.error(e)
     return null

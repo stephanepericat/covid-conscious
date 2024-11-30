@@ -5,19 +5,19 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { payload, postId } = await readBody(event)
 
-  if(!payload || !postId) {
+  if (!payload || !postId) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Email is missing",
+      message: 'Bad request',
+      statusMessage: 'Email is missing',
     })
   }
 
-  if(!user) {
+  if (!user) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
@@ -28,12 +28,12 @@ export default defineEventHandler(async (event) => {
       data: {
         content,
         author: {
-          connect: {id: authorId},
+          connect: { id: authorId },
         },
         post: {
-          connect: {id: postId},
+          connect: { id: postId },
         },
-      }
+      },
     })
 
     return { error: null }
@@ -41,8 +41,8 @@ export default defineEventHandler(async (event) => {
     consola.error(e)
     throw createError({
       status: 500,
-      message: "Something went wrong",
-      statusMessage: "Unable to create comment",
+      message: 'Something went wrong',
+      statusMessage: 'Unable to create comment',
     })
   }
 })

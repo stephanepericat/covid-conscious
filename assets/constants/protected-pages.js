@@ -1,5 +1,1 @@
-export const protectedPages = [
-  'account',
-  'forum-create',
-  'forum-my-posts',
-]
+export const protectedPages = ['account', 'forum-create', 'forum-my-posts']

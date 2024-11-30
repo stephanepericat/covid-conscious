@@ -8,12 +8,12 @@
   </div>
 </template>
 <script setup>
-  const router = useRouter()
+const router = useRouter()
 
-  umTrackView()
+umTrackView()
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .author-page {
   &__title {

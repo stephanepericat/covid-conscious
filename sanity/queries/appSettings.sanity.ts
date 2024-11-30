@@ -8,6 +8,4 @@ const APP_SETTINGS_QUERY = groq`
 }
 `
 
-export {
-  APP_SETTINGS_QUERY as default
-}
+export { APP_SETTINGS_QUERY as default }

@@ -5,11 +5,11 @@ export default defineEventHandler(async (event) => {
   // const { user } = await getUserSession(event)
   const { email } = await readBody(event)
 
-  if(!email) {
+  if (!email) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Email is missing",
+      message: 'Bad request',
+      statusMessage: 'Email is missing',
     })
   }
 
@@ -23,19 +23,20 @@ export default defineEventHandler(async (event) => {
   // }
 
   try {
-    const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        email
-      },
-      include: {
-        profile: true,
-      },
-      cacheStrategy: {
-        ttl: 60,
-        tags: ['get_user']
-      }
-    })
-    .withAccelerateInfo()
+    const user = await prisma.user
+      .findUniqueOrThrow({
+        where: {
+          email,
+        },
+        include: {
+          profile: true,
+        },
+        cacheStrategy: {
+          ttl: 60,
+          tags: ['get_user'],
+        },
+      })
+      .withAccelerateInfo()
 
     consola.info('GET USER - ', user.info)
 

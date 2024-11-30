@@ -5,27 +5,27 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { payload, reviewId } = await readBody(event)
 
-  if(!payload) {
+  if (!payload) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Payload is missing",
+      message: 'Bad request',
+      statusMessage: 'Payload is missing',
     })
   }
 
-  if(!reviewId) {
+  if (!reviewId) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "review ID is missing",
+      message: 'Bad request',
+      statusMessage: 'review ID is missing',
     })
   }
 
-  if(!user) {
+  if (!user) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
@@ -35,19 +35,19 @@ export default defineEventHandler(async (event) => {
         id: true,
       },
       where: {
-        email: user.email
+        email: user.email,
       },
       cacheStrategy: {
-        ttl: 60
+        ttl: 60,
       },
     })
 
     // make sure the logged in user can post a review for the user id
-    if(!userInfo || userInfo.id !== payload.authorId) {
+    if (!userInfo || userInfo.id !== payload.authorId) {
       throw createError({
         status: 403,
-        message: "Unauthorized",
-        statusMessage: "You are not authorized to access this resource",
+        message: 'Unauthorized',
+        statusMessage: 'You are not authorized to access this resource',
       })
     }
 

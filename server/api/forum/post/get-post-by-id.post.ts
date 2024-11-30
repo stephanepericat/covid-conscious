@@ -4,86 +4,87 @@ import prisma from '~/lib/prisma'
 export default defineEventHandler(async (event) => {
   const { id } = await readBody(event)
 
-  if(!id) {
+  if (!id) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Post ID is missing",
+      message: 'Bad request',
+      statusMessage: 'Post ID is missing',
     })
   }
 
   try {
-    const post = await prisma.post.findUniqueOrThrow({
-      where: {
-        id: parseInt(id),
-      },
-      omit: {
-        authorId: true,
-        updatedAt: true,
-      },
-      include: {
-        author: {
-          omit: {
-            role: true,
-          },
-          include: {
-            profile: {
-              omit: {
-                id: true,
-                bio: true,
-                userId: true,
-                website: true,
+    const post = await prisma.post
+      .findUniqueOrThrow({
+        where: {
+          id: parseInt(id),
+        },
+        omit: {
+          authorId: true,
+          updatedAt: true,
+        },
+        include: {
+          author: {
+            omit: {
+              role: true,
+            },
+            include: {
+              profile: {
+                omit: {
+                  id: true,
+                  bio: true,
+                  userId: true,
+                  website: true,
+                },
               },
             },
           },
+          categories: true,
+          // comments: {
+          //   where: {
+          //     published: true,
+          //   },
+          //   orderBy: {
+          //     createdAt: 'desc',
+          //   },
+          //   omit: {
+          //     authorId: true,
+          //     postId: true,
+          //     published: true,
+          //     updatedAt: true,
+          //   },
+          //   include: {
+          //     author: {
+          //       omit: {
+          //         email: true,
+          //         role: true,
+          //       },
+          //       include: {
+          //         profile: {
+          //           omit: {
+          //             id: true,
+          //             bio: true,
+          //             userId: true,
+          //             website: true,
+          //           },
+          //         },
+          //       },
+          //     },
+          //   },
+          // },
         },
-        categories: true,
-        // comments: {
-        //   where: {
-        //     published: true,
-        //   },
-        //   orderBy: {
-        //     createdAt: 'desc',
-        //   },
-        //   omit: {
-        //     authorId: true,
-        //     postId: true,
-        //     published: true,
-        //     updatedAt: true,
-        //   },
-        //   include: {
-        //     author: {
-        //       omit: {
-        //         email: true,
-        //         role: true,
-        //       },
-        //       include: {
-        //         profile: {
-        //           omit: {
-        //             id: true,
-        //             bio: true,
-        //             userId: true,
-        //             website: true,
-        //           },
-        //         },
-        //       },
-        //     },
-        //   },
-        // },
-      },
-      cacheStrategy: {
-        ttl: 180,
-        swr: 30,
-        tags: ['get_post_by_id']
-      },
-    })
-    .withAccelerateInfo()
+        cacheStrategy: {
+          ttl: 180,
+          swr: 30,
+          tags: ['get_post_by_id'],
+        },
+      })
+      .withAccelerateInfo()
 
-    if(!post || !post.data?.published) {
+    if (!post || !post.data?.published) {
       throw createError({
         status: 400,
-        message: "Bad request",
-        statusMessage: "Post ID is missing",
+        message: 'Bad request',
+        statusMessage: 'Post ID is missing',
       })
     }
 

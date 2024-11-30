@@ -8,8 +8,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'introduction'
-    }
+      name: 'introduction',
+    },
   })
 
   await prisma.category.upsert({
@@ -18,8 +18,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'lifestyle'
-    }
+      name: 'lifestyle',
+    },
   })
 
   await prisma.category.upsert({
@@ -28,10 +28,9 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'long-covid'
-    }
+      name: 'long-covid',
+    },
   })
-
 
   await prisma.category.upsert({
     where: {
@@ -39,8 +38,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'misc'
-    }
+      name: 'misc',
+    },
   })
 
   await prisma.category.upsert({
@@ -49,8 +48,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'products'
-    }
+      name: 'products',
+    },
   })
 
   await prisma.category.upsert({
@@ -59,8 +58,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'recovery'
-    }
+      name: 'recovery',
+    },
   })
 
   await prisma.category.upsert({
@@ -69,8 +68,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'relationships'
-    }
+      name: 'relationships',
+    },
   })
 
   await prisma.category.upsert({
@@ -79,8 +78,8 @@ async function main() {
     },
     update: {},
     create: {
-      name: 'self-care'
-    }
+      name: 'self-care',
+    },
   })
 }
 

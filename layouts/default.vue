@@ -1,11 +1,15 @@
 <template>
   <ILayout class="default-layout">
-    <template v-if="$appSettings.PASSWORD_PROTECT && !authorized && !runtimeConfig.public.bypassLogin">
-      <div class="h-screen w-screen flex justify-center	items-center">
+    <template
+      v-if="
+        $appSettings.PASSWORD_PROTECT &&
+        !authorized &&
+        !runtimeConfig.public.bypassLogin
+      "
+    >
+      <div class="h-screen w-screen flex justify-center items-center">
         <div>
-          <IForm
-            @submit.prevent="handleLogin"
-          >
+          <IForm @submit.prevent="handleLogin">
             <IFormGroup>
               <IInput
                 v-model="password"
@@ -15,14 +19,8 @@
               />
             </IFormGroup>
             <IFormGroup>
-              <IButton
-                block
-                type="submit"
-              >
-                <Icon
-                  v-if="loading"
-                  name="eos-icons:loading"
-                />
+              <IButton block type="submit">
+                <Icon v-if="loading" name="eos-icons:loading" />
                 {{ $t('login.buttons.signin') }}
               </IButton>
             </IFormGroup>
@@ -46,7 +44,11 @@
               :placeholder="`${$t('layout.search')}...`"
             >
               <template #append>
-                <IButton color="primary" :disabled="!searchTerm.length" @click="onSearch">
+                <IButton
+                  color="primary"
+                  :disabled="!searchTerm.length"
+                  @click="onSearch"
+                >
                   <IIcon name="ink-search" />
                 </IButton>
               </template>
@@ -54,28 +56,50 @@
             <IDropdown placement="bottom-end" events="hover">
               <INavItem>
                 <!-- <Icon :name="currentLocale.flag" /> -->
-                <span v-text="currentLocale.code" class="default-layout__language--label" />
+                <span
+                  v-text="currentLocale.code"
+                  class="default-layout__language--label"
+                />
               </INavItem>
               <template #body>
-                <IDropdownItem v-for="locale in availableLocales" :key="locale.code" :to="switchLocalePath(locale.code)">
+                <IDropdownItem
+                  v-for="locale in availableLocales"
+                  :key="locale.code"
+                  :to="switchLocalePath(locale.code)"
+                >
                   <span>{{ locale.name }}</span>
                 </IDropdownItem>
               </template>
             </IDropdown>
-            <INavItem class="default-layout__header--color-mode" @click="switchColorMode">
+            <INavItem
+              class="default-layout__header--color-mode"
+              @click="switchColorMode"
+            >
               <Icon :name="colorModeIcon" />
             </INavItem>
             <IDropdown placement="bottom-end" events="hover">
               <INavItem>
                 <Icon name="material-symbols:account-circle" />
-                <span class="default-layout__user--label">{{ $t('layout.userAccount') }}</span>
+                <span class="default-layout__user--label">{{
+                  $t('layout.userAccount')
+                }}</span>
               </INavItem>
               <template #header v-if="loggedIn">
                 <div class="default-layout__user--info">
-                  <NuxtImg v-if="avatar" :src="avatar" width="40" height="40" class="default-layout__user--info-visual" />
+                  <NuxtImg
+                    v-if="avatar"
+                    :src="avatar"
+                    width="40"
+                    height="40"
+                    class="default-layout__user--info-visual"
+                  />
                   <div>
-                    <p class="default-layout__user--info-detail username">@{{ userStore.username || 'USER' }}</p>
-                    <p class="default-layout__user--info-detail email">{{ userStore.email }}</p>
+                    <p class="default-layout__user--info-detail username">
+                      @{{ userStore.username || 'USER' }}
+                    </p>
+                    <p class="default-layout__user--info-detail email">
+                      {{ userStore.email }}
+                    </p>
                   </div>
                 </div>
               </template>
@@ -101,7 +125,7 @@
                 </template>
               </template>
             </IDropdown>
-        </INav>
+          </INav>
         </INavbar>
         <INavbar class="default-layout__sub-nav" size="sm">
           <INavbarCollapsible>
@@ -115,18 +139,34 @@
                 v-show="!item.hidden"
               >
                 {{ item.label }}
-                <IBadge size="sm" color="secondary" :style="{fontSize: '8px', verticalAlign: 'text-top'}" v-if="item.showNew">NEW</IBadge>
+                <IBadge
+                  size="sm"
+                  color="secondary"
+                  :style="{ fontSize: '8px', verticalAlign: 'text-top' }"
+                  v-if="item.showNew"
+                  >NEW</IBadge
+                >
               </INavItem>
-              <IDropdown class="default-layout__sub-nav--more" placement="bottom-end" events="hover">
+              <IDropdown
+                class="default-layout__sub-nav--more"
+                placement="bottom-end"
+                events="hover"
+              >
                 <INavItem>
                   <Icon size="22" name="mdi:dots-horizontal-circle-outline" />
                   <!-- {{ $t('layout.more.label') }} -->
-                </InavItem>
+                </INavItem>
                 <template #body>
-                  <IDropdownItem :to="localePath('/public-health')" v-if="$appSettings.SHOW_PUBLIC_HEALTH">
+                  <IDropdownItem
+                    :to="localePath('/public-health')"
+                    v-if="$appSettings.SHOW_PUBLIC_HEALTH"
+                  >
                     <span>{{ $t('layout.health') }}</span>
                   </IDropdownItem>
-                  <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
+                  <IDropdownItem
+                    v-if="$appSettings.SHOW_EDUCATION"
+                    :to="localePath('/education')"
+                  >
                     <span>{{ $t('layout.education') }}</span>
                   </IDropdownItem>
                   <IDropdownItem :to="localePath('/forum')">
@@ -154,125 +194,179 @@
       <ILayoutFooter class="default-layout__footer">
         <IContainer class="default-layout__footer--container">
           <div class="default-layout__footer--container-block">
-            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.contents') }}</h5>
+            <h5 class="default-layout__footer--container-block-title">
+              {{ $t('layout.contents') }}
+            </h5>
             <ul class="default-layout__footer--list">
               <li>
-                <NuxtLink :to="localePath('/news')">{{ $t('layout.news') }}</NuxtLink>
+                <NuxtLink :to="localePath('/news')">{{
+                  $t('layout.news')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/resource')">{{ $t('layout.resource') }}</NuxtLink>
+                <NuxtLink :to="localePath('/resource')">{{
+                  $t('layout.resource')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/video')">{{ $t('layout.video') }}</NuxtLink>
+                <NuxtLink :to="localePath('/video')">{{
+                  $t('layout.video')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/scientific-library')">{{ $t('layout.scientific-library') }}</NuxtLink>
+                <NuxtLink :to="localePath('/scientific-library')">{{
+                  $t('layout.scientific-library')
+                }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_COVIDNET">
                 <NuxtLink :to="localePath('/covidnet')">
                   {{ $t('layout.covidnet') }}
-                  <IBadge size="sm" color="secondary" :style="{ fontSize: '8px', verticalAlign: 'text-top' }" v-if="$appSettings.SHOW_COVIDNET_NEW">NEW</IBadge>
+                  <IBadge
+                    size="sm"
+                    color="secondary"
+                    :style="{ fontSize: '8px', verticalAlign: 'text-top' }"
+                    v-if="$appSettings.SHOW_COVIDNET_NEW"
+                    >NEW</IBadge
+                  >
                 </NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_DIRECTORY">
-                <NuxtLink :to="localePath('/directory')">{{ $t('layout.directory') }}</NuxtLink>
+                <NuxtLink :to="localePath('/directory')">{{
+                  $t('layout.directory')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/product')">{{ $t('layout.product') }}</NuxtLink>
+                <NuxtLink :to="localePath('/product')">{{
+                  $t('layout.product')
+                }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_PUBLIC_HEALTH">
-                <NuxtLink :to="localePath('/public-health')">{{ $t('layout.health') }}</NuxtLink>
+                <NuxtLink :to="localePath('/public-health')">{{
+                  $t('layout.health')
+                }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_EDUCATION">
-                <NuxtLink :to="localePath('/education')">{{ $t('layout.education') }}</NuxtLink>
+                <NuxtLink :to="localePath('/education')">{{
+                  $t('layout.education')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/forum')">{{ $t('layout.forum') }}</NuxtLink>
+                <NuxtLink :to="localePath('/forum')">{{
+                  $t('layout.forum')
+                }}</NuxtLink>
               </li>
             </ul>
           </div>
           <div class="default-layout__footer--container-block">
-            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.tcl') }}</h5>
+            <h5 class="default-layout__footer--container-block-title">
+              {{ $t('layout.tcl') }}
+            </h5>
             <ul class="default-layout__footer--list">
               <li>
-                <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
+                <NuxtLink :to="localePath('/about')">{{
+                  $t('layout.about')
+                }}</NuxtLink>
               </li>
               <li>
-                <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
+                <a href="mailto:contact@thatcovid.life">{{
+                  $t('layout.contactUs')
+                }}</a>
               </li>
               <li>
-                <NuxtLink :to="localePath('/contribute')">{{ $t('layout.submitContent') }}</NuxtLink>
+                <NuxtLink :to="localePath('/contribute')">{{
+                  $t('layout.submitContent')
+                }}</NuxtLink>
               </li>
               <li v-if="$appSettings.SHOW_MOBILE">
-                <NuxtLink :to="localePath('/mobile')">{{ $t('layout.mobile') }}</NuxtLink>
+                <NuxtLink :to="localePath('/mobile')">{{
+                  $t('layout.mobile')
+                }}</NuxtLink>
               </li>
               <li>
                 <a :href="rssFeedUrl" target="_blank">{{ $t('layout.rss') }}</a>
               </li>
               <li>
-                <NuxtLink :to="localePath('/support')">{{ $t('layout.support') }}</NuxtLink>
+                <NuxtLink :to="localePath('/support')">{{
+                  $t('layout.support')
+                }}</NuxtLink>
               </li>
             </ul>
           </div>
           <div class="default-layout__footer--container-block">
-            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.social') }}</h5>
+            <h5 class="default-layout__footer--container-block-title">
+              {{ $t('layout.social') }}
+            </h5>
             <ul class="default-layout__footer--list">
               <li>
-                <a href="https://bsky.app/profile/thatcovidlife.bsky.social" target="_blank">
-                  <icon name="tabler:brand-bluesky" />&nbsp;
-                  Bluesky
+                <a
+                  href="https://bsky.app/profile/thatcovidlife.bsky.social"
+                  target="_blank"
+                >
+                  <icon name="tabler:brand-bluesky" />&nbsp; Bluesky
                 </a>
               </li>
               <li>
                 <a href="https://facebook.com/thatcovidlife" target="_blank">
-                  <icon name="tabler:brand-facebook" />&nbsp;
-                  Facebook
+                  <icon name="tabler:brand-facebook" />&nbsp; Facebook
                 </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/thatcovid.life" target="_blank">
-                  <icon name="tabler:brand-instagram" />&nbsp;
-                  Instagram
+                <a
+                  href="https://www.instagram.com/thatcovid.life"
+                  target="_blank"
+                >
+                  <icon name="tabler:brand-instagram" />&nbsp; Instagram
                 </a>
               </li>
               <li>
-                <a href="https://www.reddit.com/r/thatcovidlife/" target="_blank">
-                  <icon name="tabler:brand-reddit" />&nbsp;
-                  Reddit
+                <a
+                  href="https://www.reddit.com/r/thatcovidlife/"
+                  target="_blank"
+                >
+                  <icon name="tabler:brand-reddit" />&nbsp; Reddit
                 </a>
               </li>
               <li>
-                <a href="https://www.threads.net/@thatcovid.life" target="_blank">
-                  <icon name="tabler:brand-threads" />&nbsp;
-                  Threads
+                <a
+                  href="https://www.threads.net/@thatcovid.life"
+                  target="_blank"
+                >
+                  <icon name="tabler:brand-threads" />&nbsp; Threads
                 </a>
               </li>
               <li>
                 <a href="https://twitter.com/thatcovidlife" target="_blank">
-                  <icon name="tabler:brand-twitter" />&nbsp;
-                  Twitter
+                  <icon name="tabler:brand-twitter" />&nbsp; Twitter
                 </a>
               </li>
             </ul>
           </div>
           <div class="default-layout__footer--container-block">
-            <h5 class="default-layout__footer--container-block-title">{{ $t('layout.legal') }}</h5>
+            <h5 class="default-layout__footer--container-block-title">
+              {{ $t('layout.legal') }}
+            </h5>
             <ul class="default-layout__footer--list">
               <li>
-                <NuxtLink :to="localePath('/disclaimer')">{{ $t('layout.disclaimer') }}</NuxtLink>
+                <NuxtLink :to="localePath('/disclaimer')">{{
+                  $t('layout.disclaimer')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/forum-guidelines')">{{ $t('layout.forumGuidelines') }}</NuxtLink>
+                <NuxtLink :to="localePath('/forum-guidelines')">{{
+                  $t('layout.forumGuidelines')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/privacy-policy')">{{ $t('layout.privacyPolicy') }}</NuxtLink>
+                <NuxtLink :to="localePath('/privacy-policy')">{{
+                  $t('layout.privacyPolicy')
+                }}</NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="localePath('/terms-conditions')">{{ $t('layout.terms') }}</NuxtLink>
+                <NuxtLink :to="localePath('/terms-conditions')">{{
+                  $t('layout.terms')
+                }}</NuxtLink>
               </li>
-              <li>
-                &nbsp;
-              </li>
+              <li>&nbsp;</li>
               <li>
                 <NuxtLink :to="ANDROID_URL" target="_blank">
                   <NuxtImg
@@ -300,126 +394,174 @@
           </div>
         </IContainer>
         <IContainer class="default-layout__footer--container">
-          <div class="default-layout__footer--year">{{ $t("layout.footerLegal", { year: new Date().getFullYear() }) }}</div>
+          <div class="default-layout__footer--year">
+            {{ $t('layout.footerLegal', { year: new Date().getFullYear() }) }}
+          </div>
         </IContainer>
       </ILayoutFooter>
     </template>
   </ILayout>
 </template>
 <script setup>
-  import { INavItem, useInkline } from '@inkline/inkline'
-  import { DARK, DARK_ICON , LIGHT, LIGHT_ICON } from '~/assets/constants/inkline-modes'
-  import { useSignOut } from '~/assets/composables/useSignOut'
-  import { useLanguages } from '~/assets/composables/useLanguages'
-  import { getGravatarUrl } from '~/assets/utils/gravatar'
-  import { useMobileButtons } from '~/assets/composables/useMobileButtons'
-  import { useUserStore } from '~/assets/stores/user'
+import { INavItem, useInkline } from '@inkline/inkline'
+import {
+  DARK,
+  DARK_ICON,
+  LIGHT,
+  LIGHT_ICON,
+} from '~/assets/constants/inkline-modes'
+import { useSignOut } from '~/assets/composables/useSignOut'
+import { useLanguages } from '~/assets/composables/useLanguages'
+import { getGravatarUrl } from '~/assets/utils/gravatar'
+import { useMobileButtons } from '~/assets/composables/useMobileButtons'
+import { useUserStore } from '~/assets/stores/user'
 
-  const userStore = useUserStore()
-  const inkline = useInkline()
-  const { t } = useI18n()
-  const { currentLocale, availableLocales, locale } = useLanguages()
-  const switchLocalePath = useSwitchLocalePath()
-  const localePath = useLocalePath()
-  const router = useRouter()
-  const { $appSettings } = useNuxtApp()
-  const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } = useMobileButtons()
-  const loading = ref(false)
-  const password = ref('')
-  const authCookie = useCookie('tcl-auth', { default: null, watch: true })
-  const authorized = ref(false)
-  const runtimeConfig = useRuntimeConfig()
+const userStore = useUserStore()
+const inkline = useInkline()
+const { t } = useI18n()
+const { currentLocale, availableLocales, locale } = useLanguages()
+const switchLocalePath = useSwitchLocalePath()
+const localePath = useLocalePath()
+const router = useRouter()
+const { $appSettings } = useNuxtApp()
+const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } =
+  useMobileButtons()
+const loading = ref(false)
+const password = ref('')
+const authCookie = useCookie('tcl-auth', { default: null, watch: true })
+const authorized = ref(false)
+const runtimeConfig = useRuntimeConfig()
 
-  const handleLogin = async () => {
-    loading.value = true
-    try {
-      await $fetch('/api/login', {
-        method: 'POST',
-        body: {
-          password: password.value
-        }
-      })
-    } catch(e) {
-      console.error(e)
-    } finally {
-      password.value = ''
-      loading.value = false
-    }
+const handleLogin = async () => {
+  loading.value = true
+  try {
+    await $fetch('/api/login', {
+      method: 'POST',
+      body: {
+        password: password.value,
+      },
+    })
+  } catch (e) {
+    console.error(e)
+  } finally {
+    password.value = ''
+    loading.value = false
+  }
+}
+
+const verifyToken = async () => {
+  try {
+    const data = await $fetch('/api/verify', {
+      method: 'POST',
+      body: {
+        token: authCookie.value,
+      },
+    })
+    authorized.value = data.ok
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+const subNavItems = computed(() => [
+  { label: t('layout.news'), url: localePath('/news') },
+  { label: t('layout.resource'), url: localePath('/resource') },
+  { label: t('layout.video'), url: localePath('/video') },
+  {
+    label: t('layout.scientific-library'),
+    url: localePath('/scientific-library'),
+  },
+  {
+    label: t('layout.covidnet'),
+    url: localePath('/covidnet'),
+    hidden: !$appSettings.SHOW_COVIDNET,
+    showNew: $appSettings.SHOW_COVIDNET_NEW,
+  },
+  {
+    label: t('layout.directory'),
+    url: localePath('/directory'),
+    hidden: !$appSettings.SHOW_DIRECTORY,
+  },
+  { label: t('layout.product'), url: localePath('/product') },
+  {
+    label: t('layout.health'),
+    url: localePath('/public-health'),
+    class: 'optional',
+    hidden: !$appSettings.SHOW_PUBLIC_HEALTH,
+  },
+  {
+    label: t('layout.education'),
+    url: localePath('/education'),
+    class: 'optional',
+    hidden: !$appSettings.SHOW_EDUCATION,
+  },
+  { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
+  {
+    label: t('layout.submitContent'),
+    url: localePath('/contribute'),
+    class: 'optional',
+  },
+  { label: t('layout.mobile'), url: localePath('/mobile'), class: 'optional' },
+])
+
+// Inkline color mode
+const colorModeIcon = computed(() =>
+  inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON,
+)
+const switchColorMode = () =>
+  (inkline.options.colorMode =
+    inkline.options.colorMode === DARK ? LIGHT : DARK)
+
+// App Logo
+const logoFile = computed(
+  () => `/covid-life-v3-${inkline.options.colorMode}.png`,
+)
+
+// Search
+const searchTerm = ref('')
+const onSearch = () => {
+  if (!searchTerm.value.length) {
+    return
   }
 
-  const verifyToken = async () => {
-    try {
-      const data = await $fetch('/api/verify', {
-        method: 'POST',
-        body: {
-          token: authCookie.value
-        }
-      })
-      authorized.value = data.ok
-    } catch(e) {
-      console.error(e)
-    }
-  } 
+  router.push({
+    path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`),
+  })
+}
 
-  const subNavItems = computed(() => [
-    { label: t('layout.news'), url: localePath('/news') },
-    { label: t('layout.resource'), url: localePath('/resource') },
-    { label: t('layout.video'), url: localePath('/video') },
-    { label: t('layout.scientific-library'), url: localePath('/scientific-library') },
-    { label: t('layout.covidnet'), url: localePath('/covidnet'), hidden: !$appSettings.SHOW_COVIDNET, showNew: $appSettings.SHOW_COVIDNET_NEW },
-    { label: t('layout.directory'), url: localePath('/directory'), hidden: !$appSettings.SHOW_DIRECTORY },
-    { label: t('layout.product'), url: localePath('/product') },
-    { label: t('layout.health'), url: localePath('/public-health'), class: 'optional', hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
-    { label: t('layout.education'), url: localePath('/education'), class: 'optional', hidden: !$appSettings.SHOW_EDUCATION },
-    { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
-    { label: t('layout.submitContent'), url: localePath('/contribute'), class: 'optional' },
-    { label: t('layout.mobile'), url: localePath('/mobile'), class: 'optional' },
-  ])
+// Feed URL
+const rssFeedUrl = computed(() =>
+  locale?.value == 'en' ? '/api/feed' : `/api/feed?lang=${locale.value}`,
+)
 
-  // Inkline color mode
-  const colorModeIcon = computed(() => inkline.options.colorMode === DARK ? LIGHT_ICON : DARK_ICON)
-  const switchColorMode = () => inkline.options.colorMode = inkline.options.colorMode === DARK ? LIGHT : DARK
+// User Menu
+const { loggedIn, user } = useUserSession()
 
-  // App Logo
-  const logoFile = computed(() => `/covid-life-v3-${inkline.options.colorMode}.png`)
+const avatar = computedAsync(
+  async () =>
+    !user?.value?.email ? null : await getGravatarUrl(user.value.email),
+  null,
+)
 
-  // Search
-  const searchTerm = ref("")
-  const onSearch = () => {
-    if (!searchTerm.value.length) {
-      return
-    }
+const { signOut } = useSignOut(user)
 
-    router.push({ path: localePath(`/search/${encodeURIComponent(searchTerm.value)}`)})
-  }
-
-  // Feed URL
-  const rssFeedUrl = computed(() => locale?.value == "en" ? "/api/feed" : `/api/feed?lang=${locale.value}`)
-
-  // User Menu
-  const { loggedIn, user } = useUserSession()
-
-  const avatar = computedAsync(
-    async () => !user?.value?.email ? null : await getGravatarUrl(user.value.email),
-    null
-  )
-
-  const { signOut } = useSignOut(user)
-
-  watch(authCookie, () => {
-    if(authCookie.value) {
+watch(
+  authCookie,
+  () => {
+    if (authCookie.value) {
       verifyToken()
     }
-  }, { immediate: true })
+  },
+  { immediate: true },
+)
 
-  useAsyncData( async () => await userStore.updateUserInfo())
+useAsyncData(async () => await userStore.updateUserInfo())
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .default-layout {
-
   height: 100vh;
 
   &__header {
@@ -470,7 +612,7 @@
 
         &.username {
           font-weight: 700;
-          letter-spacing: .05rem;
+          letter-spacing: 0.05rem;
           text-transform: uppercase;
         }
 
@@ -500,7 +642,7 @@
       @include eyebrow();
 
       font-weight: 700;
-      letter-spacing: .1rem;
+      letter-spacing: 0.1rem;
     }
 
     .optional {
@@ -539,7 +681,7 @@
     }
 
     :deep(input) {
-      transition: width .2s;
+      transition: width 0.2s;
 
       @include breakpoint-up('lg') {
         &:focus {
@@ -584,7 +726,7 @@
 
           font-size: 13px;
           font-weight: 700;
-          letter-spacing: .1rem;
+          letter-spacing: 0.1rem;
         }
       }
     }

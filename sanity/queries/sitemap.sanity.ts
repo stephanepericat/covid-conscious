@@ -11,6 +11,4 @@ const SITEMAP_QUERY = groq`
 }
 `
 
-export {
-  SITEMAP_QUERY as default
-}
+export { SITEMAP_QUERY as default }

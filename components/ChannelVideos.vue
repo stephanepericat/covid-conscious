@@ -1,10 +1,10 @@
 <script setup>
-  import Card from './Card.vue'
+import Card from './Card.vue'
 
-  defineProps({
-    title: { type: String, required: true },
-    videos: { type: Array, default: [] },
-  })
+defineProps({
+  title: { type: String, required: true },
+  videos: { type: Array, default: [] },
+})
 </script>
 
 <template>

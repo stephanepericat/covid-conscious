@@ -36,6 +36,4 @@ const PUBLICATION_BY_TYPE_QUERY = groq`
 }
 `
 
-export {
-  PUBLICATION_BY_TYPE_QUERY as default
-}
+export { PUBLICATION_BY_TYPE_QUERY as default }

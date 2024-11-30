@@ -1,120 +1,124 @@
 <script setup>
-  import isURL from 'validator/lib/isURL'
-  import { useSignOut } from '~/assets/composables/useSignOut'
-  import { ITooltip, useToast } from '@inkline/inkline'
-  import { usePrisma } from '~/assets/composables/usePrisma'
-  import { getGravatarUrl } from '~/assets/utils/gravatar'
-  import { useForm } from '@inkline/inkline/composables'
-  import { useUserStore } from '~/assets/stores/user'
-  import _ from 'lodash'
+import isURL from 'validator/lib/isURL'
+import { useSignOut } from '~/assets/composables/useSignOut'
+import { ITooltip, useToast } from '@inkline/inkline'
+import { usePrisma } from '~/assets/composables/usePrisma'
+import { getGravatarUrl } from '~/assets/utils/gravatar'
+import { useForm } from '@inkline/inkline/composables'
+import { useUserStore } from '~/assets/stores/user'
+import _ from 'lodash'
 
-  const { findUsername, updateUserProfile } = usePrisma()
+const { findUsername, updateUserProfile } = usePrisma()
 
-  const userStore = useUserStore()
+const userStore = useUserStore()
 
-  const { user } = useUserSession()
+const { user } = useUserSession()
 
-  const { form, schema } = useForm({
-    bio: {
-      validators: [{ name: 'maxLength', value: 512 }],
-    },
-    name: {
-      validators: [
-        { name: 'required' },
-        { name: 'alphanumeric' },
-        { name: 'minLength', value: 5 },
-        {
-          name: 'custom',
-          message: 'This username is already in use',
-          validator: _.debounce(async (value) => {
-            if(!value || value === userStore.info?.profile?.name) {
-              return true
-            }
+const { form, schema } = useForm({
+  bio: {
+    validators: [{ name: 'maxLength', value: 512 }],
+  },
+  name: {
+    validators: [
+      { name: 'required' },
+      { name: 'alphanumeric' },
+      { name: 'minLength', value: 5 },
+      {
+        name: 'custom',
+        message: 'This username is already in use',
+        validator: _.debounce(async (value) => {
+          if (!value || value === userStore.info?.profile?.name) {
+            return true
+          }
 
-            const { data, error } = await findUsername(value)
+          const { data, error } = await findUsername(value)
 
-            if(error) return false
+          if (error) return false
 
-            return data.available
-          }, 300)
-        }
-      ],
-    },
-    website: {
-      validators: [
-        {
-          name: 'custom',
-          message: 'Please enter a valid URL.',
-          validator: (value) => {
-            if (!value) return true
-            return isURL(value)
-          },
+          return data.available
+        }, 300),
+      },
+    ],
+  },
+  website: {
+    validators: [
+      {
+        name: 'custom',
+        message: 'Please enter a valid URL.',
+        validator: (value) => {
+          if (!value) return true
+          return isURL(value)
         },
-      ],
-    },
+      },
+    ],
+  },
+})
+
+const avatar = computedAsync(
+  async () => (userStore.email ? await getGravatarUrl(userStore.email) : null),
+  null,
+)
+
+const toast = useToast()
+const { t } = useI18n()
+const { onError, signOut } = useSignOut(user)
+const loading = ref(false)
+
+const onUpdateSuccess = (data) => {
+  toast.show({
+    title: t('forum.auth.toast.update.title'),
+    message: t('forum.auth.toast.update.message'),
+    color: 'success',
   })
 
-  const avatar = computedAsync(
-    async () =>
-      userStore.email ? await getGravatarUrl(userStore.email) : null,
-    null,
-  )
+  userStore.updateUserInfo(data)
+}
 
-  const toast = useToast()
-  const { t } = useI18n()
-  const { onError, signOut } = useSignOut(user)
-  const loading = ref(false)
-
-  const onUpdateSuccess = (data) => {
-    toast.show({
-      title: t('forum.auth.toast.update.title'),
-      message: t('forum.auth.toast.update.message'),
-      color: 'success',
-    })
-
-    userStore.updateUserInfo(data)
+const onSubmit = async () => {
+  loading.value = true
+  const payload = {
+    data: form.value,
+    profileId: userStore.info?.profile?.id,
   }
 
-  const onSubmit = async () => {
-    loading.value = true
-    const payload = {
-      data: form.value,
-      profileId: userStore.info?.profile?.id,
-    }
-
-    try {
-      await updateUserProfile(payload)
-      onUpdateSuccess(payload.data)
-    } catch(e) {
-      console.error(e)
-      onError(e)
-    } finally {
-      loading.value = false
-    }
+  try {
+    await updateUserProfile(payload)
+    onUpdateSuccess(payload.data)
+  } catch (e) {
+    console.error(e)
+    onError(e)
+  } finally {
+    loading.value = false
   }
+}
 
-  watch(
-    userStore,
-    () => {
-      const { profile = null } = userStore.info || {}
+watch(
+  userStore,
+  () => {
+    const { profile = null } = userStore.info || {}
 
-      if (profile) {
-        schema.value.bio.value = profile.bio || ''
-        schema.value.name.value = profile.name || ''
-        schema.value.website.value = profile.website || ''
-      }
-    },
-    { immediate: true },
-  )
+    if (profile) {
+      schema.value.bio.value = profile.bio || ''
+      schema.value.name.value = profile.name || ''
+      schema.value.website.value = profile.website || ''
+    }
+  },
+  { immediate: true },
+)
 
-  umTrackView()
+umTrackView()
 </script>
 
 <template>
   <div class="account-page">
     <h1 class="account-page__title" v-text="$t('forum.account.title')" />
     <div v-if="user" class="flex flex-col">
-      <IForm v-if="userStore.info?.id" v-model="schema" class="my-12" @submit="onSubmit">
+      <IForm
+        v-if="userStore.info?.id"
+        v-model="schema"
+        class="my-12"
+        @submit="onSubmit"
+      >
         <div class="flex flex-row mb-8">
           <ITooltip placement="top" size="sm" interactable>
             <NuxtLink href="https://gravatar.com" target="_blank">
@@ -122,7 +126,8 @@
             </NuxtLink>
             <template #body>
               <div class="max-w-[120px] whitespace-normal">
-                {{ $t("forum.account.labels.avatar") }} <a href="https://gravatar.com" target="_blank">gravatar.com</a>
+                {{ $t('forum.account.labels.avatar') }}
+                <a href="https://gravatar.com" target="_blank">gravatar.com</a>
               </div>
             </template>
           </ITooltip>

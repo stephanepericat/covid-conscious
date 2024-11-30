@@ -4,11 +4,11 @@ import prisma from '~/lib/prisma'
 export default defineEventHandler(async (event) => {
   const { id } = await readBody(event)
 
-  if(!id) {
+  if (!id) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "User ID is missing",
+      message: 'Bad request',
+      statusMessage: 'User ID is missing',
     })
   }
 
@@ -22,19 +22,20 @@ export default defineEventHandler(async (event) => {
   // }
 
   try {
-    const user = await prisma.user.findFirstOrThrow({
-      where: {
-        id,
-      },
-      include: {
-        profile: true,
-      },
-      cacheStrategy: {
-        ttl: 60,
-        tags: ['get_user_by_id']
-      }
-    })
-    .withAccelerateInfo()
+    const user = await prisma.user
+      .findFirstOrThrow({
+        where: {
+          id,
+        },
+        include: {
+          profile: true,
+        },
+        cacheStrategy: {
+          ttl: 60,
+          tags: ['get_user_by_id'],
+        },
+      })
+      .withAccelerateInfo()
 
     consola.info('GET USER BY ID - ', user.info)
 

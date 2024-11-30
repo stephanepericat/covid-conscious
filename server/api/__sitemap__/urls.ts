@@ -20,11 +20,8 @@ const pages = [
   '/update-password',
 ]
 
-const formatUrl = (
-  path: string,
-  origin: string,
-  locale: string | null
-) => `${origin}${locale ? `/${locale}` : ''}${path}`
+const formatUrl = (path: string, origin: string, locale: string | null) =>
+  `${origin}${locale ? `/${locale}` : ''}${path}`
 
 export default defineSitemapEventHandler(async (event) => {
   const { locale = null } = getQuery(event)
@@ -34,8 +31,14 @@ export default defineSitemapEventHandler(async (event) => {
   try {
     const posts = await fetch<SITEMAP_QUERYResult>(sitemapQuery)
     return [
-      ...pages.map((p) => ({ loc: formatUrl(p, origin, locale as string | null) })),
-      ...posts.map((p) => ({ lastmod: p.lastmod, loc: formatUrl(p.loc as string, origin, locale as string | null), images: p.images || [] })),
+      ...pages.map((p) => ({
+        loc: formatUrl(p, origin, locale as string | null),
+      })),
+      ...posts.map((p) => ({
+        lastmod: p.lastmod,
+        loc: formatUrl(p.loc as string, origin, locale as string | null),
+        images: p.images || [],
+      })),
     ]
   } catch (e) {
     consola.error(e)

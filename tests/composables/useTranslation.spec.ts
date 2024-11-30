@@ -43,7 +43,7 @@ describe('Composables > useTranslation', () => {
 
     try {
       await translateText('Hello, world!', 'fr')
-    } catch(e) {
+    } catch (e) {
       expect(e).toEqual('Something went wrong')
     }
   })

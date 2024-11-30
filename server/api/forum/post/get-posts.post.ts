@@ -5,8 +5,7 @@ export default defineEventHandler(async (event) => {
   const { skip } = await readBody(event)
 
   try {
-    const posts = await prisma
-      .post
+    const posts = await prisma.post
       .findMany({
         where: {
           published: true, // only get published posts
@@ -32,7 +31,7 @@ export default defineEventHandler(async (event) => {
                   website: true,
                   id: true,
                   userId: true,
-                }
+                },
               },
             },
           },
@@ -41,26 +40,29 @@ export default defineEventHandler(async (event) => {
         cacheStrategy: {
           ttl: 60,
           swr: 5,
-          tags: ['get_posts']
+          tags: ['get_posts'],
         },
-      }).withAccelerateInfo()
+      })
+      .withAccelerateInfo()
 
-      consola.info('GET POSTS - ', posts.info)
+    consola.info('GET POSTS - ', posts.info)
 
-      const postCount = await prisma.post.count({
+    const postCount = await prisma.post
+      .count({
         where: {
           published: true,
         },
         cacheStrategy: {
           ttl: 60,
           swr: 5,
-          tags: ['get_posts_count']
+          tags: ['get_posts_count'],
         },
-      }).withAccelerateInfo()
+      })
+      .withAccelerateInfo()
 
-      consola.info('GET POSTS COUNT - ', postCount.info)
+    consola.info('GET POSTS COUNT - ', postCount.info)
 
-      return { entries: posts.data || [], total: postCount.data || 0 }
+    return { entries: posts.data || [], total: postCount.data || 0 }
   } catch (e) {
     consola.error(e)
     return { entries: [], total: 0 }

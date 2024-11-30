@@ -5,19 +5,19 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { authorId, posts } = await readBody(event)
 
-  if(!posts || !authorId) {
+  if (!posts || !authorId) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Post ID is missing",
+      message: 'Bad request',
+      statusMessage: 'Post ID is missing',
     })
   }
 
-  if(!user) {
+  if (!user) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
@@ -38,14 +38,14 @@ export default defineEventHandler(async (event) => {
             id: true,
           },
         },
-      }
+      },
     })
 
     if (!matches || !matches.length) {
       throw createError({
         status: 404,
-        message: "Not Found",
-        statusMessage: "These posts are not in our database",
+        message: 'Not Found',
+        statusMessage: 'These posts are not in our database',
       })
     }
 

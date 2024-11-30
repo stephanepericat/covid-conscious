@@ -5,42 +5,43 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { username } = await readBody(event)
 
-  if(!username) {
+  if (!username) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Username is missing",
+      message: 'Bad request',
+      statusMessage: 'Username is missing',
     })
   }
 
-  if(!user) {
+  if (!user) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
   try {
-    const user = await prisma.user.findFirst({
-      where: {
-        profile: {
-          name: username,
-        }
-      },
-      select: {
-        profile: {
-          select: {
-            name: true
-          }
+    const user = await prisma.user
+      .findFirst({
+        where: {
+          profile: {
+            name: username,
+          },
         },
-      },
-      cacheStrategy: {
-        ttl: 15,
-        tags: ['find_username']
-      }
-    })
-    .withAccelerateInfo()
+        select: {
+          profile: {
+            select: {
+              name: true,
+            },
+          },
+        },
+        cacheStrategy: {
+          ttl: 15,
+          tags: ['find_username'],
+        },
+      })
+      .withAccelerateInfo()
 
     consola.info('FIND USERNAME - ', user.info)
 

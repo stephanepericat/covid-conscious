@@ -5,49 +5,50 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { email, productId } = await readBody(event)
 
-  if(!email) {
+  if (!email) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Email is missing",
+      message: 'Bad request',
+      statusMessage: 'Email is missing',
     })
   }
 
-  if(!productId) {
+  if (!productId) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Product ID is missing",
+      message: 'Bad request',
+      statusMessage: 'Product ID is missing',
     })
   }
 
-  if(!user || user.email !== email) {
+  if (!user || user.email !== email) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
   try {
-    const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        email
-      },
-      include: {
-        reviews: {
-          where: {
-            productId,
-            published: true,
-          }
-        }
-      },
-      cacheStrategy: {
-        ttl: 30,
-        tags: ['get_user_review']
-      }
-    })
-    .withAccelerateInfo()
+    const user = await prisma.user
+      .findUniqueOrThrow({
+        where: {
+          email,
+        },
+        include: {
+          reviews: {
+            where: {
+              productId,
+              published: true,
+            },
+          },
+        },
+        cacheStrategy: {
+          ttl: 30,
+          tags: ['get_user_review'],
+        },
+      })
+      .withAccelerateInfo()
 
     consola.info('GET USER REVIEW - ', user.info)
 

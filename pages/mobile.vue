@@ -4,7 +4,7 @@
       <div class="mobile-page__main--text">
         <h1 class="mobile-page__main--title">
           <span v-text="$t('mobile.header')" /><br />
-          <span class="subheader" v-text="$t('mobile.subheader')"  />
+          <span class="subheader" v-text="$t('mobile.subheader')" />
         </h1>
         <div class="mobile-page__main--links">
           <NuxtLink :to="ANDROID_URL" target="_blank">
@@ -47,13 +47,14 @@
   </div>
 </template>
 <script setup>
-  import { useMobileButtons } from '~/assets/composables/useMobileButtons'
+import { useMobileButtons } from '~/assets/composables/useMobileButtons'
 
-  const { locale } = useI18n()
-  const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } = useMobileButtons()
+const { locale } = useI18n()
+const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } =
+  useMobileButtons()
 </script>
 <style lang="scss">
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 @import '@inkline/inkline/css/mixins';
 
 .mobile-page {
@@ -83,7 +84,7 @@
 
     &--button {
       height: 60px;
-      
+
       &.android {
         height: 63px;
         margin-right: 12px;
@@ -93,7 +94,8 @@
         }
       }
 
-      &.ios {}
+      &.ios {
+      }
     }
 
     &--visual {

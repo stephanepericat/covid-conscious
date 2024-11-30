@@ -1,10 +1,11 @@
-import { covidnetTypes } from "../constants/covidnet-types"
+import { covidnetTypes } from '../constants/covidnet-types'
 
 export const useCovidnet = () => {
   const videosMapper = (v) => ({
     id: v['yt:videoId'][0],
     date: v.published[0].split('T')[0],
-    description: v['media:group'][0]['media:description'][0].substr(0, 255) + '...',
+    description:
+      v['media:group'][0]['media:description'][0].substr(0, 255) + '...',
     thumbnail: v['media:group'][0]['media:thumbnail'][0].$.url,
     title: v.title[0],
     url: v.link[0].$.href,
@@ -12,12 +13,12 @@ export const useCovidnet = () => {
 
   const getChannelFeed = async (channelID, maxLength = 3) => {
     try {
-      const { data, error } = await useFetch(`/api/external/feeds/youtube/${channelID}`)
-      if(error.value) throw error.value
-      return (data.value?.entry || [])
-        .splice(0, maxLength)
-        .map(videosMapper)
-    } catch(e) {
+      const { data, error } = await useFetch(
+        `/api/external/feeds/youtube/${channelID}`,
+      )
+      if (error.value) throw error.value
+      return (data.value?.entry || []).splice(0, maxLength).map(videosMapper)
+    } catch (e) {
       console.error(e)
       return []
     }
@@ -28,14 +29,14 @@ export const useCovidnet = () => {
       const { data, error } = await useFetch('/api/external/feeds/blog/og', {
         method: 'POST',
         body: {
-          posts
-        }
+          posts,
+        },
       })
 
-      if(error.value) throw error.value
-       
+      if (error.value) throw error.value
+
       return data.value
-    } catch(e) {
+    } catch (e) {
       console.error(e)
       return []
     }
@@ -43,17 +44,21 @@ export const useCovidnet = () => {
 
   const isFeaturedContentLoading = ref(false)
 
-  const getFeaturedContent = async ({ blogFeaturedURLs, contentType, twitterFeaturedPosts }) => {
-    let content = [];
+  const getFeaturedContent = async ({
+    blogFeaturedURLs,
+    contentType,
+    twitterFeaturedPosts,
+  }) => {
+    let content = []
 
     switch (contentType) {
       case covidnetTypes.BLOG:
         isFeaturedContentLoading.value = true
         content = await getBlogOg(blogFeaturedURLs)
-        break;
+        break
       case covidnetTypes.TWITTER:
         content = twitterFeaturedPosts
-        break;
+        break
     }
 
     isFeaturedContentLoading.value = false
@@ -61,9 +66,11 @@ export const useCovidnet = () => {
     return content
   }
 
-  const hasBlogRssURL = ({ contentType, blogRssURL }) => contentType === covidnetTypes.BLOG && blogRssURL
+  const hasBlogRssURL = ({ contentType, blogRssURL }) =>
+    contentType === covidnetTypes.BLOG && blogRssURL
 
-  const hasFeaturedContent = ({ blogFeaturedURLs, twitterFeaturedPosts }) => blogFeaturedURLs?.length || twitterFeaturedPosts?.length
+  const hasFeaturedContent = ({ blogFeaturedURLs, twitterFeaturedPosts }) =>
+    blogFeaturedURLs?.length || twitterFeaturedPosts?.length
 
   return {
     covidnetTypes,

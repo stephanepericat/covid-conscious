@@ -5,8 +5,7 @@ export default defineEventHandler(async (event) => {
   const { query, skip } = await readBody(event)
 
   try {
-    const posts = await prisma
-      .post
+    const posts = await prisma.post
       .findMany({
         where: {
           AND: {
@@ -16,16 +15,16 @@ export default defineEventHandler(async (event) => {
                 title: {
                   contains: query,
                   mode: 'insensitive',
-                }
+                },
               },
               {
                 content: {
                   contains: query,
                   mode: 'insensitive',
-                }
+                },
               },
             ],
-          }
+          },
         },
         omit: {
           // authorId: true,
@@ -48,7 +47,7 @@ export default defineEventHandler(async (event) => {
                   website: true,
                   id: true,
                   userId: true,
-                }
+                },
               },
             },
           },
@@ -57,13 +56,14 @@ export default defineEventHandler(async (event) => {
         cacheStrategy: {
           ttl: 60,
           swr: 5,
-          tags: ['search_posts']
+          tags: ['search_posts'],
         },
-      }).withAccelerateInfo()
+      })
+      .withAccelerateInfo()
 
-      consola.info('SEARCH POSTS - ', posts.info)
+    consola.info('SEARCH POSTS - ', posts.info)
 
-      return { entries: posts.data || [], total: posts.data?.length || 0 }
+    return { entries: posts.data || [], total: posts.data?.length || 0 }
   } catch (e) {
     consola.error(e)
     return { entries: [], total: 0 }

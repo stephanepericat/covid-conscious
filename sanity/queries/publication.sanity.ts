@@ -81,6 +81,4 @@ const PUBLICATION_QUERY = groq`
 }
 `
 
-export {
-  PUBLICATION_QUERY as default
-}
+export { PUBLICATION_QUERY as default }

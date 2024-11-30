@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(({ name }) => {
   // @ts-ignore
   const [pageName] = name?.split('___')
 
-  if(!user.value && protectedPages.includes(pageName)) {
+  if (!user.value && protectedPages.includes(pageName)) {
     return navigateTo('/auth/auth0', { external: true, redirectCode: 403 })
   }
 })

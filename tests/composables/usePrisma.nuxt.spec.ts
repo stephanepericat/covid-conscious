@@ -6,15 +6,15 @@ import { usePrisma } from '~/assets/composables/usePrisma'
 registerEndpoint(
   '/api/forum/comment/create-comment',
   defineEventHandler(() => ({
-    error: null
-  }))
+    error: null,
+  })),
 )
 
 registerEndpoint(
   '/api/forum/post/create-post',
   defineEventHandler(() => ({
-    error: null
-  }))
+    error: null,
+  })),
 )
 
 registerEndpoint(
@@ -24,9 +24,9 @@ registerEndpoint(
 
     return {
       id: 1,
-      ...payload
+      ...payload,
     }
-  })
+  }),
 )
 
 registerEndpoint(
@@ -43,7 +43,7 @@ registerEndpoint(
       posts: [],
       reviews: [],
     }
-  })
+  }),
 )
 
 describe('Composables > usePrisma', () => {
@@ -55,7 +55,11 @@ describe('Composables > usePrisma', () => {
 
   it('should create a post', async () => {
     const { createPost } = usePrisma()
-    const call = await createPost({ title: 'lorem ipsum', body: 'dolor sit amet', category: 'lifrstyle' })
+    const call = await createPost({
+      title: 'lorem ipsum',
+      body: 'dolor sit amet',
+      category: 'lifrstyle',
+    })
     expect(call).toEqual({ error: null })
   })
 

@@ -4,8 +4,8 @@ import { parseBody } from '../../assets/utils/body-parser'
 export default eventHandler(async (event) => {
   const { valid, errors, ...rest } = await readBody(event)
   const body = parseBody(rest)
-  
-  if(!valid) {
+
+  if (!valid) {
     return { ok: false }
   }
 
@@ -21,12 +21,12 @@ export default eventHandler(async (event) => {
     )
 
     return { ok: true }
-  } catch(e) {
+  } catch (e) {
     const { message } = e as Error
     console.error(message, body)
     sendError(
       event,
-      createError({ statusCode: 500, statusMessage: message, data: body })
+      createError({ statusCode: 500, statusMessage: message, data: body }),
     )
   }
 })

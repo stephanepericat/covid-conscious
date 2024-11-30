@@ -133,6 +133,4 @@ const LATEST_PUBLICATIONS_QUERY = groq`
 }
 `
 
-export {
-  LATEST_PUBLICATIONS_QUERY as default
-}
+export { LATEST_PUBLICATIONS_QUERY as default }

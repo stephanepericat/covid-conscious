@@ -5,19 +5,19 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { data, profileId } = await readBody(event)
 
-  if(!profileId || !data) {
+  if (!profileId || !data) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Profile data is missing",
+      message: 'Bad request',
+      statusMessage: 'Profile data is missing',
     })
   }
 
-  if(!user) {
+  if (!user) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
@@ -26,15 +26,15 @@ export default defineEventHandler(async (event) => {
       where: {
         user: {
           email: user?.email,
-        }
-      }
+        },
+      },
     })
 
-    if(!profile || profile.id !== profileId) {
+    if (!profile || profile.id !== profileId) {
       throw createError({
         status: 403,
-        message: "Unauthorized",
-        statusMessage: "You are not authorized to access this resource",
+        message: 'Unauthorized',
+        statusMessage: 'You are not authorized to access this resource',
       })
     }
 

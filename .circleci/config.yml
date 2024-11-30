@@ -8,9 +8,9 @@ jobs:
       - image: node:20-alpine
     steps:
       - checkout
-      - run: "yarn --immutable"
-      - run: "yarn prisma:generate"
-      - run: "yarn test:ci"
+      - run: 'yarn --immutable'
+      - run: 'yarn prisma:generate'
+      - run: 'yarn test:ci'
 
 workflows:
   test-workflow:

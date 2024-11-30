@@ -14,10 +14,17 @@
       </IListGroup>
     </div>
     <div class="video-player__contents">
-      <div class="video-player__contents--player" v-html="videoDetails.embedCode" />
+      <div
+        class="video-player__contents--player"
+        v-html="videoDetails.embedCode"
+      />
       <p class="video-player__contents--summary">{{ videoDetails.summary }}</p>
       <ul class="video-player__contents--tags">
-        <li v-for="{ uri, name } in videoDetails.tags" :key="uri" class="video-player__contents--tags-item">
+        <li
+          v-for="{ uri, name } in videoDetails.tags"
+          :key="uri"
+          class="video-player__contents--tags-item"
+        >
           <IBadge size="sm" @click="onTagClick({ uri })">{{ name }}</IBadge>
         </li>
       </ul>
@@ -25,28 +32,26 @@
   </div>
 </template>
 <script setup>
-  import { useTags } from '~/assets/composables/useTags'
+import { useTags } from '~/assets/composables/useTags'
 
-  const { onTagClick } = useTags()
+const { onTagClick } = useTags()
 
-  const props = defineProps({
-    videos: { type: Array, default: [] },
-  })
+const props = defineProps({
+  videos: { type: Array, default: [] },
+})
 
-  const { videos: vids } = toRefs(props)
+const { videos: vids } = toRefs(props)
 
-  const activeVideo = ref(vids.value[0]?.id || null)
+const activeVideo = ref(vids.value[0]?.id || null)
 
-  const setActiveVideo = (id) => activeVideo.value = id
+const setActiveVideo = (id) => (activeVideo.value = id)
 
-  const videoDetails = computed(() => {
-    return vids
-      .value
-      .find(({ id }) => id === activeVideo.value)
-  })
+const videoDetails = computed(() => {
+  return vids.value.find(({ id }) => id === activeVideo.value)
+})
 </script>
 <style lang="scss" scoped>
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .video-player {
   display: flex;
@@ -64,7 +69,8 @@
   }
 
   &__contents {
-    border-left: 1px solid var(--list-group--border-bottom-color, var(--border-bottom-color));
+    border-left: 1px solid
+      var(--list-group--border-bottom-color, var(--border-bottom-color));
     padding-left: 20px;
     width: 67%;
 

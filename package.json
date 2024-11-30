@@ -7,6 +7,7 @@
     "coverage": "open ./coverage/index.html",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
+    "lint": "prettier . --write",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "prisma:generate": "prisma generate",

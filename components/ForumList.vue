@@ -14,62 +14,65 @@
   </div>
 </template>
 <script setup>
-  import PostPreview from '~/components/PostPreview.vue'
-  import { getGravatarUrl } from '~/assets/utils/gravatar';
+import PostPreview from '~/components/PostPreview.vue'
+import { getGravatarUrl } from '~/assets/utils/gravatar'
 
-  const props = defineProps({
-    hideThumbnail: Boolean,
-    posts: { type: Array, default: [] },
-    rootPath: { type: String, required: true },
-    ssr: Boolean,
-  })
+const props = defineProps({
+  hideThumbnail: Boolean,
+  posts: { type: Array, default: [] },
+  rootPath: { type: String, required: true },
+  ssr: Boolean,
+})
 
-  const { posts: rawPosts } = toRefs(props)
+const { posts: rawPosts } = toRefs(props)
 
-  const formattedPosts = computedAsync(async() => {
-    if(!rawPosts.value) {
-      return []
+const formattedPosts = computedAsync(async () => {
+  if (!rawPosts.value) {
+    return []
+  }
+
+  const emails = rawPosts.value.map(({ author }) => author.email)
+  const thumbnails = await Promise.all(
+    emails.map(
+      (email) =>
+        new Promise(async (resolve) => {
+          const avatar = await getGravatarUrl(email)
+          resolve([email, avatar])
+        }),
+    ),
+  )
+
+  const thumbnailMap = thumbnails.reduce((acc, val) => {
+    const [email, avatar] = val
+
+    if (!acc[email]) {
+      acc[email] = avatar
     }
 
-    const emails = rawPosts.value.map(({ author }) => author.email)
-    const thumbnails = await Promise.all(
-      emails.map((email) => new Promise(async (resolve) => {
-        const avatar = await getGravatarUrl(email)
-        resolve([email, avatar])
-      }))
-    );
+    return acc
+  }, {})
 
-    const thumbnailMap = thumbnails.reduce((acc, val) => {
-      const [email, avatar] = val;
-
-      if(!acc[email]) {
-        acc[email] = avatar
+  return rawPosts.value.map(
+    ({ author, categories, content, createdAt, id, title }) => {
+      return {
+        id,
+        author: {
+          id: author.id,
+          username: author.profile?.name || 'USER',
+        },
+        description: content ? content.substr(0, 255) : null,
+        published: createdAt,
+        tags: categories || [],
+        thumbnail: thumbnailMap[author.email] || null,
+        title,
       }
-
-      return acc
-    }, {})
-
-    return rawPosts
-      .value
-      .map(({ author, categories, content, createdAt, id, title }) => {
-        return {
-          id,
-          author: {
-            id: author.id,
-            username: author.profile?.name || 'USER',
-          },
-          description: content ? content.substr(0, 255) : null,
-          published: createdAt,
-          tags: categories || [],
-          thumbnail: thumbnailMap[author.email] || null,
-          title,
-        }
-      })
-  }, [])
+    },
+  )
+}, [])
 </script>
 <style lang="scss" scoped>
 @import '@inkline/inkline/css/mixins';
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .forum-list {
   &__description {

@@ -8,6 +8,4 @@ const POLICY_QUERY = groq`
 }
 `
 
-export {
-  POLICY_QUERY as default
-}
+export { POLICY_QUERY as default }

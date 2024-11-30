@@ -1,10 +1,6 @@
 <template>
   <div class="sf-page-shell">
-    <INav
-      class="sf-page-shell__nav"
-      vertical
-      size="sm"
-    >
+    <INav class="sf-page-shell__nav" vertical size="sm">
       <INavItem :to="localePath(rootPath)">
         <Icon
           class="sf-page-shell__nav--icon"
@@ -27,25 +23,13 @@
           />
           {{ $t('forum.nav.my.posts') }}
         </INavItem>
-        <INavItem
-          class="sf-page-shell__nav--action"
-          @click.prevent="signOut"
-        >
-          <Icon
-            class="sf-page-shell__nav--icon"
-            name="ph:sign-out-bold"
-          />
+        <INavItem class="sf-page-shell__nav--action" @click.prevent="signOut">
+          <Icon class="sf-page-shell__nav--icon" name="ph:sign-out-bold" />
           {{ $t('forum.nav.logout') }}
         </INavItem>
       </template>
-      <INavItem
-        v-else
-        :to="localePath('/login')"
-      >
-        <Icon
-          class="sf-page-shell__nav--icon"
-          name="ph:sign-in-bold"
-        />
+      <INavItem v-else :to="localePath('/login')">
+        <Icon class="sf-page-shell__nav--icon" name="ph:sign-in-bold" />
         {{ $t('forum.nav.login') }}
       </INavItem>
     </INav>
@@ -57,15 +41,15 @@
   </div>
 </template>
 <script setup>
-  import { useSignOut } from '~/assets/composables/useSignOut'
+import { useSignOut } from '~/assets/composables/useSignOut'
 
-  const config = useRuntimeConfig()
-  const { user } = useUserSession()
-  const localePath = useLocalePath()
+const config = useRuntimeConfig()
+const { user } = useUserSession()
+const localePath = useLocalePath()
 
-  const rootPath = computed(() => config.public.forum.rootPath)
+const rootPath = computed(() => config.public.forum.rootPath)
 
-  const { signOut } = useSignOut(user)
+const { signOut } = useSignOut(user)
 </script>
 <style lang="scss" scoped>
 .sf-page-shell {

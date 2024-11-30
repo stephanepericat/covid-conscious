@@ -5,19 +5,19 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { email } = await readBody(event)
 
-  if(!email) {
+  if (!email) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Email is missing",
+      message: 'Bad request',
+      statusMessage: 'Email is missing',
     })
   }
 
-  if(!user || user.email !== email) {
+  if (!user || user.email !== email) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
@@ -26,15 +26,15 @@ export default defineEventHandler(async (event) => {
       data: {
         email: email,
         profile: {
-          create: {}
-        }
-      }
+          create: {},
+        },
+      },
     })
 
     const profile = await prisma.profile.findUniqueOrThrow({
       where: {
-        userId: user.id
-      }
+        userId: user.id,
+      },
     })
 
     return { ...user, profile }

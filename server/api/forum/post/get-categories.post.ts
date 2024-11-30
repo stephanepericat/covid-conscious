@@ -3,18 +3,18 @@ import prisma from '~/lib/prisma'
 
 export default defineEventHandler(async () => {
   try {
-    const categories = await prisma
-      .category
+    const categories = await prisma.category
       .findMany({
         cacheStrategy: {
           ttl: 3600,
-          tags: ['get_categories']
+          tags: ['get_categories'],
         },
-      }).withAccelerateInfo()
+      })
+      .withAccelerateInfo()
 
-      consola.info('GET CATEGORIES - ', categories.info)
+    consola.info('GET CATEGORIES - ', categories.info)
 
-      return categories.data || []
+    return categories.data || []
   } catch (e) {
     consola.error(e)
     return null

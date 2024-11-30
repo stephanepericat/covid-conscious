@@ -1,12 +1,12 @@
 <script setup>
-  import Card from './Card.vue'
+import Card from './Card.vue'
 
-  defineProps({
-    articles: { type: Array, default: [] },
-    title: { type: String, required: true },
-  })
+defineProps({
+  articles: { type: Array, default: [] },
+  title: { type: String, required: true },
+})
 
-  const localePath = useLocalePath()
+const localePath = useLocalePath()
 </script>
 
 <template>

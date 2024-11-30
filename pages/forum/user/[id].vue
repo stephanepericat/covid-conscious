@@ -14,28 +14,23 @@
     <template v-else>
       <IMedia class="sf-user-page__info">
         <template #image>
-          <img
-            v-if="avatar"
-            class="sf-user-page__thumbnail"
-            :src="avatar"
-          >
-          <div
-            v-else
-            class="sf-user-page__thumbnail--fallback"
-          >
+          <img v-if="avatar" class="sf-user-page__thumbnail" :src="avatar" />
+          <div v-else class="sf-user-page__thumbnail--fallback">
             <Icon
               class="sf-user-page__thumbnail--fallback-icon"
               name="material-symbols:account-circle-full"
             />
           </div>
           <div>
-            <h1 class="sf-user-page__title" v-text="`@${user?.profile?.name || ''}`" />
+            <h1
+              class="sf-user-page__title"
+              v-text="`@${user?.profile?.name || ''}`"
+            />
             <div v-if="user?.profile?.website">
-              <Icon
-                class="sf-user-page__website--icon"
-                name="mdi:web"
-              />
-              <a :href="`https://${user.profile.website}`" target="_blank">{{ $t('forum.account.labels.website') }}</a>
+              <Icon class="sf-user-page__website--icon" name="mdi:web" />
+              <a :href="`https://${user.profile.website}`" target="_blank">{{
+                $t('forum.account.labels.website')
+              }}</a>
             </div>
           </div>
         </template>
@@ -52,30 +47,39 @@
   </div>
 </template>
 <script setup>
-  import { usePrisma } from '~/assets/composables/usePrisma'
-  import { getGravatarUrl } from '~/assets/utils/gravatar'
+import { usePrisma } from '~/assets/composables/usePrisma'
+import { getGravatarUrl } from '~/assets/utils/gravatar'
 
-  const route = useRoute()
-  const router = useRouter()
+const route = useRoute()
+const router = useRouter()
 
-  const { getUserById } = usePrisma()
-  const user = computedAsync(async () => await getUserById(parseInt(route.params.id)), null)
-  
-  const avatar = computedAsync(
-    async () => user.value?.email
-      ? await getGravatarUrl(user.value.email)
+const { getUserById } = usePrisma()
+const user = computedAsync(
+  async () => await getUserById(parseInt(route.params.id)),
+  null,
+)
+
+const avatar = computedAsync(
+  async () =>
+    user.value?.email ? await getGravatarUrl(user.value.email) : null,
+  null,
+)
+
+const pageTitle = computed(() =>
+  user.value?.profile?.name
+    ? `@${user.value.profile.name}`
+    : user.value?.email
+      ? user.value.email
       : null,
-    null
-  )
+)
+const pageDescription = computed(() =>
+  user.value?.profile.bio ? user.value.profile.bio : null,
+)
 
-  const pageTitle = computed(() => user.value?.profile?.name ? `@${user.value.profile.name}` : user.value?.email ? user.value.email : null)
-  const pageDescription = computed(() => user.value?.profile.bio ? user.value.profile.bio : null)
-
-  umTrackView()
+umTrackView()
 </script>
 <style lang="scss" scoped>
-
-@import "~/assets/sass/mixins.scss";
+@import '~/assets/sass/mixins.scss';
 
 .sf-user-page {
   &__info {

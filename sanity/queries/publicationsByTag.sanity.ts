@@ -37,6 +37,4 @@ const PUBLICATION_BY_TAG_QUERY = groq`
 }
 `
 
-export {
-  PUBLICATION_BY_TAG_QUERY as default
-}
+export { PUBLICATION_BY_TAG_QUERY as default }

@@ -1,1 +1,2 @@
-export const cleanPostBody = (str) => `${str.replace(/(<([^>]+)>)/ig, '').substr(0, 255)}...`
+export const cleanPostBody = (str) =>
+  `${str.replace(/(<([^>]+)>)/gi, '').substr(0, 255)}...`

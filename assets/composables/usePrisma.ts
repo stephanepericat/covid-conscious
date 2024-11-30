@@ -5,9 +5,9 @@ export const usePrisma = () => {
     try {
       return await $fetch('/api/forum/comment/create-comment', {
         method: 'POST',
-        body: { payload, postId }
+        body: { payload, postId },
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return { error: e }
     }
@@ -17,9 +17,9 @@ export const usePrisma = () => {
     try {
       return await $fetch('/api/forum/post/create-post', {
         method: 'POST',
-        body: { payload }
+        body: { payload },
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return { error: e }
     }
@@ -29,9 +29,9 @@ export const usePrisma = () => {
     try {
       return await $fetch('/api/product/reviews/create-review', {
         method: 'POST',
-        body: { payload }
+        body: { payload },
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       throw e
     }
@@ -41,33 +41,36 @@ export const usePrisma = () => {
     try {
       return await $fetch('/api/forum/user/create-user', {
         method: 'POST',
-        body: { email }
+        body: { email },
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return null
     }
   }
 
-  const deleteComment = async (body: { authorId: number, commentId: number }) => {
+  const deleteComment = async (body: {
+    authorId: number
+    commentId: number
+  }) => {
     try {
       return await $fetch('/api/forum/comment/delete-comment', {
         method: 'POST',
         body,
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return false
     }
   }
 
-  const deletePosts = async (body: { authorId: number, posts: number[] }) => {
+  const deletePosts = async (body: { authorId: number; posts: number[] }) => {
     try {
       return await $fetch('/api/forum/post/delete-posts', {
         method: 'POST',
         body,
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return false
     }
@@ -81,11 +84,11 @@ export const usePrisma = () => {
       })
 
       return { data: { available }, error: null }
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return { error: e, data: null }
     }
-  } 
+  }
 
   const getLatestPosts = async () => {
     try {
@@ -93,12 +96,12 @@ export const usePrisma = () => {
         method: 'POST',
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('No posts found')
       }
 
-      return res || null;
-    } catch(e) {
+      return res || null
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -107,10 +110,10 @@ export const usePrisma = () => {
   const getOrCreateUser = async (email: string) => {
     try {
       const user = await getUser(email)
-      if(user) return user
+      if (user) return user
 
       return await createUser(email)
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -120,15 +123,15 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/post/get-post-by-id', {
         method: 'POST',
-        body: { id }
+        body: { id },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('Post not found')
       }
 
-      return res || null;
-    } catch(e) {
+      return res || null
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -138,9 +141,9 @@ export const usePrisma = () => {
     try {
       return await $fetch('/api/forum/comment/get-comments', {
         method: 'POST',
-        body: { id, skip }
+        body: { id, skip },
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return []
     }
@@ -153,12 +156,12 @@ export const usePrisma = () => {
         body: { skip },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('No posts found')
       }
 
-      return res || null;
-    } catch(e) {
+      return res || null
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -171,12 +174,12 @@ export const usePrisma = () => {
         body: { productId, skip },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('No product reviews found')
       }
 
-      return res || [];
-    } catch(e) {
+      return res || []
+    } catch (e) {
       consola.error(e)
       return { entries: [], total: 0, average: null }
     }
@@ -189,7 +192,7 @@ export const usePrisma = () => {
       })
 
       return topics || []
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return []
     }
@@ -199,11 +202,11 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-user', {
         method: 'POST',
-        body: { email }
+        body: { email },
       })
 
       return res || null
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -213,11 +216,11 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-user-by-id', {
         method: 'POST',
-        body: { id }
+        body: { id },
       })
 
       return res || null
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -227,7 +230,7 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-username', {
         method: 'POST',
-        body: { email }
+        body: { email },
       })
 
       // if(!res) {
@@ -235,7 +238,7 @@ export const usePrisma = () => {
       // }
 
       return res
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -245,15 +248,15 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-user-review', {
         method: 'POST',
-        body: { email, productId }
+        body: { email, productId },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('User review not found')
       }
 
-      return res;
-    } catch(e) {
+      return res
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -263,15 +266,15 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-user-role', {
         method: 'POST',
-        body: { email }
+        body: { email },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('User role not found')
       }
 
-      return res;
-    } catch(e) {
+      return res
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -281,15 +284,15 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-user-comments', {
         method: 'POST',
-        body: { email }
+        body: { email },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('User comments not found')
       }
 
-      return res;
-    } catch(e) {
+      return res
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -299,15 +302,15 @@ export const usePrisma = () => {
     try {
       const res = await $fetch('/api/forum/user/get-user-posts', {
         method: 'POST',
-        body: { email, skip }
+        body: { email, skip },
       })
 
-      if(!res) {
+      if (!res) {
         throw new Error('User posts not found')
       }
 
-      return res;
-    } catch(e) {
+      return res
+    } catch (e) {
       consola.error(e)
       return null
     }
@@ -317,33 +320,36 @@ export const usePrisma = () => {
     try {
       return await $fetch('/api/forum/post/search', {
         method: 'POST',
-        body: { query, skip }
+        body: { query, skip },
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return { entries: [], total: 0 }
     }
   }
 
-  const updateProductReview = async (body: { payload: any, reviewId: number }) => {
+  const updateProductReview = async (body: {
+    payload: any
+    reviewId: number
+  }) => {
     try {
       return await $fetch('/api/product/reviews/update-review', {
         method: 'POST',
         body,
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       throw e
     }
   }
 
-  const updateUserProfile = async (body: { data: any, profileId: number }) => {
+  const updateUserProfile = async (body: { data: any; profileId: number }) => {
     try {
       return await $fetch('/api/forum/user/update-profile', {
         method: 'POST',
         body,
       })
-    } catch(e) {
+    } catch (e) {
       consola.error(e)
       return null
     }

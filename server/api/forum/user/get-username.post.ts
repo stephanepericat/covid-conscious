@@ -4,32 +4,33 @@ import prisma from '~/lib/prisma'
 export default defineEventHandler(async (event) => {
   const { email } = await readBody(event)
 
-  if(!email) {
+  if (!email) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Email is missing",
+      message: 'Bad request',
+      statusMessage: 'Email is missing',
     })
   }
 
   try {
-    const user = await prisma.user.findUniqueOrThrow({
-      where: {
-        email
-      },
-      include: {
-        profile: {
-          select: {
-            name: true
-          }
+    const user = await prisma.user
+      .findUniqueOrThrow({
+        where: {
+          email,
         },
-      },
-      cacheStrategy: {
-        ttl: 30,
-        tags: ['get_username']
-      }
-    })
-    .withAccelerateInfo()
+        include: {
+          profile: {
+            select: {
+              name: true,
+            },
+          },
+        },
+        cacheStrategy: {
+          ttl: 30,
+          tags: ['get_username'],
+        },
+      })
+      .withAccelerateInfo()
 
     consola.info('GET USERNAME - ', user.info)
 

@@ -31,8 +31,6 @@ const RSS_FEED_QUERY = groq`
     "entries": all_entries[0..20],
     "settings": settings
   }
-`;
+`
 
-export {
-  RSS_FEED_QUERY as default
-}
+export { RSS_FEED_QUERY as default }

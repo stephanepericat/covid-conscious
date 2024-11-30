@@ -29,6 +29,4 @@ const SEARCH_QUERY = groq`
 }
 `
 
-export {
-  SEARCH_QUERY as default
-}
+export { SEARCH_QUERY as default }

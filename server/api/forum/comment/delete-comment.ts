@@ -5,19 +5,19 @@ export default defineEventHandler(async (event) => {
   const { user } = await getUserSession(event)
   const { authorId, commentId } = await readBody(event)
 
-  if(!commentId || !authorId) {
+  if (!commentId || !authorId) {
     throw createError({
       status: 400,
-      message: "Bad request",
-      statusMessage: "Comment ID is missing",
+      message: 'Bad request',
+      statusMessage: 'Comment ID is missing',
     })
   }
 
-  if(!user) {
+  if (!user) {
     throw createError({
       status: 403,
-      message: "Unauthorized",
-      statusMessage: "You are not authorized to access this resource",
+      message: 'Unauthorized',
+      statusMessage: 'You are not authorized to access this resource',
     })
   }
 
@@ -36,22 +36,22 @@ export default defineEventHandler(async (event) => {
             id: true,
           },
         },
-      }
+      },
     })
 
     if (!comment) {
       throw createError({
         status: 404,
-        message: "Not Found",
-        statusMessage: "This comment is not in our database",
+        message: 'Not Found',
+        statusMessage: 'This comment is not in our database',
       })
     }
 
-    if(comment.id !== commentId || comment.author.id !== authorId) {
+    if (comment.id !== commentId || comment.author.id !== authorId) {
       throw createError({
         status: 403,
-        message: "Unauthorized",
-        statusMessage: "You are not authorized to access this resource",
+        message: 'Unauthorized',
+        statusMessage: 'You are not authorized to access this resource',
       })
     }
 
