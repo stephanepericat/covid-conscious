@@ -22,7 +22,7 @@
   "devDependencies": {
     "@nuxt/devtools": "^1.0.8",
     "@nuxt/test-utils": "^3.9.0",
-    "@prisma/client": "^6.0.0",
+    "@prisma/client": "^6.0.1",
     "@sanity/cli": "^3.65.1",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/lodash": "^4.17.9",
@@ -32,7 +32,7 @@
     "@vitest/coverage-v8": "^1.0.4",
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^12.9.1",
-    "prisma": "^5.22.0",
+    "prisma": "^6.0.1",
     "sass": "^1.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
