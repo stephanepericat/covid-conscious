@@ -1,4 +1,5 @@
 import {
+  BLOG,
   BRAND,
   COMMUNITY,
   COVIDNET,
@@ -15,6 +16,7 @@ import {
   VIDEO,
 } from '../constants/types'
 
+export const isBlog = (type) => type === BLOG
 export const isBrand = (type) => type === BRAND
 export const isCommunity = (type) => type === COMMUNITY
 export const isCovidnet = (type) => type === COVIDNET

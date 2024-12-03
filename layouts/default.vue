@@ -169,6 +169,9 @@
                   >
                     <span>{{ $t('layout.education') }}</span>
                   </IDropdownItem>
+                  <IDropdownItem :to="localePath('/blog')">
+                    <span>{{ $t('layout.blog') }}</span>
+                  </IDropdownItem>
                   <IDropdownItem :to="localePath('/forum')">
                     <span>{{ $t('layout.forum') }}</span>
                   </IDropdownItem>
@@ -265,6 +268,11 @@
               <li>
                 <NuxtLink :to="localePath('/about')">{{
                   $t('layout.about')
+                }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/blog')">{{
+                  $t('layout.blog')
                 }}</NuxtLink>
               </li>
               <li>
@@ -495,6 +503,7 @@ const subNavItems = computed(() => [
     class: 'optional',
     hidden: !$appSettings.SHOW_EDUCATION,
   },
+  { label: t('layout.blog'), url: localePath('/blog'), class: 'optional' },
   { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
   {
     label: t('layout.submitContent'),

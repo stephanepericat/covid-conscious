@@ -4,7 +4,7 @@ import { baseLanguage } from '../../assets/constants/base-language'
 const PUBLICATION_QUERY = groq`
 *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {
   "id": _id,
-  "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, ''),
+  "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title[$locale], title['${baseLanguage}'], title, ''),
   name,
   "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },
   "published": _createdAt,

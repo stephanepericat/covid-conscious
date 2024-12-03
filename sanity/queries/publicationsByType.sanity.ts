@@ -6,7 +6,7 @@ const PUBLICATION_BY_TYPE_QUERY = groq`
 {
   "results": *[_type == $articleType] | order(publicationDate desc, _createdAt desc){
     // "id": _id,
-    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title, null),
+    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[_key == ^.language][0].value, title[$locale], title['${baseLanguage}'], title, null),
     name,
     "author": author-> { nickname, "slug": uri.current },
     "date": coalesce(publicationDate, eventDate, null),
