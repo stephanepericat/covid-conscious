@@ -708,4 +708,8 @@
   height: 100% !important;
   width: 100% !important;
 }
+.article-page__body--contents-text ol,
+.article-page__body--contents-text ul {
+  list-style-type: revert;
+}
 </style>
