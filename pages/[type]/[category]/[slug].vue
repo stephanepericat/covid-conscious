@@ -19,11 +19,11 @@
       <Meta name="twitter:card" content="summary_large_image" />
     </Head>
 
-    <NeedLogin class="my-8 md:my-16" v-if="!loggedIn" url="/auth/auth0" />
+    <NeedLogin class="my-8 md:my-16" v-if="loginEnforced" url="/auth/auth0" />
 
-    <ILoader v-if="loggedIn && pending" class="article-page__loader" />
+    <ILoader v-if="!loginEnforced && pending" class="article-page__loader" />
 
-    <template v-else-if="loggedIn && !pending && article">
+    <template v-else-if="!loginEnforced && !pending && article">
       <h1 class="article-page__title" :class="{ 'with-brand': brand?.name }">
         <span>{{ isBrand(type) ? article.name : article.title }}</span>
         <div
@@ -444,6 +444,7 @@ import { format } from 'date-fns'
 import { useToast } from '@inkline/inkline'
 import { useMediaQuery } from '@vueuse/core'
 import {
+  isBlog,
   isBrand,
   isCovidnet,
   isDirectory,
@@ -484,8 +485,9 @@ const { onTagClick } = useTags()
 const hashtag = computed(() => category.replace(/-/gi, ''))
 const isMobile = useMediaQuery('(max-width: 576px)')
 const { loggedIn } = useUserSession()
+const loginEnforced = computed(() => !loggedIn.value && !isBlog(type))
 
-const { data: article, pending } = loggedIn.value
+const { data: article, pending } = !loginEnforced.value
   ? useLazySanityQuery(publicationQuery, {
       category,
       locale,
