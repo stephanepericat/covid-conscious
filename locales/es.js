@@ -116,6 +116,7 @@ export default {
   },
   layout: {
     about: "Sobre Nosotros",
+    blog: 'Blog',
     bluesky: "Síguenos en Bluesky",
     brand: "Marcas",
     contents: "Contenido",
@@ -132,6 +133,7 @@ export default {
     contactUs: "Contacta con Nosotros",
     education: "Educación",
     empty: {
+      blog: 'Aún no hay entradas en el blog.',
       community: 'Aún no hay enlaces de la comunidad.',
       directory: 'Aún no hay listados en el directorio.',
       education: 'Aún no hay contenido educativo.',

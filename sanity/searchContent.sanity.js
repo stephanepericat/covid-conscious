@@ -6,7 +6,7 @@ export default groq`
 {
   "results": *[_type != "feedSettings" && [coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title, null), coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, [])[0].children[0].text] match $searchTerm] | order(publicationDate desc, _createdAt desc){
     "id": _id,
-    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title, null),
+    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, title[$locale], title['${baseLanguage}'], title, null),
     name,
     "author": author-> { nickname, "slug": uri.current },
     "date": coalesce(publicationDate, eventDate, null),

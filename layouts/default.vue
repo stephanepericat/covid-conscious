@@ -129,6 +129,9 @@
                   <IDropdownItem v-if="$appSettings.SHOW_EDUCATION" :to="localePath('/education')">
                     <span>{{ $t('layout.education') }}</span>
                   </IDropdownItem>
+                  <IDropdownItem :to="localePath('/blog')">
+                    <span>{{ $t('layout.blog') }}</span>
+                  </IDropdownItem>
                   <IDropdownItem :to="localePath('/forum')">
                     <span>{{ $t('layout.forum') }}</span>
                   </IDropdownItem>
@@ -196,6 +199,9 @@
             <ul class="default-layout__footer--list">
               <li>
                 <NuxtLink :to="localePath('/about')">{{ $t('layout.about') }}</NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="localePath('/blog')">{{ $t('layout.blog') }}</NuxtLink>
               </li>
               <li>
                 <a href="mailto:contact@thatcovid.life">{{ $t('layout.contactUs') }}</a>
@@ -370,6 +376,7 @@
     { label: t('layout.product'), url: localePath('/product') },
     { label: t('layout.health'), url: localePath('/public-health'), class: 'optional', hidden: !$appSettings.SHOW_PUBLIC_HEALTH },
     { label: t('layout.education'), url: localePath('/education'), class: 'optional', hidden: !$appSettings.SHOW_EDUCATION },
+    { label: t('layout.blog'), url: localePath('/blog'), class: 'optional' },
     { label: t('layout.forum'), url: localePath('/forum'), class: 'optional' },
     { label: t('layout.submitContent'), url: localePath('/contribute'), class: 'optional' },
     { label: t('layout.mobile'), url: localePath('/mobile'), class: 'optional' },

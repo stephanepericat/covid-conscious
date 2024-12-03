@@ -149,6 +149,24 @@
           />
           <div class="lg:col-span-3">
             <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
+              {{ $t("layout.blog") }}
+            </h3>
+            <p v-text="$t('layout.empty.blog')" v-if="!latestPublications?.blog?.length" />
+            <template v-else>
+              <div class="grid lg:grid-cols-3 gap-4 lg:gap-8">
+                <Media
+                  v-for="post in latestPublications?.blog"
+                  :key="post.id"
+                  :summary="post.summary"
+                  :tags="post.tags"
+                  :title="post.title"
+                  :url="localePath(post.path)"
+                />
+              </div>
+            </template>
+          </div>
+          <div class="lg:col-span-3">
+            <h3 class="uppercase font-base font-bold text-lg tracking-widest hover:no-underline mt-4">
               {{ $t("layout.forum") }}
             </h3>
             <p v-text="$t('layout.empty.forum')" v-if="!posts?.length" />

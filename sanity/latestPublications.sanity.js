@@ -140,6 +140,18 @@ export default groq`
     url,
     "visual": visual.asset._ref,
     "zoneId": zoneId.current,
+  },
+  // BLOG
+  "blog": *[(_type == "blog") && !(_id in path('drafts.**'))] | order(_createdAt asc)[0..2] {
+    "title": coalesce(title[$locale], title['${baseLanguage}'], ''),
+    "published": _createdAt,
+    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
+    source,
+    "summary": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${baseLanguage}'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",
+    "thumbnail": visual.asset._ref,
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${baseLanguage}'], ''), "uri": uri.current },
+    "type": _type,
   }
 }
 `
