@@ -189,6 +189,8 @@ export default {
     },
     userAccount: 'Conta de Usuário',
     video: 'Vídeos',
+    warningSupport: 'Para entrar em contato com o suporte, clique aqui.',
+    warning: 'That Covid Life em breve introduzirá o requisito de login de conta gratuito para acessar áreas específicas do site. Essa mudança tem como objetivo proteger a comunidade anti-COVID da hostilidade, proteger as empresas listadas no diretório e promover um espaço seguro e solidário. A equipe fornecerá atualizações sobre a transição e solicita perguntas ou comentários dos usuários.',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",

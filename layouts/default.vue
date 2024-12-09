@@ -150,6 +150,12 @@
       <!-- content -->
       <ILayoutContent class="default-layout__content">
         <IContainer class="default-layout__content--container">
+          <IAlert color="warning" class="mb-5" v-if="$appSettings.SHOW_LOGIN_WARNING">
+            <template #icon>
+                <IIcon name="ink-warning" />
+            </template>
+            {{  $t('layout.warning') }} <NuxtLink :to="localePath('/support')">{{ $t('layout.warningSupport') }}</NuxtLink>
+          </IAlert>
           <NuxtPage />
         </IContainer>
       </ILayoutContent>

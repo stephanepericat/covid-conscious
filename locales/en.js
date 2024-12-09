@@ -189,6 +189,8 @@ export default {
     },
     userAccount: 'User Account',
     video: 'Videos',
+    warningSupport: 'Click here to contact support.',
+    warning: 'That Covid Life will soon introduce a free account login requirement to access specific parts of the site. This change aims to protect the COVID-conscious community from hostility, safeguard directory-listed businesses, and foster a secure, supportive space. The team will provide updates on the transition and invites questions or feedback from users.',
   },
   list: {
     categoryTitle: "That Covid Life - {type} - {category}",
