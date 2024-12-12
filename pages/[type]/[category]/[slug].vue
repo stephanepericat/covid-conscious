@@ -455,7 +455,8 @@ import {
   isVideo,
   showPublicationDate,
 } from '~/assets/utils/article-types'
-import publicationQuery from '~/sanity/queries/publication.sanity'
+import PUBLICATION_QUERY from '~/sanity/queries/publication.sanity'
+import METADATA_QUERY from '~/sanity/queries/metadata.sanity'
 import { LOCALIZED_DATE_FORMAT } from '~/assets/constants/date-formats'
 import ReviewBox from '~/components/ReviewBox.vue'
 import ReviewList from '~/components/ReviewList.vue'
@@ -487,14 +488,21 @@ const isMobile = useMediaQuery('(max-width: 576px)')
 const { loggedIn } = useUserSession()
 const loginEnforced = computed(() => !loggedIn.value && !isBlog(type))
 
+const { data: metadata } = useLazySanityQuery(METADATA_QUERY, {
+  category,
+  locale,
+  slug,
+  type,
+})
+
 const { data: article, pending } = !loginEnforced.value
-  ? useLazySanityQuery(publicationQuery, {
+  ? useLazySanityQuery(PUBLICATION_QUERY, {
       category,
       locale,
       slug,
       type,
     })
-  : { data: {}, pending: false }
+  : { data: ref({}), pending: false }
 
 const initialLoad = ref(true)
 const articleId = computed(() => article?.value?.id || null)
@@ -504,14 +512,14 @@ const relatedArticles = computed(
 )
 
 const pageTitle = computed(
-  () => article?.value?.title || article?.value?.name || '',
+  () => metadata?.value?.title || metadata?.value?.name || '',
 )
 const pageDescription = computed(
-  () => article?.value?.description || t('home.description'),
+  () => metadata?.value?.description || t('home.description'),
 )
 const ogImage = computed(() =>
-  article?.value?.image
-    ? `${article.value.image}?crop=entropy&fit=crop&h=450&w=800`
+  metadata?.value?.image
+    ? `${metadata.value.image}?crop=entropy&fit=crop&h=450&w=800`
     : '/tcl-fallback-169.jpg',
 )
 const ogImageType = computed(() => {
