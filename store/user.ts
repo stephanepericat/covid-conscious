@@ -17,7 +17,7 @@ export type UserInfo = {
 export const useUserStore = defineStore('user', {
   state: () => ({ info: null as UserInfo | null }),
   getters: {
-    canPost: ({ info }: { info: UserInfo }) => {
+    canPost: ({ info }: { info: UserInfo | null }) => {
       if (!info) {
         return false
       }
@@ -32,17 +32,13 @@ export const useUserStore = defineStore('user', {
       const { user } = useUserSession()
 
       if (!user.value) {
-        // @ts-expect-error 
         this.info = null
         return
       }
 
       if (payload) {
-        // @ts-expect-error 
         this.info = {
-          // @ts-expect-error 
           ...this.info,
-          // @ts-expect-error 
           profile: { ...this.info?.profile, ...payload },
         }
         return
@@ -52,11 +48,9 @@ export const useUserStore = defineStore('user', {
 
       try {
         const info = await getOrCreateUser(user.value.email as string)
-        // @ts-expect-error 
-        this.info = info
+        this.info = info as UserInfo
       } catch (e) {
         consola.error(e)
-        // @ts-expect-error 
         this.info = null
       }
     },
