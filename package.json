@@ -7,16 +7,27 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "lint": "prettier . --write",
+    "postinstall": "nuxt prepare",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:migrate:dev": "prisma migrate dev",
+    "prisma:migrate:status": "prisma migrate status",
+    "prisma:seed": "prisma db seed",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/nuxt": "0.9.0",
+    "@prisma/extension-accelerate": "^1.2.1",
+    "@prisma/nuxt": "^0.1.3",
     "@radix-icons/vue": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "nuxt": "^3.14.1592",
+    "nuxt-auth-utils": "^0.5.7",
+    "pinia": "^2.3.0",
     "radix-vue": "^1.9.11",
     "shadcn-nuxt": "^0.11.3",
     "tailwind-merge": "^2.6.0",
@@ -25,6 +36,7 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@prisma/client": "^6.1.0",
     "prettier": "^3.4.2"
   }
 }
