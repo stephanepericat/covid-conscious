@@ -25,7 +25,8 @@ export const useUserStore = defineStore('user', {
       return !!info?.profile?.name
     },
     email: ({ info }: { info: UserInfo | null }) => info?.email || null,
-    username: ({ info }: { info: UserInfo | null }) => info?.profile?.name || null,
+    username: ({ info }: { info: UserInfo | null }) =>
+      info?.profile?.name || null,
   },
   actions: {
     async updateUserInfo(payload: UserInfo['profile'] | undefined) {

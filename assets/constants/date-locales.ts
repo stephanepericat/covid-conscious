@@ -13,4 +13,5 @@ export const locales: Locales = {
   pt: ptBR,
 }
 
-export const getDateLocale = (locale: string) => locales[locale] || locales[BASE_LANGUAGE]
+export const getDateLocale = (locale: string) =>
+  locales[locale] || locales[BASE_LANGUAGE]
