@@ -5,9 +5,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   modules: [
-    '@pinia/nuxt',
-    '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
+    '@nuxtjs/sanity',
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
     '@prisma/nuxt',
     'nuxt-auth-utils',
     'shadcn-nuxt',
@@ -21,6 +22,15 @@ export default defineNuxtConfig({
     installCLI: process.env.NODE_ENV === 'development',
     installClient: process.env.NODE_ENV === 'development',
     installStudio: false,
+  },
+
+  sanity: {
+    apiVersion: '2024-07-11',
+    dataset: process.env.SANITY_DATASET,
+    minimal: true,
+    projectId: process.env.SANITY_PROJECTID,
+    token: process.env.SANITY_TOKEN,
+    useCdn: true,
   },
 
   shadcn: {
