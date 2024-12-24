@@ -23,7 +23,7 @@ const { loggedIn } = useUserSession()
       <!-- <SearchInput /> -->
       <TclModeToggle />
       <TclLocaleSwitch />
-      <!-- <ContactMenu /> -->
+      <TclContactMenu />
       <TclUserMenu :logged-in="loggedIn" />
     </div>
   </header>

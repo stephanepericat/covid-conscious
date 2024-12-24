@@ -137,6 +137,7 @@ export default {
     here: 'aquí',
     home: 'Página Principal',
     community: 'Comunidad',
+    contactInfo: 'Información de contacto',
     contactUs: 'Contacta con Nosotros',
     education: 'Educación',
     empty: {
@@ -190,6 +191,7 @@ export default {
       light: 'Claro',
       system: 'Sistema',
     },
+    toggleContactMenu: 'Menú de contacto',
     toggleLanguage: 'Alternar idioma',
     toggleTheme: 'Alternar tema',
     toggleUserMenu: 'Alternar menú de usuario',

@@ -134,6 +134,7 @@ export default {
     here: 'here',
     home: 'Home',
     community: 'Community',
+    contactInfo: 'Contact Info',
     contactUs: 'Contact Us',
     education: 'Education',
     empty: {
@@ -187,6 +188,7 @@ export default {
       light: 'Light',
       system: 'System',
     },
+    toggleContactMenu: 'Toggle Contact Menu',
     toggleLanguage: 'Toggle language',
     toggleTheme: 'Toggle theme',
     toggleUserMenu: 'Toggle user menu',
