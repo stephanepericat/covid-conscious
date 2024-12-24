@@ -35,17 +35,27 @@ export default defineNuxtConfig({
     ],
   },
 
+  linkChecker: {
+    enabled: false,
+  },
+
   modules: [
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
     '@nuxtjs/sanity',
+    '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/turnstile',
     '@pinia/nuxt',
     '@prisma/nuxt',
     'nuxt-auth-utils',
     'shadcn-nuxt',
     'nuxt-umami',
   ],
+
+  ogImage: {
+    enabled: false,
+  },
 
   pinia: {
     storesDirs: ['./store/**'],
@@ -57,6 +67,16 @@ export default defineNuxtConfig({
     installStudio: false,
   },
 
+  robots: {
+    disallow: ['/account', '/forum/create', '/forum/my-posts'],
+  },
+
+  runtimeConfig: {
+    turnstile: {
+      secretKey: process.env.TURNSTILE_SECRET_KEY,
+    },
+  },
+
   sanity: {
     apiVersion: '2024-07-11',
     dataset: process.env.SANITY_DATASET,
@@ -66,13 +86,54 @@ export default defineNuxtConfig({
     useCdn: true,
   },
 
+  schemaOrg: {
+    identity: {
+      type: 'Organization',
+      name: 'That Covid Life',
+      url: 'https://thatcovid.life',
+      logo: 'https://thatcovid.life/tcl-icon.png',
+    },
+  },
+
   shadcn: {
     prefix: '',
     componentDir: './components/ui',
   },
 
+  // seoExperiments: {
+  //   enabled: false,
+  // },
+
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL,
+    name: 'That Covid Life',
+    description:
+      'That Covid Life serves as an educational tool that gathers links to news, research, and other resources relative to COVID-19.',
+  },
+
+  sitemap: {
+    sitemaps: {
+      'en-US': {
+        sources: ['/api/__sitemap__/urls'],
+      },
+      'es-MX': {
+        sources: ['/api/__sitemap__/urls?locale=es'],
+      },
+      'fr-FR': {
+        sources: ['/api/__sitemap__/urls?locale=fr'],
+      },
+      'pt-BR': {
+        sources: ['/api/__sitemap__/urls?locale=pt'],
+      },
+    },
+  },
+
   tailwindcss: {
     viewer: false,
+  },
+
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY,
   },
 
   umami: {
@@ -86,7 +147,7 @@ export default defineNuxtConfig({
     domains: ['covid-conscious-preview.vercel.app', 'thatcovid.life'],
     // customEndpoint: '/my-custom-endpoint',
     // enabled: false,
-    // logErrors: true,
+    logErrors: true,
   },
 
   vite: {

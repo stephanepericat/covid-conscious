@@ -194,8 +194,10 @@ export default {
     },
     userAccount: 'Cuenta de Usuario',
     video: 'Vídeos',
-    warningSupport: 'Para ponerse en contacto con el servicio de asistencia, haga clic aquí.',
-    warning: 'That Covid Life pronto introducirá el requisito de inicio de sesión de cuenta gratuito para acceder a áreas específicas del sitio web. Este cambio tiene como objetivo proteger a la comunidad anti-COVID de la hostilidad, proteger a las empresas que figuran en el directorio y promover un espacio seguro y solidario. El equipo proporcionará actualizaciones sobre la transición e invitará a los usuarios a hacer preguntas o comentarios.',
+    warningSupport:
+      'Para ponerse en contacto con el servicio de asistencia, haga clic aquí.',
+    warning:
+      'That Covid Life pronto introducirá el requisito de inicio de sesión de cuenta gratuito para acceder a áreas específicas del sitio web. Este cambio tiene como objetivo proteger a la comunidad anti-COVID de la hostilidad, proteger a las empresas que figuran en el directorio y promover un espacio seguro y solidario. El equipo proporcionará actualizaciones sobre la transición e invitará a los usuarios a hacer preguntas o comentarios.',
   },
   list: {
     categoryTitle: 'That Covid Life - {type} - {category}',

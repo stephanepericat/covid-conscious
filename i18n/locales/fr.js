@@ -194,7 +194,8 @@ export default {
     userAccount: "Compte d'Utilisateur",
     video: 'Vidéos',
     warningSupport: 'Cliquez ici pour contacter le support technique.',
-    warning: 'That Covid Life introduira bientôt une obligation de connexion à un compte utilisateur gratuit pour accéder à certaines parties du site. Ce changement vise à protéger la communauté COVID de l\'hostilité, à sauvegarder les entreprises figurant dans l\'annuaire et à favoriser un espace sûr et solidaire. L\'équipe fournira des mises à jour sur la transition, et invite les utilisateurs à poser des questions ou à faire part de leurs commentaires.',
+    warning:
+      "That Covid Life introduira bientôt une obligation de connexion à un compte utilisateur gratuit pour accéder à certaines parties du site. Ce changement vise à protéger la communauté COVID de l'hostilité, à sauvegarder les entreprises figurant dans l'annuaire et à favoriser un espace sûr et solidaire. L'équipe fournira des mises à jour sur la transition, et invite les utilisateurs à poser des questions ou à faire part de leurs commentaires.",
   },
   list: {
     categoryTitle: 'That Covid Life - {type} - {category}',
