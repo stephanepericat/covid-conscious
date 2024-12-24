@@ -72,6 +72,7 @@ export default defineNuxtConfig({
   },
 
   modules: [
+    '@nuxt/icon',
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
     '@nuxtjs/sanity',
@@ -188,13 +189,8 @@ export default defineNuxtConfig({
     id: process.env.NUXT_PUBLIC_UMAMI_ID,
     host: process.env.NUXT_PUBLIC_UMAMI_HOST,
     autoTrack: true,
-    // proxy: 'cloak',
-    // useDirective: true,
     ignoreLocalhost: true,
-    // excludeQueryParams: false,
     domains: ['covid-conscious-preview.vercel.app', 'thatcovid.life'],
-    // customEndpoint: '/my-custom-endpoint',
-    // enabled: false,
     logErrors: true,
   },
 
