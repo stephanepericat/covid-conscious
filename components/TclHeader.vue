@@ -1,21 +1,23 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const localePath = useLocalePath()
+</script>
 
 <template>
   <header
-    className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-[2]"
+    className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-[2] justify-between"
   >
     <nav
-      className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
+      className="hidden flex-col space-x-6 text-lg font-medium md:flex md:flex-row md:items-center md:space-x-5 md:text-sm lg:space-x-6"
     >
-      <Link href="/" className="min-w-[46px]">
-        <!-- <Logo />
-        <span className="sr-only">{t('app.title')}</span> -->
-      </Link>
+      <NuxtLink :to="localePath('/')" className="min-w-[46px]">
+        <TclLogo />
+        <span className="sr-only">{{ $t('layout.tcl') }}</span>
+      </NuxtLink>
       <!-- <TopNavigation loggedIn={loggedIn} /> -->
     </nav>
     <!-- <MobileNavigation /> -->
     <div
-      className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4"
+      className="flex items-center space-x-4 md:ml-auto md:space-x-2 lg:space-x-4"
     >
       <!-- <SearchInput /> -->
       <TclModeToggle />

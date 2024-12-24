@@ -77,6 +77,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/icon',
+    '@nuxt/image',
     '@nuxt/test-utils/module',
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
