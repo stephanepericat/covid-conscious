@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="tcl">
+  <div class="font-sans">
     <TclHeader />
     <TclBody>
       <NuxtPage />
