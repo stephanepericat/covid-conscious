@@ -8,14 +8,11 @@ export default defineVitestConfig({
     },
     dir: 'tests',
     coverage: {
-      enabled: false, // TODO: fix!!
-      exclude: [
-        '**/*.mjs',
-        'assets/constants/*.js',
-        'i18n/locales/*.js',
-        'plugins/*.js',
+      enabled: true,
+      include: [
+        'composables/*.ts',
+        'pages/**/*.vue',
       ],
-      provider: 'istanbul',
       reportsDirectory: './coverage',
     },
     globals: true,
