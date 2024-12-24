@@ -14,18 +14,20 @@ const colorMode = useColorMode()
           name="radix-icons:sun"
           class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
         />
-        <span class="sr-only">Toggle theme</span>
+        <span class="sr-only">{{ $t('layout.toggleTheme') }}</span>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
+      <DropdownMenuLabel>{{ $t('layout.theme') }}</DropdownMenuLabel>
+      <DropdownMenuSeparator />
       <DropdownMenuItem @click="colorMode.preference = 'light'">
-        Light
+        {{ $t('layout.themeOptions.light') }}
       </DropdownMenuItem>
       <DropdownMenuItem @click="colorMode.preference = 'dark'">
-        Dark
+        {{ $t('layout.themeOptions.dark') }}
       </DropdownMenuItem>
       <DropdownMenuItem @click="colorMode.preference = 'system'">
-        System
+        {{ $t('layout.themeOptions.system') }}
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

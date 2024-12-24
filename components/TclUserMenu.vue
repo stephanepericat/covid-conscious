@@ -14,7 +14,7 @@ const { signOut } = useSignOut()
     <DropdownMenuTrigger>
       <Button variant="outline">
         <Icon name="hugeicons:user-account" :size="20" />
-        <span className="sr-only">{{ $t('layout.toggleUserMenu' )}}</span>
+        <span class="sr-only">{{ $t('layout.toggleUserMenu') }}</span>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
@@ -22,18 +22,22 @@ const { signOut } = useSignOut()
       <DropdownMenuSeparator />
       <template v-if="loggedIn">
         <DropdownMenuItem>
-          <NuxtLink :to="localePath('/bookmarks')">{{ $t('layout.user.bookmarks')}}</NuxtLink>
+          <NuxtLink :to="localePath('/bookmarks')">{{
+            $t('layout.user.bookmarks')
+          }}</NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <NuxtLink :to="localePath('/account')">{{ $t('layout.user.settings')}}</NuxtLink>
+          <NuxtLink :to="localePath('/account')">{{
+            $t('layout.user.settings')
+          }}</NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem @click="() => signOut()">
-          {{ $t('layout.user.signOut')}}
+          {{ $t('layout.user.signOut') }}
         </DropdownMenuItem>
       </template>
       <DropdownMenuItem v-else>
-        <a href="/auth/auth0">{{$t('layout.user.signIn')}}</a>
+        <a href="/auth/auth0">{{ $t('layout.user.signIn') }}</a>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

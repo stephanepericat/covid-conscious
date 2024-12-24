@@ -8,7 +8,7 @@ export const useSignOut = () => {
       await clear()
       router.push(localePath('/'))
     } catch (error) {
-      throw error;
+      throw error
     }
   }
 

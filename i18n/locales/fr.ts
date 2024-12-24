@@ -180,6 +180,13 @@ export default {
     },
     tcl: 'That Covid Life',
     terms: 'Termes et Conditions',
+    theme: 'Thème de Couleurs',
+    themeOptions: {
+      dark: 'Sombre',
+      light: 'Clair',
+      system: 'Système',
+    },
+    toggleTheme: 'Changer le thème',
     toggleUserMenu: 'Afficher le menu utilisateur',
     twitter: 'Suivez-nous sur Twitter',
     user: {
