@@ -1,1 +1,1 @@
-export const convertTs = (ts) => `${ts}T12:00:01Z`
+export const convertTs = (ts: string) => `${ts}T12:00:01Z`

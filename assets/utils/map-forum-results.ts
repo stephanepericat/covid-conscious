@@ -1,6 +1,6 @@
 import { FORUM, POST } from '../constants/types'
 
-export const mapForumSearchResult = (result) => {
+export const mapForumSearchResult = (result: any) => {
   const { t } = useI18n()
   const topic = result.categories[0].name || ''
 

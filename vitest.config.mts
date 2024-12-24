@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 export default defineVitestConfig({
   test: {
     alias: {
-      '@prisma/client': resolve('./tests/mocks/prisma.js'),
+      '@prisma/client': resolve('./tests/mocks/prisma.ts'),
     },
     dir: 'tests',
     coverage: {

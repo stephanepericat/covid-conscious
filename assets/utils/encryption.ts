@@ -1,4 +1,4 @@
-export const getSHA256Hash = async (input) => {
+export const getSHA256Hash = async (input: string) => {
   const textAsBuffer = new TextEncoder().encode(input)
   const hashBuffer = await global.crypto.subtle.digest('SHA-256', textAsBuffer)
   const hashArray = Array.from(new Uint8Array(hashBuffer))
