@@ -4,7 +4,7 @@ import { Button } from '~/components/ui/button'
 
 <template>
   <div class="home-page">
-    <h1>Home Page</h1>
+    <h1>Home Page {{ $t('layout.tcl') }}</h1>
     <Button>Click me!</Button>
   </div>
 </template>

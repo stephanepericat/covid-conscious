@@ -4,8 +4,40 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
+  i18n: {
+    baseUrl: `${process.env.NUXT_PUBLIC_SITE_URL}/`,
+    defaultLocale: 'en',
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-US',
+        name: 'English',
+        file: 'en.js',
+      },
+      {
+        code: 'es',
+        iso: 'es-MX',
+        name: 'Español',
+        file: 'es.js',
+      },
+      {
+        code: 'fr',
+        iso: 'fr-FR',
+        name: 'Français',
+        file: 'fr.js',
+      },
+      {
+        code: 'pt',
+        iso: 'pt-BR',
+        name: 'Português',
+        file: 'pt.js',
+      },
+    ],
+  },
+
   modules: [
     '@nuxtjs/color-mode',
+    '@nuxtjs/i18n',
     '@nuxtjs/sanity',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
