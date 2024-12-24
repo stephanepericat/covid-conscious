@@ -49,8 +49,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@prisma/nuxt',
     'nuxt-auth-utils',
-    'shadcn-nuxt',
+    'nuxt-security',
     'nuxt-umami',
+    'shadcn-nuxt',
   ],
 
   ogImage: {
@@ -95,14 +96,29 @@ export default defineNuxtConfig({
     },
   },
 
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'img-src': [
+          "'self'",
+          'data:',
+          'blob:',
+          'cdn.sanity.io',
+          'a.tile.openstreetmap.org',
+          'b.tile.openstreetmap.org',
+          'c.tile.openstreetmap.org',
+          'gravatar.com',
+          '*.ytimg.com',
+        ],
+      },
+      crossOriginEmbedderPolicy: 'unsafe-none',
+    },
+  },
+
   shadcn: {
     prefix: '',
     componentDir: './components/ui',
   },
-
-  // seoExperiments: {
-  //   enabled: false,
-  // },
 
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL,
