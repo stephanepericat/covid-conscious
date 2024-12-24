@@ -1,6 +1,4 @@
-<script setup lang="ts">
-import { Button } from '~/components/ui/button'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="home-page">

@@ -9,10 +9,7 @@ export default defineVitestConfig({
     dir: 'tests',
     coverage: {
       enabled: true,
-      include: [
-        'composables/*.ts',
-        'pages/**/*.vue',
-      ],
+      include: ['composables/*.ts', 'pages/**/*.vue'],
       reportsDirectory: './coverage',
     },
     globals: true,

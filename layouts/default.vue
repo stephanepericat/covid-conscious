@@ -1,13 +1,10 @@
-<script setup lang="ts">
-import Body from '~/components/Body'
-import Header from '~/components/Header'
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="tcl">
-    <Header />
-    <Body>
+    <TclHeader />
+    <TclBody>
       <NuxtPage />
-    </Body>
+    </TclBody>
   </div>
 </template>
