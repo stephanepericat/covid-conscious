@@ -1,5 +1,37 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/tcl-logo-big-transparent.ico',
+        },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'anonymous',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Oswald:wght@200..700&display=swap',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.css',
+        },
+      ],
+      script: [
+        {
+          src: 'https://s3.amazonaws.com/assets.freshdesk.com/widget/freshwidget.js',
+          type: 'text/javascript',
+        },
+      ],
+    },
+  },
+
   compatibilityDate: '2024-11-01',
 
   devtools: { enabled: true },
