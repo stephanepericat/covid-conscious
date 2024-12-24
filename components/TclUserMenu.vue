@@ -12,7 +12,7 @@ const { signOut } = useSignOut()
 <template>
   <DropdownMenu>
     <DropdownMenuTrigger>
-      <Button variant="outline">
+      <Button variant="outline" size="icon" class="rounded-full">
         <Icon name="hugeicons:user-account" :size="20" />
         <span class="sr-only">{{ $t('layout.toggleUserMenu') }}</span>
       </Button>
