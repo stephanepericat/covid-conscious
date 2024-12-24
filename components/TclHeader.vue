@@ -22,10 +22,9 @@ const { loggedIn } = useUserSession()
     >
       <!-- <SearchInput /> -->
       <TclModeToggle />
-      <!-- <LocaleSwitch />
-      <ContactMenu /> -->
+      <TclLocaleSwitch />
+      <!-- <ContactMenu /> -->
       <TclUserMenu :logged-in="loggedIn" />
-      <!-- <a href="/auth/auth0">Login</a> -->
     </div>
   </header>
 </template>

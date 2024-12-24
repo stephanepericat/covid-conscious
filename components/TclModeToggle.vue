@@ -4,7 +4,7 @@ const colorMode = useColorMode()
 
 <template>
   <DropdownMenu>
-    <DropdownMenuTrigger as-child>
+    <DropdownMenuTrigger>
       <Button variant="outline" size="icon" class="rounded-full">
         <Icon
           name="radix-icons:moon"
