@@ -73,6 +73,7 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxt/icon',
+    '@nuxt/test-utils/module',
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
     '@nuxtjs/sanity',
