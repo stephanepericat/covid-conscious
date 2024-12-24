@@ -1,7 +1,7 @@
-import InlineImage from '~/components/InlineImage.vue'
+import TclInlineImage from '@/components/TclInlineImage.vue'
 
 export const SERIALIZERS = {
   types: {
-    image: InlineImage,
+    image: TclInlineImage,
   },
 }
