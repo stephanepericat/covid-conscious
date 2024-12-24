@@ -17,9 +17,9 @@
     <div
       className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4"
     >
-      <!-- <SearchInput />
-      <ModeToggle />
-      <LocaleSwitch />
+      <!-- <SearchInput /> -->
+      <TclModeToggle />
+      <!-- <LocaleSwitch />
       <ContactMenu />
       <UserMenu loggedIn={loggedIn} /> -->
       <a href="/auth/auth0">Login</a>

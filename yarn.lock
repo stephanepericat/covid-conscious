@@ -1416,6 +1416,13 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/radix-icons@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/radix-icons/-/radix-icons-1.2.2.tgz#9ffbe51a7387c993cd6c2dfe03aa4893922feedf"
+  integrity sha512-+PPmKWDP7pfJMcEc9Ty1zyo/zzq+9rfKW4EGb2HSZcPu1VUhothDLFzWvBqQNoFIOYCJ2nm0Vmf8kVyYhq9G0Q==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/ri@^1.2.3":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@iconify-json/ri/-/ri-1.2.5.tgz#bd7d607225cc69b42928df3a55d4069ad8b7aaea"

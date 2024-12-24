@@ -56,6 +56,8 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@iconify-json/radix-icons": "^1.2.2",
+    "@iconify/vue": "^4.2.0",
     "@nuxt/test-utils": "^3.15.1",
     "@prisma/client": "^6.1.0",
     "@sanity/cli": "^3.68.3",
