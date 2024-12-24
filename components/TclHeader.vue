@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
+const { loggedIn } = useUserSession()
 </script>
 
 <template>
@@ -22,9 +23,9 @@ const localePath = useLocalePath()
       <!-- <SearchInput /> -->
       <TclModeToggle />
       <!-- <LocaleSwitch />
-      <ContactMenu />
-      <UserMenu loggedIn={loggedIn} /> -->
-      <a href="/auth/auth0">Login</a>
+      <ContactMenu /> -->
+      <TclUserMenu :logged-in="loggedIn" />
+      <!-- <a href="/auth/auth0">Login</a> -->
     </div>
   </header>
 </template>

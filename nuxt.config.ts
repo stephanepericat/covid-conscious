@@ -38,7 +38,7 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2024-11-01',
 
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   i18n: {
     baseUrl: `${process.env.NUXT_PUBLIC_SITE_URL}/`,

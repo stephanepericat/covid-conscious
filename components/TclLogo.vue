@@ -1,6 +1,6 @@
 <script setup leng="ts">
-  const colorMode = useColorMode()
-  const theme = computed(() => colorMode.value)
+const colorMode = useColorMode()
+const theme = computed(() => colorMode.value)
 </script>
 
 <template>

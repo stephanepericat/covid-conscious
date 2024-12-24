@@ -85,7 +85,7 @@ module.exports = {
         sans: ['Inter', ...fontFamily.sans],
         title: ['Oswald', ...fontFamily.sans],
         pt: ['PT Serif', ...fontFamily.serif],
-      }
+      },
     },
   },
   plugins: [animate],
