@@ -3,8 +3,8 @@ import { Feed } from 'feed'
 import { parseStringPromise } from 'xml2js'
 import _ from 'lodash'
 
-import ytFeedQuery from '~/sanity/queries/ytFeed.sanity'
-import { YT_FEED_QUERYResult } from '~/sanity/types'
+import ytFeedQuery from '@/sanity/queries/ytFeed.sanity'
+import { YT_FEED_QUERYResult } from '@/sanity/types'
 
 // type YtFeed = {
 //   feedURL: string;

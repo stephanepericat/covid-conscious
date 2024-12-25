@@ -1,5 +1,5 @@
 import consola from 'consola'
-import prisma from '~/lib/prisma'
+import prisma from '@/lib/prisma'
 
 export default defineEventHandler(async (event) => {
   const { query, skip } = await readBody(event)

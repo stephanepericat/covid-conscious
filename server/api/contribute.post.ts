@@ -1,5 +1,5 @@
 import emailjs from '@emailjs/nodejs'
-import { parseBody } from '~/assets/utils/body-parser'
+import { parseBody } from '@/assets/utils/body-parser'
 
 export default eventHandler(async (event) => {
   const { valid, errors, ...rest } = await readBody(event)

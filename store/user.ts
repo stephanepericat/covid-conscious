@@ -1,5 +1,5 @@
 import consola from 'consola'
-import { usePrisma } from '~/composables/usePrisma'
+import { usePrisma } from '@/composables/usePrisma'
 
 export type UserInfo = {
   id?: number
@@ -29,7 +29,7 @@ export const useUserStore = defineStore('user', {
       info?.profile?.name || null,
   },
   actions: {
-    async updateUserInfo(payload: UserInfo['profile'] | undefined) {
+    async updateUserInfo(payload?: UserInfo['profile']) {
       const { user } = useUserSession()
 
       if (!user.value) {

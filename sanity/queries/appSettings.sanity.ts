@@ -1,5 +1,5 @@
 import groq from 'groq'
-// import { BASE_LANGUAGE } from '~/assets/constants/base-language'
+// import { BASE_LANGUAGE } from '@/assets/constants/base-language'
 
 const APP_SETTINGS_QUERY = groq`
 *[_type == 'appSettings'] {

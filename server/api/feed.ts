@@ -1,7 +1,7 @@
 import { Feed } from 'feed'
-import rssFeedQuery from '~/sanity/queries/rssFeed.sanity'
-import { RSS_FEED_QUERYResult } from '~/sanity/types'
-import { isExternalLink, isNews, isLibrary } from '~/assets/utils/article-types'
+import rssFeedQuery from '@/sanity/queries/rssFeed.sanity'
+import { RSS_FEED_QUERYResult } from '@/sanity/types'
+import { isExternalLink, isNews, isLibrary } from '@/assets/utils/article-types'
 
 export default eventHandler(async (event) => {
   const { fetch } = useSanity()
