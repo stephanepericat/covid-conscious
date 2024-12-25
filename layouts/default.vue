@@ -1,10 +1,4 @@
-<script setup lang="ts">
-import { useUserStore } from '@/store/user'
-
-const userStore = useUserStore()
-
-useAsyncData(async () => await userStore.updateUserInfo())
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="font-sans">

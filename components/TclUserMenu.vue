@@ -27,7 +27,7 @@ const { signOut } = useSignOut()
           }}</NuxtLink>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <NuxtLink :to="localePath('/account')">{{
+          <NuxtLink :to="localePath('/user/account')">{{
             $t('layout.user.settings')
           }}</NuxtLink>
         </DropdownMenuItem>

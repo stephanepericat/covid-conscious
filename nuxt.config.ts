@@ -108,7 +108,7 @@ export default defineNuxtConfig({
   },
 
   robots: {
-    disallow: ['/account', '/forum/create', '/forum/my-posts'],
+    disallow: ['/user/account', '/user/bookmarks', '/forum/create', '/forum/my-posts'],
   },
 
   runtimeConfig: {

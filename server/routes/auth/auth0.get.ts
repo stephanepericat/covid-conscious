@@ -12,7 +12,7 @@ export default defineOAuthAuth0EventHandler({
 
     return sendRedirect(
       event,
-      `${locale && locale !== 'en' ? `/${locale}` : ''}/account`,
+      `${locale && locale !== 'en' ? `/${locale}` : ''}/user/account`,
     )
   },
   // Optional, will return a json error and 401 status code by default
