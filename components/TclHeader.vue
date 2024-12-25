@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
 const { loggedIn } = useUserSession()
+
+const searchValue = ref('')
 </script>
 
 <template>
@@ -20,7 +22,7 @@ const { loggedIn } = useUserSession()
     <div
       class="flex items-center space-x-4 md:ml-auto md:space-x-2 lg:space-x-4"
     >
-      <!-- <SearchInput /> -->
+      <TclSearchInput v-model="searchValue" />
       <TclModeToggle />
       <TclLocaleSwitch />
       <TclContactMenu />
