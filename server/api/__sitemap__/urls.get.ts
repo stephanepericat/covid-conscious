@@ -7,17 +7,14 @@ const pages = [
   '/',
   '/about',
   '/contribute',
-  '/create-account',
   '/disclaimer',
   '/forum',
   '/forum-guidelines',
-  '/login',
   '/mobile',
   '/privacy-policy',
-  '/reset-password',
   '/support',
   '/terms-conditions',
-  '/update-password',
+  // TODO: add other pages
 ]
 
 const formatUrl = (path: string, origin: string, locale: string | null) =>
