@@ -13,7 +13,7 @@ const { signOut } = useSignOut()
   <DropdownMenu>
     <DropdownMenuTrigger>
       <Button variant="outline" size="icon" class="rounded-full">
-        <Icon name="material-symbols:account-circle-outline" :size="20" />
+        <Icon name="iconoir:profile-circle" :size="20" />
         <span class="sr-only">{{ $t('layout.toggleUserMenu') }}</span>
       </Button>
     </DropdownMenuTrigger>
