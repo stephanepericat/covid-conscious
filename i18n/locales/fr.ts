@@ -557,4 +557,68 @@ export default {
     header: 'Toutes vos informations sur la pandémie de COVID-19.',
     subheader: 'En un seul endroit.',
   },
+  topNav: {
+    blog: {
+      title: 'Blog',
+    },
+    forum: {
+      title: 'Forum',
+    },
+    latest: {
+      children: {
+        events: {
+          description: 'Événements à venir et passés autour de la COVID-19.',
+          title: 'Événements',
+        },
+        library: {
+          description:
+            'Les dernières recherches et articles scientifiques sur la COVID-19.',
+          title: 'Bibliothèque Scientifique',
+        },
+        news: {
+          description: 'Les dernières nouvelles sur la COVID-19.',
+          title: 'Actualités',
+        },
+        phw: {
+          description:
+            'Les dernières nouvelles sur les pandémies émergentes, telles que la variole et le H5N1.',
+          title: 'Veille Sanitaire',
+        },
+        videos: {
+          description: 'Les dernières vidéos sur la COVID-19.',
+          title: 'Vidéos',
+        },
+      },
+      display: {
+        description:
+          "Une liste organisée d'actualités, d'articles scientifiques et événements.",
+        title: 'Articles Récents',
+      },
+      title: 'Récents',
+    },
+    other: {
+      children: {
+        covidnet: {
+          description:
+            'Une liste organisée de blogs et de chaînes YouTube sur le COVID-19.',
+          title: 'Covidnet',
+        },
+        directory: {
+          description:
+            "Un répertoire d'entreprises et de prestataires de soins de santé conscients du COVID.",
+          title: 'Annuaire',
+        },
+        products: {
+          description:
+            "Une liste d'équipements de protection individuelle, tels que des masques, des purificateurs d'air, etc...",
+          title: 'EPI',
+        },
+        resources: {
+          description: 'Une liste de ressources utiles autour du COVID-19.',
+          title: 'Ressources',
+        },
+      },
+      title: 'Autre',
+    },
+  },
 }

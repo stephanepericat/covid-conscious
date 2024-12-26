@@ -1407,6 +1407,13 @@
     "@floating-ui/utils" "^0.2.8"
     vue-demi ">=0.13.0"
 
+"@iconify-json/bi@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/bi/-/bi-1.2.2.tgz#0f64d20323904f11546cadd0dc75f2fd024a46f8"
+  integrity sha512-f/Wm+RTdBosw3cI/gmg5uSFmdumkw2thUk4qVFS56jTerdal6wqWnWAbRTSJJ/vhH9/y16pRKnvE8F2+M23dzw==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/carbon@^1.2.4":
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/@iconify-json/carbon/-/carbon-1.2.5.tgz#d7872f6c8d99454b64d5ce50ada956e7977db287"
@@ -1414,10 +1421,38 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/iconoir@^1.2.6":
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/@iconify-json/iconoir/-/iconoir-1.2.6.tgz#b0cfd16b3e9aafde7ead13accf5449d46b4db438"
+  integrity sha512-vGeMrDy5e4b2Y/UYCz5CSgE/J1L0M58al6O4ar/X593SRZaGUsLzAVdYIulzRV4pCZh3mSsIakiBj6gFtle8dg==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/lets-icons@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@iconify-json/lets-icons/-/lets-icons-1.2.1.tgz#011aa8780593c2f4ddb8c93380830cfa512339bb"
+  integrity sha512-ahSTwg1OTccHNEy3E1GuoRgazGpodIEbdjWp1V/7abur7efjTbtJyHfWVPRBF7yIWg0I8MKXrSGAkVVS1D1q8w==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/logos@^1.2.3":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@iconify-json/logos/-/logos-1.2.4.tgz#1591937349a487da360fb10000d5e7ab0601bfd7"
   integrity sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/mynaui@^1.2.9":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@iconify-json/mynaui/-/mynaui-1.2.9.tgz#738f6b1c3dcb1c08979d8d1327481f49089aa15d"
+  integrity sha512-dd5yNIPxD3W/kRd9t8xc1SVh/UqicaYsaDg7dStGjlT1wqjhvkLjj10xeNZARz1vDaOlCoFJnkf2OKIejTnHOw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/prime@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/prime/-/prime-1.2.2.tgz#b0228cbe8ffbf753e13b64e01d7be108414e3fd4"
+  integrity sha512-W08l1i445VOmiOounOAzHHcpW3i3B+EkRJlkMSCIlAmZNnrdCE+JRUG4GhEA5WlIYu/rqIDmpAF+0YZLH4RNBg==
   dependencies:
     "@iconify/types" "*"
 

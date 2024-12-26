@@ -21,13 +21,19 @@ const colorMode = useColorMode()
       <DropdownMenuLabel>{{ $t('layout.theme') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="colorMode.preference = 'light'">
-        {{ $t('layout.themeOptions.light') }}
+        <span class="hover:cursor-pointer">{{
+          $t('layout.themeOptions.light')
+        }}</span>
       </DropdownMenuItem>
       <DropdownMenuItem @click="colorMode.preference = 'dark'">
-        {{ $t('layout.themeOptions.dark') }}
+        <span class="hover:cursor-pointer">{{
+          $t('layout.themeOptions.dark')
+        }}</span>
       </DropdownMenuItem>
       <DropdownMenuItem @click="colorMode.preference = 'system'">
-        {{ $t('layout.themeOptions.system') }}
+        <span class="hover:cursor-pointer">{{
+          $t('layout.themeOptions.system')
+        }}</span>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

@@ -7,7 +7,9 @@ const switchLocalePath = useSwitchLocalePath()
   <DropdownMenu>
     <DropdownMenuTrigger>
       <Button variant="outline" size="icon" class="rounded-full">
-        <span class="uppercase font-light text-sm tracking-wider">{{ locale }}</span>
+        <span class="uppercase font-light text-sm tracking-wider">{{
+          locale
+        }}</span>
         <span class="sr-only">{{ $t('layout.toggleLanguage') }}</span>
       </Button>
     </DropdownMenuTrigger>

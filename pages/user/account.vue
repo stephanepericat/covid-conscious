@@ -5,7 +5,5 @@ const userStore = useUserStore()
 </script>
 
 <template>
-  <div class="account-page">
-    {{ userStore }}
-  </div>
+  <div class="account-page">Welcome, {{ userStore.info?.email || '' }}!</div>
 </template>

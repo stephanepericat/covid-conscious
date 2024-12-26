@@ -554,4 +554,68 @@ export default {
     header: 'Toda la información sobre el COVID-19 que necesitas.',
     subheader: 'En un solo lugar.',
   },
+  topNav: {
+    blog: {
+      title: 'Blog',
+    },
+    forum: {
+      title: 'Foro',
+    },
+    latest: {
+      children: {
+        events: {
+          description: 'Próximos y pasados ​​eventos en torno a la COVID-19.',
+          title: 'Eventos',
+        },
+        library: {
+          description:
+            'Las últimas investigaciones y artículos científicos sobre la COVID-19.',
+          title: 'Biblioteca científica',
+        },
+        news: {
+          description: 'Las últimas noticias sobre la COVID-19.',
+          title: 'Noticias',
+        },
+        phw: {
+          description:
+            'Las últimas noticias sobre pandemias emergentes, como Mpox y H5N1.',
+          title: 'Public Health Watch',
+        },
+        videos: {
+          description: 'Los últimos videos sobre la COVID-19.',
+          title: 'Videos',
+        },
+      },
+      display: {
+        description:
+          'Una lista seleccionada de noticias, artículos científicos y eventos.',
+        title: 'Últimas publicaciones',
+      },
+      title: 'Últimas noticias',
+    },
+    other: {
+      children: {
+        covidnet: {
+          description:
+            'Una lista seleccionada de blogs y canales de YouTube sobre la COVID-19.',
+          title: 'Covidnet',
+        },
+        directory: {
+          description:
+            'Un directorio de empresas y proveedores de atención médica conscientes de la COVID-19.',
+          title: 'Directorio',
+        },
+        products: {
+          description:
+            'Una lista de equipos de protección personal, como mascarillas, purificadores de aire, etc.',
+          title: 'EPP',
+        },
+        resources: {
+          description: 'Una lista de recursos útiles sobre la COVID-19.',
+          title: 'Recursos',
+        },
+      },
+      title: 'Otros',
+    },
+  },
 }

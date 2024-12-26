@@ -26,7 +26,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
         id="search"
         type="text"
         :placeholder="$t('layout.search')"
-        class="pl-9 sm:w-[300px] md:w-[200px] lg:w-[300px]"
+        class="pl-9 sm:w-[250px] md:w-[150px] lg:w-[250px]"
       />
       <span
         class="absolute start-0 inset-y-0 flex items-center justify-center px-2"

@@ -540,4 +540,66 @@ export default {
     header: 'All your COVID-19 information.',
     subheader: 'In one place.',
   },
+  topNav: {
+    blog: {
+      title: 'Blog',
+    },
+    forum: {
+      title: 'Forum',
+    },
+    latest: {
+      children: {
+        events: {
+          description: 'Upcoming and past events around COVID-19.',
+          title: 'Events',
+        },
+        library: {
+          description: 'The latest research and scientific papers on COVID-19.',
+          title: 'Scientific Library',
+        },
+        news: {
+          description: 'The latest news about COVID-19.',
+          title: 'News',
+        },
+        phw: {
+          description:
+            'The latest news on emerging pandemics, such as Mpox and H5N1.',
+          title: 'Public Health Watch',
+        },
+        videos: {
+          description: 'The latest videos about COVID-19.',
+          title: 'Videos',
+        },
+      },
+      display: {
+        description: 'A curated list of news, scientific papers and events.',
+        title: 'Latest Posts',
+      },
+      title: 'Latest',
+    },
+    other: {
+      children: {
+        covidnet: {
+          description:
+            'A curated list of blogs and youtube channels about COVID-19.',
+          title: 'Covidnet',
+        },
+        directory: {
+          description:
+            'A directory of covid-conscious businesses and healthcare providers.',
+          title: 'Directory',
+        },
+        products: {
+          description:
+            'A list of personal protective equipments, such as masks, air purifiers, etc...',
+          title: 'PPE',
+        },
+        resources: {
+          description: 'A list of useful resources around COVID-19.',
+          title: 'Resources',
+        },
+      },
+      title: 'Other',
+    },
+  },
 }
