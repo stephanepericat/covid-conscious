@@ -193,6 +193,7 @@ export default {
     },
     toggleContactMenu: 'Menú de contacto',
     toggleLanguage: 'Alternar idioma',
+    toggleNavMenu: 'Alternar menú de navegación',
     toggleTheme: 'Alternar tema',
     toggleUserMenu: 'Alternar menú de usuario',
     twitter: 'Síganos en Twitter',

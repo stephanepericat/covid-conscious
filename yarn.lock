@@ -1421,6 +1421,13 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/icon-park-outline@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/icon-park-outline/-/icon-park-outline-1.2.2.tgz#382945d5e58f5f9488561614ff480c9fa04674d4"
+  integrity sha512-7VkMWOZTIMNkC9+oAL4I5kVlVC5Pq3nQpruZ4E3cLyKaeV95gaUrEilUkvGW71fgsFYCBWAmOZ3KpM4ux0j0zA==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/iconoir@^1.2.6":
   version "1.2.6"
   resolved "https://registry.yarnpkg.com/@iconify-json/iconoir/-/iconoir-1.2.6.tgz#b0cfd16b3e9aafde7ead13accf5449d46b4db438"
@@ -1439,6 +1446,13 @@
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@iconify-json/logos/-/logos-1.2.4.tgz#1591937349a487da360fb10000d5e7ab0601bfd7"
   integrity sha512-XC4If5D/hbaZvUkTV8iaZuGlQCyG6CNOlaAaJaGa13V5QMYwYjgtKk3vPP8wz3wtTVNVEVk3LRx1fOJz+YnSMw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify-json/mdi@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/mdi/-/mdi-1.2.2.tgz#757d5780470c9e539dca9dd97b94f0bb4c8dbfb8"
+  integrity sha512-84aznJXzfGdbOXGe8xB7E5uNAb7Yo5IABwTgq2X3kczb819qZeS9eL31bTVn7wJdCLK5ieaoUc2GTS3QYIkJ6g==
   dependencies:
     "@iconify/types" "*"
 

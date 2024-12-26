@@ -192,6 +192,7 @@ export default {
     },
     toggleContactMenu: 'Afficher le menu de contact',
     toggleLanguage: 'Changement de langue',
+    toggleNavMenu: 'Afficher le menu de navigation',
     toggleTheme: 'Changer le thème',
     toggleUserMenu: 'Afficher le menu utilisateur',
     twitter: 'Suivez-nous sur Twitter',

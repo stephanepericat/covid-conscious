@@ -1,3 +1,5 @@
+export type MobileNavItem = Omit<NavConfigChild, 'description'>
+
 export type NavConfigChild = {
   description: string
   id: string

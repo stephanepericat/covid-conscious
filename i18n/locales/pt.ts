@@ -192,6 +192,7 @@ export default {
     },
     toggleContactMenu: 'Alternar o menu Contato',
     toggleLanguage: 'Alternar idioma',
+    toggleNavMenu: 'Alternar menu de navegação',
     toggleTheme: 'Alternar tema',
     toggleUserMenu: 'Alternar o menu do usuário',
     twitter: 'Siga-nos no Twitter',

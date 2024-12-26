@@ -18,7 +18,7 @@ const searchValue = ref('')
       </NuxtLink>
       <TclTopNavigation :logged-in="loggedIn" />
     </nav>
-    <!-- <MobileNavigation /> -->
+    <TclMobileNavigation :logged-in="loggedIn" with-taco />
     <div class="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
       <TclSearchInput v-model="searchValue" />
       <TclModeToggle />

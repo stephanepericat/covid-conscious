@@ -1,4 +1,4 @@
-import type { NavConfig } from '@/lib/types'
+import type { MobileNavItem, NavConfig } from '@/lib/types'
 
 export const useNavConfig = () => {
   const { t } = useI18n()
@@ -91,7 +91,80 @@ export const useNavConfig = () => {
       ] as NavConfig[],
   )
 
+  const mobileConfig = computed(
+    () =>
+      [
+        {
+          id: 'mobile-news',
+          link: '/news',
+          premium: false,
+          title: t('topNav.latest.children.news.title'),
+        },
+        {
+          id: 'mobile-library',
+          link: '/scientific-library',
+          premium: false,
+          title: t('topNav.latest.children.library.title'),
+        },
+        {
+          id: 'mobile-videos',
+          link: '/video',
+          premium: false,
+          title: t('topNav.latest.children.videos.title'),
+        },
+        {
+          id: 'mobile-phw',
+          title: t('topNav.latest.children.phw.title'),
+          link: '/public-health',
+          premium: false,
+        },
+        {
+          id: 'mobile-events',
+          title: t('topNav.latest.children.events.title'),
+          link: '/event',
+          premium: false,
+        },
+        {
+          id: 'mobile-covidnet',
+          title: t('topNav.other.children.covidnet.title'),
+          link: '/covidnet',
+          premium: false,
+        },
+        {
+          id: 'mobile-directory',
+          title: t('topNav.other.children.directory.title'),
+          link: '/directory',
+          premium: true,
+        },
+        {
+          id: 'mobile-products',
+          title: t('topNav.other.children.products.title'),
+          link: '/product',
+          premium: false,
+        },
+        {
+          id: 'mobile-resources',
+          title: t('topNav.other.children.resources.title'),
+          link: '/resource',
+          premium: false,
+        },
+        {
+          id: 'forum',
+          title: t('topNav.forum.title'),
+          link: '/forum',
+          premium: false,
+        },
+        {
+          id: 'blog',
+          title: t('topNav.blog.title'),
+          link: '/blog',
+          premium: false,
+        },
+      ] as MobileNavItem[],
+  )
+
   return {
     config,
+    mobileConfig,
   }
 }

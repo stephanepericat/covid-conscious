@@ -190,6 +190,7 @@ export default {
     },
     toggleContactMenu: 'Toggle Contact Menu',
     toggleLanguage: 'Toggle language',
+    toggleNavMenu: 'Toggle navigation menu',
     toggleTheme: 'Toggle theme',
     toggleUserMenu: 'Toggle user menu',
     twitter: 'Follow us on Twitter',
