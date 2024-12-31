@@ -170,6 +170,7 @@ export default {
     product: 'PPE',
     'public-health': 'Public Health Watch',
     resource: 'Resources',
+    rights: 'All rights reserved',
     rss: 'RSS Feed',
     'scientific-library': 'Library',
     search: 'Search',
@@ -601,6 +602,27 @@ export default {
         },
       },
       title: 'Other',
+    },
+  },
+  footer: {
+    legal: {
+      disclaimer: 'Disclaimer',
+      forum: 'Forum Guidelines',
+      privacy: 'Privacy Policy',
+      terms: 'Terms & Conditions',
+      title: 'Legal Information',
+    },
+    social: {
+      title: 'Social Networks',
+    },
+    tcl: {
+      about: 'About',
+      contact: 'Contact Us',
+      contribute: 'Contribute',
+      mobile: 'Mobile App',
+      rss: 'RSS Feed',
+      support: 'Support',
+      title: 'That Covid Life',
     },
   },
 }

@@ -172,6 +172,7 @@ export default {
     product: 'EPI',
     'public-health': 'Veille Sanitaire',
     resource: 'Ressources',
+    rights: 'Tous droits réservés',
     rss: 'Flux RSS',
     'scientific-library': 'Bibliothèque',
     search: 'Rechercher',
@@ -620,6 +621,27 @@ export default {
         },
       },
       title: 'Autre',
+    },
+  },
+  footer: {
+    legal: {
+      disclaimer: 'Clause de non-responsabilité',
+      forum: 'Règles du forum',
+      privacy: 'Politique de confidentialité',
+      terms: 'Conditions générales',
+      title: 'Informations légales',
+    },
+    social: {
+      title: 'Réseaux sociaux',
+    },
+    tcl: {
+      about: 'À propos',
+      contact: 'Nous contacter',
+      contribute: 'Contribuer',
+      mobile: 'Application mobile',
+      rss: 'Flux RSS',
+      support: 'Support technique',
+      title: 'That Covid Life',
     },
   },
 }

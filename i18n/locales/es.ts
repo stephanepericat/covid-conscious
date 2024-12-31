@@ -173,6 +173,7 @@ export default {
     product: 'EPI',
     'public-health': 'Vigilancia de la Salud Pública',
     resource: 'Recursos',
+    rights: 'Reservados todos los derechos',
     rss: 'RSS Feed',
     'scientific-library': 'Biblioteca',
     search: 'Buscar',
@@ -617,6 +618,27 @@ export default {
         },
       },
       title: 'Otros',
+    },
+  },
+  footer: {
+    legal: {
+      disclaimer: 'Descargo de responsabilidad',
+      forum: 'Pautas del foro',
+      privacy: 'Política de privacidad',
+      terms: 'Términos y condiciones',
+      title: 'Información legal',
+    },
+    social: {
+      title: 'Redes sociales',
+    },
+    tcl: {
+      about: 'Sobre Nosotros',
+      contact: 'Contáctenos',
+      contribute: 'Contáctenos',
+      mobile: 'Aplicación móvil',
+      rss: 'Feed RSS',
+      support: 'Soporte',
+      title: 'That Covid Life',
     },
   },
 }

@@ -173,6 +173,7 @@ export default {
     'public-health': 'Vigilância da Saúde Pública',
     rss: 'Feed RSS',
     resource: 'Recursos',
+    rights: 'Todos os direitos reservados',
     'scientific-library': 'Biblioteca',
     search: 'Procurar',
     social: 'Redes Sociais',
@@ -611,6 +612,27 @@ export default {
         },
       },
       title: 'Outros',
+    },
+  },
+  footer: {
+    legal: {
+      disclaimer: 'Aviso Legal',
+      forum: 'Diretrizes do Fórum',
+      privacy: 'Política de Privacidade',
+      terms: 'Termos e Condições',
+      title: 'Informações Legais',
+    },
+    social: {
+      title: 'Redes Sociais',
+    },
+    tcl: {
+      about: 'Sobre',
+      contact: 'Fale Conosco',
+      contribute: 'Contribuir',
+      mobile: 'Aplicativo Móvel',
+      rss: 'Feed RSS',
+      support: 'Suporte',
+      title: 'That Covid Life',
     },
   },
 }
