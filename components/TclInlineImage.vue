@@ -1,7 +1,9 @@
 <script setup lang="ts">
-defineProps({
-  asset: Object,
-})
+defineProps<{
+  asset?: {
+    _ref?: string
+  }
+}>()
 </script>
 
 <template>

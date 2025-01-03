@@ -2,9 +2,9 @@
 import { navigationMenuTriggerStyle } from '@/components/ui/navigation-menu'
 import { useNavConfig } from '@/composables/useNavConfig'
 
-const props = defineProps({
-  loggedIn: Boolean,
-})
+const props = defineProps<{
+  loggedIn?: boolean
+}>()
 
 const { config } = useNavConfig()
 const localePath = useLocalePath()

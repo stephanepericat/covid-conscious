@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { useNavConfig } from '@/composables/useNavConfig'
 
-const props = defineProps({
-  loggedIn: Boolean,
-  withTaco: Boolean,
-})
+const props = defineProps<{
+  loggedIn?: boolean
+  withTaco?: boolean
+}>()
 
 const { mobileConfig } = useNavConfig()
 const localePath = useLocalePath()

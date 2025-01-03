@@ -2,12 +2,9 @@
 import { cn } from '@/lib/utils'
 import type { LATEST_PUBLICATIONS_QUERYResult } from '@/sanity/types'
 
-defineProps({
-  docs: {
-    type: Array<LATEST_PUBLICATIONS_QUERYResult['showcase'][0]>,
-    default: [],
-  },
-})
+defineProps<{
+  docs: LATEST_PUBLICATIONS_QUERYResult['showcase'] | []
+}>()
 
 const spans = ref([
   'md:col-span-2 md:row-span-3',

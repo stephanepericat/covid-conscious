@@ -1,0 +1,37 @@
+<script setup lang="ts">
+import type { Tag } from '@/lib/types'
+
+defineProps<{
+  className?: string
+  free?: boolean
+  limited?: boolean
+  premium?: boolean
+  tags: Tag[]
+}>()
+
+const localePath = useLocalePath()
+</script>
+
+<template>
+  <div class="flex flex-wrap">
+    <Badge v-if="free" class="uppercase tracking-widest mr-1.5 mb-1">
+      {{ $t('article.free') }}
+    </Badge>
+    <Badge v-if="limited" class="uppercase tracking-widest mr-1.5 mb-1">
+      {{ $t('article.limited') }}
+    </Badge>
+    <Badge v-if="premium" class="uppercase tracking-widest mr-1.5 mb-1">
+      {{ $t('article.locked') }}
+    </Badge>
+    <NuxtLink
+      v-for="{ label, slug } in tags"
+      :key="slug"
+      :to="localePath(`/tag/${slug}`)"
+      target="_self"
+    >
+      <Badge class="uppercase tracking-widest mr-1.5 mb-1" variant="secondary">
+        {{ label }}
+      </Badge>
+    </NuxtLink>
+  </div>
+</template>

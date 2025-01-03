@@ -1,3 +1,9 @@
+export type Metadata = {
+  aspectRatio: number | null
+  height: number | null
+  width: number | null
+}
+
 export type MobileNavItem = Omit<NavConfigChild, 'description'>
 
 export type NavConfigChild = {
@@ -19,3 +25,10 @@ export type NavConfig = {
   link?: string
   title: string
 }
+
+export type Tag = {
+  label: string
+  slug: string
+}
+
+export type Target = '_blank' | '_self'

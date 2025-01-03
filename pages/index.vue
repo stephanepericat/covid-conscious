@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Tag } from '@/lib/types'
 import LATEST_PUBLICATIONS_QUERY from '@/sanity/queries/latestPublications.sanity'
 import type { LATEST_PUBLICATIONS_QUERYResult } from '@/sanity/types'
 
@@ -16,6 +17,7 @@ const loading = computed(
 )
 // const error = computed(() => status?.value === 'error')
 
+const news = computed(() => data?.value?.news || [])
 const showcase = computed(() => data?.value?.showcase || [])
 </script>
 
@@ -40,6 +42,24 @@ const showcase = computed(() => data?.value?.showcase || [])
         <h2 class="font-title font-bold text-[48px] uppercase">
           {{ $t('home.latestNews') }}
         </h2>
+
+        <div
+          class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 xl:gap-12 py-6 md:py-12"
+        >
+          <TclPostCard
+            v-for="article in news"
+            :key="article.id"
+            :date="article.date"
+            :limited="article.limited"
+            :link="article.link || ''"
+            :metadata="article.metadata"
+            :premium="article.premium"
+            :tags="article.tags as Tag[]"
+            target="_blank"
+            :title="article.title || ''"
+            :visual="article.visual"
+          />
+        </div>
       </div>
     </template>
   </div>

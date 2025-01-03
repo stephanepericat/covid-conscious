@@ -1,10 +1,10 @@
 <script setup lang="ts">
-defineProps({
-  description: { type: String, required: true },
-  image: { type: String, default: null },
-  imageType: { type: String, default: null },
-  title: { type: String, required: true },
-})
+defineProps<{
+  description: string
+  image?: string
+  imageType?: string
+  title: string
+}>()
 
 const { locale } = useI18n()
 </script>

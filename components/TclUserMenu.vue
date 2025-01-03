@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useSignOut } from '@/composables/useSignOut'
 
-defineProps({
-  loggedIn: Boolean,
-})
+defineProps<{
+  loggedIn?: boolean
+}>()
 
 const localePath = useLocalePath()
 const { signOut } = useSignOut()
