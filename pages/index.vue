@@ -5,12 +5,18 @@ import type { LATEST_PUBLICATIONS_QUERYResult } from '@/sanity/types'
 const host = computed(() => window?.location?.origin || '')
 const { locale } = useI18n()
 
-const { data } = await useLazySanityQuery<LATEST_PUBLICATIONS_QUERYResult>(
-  LATEST_PUBLICATIONS_QUERY,
-  { locale },
-)
+const { data, status } =
+  await useLazySanityQuery<LATEST_PUBLICATIONS_QUERYResult>(
+    LATEST_PUBLICATIONS_QUERY,
+    { locale },
+  )
 
-const showcase = computed(() => data?.value?.showcase ?? [])
+const loading = computed(
+  () => status?.value === 'pending' || status?.value === 'idle',
+)
+// const error = computed(() => status?.value === 'error')
+
+const showcase = computed(() => data?.value?.showcase || [])
 </script>
 
 <template>
@@ -21,14 +27,20 @@ const showcase = computed(() => data?.value?.showcase ?? [])
       image-type="image/jpeg"
       :title="$t('layout.home')"
     />
-    <TclShowcase
-      class="container mx-auto my-4 md:my-8 lg:my-12"
-      :docs="showcase"
-    />
-    <div class="container">
-      <h2 class="font-title font-bold text-[48px] uppercase">
-        {{ $t('home.latestNews') }}
-      </h2>
-    </div>
+
+    <TclLoader v-if="loading" />
+
+    <template v-else>
+      <TclShowcase
+        class="container mx-auto my-4 md:my-8 lg:my-12"
+        :docs="showcase"
+      />
+
+      <div class="container">
+        <h2 class="font-title font-bold text-[48px] uppercase">
+          {{ $t('home.latestNews') }}
+        </h2>
+      </div>
+    </template>
   </div>
 </template>
