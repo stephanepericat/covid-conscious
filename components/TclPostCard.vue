@@ -5,7 +5,6 @@ import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
 
 defineProps<{
-  className?: string
   date?: Date | string | null
   description?: string
   end?: Date | string | null

@@ -2,7 +2,6 @@
 import type { Tag } from '@/lib/types'
 
 defineProps<{
-  className?: string
   free?: boolean
   limited?: boolean
   premium?: boolean

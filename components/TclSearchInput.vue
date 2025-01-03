@@ -19,7 +19,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
 </script>
 
 <template>
-  <form className="ml-auto flex-1 sm:flex-initial">
+  <form class="ml-auto flex-1 sm:flex-initial">
     <div class="relative w-full max-w-sm items-center">
       <Input
         v-model="modelValue"
