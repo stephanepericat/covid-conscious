@@ -51,12 +51,12 @@ const showcase = computed(() => data?.value?.showcase || [])
             :key="article.id"
             :date="article.date"
             :limited="article.limited"
-            :link="article.link || ''"
+            :link="<string>article.link"
             :metadata="article.metadata"
             :premium="article.premium"
-            :tags="article.tags as Tag[]"
+            :tags="<Tag[]>article.tags"
             target="_blank"
-            :title="article.title || ''"
+            :title="<string>article.title"
             :visual="article.visual"
           />
         </div>
