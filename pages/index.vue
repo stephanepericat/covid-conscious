@@ -14,7 +14,7 @@ const showcase = computed(() => data?.value?.showcase ?? [])
 </script>
 
 <template>
-  <div className="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center items-center">
     <TclSeo
       :description="$t('layout.description')"
       :image="`${host}/tcl-fallback-169.jpg`"
@@ -25,5 +25,10 @@ const showcase = computed(() => data?.value?.showcase ?? [])
       class="container mx-auto my-4 md:my-8 lg:my-12"
       :docs="showcase"
     />
+    <div class="container">
+      <h2 class="font-title font-bold text-[48px] uppercase">
+        {{ $t('home.latestNews') }}
+      </h2>
+    </div>
   </div>
 </template>

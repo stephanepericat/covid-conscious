@@ -34,7 +34,7 @@ const spans = ref([
         )
       "
     >
-      <h3 className="peer absolute bottom-0 left-0 z-[1] m-3">
+      <h3 class="peer absolute bottom-0 left-0 z-[1] m-3">
         <span
           :class="
             cn(
@@ -49,7 +49,7 @@ const spans = ref([
         </span>
       </h3>
       <div
-        className="w-full h-full bg-cover bg-center transition-transform ease-out duration-200 scale-[1.07] hover:scale-[1.0] peer-has-[:hover]:scale-[1.0]"
+        class="w-full h-full bg-cover bg-center transition-transform ease-out duration-200 scale-[1.07] hover:scale-[1.0] peer-has-[:hover]:scale-[1.0]"
         :style="{
           backgroundImage: `url(${visual || '/tcl-fallback-169.jpg'})`,
         }"
