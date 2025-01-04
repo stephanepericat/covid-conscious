@@ -70,7 +70,7 @@ const videos = computed(() => data?.value?.videos || [])
           <TclMoreButton
             extra="w-full md:w-auto"
             :label="$t('home.seeAllNews')"
-            link="/news"
+            :link="localePath('/news')"
             target="_self"
           />
         </div>
@@ -105,9 +105,9 @@ const videos = computed(() => data?.value?.videos || [])
           </div>
           <div class="md:flex md:justify-center">
             <TclMoreButton
-              class="w-full md:w-auto"
+              extra="w-full md:w-auto"
               :label="$t('home.seeAllEvents')"
-              link="/event"
+              :link="localePath('/event')"
               target="_self"
             />
           </div>
@@ -120,13 +120,35 @@ const videos = computed(() => data?.value?.videos || [])
           <h2 class="font-title font-bold text-[48px] uppercase">
             {{ $t('home.videos') }}
           </h2>
-          <div class="flex w-full justify-center pt-6 md:pt-12">
+          <div class="flex flex-col w-full justify-center pt-6 md:pt-12">
             <TclVideoCarousel
               class="hidden md:block"
               :link="localePath('/video')"
               :see-all-label="$t('home.seeAllVideos')"
               :videos="videos"
             />
+            <div class="md:hidden grid gap-6 mb-6 w-full">
+              <TclPostCard
+                v-for="video in videos"
+                :key="video.id"
+                :date="video.date"
+                :description="video.description"
+                :link="<string>video.link"
+                :metadata="video.metadata"
+                :tags="<Tag[]>video.tags"
+                target="_self"
+                :title="<string>video.title"
+                :visual="video.visual"
+              />
+            </div>
+            <div class="w-full md:hidden">
+              <TclMoreButton
+                extra="w-full"
+                :label="$t('home.seeAllVideos')"
+                :link="localePath('/video')"
+                target="_self"
+              />
+            </div>
           </div>
         </div>
       </div>
