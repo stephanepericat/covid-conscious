@@ -5,6 +5,6 @@
       <NuxtPage />
     </TclBody>
     <Separator />
-    <TclFooter />
+    <TclFooter class="bg-muted" />
   </div>
 </template>

@@ -52,6 +52,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
     "phw": *[_type == 'public-health' && !(_id in path('drafts.**')) && language == $locale] | order(publicationDate desc)[0..4] {
       "id": _id,
       "date": publicationDate,
+      "description": null,
       "limited": coalesce(limitedAccess, false),
       "link": url,
       "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },

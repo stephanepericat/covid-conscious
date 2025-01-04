@@ -19,7 +19,9 @@ const loading = computed(
 // const error = computed(() => status?.value === 'error')
 
 const events = computed(() => data?.value?.events || [])
+const library = computed(() => data?.value?.library || [])
 const news = computed(() => data?.value?.news || [])
+const phw = computed(() => data?.value?.phw || [])
 const showcase = computed(() => data?.value?.showcase || [])
 const videos = computed(() => data?.value?.videos || [])
 </script>
@@ -120,7 +122,9 @@ const videos = computed(() => data?.value?.videos || [])
           <h2 class="font-title font-bold text-[48px] uppercase">
             {{ $t('home.videos') }}
           </h2>
-          <div class="flex flex-col w-full justify-center items-center pt-6 md:pt-12">
+          <div
+            class="flex flex-col w-full justify-center items-center pt-6 md:pt-12"
+          >
             <TclVideoCarousel
               class="hidden md:block max-w-[calc(100%-100px)] 2xl:max-w-full"
               :link="localePath('/video')"
@@ -150,6 +154,38 @@ const videos = computed(() => data?.value?.videos || [])
               />
             </div>
           </div>
+        </div>
+      </div>
+
+      <!-- PHW & LIBRARY -->
+      <div class="container py-6 md:py-12">
+        <h2 class="font-title font-bold text-[48px] uppercase">
+          {{ $t('home.library') }}
+        </h2>
+        <TclArticleBlock :articles="library" class="py-6 md:py-12" />
+        <div class="md:flex md:justify-center pb-6 md:pb-12">
+          <TclMoreButton
+            extra="w-full md:w-auto"
+            :label="$t('home.seeAllLibrary')"
+            :link="localePath('/scientific-library')"
+            target="_self"
+          />
+        </div>
+        <h2 class="font-title font-bold text-[48px] uppercase">
+          {{ $t('home.phw') }}
+        </h2>
+        <TclArticleBlock
+          :articles="phw"
+          class="py-6 md:py-12"
+          target="_blank"
+        />
+        <div class="md:flex md:justify-center pb-6 md:pb-12">
+          <TclMoreButton
+            extra="w-full md:w-auto"
+            :label="$t('home.seeAllPhw')"
+            :link="localePath('/public-health')"
+            target="_self"
+          />
         </div>
       </div>
     </template>
