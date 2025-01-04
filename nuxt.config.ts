@@ -149,6 +149,7 @@ export default defineNuxtConfig({
           'data:',
           'blob:',
           'cdn.sanity.io',
+          'yt0dcu6v.apicdn.sanity.io',
           'a.tile.openstreetmap.org',
           'b.tile.openstreetmap.org',
           'c.tile.openstreetmap.org',

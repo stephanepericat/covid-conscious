@@ -20,6 +20,7 @@ const loading = computed(
 const events = computed(() => data?.value?.events || [])
 const news = computed(() => data?.value?.news || [])
 const showcase = computed(() => data?.value?.showcase || [])
+const videos = computed(() => data?.value?.videos || [])
 </script>
 
 <template>
@@ -34,11 +35,13 @@ const showcase = computed(() => data?.value?.showcase || [])
     <TclLoader v-if="loading" />
 
     <template v-else>
+      <!-- SHOWCASE -->
       <TclShowcase
         class="container mx-auto my-4 md:my-8 lg:my-12"
         :docs="showcase"
       />
 
+      <!-- NEWS -->
       <div class="container">
         <h2 class="font-title font-bold text-[48px] uppercase">
           {{ $t('home.latestNews') }}
@@ -71,6 +74,8 @@ const showcase = computed(() => data?.value?.showcase || [])
           />
         </div>
       </div>
+
+      <!-- EVENTS -->
       <div v-if="events.length" class="bg-foreground w-full">
         <div class="container py-6 md:py-12">
           <h2
@@ -96,6 +101,26 @@ const showcase = computed(() => data?.value?.showcase || [])
               :title="<string>event.title"
               :visual="event.visual"
             />
+          </div>
+          <div class="md:flex md:justify-center">
+            <TclMoreButton
+              class="w-full md:w-auto"
+              :label="$t('home.seeAllEvents')"
+              link="/event"
+              target="_self"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- VIDEOS -->
+      <div class="bg-muted w-full">
+        <div class="container py-6 md:py-12">
+          <h2 class="font-title font-bold text-[48px] uppercase">
+            {{ $t('home.videos') }}
+          </h2>
+          <div class="flex w-full justify-center pt-6 md:pt-12">
+            <TclVideoCarousel />
           </div>
         </div>
       </div>
