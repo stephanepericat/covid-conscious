@@ -12,7 +12,7 @@ defineProps<{
 
 <template>
   <Carousel
-    class="w-full"
+    class="relative w-full"
     :opts="{
       align: 'start',
     }"

@@ -120,9 +120,9 @@ const videos = computed(() => data?.value?.videos || [])
           <h2 class="font-title font-bold text-[48px] uppercase">
             {{ $t('home.videos') }}
           </h2>
-          <div class="flex flex-col w-full justify-center pt-6 md:pt-12">
+          <div class="flex flex-col w-full justify-center items-center pt-6 md:pt-12">
             <TclVideoCarousel
-              class="hidden md:block"
+              class="hidden md:block max-w-[calc(100%-100px)] 2xl:max-w-full"
               :link="localePath('/video')"
               :see-all-label="$t('home.seeAllVideos')"
               :videos="videos"
