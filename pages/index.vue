@@ -17,6 +17,7 @@ const loading = computed(
 )
 // const error = computed(() => status?.value === 'error')
 
+const events = computed(() => data?.value?.events || [])
 const news = computed(() => data?.value?.news || [])
 const showcase = computed(() => data?.value?.showcase || [])
 </script>
@@ -68,6 +69,34 @@ const showcase = computed(() => data?.value?.showcase || [])
             link="/news"
             target="_self"
           />
+        </div>
+      </div>
+      <div v-if="events.length" class="bg-foreground w-full">
+        <div class="container py-6 md:py-12">
+          <h2
+            class="font-title font-bold text-[48px] text-background uppercase"
+          >
+            {{ $t('home.events') }}
+          </h2>
+          <div
+            class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 xl:gap-12 py-6 md:py-12"
+          >
+            <TclPostCard
+              v-for="event in events"
+              :key="event.id"
+              class="bg-muted"
+              :date="event.date"
+              :end="event.end"
+              :description="event.description"
+              :free="event.free"
+              :link="<string>event.link"
+              :metadata="event.metadata"
+              :tags="<Tag[]>event.tags"
+              target="_self"
+              :title="<string>event.title"
+              :visual="event.visual"
+            />
+          </div>
         </div>
       </div>
     </template>

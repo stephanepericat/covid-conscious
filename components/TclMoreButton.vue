@@ -13,7 +13,10 @@ const localePath = useLocalePath()
 </script>
 
 <template>
-  <NuxtLink :to="target === '_blank' ? link : localePath(link)" :target="target || '_self'">
+  <NuxtLink
+    :to="target === '_blank' ? link : localePath(link)"
+    :target="target || '_self'"
+  >
     <Button :class="cn('group', extra)">
       {{ label }}&nbsp;
       <!-- <ArrowRight
