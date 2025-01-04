@@ -5,6 +5,7 @@ import type { LATEST_PUBLICATIONS_QUERYResult } from '@/sanity/types'
 
 const host = computed(() => window?.location?.origin || '')
 const { locale } = useI18n()
+const localePath = useLocalePath()
 
 const { data, status } =
   await useLazySanityQuery<LATEST_PUBLICATIONS_QUERYResult>(
@@ -120,7 +121,12 @@ const videos = computed(() => data?.value?.videos || [])
             {{ $t('home.videos') }}
           </h2>
           <div class="flex w-full justify-center pt-6 md:pt-12">
-            <TclVideoCarousel />
+            <TclVideoCarousel
+              class="hidden md:block"
+              :link="localePath('/video')"
+              :see-all-label="$t('home.seeAllVideos')"
+              :videos="videos"
+            />
           </div>
         </div>
       </div>
