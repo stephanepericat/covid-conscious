@@ -24,11 +24,15 @@ defineProps<{
 }>()
 
 const { locale } = useI18n()
+const localePath = useLocalePath()
 </script>
 
 <template>
   <Card class="overflow-hidden group">
-    <NuxtLink :to="link" :target="target">
+    <NuxtLink
+      :to="target === '_blank' ? link : localePath(link)"
+      :target="target"
+    >
       <CardHeader class="p-0 pb-6">
         <SanityImage
           v-if="visual"
@@ -47,7 +51,7 @@ const { locale } = useI18n()
       <h3 class="font-title text-2xl mb-3">
         <NuxtLink
           class="transition-colors duration-200 hover:text-primary"
-          :href="link"
+          :to="target === '_blank' ? link : localePath(link)"
           :target="target"
         >
           {{ title }}

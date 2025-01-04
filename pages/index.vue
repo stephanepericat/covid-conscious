@@ -60,6 +60,15 @@ const showcase = computed(() => data?.value?.showcase || [])
             :visual="article.visual"
           />
         </div>
+
+        <div class="md:flex md:justify-center pb-6 md:pb-12">
+          <TclMoreButton
+            extra="w-full md:w-auto"
+            :label="$t('home.seeAllNews')"
+            link="/news"
+            target="_self"
+          />
+        </div>
       </div>
     </template>
   </div>
