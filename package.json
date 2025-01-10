@@ -33,7 +33,7 @@
     "@vitest/coverage-v8": "^1.0.4",
     "@vue/test-utils": "^2.4.6",
     "happy-dom": "^12.9.1",
-    "prisma": "^6.0.1",
+    "prisma": "^6.2.1",
     "sass": "^1.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
