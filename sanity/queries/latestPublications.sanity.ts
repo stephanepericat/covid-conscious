@@ -10,7 +10,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
       "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",
       "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
       "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
-      "title": coalesce(title[$locale], title['${BASE_LANGUAGE}'], ''),
+      "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, ''),
       "type": _type,
       "visual": visual.asset._ref,
     },
