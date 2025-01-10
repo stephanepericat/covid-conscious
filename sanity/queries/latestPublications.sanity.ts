@@ -132,7 +132,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
   },
   // BLOG
   "blog": *[(_type == "blog") && !(_id in path('drafts.**'))] | order(_createdAt asc)[0..2] {
-    "title": coalesce(title[$locale], title['${baseLanguage}'], ''),
+    "title": coalesce(title[_key == $locale][0].value, title[_key == '${baseLanguage}'][0].value, ''),
     "published": _createdAt,
     "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "category": coalesce(tags[0]->name[$locale], tags[0]->name['${baseLanguage}'], null),
