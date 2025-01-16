@@ -168,7 +168,7 @@ export default defineNuxtConfig({
         ],
         'connect-src': [
           "'self'",
-          'https://*.posthog.com',
+          'https://*.i.posthog.com',
         ],
       },
       crossOriginEmbedderPolicy: 'unsafe-none',
