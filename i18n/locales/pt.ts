@@ -645,4 +645,19 @@ export default {
       title: 'That Covid Life',
     },
   },
+  description: {
+    covidnet: 'Uma lista selecionada de blogs e canais do YouTube sobre a COVID-19.',
+    directory:
+      'Um diretório de empresas e provedores de saúde preocupados com a COVID.',
+    event: 'Eventos futuros e passados ​​sobre a COVID-19.',
+    'scientific-library':
+      'As últimas pesquisas e artigos científicos sobre a COVID-19.',
+    news: 'As últimas notícias sobre a COVID-19.',
+    product:
+      'Uma lista de equipamentos de proteção individual, como máscaras, purificadores de ar, etc...',
+    'public-health':
+      'As últimas notícias sobre pandemias emergentes, como Mpox e H5N1.',
+    resource: 'Uma lista de recursos úteis sobre a COVID-19.',
+    video: 'Os últimos vídeos sobre a COVID-19.',
+  },
 }

@@ -46,7 +46,9 @@ const videos = computed(() => data?.value?.videos || [])
 
       <!-- NEWS -->
       <div class="container">
-        <h2 class="font-title font-bold text-[48px] uppercase">
+        <h2
+          class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
+        >
           {{ $t('home.latestNews') }}
         </h2>
 
@@ -82,7 +84,7 @@ const videos = computed(() => data?.value?.videos || [])
       <div v-if="events.length" class="bg-foreground w-full">
         <div class="container py-6 md:py-12">
           <h2
-            class="font-title font-bold text-[48px] text-background uppercase"
+            class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl text-background uppercase"
           >
             {{ $t('home.events') }}
           </h2>
@@ -119,7 +121,9 @@ const videos = computed(() => data?.value?.videos || [])
       <!-- VIDEOS -->
       <div class="bg-muted w-full">
         <div class="container py-6 md:py-12">
-          <h2 class="font-title font-bold text-[48px] uppercase">
+          <h2
+            class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
+          >
             {{ $t('home.videos') }}
           </h2>
           <div
@@ -159,7 +163,9 @@ const videos = computed(() => data?.value?.videos || [])
 
       <!-- PHW & LIBRARY -->
       <div class="container py-6 md:py-12">
-        <h2 class="font-title font-bold text-[48px] uppercase">
+        <h2
+          class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
+        >
           {{ $t('home.library') }}
         </h2>
         <TclArticleBlock :articles="library" class="py-6 md:py-12" />
@@ -171,7 +177,9 @@ const videos = computed(() => data?.value?.videos || [])
             target="_self"
           />
         </div>
-        <h2 class="font-title font-bold text-[48px] uppercase">
+        <h2
+          class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
+        >
           {{ $t('home.phw') }}
         </h2>
         <TclArticleBlock

@@ -635,4 +635,19 @@ export default {
       title: 'That Covid Life',
     },
   },
+  description: {
+    covidnet: 'A curated list of blogs and youtube channels about COVID-19.',
+    directory:
+      'A directory of covid-conscious businesses and healthcare providers.',
+    event: 'Upcoming and past events around COVID-19.',
+    'scientific-library':
+      'The latest research and scientific papers on COVID-19.',
+    news: 'The latest news about COVID-19.',
+    product:
+      'A list of personal protective equipments, such as masks, air purifiers, etc...',
+    'public-health':
+      'The latest news on emerging pandemics, such as Mpox and H5N1.',
+    resource: 'A list of useful resources around COVID-19.',
+    video: 'The latest videos about COVID-19.',
+  },
 }
