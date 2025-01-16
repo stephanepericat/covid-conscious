@@ -162,6 +162,8 @@ export default defineNuxtConfig({
         ],
         'script-src': [
           "'self'",
+          'unsafe-inline',
+          'https://vercel.live',
           'https://*.posthog.com',
         ],
         'connect-src': [
