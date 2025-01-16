@@ -158,6 +158,7 @@ export default defineNuxtConfig({
           'c.tile.openstreetmap.org',
           'gravatar.com',
           '*.ytimg.com',
+          '*.i.posthog.com'
         ],
       },
       crossOriginEmbedderPolicy: 'unsafe-none',
