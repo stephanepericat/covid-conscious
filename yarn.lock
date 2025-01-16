@@ -1435,6 +1435,13 @@
   dependencies:
     "@iconify/types" "*"
 
+"@iconify-json/ion@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/ion/-/ion-1.2.2.tgz#ec1afaa19b82c2856eaa6a0ec976209538cd1bae"
+  integrity sha512-GysHYDAyy3K4R2Xxsab3I0ZFmQA4oorfIkwX0g6xfZJNVZcFyAlA4pa1jAJC9Bk3cLiWUtnN8ZyWs6cP3nxlnw==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/lets-icons@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@iconify-json/lets-icons/-/lets-icons-1.2.1.tgz#011aa8780593c2f4ddb8c93380830cfa512339bb"
@@ -5291,6 +5298,11 @@ core-js-compat@^3.38.0, core-js-compat@^3.38.1:
   dependencies:
     browserslist "^4.24.3"
 
+core-js@^3.38.1:
+  version "3.40.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.40.0.tgz#2773f6b06877d8eda102fc42f828176437062476"
+  integrity sha512-7vsMc/Lty6AGnn7uFpYT56QesI5D2Y/UkgKounk87OP9Z2H9Z8kj6jzcSGAxFmUtDOS0ntK6lbQz+Nsa0Jj6mQ==
+
 core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
@@ -6264,6 +6276,11 @@ feed@^4.2.2:
   integrity sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==
   dependencies:
     xml-js "^1.6.11"
+
+fflate@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
+  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
 
 fflate@^0.7.3:
   version "0.7.4"
@@ -9279,6 +9296,21 @@ postcss@^8.4.43, postcss@^8.4.47, postcss@^8.4.48, postcss@^8.4.49:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
+posthog-js@^1.206.1:
+  version "1.206.1"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.206.1.tgz#5551c8e9344ded2a9ba6fa48b3ddb867b21f4631"
+  integrity sha512-Ov/aGKORlukofKB9+cHQs1bRM5BXwALPVr8e4eOO7gLm2kSnQ32ZhYaP3kGGt6ClUyQxAPbFiS7v1R/BW5j8tQ==
+  dependencies:
+    core-js "^3.38.1"
+    fflate "^0.4.8"
+    preact "^10.19.3"
+    web-vitals "^4.2.0"
+
+preact@^10.19.3:
+  version "10.25.4"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.25.4.tgz#c1d00bee9d7b9dcd06a2311d9951973b506ae8ac"
+  integrity sha512-jLdZDb+Q+odkHJ+MpW/9U5cODzqnB+fy2EiHSZES7ldV5LK7yjlVzTp7R8Xy6W6y75kfK8iWYtFVH7lvjwrCMA==
+
 prebuild-install@^7.1.1:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/prebuild-install/-/prebuild-install-7.1.2.tgz#a5fd9986f5a6251fbc47e1e5c65de71e68c0a056"
@@ -11410,6 +11442,11 @@ vue@^3.4, vue@^3.5.13, vue@latest:
     "@vue/runtime-dom" "3.5.13"
     "@vue/server-renderer" "3.5.13"
     "@vue/shared" "3.5.13"
+
+web-vitals@^4.2.0:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-4.2.4.tgz#1d20bc8590a37769bd0902b289550936069184b7"
+  integrity sha512-r4DIlprAGwJ7YM11VZp4R884m0Vmgr6EAKe3P+kO0PPj3Unqyvv59rczf6UiGcb9Z8QxZVcqKNwv/g0WNdWwsw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
