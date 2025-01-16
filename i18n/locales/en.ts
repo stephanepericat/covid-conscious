@@ -636,6 +636,8 @@ export default {
     },
   },
   description: {
+    blog: 'The latest news from the editorial team.',
+    forum: 'A user forum to exchange tips, experiences and testimonies.',
     covidnet: 'A curated list of blogs and youtube channels about COVID-19.',
     directory:
       'A directory of covid-conscious businesses and healthcare providers.',

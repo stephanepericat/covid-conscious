@@ -646,6 +646,8 @@ export default {
     },
   },
   description: {
+    blog: 'As últimas notícias da equipe editorial.',
+    forum: 'Um fórum de usuários para trocar dicas, experiências e depoimentos.',
     covidnet: 'Uma lista selecionada de blogs e canais do YouTube sobre a COVID-19.',
     directory:
       'Um diretório de empresas e provedores de saúde preocupados com a COVID.',
