@@ -653,8 +653,10 @@ export default {
   },
   description: {
     blog: 'Las últimas novedades de la redacción.',
-    forum: 'Un foro de usuarios para intercambiar consejos, experiencias y testimonios.',
-    covidnet: 'Una lista seleccionada de blogs y canales de YouTube sobre la COVID-19.',
+    forum:
+      'Un foro de usuarios para intercambiar consejos, experiencias y testimonios.',
+    covidnet:
+      'Una lista seleccionada de blogs y canales de YouTube sobre la COVID-19.',
     directory:
       'Un directorio de empresas y proveedores de atención médica conscientes de la COVID-19.',
     event: 'Próximos y pasados ​​eventos en torno a la COVID-19.',

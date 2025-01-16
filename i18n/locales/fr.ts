@@ -656,16 +656,18 @@ export default {
   },
   description: {
     blog: 'Les dernières nouvelles de la rédaction.',
-    forum: 'Un forum d\'utilisateurs pour échanger des conseils, des expériences et des témoignages.',
-    covidnet: 'Une liste organisée de blogs et de chaînes YouTube sur le COVID-19.',
+    forum:
+      "Un forum d'utilisateurs pour échanger des conseils, des expériences et des témoignages.",
+    covidnet:
+      'Une liste organisée de blogs et de chaînes YouTube sur le COVID-19.',
     directory:
-      'Un répertoire d\'entreprises et de prestataires de soins de santé conscients du COVID.',
+      "Un répertoire d'entreprises et de prestataires de soins de santé conscients du COVID.",
     event: 'Événements à venir et passés autour de la COVID-19.',
     'scientific-library':
       'Les dernières recherches et articles scientifiques sur la COVID-19.',
     news: 'Les dernières nouvelles sur la COVID-19.',
     product:
-      'Une liste d\'équipements de protection individuelle, tels que des masques, des purificateurs d\'air, etc...',
+      "Une liste d'équipements de protection individuelle, tels que des masques, des purificateurs d'air, etc...",
     'public-health':
       'Les dernières nouvelles sur les pandémies émergentes, telles que la variole et le H5N1.',
     resource: 'Une liste de ressources utiles autour du COVID-19.',
