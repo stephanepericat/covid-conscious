@@ -158,7 +158,7 @@ export default defineNuxtConfig({
           'c.tile.openstreetmap.org',
           'gravatar.com',
           '*.ytimg.com',
-          'https://*.posthog.com'
+          'https://*.i.posthog.com'
         ],
         'script-src': [
           "'self'",
