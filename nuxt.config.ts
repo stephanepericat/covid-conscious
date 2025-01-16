@@ -118,10 +118,6 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    public: {
-      posthogPublicKey: process.env.POSTHOG_PUBLIC_KEY,
-      posthogHost: process.env.POSTHOG_HOST,
-    },
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
@@ -158,17 +154,6 @@ export default defineNuxtConfig({
           'c.tile.openstreetmap.org',
           'gravatar.com',
           '*.ytimg.com',
-          'https://*.i.posthog.com'
-        ],
-        'script-src': [
-          "'self'",
-          "'unsafe-inline'",
-          'https://vercel.live',
-          'https://*.posthog.com',
-        ],
-        'connect-src': [
-          "'self'",
-          'https://*.i.posthog.com',
         ],
       },
       crossOriginEmbedderPolicy: 'unsafe-none',
