@@ -1,10 +1,12 @@
-<script>
+<script setup lang="ts">
 // const onResetFilters = () => {
 //   console.log('reset filters')
+//   umTrackEvent('filter:reset')
 // }
 
 const onUpdateFilters = () => {
   console.log('update filters')
+  umTrackEvent('update:filter')
 }
 </script>
 

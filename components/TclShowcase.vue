@@ -13,6 +13,8 @@ const spans = ref([
   'md:col-span-2 md:row-span-3',
   'md:col-span-2 md:row-span-2',
 ])
+
+const onClick = (link: string) => umTrackEvent('click:showcase', { link })
 </script>
 
 <template>
@@ -30,6 +32,7 @@ const spans = ref([
           spans[index],
         )
       "
+      @click="() => onClick(`${link}`)"
     >
       <h3 class="peer absolute bottom-0 left-0 z-[1] m-3">
         <span

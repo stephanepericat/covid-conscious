@@ -7,6 +7,8 @@ defineProps<{
 
 const localePath = useLocalePath()
 const { signOut } = useSignOut()
+
+const onClick = (linkName: string) => umTrackEvent('click:user', { linkName })
 </script>
 
 <template>
@@ -22,14 +24,18 @@ const { signOut } = useSignOut()
       <DropdownMenuSeparator />
       <template v-if="loggedIn">
         <DropdownMenuItem>
-          <NuxtLink :to="localePath('/bookmarks')">{{
-            $t('layout.user.bookmarks')
-          }}</NuxtLink>
+          <NuxtLink
+            :to="localePath('/bookmarks')"
+            @click="() => onClick('bookmarks')"
+            >{{ $t('layout.user.bookmarks') }}</NuxtLink
+          >
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <NuxtLink :to="localePath('/user/account')">{{
-            $t('layout.user.settings')
-          }}</NuxtLink>
+          <NuxtLink
+            :to="localePath('/user/account')"
+            @click="() => onClick('account')"
+            >{{ $t('layout.user.settings') }}</NuxtLink
+          >
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem @click="() => signOut()">
@@ -37,7 +43,9 @@ const { signOut } = useSignOut()
         </DropdownMenuItem>
       </template>
       <DropdownMenuItem v-else>
-        <a href="/auth/auth0">{{ $t('layout.user.signIn') }}</a>
+        <a href="/auth/auth0" @click="() => onClick('sign-in')">{{
+          $t('layout.user.signIn')
+        }}</a>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

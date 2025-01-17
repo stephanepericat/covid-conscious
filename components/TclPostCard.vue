@@ -25,6 +25,8 @@ defineProps<{
 
 const { locale } = useI18n()
 const localePath = useLocalePath()
+
+const onClick = (link: string) => umTrackEvent('click:article', { link })
 </script>
 
 <template>
@@ -32,6 +34,7 @@ const localePath = useLocalePath()
     <NuxtLink
       :to="target === '_blank' ? link : localePath(link)"
       :target="target"
+      @click="() => onClick(link)"
     >
       <CardHeader class="p-0 pb-6">
         <SanityImage
@@ -53,6 +56,7 @@ const localePath = useLocalePath()
           class="transition-colors duration-200 hover:text-primary"
           :to="target === '_blank' ? link : localePath(link)"
           :target="target"
+          @click="() => onClick(link)"
         >
           {{ title }}
         </NuxtLink>

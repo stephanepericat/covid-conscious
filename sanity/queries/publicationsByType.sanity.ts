@@ -32,7 +32,10 @@ const PUBLICATION_BY_TYPE_QUERY = groq`
     // "onlineOnly": onlineOnly,
     // "free": isEventFree,
     "id": _id,
+    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, [])), "")[0..512], "") + "...",
+    "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, title[_key == ^.language][0].value, title[$locale], title['${BASE_LANGUAGE}'], title, null),
+    "visual": visual.asset._ref,
   },
   "total": count(*[_type == $articleType])
 }
