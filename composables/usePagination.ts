@@ -4,6 +4,7 @@ export const usePagination = () => {
 
   const limit = computed(() => parseInt(route.query?.limit as string) || 5)
   const offset = computed(() => parseInt(route.query?.offset as string) || 0)
+  const currentPage = computed(() => offset.value / limit.value + 1)
 
   const onPreviousPage = (e: Event) => {
     e.preventDefault()
@@ -24,6 +25,7 @@ export const usePagination = () => {
   }
 
   return {
+    currentPage,
     limit,
     offset,
     onNextPage,

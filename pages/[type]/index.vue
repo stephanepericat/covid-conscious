@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { usePagination } from '@/composables/usePagination'
 
-const { limit, offset, onNextPage, onPreviousPage, route } = usePagination()
+const { currentPage, limit, offset, onNextPage, onPreviousPage, route } =
+  usePagination()
 const type = computed(() => route.params.type || null)
 </script>
 
@@ -23,7 +24,11 @@ const type = computed(() => route.params.type || null)
       <TclFiltersSheet />
     </div>
     <section class="mt-4 md:mt-8">
-      contents (offset: {{ offset }}, limit: {{ limit }}) |
+      <ul>
+        <li>OFFSET: {{ offset }}</li>
+        <li>LIMIT: {{ limit }}</li>
+        <li>CURRENT PAGE: {{ currentPage }}</li>
+      </ul>
       <button :onClick="onPreviousPage">previous page</button> |
       <button :onClick="onNextPage">next page</button>
     </section>
