@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
 import { usePagination } from '@/composables/usePagination'
 
 const {
@@ -10,7 +11,24 @@ const {
   resetPagination,
   route,
 } = usePagination()
+
+const { locale } = useI18n()
+
 const type = computed(() => route.params.type || null)
+const start = computed(() => offset.value)
+const end = computed(() => offset.value + (limit.value - 1))
+
+const { data, error, pending } = await useLazySanityQuery(
+  PUBLICATION_BY_TYPE_QUERY,
+  {
+    start,
+    end,
+    locale,
+    type,
+  },
+)
+
+console.log('call', data.value)
 </script>
 
 <template>
@@ -36,9 +54,12 @@ const type = computed(() => route.params.type || null)
         <li>LIMIT: {{ limit }}</li>
         <li>CURRENT PAGE: {{ currentPage }}</li>
       </ul>
-      <button :onClick="onPreviousPage">previous page</button> |
-      <button :onClick="onNextPage">next page</button> |
-      <button :onClick="resetPagination">reset</button>
+      <div>
+        <button :onClick="onPreviousPage">previous page</button> |
+        <button :onClick="onNextPage">next page</button> |
+        <button :onClick="resetPagination">reset</button>
+      </div>
+      <pre>DATA: {{ data }}</pre>
     </section>
   </div>
 </template>
