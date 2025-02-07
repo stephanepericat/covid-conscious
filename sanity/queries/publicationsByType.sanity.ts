@@ -1,7 +1,6 @@
 import groq from 'groq'
 import { BASE_LANGUAGE } from '../../assets/constants/base-language'
 
-// TODO: pagination when dataset gets too large... https://www.sanity.io/docs/paginating-with-groq
 const PUBLICATION_BY_TYPE_QUERY = groq`
 {
   "results": *[_type == $type && !(_id in path('drafts.**'))] | order(publicationDate desc, _createdAt desc)[$start..$end] {

@@ -2,6 +2,8 @@
 import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
 import { usePagination } from '@/composables/usePagination'
 
+import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
+
 const {
   currentPage,
   limit,
@@ -18,17 +20,18 @@ const type = computed(() => route.params.type || null)
 const start = computed(() => offset.value)
 const end = computed(() => offset.value + (limit.value - 1))
 
-const { data, error, pending } = await useLazySanityQuery(
-  PUBLICATION_BY_TYPE_QUERY,
-  {
-    start,
-    end,
-    locale,
-    type,
-  },
-)
+const { data, error, pending } =
+  await useLazySanityQuery<PUBLICATION_BY_TYPE_QUERYResult>(
+    PUBLICATION_BY_TYPE_QUERY,
+    {
+      start,
+      end,
+      locale,
+      type,
+    },
+  )
 
-console.log('call', data.value)
+const total = computed(() => data.value?.info?.total || 0)
 </script>
 
 <template>
@@ -53,13 +56,14 @@ console.log('call', data.value)
         <li>OFFSET: {{ offset }}</li>
         <li>LIMIT: {{ limit }}</li>
         <li>CURRENT PAGE: {{ currentPage }}</li>
+        <li>TOTAL: {{ total }}</li>
       </ul>
       <div>
         <button :onClick="onPreviousPage">previous page</button> |
         <button :onClick="onNextPage">next page</button> |
         <button :onClick="resetPagination">reset</button>
       </div>
-      <pre>DATA: {{ data }}</pre>
+      <pre>{{ data }}</pre>
     </section>
   </div>
 </template>
