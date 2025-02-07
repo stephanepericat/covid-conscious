@@ -60,7 +60,8 @@ const total = computed(() => data.value?.info?.total || 0)
       </ul>
       <div>
         <button :onClick="onPreviousPage">previous page</button> |
-        <button :onClick="onNextPage">next page</button> |
+        <button :onClick="(e) => onNextPage(e, total)">next page</button>
+        |
         <button :onClick="resetPagination">reset</button>
       </div>
       <pre>{{ data }}</pre>

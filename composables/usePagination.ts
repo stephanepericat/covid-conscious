@@ -25,12 +25,15 @@ export const usePagination = () => {
     go(limit.value, previousOffset)
   }
 
-  const onNextPage = (e: Event) => {
+  const onNextPage = (e: Event, total: number) => {
     e.preventDefault()
 
-    // TODO: total
-
     const nextOffset = offset.value + limit.value
+
+    if (nextOffset >= total) {
+      return
+    }
+
     go(limit.value, nextOffset)
   }
 
