@@ -1,8 +1,15 @@
 <script setup lang="ts">
 import { usePagination } from '@/composables/usePagination'
 
-const { currentPage, limit, offset, onNextPage, onPreviousPage, route } =
-  usePagination()
+const {
+  currentPage,
+  limit,
+  offset,
+  onNextPage,
+  onPreviousPage,
+  resetPagination,
+  route,
+} = usePagination()
 const type = computed(() => route.params.type || null)
 </script>
 
@@ -30,7 +37,8 @@ const type = computed(() => route.params.type || null)
         <li>CURRENT PAGE: {{ currentPage }}</li>
       </ul>
       <button :onClick="onPreviousPage">previous page</button> |
-      <button :onClick="onNextPage">next page</button>
+      <button :onClick="onNextPage">next page</button> |
+      <button :onClick="resetPagination">reset</button>
     </section>
   </div>
 </template>

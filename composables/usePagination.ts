@@ -2,9 +2,17 @@ export const usePagination = () => {
   const route = useRoute()
   const router = useRouter()
 
-  const limit = computed(() => parseInt(route.query?.limit as string) || 5)
-  const offset = computed(() => parseInt(route.query?.offset as string) || 0)
+  const DEFAULT_LIMIT = 5
+  const DEFAULT_OFFSET = 0
+  const limit = computed(
+    () => parseInt(route.query?.limit as string) || DEFAULT_LIMIT,
+  )
+  const offset = computed(
+    () => parseInt(route.query?.offset as string) || DEFAULT_OFFSET,
+  )
   const currentPage = computed(() => offset.value / limit.value + 1)
+
+  const go = (l: number, o: number) => router.push(`?limit=${l}&offset=${o}`)
 
   const onPreviousPage = (e: Event) => {
     e.preventDefault()
@@ -14,14 +22,20 @@ export const usePagination = () => {
     }
 
     const previousOffset = offset.value - limit.value
-    router.push(`?offset=${previousOffset}&limit=${limit.value}`)
+    go(limit.value, previousOffset)
   }
 
   const onNextPage = (e: Event) => {
     e.preventDefault()
 
+    // TODO: total
+
     const nextOffset = offset.value + limit.value
-    router.push(`?offset=${nextOffset}&limit=${limit.value}`)
+    go(limit.value, nextOffset)
+  }
+
+  const resetPagination = () => {
+    go(DEFAULT_LIMIT, DEFAULT_OFFSET)
   }
 
   return {
@@ -30,6 +44,7 @@ export const usePagination = () => {
     offset,
     onNextPage,
     onPreviousPage,
+    resetPagination,
     route,
   }
 }
