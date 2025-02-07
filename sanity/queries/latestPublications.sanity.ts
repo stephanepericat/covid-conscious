@@ -9,7 +9,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
       "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
       "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",
       "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
-      "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
+      "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
       "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, ''),
       "type": _type,
       "visual": visual.asset._ref,
