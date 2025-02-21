@@ -213,7 +213,7 @@ export default {
       login: 'Sign In',
       signup: 'Create an account',
     },
-    description: 'We created this platform at no cost to you to promote education on public health and science and receive no financial return. We ask that you support us by signing up for a free account. Thank you',
+    description: 'We created this platform at no cost to you to promote education on public health and science and receive no financial return. We ask that you support us by signing up for a free account. Thank you.',
     title: 'You need to be logged in to access this content',
   },
   notFound: {
