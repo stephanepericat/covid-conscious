@@ -244,7 +244,7 @@ export default {
       login: "S'identifier",
       signup: 'Créer un compte',
     },
-    description: "La création d'un compte est gratuite, facile et sûre.",
+    description: "Nous avons créé cette plateforme sans frais pour vous afin de promouvoir l'éducation en matière de santé publique et de science et nous ne recevons aucun retour financier. Nous vous demandons de nous soutenir en créant un compte gratuit. Merci.",
     title: 'Vous devez être connecté pour accéder à ce contenu',
   },
   notFound: {
