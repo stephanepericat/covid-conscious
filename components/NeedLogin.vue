@@ -11,7 +11,7 @@ defineProps({
       name="streamline:programming-browser-key-secure-password-window-browser-key-security-login"
     />
     <h2 class="text-2xl text-center" v-text="$t('needLogin.title')" />
-    <p class="mb-8" v-text="$t('needLogin.description')" />
+    <p class="mb-8 text-center max-w-xl" v-text="$t('needLogin.description')" />
     <div>
       <IButton color="primary" :href="url">
         <template #icon>
