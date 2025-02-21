@@ -216,7 +216,7 @@ export default {
       login: 'Entrar',
       signup: 'Criar uma conta',
     },
-    description: 'A criação de uma conta é gratuita, fácil e segura.',
+    description: 'Criamos esta plataforma sem nenhum custo para você para promover a educação sobre saúde pública e ciência. Não recebemos nenhum retorno financeiro. Apoie-nos criando uma conta gratuita. Obrigado.',
     title: 'Você precisa estar conectado para acessar este conteúdo',
   },
   notFound: {
