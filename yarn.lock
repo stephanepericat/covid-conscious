@@ -1390,7 +1390,7 @@
   dependencies:
     "@floating-ui/utils" "^0.2.9"
 
-"@floating-ui/dom@^1.0.0", "@floating-ui/dom@^1.6.7":
+"@floating-ui/dom@^1.0.0", "@floating-ui/dom@^1.6.13", "@floating-ui/dom@^1.6.7":
   version "1.6.13"
   resolved "https://registry.yarnpkg.com/@floating-ui/dom/-/dom-1.6.13.tgz#a8a938532aea27a95121ec16e667a7cbe8c59e34"
   integrity sha512-umqzocjDgNRGTuO7Q8CU32dkHkECqI8ZdMZ5Swb6QAM0t5rnlrN3lGo1hdpscRd3WS8T6DKYK4ephgIH9iRh3w==
@@ -1403,7 +1403,7 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
   integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
 
-"@floating-ui/vue@^1.1.0":
+"@floating-ui/vue@^1.1.0", "@floating-ui/vue@^1.1.6":
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/@floating-ui/vue/-/vue-1.1.6.tgz#1c7e8f257fae5b71a72d10c1746e6b0ba338399c"
   integrity sha512-XFlUzGHGv12zbgHNk5FN2mUB7ROul3oG2ENdTpWdE+qMFxyNxWSRmsoyhiEnpmabNm6WnUvR1OvJfUfN4ojC1A==
@@ -1543,14 +1543,14 @@
   dependencies:
     "@iconify/types" "^2.0.0"
 
-"@internationalized/date@^3.5.4":
+"@internationalized/date@^3.5.0", "@internationalized/date@^3.5.4":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@internationalized/date/-/date-3.7.0.tgz#23a4956308ee108e308517a7137c69ab8f5f2ad9"
   integrity sha512-VJ5WS3fcVx0bejE/YHfbDKR/yawZgKqn/if+oEeLqNwBtPzVB06olkfcnojTmEMX+gTpH+FlQ69SHNitJ8/erQ==
   dependencies:
     "@swc/helpers" "^0.5.0"
 
-"@internationalized/number@^3.5.3":
+"@internationalized/number@^3.5.0", "@internationalized/number@^3.5.3":
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@internationalized/number/-/number-3.6.0.tgz#dc6ba20c41b25eb605f1d5cac7d8668e9022c224"
   integrity sha512-PtrRcJVy7nw++wn4W2OuePQQfTqDzfusSuY1QTtui4wa7r+rGVtR75pO8CyKvHvzyQYi3Q1uO5sY0AsB4e65Bw==
@@ -3430,10 +3430,34 @@
   dependencies:
     tslib "^2.8.0"
 
+"@tanstack/table-core@8.21.2":
+  version "8.21.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.21.2.tgz#dd57595a1773652bb6fb437e90a5f5386a49fd7e"
+  integrity sha512-uvXk/U4cBiFMxt+p9/G7yUWI/UbHYbyghLCjlpWZ3mLeIZiUBSKcUnw9UnKkdRz7Z/N4UBuFLWQdJCjUe7HjvA==
+
 "@tanstack/virtual-core@3.12.0":
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.12.0.tgz#f3de8b824f8c2f8a1bc81df08c796ae71aa9febc"
   integrity sha512-7mDINtua3v/pOnn6WUmuT9dPXYSO7WidFej7JzoAfqEOcbbpt/iZ1WPqd+eg+FnrL9nUJK8radqj4iAU51Zchg==
+
+"@tanstack/virtual-core@3.13.2":
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.13.2.tgz#132fde09a19cc4b10dff24a2df1fc7be40635866"
+  integrity sha512-Qzz4EgzMbO5gKrmqUondCjiHcuu4B1ftHb0pjCut661lXZdGoHeze9f/M8iwsK1t5LGR6aNuNGU7mxkowaW6RQ==
+
+"@tanstack/vue-table@^8.21.2":
+  version "8.21.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/vue-table/-/vue-table-8.21.2.tgz#1c9f0dcf8767455f63f29aa2332109af71af3c1d"
+  integrity sha512-KBgOWxha/x4m1EdhVWxOpqHb661UjqAxzPcmXR3QiA7aShZ547x19Gw0UJX9we+m+tVcPuLRZ61JsYW47QZFfQ==
+  dependencies:
+    "@tanstack/table-core" "8.21.2"
+
+"@tanstack/vue-virtual@^3.12.0":
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/@tanstack/vue-virtual/-/vue-virtual-3.13.2.tgz#8e4c5f6723133c76547b18da542aa2d3d78cb5db"
+  integrity sha512-z4swzjdhzCh95n9dw9lTvw+t3iwSkYRlVkYkra3C9mul/m5fTzHR7KmtkwH4qXMTXGJUbngtC/bz2cHQIHkO8g==
+  dependencies:
+    "@tanstack/virtual-core" "3.13.2"
 
 "@tanstack/vue-virtual@^3.8.1":
   version "3.12.0"
@@ -3596,6 +3620,11 @@
   version "0.0.20"
   resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.20.tgz#f066abfcd1cbe66267cdbbf0de010d8a41b41597"
   integrity sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==
+
+"@types/web-bluetooth@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@types/web-bluetooth/-/web-bluetooth-0.0.21.tgz#525433c784aed9b457aaa0ee3d92aeb71f346b63"
+  integrity sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==
 
 "@types/xml2js@^0.4.14":
   version "0.4.14"
@@ -4348,6 +4377,16 @@
     "@vueuse/shared" "11.3.0"
     vue-demi ">=0.14.10"
 
+"@vueuse/core@^12.8.2":
+  version "12.8.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-12.8.2.tgz#007c6dd29a7d1f6933e916e7a2f8ef3c3f968eaa"
+  integrity sha512-HbvCmZdzAu3VGi/pWYm5Ut+Kd9mn1ZHnn4L5G8kOQTPs/IwIAmJoBrmYk2ckLArgMXZj0AW3n5CAejLUO+PhdQ==
+  dependencies:
+    "@types/web-bluetooth" "^0.0.21"
+    "@vueuse/metadata" "12.8.2"
+    "@vueuse/shared" "12.8.2"
+    vue "^3.5.13"
+
 "@vueuse/integrations@^12.2.0":
   version "12.5.0"
   resolved "https://registry.yarnpkg.com/@vueuse/integrations/-/integrations-12.5.0.tgz#6496ea24772d087c8fec3973a471a6ab50f9e7c0"
@@ -4371,6 +4410,11 @@
   version "12.5.0"
   resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-12.5.0.tgz#8f1778a2894bdda2bf458054377a379d40276306"
   integrity sha512-Ui7Lo2a7AxrMAXRF+fAp9QsXuwTeeZ8fIB9wsLHqzq9MQk+2gMYE2IGJW48VMJ8ecvCB3z3GsGLKLbSasQ5Qlg==
+
+"@vueuse/metadata@12.8.2":
+  version "12.8.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/metadata/-/metadata-12.8.2.tgz#6cb3a4e97cdcf528329eebc1bda73cd7f64318d3"
+  integrity sha512-rAyLGEuoBJ/Il5AmFHiziCPdQzRt88VxR+Y/A/QhJ1EWtWqPBBAxTAFaSkviwEuOEZNtW8pvkPgoCZQ+HxqW1A==
 
 "@vueuse/nuxt@12.5.0", "@vueuse/nuxt@^12.2.0":
   version "12.5.0"
@@ -4401,6 +4445,13 @@
   version "12.5.0"
   resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-12.5.0.tgz#b93af7ab0fd6a8d879808c9bf37d540dac01da13"
   integrity sha512-vMpcL1lStUU6O+kdj6YdHDixh0odjPAUM15uJ9f7MY781jcYkIwFA4iv2EfoIPO6vBmvutI1HxxAwmf0cx5ISQ==
+  dependencies:
+    vue "^3.5.13"
+
+"@vueuse/shared@12.8.2", "@vueuse/shared@^12.5.0":
+  version "12.8.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-12.8.2.tgz#b9e4611d0603629c8e151f982459da394e22f930"
+  integrity sha512-dznP38YzxZoNloI0qpEfpkms8knDtaoQ6Y/sfS0L7Yki4zh40LFHEhur0odJC6xTHG5dxWVPiUWBXn+wCG2s5w==
   dependencies:
     vue "^3.5.13"
 
@@ -7834,6 +7885,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lucide-vue-next@^0.479.0:
+  version "0.479.0"
+  resolved "https://registry.yarnpkg.com/lucide-vue-next/-/lucide-vue-next-0.479.0.tgz#d47a9706bfa68f6ba5af0bf5266ffd658ee5f275"
+  integrity sha512-N+ILdUqN30XX39LgV2HI6PbbnFeyt3zCiNXxi9W4cUKOp7eZNTd4P/J9W351D+3xfiXnAaCZT2loxJOnMPYF5A==
+
 magic-regexp@^0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/magic-regexp/-/magic-regexp-0.8.0.tgz#c67de16456522a83672c22aa408b774facfd882e"
@@ -9690,6 +9746,22 @@ regjsparser@^0.12.0:
   dependencies:
     jsesc "~3.0.2"
 
+reka-ui@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/reka-ui/-/reka-ui-2.0.2.tgz#1a1991d24f9a346b70b268f8e4ae87ac3a511ff3"
+  integrity sha512-pC2UF6Z+kJF96aJvIErhkSO4DJYIeq9pgvh3pntNqcZb3zFGMzw8h2uny+GnLX2CKiQV54kZNYXxecYIiPMGyg==
+  dependencies:
+    "@floating-ui/dom" "^1.6.13"
+    "@floating-ui/vue" "^1.1.6"
+    "@internationalized/date" "^3.5.0"
+    "@internationalized/number" "^3.5.0"
+    "@tanstack/vue-virtual" "^3.12.0"
+    "@vueuse/core" "^12.5.0"
+    "@vueuse/shared" "^12.5.0"
+    aria-hidden "^1.2.4"
+    defu "^6.1.4"
+    ohash "^1.1.4"
+
 replace-in-file@^6.1.0:
   version "6.3.5"
   resolved "https://registry.yarnpkg.com/replace-in-file/-/replace-in-file-6.3.5.tgz#ff956b0ab5bc96613207d603d197cd209400a654"
@@ -10437,10 +10509,10 @@ tailwind-config-viewer@^2.0.4:
     portfinder "^1.0.26"
     replace-in-file "^6.1.0"
 
-tailwind-merge@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-3.0.1.tgz#0f0189966511ebcd63ef98d9eaf5607beb0d59d3"
-  integrity sha512-AvzE8FmSoXC7nC+oU5GlQJbip2UO7tmOhOfQyOmPhrStOGXHU08j8mZEHZ4BmCqY5dWTCo4ClWkNyRNx1wpT0g==
+tailwind-merge@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/tailwind-merge/-/tailwind-merge-3.0.2.tgz#567eff76de12211e24dd909da0f5ed6f4f422b0c"
+  integrity sha512-l7z+OYZ7mu3DTqrL88RiKrKIqO3NcpEO8V/Od04bNpvk0kiIFndGEoqfuzvj4yuhRkHKjRkII2z+KS2HfPcSxw==
 
 tailwindcss-animate@^1.0.7:
   version "1.0.7"
