@@ -59,7 +59,7 @@ const total = computed(() => data?.value?.info?.total || 0)
         <ClientOnly>
           <TclMedia
             v-for="article in data?.results"
-            v-key="article.id"
+            :key="article.id"
             :date="article.date"
             :description="article.description"
             :free="article.attributes.free"
