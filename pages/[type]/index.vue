@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { cn } from '@/lib/utils'
 import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
 import { usePagination } from '@/composables/usePagination'
 import { isExternalLink } from '@/assets/utils/article-types'
@@ -39,6 +40,8 @@ const loading = computed(
 
 const total = computed(() => data?.value?.info?.total || 0)
 const pages = computed(() => Math.ceil(total.value / limit.value))
+const previousPageDisabled = computed(() => currentPage.value === 1)
+const nextPageDisabled = computed(() => currentPage.value === pages.value)
 </script>
 
 <template>
@@ -81,8 +84,21 @@ const pages = computed(() => Math.ceil(total.value / limit.value))
         </ClientOnly>
       </div>
       <div>
-        <button :onClick="onPreviousPage">previous page</button> |
-        <button :onClick="(e) => onNextPage(e, total)">next page</button>
+        <button
+          :disabled="previousPageDisabled"
+          :onClick="onPreviousPage"
+          :class="cn(previousPageDisabled ? 'text-muted-foreground' : '')"
+        >
+          previous page
+        </button>
+        |
+        <button
+          :disabled="nextPageDisabled"
+          :onClick="(e) => onNextPage(e, total)"
+          :class="cn(nextPageDisabled ? 'text-muted-foreground' : '')"
+        >
+          next page
+        </button>
         |
         <button :onClick="resetPagination">reset</button>
         | <span>current page: {{ currentPage }} / {{ pages }}</span>
