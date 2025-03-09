@@ -22,7 +22,7 @@ const type = computed(() => route.params.type || null)
 const start = computed(() => offset.value)
 const end = computed(() => offset.value + (limit.value - 1))
 
-const { data, error, pending } =
+const { data, error, status } =
   await useLazySanityQuery<PUBLICATION_BY_TYPE_QUERYResult>(
     PUBLICATION_BY_TYPE_QUERY,
     {
@@ -32,6 +32,10 @@ const { data, error, pending } =
       type,
     },
   )
+
+const loading = computed(
+  () => status?.value === 'pending' || status?.value === 'idle',
+)
 
 const total = computed(() => data?.value?.info?.total || 0)
 </script>
@@ -54,7 +58,8 @@ const total = computed(() => data?.value?.info?.total || 0)
       <TclFiltersSheet />
     </div>
     <section class="mt-4 md:mt-8">
-      <div class="grid gap-4 md:gap-8 py-4 md:py-8" v-if="!pending">
+      <TclLoader v-if="loading" />
+      <div class="grid gap-4 md:gap-8 py-4 md:py-8" v-else>
         <!-- TODO: see if clientonly can be removed -->
         <ClientOnly>
           <TclMedia
