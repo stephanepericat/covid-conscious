@@ -37,6 +37,11 @@ export const usePagination = () => {
     go(limit.value, nextOffset)
   }
 
+  const onPageChange = (page: number) => {
+    const newOffset = (page - 1) * limit.value
+    go(limit.value, newOffset)
+  }
+
   const resetPagination = () => {
     go(DEFAULT_LIMIT, DEFAULT_OFFSET)
   }
@@ -46,6 +51,7 @@ export const usePagination = () => {
     limit,
     offset,
     onNextPage,
+    onPageChange,
     onPreviousPage,
     resetPagination,
     route,

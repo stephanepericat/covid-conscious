@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { cn } from '@/lib/utils'
 import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
 import { usePagination } from '@/composables/usePagination'
 import { isExternalLink } from '@/assets/utils/article-types'
@@ -7,15 +6,7 @@ import { isExternalLink } from '@/assets/utils/article-types'
 import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
 import type { Tag } from '@/lib/types'
 
-const {
-  currentPage,
-  limit,
-  offset,
-  onNextPage,
-  onPreviousPage,
-  resetPagination,
-  route,
-} = usePagination()
+const { currentPage, limit, offset, onPageChange, route } = usePagination()
 
 const { locale } = useI18n()
 
@@ -23,7 +14,7 @@ const type = computed(() => route.params.type || null)
 const start = computed(() => offset.value)
 const end = computed(() => offset.value + (limit.value - 1))
 
-const { data, error, status } =
+const { data, status } =
   await useLazySanityQuery<PUBLICATION_BY_TYPE_QUERYResult>(
     PUBLICATION_BY_TYPE_QUERY,
     {
@@ -39,9 +30,6 @@ const loading = computed(
 )
 
 const total = computed(() => data?.value?.info?.total || 0)
-const pages = computed(() => Math.ceil(total.value / limit.value))
-const previousPageDisabled = computed(() => currentPage.value === 1)
-const nextPageDisabled = computed(() => currentPage.value === pages.value)
 </script>
 
 <template>
@@ -83,26 +71,45 @@ const nextPageDisabled = computed(() => currentPage.value === pages.value)
           />
         </ClientOnly>
       </div>
-      <div>
-        <button
-          :disabled="previousPageDisabled"
-          :onClick="onPreviousPage"
-          :class="cn(previousPageDisabled ? 'text-muted-foreground' : '')"
-        >
-          previous page
-        </button>
-        |
-        <button
-          :disabled="nextPageDisabled"
-          :onClick="(e) => onNextPage(e, total)"
-          :class="cn(nextPageDisabled ? 'text-muted-foreground' : '')"
-        >
-          next page
-        </button>
-        |
-        <button :onClick="resetPagination">reset</button>
-        | <span>current page: {{ currentPage }} / {{ pages }}</span>
-      </div>
+      <TclPagination
+        :limit="limit"
+        :total="total"
+        :on-page-change="onPageChange"
+      />
+        v-slot="{ page }"
+        :items-per-page="limit"
+        :total="total"
+        :sibling-count="1"
+        show-edges
+        :default-page="1"
+        class="flex justify-center"
+        @update:page="onPageChange"
+      >
+        <PaginationList v-slot="{ items }" class="flex items-center gap-1">
+          <PaginationFirst />
+          <PaginationPrev />
+
+          <template v-for="(item, index) in items">
+            <PaginationListItem
+              v-if="item.type === 'page'"
+              :key="index"
+              :value="item.value"
+              as-child
+            >
+              <Button
+                class="w-9 h-9 p-0"
+                :variant="item.value === page ? 'default' : 'outline'"
+              >
+                {{ item.value }}
+              </Button>
+            </PaginationListItem>
+            <PaginationEllipsis v-else :key="item.type" :index="index" />
+          </template>
+
+          <PaginationNext />
+          <PaginationLast />
+        </PaginationList>
+      </Pagination> -->
       <!-- <pre>{{ data }}</pre> -->
     </section>
   </div>

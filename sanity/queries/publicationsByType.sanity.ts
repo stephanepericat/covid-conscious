@@ -32,4 +32,22 @@ const PUBLICATION_BY_TYPE_QUERY = groq`
 }
 `
 
+// export const makePublicationByTypeQuery = (selection: Record<string, any>) => {
+//   const filters = Object.entries(selection)
+//     .reduce((result, entry) => {
+//       const [key, value] = entry
+//       let fltr = Array.isArray(value)
+//         ? `${key} in [${value.map((v: string) => `"${v}"`).join(', ')}]`
+//         : `${key} == "${value}"`
+
+//       if (key === 'tags') {
+//         fltr = `tags[]->uri.current in [${value.map((v: string) => `"${v}"`).join(', ')}]`
+//       }
+//       return [...result, fltr]
+//     }, [] as string[])
+//     .join(' && ')
+
+//   return filters
+// }
+
 export { PUBLICATION_BY_TYPE_QUERY as default }
