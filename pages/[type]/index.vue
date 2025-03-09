@@ -38,6 +38,7 @@ const loading = computed(
 )
 
 const total = computed(() => data?.value?.info?.total || 0)
+const pages = computed(() => Math.ceil(total.value / limit.value))
 </script>
 
 <template>
@@ -57,7 +58,7 @@ const total = computed(() => data?.value?.info?.total || 0)
       </div>
       <TclFiltersSheet />
     </div>
-    <section class="mt-4 md:mt-8">
+    <section class="my-4 md:my-8">
       <TclLoader v-if="loading" />
       <div class="grid gap-4 md:gap-8 py-4 md:py-8" v-else>
         <!-- TODO: see if clientonly can be removed -->
@@ -79,11 +80,12 @@ const total = computed(() => data?.value?.info?.total || 0)
           />
         </ClientOnly>
       </div>
-      <div className="pb-4 md:pb-8">
+      <div>
         <button :onClick="onPreviousPage">previous page</button> |
         <button :onClick="(e) => onNextPage(e, total)">next page</button>
         |
         <button :onClick="resetPagination">reset</button>
+        | <span>current page: {{ currentPage }} / {{ pages }}</span>
       </div>
       <!-- <pre>{{ data }}</pre> -->
     </section>
