@@ -52,7 +52,6 @@ const total = computed(() => data?.value?.info?.total || 0)
     <section class="my-4 md:my-8">
       <TclLoader v-if="loading" />
       <div class="grid gap-4 md:gap-8 py-4 md:py-8" v-else>
-        <!-- TODO: see if clientonly can be removed -->
         <ClientOnly>
           <TclMedia
             v-for="article in data?.results"
@@ -72,6 +71,7 @@ const total = computed(() => data?.value?.info?.total || 0)
         </ClientOnly>
       </div>
       <TclPagination
+        v-if="total"
         :limit="limit"
         :total="total"
         :on-page-change="onPageChange"

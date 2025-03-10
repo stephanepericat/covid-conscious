@@ -48,6 +48,7 @@ const onClick = (link: string) => umTrackEvent('click:article', { link })
       <NuxtImg
         v-else
         src="/tcl-fallback-169.jpg"
+        class="rounded-lg"
         :height="135"
         :width="240"
         :alt="title"
