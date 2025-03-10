@@ -63,7 +63,7 @@ const videos = computed(() => data?.value?.videos || [])
             :link="<string>article.link"
             :metadata="article.metadata"
             :premium="article.premium"
-            :source="article.source"
+            :source="<string>article.source"
             :tags="<Tag[]>article.tags"
             target="_blank"
             :title="<string>article.title"

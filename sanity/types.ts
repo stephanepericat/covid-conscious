@@ -570,6 +570,14 @@ export type LocaleText = {
   es?: string
 }
 
+export type LocaleString = {
+  _type: 'localeString'
+  en?: string
+  fr?: string
+  pt?: string
+  es?: string
+}
+
 export type LocaleBlock = {
   _type: 'localeBlock'
   en?: Array<
@@ -813,7 +821,11 @@ export type Blog = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  title?: LocaleString
+  title?: Array<
+    {
+      _key: string
+    } & InternationalizedArrayStringValue
+  >
   uri?: Slug
   description?: Array<
     {
@@ -895,14 +907,6 @@ export type SanityImageMetadata = {
   blurHash?: string
   hasAlpha?: boolean
   isOpaque?: boolean
-}
-
-export type LocaleString = {
-  _type: 'localeString'
-  en?: string
-  fr?: string
-  pt?: string
-  es?: string
 }
 
 export type AppSettings = {
@@ -1007,6 +1011,7 @@ export type AllSanitySchemaTypes =
   | Covidnet
   | Author
   | LocaleText
+  | LocaleString
   | LocaleBlock
   | Language
   | ContactInfo
@@ -1018,7 +1023,6 @@ export type AllSanitySchemaTypes =
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
-  | LocaleString
   | AppSettings
   | InternationalizedArrayRichTextValue
   | InternationalizedArrayTextValue
@@ -1253,22 +1257,6 @@ export type METADATA_QUERYResult =
               _key: string
             } & InternationalizedArrayStringValue
           >
-        | string
-        | ''
-      description: string
-      image: string | null
-      name: null
-    }
-  | {
-      title:
-        | Array<{
-            _type: 'localeString'
-            en?: string
-            fr?: string
-            pt?: string
-            es?: string
-          }>
-        | LocaleString
         | string
         | ''
       description: string
@@ -1778,14 +1766,11 @@ export type PUBLICATION_QUERYResult =
   | {
       id: string
       title:
-        | Array<{
-            _type: 'localeString'
-            en?: string
-            fr?: string
-            pt?: string
-            es?: string
-          }>
-        | LocaleString
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
         | string
         | ''
       name: null
@@ -1863,7 +1848,14 @@ export type PUBLICATION_QUERYResult =
       image: string | null
       related: Array<{
         id: string
-        title: LocaleString | ''
+        title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
+          | string
+          | ''
         visual: string | null
         url: string | null
         tags: Array<{
@@ -3319,14 +3311,11 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
       }
     | {
         title:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | LocaleString
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | ''
         name: null
@@ -4173,6 +4162,50 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
             >
           | string
           | null
+        type: 'blog'
+        url: null
+        visual: string | null
+      }
+    | {
+        attributes: {
+          free: false
+          limited: false
+          onlineOnly: false
+          premium: false
+        }
+        date: string
+        description: string
+        end: null
+        id: string
+        language: null
+        link: string | null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
+          | string
+          | null
         type: 'education'
         url: null
         visual: string | null
@@ -4219,53 +4252,6 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
           | null
         type: 'product'
         url: string | null
-        visual: string | null
-      }
-    | {
-        attributes: {
-          free: false
-          limited: false
-          onlineOnly: false
-          premium: false
-        }
-        date: string
-        description: string
-        end: null
-        id: string
-        language: null
-        link: string | null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | LocaleString
-          | string
-          | null
-        type: 'blog'
-        url: null
         visual: string | null
       }
     | {
@@ -4582,14 +4568,11 @@ export type RSS_FEED_QUERYResult = {
         id: string
         type: 'blog'
         title:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | LocaleString
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         description: string
@@ -5172,14 +5155,11 @@ export type SEARCH_QUERYResult = {
     | {
         id: string
         title:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | LocaleString
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         name: null
