@@ -3,17 +3,17 @@ import { BASE_LANGUAGE } from '../../assets/constants/base-language'
 
 const LATEST_PUBLICATIONS_QUERY = groq`
   {
-    "blog": *[(_type == "blog") && !(_id in path('drafts.**'))] | order(_createdAt asc)[0..2] {
-      "id": _id,
-      "date": _createdAt,
-      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
-      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",
-      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
-      "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
-      "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, ''),
-      "type": _type,
-      "visual": visual.asset._ref,
-    },
+    // "blog": *[(_type == "blog") && !(_id in path('drafts.**'))] | order(_createdAt asc)[0..2] {
+    //   "id": _id,
+    //   "date": _createdAt,
+    //   "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
+    //   "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",
+    //   "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
+    //   "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
+    //   "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, ''),
+    //   "type": _type,
+    //   "visual": visual.asset._ref,
+    // },
     "events": *[_type == 'event' && !(_id in path('drafts.**')) && (string(eventDate) >= string::split(string(now()), 'T')[0] || string(endDate) >= string::split(string(now()), 'T')[0])] | order(eventDate asc) {
       "id": _id,
       "date": eventDate,
@@ -34,6 +34,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
       "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
       "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
       "premium": coalesce(premiumAccess, false),
+      "source": coalesce(source, null),
       "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
       "title": title,
       "visual": visual.asset._ref,
@@ -45,6 +46,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
       "link": url,
       "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
       "premium": coalesce(premiumAccess, false),
+      "source": coalesce(source, null),
       "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
       "title": title,
       "visual": visual.asset._ref,
@@ -57,6 +59,7 @@ const LATEST_PUBLICATIONS_QUERY = groq`
       "link": url,
       "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
       "premium": coalesce(premiumAccess, false),
+      "source": coalesce(source, null),
       "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
       "title": title,
       "visual": visual.asset._ref,

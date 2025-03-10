@@ -63,6 +63,7 @@ const total = computed(() => data?.value?.info?.total || 0)
             :limited="article.attributes.limited"
             :metadata="article.metadata"
             :premium="article.attributes.premium"
+            :source="article.source"
             :tags="<Tag[]>article.tags"
             :target="isExternalLink(article.type) ? '_blank' : '_self'"
             :title="<string>article.title"

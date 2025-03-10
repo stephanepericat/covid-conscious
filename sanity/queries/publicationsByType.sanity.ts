@@ -17,6 +17,7 @@ const PUBLICATION_BY_TYPE_QUERY = groq`
     "language": language,
     "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },
+    "source": coalesce(source, null),
     "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, title[_key == ^.language][0].value, title[$locale], title['${BASE_LANGUAGE}'], title, null),
     "type": _type,

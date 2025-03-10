@@ -17,6 +17,7 @@ defineProps<{
     width: number | null
   } | null
   premium?: boolean
+  source?: string
   tags?: Tag[]
   target?: Target
   title: string
@@ -62,6 +63,7 @@ const onClick = (link: string) => umTrackEvent('click:article', { link })
         </NuxtLink>
       </h3>
       <h4 v-if="date" class="uppercase tracking-widest text-xs">
+        <span v-if="source">{{ source }} | </span>
         {{
           format(date, LOCALIZED_DATE_FORMAT, {
             locale: getDateLocale(locale),
