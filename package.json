@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@emailjs/nodejs": "^5.0.2",
+    "@formkit/auto-animate": "^0.8.2",
     "@nuxt/icon": "1.10.3",
     "@nuxt/image": "1.9.0",
     "@nuxt/scripts": "^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0",
@@ -39,6 +40,7 @@
     "@radix-icons/vue": "^1.0.0",
     "@sanity/client": "^6.27.2",
     "@tanstack/vue-table": "^8.21.2",
+    "@vee-validate/zod": "^4.15.0",
     "@vueuse/core": "^12.8.2",
     "@vueuse/nuxt": "12.5.0",
     "class-variance-authority": "^0.7.1",
@@ -62,9 +64,11 @@
     "shadcn-nuxt": "^0.11.3",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
+    "vee-validate": "^4.15.0",
     "vue": "latest",
     "vue-router": "latest",
-    "xml2js": "^0.6.2"
+    "xml2js": "^0.6.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@iconify-json/bi": "^1.2.2",
@@ -95,5 +99,6 @@
   },
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

@@ -1,13 +1,23 @@
 <script setup lang="ts">
-// const onResetFilters = () => {
-//   console.log('reset filters')
-//   umTrackEvent('filter:reset')
-// }
+import { useForm, useIsFormValid } from 'vee-validate'
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
 
-const onUpdateFilters = () => {
-  console.log('update filters')
-  umTrackEvent('update:filter')
-}
+const formSchema = toTypedSchema(
+  z.object({
+    username: z.string().min(2).max(50),
+  }),
+)
+
+const form = useForm({
+  validationSchema: formSchema,
+})
+
+const isFormValid = useIsFormValid(form)
+
+const onSubmit = form.handleSubmit((values) => {
+  console.log('submitted', values)
+})
 </script>
 
 <template>
@@ -22,8 +32,9 @@ const onUpdateFilters = () => {
           {{ $t('filters.description') }}
         </SheetDescription>
       </SheetHeader>
-      <div class="grid gap-4 py-4">
-        <!-- <div class="grid grid-cols-4 items-center gap-4">
+      <form @submit="onSubmit">
+        <div class="grid gap-4 py-4">
+          <!-- <div class="grid grid-cols-4 items-center gap-4">
           <Label for="name" class="text-right"> Name </Label>
           <Input id="name" value="Pedro Duarte" class="col-span-3" />
         </div>
@@ -31,16 +42,33 @@ const onUpdateFilters = () => {
           <Label for="username" class="text-right"> Username </Label>
           <Input id="username" value="@peduarte" class="col-span-3" />
         </div> -->
-        <div>tag</div>
-        <div>language</div>
-      </div>
-      <SheetFooter>
-        <SheetClose as-child>
-          <Button class="mb-3" type="submit" @click="onUpdateFilters">{{
-            $t('filters.apply')
-          }}</Button>
-        </SheetClose>
-      </SheetFooter>
+
+          <FormField v-slot="{ componentField }" name="username">
+            <FormItem v-auto-animate>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input
+                  type="text"
+                  placeholder="shadcn"
+                  v-bind="componentField"
+                />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          </FormField>
+          <!-- <Button type="submit"> Submit </Button> -->
+        </div>
+        <SheetFooter>
+          <SheetClose as-child>
+            <Button class="mb-3" type="submit" :disabled="!isFormValid">{{
+              $t('filters.apply')
+            }}</Button>
+          </SheetClose>
+        </SheetFooter>
+      </form>
     </SheetContent>
   </Sheet>
 </template>
