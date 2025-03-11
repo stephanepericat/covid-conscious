@@ -63,6 +63,9 @@ const onSubmit = form.handleSubmit((values) => {
         </div>
         <SheetFooter>
           <SheetClose as-child>
+            <Button class="mb-3 mr-1" variant="secondary">Close</Button>
+          </SheetClose>
+          <SheetClose as-child>
             <Button class="mb-3" type="submit" :disabled="!isFormValid">{{
               $t('filters.apply')
             }}</Button>
