@@ -13,7 +13,7 @@ const form = useForm({
   validationSchema: formSchema,
 })
 
-const isFormValid = useIsFormValid(form)
+const isFormValid = useIsFormValid()
 
 const onSubmit = form.handleSubmit((values) => {
   console.log('submitted', values)
