@@ -2,7 +2,10 @@
 defineProps<{
   limit: number
   total: number
-  onPageChange: (page: number) => void
+}>()
+
+const emit = defineEmits<{
+  (e: 'page:change', page: number): void
 }>()
 </script>
 
@@ -15,7 +18,7 @@ defineProps<{
     show-edges
     :default-page="1"
     class="flex justify-center"
-    @update:page="onPageChange"
+    @update:page="(value) => emit('page:change', value)"
   >
     <PaginationList v-slot="{ items }" class="flex items-center gap-1">
       <PaginationFirst />

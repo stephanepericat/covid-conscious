@@ -83,7 +83,7 @@ const onUpdateFilters = (filters: Record<string, string>) => {
         v-if="total"
         :limit="limit"
         :total="total"
-        :on-page-change="onPageChange"
+        @page:change="onPageChange"
       />
       <!-- <pre>{{ data }}</pre> -->
     </section>
