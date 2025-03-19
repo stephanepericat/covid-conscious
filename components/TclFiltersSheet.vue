@@ -66,10 +66,10 @@ const onSubmit = handleSubmit((values) => {
           <FormField v-slot="{ componentField }" name="tag">
             <FormItem v-auto-animate>
               <FormLabel>Tags</FormLabel>
-              <Combobox by="label">
+              <Combobox by="label" class="w-full">
                 <FormControl>
-                  <ComboboxAnchor>
-                    <div class="relative items-center">
+                  <ComboboxAnchor class="flex w-full">
+                    <div class="relative w-full items-center">
                       <ComboboxInput
                         :display-value="(val) => val?.label ?? ''"
                         placeholder="Select tag..."
@@ -82,7 +82,9 @@ const onSubmit = handleSubmit((values) => {
                     </div>
                   </ComboboxAnchor>
                 </FormControl>
-                <ComboboxList class="max-h-60 overflow-auto">
+                <ComboboxList
+                  class="max-h-60 w-[250px] sm:w-[325px] overflow-auto"
+                >
                   <ComboboxEmpty> Nothing found. </ComboboxEmpty>
                   <ComboboxGroup>
                     <ComboboxItem
