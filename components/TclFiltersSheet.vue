@@ -3,6 +3,20 @@ import { useForm, useIsFormValid } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 
+import TAGS_BY_TYPE_QUERY from '@/sanity/queries/tagsByType.sanity'
+import type { TAGS_BY_TYPE_QUERYResult } from '@/sanity/types'
+
+const props = defineProps<{
+  locale: string
+  type: string
+}>()
+
+const { data: tagList, status } =
+  await useLazySanityQuery<TAGS_BY_TYPE_QUERYResult>(TAGS_BY_TYPE_QUERY, {
+    locale: props.locale,
+    type: props.type,
+  })
+
 const formSchema = toTypedSchema(
   z.object({
     username: z.string().min(2).max(50),
@@ -47,11 +61,11 @@ const onSubmit = form.handleSubmit((values) => {
             <FormItem v-auto-animate>
               <FormLabel>Username</FormLabel>
               <FormControl>
-                <Input
+                <!-- <Input
                   type="text"
                   placeholder="shadcn"
                   v-bind="componentField"
-                />
+                /> -->
               </FormControl>
               <FormDescription>
                 This is your public display name.

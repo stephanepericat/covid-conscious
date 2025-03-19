@@ -47,7 +47,7 @@ const total = computed(() => data?.value?.info?.total || 0)
           {{ $t(`description.${type}`) }}
         </h4>
       </div>
-      <TclFiltersSheet />
+      <TclFiltersSheet :locale="locale" :type="type" />
     </div>
     <section class="my-4 md:my-8">
       <TclLoader v-if="loading" />

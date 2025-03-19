@@ -8,8 +8,8 @@ const TAGS_BY_TYPE_QUERY = groq`
   .tags[])
   } | {
     "t": *[_type == 'tag' && uri.current in ^.tags] | order(name[$locale], "desc") {
-      "id": uri.current,
-      "name": name[$locale]
+      "value": uri.current,
+      "label": name[$locale]
     }
   }.t[]
 `
