@@ -2,6 +2,9 @@
 import { useForm, useIsFormValid } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+import { cn } from '@/lib/utils'
+
+import { Check, ChevronsUpDown } from 'lucide-vue-next'
 
 import TAGS_BY_TYPE_QUERY from '@/sanity/queries/tagsByType.sanity'
 import type { TAGS_BY_TYPE_QUERYResult } from '@/sanity/types'
@@ -19,17 +22,20 @@ const { data: tagList, status } =
 
 const formSchema = toTypedSchema(
   z.object({
-    username: z.string().min(2).max(50),
+    tag: z.string(),
   }),
 )
 
-const form = useForm({
+const { handleSubmit, setFieldValue } = useForm({
   validationSchema: formSchema,
+  initialValues: {
+    tag: '',
+  },
 })
 
 const isFormValid = useIsFormValid()
 
-const onSubmit = form.handleSubmit((values) => {
+const onSubmit = handleSubmit((values) => {
   console.log('submitted', values)
 })
 </script>
@@ -57,23 +63,50 @@ const onSubmit = form.handleSubmit((values) => {
           <Input id="username" value="@peduarte" class="col-span-3" />
         </div> -->
 
-          <FormField v-slot="{ componentField }" name="username">
+          <FormField v-slot="{ componentField }" name="tag">
             <FormItem v-auto-animate>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <!-- <Input
-                  type="text"
-                  placeholder="shadcn"
-                  v-bind="componentField"
-                /> -->
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormLabel>Tags</FormLabel>
+              <Combobox by="label">
+                <FormControl>
+                  <ComboboxAnchor>
+                    <div class="relative items-center">
+                      <ComboboxInput
+                        :display-value="(val) => val?.label ?? ''"
+                        placeholder="Select tag..."
+                      />
+                      <ComboboxTrigger
+                        class="absolute end-0 inset-y-0 flex items-center justify-center px-3"
+                      >
+                        <ChevronsUpDown class="size-4 text-muted-foreground" />
+                      </ComboboxTrigger>
+                    </div>
+                  </ComboboxAnchor>
+                </FormControl>
+                <ComboboxList class="max-h-60 overflow-auto">
+                  <ComboboxEmpty> Nothing found. </ComboboxEmpty>
+                  <ComboboxGroup>
+                    <ComboboxItem
+                      v-for="tag in tagList"
+                      :key="tag.value"
+                      :value="tag"
+                      @select="
+                        () => {
+                          setFieldValue('tag', tag.value)
+                        }
+                      "
+                    >
+                      {{ tag.label }}
+                      <ComboboxItemIndicator>
+                        <Check :class="cn('ml-auto h-4 w-4')" />
+                      </ComboboxItemIndicator>
+                    </ComboboxItem>
+                  </ComboboxGroup>
+                </ComboboxList>
+              </Combobox>
+              <FormDescription> Choose a tag. </FormDescription>
               <FormMessage />
             </FormItem>
           </FormField>
-          <!-- <Button type="submit"> Submit </Button> -->
         </div>
         <SheetFooter>
           <SheetClose as-child>
