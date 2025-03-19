@@ -1,5 +1,6 @@
 <script setup lang="ts">
 defineProps<{
+  initialPage?: number
   limit: number
   total: number
 }>()
@@ -16,7 +17,7 @@ const emit = defineEmits<{
     :total="total"
     :sibling-count="1"
     show-edges
-    :default-page="1"
+    :default-page="initialPage || 1"
     class="flex justify-center"
     @update:page="(value) => emit('page:change', value)"
   >

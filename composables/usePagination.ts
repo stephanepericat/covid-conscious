@@ -10,9 +10,18 @@ export const usePagination = () => {
   const offset = computed(
     () => parseInt(route.query?.offset as string) || DEFAULT_OFFSET,
   )
+
   const currentPage = computed(() => Math.ceil(offset.value / limit.value) + 1)
 
-  const go = (l: number, o: number) => router.push(`?limit=${l}&offset=${o}`)
+  const go = (l: number, o: number) => {
+    router.push({
+      query: {
+        ...route.query,
+        limit: l,
+        offset: o,
+      },
+    })
+  }
 
   const onPreviousPage = (e: Event) => {
     e.preventDefault()

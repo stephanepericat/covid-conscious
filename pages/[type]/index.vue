@@ -81,6 +81,7 @@ const onUpdateFilters = (filters: Record<string, string>) => {
       </div>
       <TclPagination
         v-if="total"
+        :initial-page="currentPage"
         :limit="limit"
         :total="total"
         @page:change="onPageChange"
