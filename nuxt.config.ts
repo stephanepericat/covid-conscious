@@ -125,7 +125,7 @@ export default defineNuxtConfig({
   },
 
   sanity: {
-    apiVersion: '2024-07-11',
+    apiVersion: '2025-03-19',
     dataset: process.env.SANITY_DATASET,
     minimal: true,
     projectId: process.env.SANITY_PROJECTID,
@@ -203,7 +203,11 @@ export default defineNuxtConfig({
     host: process.env.NUXT_PUBLIC_UMAMI_HOST,
     autoTrack: true,
     ignoreLocalhost: true,
-    domains: ['covid-conscious-preview.vercel.app', 'thatcovid.life'],
+    domains: [
+      'tcl-next-red.vercel.app',
+      'covid-conscious-preview.vercel.app',
+      'thatcovid.life',
+    ],
     logErrors: true,
   },
 

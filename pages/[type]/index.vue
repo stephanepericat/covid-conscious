@@ -6,13 +6,15 @@ import { isExternalLink } from '@/assets/utils/article-types'
 import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
 import type { Tag } from '@/lib/types'
 
-const { currentPage, limit, offset, onPageChange, route } = usePagination()
+const { currentPage, limit, offset, onPageChange, route, updateQueryParams } =
+  usePagination()
 
 const { locale } = useI18n()
 
 const type = computed(() => route.params.type || null)
 const start = computed(() => offset.value)
 const end = computed(() => offset.value + (limit.value - 1))
+const results = ref<PUBLICATION_BY_TYPE_QUERYResult>([])
 
 const { data, status } =
   await useLazySanityQuery<PUBLICATION_BY_TYPE_QUERYResult>(
@@ -31,8 +33,13 @@ const loading = computed(
 
 const total = computed(() => data?.value?.info?.total || 0)
 
+const buildDynamicQuery = (filters: Record<string, string>) => {
+  return q()
+}
+
 const onUpdateFilters = (filters: Record<string, string>) => {
   console.log('filters updated', filters)
+  updateQueryParams(filters)
 }
 </script>
 

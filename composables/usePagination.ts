@@ -1,3 +1,5 @@
+import type { LocationQuery, LocationQueryValue } from 'vue-router'
+
 export const usePagination = () => {
   const route = useRoute()
   const router = useRouter()
@@ -13,13 +15,19 @@ export const usePagination = () => {
 
   const currentPage = computed(() => Math.ceil(offset.value / limit.value) + 1)
 
-  const go = (l: number, o: number) => {
+  const updateQueryParams = (payload: LocationQuery) => {
     router.push({
       query: {
         ...route.query,
-        limit: l,
-        offset: o,
+        ...payload,
       },
+    })
+  }
+
+  const go = (l: number, o: number) => {
+    updateQueryParams({
+      limit: l.toString() as LocationQueryValue,
+      offset: o.toString() as LocationQueryValue,
     })
   }
 
@@ -64,5 +72,6 @@ export const usePagination = () => {
     onPreviousPage,
     resetPagination,
     route,
+    updateQueryParams,
   }
 }
