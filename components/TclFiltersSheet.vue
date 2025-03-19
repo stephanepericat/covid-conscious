@@ -65,14 +65,14 @@ const onSubmit = handleSubmit((values) => {
 
           <FormField v-slot="{ componentField }" name="tag">
             <FormItem v-auto-animate>
-              <FormLabel>Tags</FormLabel>
+              <FormLabel>{{ $t('filters.label.tags') }}</FormLabel>
               <Combobox by="label" class="w-full">
                 <FormControl>
                   <ComboboxAnchor class="flex w-full">
                     <div class="relative w-full items-center">
                       <ComboboxInput
                         :display-value="(val) => val?.label ?? ''"
-                        placeholder="Select tag..."
+                        :placeholder="$t('filters.placeholder.tags')"
                       />
                       <ComboboxTrigger
                         class="absolute end-0 inset-y-0 flex items-center justify-center px-3"
@@ -85,7 +85,7 @@ const onSubmit = handleSubmit((values) => {
                 <ComboboxList
                   class="max-h-60 w-[250px] sm:w-[325px] overflow-auto"
                 >
-                  <ComboboxEmpty> Nothing found. </ComboboxEmpty>
+                  <ComboboxEmpty>{{ $t('filters.noResults') }}</ComboboxEmpty>
                   <ComboboxGroup>
                     <ComboboxItem
                       v-for="tag in tagList"
@@ -105,14 +105,16 @@ const onSubmit = handleSubmit((values) => {
                   </ComboboxGroup>
                 </ComboboxList>
               </Combobox>
-              <FormDescription> Choose a tag. </FormDescription>
+              <!-- <FormDescription> Choose a tag. </FormDescription> -->
               <FormMessage />
             </FormItem>
           </FormField>
         </div>
         <SheetFooter>
           <SheetClose as-child>
-            <Button class="mb-3 mr-1" variant="secondary">Close</Button>
+            <Button class="mb-3 mr-1" variant="secondary">{{
+              $t('filters.close')
+            }}</Button>
           </SheetClose>
           <SheetClose as-child>
             <Button class="mb-3" type="submit" :disabled="!isFormValid">{{
