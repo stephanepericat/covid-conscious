@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
 import { usePagination } from '@/composables/usePagination'
+import { useGroqd } from '@/composables/useGroqd'
 import { isExternalLink } from '@/assets/utils/article-types'
 
 import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
@@ -33,14 +34,22 @@ const loading = computed(
 
 const total = computed(() => data?.value?.info?.total || 0)
 
-const buildDynamicQuery = (filters: Record<string, string>) => {
-  return q()
+const { q, runQuery } = useGroqd()
+
+const buildDynamicQuery = async (filters: Record<string, string>) => {
+  const query = q.star.filterByType(type.value).slice(0, 5)
+
+  const data = await runQuery(query)
+  console.log('data', data)
 }
 
 const onUpdateFilters = (filters: Record<string, string>) => {
   console.log('filters updated', filters)
   updateQueryParams(filters)
+  buildDynamicQuery(filters)
 }
+
+buildDynamicQuery({})
 </script>
 
 <template>
