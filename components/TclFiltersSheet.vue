@@ -14,6 +14,10 @@ const props = defineProps<{
   type: string
 }>()
 
+const emit = defineEmits<{
+  (e: 'update:filters', payload: Record<string, string>): void
+}>()
+
 const { data: tagList, status } =
   await useLazySanityQuery<TAGS_BY_TYPE_QUERYResult>(TAGS_BY_TYPE_QUERY, {
     locale: props.locale,
@@ -35,9 +39,7 @@ const { handleSubmit, setFieldValue } = useForm({
 
 const isFormValid = useIsFormValid()
 
-const onSubmit = handleSubmit((values) => {
-  console.log('submitted', values)
-})
+const onSubmit = handleSubmit((values) => emit('update:filters', values))
 </script>
 
 <template>
@@ -54,15 +56,6 @@ const onSubmit = handleSubmit((values) => {
       </SheetHeader>
       <form @submit="onSubmit">
         <div class="grid gap-4 py-4">
-          <!-- <div class="grid grid-cols-4 items-center gap-4">
-          <Label for="name" class="text-right"> Name </Label>
-          <Input id="name" value="Pedro Duarte" class="col-span-3" />
-        </div>
-        <div class="grid grid-cols-4 items-center gap-4">
-          <Label for="username" class="text-right"> Username </Label>
-          <Input id="username" value="@peduarte" class="col-span-3" />
-        </div> -->
-
           <FormField v-slot="{ componentField }" name="tag">
             <FormItem v-auto-animate>
               <FormLabel>{{ $t('filters.label.tags') }}</FormLabel>

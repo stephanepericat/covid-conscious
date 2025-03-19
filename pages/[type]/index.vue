@@ -30,6 +30,10 @@ const loading = computed(
 )
 
 const total = computed(() => data?.value?.info?.total || 0)
+
+const onUpdateFilters = (filters: Record<string, string>) => {
+  console.log('filters updated', filters)
+}
 </script>
 
 <template>
@@ -47,7 +51,11 @@ const total = computed(() => data?.value?.info?.total || 0)
           {{ $t(`description.${type}`) }}
         </h4>
       </div>
-      <TclFiltersSheet :locale="locale" :type="type" />
+      <TclFiltersSheet
+        :locale="locale"
+        :type="type"
+        @update:filters="onUpdateFilters"
+      />
     </div>
     <section class="my-4 md:my-8">
       <TclLoader v-if="loading" />
