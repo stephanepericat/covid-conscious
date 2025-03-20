@@ -1,55 +1,98 @@
 <script setup lang="ts">
-import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
+import consola from 'consola'
+// import PUBLICATION_BY_TYPE_QUERY from '@/sanity/queries/publicationsByType.sanity'
 import { usePagination } from '@/composables/usePagination'
 import { useGroqd } from '@/composables/useGroqd'
 import { isExternalLink } from '@/assets/utils/article-types'
 
-import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
+// import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
 import type { Tag } from '@/lib/types'
 
-const { currentPage, limit, offset, onPageChange, route, updateQueryParams } =
-  usePagination()
+const {
+  currentPage,
+  limit,
+  offset,
+  onPageChange,
+  resetPagination,
+  route,
+  updateQueryParams,
+} = usePagination()
 
 const { locale } = useI18n()
 
 const type = computed(() => route.params.type || null)
 const start = computed(() => offset.value)
-const end = computed(() => offset.value + (limit.value - 1))
-const results = ref<PUBLICATION_BY_TYPE_QUERYResult>([])
+const end = computed(() => offset.value + limit.value)
+const filters = computed(() => route.query || {})
+const results = ref([])
 
-const { data, status } =
-  await useLazySanityQuery<PUBLICATION_BY_TYPE_QUERYResult>(
-    PUBLICATION_BY_TYPE_QUERY,
-    {
-      start,
-      end,
-      locale,
-      type,
-    },
-  )
+// const { data, status } =
+//   await useLazySanityQuery<PUBLICATION_BY_TYPE_QUERYResult>(
+//     PUBLICATION_BY_TYPE_QUERY,
+//     {
+//       start,
+//       end,
+//       locale,
+//       type,
+//     },
+//   )
 
-const loading = computed(
-  () => status?.value === 'pending' || status?.value === 'idle',
-)
+// const loading = computed(
+//   () => status?.value === 'pending' || status?.value === 'idle',
+// )
 
-const total = computed(() => data?.value?.info?.total || 0)
+// const total = computed(() => data?.value?.info?.total || 0)
 
 const { q, runQuery } = useGroqd()
 
-const buildDynamicQuery = async (filters: Record<string, string>) => {
-  const query = q.star.filterByType(type.value).slice(0, 5)
+const buildDynamicQuery = async ({
+  end,
+  filters,
+  locale,
+  start,
+  type,
+}: {
+  end: number
+  filters: Record<string, string>
+  locale: string
+  start: number
+  type: string
+}) => {
+  let query = q.star.filterByType(type as any)
 
-  const data = await runQuery(query)
-  console.log('data', data)
+  Object.keys(filters).forEach((key: string) => {
+    if (key === 'tag') {
+      query = query.filter(`"${filters[key]}" in tags[]->uri.current`)
+    }
+  })
+
+  query = query.slice(start, end)
+
+  try {
+    const data = await runQuery(query)
+    consola.info('data', data)
+  } catch (error) {
+    consola.error(error)
+  } finally {
+  }
 }
 
-const onUpdateFilters = (filters: Record<string, string>) => {
-  console.log('filters updated', filters)
+const onUpdateFilters = (filters: Record<string, string>) =>
   updateQueryParams(filters)
-  buildDynamicQuery(filters)
-}
 
-buildDynamicQuery({})
+watch(
+  () => filters.value,
+  () => {
+    buildDynamicQuery({
+      end: end.value,
+      filters: filters.value as Record<string, string>,
+      locale: locale.value,
+      start: start.value,
+      type: type.value as string,
+    })
+  },
+  { deep: true, immediate: true },
+)
 </script>
 
 <template>
@@ -69,7 +112,7 @@ buildDynamicQuery({})
       </div>
       <TclFiltersSheet
         :locale="locale"
-        :type="type"
+        :type="<string>type"
         @update:filters="onUpdateFilters"
       />
     </div>

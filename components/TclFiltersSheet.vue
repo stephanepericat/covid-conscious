@@ -82,11 +82,11 @@ const onSubmit = handleSubmit((values) => emit('update:filters', values))
                   <ComboboxGroup>
                     <ComboboxItem
                       v-for="tag in tagList"
-                      :key="tag.value"
+                      :key="<string>tag.value"
                       :value="tag"
                       @select="
                         () => {
-                          setFieldValue('tag', tag.value)
+                          setFieldValue('tag', tag.value as string)
                         }
                       "
                     >
