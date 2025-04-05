@@ -88,6 +88,7 @@ export default defineNuxtConfig({
     '@nuxtjs/turnstile',
     '@pinia/nuxt',
     '@prisma/nuxt',
+    '@vueuse/motion/nuxt',
     '@vueuse/nuxt',
     'nuxt-auth-utils',
     'nuxt-security',
