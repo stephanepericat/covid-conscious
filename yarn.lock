@@ -15885,6 +15885,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nuxt-posthog@npm:^1.6.3":
+  version: 1.6.3
+  resolution: "nuxt-posthog@npm:1.6.3"
+  dependencies:
+    "@nuxt/kit": "npm:^3.15.4"
+    defu: "npm:^6.1.4"
+    posthog-js: "npm:^1.217.0"
+    posthog-node: "npm:4.4.1"
+  checksum: 10c0/7dcf6b6e01e07d4726de997aed103164bef1657d741a334a42b71f60eae3edd82ddd0a804c9898deffed424741c1859447caaba33eb08afda01318bcf78c6051
+  languageName: node
+  linkType: hard
+
 "nuxt-schema-org@npm:^4.1.1":
   version: 4.1.1
   resolution: "nuxt-schema-org@npm:4.1.1"
@@ -17293,7 +17305,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"posthog-js@npm:^1.236.5":
+"posthog-js@npm:^1.217.0, posthog-js@npm:^1.236.5":
   version: 1.236.5
   resolution: "posthog-js@npm:1.236.5"
   dependencies:
@@ -17310,6 +17322,15 @@ __metadata:
     rrweb-snapshot:
       optional: true
   checksum: 10c0/15562a23abca641498439c79e905f705716738aacdc2317b66131366603a5766cf7f587cae1d0d63222291e8d061df4e952461474527af79f22fcf68074ba9d1
+  languageName: node
+  linkType: hard
+
+"posthog-node@npm:4.4.1":
+  version: 4.4.1
+  resolution: "posthog-node@npm:4.4.1"
+  dependencies:
+    axios: "npm:^1.7.4"
+  checksum: 10c0/ae111e95fd74d0186491fb43af45728026cda8b8dedad81d8d4ff893cdf7ce42816afe3954ff3fb88044709f242e24f11815b113daf9b92073ba8108f96dccbb
   languageName: node
   linkType: hard
 
@@ -19489,6 +19510,7 @@ __metadata:
     lucide-vue-next: "npm:^0.503.0"
     nuxt: "npm:^3.16.2"
     nuxt-auth-utils: "npm:^0.5.20"
+    nuxt-posthog: "npm:^1.6.3"
     nuxt-security: "npm:^2.2.0"
     nuxt-umami: "npm:3.2.0"
     open-graph-scraper: "npm:^6.10.0"

@@ -60,6 +60,7 @@
     "lucide-vue-next": "^0.503.0",
     "nuxt": "^3.16.2",
     "nuxt-auth-utils": "^0.5.20",
+    "nuxt-posthog": "^1.6.3",
     "nuxt-security": "^2.2.0",
     "nuxt-umami": "3.2.0",
     "open-graph-scraper": "^6.10.0",

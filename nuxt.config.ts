@@ -95,6 +95,7 @@ export default defineNuxtConfig({
     // 'nuxt-security',
     'nuxt-umami',
     'shadcn-nuxt',
+    'nuxt-posthog',
   ],
 
   ogImage: {
@@ -103,6 +104,12 @@ export default defineNuxtConfig({
 
   pinia: {
     storesDirs: ['./store/**'],
+  },
+
+  posthog: {
+    publicKey: process.env.POSTHOG_PUBLIC_KEY,
+    host: process.env.POSTHOG_HOST,
+    disabled: process.env.NODE_ENV === 'development',
   },
 
   prisma: {
@@ -121,10 +128,6 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    public: {
-      posthogPublicKey: process.env.POSTHOG_PUBLIC_KEY,
-      posthogHost: process.env.POSTHOG_HOST,
-    },
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
