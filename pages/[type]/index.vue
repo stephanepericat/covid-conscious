@@ -86,6 +86,7 @@ const buildDynamicQuery = async ({
 
   try {
     loading.value = true
+    total.value = 0
 
     const data = await runQuery(query)
     const count = await runQuery(countQuery)
