@@ -4,6 +4,7 @@ import consola from 'consola'
 import { usePagination } from '@/composables/usePagination'
 import { useGroqd } from '@/composables/useGroqd'
 import { isExternalLink } from '@/assets/utils/article-types'
+import { BASE_LANGUAGE } from '@/assets/constants/base-language'
 
 // import type { PUBLICATION_BY_TYPE_QUERYResult } from '@/sanity/types'
 import type { Tag } from '@/lib/types'
@@ -58,19 +59,31 @@ const buildDynamicQuery = async ({
   start: number
   type: string
 }) => {
-  let query = q.star.filterByType(type as any)
+  let query = q.star
+    .filterByType(type as any)
+    .filterRaw(`language == "${locale}"`)
 
   Object.keys(filters).forEach((key: string) => {
     if (key === 'tag') {
-      query = query.filter(`"${filters[key]}" in tags[]->uri.current`)
+      query = query.filterRaw(`"${filters[key]}" in tags[]->uri.current`)
     }
   })
 
   query = query.slice(start, end)
 
+  // TODO: finish projection
+  query = query.project((sub) => ({
+    id: sub.field('_id', q.string()),
+    free: sub.raw<boolean | null>('isFreeEvent'),
+    title: sub.raw<string | null>(
+      `coalesce(title[_key == '${locale}'][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, title[_key == ^.language][0].value, title['${locale}'], title['${BASE_LANGUAGE}'], title, null)`,
+    ),
+  }))
+
   try {
     const data = await runQuery(query)
     consola.info('data', data)
+    results.value = data
   } catch (error) {
     consola.error(error)
   } finally {
