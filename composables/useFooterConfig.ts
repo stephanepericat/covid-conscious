@@ -93,12 +93,12 @@ export const useFooterConfig = () => {
           href: '/legal/disclaimer',
           target: '_self',
         },
-        {
-          icon: null,
-          label: t('footer.legal.forum'),
-          href: '/legal/forum-guidelines',
-          target: '_self',
-        },
+        // {
+        //   icon: null,
+        //   label: t('footer.legal.forum'),
+        //   href: '/legal/forum-guidelines',
+        //   target: '_self',
+        // },
         {
           icon: null,
           label: t('footer.legal.privacy'),

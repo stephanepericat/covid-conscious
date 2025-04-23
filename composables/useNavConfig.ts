@@ -78,11 +78,11 @@ export const useNavConfig = () => {
             },
           ],
         },
-        {
-          id: 'forum',
-          title: t('topNav.forum.title'),
-          link: '/forum?offset=0&limit=5',
-        },
+        // {
+        //   id: 'forum',
+        //   title: t('topNav.forum.title'),
+        //   link: '/forum?offset=0&limit=5',
+        // },
         {
           id: 'blog',
           title: t('topNav.blog.title'),
@@ -148,12 +148,12 @@ export const useNavConfig = () => {
           link: '/resource?offset=0&limit=5',
           premium: false,
         },
-        {
-          id: 'forum',
-          title: t('topNav.forum.title'),
-          link: '/forum?offset=0&limit=5',
-          premium: false,
-        },
+        // {
+        //   id: 'forum',
+        //   title: t('topNav.forum.title'),
+        //   link: '/forum?offset=0&limit=5',
+        //   premium: false,
+        // },
         {
           id: 'blog',
           title: t('topNav.blog.title'),
@@ -163,8 +163,5 @@ export const useNavConfig = () => {
       ] as MobileNavItem[],
   )
 
-  return {
-    config,
-    mobileConfig,
-  }
+  return { config, mobileConfig }
 }
