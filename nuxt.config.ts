@@ -92,10 +92,10 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-auth-utils',
     // TODO: fix posthog and re-enable
-    // 'nuxt-security',
+    'nuxt-security',
     'nuxt-umami',
     'shadcn-nuxt',
-    'nuxt-posthog',
+    // 'nuxt-posthog',
   ],
 
   ogImage: {
@@ -106,11 +106,11 @@ export default defineNuxtConfig({
     storesDirs: ['./store/**'],
   },
 
-  posthog: {
-    publicKey: process.env.POSTHOG_PUBLIC_KEY,
-    host: process.env.POSTHOG_HOST,
-    disabled: process.env.NODE_ENV === 'development',
-  },
+  // posthog: {
+  //   publicKey: process.env.POSTHOG_PUBLIC_KEY,
+  //   host: process.env.POSTHOG_HOST,
+  //   disabled: process.env.NODE_ENV === 'development',
+  // },
 
   prisma: {
     installCLI: process.env.NODE_ENV === 'development',
