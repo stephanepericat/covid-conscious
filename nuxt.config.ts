@@ -91,7 +91,8 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@vueuse/nuxt',
     'nuxt-auth-utils',
-    'nuxt-security',
+    // TODO: fix posthog and re-enable
+    // 'nuxt-security',
     'nuxt-umami',
     'shadcn-nuxt',
   ],
@@ -120,6 +121,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    public: {
+      posthogPublicKey: process.env.POSTHOG_PUBLIC_KEY,
+      posthogHost: process.env.POSTHOG_HOST,
+    },
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },
