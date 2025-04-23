@@ -31,7 +31,7 @@
     "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/i18n": "9.2.0",
     "@nuxtjs/sanity": "^1.13.3",
-    "@nuxtjs/seo": "2.1.1",
+    "@nuxtjs/seo": "^2.2.0",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@nuxtjs/turnstile": "0.9.16",
     "@pinia/nuxt": "0.11.0",
@@ -112,5 +112,8 @@
   "prisma": {
     "seed": "ts-node --transpile-only prisma/seed.ts"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.9.1",
+  "resolutions": {
+    "@nuxt/kit": "^3.16.2"
+  }
 }
