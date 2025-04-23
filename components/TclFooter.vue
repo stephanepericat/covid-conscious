@@ -21,13 +21,16 @@ const onClick = (linkName: string) => umTrackEvent('click:footer', linkName)
         </h4>
         <ul>
           <li
-            v-for="({ label, href, icon, target }, rowIndex) in contents"
+            v-for="(
+              { label, href, icon, target, external }, rowIndex
+            ) in contents"
             :key="`footer-col-${columnIndex}-row-${rowIndex}`"
             class="text-[13px] mb-2.5 h-5"
           >
             <NuxtLink
               :to="href"
               :target="target"
+              :external="external"
               class="hover:underline text-primary hover:brightness-90 inline-flex items-center"
               @click="() => onClick(label)"
             >
