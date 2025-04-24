@@ -180,6 +180,7 @@ export default defineNuxtConfig({
     sourceMapsUploadOptions: {
       org: 'that-covid-life',
       project: 'tcl-shad',
+      authToken: process.env.SENTRY_AUTH_TOKEN,
     },
 
     autoInjectServerSentry: 'top-level-import',
