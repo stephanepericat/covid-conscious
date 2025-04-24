@@ -1033,14 +1033,6 @@ export type AllSanitySchemaTypes =
   | MediaTag
   | Slug
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ./sanity/queries/appSettings.sanity.ts
-// Variable: APP_SETTINGS_QUERY
-// Query: *[_type == 'appSettings'] {  key,  "value": coalesce(valueString, valueBoolean, valueNumber, null)}
-export type APP_SETTINGS_QUERYResult = Array<{
-  key: string | null
-  value: boolean | number | string | null
-}>
-
 // Source: ./sanity/queries/latestPublications.sanity.ts
 // Variable: LATEST_PUBLICATIONS_QUERY
 // Query: {    // "blog": *[(_type == "blog") && !(_id in path('drafts.**'))] | order(_createdAt asc)[0..2] {    //   "id": _id,    //   "date": _createdAt,    //   "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,    //   "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == 'en'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",    //   "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },    //   "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },    //   "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, ''),    //   "type": _type,    //   "visual": visual.asset._ref,    // },    "events": *[_type == 'event' && !(_id in path('drafts.**')) && (string(eventDate) >= string::split(string(now()), 'T')[0] || string(endDate) >= string::split(string(now()), 'T')[0])] | order(eventDate asc) {      "id": _id,      "date": eventDate,      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value)), '')[0..255], '') + '...',      "end": endDate,      "free": coalesce(isEventFree, false),      "link": '/' + _type + '/' + tags[0]->uri.current + '/' + uri.current,      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },      "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },      "title": title,      "visual": visual.asset._ref,    },    "library": *[(_type == "scientific-library") && !(_id in path('drafts.**')) && (language == $locale)] | order(publicationDate desc)[0..4]{      "id": _id,      "date": publicationDate,      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value, [])), "")[0..255], "") + "...",      "limited": coalesce(limitedAccess, false),      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },      "premium": coalesce(premiumAccess, false),      "source": coalesce(source, null),      "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },      "title": title,      "visual": visual.asset._ref,    },    "news": *[_type == 'news' && !(_id in path('drafts.**')) && language == $locale] | order(publicationDate desc)[0..5] {      "id": _id,      "date": publicationDate,      "limited": coalesce(limitedAccess, false),      "link": url,      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },      "premium": coalesce(premiumAccess, false),      "source": coalesce(source, null),      "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },      "title": title,      "visual": visual.asset._ref,    },    "phw": *[_type == 'public-health' && !(_id in path('drafts.**')) && language == $locale] | order(publicationDate desc)[0..4] {      "id": _id,      "date": publicationDate,      "description": null,      "limited": coalesce(limitedAccess, false),      "link": url,      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },      "premium": coalesce(premiumAccess, false),      "source": coalesce(source, null),      "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },      "title": title,      "visual": visual.asset._ref,    },    "showcase": *[_type in ['news', 'scientific-library', 'public-health', 'video'] && !(_id in path('drafts.**')) && language == $locale] | order(_createdAt desc)[0..4] {      "id": _id,      "link": url,      "title": title,      "visual": visual.asset->url,    },    "videos": *[_type == 'video' && !(_id in path('drafts.**')) && (language == $locale) ] | order(publicationDate desc)[0..5]{      "id": _id,      "date": publicationDate,      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value)), '')[0..255], '') + '...',      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },      "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },      "title": title,      "visual": visual.asset._ref,    },  }
@@ -1198,13 +1190,12 @@ export type LATEST_PUBLICATIONS_QUERYResult = {
 // Query: *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {  "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title[$locale], title['en'], title, ''),  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == 'en'][0].value, null))), "")[0..252], "") + '...',  "image": visual.asset->url,  "name": coalesce(name, null),}
 export type METADATA_QUERYResult =
   | {
-      title: ''
-      description: string
-      image: null
-      name: null
-    }
-  | {
       title:
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
         | Array<
             {
               _key: string
@@ -1218,6 +1209,12 @@ export type METADATA_QUERYResult =
     }
   | {
       title: Array<string> | string | ''
+      description: string
+      image: null
+      name: null
+    }
+  | {
+      title: ''
       description: string
       image: null
       name: null
@@ -1245,13 +1242,12 @@ export type METADATA_QUERYResult =
       name: Slug | null
     }
   | {
-      title: ''
-      description: string
-      image: string | null
-      name: null
-    }
-  | {
       title:
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
         | Array<
             {
               _key: string
@@ -1265,6 +1261,12 @@ export type METADATA_QUERYResult =
     }
   | {
       title: Array<string> | string | ''
+      description: string
+      image: string | null
+      name: null
+    }
+  | {
+      title: ''
       description: string
       image: string | null
       name: null
@@ -1316,708 +1318,6 @@ export type POLICY_QUERYResult = Array<{
 // Variable: PUBLICATION_QUERY
 // Query: *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {  "id": _id,  "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title[$locale], title['en'], title, ''),  name,  "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },  "published": _createdAt,  "date": coalesce(publicationDate, eventDate),  "end": endDate,  "updated": _updatedAt,  "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value, []),  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == 'en'][0].value, null))), "")[0..252], ""),  "category": coalesce(tags[0]->name[$locale], tags[0]->name['en'], null),  "info": contactInfo {    "street1": streetAdressOne,    "street2": streetAdressTwo,    city,    zipCode,    "country": coalesce(country->name[_key == $locale][0].value, country->name[_key == 'en'][0].value, null),    "phone": phoneNumber,    email,    website,  },  "link": url,  embedCode,  language,  location,  onlineOnly,  "free": isEventFree,  "tags": tags[]-> { "name": coalesce(name[$locale], name['en'], ''), "uri": uri.current },  "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {    "external": isExternalLink,    name,    url,    "visual": visual.asset._ref,    "zoneId": zoneId.current,  },  "image": visual.asset->url,  "related": *[    _type == ^._type &&    _id != ^._id &&    !(_id in path('drafts.**')) &&    (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&    language == $locale  ] [0...8] {    "id": _id,    "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title, ''),    "visual": visual.asset._ref,    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,    "tags": tags[]-> { "name": coalesce(name[$locale], name['en'], ''), "uri": uri.current },    "date": coalesce(publicationDate, eventDate),  },  "contentType": coalesce(contentType, null),  "thumbnail": coalesce(visual.asset._ref, null),  "covidnet": {    blogFeaturedURLs,    blogRssURL,    blogURL,    channelID,    channelURL,    contentType,    twitterFeaturedPosts,    twitterUsername,  },  "brand": brand-> {    name,    url,    "path": '/brand/' + tags[0]->uri.current + '/' + uri.current,  },  "products": *[^._type == 'brand' && _type == 'product' && brand->name == ^.name] | order(coalesce(title[_key == $locale].value, title[_key == 'en'].value)[0] asc) {    "id": _id,    "url": '/product/' + tags[0]->uri.current + '/' + uri.current,    "title": coalesce(title[_key == $locale].value, title[_key == 'en'].value)[0],    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == 'en'].value)), '')[0..255], '') + '...',    "tags": tags[]-> { "name": coalesce(name[$locale], name['en'], ''), "uri": uri.current },    "visual": coalesce(visual.asset._ref, null),  },}
 export type PUBLICATION_QUERYResult =
-  | {
-      id: string
-      title: ''
-      name: null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: null
-      related: Array<never>
-      contentType: null
-      thumbnail: null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title:
-        | Array<
-            {
-              _key: string
-            } & InternationalizedArrayStringValue
-          >
-        | string
-        | ''
-      name: null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: null
-      related: Array<never>
-      contentType: null
-      thumbnail: null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: ''
-      name: Array<
-        {
-          _key: string
-        } & InternationalizedArrayStringValue
-      > | null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: null
-      related: Array<never>
-      contentType: null
-      thumbnail: null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: ''
-      name: LocaleString | null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: null
-      related: Array<never>
-      contentType: null
-      thumbnail: null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: ''
-      name: Slug | null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: null
-      related: Array<never>
-      contentType: null
-      thumbnail: null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: Array<string> | string | ''
-      name: null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: string | null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: null
-      related: Array<never>
-      contentType: null
-      thumbnail: null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: ''
-      name: string | null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: string | null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: string | null
-      related: Array<never>
-      contentType: null
-      thumbnail: string | null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: ''
-      name: null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category: null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: string | null
-      related: Array<never>
-      contentType: null
-      thumbnail: string | null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: string | null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: Array<string> | string | ''
-      name: null
-      author: null
-      published: string
-      date: string | null
-      end: null
-      updated: string
-      body: Array<never>
-      description: string
-      category:
-        | Array<{
-            _type: 'localeString'
-            en?: string
-            fr?: string
-            pt?: string
-            es?: string
-          }>
-        | string
-        | null
-      info: null
-      link: string | null
-      embedCode: null
-      language: 'en' | 'es' | 'fr' | 'pt' | null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: Array<{
-        name:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | string
-          | ''
-        uri: string | null
-      }> | null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: string | null
-      related: Array<{
-        id: string
-        title: string | ''
-        visual: string | null
-        url: null
-        tags: Array<{
-          name:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          uri: string | null
-        }> | null
-        date: string | null
-      }>
-      contentType: null
-      thumbnail: string | null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title:
-        | Array<
-            {
-              _key: string
-            } & InternationalizedArrayStringValue
-          >
-        | string
-        | ''
-      name: null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body:
-        | Array<{
-            children?: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
-              _key: string
-            }>
-            style?:
-              | 'blockquote'
-              | 'h1'
-              | 'h2'
-              | 'h3'
-              | 'h4'
-              | 'h5'
-              | 'h6'
-              | 'normal'
-            listItem?: 'bullet' | 'number'
-            markDefs?: Array<{
-              href?: string
-              _type: 'link'
-              _key: string
-            }>
-            level?: number
-            _type: 'block'
-            _key: string
-          }>
-        | Array<never>
-      description: string
-      category:
-        | Array<{
-            _type: 'localeString'
-            en?: string
-            fr?: string
-            pt?: string
-            es?: string
-          }>
-        | string
-        | null
-      info: null
-      link: null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: Array<{
-        name:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | string
-          | ''
-        uri: string | null
-      }> | null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: string | null
-      related: Array<{
-        id: string
-        title:
-          | Array<
-              {
-                _key: string
-              } & InternationalizedArrayStringValue
-            >
-          | string
-          | ''
-        visual: string | null
-        url: string | null
-        tags: Array<{
-          name:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          uri: string | null
-        }> | null
-        date: null
-      }>
-      contentType: null
-      thumbnail: string | null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<never>
-    }
-  | {
-      id: string
-      title: ''
-      name: string | null
-      author: null
-      published: string
-      date: null
-      end: null
-      updated: string
-      body:
-        | Array<{
-            children?: Array<{
-              marks?: Array<string>
-              text?: string
-              _type: 'span'
-              _key: string
-            }>
-            style?:
-              | 'blockquote'
-              | 'h1'
-              | 'h2'
-              | 'h3'
-              | 'h4'
-              | 'h5'
-              | 'h6'
-              | 'normal'
-            listItem?: 'bullet' | 'number'
-            markDefs?: Array<{
-              href?: string
-              _type: 'link'
-              _key: string
-            }>
-            level?: number
-            _type: 'block'
-            _key: string
-          }>
-        | Array<never>
-      description: string
-      category:
-        | Array<{
-            _type: 'localeString'
-            en?: string
-            fr?: string
-            pt?: string
-            es?: string
-          }>
-        | string
-        | null
-      info: null
-      link: string | null
-      embedCode: null
-      language: null
-      location: null
-      onlineOnly: null
-      free: null
-      tags: Array<{
-        name:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | string
-          | ''
-        uri: string | null
-      }> | null
-      promos: Array<{
-        external: boolean | null
-        name: string | null
-        url: string | null
-        visual: string | null
-        zoneId: string | null
-      }>
-      image: string | null
-      related: Array<{
-        id: string
-        title: ''
-        visual: string | null
-        url: string | null
-        tags: Array<{
-          name:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          uri: string | null
-        }> | null
-        date: null
-      }>
-      contentType: null
-      thumbnail: string | null
-      covidnet: {
-        blogFeaturedURLs: null
-        blogRssURL: null
-        blogURL: null
-        channelID: null
-        channelURL: null
-        contentType: null
-        twitterFeaturedPosts: null
-        twitterUsername: null
-      }
-      brand: null
-      products: Array<{
-        id: string
-        url: string | null
-        title: string | null
-        description: string
-        tags: Array<{
-          name:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          uri: string | null
-        }> | null
-        visual: string | null
-      }>
-    }
   | {
       id: string
       title: Array<string> | string | ''
@@ -2701,6 +2001,271 @@ export type PUBLICATION_QUERYResult =
               _key: string
             } & InternationalizedArrayStringValue
           >
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
+        | string
+        | ''
+      name: null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body:
+        | Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?:
+              | 'blockquote'
+              | 'h1'
+              | 'h2'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal'
+            listItem?: 'bullet' | 'number'
+            markDefs?: Array<{
+              href?: string
+              _type: 'link'
+              _key: string
+            }>
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+        | Array<never>
+      description: string
+      category:
+        | Array<{
+            _type: 'localeString'
+            en?: string
+            fr?: string
+            pt?: string
+            es?: string
+          }>
+        | string
+        | null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: Array<{
+        name:
+          | Array<{
+              _type: 'localeString'
+              en?: string
+              fr?: string
+              pt?: string
+              es?: string
+            }>
+          | string
+          | ''
+        uri: string | null
+      }> | null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: string | null
+      related: Array<{
+        id: string
+        title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
+          | string
+          | ''
+        visual: string | null
+        url: string | null
+        tags: Array<{
+          name:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          uri: string | null
+        }> | null
+        date: null
+      }>
+      contentType: null
+      thumbnail: string | null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: string | null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body:
+        | Array<{
+            children?: Array<{
+              marks?: Array<string>
+              text?: string
+              _type: 'span'
+              _key: string
+            }>
+            style?:
+              | 'blockquote'
+              | 'h1'
+              | 'h2'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal'
+            listItem?: 'bullet' | 'number'
+            markDefs?: Array<{
+              href?: string
+              _type: 'link'
+              _key: string
+            }>
+            level?: number
+            _type: 'block'
+            _key: string
+          }>
+        | Array<never>
+      description: string
+      category:
+        | Array<{
+            _type: 'localeString'
+            en?: string
+            fr?: string
+            pt?: string
+            es?: string
+          }>
+        | string
+        | null
+      info: null
+      link: string | null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: Array<{
+        name:
+          | Array<{
+              _type: 'localeString'
+              en?: string
+              fr?: string
+              pt?: string
+              es?: string
+            }>
+          | string
+          | ''
+        uri: string | null
+      }> | null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: string | null
+      related: Array<{
+        id: string
+        title: ''
+        visual: string | null
+        url: string | null
+        tags: Array<{
+          name:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          uri: string | null
+        }> | null
+        date: null
+      }>
+      contentType: null
+      thumbnail: string | null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<{
+        id: string
+        url: string | null
+        title: string | null
+        description: string
+        tags: Array<{
+          name:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          uri: string | null
+        }> | null
+        visual: string | null
+      }>
+    }
+  | {
+      id: string
+      title:
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
         | string
         | ''
       name: null
@@ -2874,6 +2439,463 @@ export type PUBLICATION_QUERYResult =
               _key: string
             } & InternationalizedArrayStringValue
           >
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
+        | string
+        | ''
+      name: null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: null
+      related: Array<never>
+      contentType: null
+      thumbnail: null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: null
+      related: Array<never>
+      contentType: null
+      thumbnail: null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: Array<
+        {
+          _key: string
+        } & InternationalizedArrayStringValue
+      > | null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: null
+      related: Array<never>
+      contentType: null
+      thumbnail: null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: LocaleString | null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: null
+      related: Array<never>
+      contentType: null
+      thumbnail: null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: Slug | null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: null
+      related: Array<never>
+      contentType: null
+      thumbnail: null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: Array<string> | string | ''
+      name: null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: string | null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: null
+      related: Array<never>
+      contentType: null
+      thumbnail: null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: string | null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: string | null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: string | null
+      related: Array<never>
+      contentType: null
+      thumbnail: string | null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: ''
+      name: null
+      author: null
+      published: string
+      date: null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category: null
+      info: null
+      link: null
+      embedCode: null
+      language: null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: string | null
+      related: Array<never>
+      contentType: null
+      thumbnail: string | null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: string | null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title: Array<string> | string | ''
+      name: null
+      author: null
+      published: string
+      date: string | null
+      end: null
+      updated: string
+      body: Array<never>
+      description: string
+      category:
+        | Array<{
+            _type: 'localeString'
+            en?: string
+            fr?: string
+            pt?: string
+            es?: string
+          }>
+        | string
+        | null
+      info: null
+      link: string | null
+      embedCode: null
+      language: 'en' | 'es' | 'fr' | 'pt' | null
+      location: null
+      onlineOnly: null
+      free: null
+      tags: Array<{
+        name:
+          | Array<{
+              _type: 'localeString'
+              en?: string
+              fr?: string
+              pt?: string
+              es?: string
+            }>
+          | string
+          | ''
+        uri: string | null
+      }> | null
+      promos: Array<{
+        external: boolean | null
+        name: string | null
+        url: string | null
+        visual: string | null
+        zoneId: string | null
+      }>
+      image: string | null
+      related: Array<{
+        id: string
+        title: string | ''
+        visual: string | null
+        url: null
+        tags: Array<{
+          name:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          uri: string | null
+        }> | null
+        date: string | null
+      }>
+      contentType: null
+      thumbnail: string | null
+      covidnet: {
+        blogFeaturedURLs: null
+        blogRssURL: null
+        blogURL: null
+        channelID: null
+        channelURL: null
+        contentType: null
+        twitterFeaturedPosts: null
+        twitterUsername: null
+      }
+      brand: null
+      products: Array<never>
+    }
+  | {
+      id: string
+      title:
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
+        | Array<
+            {
+              _key: string
+            } & InternationalizedArrayStringValue
+          >
         | string
         | ''
       name: null
@@ -3003,32 +3025,12 @@ export type PUBLICATION_QUERYResult =
 export type PUBLICATION_BY_TAG_QUERYResult = {
   results: Array<
     | {
-        title: ''
-        name: null
-        author: null
-        date: null
-        end: null
-        published: string
-        category: null
-        categoryUri: null
-        shortDescription: string
-        link: null
-        path: null
-        source: null
-        thumbnail: null
-        type: 'appSettings'
-        contentType: null
-        uri: null
-        countryCode: null
-        countryName: null
-        city: null
-        language: unknown | null
-        tags: null
-        locked: false
-        limited: false
-      }
-    | {
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -3074,6 +3076,31 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
         source: null
         thumbnail: null
         type: 'feedSettings'
+        contentType: null
+        uri: null
+        countryCode: null
+        countryName: null
+        city: null
+        language: unknown | null
+        tags: null
+        locked: false
+        limited: false
+      }
+    | {
+        title: ''
+        name: null
+        author: null
+        date: null
+        end: null
+        published: string
+        category: null
+        categoryUri: null
+        shortDescription: string
+        link: null
+        path: null
+        source: null
+        thumbnail: null
+        type: 'appSettings'
         contentType: null
         uri: null
         countryCode: null
@@ -3316,6 +3343,11 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | ''
         name: null
@@ -3364,6 +3396,11 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
       }
     | {
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -3445,52 +3482,6 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
         countryName: null
         city: null
         language: unknown | null
-        tags: Array<{
-          name:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          uri: string | null
-        }> | null
-        locked: false
-        limited: false
-      }
-    | {
-        title: Array<string> | string | ''
-        name: null
-        author: null
-        date: string | null
-        end: null
-        published: string
-        category:
-          | Array<{
-              _type: 'localeString'
-              en?: string
-              fr?: string
-              pt?: string
-              es?: string
-            }>
-          | string
-          | null
-        categoryUri: string | null
-        shortDescription: string
-        link: string | null
-        path: string | null
-        source: null
-        thumbnail: string | null
-        type: 'video'
-        contentType: null
-        uri: string | null
-        countryCode: null
-        countryName: null
-        city: null
-        language: 'en' | 'es' | 'fr' | 'pt' | unknown | null
         tags: Array<{
           name:
             | Array<{
@@ -3644,6 +3635,52 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
         }> | null
         locked: boolean | false
         limited: boolean | false
+      }
+    | {
+        title: Array<string> | string | ''
+        name: null
+        author: null
+        date: string | null
+        end: null
+        published: string
+        category:
+          | Array<{
+              _type: 'localeString'
+              en?: string
+              fr?: string
+              pt?: string
+              es?: string
+            }>
+          | string
+          | null
+        categoryUri: string | null
+        shortDescription: string
+        link: string | null
+        path: string | null
+        source: null
+        thumbnail: string | null
+        type: 'video'
+        contentType: null
+        uri: string | null
+        countryCode: null
+        countryName: null
+        city: null
+        language: 'en' | 'es' | 'fr' | 'pt' | unknown | null
+        tags: Array<{
+          name:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          uri: string | null
+        }> | null
+        locked: false
+        limited: false
       }
     | {
         title: Array<string> | string | ''
@@ -3790,6 +3827,11 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | ''
         name: null
@@ -3860,6 +3902,228 @@ export type PUBLICATION_BY_TAG_QUERYResult = {
 // Query: {  "results": *[_type == $type && !(_id in path('drafts.**'))] | order(publicationDate desc, _createdAt desc)[$start..$end] {    "attributes": {      "free": coalesce(isEventFree, false),      "limited": coalesce(limitedAccess, false),      "onlineOnly": coalesce(onlineOnly, false),      "premium": coalesce(premiumAccess, false),    },    "date": coalesce(eventDate, publicationDate, _createdAt),    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value, [])), "")[0..512], "") + "...",    "end": endDate,    "id": _id,    "language": language,    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,    "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },    "source": coalesce(source, null),    "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },    "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title[$locale], title['en'], title, null),    "type": _type,    "url": url,    "visual": visual.asset._ref,  },  "info": {    "locale": coalesce($locale, "en"),    "start": coalesce($start, 0),    "end": coalesce($end, 5),    "total": coalesce(count(*[_type == $type && !(_id in path('drafts.**'))]), 0),  },}
 export type PUBLICATION_BY_TYPE_QUERYResult = {
   results: Array<
+    | {
+        attributes: {
+          free: boolean | false
+          limited: false
+          onlineOnly: false
+          premium: false
+        }
+        date: string
+        description: string
+        end: string | null
+        id: string
+        language: 'en' | 'es' | 'fr' | 'pt' | null
+        link: string | null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title: Array<string> | string | null
+        type: 'event'
+        url: string | null
+        visual: string | null
+      }
+    | {
+        attributes: {
+          free: false
+          limited: boolean | false
+          onlineOnly: false
+          premium: boolean | false
+        }
+        date: string
+        description: string
+        end: null
+        id: string
+        language: 'en' | 'es' | 'fr' | 'pt' | null
+        link: null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: string | null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title: Array<string> | string | null
+        type: 'news'
+        url: string | null
+        visual: string | null
+      }
+    | {
+        attributes: {
+          free: false
+          limited: boolean | false
+          onlineOnly: false
+          premium: boolean | false
+        }
+        date: string
+        description: string
+        end: null
+        id: string
+        language: 'en' | 'es' | 'fr' | 'pt' | null
+        link: null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: string | null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title: Array<string> | string | null
+        type: 'public-health'
+        url: string | null
+        visual: string | null
+      }
+    | {
+        attributes: {
+          free: false
+          limited: boolean | false
+          onlineOnly: false
+          premium: boolean | false
+        }
+        date: string
+        description: string
+        end: null
+        id: string
+        language: 'en' | 'es' | 'fr' | 'pt' | null
+        link: string | null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: string | null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title: Array<string> | string | null
+        type: 'scientific-library'
+        url: string | null
+        visual: string | null
+      }
+    | {
+        attributes: {
+          free: false
+          limited: false
+          onlineOnly: boolean | false
+          premium: false
+        }
+        date: string
+        description: string
+        end: null
+        id: string
+        language: 'en' | 'es' | 'fr' | 'pt' | null
+        link: string | null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title: Array<string> | string | null
+        type: 'directory'
+        url: null
+        visual: string | null
+      }
+    | {
+        attributes: {
+          free: false
+          limited: false
+          onlineOnly: false
+          premium: false
+        }
+        date: string
+        description: string
+        end: null
+        id: string
+        language: 'en' | 'es' | 'fr' | 'pt' | null
+        link: string | null
+        metadata: {
+          aspectRatio: number | null
+          height: number | null
+          width: number | null
+        } | null
+        source: null
+        tags: Array<{
+          label:
+            | Array<{
+                _type: 'localeString'
+                en?: string
+                fr?: string
+                pt?: string
+                es?: string
+              }>
+            | string
+            | ''
+          slug: string | null
+        }> | null
+        title: Array<string> | string | null
+        type: 'video'
+        url: string | null
+        visual: string | null
+      }
     | {
         attributes: {
           free: false
@@ -3961,6 +4225,11 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
         source: null
         tags: null
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -4160,6 +4429,11 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         type: 'blog'
@@ -4204,6 +4478,11 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         type: 'education'
@@ -4243,6 +4522,11 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
           slug: string | null
         }> | null
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -4328,228 +4612,6 @@ export type PUBLICATION_BY_TYPE_QUERYResult = {
         url: string | null
         visual: string | null
       }
-    | {
-        attributes: {
-          free: false
-          limited: false
-          onlineOnly: false
-          premium: false
-        }
-        date: string
-        description: string
-        end: null
-        id: string
-        language: 'en' | 'es' | 'fr' | 'pt' | null
-        link: string | null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title: Array<string> | string | null
-        type: 'video'
-        url: string | null
-        visual: string | null
-      }
-    | {
-        attributes: {
-          free: false
-          limited: false
-          onlineOnly: boolean | false
-          premium: false
-        }
-        date: string
-        description: string
-        end: null
-        id: string
-        language: 'en' | 'es' | 'fr' | 'pt' | null
-        link: string | null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title: Array<string> | string | null
-        type: 'directory'
-        url: null
-        visual: string | null
-      }
-    | {
-        attributes: {
-          free: false
-          limited: boolean | false
-          onlineOnly: false
-          premium: boolean | false
-        }
-        date: string
-        description: string
-        end: null
-        id: string
-        language: 'en' | 'es' | 'fr' | 'pt' | null
-        link: null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: string | null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title: Array<string> | string | null
-        type: 'news'
-        url: string | null
-        visual: string | null
-      }
-    | {
-        attributes: {
-          free: false
-          limited: boolean | false
-          onlineOnly: false
-          premium: boolean | false
-        }
-        date: string
-        description: string
-        end: null
-        id: string
-        language: 'en' | 'es' | 'fr' | 'pt' | null
-        link: null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: string | null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title: Array<string> | string | null
-        type: 'public-health'
-        url: string | null
-        visual: string | null
-      }
-    | {
-        attributes: {
-          free: false
-          limited: boolean | false
-          onlineOnly: false
-          premium: boolean | false
-        }
-        date: string
-        description: string
-        end: null
-        id: string
-        language: 'en' | 'es' | 'fr' | 'pt' | null
-        link: string | null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: string | null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title: Array<string> | string | null
-        type: 'scientific-library'
-        url: string | null
-        visual: string | null
-      }
-    | {
-        attributes: {
-          free: boolean | false
-          limited: false
-          onlineOnly: false
-          premium: false
-        }
-        date: string
-        description: string
-        end: string | null
-        id: string
-        language: 'en' | 'es' | 'fr' | 'pt' | null
-        link: string | null
-        metadata: {
-          aspectRatio: number | null
-          height: number | null
-          width: number | null
-        } | null
-        source: null
-        tags: Array<{
-          label:
-            | Array<{
-                _type: 'localeString'
-                en?: string
-                fr?: string
-                pt?: string
-                es?: string
-              }>
-            | string
-            | ''
-          slug: string | null
-        }> | null
-        title: Array<string> | string | null
-        type: 'event'
-        url: string | null
-        visual: string | null
-      }
   >
   info: {
     locale: 'en' | unknown
@@ -4568,6 +4630,11 @@ export type RSS_FEED_QUERYResult = {
         id: string
         type: 'blog'
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -4671,6 +4738,11 @@ export type RSS_FEED_QUERYResult = {
         id: string
         type: 'product'
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -4827,6 +4899,11 @@ export type RSS_FEED_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         description: string
@@ -4892,6 +4969,11 @@ export type SEARCH_QUERYResult = {
     | {
         id: string
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -5160,6 +5242,11 @@ export type SEARCH_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         name: null
@@ -5204,6 +5291,11 @@ export type SEARCH_QUERYResult = {
     | {
         id: string
         title:
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | Array<
               {
                 _key: string
@@ -5552,6 +5644,11 @@ export type SEARCH_QUERYResult = {
                 _key: string
               } & InternationalizedArrayStringValue
             >
+          | Array<
+              {
+                _key: string
+              } & InternationalizedArrayStringValue
+            >
           | string
           | null
         name: null
@@ -5637,7 +5734,6 @@ export type YT_FEED_QUERYResult = Array<{
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n*[_type == \'appSettings\'] {\n  key,\n  "value": coalesce(valueString, valueBoolean, valueNumber, null)\n}\n': APP_SETTINGS_QUERYResult
     '\n  {\n    // "blog": *[(_type == "blog") && !(_id in path(\'drafts.**\'))] | order(_createdAt asc)[0..2] {\n    //   "id": _id,\n    //   "date": _createdAt,\n    //   "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n    //   "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",\n    //   "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n    //   "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n    //   "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, \'\'),\n    //   "type": _type,\n    //   "visual": visual.asset._ref,\n    // },\n    "events": *[_type == \'event\' && !(_id in path(\'drafts.**\')) && (string(eventDate) >= string::split(string(now()), \'T\')[0] || string(endDate) >= string::split(string(now()), \'T\')[0])] | order(eventDate asc) {\n      "id": _id,\n      "date": eventDate,\n      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value)), \'\')[0..255], \'\') + \'...\',\n      "end": endDate,\n      "free": coalesce(isEventFree, false),\n      "link": \'/\' + _type + \'/\' + tags[0]->uri.current + \'/\' + uri.current,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "library": *[(_type == "scientific-library") && !(_id in path(\'drafts.**\')) && (language == $locale)] | order(publicationDate desc)[0..4]{\n      "id": _id,\n      "date": publicationDate,\n      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value, [])), "")[0..255], "") + "...",\n      "limited": coalesce(limitedAccess, false),\n      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "premium": coalesce(premiumAccess, false),\n      "source": coalesce(source, null),\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "news": *[_type == \'news\' && !(_id in path(\'drafts.**\')) && language == $locale] | order(publicationDate desc)[0..5] {\n      "id": _id,\n      "date": publicationDate,\n      "limited": coalesce(limitedAccess, false),\n      "link": url,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "premium": coalesce(premiumAccess, false),\n      "source": coalesce(source, null),\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "phw": *[_type == \'public-health\' && !(_id in path(\'drafts.**\')) && language == $locale] | order(publicationDate desc)[0..4] {\n      "id": _id,\n      "date": publicationDate,\n      "description": null,\n      "limited": coalesce(limitedAccess, false),\n      "link": url,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "premium": coalesce(premiumAccess, false),\n      "source": coalesce(source, null),\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "showcase": *[_type in [\'news\', \'scientific-library\', \'public-health\', \'video\'] && !(_id in path(\'drafts.**\')) && language == $locale] | order(_createdAt desc)[0..4] {\n      "id": _id,\n      "link": url,\n      "title": title,\n      "visual": visual.asset->url,\n    },\n    "videos": *[_type == \'video\' && !(_id in path(\'drafts.**\')) && (language == $locale) ] | order(publicationDate desc)[0..5]{\n      "id": _id,\n      "date": publicationDate,\n      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value)), \'\')[0..255], \'\') + \'...\',\n      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n  }\n': LATEST_PUBLICATIONS_QUERYResult
     '\n*[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {\n  "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, \'\'),\n  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, null))), "")[0..252], "") + \'...\',\n  "image": visual.asset->url,\n  "name": coalesce(name, null),\n}\n': METADATA_QUERYResult
     "\n*[_type == \"policy\" && title[_key == 'en'][0].value == $policyType] {\n  \"title\": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, ''),\n  \"contents\": coalesce(contents[_key == $locale][0].value, contents[_key == 'en'][0].value, []),\n}\n": POLICY_QUERYResult
