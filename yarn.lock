@@ -15823,16 +15823,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-umami@npm:3.2.0":
-  version: 3.2.0
-  resolution: "nuxt-umami@npm:3.2.0"
-  dependencies:
-    "@nuxt/kit": "npm:^3.15.4"
-    request-ip: "npm:^3.3.0"
-  checksum: 10c0/ee4d542b497a5509a21fd6ca7fd2cbdf9cb56974c4ad0644914181bba19f143a6ff05cff9988fb865619234d72ace19b6c9e1e6638387821593c99ebcb62ef03
-  languageName: node
-  linkType: hard
-
 "nuxt@npm:^3.16.2":
   version: 3.16.2
   resolution: "nuxt@npm:3.16.2"
@@ -17681,13 +17671,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"request-ip@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "request-ip@npm:3.3.0"
-  checksum: 10c0/35ab5fcb29408cb72629b53207f00a443a60fe881ffb63e3b08a06c07dae3eee617522741bd0b035492153d6c9babe7f8d9f79c008d493d1e6638b0bd92cb02b
-  languageName: node
-  linkType: hard
-
 "require-directory@npm:^2.1.1":
   version: 2.1.1
   resolution: "require-directory@npm:2.1.1"
@@ -19322,7 +19305,6 @@ __metadata:
     nuxt: "npm:^3.16.2"
     nuxt-auth-utils: "npm:^0.5.20"
     nuxt-security: "npm:^2.2.0"
-    nuxt-umami: "npm:3.2.0"
     open-graph-scraper: "npm:^6.10.0"
     pinia: "npm:^3.0.2"
     playwright-core: "npm:^1.52.0"

@@ -91,7 +91,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-auth-utils',
     'nuxt-security',
-    'nuxt-umami',
     'shadcn-nuxt',
   ],
 
@@ -211,19 +210,6 @@ export default defineNuxtConfig({
 
   turnstile: {
     siteKey: process.env.TURNSTILE_SITE_KEY,
-  },
-
-  umami: {
-    id: process.env.NUXT_PUBLIC_UMAMI_ID,
-    host: process.env.NUXT_PUBLIC_UMAMI_HOST,
-    autoTrack: true,
-    ignoreLocalhost: true,
-    domains: [
-      'tcl-next-red.vercel.app',
-      'covid-conscious-preview.vercel.app',
-      'thatcovid.life',
-    ],
-    logErrors: true,
   },
 
   vite: {
