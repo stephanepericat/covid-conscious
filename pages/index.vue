@@ -75,7 +75,7 @@ const videos = computed(() => data?.value?.videos || [])
           <TclMoreButton
             extra="w-full md:w-auto"
             :label="$t('home.seeAllNews')"
-            :link="localePath('/news')"
+            :link="localePath('/news?offset=0&limit=5')"
             target="_self"
           />
         </div>
@@ -116,7 +116,7 @@ const videos = computed(() => data?.value?.videos || [])
             <TclMoreButton
               extra="w-full md:w-auto"
               :label="$t('home.seeAllEvents')"
-              :link="localePath('/event')"
+              :link="localePath('/event?offset=0&limit=5')"
               target="_self"
             />
           </div>
@@ -158,7 +158,7 @@ const videos = computed(() => data?.value?.videos || [])
               <TclMoreButton
                 extra="w-full"
                 :label="$t('home.seeAllVideos')"
-                :link="localePath('/video')"
+                :link="localePath('/video?offset=0&limit=5')"
                 target="_self"
               />
             </div>
@@ -178,7 +178,7 @@ const videos = computed(() => data?.value?.videos || [])
           <TclMoreButton
             extra="w-full md:w-auto"
             :label="$t('home.seeAllLibrary')"
-            :link="localePath('/scientific-library')"
+            :link="localePath('/scientific-library?offset=0&limit=5')"
             target="_self"
           />
         </div>
@@ -196,7 +196,7 @@ const videos = computed(() => data?.value?.videos || [])
           <TclMoreButton
             extra="w-full md:w-auto"
             :label="$t('home.seeAllPhw')"
-            :link="localePath('/public-health')"
+            :link="localePath('/public-health?offset=0&limit=5')"
             target="_self"
           />
         </div>
