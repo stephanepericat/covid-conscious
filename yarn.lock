@@ -9771,13 +9771,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.38.1":
-  version: 3.41.0
-  resolution: "core-js@npm:3.41.0"
-  checksum: 10c0/a29ed0b7fe81acf49d04ce5c17a1947166b1c15197327a5d12f95bbe84b46d60c3c13de701d808f41da06fa316285f3f55ce5903abc8d5642afc1eac4457afc8
-  languageName: node
-  linkType: hard
-
 "core-util-is@npm:~1.0.0":
   version: 1.0.3
   resolution: "core-util-is@npm:1.0.3"
@@ -12164,7 +12157,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fflate@npm:^0.4.4, fflate@npm:^0.4.8":
+"fflate@npm:^0.4.4":
   version: 0.4.8
   resolution: "fflate@npm:0.4.8"
   checksum: 10c0/29d1eddaaa5deab61b1c6b0d21282adacadbc4d2c01e94d8b1ee784398151673b9c563e53f97a801bc410a1ae55e8de5378114a743430e643e7a0644ba8e5a42
@@ -15760,18 +15753,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-posthog@npm:^1.6.3":
-  version: 1.6.3
-  resolution: "nuxt-posthog@npm:1.6.3"
-  dependencies:
-    "@nuxt/kit": "npm:^3.15.4"
-    defu: "npm:^6.1.4"
-    posthog-js: "npm:^1.217.0"
-    posthog-node: "npm:4.4.1"
-  checksum: 10c0/7dcf6b6e01e07d4726de997aed103164bef1657d741a334a42b71f60eae3edd82ddd0a804c9898deffed424741c1859447caaba33eb08afda01318bcf78c6051
-  languageName: node
-  linkType: hard
-
 "nuxt-schema-org@npm:^4.1.2":
   version: 4.1.3
   resolution: "nuxt-schema-org@npm:4.1.3"
@@ -17159,46 +17140,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"posthog-js@npm:^1.217.0, posthog-js@npm:^1.236.5":
-  version: 1.236.5
-  resolution: "posthog-js@npm:1.236.5"
-  dependencies:
-    core-js: "npm:^3.38.1"
-    fflate: "npm:^0.4.8"
-    preact: "npm:^10.19.3"
-    web-vitals: "npm:^4.2.4"
-  peerDependencies:
-    "@rrweb/types": 2.0.0-alpha.17
-    rrweb-snapshot: 2.0.0-alpha.17
-  peerDependenciesMeta:
-    "@rrweb/types":
-      optional: true
-    rrweb-snapshot:
-      optional: true
-  checksum: 10c0/15562a23abca641498439c79e905f705716738aacdc2317b66131366603a5766cf7f587cae1d0d63222291e8d061df4e952461474527af79f22fcf68074ba9d1
-  languageName: node
-  linkType: hard
-
-"posthog-node@npm:4.4.1":
-  version: 4.4.1
-  resolution: "posthog-node@npm:4.4.1"
-  dependencies:
-    axios: "npm:^1.7.4"
-  checksum: 10c0/ae111e95fd74d0186491fb43af45728026cda8b8dedad81d8d4ff893cdf7ce42816afe3954ff3fb88044709f242e24f11815b113daf9b92073ba8108f96dccbb
-  languageName: node
-  linkType: hard
-
 "potpack@npm:^1.0.2":
   version: 1.0.2
   resolution: "potpack@npm:1.0.2"
   checksum: 10c0/670c23898a4257130858b960c2e654d3327c0f6a7e7091ff5846f213e65af8f9476320b995b8ad561a47a4d1c359c7ef347de57d22e7b02597051abb52bc85c4
-  languageName: node
-  linkType: hard
-
-"preact@npm:^10.19.3":
-  version: 10.26.5
-  resolution: "preact@npm:10.26.5"
-  checksum: 10c0/542a924009489c21b24e9588a5580dac03239a60951d10e6ad1207db66c8e719e1d46a38af6577c8f324b238fbe2aa92e0ffc04d3a71dbe182f56426c8abe632
   languageName: node
   linkType: hard
 
@@ -19384,13 +19329,11 @@ __metadata:
     lucide-vue-next: "npm:^0.503.0"
     nuxt: "npm:^3.16.2"
     nuxt-auth-utils: "npm:^0.5.20"
-    nuxt-posthog: "npm:^1.6.3"
     nuxt-security: "npm:^2.2.0"
     nuxt-umami: "npm:3.2.0"
     open-graph-scraper: "npm:^6.10.0"
     pinia: "npm:^3.0.2"
     playwright-core: "npm:^1.52.0"
-    posthog-js: "npm:^1.236.5"
     prettier: "npm:^3.5.3"
     prisma: "npm:^6.3.1"
     radix-vue: "npm:^1.9.17"
@@ -21270,13 +21213,6 @@ __metadata:
   version: 3.3.3
   resolution: "web-streams-polyfill@npm:3.3.3"
   checksum: 10c0/64e855c47f6c8330b5436147db1c75cb7e7474d924166800e8e2aab5eb6c76aac4981a84261dd2982b3e754490900b99791c80ae1407a9fa0dcff74f82ea3a7f
-  languageName: node
-  linkType: hard
-
-"web-vitals@npm:^4.2.4":
-  version: 4.2.4
-  resolution: "web-vitals@npm:4.2.4"
-  checksum: 10c0/383c9281d5b556bcd190fde3c823aeb005bb8cf82e62c75b47beb411014a4ed13fa5c5e0489ed0f1b8d501cd66b0bebcb8624c1a75750bd5df13e2a3b1b2d194
   languageName: node
   linkType: hard
 
