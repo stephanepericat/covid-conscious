@@ -87,7 +87,6 @@ export default defineNuxtConfig({
     '@nuxtjs/turnstile',
     '@pinia/nuxt',
     '@prisma/nuxt',
-    // '@sentry/nuxt/module',
     '@vueuse/motion/nuxt',
     '@vueuse/nuxt',
     'nuxt-auth-utils',
@@ -176,16 +175,6 @@ export default defineNuxtConfig({
     },
   },
 
-  sentry: {
-    sourceMapsUploadOptions: {
-      org: 'that-covid-life',
-      project: 'tcl-shad',
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-    },
-
-    autoInjectServerSentry: 'top-level-import',
-  },
-
   shadcn: {
     prefix: '',
     componentDir: './components/ui',
@@ -213,10 +202,6 @@ export default defineNuxtConfig({
         sources: ['/api/__sitemap__/urls?locale=pt'],
       },
     },
-  },
-
-  sourcemap: {
-    client: 'hidden',
   },
 
   tailwindcss: {

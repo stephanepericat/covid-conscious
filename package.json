@@ -40,7 +40,6 @@
     "@prisma/nuxt": "^0.3.0",
     "@radix-icons/vue": "^1.0.0",
     "@sanity/client": "^6.29.0",
-    "@sentry/nuxt": "^9",
     "@tanstack/vue-table": "^8.21.3",
     "@unovis/ts": "^1.5.1",
     "@unovis/vue": "^1.5.1",
