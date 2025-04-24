@@ -9,7 +9,6 @@ defineProps<{
 }>()
 
 const localePath = useLocalePath()
-const onClick = (slug: string) => umTrackEvent('click:tag', { slug })
 </script>
 
 <template>
@@ -28,7 +27,6 @@ const onClick = (slug: string) => umTrackEvent('click:tag', { slug })
       :key="slug"
       :to="localePath(`/tag/${slug}`)"
       target="_self"
-      @click="() => onClick(slug)"
     >
       <Badge class="uppercase tracking-widest mr-1.5 mb-1" variant="secondary">
         {{ label }}

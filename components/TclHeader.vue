@@ -12,11 +12,7 @@ const searchValue = ref('')
     <nav
       class="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6"
     >
-      <NuxtLink
-        :to="localePath('/')"
-        class="min-w-[46px]"
-        @click="() => umTrackEvent('click:logo')"
-      >
+      <NuxtLink :to="localePath('/')" class="min-w-[46px]">
         <TclLogo />
         <span class="sr-only">{{ $t('layout.tcl') }}</span>
       </NuxtLink>

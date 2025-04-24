@@ -12,9 +12,6 @@ const localePath = useLocalePath()
 const lockIcon = computed(() =>
   props.loggedIn ? 'mynaui:lock-open' : 'mynaui:lock',
 )
-
-const onClick = (linkName: string) =>
-  umTrackEvent('click:mobile-nav', { linkName })
 </script>
 
 <template>
@@ -35,7 +32,6 @@ const onClick = (linkName: string) =>
         <NuxtLink
           :to="localePath('/')"
           class="flex items-center gap-2 text-lg font-semibold"
-          @click="() => onClick('logo')"
         >
           <TclLogo />
           <span class="sr-only">{{ $t('layout.tcl') }}</span>
@@ -45,7 +41,6 @@ const onClick = (linkName: string) =>
           :key="item.id"
           :to="localePath(item.link)"
           class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
-          @click="() => onClick(item.link)"
         >
           {{ item.title }}
           <Icon

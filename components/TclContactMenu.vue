@@ -1,8 +1,5 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
-
-const onClick = (linkName: string) =>
-  umTrackEvent('click:contact', { linkName })
 </script>
 
 <template>
@@ -20,25 +17,19 @@ const onClick = (linkName: string) =>
       <DropdownMenuLabel>{{ $t('layout.contactInfo') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem>
-        <NuxtLink
-          :to="localePath('/contact-us')"
-          @click="() => onClick('contact')"
-          >{{ $t('layout.contactUs') }}</NuxtLink
-        >
+        <NuxtLink :to="localePath('/contact-us')">{{
+          $t('layout.contactUs')
+        }}</NuxtLink>
       </DropdownMenuItem>
       <DropdownMenuItem>
-        <NuxtLink
-          :to="localePath('/contribute')"
-          @click="() => onClick('contribute')"
-          >{{ $t('layout.submitContent') }}</NuxtLink
-        >
+        <NuxtLink :to="localePath('/contribute')">{{
+          $t('layout.submitContent')
+        }}</NuxtLink>
       </DropdownMenuItem>
       <DropdownMenuItem>
-        <NuxtLink
-          :to="localePath('/support')"
-          @click="() => onClick('support')"
-          >{{ $t('layout.support') }}</NuxtLink
-        >
+        <NuxtLink :to="localePath('/support')">{{
+          $t('layout.support')
+        }}</NuxtLink>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

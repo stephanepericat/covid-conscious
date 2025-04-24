@@ -1,8 +1,6 @@
 <script setup lang="ts">
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
-const onClick = (language: string) =>
-  umTrackEvent('click:language', { language })
 </script>
 
 <template>
@@ -19,11 +17,9 @@ const onClick = (language: string) =>
       <DropdownMenuLabel>{{ $t('layout.language') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem v-for="locale in locales" :key="locale.code">
-        <NuxtLink
-          :to="switchLocalePath(locale.code)"
-          @click="() => onClick(locale.code)"
-          >{{ locale.name }}</NuxtLink
-        >
+        <NuxtLink :to="switchLocalePath(locale.code)">{{
+          locale.name
+        }}</NuxtLink>
       </DropdownMenuItem>
     </DropdownMenuContent>
   </DropdownMenu>

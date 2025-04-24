@@ -10,14 +10,12 @@ defineProps<{
 }>()
 
 const localePath = useLocalePath()
-const onClick = (linkName: string) => umTrackEvent('click:more', { linkName })
 </script>
 
 <template>
   <NuxtLink
     :to="target === '_blank' ? link : localePath(link)"
     :target="target || '_self'"
-    @click="() => onClick(link)"
   >
     <Button :class="cn('group', extra)">
       {{ label }}&nbsp;

@@ -12,9 +12,6 @@ const localePath = useLocalePath()
 const lockIcon = computed(() =>
   props.loggedIn ? 'mynaui:lock-open' : 'mynaui:lock',
 )
-
-const onClick = (linkName: string) =>
-  umTrackEvent('click:top-nav', { linkName })
 </script>
 
 <template>
@@ -48,7 +45,6 @@ const onClick = (linkName: string) =>
                   <NuxtLink
                     :to="localePath(child.link)"
                     class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                    @click="() => onClick(child.link)"
                   >
                     <div
                       class="text-sm font-medium leading-none flex items-center"
@@ -72,10 +68,7 @@ const onClick = (linkName: string) =>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem v-else>
-          <NuxtLink
-            :to="localePath(item.link as string)"
-            @click="() => onClick(item.link as string)"
-          >
+          <NuxtLink :to="localePath(item.link as string)">
             <NavigationMenuLink :class="navigationMenuTriggerStyle()">
               {{ item.title }}
             </NavigationMenuLink>

@@ -5,8 +5,6 @@ import { useMobileButtons } from '@/composables/useMobileButtons'
 const { config } = useFooterConfig()
 const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } =
   useMobileButtons()
-
-const onClick = (linkName: string) => umTrackEvent('click:footer', linkName)
 </script>
 
 <template>
@@ -32,7 +30,6 @@ const onClick = (linkName: string) => umTrackEvent('click:footer', linkName)
               :target="target"
               :external="external"
               class="hover:underline text-primary hover:brightness-90 inline-flex items-center"
-              @click="() => onClick(label)"
             >
               <Icon v-if="icon" :name="icon" class="mr-1.5" />
               {{ label }}
@@ -43,23 +40,14 @@ const onClick = (linkName: string) => umTrackEvent('click:footer', linkName)
       <div
         class="flex flex-col items-start lg:items-end justify-end lg:justify-center"
       >
-        <NuxtLink
-          :href="IOS_URL"
-          target="_blank"
-          class="mb-2 lg:mr-0.5"
-          @click="() => onClick('mobile-apple')"
-        >
+        <NuxtLink :href="IOS_URL" target="_blank" class="mb-2 lg:mr-0.5">
           <NuxtImg
             alt="Apple Store logo"
             class="h-[45px]"
             :src="appleStoreBtn"
           />
         </NuxtLink>
-        <NuxtLink
-          :href="ANDROID_URL"
-          target="_blank"
-          @click="() => onClick('mobile-android')"
-        >
+        <NuxtLink :href="ANDROID_URL" target="_blank">
           <NuxtImg
             alt="Google Play logo"
             class="h-[45px]"

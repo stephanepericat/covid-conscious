@@ -21,14 +21,14 @@ const { locale } = useI18n()
     </h1>
     <h2
       v-if="date || source"
-      class="flex flex-row gap-1 antialiased text-sm uppercase tracking-widest mb-2"
+      class="flex flex-col md:flex-row gap-1 antialiased text-sm uppercase tracking-widest mb-2"
     >
       <span v-if="date">{{
         format(convertTs(date), LOCALIZED_DATE_FORMAT, {
           locale: getDateLocale(locale),
         })
       }}</span>
-      <span v-if="date && source">|</span>
+      <span v-if="date && source" class="hidden md:flex">|</span>
       <span v-if="source">{{ source }}</span>
     </h2>
   </div>

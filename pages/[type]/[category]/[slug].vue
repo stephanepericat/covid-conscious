@@ -1,16 +1,51 @@
 <script lang="ts" setup>
 import PUBLICATION_QUERY from '@/sanity/queries/publication.sanity'
-import type { PUBLICATION_QUERYResult } from '@/sanity/types'
+import METADATA_QUERY from '@/sanity/queries/metadata.sanity'
+import type {
+  METADATA_QUERYResult,
+  PUBLICATION_QUERYResult,
+} from '@/sanity/types'
 
 const route = useRoute()
-const { locale } = useI18n()
+const { locale, t } = useI18n()
+const host = computed(() => window?.location?.origin || '')
 
 const { category, slug, type } = route.params
 
-const { data, status } = await useLazySanityQuery<PUBLICATION_QUERYResult>(
-  PUBLICATION_QUERY,
-  { category, locale, slug, type },
+const { data: metadata } = useLazySanityQuery<METADATA_QUERYResult>(
+  METADATA_QUERY,
+  {
+    category,
+    locale,
+    slug,
+    type,
+  },
 )
+
+const pageTitle = computed(
+  () => metadata?.value?.title || metadata?.value?.name || '',
+)
+const pageDescription = computed(
+  () => metadata?.value?.description || t('home.description'),
+)
+const ogImage = computed(() =>
+  metadata?.value?.image
+    ? `${metadata.value.image}?crop=entropy&fit=crop&h=450&w=800`
+    : '/tcl-fallback-169.jpg',
+)
+const ogImageType = computed(() => {
+  const extension =
+    ogImage?.value?.split('.')?.pop()?.split('?').shift() || 'jpeg'
+  return `image/${extension}`
+})
+
+const { data: article, status } =
+  await useLazySanityQuery<PUBLICATION_QUERYResult>(PUBLICATION_QUERY, {
+    category,
+    locale,
+    slug,
+    type,
+  })
 
 const loading = computed(
   () => status?.value === 'pending' || status?.value === 'idle',
@@ -19,16 +54,31 @@ const loading = computed(
 
 <template>
   <div class="container max-w-3xl py-4 md:py-8">
+    <TclSeo
+      :description="pageDescription"
+      :image="ogImage"
+      :image-type="ogImageType"
+      :title="<string>pageTitle"
+    />
     <TclLoader v-if="loading" />
     <template v-else>
       <TclArticleHeader
-        v-if="data"
-        class="mb-6 md:mb-12"
-        :date="<string | null>data.date"
-        :source="<string | null>data.source"
-        :title="<string>data.title"
+        v-if="article"
+        class="mb-8 md:mb-16"
+        :date="<string | null>article.date"
+        :source="<string | null>article.source"
+        :title="<string>article.title"
       />
-      <section class="font-pt text-lg">body</section>
+      <section class="font-pt text-lg">
+        <SanityImage
+          v-if="article?.thumbnail"
+          :alt="article.title"
+          :asset-id="article.thumbnail"
+          :w="768"
+          class="w-full h-auto rounded-xl mb-8"
+        />
+        <div>content goes here</div>
+      </section>
     </template>
   </div>
 </template>
