@@ -28,3 +28,6 @@ dist
 _ca
 coverage
 old.yarn.lock
+
+# Sentry Config File
+.env.sentry-build-plugin
