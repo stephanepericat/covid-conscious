@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { SERIALIZERS } from '@/assets/constants/serializers'
 import PUBLICATION_QUERY from '@/sanity/queries/publication.sanity'
 import METADATA_QUERY from '@/sanity/queries/metadata.sanity'
 import type {
@@ -8,7 +9,6 @@ import type {
 
 const route = useRoute()
 const { locale, t } = useI18n()
-const host = computed(() => window?.location?.origin || '')
 
 const { category, slug, type } = route.params
 
@@ -64,7 +64,7 @@ const loading = computed(
     <template v-else>
       <TclArticleHeader
         v-if="article"
-        class="mb-8 md:mb-16"
+        class="mb-4 md:mb-10"
         :date="<string | null>article.date"
         :source="<string | null>article.source"
         :title="<string>article.title"
@@ -77,7 +77,13 @@ const loading = computed(
           :w="768"
           class="w-full h-auto rounded-xl mb-8"
         />
-        <div>content goes here</div>
+        <div class="font-thin leading-8">
+          <SanityContent
+            v-if="article?.body"
+            :blocks="<any>article?.body"
+            :serializers="SERIALIZERS"
+          />
+        </div>
       </section>
     </template>
   </div>

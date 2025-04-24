@@ -30,7 +30,7 @@ const videos = computed(() => data?.value?.videos || [])
   <div class="flex flex-col justify-center items-center">
     <TclSeo
       :description="$t('layout.description')"
-      :image="`${host}/tcl-fallback-169.jpg`"
+      image="/tcl-fallback-169.jpg"
       image-type="image/jpeg"
       :title="$t('layout.home')"
     />

@@ -9,7 +9,6 @@ const { currentPage, limit, onPageChange, route, updateQueryParams } =
 
 const { locale } = useI18n()
 
-const host = computed(() => window?.location?.origin || '')
 const type = computed(() => route.params.type || null)
 const filters = computed(() => route.query || {})
 
@@ -39,7 +38,7 @@ watch(
   <div class="container pt-4 md:pt-8">
     <TclSeo
       :description="$t(`description.${type}`)"
-      :image="`${host}/tcl-fallback-169.jpg`"
+      image="/tcl-fallback-169.jpg"
       image-type="image/jpeg"
       :title="$t(`layout.${type}`)"
     />
