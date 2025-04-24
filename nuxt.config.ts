@@ -129,8 +129,8 @@ export default defineNuxtConfig({
       flagsmith: {
         environmentId: process.env.FLAGSMITH_ENVIRONMENT_ID,
       },
-      sentry: {
-        dsn: process.env.SENTRY_DSN,
+      statsig: {
+        clientKey: process.env.STATSIG_CLIENT_ID,
       },
     },
     turnstile: {
@@ -169,6 +169,7 @@ export default defineNuxtConfig({
           'c.tile.openstreetmap.org',
           'gravatar.com',
           '*.ytimg.com',
+          'prodregistryv2.org',
         ],
       },
       crossOriginEmbedderPolicy: 'unsafe-none',

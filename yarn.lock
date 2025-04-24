@@ -5608,6 +5608,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rrweb/types@npm:^2.0.0-alpha.14":
+  version: 2.0.0-alpha.18
+  resolution: "@rrweb/types@npm:2.0.0-alpha.18"
+  checksum: 10c0/a1adb842f59b782e04576a7e88ffc2e43b8b29460555922e6a15f8ffd4840e554e96c1331653b0a322a3a8f25e73a9ae38ff37d3e60f1da71b6f6c0d001a20e7
+  languageName: node
+  linkType: hard
+
 "@sanity/cli@npm:^3.86.0":
   version: 3.86.0
   resolution: "@sanity/cli@npm:3.86.0"
@@ -6014,6 +6021,42 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@statsig/client-core@npm:3.15.4":
+  version: 3.15.4
+  resolution: "@statsig/client-core@npm:3.15.4"
+  checksum: 10c0/feabd73418fb52bd1dadec9839939e7139b5f3e6e70280d4adfec3682a290ece60e1a11199cc37f612893a46f627ec9cb1bb6181c249ad384c25db2e8c448278
+  languageName: node
+  linkType: hard
+
+"@statsig/js-client@npm:3.15.4, @statsig/js-client@npm:^3.15.4":
+  version: 3.15.4
+  resolution: "@statsig/js-client@npm:3.15.4"
+  dependencies:
+    "@statsig/client-core": "npm:3.15.4"
+  checksum: 10c0/b959816ad313e5a54c813d1c70984066d449d1ac4483814714cae458743bcee6a89329fa6d56fdf19a9618aa51065674a12d7885e6e3de371b655245c3de13a9
+  languageName: node
+  linkType: hard
+
+"@statsig/session-replay@npm:^3.15.4":
+  version: 3.15.4
+  resolution: "@statsig/session-replay@npm:3.15.4"
+  dependencies:
+    "@statsig/client-core": "npm:3.15.4"
+    rrweb: "npm:2.0.0-alpha.14"
+  checksum: 10c0/7233a6e74b7d973ccaac8f3ccd737499167baf8916266a312385e434441e09aab61e2f4538f8e0b04d929d593bee848030fa72ef5c7d22cc843b79309d5de927
+  languageName: node
+  linkType: hard
+
+"@statsig/web-analytics@npm:^3.15.4":
+  version: 3.15.4
+  resolution: "@statsig/web-analytics@npm:3.15.4"
+  dependencies:
+    "@statsig/client-core": "npm:3.15.4"
+    "@statsig/js-client": "npm:3.15.4"
+  checksum: 10c0/1973b889f6f66e19bf3a3bca8894072237f6da0f97202712559c94f832d54aafbd046645c99e92c2961724afbc8007cbc0ba4b8ef36d97d17b9ed126a6428d15
+  languageName: node
+  linkType: hard
+
 "@stripe/stripe-js@npm:^4.8.0":
   version: 4.10.0
   resolution: "@stripe/stripe-js@npm:4.10.0"
@@ -6148,6 +6191,13 @@ __metadata:
   dependencies:
     "@types/node": "npm:*"
   checksum: 10c0/4b7b561f195f779d07f973801a9f15d77cd58ceb67e817459688b11cc735288d30de050f445c91f4cd2c007fa86824e59a6e3cde602d150b828c4474f6e67be5
+  languageName: node
+  linkType: hard
+
+"@types/css-font-loading-module@npm:0.0.7":
+  version: 0.0.7
+  resolution: "@types/css-font-loading-module@npm:0.0.7"
+  checksum: 10c0/a74759a14bcc7d60a1a1d863b53b7638d4aa7f88f1d97347426262cc6fe8f9335d8fa80c7e0608cd67e33ff0067608e9b5475a1227a684e1dfad3cac87df1405
   languageName: node
   linkType: hard
 
@@ -8175,6 +8225,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@xstate/fsm@npm:^1.4.0":
+  version: 1.6.5
+  resolution: "@xstate/fsm@npm:1.6.5"
+  checksum: 10c0/472fe625b84b9e7102b8774e80c441b8b7dbc9585e700223d9c7a39c583d38ba50636909a5d749d44b361555daa841862f932a29c52b81c8829a74884e715bf4
+  languageName: node
+  linkType: hard
+
 "JSONStream@npm:^1.3.5":
   version: 1.3.5
   resolution: "JSONStream@npm:1.3.5"
@@ -8662,6 +8719,13 @@ __metadata:
     bare-events:
       optional: true
   checksum: 10c0/1242286f8f3147e9fd353cdaa9cf53226a807ac0dde8177c13f1463aa4cd1f88e07407c883a1b322b901e9af2d1cd30aacd873529031132c384622972e0419df
+  languageName: node
+  linkType: hard
+
+"base64-arraybuffer@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "base64-arraybuffer@npm:1.0.2"
+  checksum: 10c0/3acac95c70f9406e87a41073558ba85b6be9dbffb013a3d2a710e3f2d534d506c911847d5d9be4de458af6362c676de0a5c4c2d7bdf4def502d00b313368e72f
   languageName: node
   linkType: hard
 
@@ -12100,7 +12164,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fflate@npm:^0.4.8":
+"fflate@npm:^0.4.4, fflate@npm:^0.4.8":
   version: 0.4.8
   resolution: "fflate@npm:0.4.8"
   checksum: 10c0/29d1eddaaa5deab61b1c6b0d21282adacadbc4d2c01e94d8b1ee784398151673b9c563e53f97a801bc410a1ae55e8de5378114a743430e643e7a0644ba8e5a42
@@ -15081,7 +15145,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mitt@npm:^3.0.1":
+"mitt@npm:^3.0.0, mitt@npm:^3.0.1":
   version: 3.0.1
   resolution: "mitt@npm:3.0.1"
   checksum: 10c0/3ab4fdecf3be8c5255536faa07064d05caa3dd332bd318ff02e04621f7b3069ca1de9106cfe8e7ced675abfc2bec2ce4c4ef321c4a1bb1fb29df8ae090741913
@@ -17073,7 +17137,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.23, postcss@npm:^8.5.3":
+"postcss@npm:^8.4.23, postcss@npm:^8.4.38, postcss@npm:^8.5.3":
   version: 8.5.3
   resolution: "postcss@npm:8.5.3"
   dependencies:
@@ -18004,6 +18068,40 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: 10c0/90aa57487d4a9a7de1a47bf42a6091f83f1cb7fe1814650dfec278ab8ddae5736b86535d4c766493517720f334dfd4aa0635405ca8f4f36ed8d3c0f875f2a801
+  languageName: node
+  linkType: hard
+
+"rrdom@npm:^2.0.0-alpha.14":
+  version: 2.0.0-alpha.18
+  resolution: "rrdom@npm:2.0.0-alpha.18"
+  dependencies:
+    rrweb-snapshot: "npm:^2.0.0-alpha.18"
+  checksum: 10c0/13770f81a475eff96d50bb74d313965a4e3d5b904b9a27dc43cb33fb92dac040fa5acd602db3a20de5366997a4cf3f55c635a5359e58bd26187ef074c0704fe5
+  languageName: node
+  linkType: hard
+
+"rrweb-snapshot@npm:^2.0.0-alpha.14, rrweb-snapshot@npm:^2.0.0-alpha.18":
+  version: 2.0.0-alpha.18
+  resolution: "rrweb-snapshot@npm:2.0.0-alpha.18"
+  dependencies:
+    postcss: "npm:^8.4.38"
+  checksum: 10c0/296996f50f8a9c5f5dad2f92cea8fcc670bf364e094db48592919cab8987cdc19ce2e7b9b20653c63160f924e733a213329e87ff092353d4a5364c0a3a66405c
+  languageName: node
+  linkType: hard
+
+"rrweb@npm:2.0.0-alpha.14":
+  version: 2.0.0-alpha.14
+  resolution: "rrweb@npm:2.0.0-alpha.14"
+  dependencies:
+    "@rrweb/types": "npm:^2.0.0-alpha.14"
+    "@types/css-font-loading-module": "npm:0.0.7"
+    "@xstate/fsm": "npm:^1.4.0"
+    base64-arraybuffer: "npm:^1.0.1"
+    fflate: "npm:^0.4.4"
+    mitt: "npm:^3.0.0"
+    rrdom: "npm:^2.0.0-alpha.14"
+    rrweb-snapshot: "npm:^2.0.0-alpha.14"
+  checksum: 10c0/12db7c7f7882e3ae8869ae2f4be1a5025958323eb29144afa7b9446f0b55ed7fb2ab7d35c48d19f74333b6d6a7a58851b5af799a68da181f95e489f92edf37a8
   languageName: node
   linkType: hard
 
@@ -19255,6 +19353,9 @@ __metadata:
     "@radix-icons/vue": "npm:^1.0.0"
     "@sanity/cli": "npm:^3.86.0"
     "@sanity/client": "npm:^6.29.0"
+    "@statsig/js-client": "npm:^3.15.4"
+    "@statsig/session-replay": "npm:^3.15.4"
+    "@statsig/web-analytics": "npm:^3.15.4"
     "@tanstack/vue-table": "npm:^8.21.3"
     "@types/jsonwebtoken": "npm:^9.0.9"
     "@types/lodash": "npm:^4.17.16"
