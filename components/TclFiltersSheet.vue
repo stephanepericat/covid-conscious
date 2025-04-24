@@ -3,6 +3,7 @@ import { useForm, useIsFormValid } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
 import { cn } from '@/lib/utils'
+import { ListFilterPlus } from 'lucide-vue-next'
 
 import { Check, ChevronsUpDown } from 'lucide-vue-next'
 
@@ -45,7 +46,10 @@ const onSubmit = handleSubmit((values) => emit('update:filters', values))
 <template>
   <Sheet>
     <SheetTrigger as-child>
-      <Button>{{ $t('filters.title') }}</Button>
+      <Button>
+        <ListFilterPlus />
+        {{ $t('filters.title') }}
+      </Button>
     </SheetTrigger>
     <SheetContent>
       <SheetHeader>

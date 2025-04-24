@@ -136,7 +136,7 @@ const videos = computed(() => data?.value?.videos || [])
           >
             <TclVideoCarousel
               class="hidden md:block max-w-[calc(100%-100px)] 2xl:max-w-full"
-              :link="localePath('/video')"
+              :link="localePath('/video?offset=0&limit=5')"
               :see-all-label="$t('home.seeAllVideos')"
               :videos="videos"
             />
