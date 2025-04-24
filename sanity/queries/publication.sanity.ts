@@ -78,6 +78,7 @@ const PUBLICATION_QUERY = groq`
     "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
     "visual": coalesce(visual.asset._ref, null),
   },
+  source,
 }
 `
 

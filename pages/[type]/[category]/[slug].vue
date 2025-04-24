@@ -21,7 +21,14 @@ const loading = computed(
   <div class="container max-w-3xl py-4 md:py-8">
     <TclLoader v-if="loading" />
     <template v-else>
-      <h1>{{ data?.title }}</h1>
+      <TclArticleHeader
+        v-if="data"
+        class="mb-6 md:mb-12"
+        :date="<string | null>data.date"
+        :source="<string | null>data.source"
+        :title="<string>data.title"
+      />
+      <section class="font-pt text-lg">body</section>
     </template>
   </div>
 </template>
