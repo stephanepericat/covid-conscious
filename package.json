@@ -54,6 +54,7 @@
     "deepl-node": "^1.17.3",
     "embla-carousel-vue": "^8.6.0",
     "feed": "^4.2.2",
+    "flagsmith": "^9.1.0",
     "groqd": "^1.4.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",

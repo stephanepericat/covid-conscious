@@ -128,6 +128,11 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    public: {
+      flagsmith: {
+        environmentId: process.env.FLAGSMITH_ENVIRONMENT_ID,
+      },
+    },
     turnstile: {
       secretKey: process.env.TURNSTILE_SECRET_KEY,
     },

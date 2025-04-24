@@ -12331,6 +12331,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flagsmith@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "flagsmith@npm:9.1.0"
+  checksum: 10c0/e2ee6ee5fd4ad6351677500282d22bdb60d849ed6ee5d5b83d9435384211fda9b0c52a0d726b1fe4394a148ec39096d624414c4fa8b1fcb36b1e793942944c48
+  languageName: node
+  linkType: hard
+
 "flattie@npm:^1.1.1":
   version: 1.1.1
   resolution: "flattie@npm:1.1.1"
@@ -19441,6 +19448,7 @@ __metadata:
     deepl-node: "npm:^1.17.3"
     embla-carousel-vue: "npm:^8.6.0"
     feed: "npm:^4.2.2"
+    flagsmith: "npm:^9.1.0"
     groqd: "npm:^1.4.0"
     happy-dom: "npm:^17.4.4"
     husky: "npm:^9.1.7"
