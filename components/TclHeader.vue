@@ -20,7 +20,8 @@ const searchValue = ref('')
     </nav>
     <TclMobileNavigation :logged-in="loggedIn" with-taco />
     <div class="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-      <TclSearchInput v-model="searchValue" />
+      <!-- <TclSearchInput v-model="searchValue" /> -->
+      <TclSearchbox class="min-w-[225px] lg:min-w-[350px]" />
       <TclModeToggle />
       <TclLocaleSwitch />
       <TclContactMenu />
