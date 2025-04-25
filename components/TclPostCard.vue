@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { format } from 'date-fns'
+import { convertTs } from '@/assets/utils/convert-timestamp'
 import type { Tag, Target } from '@/lib/types'
 import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
@@ -61,7 +62,7 @@ const localePath = useLocalePath()
       <h4 v-if="date" class="uppercase tracking-widest text-xs">
         <span v-if="source">{{ source }} | </span>
         {{
-          format(date, LOCALIZED_DATE_FORMAT, {
+          format(convertTs(date as string), LOCALIZED_DATE_FORMAT, {
             locale: getDateLocale(locale),
           })
         }}
