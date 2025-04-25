@@ -85,6 +85,15 @@ const loading = computed(
           />
         </div>
       </section>
+      <Separator class="my-8" />
+      <section>
+        <h2
+          class="font-pt text-2xl font-semibold uppercase tracking-widest mb-4"
+        >
+          {{ t('article.related') }}
+        </h2>
+        {{ article?.related }}
+      </section>
     </template>
   </div>
 </template>
