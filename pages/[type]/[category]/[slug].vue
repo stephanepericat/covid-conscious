@@ -6,6 +6,7 @@ import type {
   METADATA_QUERYResult,
   PUBLICATION_QUERYResult,
 } from '@/sanity/types'
+import type { Tag } from '@/lib/types'
 
 const route = useRoute()
 const { locale, t } = useI18n()
@@ -85,14 +86,23 @@ const loading = computed(
           />
         </div>
       </section>
-      <Separator class="my-8" />
-      <section>
-        <h2
-          class="font-pt text-2xl font-semibold uppercase tracking-widest mb-4"
-        >
+      <Separator v-if="article?.related?.length" class="my-8" />
+      <section
+        v-if="article?.related?.length"
+        class="grid gap-4 md:gap-8"
+        v-motion-fade-visible
+      >
+        <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
           {{ t('article.related') }}
         </h2>
-        {{ article?.related }}
+        <TclMedia
+          v-for="article in article?.related"
+          :key="article.id"
+          :link="<string>article.url"
+          :tags="<Tag[]>article.tags"
+          :title="<string>article.title"
+          :visual="<string>article.visual"
+        />
       </section>
     </template>
   </div>

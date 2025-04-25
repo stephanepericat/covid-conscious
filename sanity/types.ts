@@ -1316,7 +1316,7 @@ export type POLICY_QUERYResult = Array<{
 
 // Source: ./sanity/queries/publication.sanity.ts
 // Variable: PUBLICATION_QUERY
-// Query: *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {  "id": _id,  "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title[$locale], title['en'], title, ''),  name,  "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },  "published": _createdAt,  "date": coalesce(publicationDate, eventDate),  "end": endDate,  "updated": _updatedAt,  "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value, []),  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == 'en'][0].value, null))), "")[0..252], ""),  "category": coalesce(tags[0]->name[$locale], tags[0]->name['en'], null),  "info": contactInfo {    "street1": streetAdressOne,    "street2": streetAdressTwo,    city,    zipCode,    "country": coalesce(country->name[_key == $locale][0].value, country->name[_key == 'en'][0].value, null),    "phone": phoneNumber,    email,    website,  },  "link": url,  embedCode,  language,  location,  onlineOnly,  "free": isEventFree,  "tags": tags[]-> { "name": coalesce(name[$locale], name['en'], ''), "uri": uri.current },  "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {    "external": isExternalLink,    name,    url,    "visual": visual.asset._ref,    "zoneId": zoneId.current,  },  "image": visual.asset->url,  "related": *[    _type == ^._type &&    _id != ^._id &&    !(_id in path('drafts.**')) &&    (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&    language == $locale  ] [0...8] {    "id": _id,    "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title, ''),    "visual": visual.asset._ref,    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,    "tags": tags[]-> { "name": coalesce(name[$locale], name['en'], ''), "uri": uri.current },    "date": coalesce(publicationDate, eventDate),  },  "contentType": coalesce(contentType, null),  "thumbnail": coalesce(visual.asset._ref, null),  "covidnet": {    blogFeaturedURLs,    blogRssURL,    blogURL,    channelID,    channelURL,    contentType,    twitterFeaturedPosts,    twitterUsername,  },  "brand": brand-> {    name,    url,    "path": '/brand/' + tags[0]->uri.current + '/' + uri.current,  },  "products": *[^._type == 'brand' && _type == 'product' && brand->name == ^.name] | order(coalesce(title[_key == $locale].value, title[_key == 'en'].value)[0] asc) {    "id": _id,    "url": '/product/' + tags[0]->uri.current + '/' + uri.current,    "title": coalesce(title[_key == $locale].value, title[_key == 'en'].value)[0],    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == 'en'].value)), '')[0..255], '') + '...',    "tags": tags[]-> { "name": coalesce(name[$locale], name['en'], ''), "uri": uri.current },    "visual": coalesce(visual.asset._ref, null),  },  source,}
+// Query: *[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {  "id": _id,  "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title[$locale], title['en'], title, ''),  name,  "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },  "published": _createdAt,  "date": coalesce(publicationDate, eventDate),  "end": endDate,  "updated": _updatedAt,  "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == 'en'][0].value, []),  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == 'en'][0].value, null))), "")[0..252], ""),  "category": coalesce(tags[0]->name[$locale], tags[0]->name['en'], null),  "info": contactInfo {    "street1": streetAdressOne,    "street2": streetAdressTwo,    city,    zipCode,    "country": coalesce(country->name[_key == $locale][0].value, country->name[_key == 'en'][0].value, null),    "phone": phoneNumber,    email,    website,  },  "link": url,  embedCode,  language,  location,  onlineOnly,  "free": isEventFree,  "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },  "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {    "external": isExternalLink,    name,    url,    "visual": visual.asset._ref,    "zoneId": zoneId.current,  },  "image": visual.asset->url,  "related": *[    _type == ^._type &&    _id != ^._id &&    !(_id in path('drafts.**')) &&    (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&    language == $locale  ] [0...8] {    "id": _id,    "title": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, title[_key == ^.language][0].value, title, ''),    "visual": visual.asset._ref,    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,    "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },    "date": coalesce(publicationDate, eventDate),  },  "contentType": coalesce(contentType, null),  "thumbnail": coalesce(visual.asset._ref, null),  "covidnet": {    blogFeaturedURLs,    blogRssURL,    blogURL,    channelID,    channelURL,    contentType,    twitterFeaturedPosts,    twitterUsername,  },  "brand": brand-> {    name,    url,    "path": '/brand/' + tags[0]->uri.current + '/' + uri.current,  },  "products": *[^._type == 'brand' && _type == 'product' && brand->name == ^.name] | order(coalesce(title[_key == $locale].value, title[_key == 'en'].value)[0] asc) {    "id": _id,    "url": '/product/' + tags[0]->uri.current + '/' + uri.current,    "title": coalesce(title[_key == $locale].value, title[_key == 'en'].value)[0],    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == 'en'].value)), '')[0..255], '') + '...',    "tags": tags[]-> { 'label': coalesce(name[$locale], name['en'], ''), 'slug': uri.current },    "visual": coalesce(visual.asset._ref, null),  },  source,}
 export type PUBLICATION_QUERYResult =
   | {
       id: string
@@ -1374,7 +1374,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -1384,7 +1384,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -1400,7 +1400,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -1410,7 +1410,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -1495,7 +1495,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: boolean | null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -1505,7 +1505,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -1521,7 +1521,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -1531,7 +1531,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -1607,7 +1607,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -1617,7 +1617,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -1633,7 +1633,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -1643,7 +1643,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: string | null
       }>
@@ -1719,7 +1719,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: boolean | null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -1729,7 +1729,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -1745,7 +1745,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -1755,7 +1755,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: string | null
       }>
@@ -1831,7 +1831,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -1841,7 +1841,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -1857,7 +1857,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -1867,7 +1867,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: string | null
       }>
@@ -1943,7 +1943,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -1953,7 +1953,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -1969,7 +1969,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -1979,7 +1979,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -2067,7 +2067,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -2077,7 +2077,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -2100,7 +2100,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -2110,7 +2110,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -2186,7 +2186,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -2196,7 +2196,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -2212,7 +2212,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -2222,7 +2222,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -2245,7 +2245,7 @@ export type PUBLICATION_QUERYResult =
         title: string | null
         description: string
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -2255,7 +2255,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         visual: string | null
       }>
@@ -2329,7 +2329,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -2339,7 +2339,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -2362,7 +2362,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -2372,7 +2372,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -2846,7 +2846,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -2856,7 +2856,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -2872,7 +2872,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -2882,7 +2882,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: string | null
       }>
@@ -2974,7 +2974,7 @@ export type PUBLICATION_QUERYResult =
       onlineOnly: null
       free: null
       tags: Array<{
-        name:
+        label:
           | Array<{
               _type: 'localeString'
               en?: string
@@ -2984,7 +2984,7 @@ export type PUBLICATION_QUERYResult =
             }>
           | string
           | ''
-        uri: string | null
+        slug: string | null
       }> | null
       promos: Array<{
         external: boolean | null
@@ -3007,7 +3007,7 @@ export type PUBLICATION_QUERYResult =
         visual: string | null
         url: string | null
         tags: Array<{
-          name:
+          label:
             | Array<{
                 _type: 'localeString'
                 en?: string
@@ -3017,7 +3017,7 @@ export type PUBLICATION_QUERYResult =
               }>
             | string
             | ''
-          uri: string | null
+          slug: string | null
         }> | null
         date: null
       }>
@@ -5757,7 +5757,7 @@ declare module '@sanity/client' {
     '\n  {\n    // "blog": *[(_type == "blog") && !(_id in path(\'drafts.**\'))] | order(_createdAt asc)[0..2] {\n    //   "id": _id,\n    //   "date": _createdAt,\n    //   "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n    //   "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, description[_key == ^.language][0].value)), "")[0..127], "") + "...",\n    //   "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n    //   "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n    //   "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, \'\'),\n    //   "type": _type,\n    //   "visual": visual.asset._ref,\n    // },\n    "events": *[_type == \'event\' && !(_id in path(\'drafts.**\')) && (string(eventDate) >= string::split(string(now()), \'T\')[0] || string(endDate) >= string::split(string(now()), \'T\')[0])] | order(eventDate asc) {\n      "id": _id,\n      "date": eventDate,\n      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value)), \'\')[0..255], \'\') + \'...\',\n      "end": endDate,\n      "free": coalesce(isEventFree, false),\n      "link": \'/\' + _type + \'/\' + tags[0]->uri.current + \'/\' + uri.current,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "library": *[(_type == "scientific-library") && !(_id in path(\'drafts.**\')) && (language == $locale)] | order(publicationDate desc)[0..4]{\n      "id": _id,\n      "date": publicationDate,\n      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value, [])), "")[0..255], "") + "...",\n      "limited": coalesce(limitedAccess, false),\n      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "premium": coalesce(premiumAccess, false),\n      "source": coalesce(source, null),\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "news": *[_type == \'news\' && !(_id in path(\'drafts.**\')) && language == $locale] | order(publicationDate desc)[0..5] {\n      "id": _id,\n      "date": publicationDate,\n      "limited": coalesce(limitedAccess, false),\n      "link": url,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "premium": coalesce(premiumAccess, false),\n      "source": coalesce(source, null),\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "phw": *[_type == \'public-health\' && !(_id in path(\'drafts.**\')) && language == $locale] | order(publicationDate desc)[0..4] {\n      "id": _id,\n      "date": publicationDate,\n      "description": null,\n      "limited": coalesce(limitedAccess, false),\n      "link": url,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "premium": coalesce(premiumAccess, false),\n      "source": coalesce(source, null),\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n    "showcase": *[_type in [\'news\', \'scientific-library\', \'public-health\', \'video\'] && !(_id in path(\'drafts.**\')) && language == $locale] | order(_createdAt desc)[0..4] {\n      "id": _id,\n      "link": url,\n      "title": title,\n      "visual": visual.asset->url,\n    },\n    "videos": *[_type == \'video\' && !(_id in path(\'drafts.**\')) && (language == $locale) ] | order(publicationDate desc)[0..5]{\n      "id": _id,\n      "date": publicationDate,\n      "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value)), \'\')[0..255], \'\') + \'...\',\n      "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n      "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n      "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n      "title": title,\n      "visual": visual.asset._ref,\n    },\n  }\n': LATEST_PUBLICATIONS_QUERYResult
     '\n*[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {\n  "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, \'\'),\n  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, null))), "")[0..252], "") + \'...\',\n  "image": visual.asset->url,\n  "name": coalesce(name, null),\n}\n': METADATA_QUERYResult
     "\n*[_type == \"policy\" && title[_key == 'en'][0].value == $policyType] {\n  \"title\": coalesce(title[_key == $locale][0].value, title[_key == 'en'][0].value, ''),\n  \"contents\": coalesce(contents[_key == $locale][0].value, contents[_key == 'en'][0].value, []),\n}\n": POLICY_QUERYResult
-    '\n*[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {\n  "id": _id,\n  "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, \'\'),\n  name,\n  "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },\n  "published": _createdAt,\n  "date": coalesce(publicationDate, eventDate),\n  "end": endDate,\n  "updated": _updatedAt,\n  "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value, []),\n  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, null))), "")[0..252], ""),\n  "category": coalesce(tags[0]->name[$locale], tags[0]->name[\'en\'], null),\n  "info": contactInfo {\n    "street1": streetAdressOne,\n    "street2": streetAdressTwo,\n    city,\n    zipCode,\n    "country": coalesce(country->name[_key == $locale][0].value, country->name[_key == \'en\'][0].value, null),\n    "phone": phoneNumber,\n    email,\n    website,\n  },\n  "link": url,\n  embedCode,\n  language,\n  location,\n  onlineOnly,\n  "free": isEventFree,\n  "tags": tags[]-> { "name": coalesce(name[$locale], name[\'en\'], \'\'), "uri": uri.current },\n  "promos": *[(_type == "promo") && !(_id in path(\'drafts.**\')) && (enabled)] {\n    "external": isExternalLink,\n    name,\n    url,\n    "visual": visual.asset._ref,\n    "zoneId": zoneId.current,\n  },\n  "image": visual.asset->url,\n  "related": *[\n    _type == ^._type &&\n    _id != ^._id &&\n    !(_id in path(\'drafts.**\')) &&\n    (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&\n    language == $locale\n  ] [0...8] {\n    "id": _id,\n    "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title, \'\'),\n    "visual": visual.asset._ref,\n    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n    "tags": tags[]-> { "name": coalesce(name[$locale], name[\'en\'], \'\'), "uri": uri.current },\n    "date": coalesce(publicationDate, eventDate),\n  },\n  "contentType": coalesce(contentType, null),\n  "thumbnail": coalesce(visual.asset._ref, null),\n  "covidnet": {\n    blogFeaturedURLs,\n    blogRssURL,\n    blogURL,\n    channelID,\n    channelURL,\n    contentType,\n    twitterFeaturedPosts,\n    twitterUsername,\n  },\n  "brand": brand-> {\n    name,\n    url,\n    "path": \'/brand/\' + tags[0]->uri.current + \'/\' + uri.current,\n  },\n  "products": *[^._type == \'brand\' && _type == \'product\' && brand->name == ^.name] | order(coalesce(title[_key == $locale].value, title[_key == \'en\'].value)[0] asc) {\n    "id": _id,\n    "url": \'/product/\' + tags[0]->uri.current + \'/\' + uri.current,\n    "title": coalesce(title[_key == $locale].value, title[_key == \'en\'].value)[0],\n    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == \'en\'].value)), \'\')[0..255], \'\') + \'...\',\n    "tags": tags[]-> { "name": coalesce(name[$locale], name[\'en\'], \'\'), "uri": uri.current },\n    "visual": coalesce(visual.asset._ref, null),\n  },\n  source,\n}\n': PUBLICATION_QUERYResult
+    '\n*[_type == $type && tags[0]->uri.current == $category && uri.current == $slug][0] {\n  "id": _id,\n  "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, \'\'),\n  name,\n  "author": author-> { nickname, "slug": uri.current, "avatar": visual.asset._ref },\n  "published": _createdAt,\n  "date": coalesce(publicationDate, eventDate),\n  "end": endDate,\n  "updated": _updatedAt,\n  "body": coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value, []),\n  "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, null))), "")[0..252], ""),\n  "category": coalesce(tags[0]->name[$locale], tags[0]->name[\'en\'], null),\n  "info": contactInfo {\n    "street1": streetAdressOne,\n    "street2": streetAdressTwo,\n    city,\n    zipCode,\n    "country": coalesce(country->name[_key == $locale][0].value, country->name[_key == \'en\'][0].value, null),\n    "phone": phoneNumber,\n    email,\n    website,\n  },\n  "link": url,\n  embedCode,\n  language,\n  location,\n  onlineOnly,\n  "free": isEventFree,\n  "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n  "promos": *[(_type == "promo") && !(_id in path(\'drafts.**\')) && (enabled)] {\n    "external": isExternalLink,\n    name,\n    url,\n    "visual": visual.asset._ref,\n    "zoneId": zoneId.current,\n  },\n  "image": visual.asset->url,\n  "related": *[\n    _type == ^._type &&\n    _id != ^._id &&\n    !(_id in path(\'drafts.**\')) &&\n    (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&\n    language == $locale\n  ] [0...8] {\n    "id": _id,\n    "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title, \'\'),\n    "visual": visual.asset._ref,\n    "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n    "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n    "date": coalesce(publicationDate, eventDate),\n  },\n  "contentType": coalesce(contentType, null),\n  "thumbnail": coalesce(visual.asset._ref, null),\n  "covidnet": {\n    blogFeaturedURLs,\n    blogRssURL,\n    blogURL,\n    channelID,\n    channelURL,\n    contentType,\n    twitterFeaturedPosts,\n    twitterUsername,\n  },\n  "brand": brand-> {\n    name,\n    url,\n    "path": \'/brand/\' + tags[0]->uri.current + \'/\' + uri.current,\n  },\n  "products": *[^._type == \'brand\' && _type == \'product\' && brand->name == ^.name] | order(coalesce(title[_key == $locale].value, title[_key == \'en\'].value)[0] asc) {\n    "id": _id,\n    "url": \'/product/\' + tags[0]->uri.current + \'/\' + uri.current,\n    "title": coalesce(title[_key == $locale].value, title[_key == \'en\'].value)[0],\n    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == \'en\'].value)), \'\')[0..255], \'\') + \'...\',\n    "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n    "visual": coalesce(visual.asset._ref, null),\n  },\n  source,\n}\n': PUBLICATION_QUERYResult
     '\n{\n  "results": *[$slug in tags[]->uri.current] | order(publicationDate desc, _createdAt desc){\n    // "id": _id,\n    "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, \'\'),\n    name,\n    "author": author-> { nickname, "slug": uri.current },\n    "date": coalesce(publicationDate, eventDate, null),\n    "end": endDate,\n    "published": _createdAt,\n    "category": coalesce(tags[0]->name[$locale], tags[0]->name[\'en\'], null),\n    "categoryUri": tags[0]->uri.current,\n    "shortDescription": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value, [])), "")[0..512], "") + "...",\n    "link": url,\n    "path": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n    "source": source,\n    "thumbnail": visual.asset._ref,\n    "type": _type,\n    "contentType": coalesce(contentType, null),\n    "uri": uri.current,\n    "countryCode": contactInfo.country->code,\n    "countryName": coalesce(contactInfo.country->name[_key == $locale][0].value, contactInfo.country->name[_key == \'en\'][0].value, null),\n    "city": contactInfo.city,\n    "language": coalesce(language, $locale),\n    "tags": tags[]-> { "name": coalesce(name[$locale], name[\'en\'], \'\'), "uri": uri.current },\n    "locked": coalesce(premiumAccess, false),\n    "limited": coalesce(limitedAccess, false),\n  },\n  "metadata": *[_type == "tag" && uri.current == $slug][0] {\n    "label": coalesce(name[$locale], name[\'en\'], \'\'),\n  },\n  "total": count(*[$slug in tags[]->uri.current])\n}\n': PUBLICATION_BY_TAG_QUERYResult
     '\n{\n  "results": *[_type == $type && !(_id in path(\'drafts.**\'))] | order(publicationDate desc, _createdAt desc)[$start..$end] {\n    "attributes": {\n      "free": coalesce(isEventFree, false),\n      "limited": coalesce(limitedAccess, false),\n      "onlineOnly": coalesce(onlineOnly, false),\n      "premium": coalesce(premiumAccess, false),\n    },\n    "date": coalesce(eventDate, publicationDate, _createdAt),\n    "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == \'en\'][0].value, [])), "")[0..512], "") + "...",\n    "end": endDate,\n    "id": _id,\n    "language": language,\n    "link": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n    "metadata": visual.asset->metadata.dimensions { aspectRatio, height, width },\n    "source": coalesce(source, null),\n    "tags": tags[]-> { \'label\': coalesce(name[$locale], name[\'en\'], \'\'), \'slug\': uri.current },\n    "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, null),\n    "type": _type,\n    "url": url,\n    "visual": visual.asset._ref,\n  },\n  "info": {\n    "locale": coalesce($locale, "en"),\n    "start": coalesce($start, 0),\n    "end": coalesce($end, 5),\n    "total": coalesce(count(*[_type == $type && !(_id in path(\'drafts.**\'))]), 0),\n  },\n}\n': PUBLICATION_BY_TYPE_QUERYResult
     '\n  {\n    "all_entries": *[(_type in ["news", "scientific-library", "video", "resource", "event", "product", "directory", "education", "public-health", "covidnet", "blog"]) && !(_id in path(\'drafts.**\'))]| order(_createdAt desc) {\n      "id": _id,\n      "type": _type,\n      "title": coalesce(title[_key == $locale][0].value, title[_key == \'en\'][0].value, title[_key == ^.language][0].value, title[$locale], title[\'en\'], title, null),\n      "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, null))), "")[0..252], ""),\n      "publishedAt": _createdAt,\n      "updatedAt": _updatedAt,\n      "link": url,\n      "slug": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,\n      "source": source,\n      "category": coalesce(tags[0]->name[$locale], tags[0]->name[\'en\'], null),\n      "image": visual.asset->url,\n      "author": author-> { "name": nickname },\n      "contentType": coalesce(contentType, null),\n    },\n    "settings": *[_type == "feedSettings"][0] {\n      "title": title,\n      "description": coalesce(description[_key == $locale][0].value, description[_key == \'en\'][0].value, \'\'),\n      "image": logo.asset->url,\n      "author": {\n        "email": author.email,\n        "name": author.name,\n      },\n    },\n  } | {\n    "entries": all_entries[0..20],\n    "settings": settings\n  }\n': RSS_FEED_QUERYResult

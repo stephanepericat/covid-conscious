@@ -30,7 +30,7 @@ const PUBLICATION_QUERY = groq`
   location,
   onlineOnly,
   "free": isEventFree,
-  "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
+  "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
   "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {
     "external": isExternalLink,
     name,
@@ -45,12 +45,12 @@ const PUBLICATION_QUERY = groq`
     !(_id in path('drafts.**')) &&
     (tags[]->uri.current match ^.tags[]->uri.current || ^.tags[]->uri.current match tags[]->uri.current) &&
     language == $locale
-  ] [0...8] {
+  ] [0...5] {
     "id": _id,
     "title": coalesce(title[_key == $locale][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, title[_key == ^.language][0].value, title, ''),
     "visual": visual.asset._ref,
     "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
-    "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
+    "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
     "date": coalesce(publicationDate, eventDate),
   },
   "contentType": coalesce(contentType, null),
@@ -75,7 +75,7 @@ const PUBLICATION_QUERY = groq`
     "url": '/product/' + tags[0]->uri.current + '/' + uri.current,
     "title": coalesce(title[_key == $locale].value, title[_key == '${BASE_LANGUAGE}'].value)[0],
     "description": array::join(string::split(pt::text(coalesce(description[_key == $locale].value, description[_key == '${BASE_LANGUAGE}'].value)), '')[0..255], '') + '...',
-    "tags": tags[]-> { "name": coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), "uri": uri.current },
+    "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
     "visual": coalesce(visual.asset._ref, null),
   },
   source,
