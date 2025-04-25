@@ -86,6 +86,13 @@ const loading = computed(
           />
         </div>
       </section>
+      <section class="py-2" v-motion-fade-visible>
+        <TclMoreButton
+          :label="$t('article.readMore')"
+          :link="<string>article?.link"
+          target="_blank"
+        />
+      </section>
       <section
         v-if="article?.tags?.length"
         class="flex flex-wrap gap-2 pt-2 md:pt-4"
@@ -93,25 +100,25 @@ const loading = computed(
       >
         <TclTagList :tags="<Tag[]>article.tags" />
       </section>
-      <Separator v-if="article?.related?.length" class="my-8" />
-      <section
-        v-if="article?.related?.length"
-        class="grid gap-4 md:gap-8"
-        v-motion-fade-visible
-      >
-        <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
-          {{ t('article.related') }}
-        </h2>
-        <TclMedia
-          v-for="related in article?.related"
-          :key="related.id"
-          :description="related.description ? `${related.description}...` : ''"
-          :link="<string>related.url"
-          :tags="<Tag[]>related.tags"
-          :title="<string>related.title"
-          :visual="<string>related.visual"
-        />
-      </section>
+      <template v-if="article?.related?.length">
+        <Separator class="my-8" />
+        <section class="grid gap-4 md:gap-8" v-motion-fade-visible>
+          <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
+            {{ t('article.related') }}
+          </h2>
+          <TclMedia
+            v-for="related in article?.related"
+            :key="related.id"
+            :description="
+              related.description ? `${related.description}...` : ''
+            "
+            :link="<string>related.url"
+            :tags="<Tag[]>related.tags"
+            :title="<string>related.title"
+            :visual="<string>related.visual"
+          />
+        </section>
+      </template>
     </template>
   </div>
 </template>
