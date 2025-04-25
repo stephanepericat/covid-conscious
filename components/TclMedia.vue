@@ -5,7 +5,7 @@ import type { Tag, Target } from '@/lib/types'
 import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
 
-defineProps<{
+const props = defineProps<{
   date?: Date | string | null
   description?: string
   free?: boolean
@@ -26,6 +26,14 @@ defineProps<{
 
 const { locale } = useI18n()
 const localePath = useLocalePath()
+
+const publicationDate = computed(() => {
+  if (!props.date) return null
+
+  return props.date.toString().split('T').length === 1
+    ? convertTs(props.date as string)
+    : props.date
+})
 </script>
 
 <template>
@@ -64,10 +72,10 @@ const localePath = useLocalePath()
           {{ title }}
         </NuxtLink>
       </h2>
-      <h4 v-if="date" class="uppercase tracking-widest text-xs mb-3">
+      <h4 v-if="publicationDate" class="uppercase tracking-widest text-xs mb-3">
         <span v-if="source">{{ source }} | </span>
         {{
-          format(convertTs(date as string), LOCALIZED_DATE_FORMAT, {
+          format(publicationDate, LOCALIZED_DATE_FORMAT, {
             locale: getDateLocale(locale),
           })
         }}
