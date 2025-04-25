@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { isExternalLink } from '@/assets/utils/article-types'
 import { useDynamicQuery } from '@/composables/useDynamicQuery'
+import { isBlog } from '@/assets/utils/article-types'
 
 import type { Tag } from '@/lib/types'
 
@@ -9,7 +10,7 @@ const { currentPage, limit, onPageChange, route, updateQueryParams } =
 
 const { locale } = useI18n()
 
-const type = computed(() => route.params.type || null)
+const type = computed(() => route.params.type)
 const filters = computed(() => route.query || {})
 
 const { buildDynamicQuery, loading, results, total } = useDynamicQuery()
@@ -25,7 +26,7 @@ watch(
         parseInt(filters.value.offset as string) +
         parseInt(filters.value.limit as string),
       filters: filters.value as Record<string, string>,
-      locale: locale.value,
+      locale: isBlog(<string>type.value) ? null : locale.value,
       start: parseInt(filters.value.offset as string),
       type: type.value as string,
     })

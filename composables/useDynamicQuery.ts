@@ -20,14 +20,17 @@ export const useDynamicQuery = () => {
   }: {
     end: number
     filters: Record<string, string>
-    locale: string
+    locale: string | null
     start: number
     type: string
   }) => {
     let query = q.star
       .filterByType(type as any)
       .filterRaw(`!(_id in path('drafts.**'))`)
-      .filterRaw(`language == "${locale}"`)
+
+    if (locale) {
+      query = query.filterRaw(`language == "${locale}"`)
+    }
 
     Object.keys(filters).forEach((key: string) => {
       if (key === 'tag') {
