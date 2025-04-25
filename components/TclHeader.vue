@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import { Search as SearchIcon } from 'lucide-vue-next'
+
 const localePath = useLocalePath()
 const { loggedIn } = useUserSession()
-
-const searchValue = ref('')
 </script>
 
 <template>
@@ -20,8 +20,14 @@ const searchValue = ref('')
     </nav>
     <TclMobileNavigation :logged-in="loggedIn" with-taco />
     <div class="flex items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
-      <!-- <TclSearchInput v-model="searchValue" /> -->
-      <TclSearchbox class="min-w-[225px] lg:min-w-[350px]" />
+      <NuxtLink :to="localePath('/search')" class="md:hidden">
+        <Button size="icon" variant="outline" class="rounded-full">
+          <SearchIcon />
+        </Button>
+      </NuxtLink>
+      <TclSearchbox
+        class="hidden md:block min-w-175px md:min-w-[225px] lg:min-w-[350px]"
+      />
       <TclModeToggle />
       <TclLocaleSwitch />
       <TclContactMenu />
