@@ -86,6 +86,12 @@ const loading = computed(
           />
         </div>
       </section>
+      <section
+        v-if="article?.tags?.length"
+        class="flex flex-wrap gap-2 pt-2 md:pt-4"
+      >
+        <TclTagList :tags="<Tag[]>article.tags" />
+      </section>
       <Separator v-if="article?.related?.length" class="my-8" />
       <section
         v-if="article?.related?.length"
@@ -96,12 +102,13 @@ const loading = computed(
           {{ t('article.related') }}
         </h2>
         <TclMedia
-          v-for="article in article?.related"
-          :key="article.id"
-          :link="<string>article.url"
-          :tags="<Tag[]>article.tags"
-          :title="<string>article.title"
-          :visual="<string>article.visual"
+          v-for="related in article?.related"
+          :key="related.id"
+          :description="related.description ? `${related.description}...` : ''"
+          :link="<string>related.url"
+          :tags="<Tag[]>related.tags"
+          :title="<string>related.title"
+          :visual="<string>related.visual"
         />
       </section>
     </template>

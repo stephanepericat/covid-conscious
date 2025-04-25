@@ -52,6 +52,7 @@ const PUBLICATION_QUERY = groq`
     "url": "/" + _type + "/" + tags[0]->uri.current + "/" + uri.current,
     "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
     "date": coalesce(publicationDate, eventDate),
+    "description": array::join(string::split((pt::text(coalesce(description[_key == $locale][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, null))), "")[0..96], ""),
   },
   "contentType": coalesce(contentType, null),
   "thumbnail": coalesce(visual.asset._ref, null),
