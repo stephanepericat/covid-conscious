@@ -78,7 +78,7 @@ const loading = computed(
           :w="768"
           class="w-full h-auto rounded-xl mb-8"
         />
-        <div v-motion-fade-visible class="article-body font-normal leading-8">
+        <div v-motion-fade-visible class="article-body">
           <SanityContent
             v-if="article?.body"
             :blocks="<any>article?.body"
@@ -89,6 +89,7 @@ const loading = computed(
       <section
         v-if="article?.tags?.length"
         class="flex flex-wrap gap-2 pt-2 md:pt-4"
+        v-motion-fade-visible
       >
         <TclTagList :tags="<Tag[]>article.tags" />
       </section>

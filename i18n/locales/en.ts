@@ -667,4 +667,14 @@ export default {
     reset: ' Reset Filters',
     title: 'Filters',
   },
+
+  bookmarks: {
+    tooltip: 'Add to bookmarks',
+  },
+
+  share: {
+    action: 'Share on {name}',
+    send: 'Send via email',
+    tooltip: 'Share',
+  },
 }

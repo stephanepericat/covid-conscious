@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { format } from 'date-fns'
+import { BookmarkPlus } from 'lucide-vue-next'
 import { convertTs } from '@/assets/utils/convert-timestamp'
 import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
@@ -11,6 +12,10 @@ defineProps<{
 }>()
 
 const { locale } = useI18n()
+
+const url = computed(() => {
+  return `${location?.origin}${useRoute().fullPath}`
+})
 </script>
 <template>
   <div>
@@ -31,5 +36,10 @@ const { locale } = useI18n()
       <span v-if="date && source" class="hidden md:flex">|</span>
       <span v-if="source">{{ source }}</span>
     </h2>
+    <Separator class="my-4" />
+    <div class="mb-2 flex gap-3">
+      <TclShare :title="title" :url="url" />
+      <TclBookmark />
+    </div>
   </div>
 </template>
