@@ -77,7 +77,7 @@ const loading = computed(
           :w="768"
           class="w-full h-auto rounded-xl mb-8"
         />
-        <div class="font-thin leading-8">
+        <div v-motion-fade-visible class="article-body font-normal leading-8">
           <SanityContent
             v-if="article?.body"
             :blocks="<any>article?.body"
