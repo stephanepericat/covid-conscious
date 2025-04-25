@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { format } from 'date-fns'
-import { BookmarkPlus } from 'lucide-vue-next'
 import { convertTs } from '@/assets/utils/convert-timestamp'
 import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'

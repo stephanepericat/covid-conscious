@@ -86,10 +86,10 @@ const loading = computed(
           />
         </div>
       </section>
-      <section class="py-2" v-motion-fade-visible>
+      <section v-if="article?.link" class="py-2" v-motion-fade-visible>
         <TclMoreButton
           :label="$t('article.readMore')"
-          :link="<string>article?.link"
+          :link="<string>article.link"
           target="_blank"
         />
       </section>
