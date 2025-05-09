@@ -71,6 +71,11 @@ const lockIcon = computed(() =>
           <NuxtLink :to="localePath(item.link as string)">
             <NavigationMenuLink :class="navigationMenuTriggerStyle()">
               {{ item.title }}
+              <Icon
+                :name="lockIcon"
+                v-if="item.premium"
+                class="ml-1 text-primary"
+              />
             </NavigationMenuLink>
           </NuxtLink>
         </NavigationMenuItem>

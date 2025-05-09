@@ -87,11 +87,13 @@ export const useNavConfig = () => {
           id: 'blog',
           title: t('topNav.blog.title'),
           link: '/blog?offset=0&limit=5',
+          premium: false,
         },
         {
           id: 'chat',
           title: 'Chat',
           link: '/chat',
+          premium: true,
         },
       ] as NavConfig[],
   )
@@ -164,6 +166,12 @@ export const useNavConfig = () => {
           title: t('topNav.blog.title'),
           link: '/blog?offset=0&limit=5',
           premium: false,
+        },
+        {
+          id: 'chat',
+          title: 'Chat',
+          link: '/chat',
+          premium: true,
         },
       ] as MobileNavItem[],
   )

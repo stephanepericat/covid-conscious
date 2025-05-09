@@ -19,6 +19,7 @@ export type NavConfig = {
   display?: { description: string; icon?: string; title: string }
   id: string
   link?: string
+  premium?: boolean
   title: string
 }
 
