@@ -88,6 +88,11 @@ export const useNavConfig = () => {
           title: t('topNav.blog.title'),
           link: '/blog?offset=0&limit=5',
         },
+        {
+          id: 'chat',
+          title: 'Chat',
+          link: '/chat',
+        },
       ] as NavConfig[],
   )
 
