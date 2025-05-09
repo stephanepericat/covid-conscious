@@ -12,6 +12,6 @@ definePageMeta({
     :animate="{ opacity: 1 }"
     class="flex flex-col items-center justify-center overflow-hidden h-full"
   >
-    <h1>Chat</h1>
+    <h1>Coming soon...</h1>
   </motion.div>
 </template>

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { motion } from 'motion-v'
 import { isExternalLink } from '@/assets/utils/article-types'
 import { useDynamicQuery } from '@/composables/useDynamicQuery'
 import { isBlog } from '@/assets/utils/article-types'
@@ -64,7 +65,12 @@ watch(
     </div>
     <section class="my-4 md:my-8">
       <TclLoader v-if="loading" />
-      <div class="grid gap-4 md:gap-8 py-4 md:py-8" v-else>
+      <motion.div
+        :initial="{ opacity: 0 }"
+        :animate="{ opacity: 1 }"
+        class="grid gap-4 md:gap-8 py-4 md:py-8"
+        v-else
+      >
         <ClientOnly>
           <TclMedia
             v-for="article in results"
@@ -83,7 +89,7 @@ watch(
             :visual="article.visual"
           />
         </ClientOnly>
-      </div>
+      </motion.div>
       <TclPagination
         v-if="total"
         :initial-page="currentPage"

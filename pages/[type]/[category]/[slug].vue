@@ -1,7 +1,9 @@
 <script lang="ts" setup>
+import { motion } from 'motion-v'
 import { SERIALIZERS } from '@/assets/constants/serializers'
 import PUBLICATION_QUERY from '@/sanity/queries/publication.sanity'
 import METADATA_QUERY from '@/sanity/queries/metadata.sanity'
+import { isVideo } from '@/assets/utils/article-types'
 import type {
   METADATA_QUERYResult,
   PUBLICATION_QUERYResult,
@@ -51,6 +53,9 @@ const { data: article, status } =
 const loading = computed(
   () => status?.value === 'pending' || status?.value === 'idle',
 )
+
+const hasReadMoreButton = computed(() => !isVideo(type as string))
+const hasSplash = computed(() => !isVideo(type as string))
 </script>
 
 <template>
@@ -62,7 +67,7 @@ const loading = computed(
       :title="<string>pageTitle"
     />
     <TclLoader v-if="loading" />
-    <template v-else>
+    <motion.div :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" v-else>
       <TclArticleHeader
         v-if="article"
         class="mb-4 md:mb-10"
@@ -72,11 +77,16 @@ const loading = computed(
       />
       <section class="font-pt text-lg">
         <SanityImage
-          v-if="article?.thumbnail"
+          v-if="hasSplash && article?.thumbnail"
           :alt="article.title"
           :asset-id="article.thumbnail"
           :w="768"
           class="w-full h-auto rounded-xl mb-8"
+        />
+        <div
+          class="video-container rounded-xl overflow-hidden bg-muted mb-8 aspect-video"
+          v-html="article.embedCode"
+          v-if="isVideo(<string>type) && article?.embedCode"
         />
         <div class="article-body">
           <SanityContent
@@ -88,7 +98,14 @@ const loading = computed(
       </section>
       <section v-if="article?.link" class="py-2">
         <TclMoreButton
+          v-if="hasReadMoreButton"
           :label="$t('article.readMore')"
+          :link="<string>article.link"
+          target="_blank"
+        />
+        <TclMoreButton
+          v-if="isVideo(<string>type) && !article?.embedCode"
+          :label="$t('article.watchVideo')"
           :link="<string>article.link"
           target="_blank"
         />
@@ -118,6 +135,6 @@ const loading = computed(
           />
         </section>
       </template>
-    </template>
+    </motion.div>
   </div>
 </template>
