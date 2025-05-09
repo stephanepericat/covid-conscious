@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { motion } from 'motion-v'
 import type { Tag } from '@/lib/types'
 import LATEST_PUBLICATIONS_QUERY from '@/sanity/queries/latestPublications.sanity'
 import type { LATEST_PUBLICATIONS_QUERYResult } from '@/sanity/types'
@@ -27,7 +28,11 @@ const videos = computed(() => data?.value?.videos || [])
 </script>
 
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <motion.div
+    :initial="{ opacity: 0 }"
+    :animate="{ opacity: 1 }"
+    class="flex flex-col justify-center items-center"
+  >
     <TclSeo
       :description="$t('layout.description')"
       image="/tcl-fallback-169.jpg"
@@ -39,13 +44,23 @@ const videos = computed(() => data?.value?.videos || [])
 
     <template v-else>
       <!-- SHOWCASE -->
-      <TclShowcase
-        class="container mx-auto my-4 md:my-8 lg:my-12"
-        :docs="showcase"
-      />
+      <motion.div
+        class="w-full"
+        :initial="{ opacity: 0 }"
+        :whileInView="{ opacity: 1 }"
+      >
+        <TclShowcase
+          class="container mx-auto my-4 md:my-8 lg:my-12"
+          :docs="showcase"
+        />
+      </motion.div>
 
       <!-- NEWS -->
-      <div class="container">
+      <motion.div
+        :initial="{ opacity: 0 }"
+        :whileInView="{ opacity: 1 }"
+        class="container"
+      >
         <h2
           class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
         >
@@ -79,10 +94,15 @@ const videos = computed(() => data?.value?.videos || [])
             target="_self"
           />
         </div>
-      </div>
+      </motion.div>
 
       <!-- EVENTS -->
-      <div v-if="events.length" class="bg-foreground w-full">
+      <motion.div
+        :initial="{ opacity: 0 }"
+        :whileInView="{ opacity: 1 }"
+        v-if="events.length"
+        class="bg-foreground w-full"
+      >
         <div class="container py-6 md:py-12">
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl text-background uppercase"
@@ -117,10 +137,14 @@ const videos = computed(() => data?.value?.videos || [])
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <!-- VIDEOS -->
-      <div class="bg-muted w-full">
+      <motion.div
+        :initial="{ opacity: 0 }"
+        :whileInView="{ opacity: 1 }"
+        class="bg-muted w-full"
+      >
         <div class="container py-6 md:py-12">
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
@@ -160,43 +184,47 @@ const videos = computed(() => data?.value?.videos || [])
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <!-- PHW & LIBRARY -->
       <div class="container py-6 md:py-12">
-        <h2
-          class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
-        >
-          {{ $t('home.library') }}
-        </h2>
-        <TclArticleBlock :articles="library" class="py-6 md:py-12" />
-        <div class="md:flex md:justify-center pb-6 md:pb-12">
-          <TclMoreButton
-            extra="w-full md:w-auto"
-            :label="$t('home.seeAllLibrary')"
-            :link="localePath('/scientific-library?offset=0&limit=5')"
-            target="_self"
+        <motion.div :initial="{ opacity: 0 }" :whileInView="{ opacity: 1 }">
+          <h2
+            class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
+          >
+            {{ $t('home.library') }}
+          </h2>
+          <TclArticleBlock :articles="library" class="py-6 md:py-12" />
+          <div class="md:flex md:justify-center pb-6 md:pb-12">
+            <TclMoreButton
+              extra="w-full md:w-auto"
+              :label="$t('home.seeAllLibrary')"
+              :link="localePath('/scientific-library?offset=0&limit=5')"
+              target="_self"
+            />
+          </div>
+        </motion.div>
+        <motion.div :initial="{ opacity: 0 }" :whileInView="{ opacity: 1 }">
+          <h2
+            class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
+          >
+            {{ $t('home.phw') }}
+          </h2>
+          <TclArticleBlock
+            :articles="phw"
+            class="py-6 md:py-12"
+            target="_blank"
           />
-        </div>
-        <h2
-          class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
-        >
-          {{ $t('home.phw') }}
-        </h2>
-        <TclArticleBlock
-          :articles="phw"
-          class="py-6 md:py-12"
-          target="_blank"
-        />
-        <div class="md:flex md:justify-center pb-6 md:pb-12">
-          <TclMoreButton
-            extra="w-full md:w-auto"
-            :label="$t('home.seeAllPhw')"
-            :link="localePath('/public-health?offset=0&limit=5')"
-            target="_self"
-          />
-        </div>
+          <div class="md:flex md:justify-center pb-6 md:pb-12">
+            <TclMoreButton
+              extra="w-full md:w-auto"
+              :label="$t('home.seeAllPhw')"
+              :link="localePath('/public-health?offset=0&limit=5')"
+              target="_self"
+            />
+          </div>
+        </motion.div>
       </div>
     </template>
-  </div>
+  </motion.div>
 </template>

@@ -88,6 +88,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@prisma/nuxt',
     '@vueuse/nuxt',
+    'motion-v/nuxt',
     'nuxt-auth-utils',
     'nuxt-security',
     'shadcn-nuxt',
