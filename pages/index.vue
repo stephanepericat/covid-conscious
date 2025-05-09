@@ -82,11 +82,7 @@ const videos = computed(() => data?.value?.videos || [])
       </div>
 
       <!-- EVENTS -->
-      <div
-        v-if="events.length"
-        class="bg-foreground w-full"
-        v-motion-fade-visible-once
-      >
+      <div v-if="events.length" class="bg-foreground w-full">
         <div class="container py-6 md:py-12">
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl text-background uppercase"
@@ -124,7 +120,7 @@ const videos = computed(() => data?.value?.videos || [])
       </div>
 
       <!-- VIDEOS -->
-      <div class="bg-muted w-full" v-motion-fade-visible-once>
+      <div class="bg-muted w-full">
         <div class="container py-6 md:py-12">
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
@@ -167,7 +163,7 @@ const videos = computed(() => data?.value?.videos || [])
       </div>
 
       <!-- PHW & LIBRARY -->
-      <div class="container py-6 md:py-12" v-motion-fade-visible-once>
+      <div class="container py-6 md:py-12">
         <h2
           class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
         >

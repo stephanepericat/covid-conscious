@@ -78,7 +78,7 @@ const loading = computed(
           :w="768"
           class="w-full h-auto rounded-xl mb-8"
         />
-        <div v-motion-fade-visible class="article-body">
+        <div class="article-body">
           <SanityContent
             v-if="article?.body"
             :blocks="<any>article?.body"
@@ -86,7 +86,7 @@ const loading = computed(
           />
         </div>
       </section>
-      <section v-if="article?.link" class="py-2" v-motion-fade-visible>
+      <section v-if="article?.link" class="py-2">
         <TclMoreButton
           :label="$t('article.readMore')"
           :link="<string>article.link"
@@ -96,13 +96,12 @@ const loading = computed(
       <section
         v-if="article?.tags?.length"
         class="flex flex-wrap gap-2 pt-2 md:pt-4"
-        v-motion-fade-visible
       >
         <TclTagList :tags="<Tag[]>article.tags" />
       </section>
       <template v-if="article?.related?.length">
         <Separator class="my-8" />
-        <section class="grid gap-4 md:gap-8" v-motion-fade-visible>
+        <section class="grid gap-4 md:gap-8">
           <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
             {{ t('article.related') }}
           </h2>

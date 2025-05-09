@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans" v-motion-fade>
+  <div class="font-sans">
     <TclHeader />
     <TclBody>
       <NuxtPage />
