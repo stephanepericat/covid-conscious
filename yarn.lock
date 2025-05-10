@@ -10947,9 +10947,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepl-node@npm:^1.17.3":
-  version: 1.17.3
-  resolution: "deepl-node@npm:1.17.3"
+"deepl-node@npm:^1.18.0":
+  version: 1.18.0
+  resolution: "deepl-node@npm:1.18.0"
   dependencies:
     "@types/node": "npm:>=12.0"
     adm-zip: "npm:^0.5.16"
@@ -10957,7 +10957,7 @@ __metadata:
     form-data: "npm:^3.0.0"
     loglevel: "npm:>=1.6.2"
     uuid: "npm:^8.3.2"
-  checksum: 10c0/7b677f6e303f6138151eb389402a7765300599b2d995201fc940f690e12b4d0a505a3c959455ce8dcb9c430c480307db7b72569bd6a49ca66eac2ddcf4f8de88
+  checksum: 10c0/d6a69af7316ede79d25f3f113465d82460473459da8eec21ebb68b96b0cc4e4bea6bb355221342259180000b86488a6119e11daf3f03551d647b521fe105b830
   languageName: node
   linkType: hard
 
@@ -13215,13 +13215,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"groqd@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "groqd@npm:1.4.0"
+"groqd@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "groqd@npm:1.6.0"
   dependencies:
     type-fest: "npm:^4.10.1"
     zod: "npm:^3.22.4"
-  checksum: 10c0/8eac853ac7db4b1dbee60a962b23d87954f34318d3d61585bc376c0852f79bd5a38a7d44c717655ec411f9795aabc98187a49a0e664f459d68975b8e225c7128
+  checksum: 10c0/5b89104372e37bfd476b8a7d2c6bf550a8adee1687dbc4e4479a550ea10d3447dd28ebc2087e775d30013952ecbaf08714219317590081322f4bdc89a8a88334
   languageName: node
   linkType: hard
 
@@ -19819,10 +19819,10 @@ __metadata:
     clsx: "npm:^2.1.1"
     crypto-hash: "npm:^3.1.0"
     date-fns: "npm:^4.1.0"
-    deepl-node: "npm:^1.17.3"
+    deepl-node: "npm:^1.18.0"
     embla-carousel-vue: "npm:^8.6.0"
     feed: "npm:^4.2.2"
-    groqd: "npm:^1.4.0"
+    groqd: "npm:^1.6.0"
     happy-dom: "npm:^17.4.7"
     husky: "npm:^9.1.7"
     jsonwebtoken: "npm:^9.0.2"
