@@ -55,7 +55,7 @@
     "date-fns": "^4.1.0",
     "deepl-node": "^1.18.0",
     "embla-carousel-vue": "^8.6.0",
-    "feed": "^4.2.2",
+    "feed": "^5.0.0",
     "groqd": "^1.6.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
