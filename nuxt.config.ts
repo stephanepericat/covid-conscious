@@ -109,9 +109,9 @@ export default defineNuxtConfig({
   // },
 
   prisma: {
-    installCLI: process.env.NODE_ENV === 'development',
-    installClient: process.env.NODE_ENV === 'development',
-    installStudio: false,
+    // installCLI: process.env.NODE_ENV === 'development',
+    // installClient: process.env.NODE_ENV === 'development',
+    // installStudio: false,
   },
 
   robots: {
