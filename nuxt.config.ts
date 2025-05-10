@@ -74,6 +74,76 @@ export default defineNuxtConfig({
     enabled: false,
   },
 
+  llms: {
+    domain: process.env.NUXT_PUBLIC_SITE_URL,
+    title: 'That Covid Life',
+    description:
+      'This app serves as an educational tool that gathers links to news, research, and other resources relative to COVID-19.',
+    sections: [
+      {
+        title: 'Latest',
+        description: 'A curated list of news, scientific papers and events.',
+        links: [
+          {
+            title: 'News',
+            description: 'The latest news about COVID-19.',
+            href: '/news',
+          },
+          {
+            title: 'Scientific Library',
+            description:
+              'The latest research and scientific papers on COVID-19.',
+            href: '/library',
+          },
+          {
+            title: 'Videos',
+            description: 'The latest videos about COVID-19.',
+            href: '/video',
+          },
+          {
+            title: 'Events',
+            description: 'Upcoming and past events around COVID-19.',
+            href: '/event',
+          },
+          {
+            title: 'Public Health Watch',
+            description:
+              'The latest news on emerging pandemics, such as Mpox and H5N1.',
+            href: '/public-health',
+          },
+        ],
+      },
+      {
+        title: 'Other',
+        links: [
+          {
+            title: 'Covidnet',
+            description:
+              'A curated list of blogs and youtube channels about COVID-19.',
+            href: '/covidnet',
+          },
+          {
+            title: 'Directory',
+            description:
+              'A directory of covid-conscious businesses and healthcare providers.',
+            href: '/directory',
+          },
+          {
+            title: 'PPE',
+            description:
+              'A list of personal protective equipments, such as masks, air purifiers, etc...',
+            href: '/product',
+          },
+          {
+            title: 'Resources',
+            description: 'A list of useful resources around COVID-19.',
+            href: '/resource',
+          },
+        ],
+      },
+    ],
+  },
+
   modules: [
     '@formkit/auto-animate/nuxt',
     '@nuxt/icon',
@@ -91,6 +161,7 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
     'nuxt-api-shield',
     'nuxt-auth-utils',
+    'nuxt-llms',
     'nuxt-security',
     'shadcn-nuxt',
   ],
