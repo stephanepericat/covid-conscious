@@ -19881,7 +19881,7 @@ __metadata:
     vitest: "npm:^3.1.3"
     vitest-environment-nuxt: "npm:^1.0.1"
     vue: "npm:^3.5.13"
-    vue-router: "npm:^4.5.0"
+    vue-router: "npm:^4.5.1"
     vue-sonner: "npm:^1.3.2"
     vue3-social-sharing: "npm:^1.4.1"
     xml2js: "npm:^0.6.2"
