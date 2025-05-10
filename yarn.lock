@@ -6232,39 +6232,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@statsig/client-core@npm:3.15.4":
-  version: 3.15.4
-  resolution: "@statsig/client-core@npm:3.15.4"
-  checksum: 10c0/feabd73418fb52bd1dadec9839939e7139b5f3e6e70280d4adfec3682a290ece60e1a11199cc37f612893a46f627ec9cb1bb6181c249ad384c25db2e8c448278
+"@statsig/client-core@npm:3.16.1":
+  version: 3.16.1
+  resolution: "@statsig/client-core@npm:3.16.1"
+  checksum: 10c0/9d3f9b5f988a587d056055ee7c0d818e834ce1f925549030b8aae6312504118d9f2487cac041ad47ad32694752444a6e3501b1595ca30bd6e20a0502eb9b9142
   languageName: node
   linkType: hard
 
-"@statsig/js-client@npm:3.15.4, @statsig/js-client@npm:^3.15.4":
-  version: 3.15.4
-  resolution: "@statsig/js-client@npm:3.15.4"
+"@statsig/js-client@npm:3.16.1, @statsig/js-client@npm:^3.16.1":
+  version: 3.16.1
+  resolution: "@statsig/js-client@npm:3.16.1"
   dependencies:
-    "@statsig/client-core": "npm:3.15.4"
-  checksum: 10c0/b959816ad313e5a54c813d1c70984066d449d1ac4483814714cae458743bcee6a89329fa6d56fdf19a9618aa51065674a12d7885e6e3de371b655245c3de13a9
+    "@statsig/client-core": "npm:3.16.1"
+  checksum: 10c0/6ce4db30db5b788a4a3d1922d762fdcf5dec614155f56965193763b42dcc1a27c0a78e318b8b1712b854842b145d1db6bbd575b1e4c03e7c4030f8052d497d2f
   languageName: node
   linkType: hard
 
-"@statsig/session-replay@npm:^3.15.4":
-  version: 3.15.4
-  resolution: "@statsig/session-replay@npm:3.15.4"
+"@statsig/session-replay@npm:^3.16.1":
+  version: 3.16.1
+  resolution: "@statsig/session-replay@npm:3.16.1"
   dependencies:
-    "@statsig/client-core": "npm:3.15.4"
+    "@statsig/client-core": "npm:3.16.1"
     rrweb: "npm:2.0.0-alpha.14"
-  checksum: 10c0/7233a6e74b7d973ccaac8f3ccd737499167baf8916266a312385e434441e09aab61e2f4538f8e0b04d929d593bee848030fa72ef5c7d22cc843b79309d5de927
+  checksum: 10c0/f62a8de671543822090078ccef876e20af2efba699db3baadc918b5d23d5fa9e3b523a84a22fd3dc7cfed61c15813c1ead9d95b3b2bd33f269e7141a2ed8603d
   languageName: node
   linkType: hard
 
-"@statsig/web-analytics@npm:^3.15.4":
-  version: 3.15.4
-  resolution: "@statsig/web-analytics@npm:3.15.4"
+"@statsig/web-analytics@npm:^3.16.1":
+  version: 3.16.1
+  resolution: "@statsig/web-analytics@npm:3.16.1"
   dependencies:
-    "@statsig/client-core": "npm:3.15.4"
-    "@statsig/js-client": "npm:3.15.4"
-  checksum: 10c0/1973b889f6f66e19bf3a3bca8894072237f6da0f97202712559c94f832d54aafbd046645c99e92c2961724afbc8007cbc0ba4b8ef36d97d17b9ed126a6428d15
+    "@statsig/client-core": "npm:3.16.1"
+    "@statsig/js-client": "npm:3.16.1"
+  checksum: 10c0/1945fa5165c29fff1ba258985cf280640d09f04a04cc560fd4277442a8b4dd4f7356a3109d5021a52459e744bef84c95a61eb0a80536f3f4e336ff7bd096875d
   languageName: node
   linkType: hard
 
@@ -19801,9 +19801,9 @@ __metadata:
     "@radix-icons/vue": "npm:^1.0.0"
     "@sanity/cli": "npm:^3.88.2"
     "@sanity/client": "npm:^6.29.1"
-    "@statsig/js-client": "npm:^3.15.4"
-    "@statsig/session-replay": "npm:^3.15.4"
-    "@statsig/web-analytics": "npm:^3.15.4"
+    "@statsig/js-client": "npm:^3.16.1"
+    "@statsig/session-replay": "npm:^3.16.1"
+    "@statsig/web-analytics": "npm:^3.16.1"
     "@tanstack/vue-table": "npm:^8.21.3"
     "@types/jsonwebtoken": "npm:^9.0.9"
     "@types/lodash": "npm:^4.17.16"
