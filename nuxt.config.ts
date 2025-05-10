@@ -89,10 +89,50 @@ export default defineNuxtConfig({
     '@prisma/nuxt',
     '@vueuse/nuxt',
     'motion-v/nuxt',
+    'nuxt-api-shield',
     'nuxt-auth-utils',
     'nuxt-security',
     'shadcn-nuxt',
   ],
+
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    scheduledTasks: {
+      '*/15 * * * *': ['shield:clean'], // clean the shield storage every 15 minutes
+    },
+    storage: {
+      shield: {
+        // storage name, you **must** use "shield" as the name
+        driver: 'memory',
+      },
+    },
+  },
+
+  nuxtApiShield: {
+    /*limit: {
+      max: 12,        // maximum requests per duration time, default is 12/duration
+      duration: 108,   // duration time in seconds, default is 108 seconds
+      ban: 3600,      // ban time in seconds, default is 3600 seconds = 1 hour
+    },
+    delayOnBan: true  // delay every response with +1sec when the user is banned, default is true
+    errorMessage: "Too Many Requests",  // error message when the user is banned, default is "Too Many Requests"
+    retryAfterHeader: false, // when the user is banned add the Retry-After header to the response, default is false
+    log: {
+      path: "logs", // path to the log file, every day a new log file will be created, use "" to disable logging
+      attempts: 100,    // if an IP reach 100 requests, all the requests will be logged, can be used for further analysis or blocking for example with fail2ban, use 0 to disable logging
+    },
+    routes: [], // specify routes to apply rate limiting to, default is an empty array meaning all routes are protected.
+    // Example:
+    // routes: ["/api/v2/", "/api/v3/"], // /api/v1 will not be protected, /api/v2/ and /api/v3/ will be protected */
+    limit: {
+      max: 10,
+      duration: 3600,
+      ban: 3600,
+    },
+    routes: ['/api/chat', '/api/contribute', '/api/translate'],
+  },
 
   ogImage: {
     enabled: false,
