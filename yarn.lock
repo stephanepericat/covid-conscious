@@ -12665,12 +12665,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:12.5.0":
-  version: 12.5.0
-  resolution: "framer-motion@npm:12.5.0"
+"framer-motion@npm:12.10.5":
+  version: 12.10.5
+  resolution: "framer-motion@npm:12.10.5"
   dependencies:
-    motion-dom: "npm:^12.5.0"
-    motion-utils: "npm:^12.5.0"
+    motion-dom: "npm:^12.10.5"
+    motion-utils: "npm:^12.9.4"
     tslib: "npm:^2.4.0"
   peerDependencies:
     "@emotion/is-prop-valid": "*"
@@ -12683,7 +12683,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10c0/ac632ea3a452e473abf9adad1d6777522b1dd2ed8cf567078a9997f07a388d7b9e68a3e9c102b1807e1e88af3d83eb2eb0d9476032059f4803a0c32bded9bf74
+  checksum: 10c0/a24a44b7a1b21e347f93f9ec3c1218b9ebf2b2bc2883c26ab9951e19a62fdc2e03f80a57d0c78eaf408d098ed6f0fbcae48207313921c1f5462eb04296adf55b
   languageName: node
   linkType: hard
 
@@ -14995,12 +14995,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lucide-vue-next@npm:^0.503.0":
-  version: 0.503.0
-  resolution: "lucide-vue-next@npm:0.503.0"
+"lucide-vue-next@npm:^0.509.0":
+  version: 0.509.0
+  resolution: "lucide-vue-next@npm:0.509.0"
   peerDependencies:
     vue: ">=3.0.1"
-  checksum: 10c0/124440087c86bf2a8932480349e2c49c3fae796169831df40840d96a3c404b1501235683f74cfeb082c57ecb7f391b63b22d1ef619aa5dd1f83772d11f7e0ff7
+  checksum: 10c0/53dbb242c8722d3b5887d8b3d19bfc97733410a7593e879c5c542095b8558d05b517819a235055a264696415c4685032c254429cf4ed6fbe7d276e92d6c20cb2
   languageName: node
   linkType: hard
 
@@ -15601,33 +15601,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"motion-dom@npm:^12.5.0":
-  version: 12.10.4
-  resolution: "motion-dom@npm:12.10.4"
+"motion-dom@npm:^12.10.5":
+  version: 12.10.5
+  resolution: "motion-dom@npm:12.10.5"
   dependencies:
     motion-utils: "npm:^12.9.4"
-  checksum: 10c0/f8e6d72f3400642d5479236bb5b72f53f0de8c3a16e65efc5099b3a82ffbd3ebd6711ee3dcadf912c42cb3853268bf18c26e3e065f738da0d1defd795e271a94
+  checksum: 10c0/2c362eb94c941bbbc42288a6738b8c7a11933687b3b20aa6c9f2c3dedc69e5c7995c7348499b535f8abe5ed9ea81d88f9eb2f98b69f5012bcd80b8f7a64a1c2c
   languageName: node
   linkType: hard
 
-"motion-utils@npm:^12.5.0, motion-utils@npm:^12.9.4":
+"motion-utils@npm:^12.9.4":
   version: 12.9.4
   resolution: "motion-utils@npm:12.9.4"
   checksum: 10c0/b6783babfd1282ad320585f7cdac9fe7a1f97b39e07d12a500d3709534441bd9d49b556fa1cd838d1bde188570d4ab6b4c5aa9d297f7f5aa9dc16d600c17afdc
   languageName: node
   linkType: hard
 
-"motion-v@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "motion-v@npm:1.0.2"
+"motion-v@npm:^1.1.0-alpha.1":
+  version: 1.1.0-alpha.1
+  resolution: "motion-v@npm:1.1.0-alpha.1"
   dependencies:
     "@vueuse/core": "npm:^10.0.0"
-    framer-motion: "npm:12.5.0"
+    framer-motion: "npm:12.10.5"
     hey-listen: "npm:^1.0.8"
-    motion-dom: "npm:^12.5.0"
   peerDependencies:
     vue: ">=3.0.0"
-  checksum: 10c0/4a478b6b58e4890bfe76b3a73fddd382d7009e1b5d10c0bc6f121841504ac1952342a47b965a6e8073dcc159a3202ddb693dd6b234e9b4c2c59495fb1fb1033b
+  checksum: 10c0/eeacd2f1e0244023cac2ed5b933b02a240fecf757ad8a8ba3f46ab929e71dfe8877171a24950e3a19f02b44dcb64864214b96b17b0d584b521f9efc19edaff9a
   languageName: node
   linkType: hard
 
@@ -19861,8 +19860,8 @@ __metadata:
     husky: "npm:^9.1.7"
     jsonwebtoken: "npm:^9.0.2"
     lodash: "npm:^4.17.21"
-    lucide-vue-next: "npm:^0.503.0"
-    motion-v: "npm:^1.0.2"
+    lucide-vue-next: "npm:^0.509.0"
+    motion-v: "npm:^1.1.0-alpha.1"
     nuxt: "npm:^3.17.2"
     nuxt-auth-utils: "npm:^0.5.20"
     nuxt-security: "npm:^2.2.0"
