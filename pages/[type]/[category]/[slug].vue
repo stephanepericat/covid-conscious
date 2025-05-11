@@ -115,9 +115,9 @@ const hasSplash = computed(() => !isVideo(type as string))
         class="flex flex-wrap gap-2 pt-2 md:pt-4"
       >
         <TclTagList
-          :free="article?.free as boolean"
-          :limited="article?.limited as boolean"
-          :premium="article?.premium as boolean"
+          :free="article?.free"
+          :limited="article?.limited"
+          :premium="article?.premium"
           :tags="<Tag[]>article.tags"
         />
       </section>
