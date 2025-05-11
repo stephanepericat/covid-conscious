@@ -114,7 +114,12 @@ const hasSplash = computed(() => !isVideo(type as string))
         v-if="article?.tags?.length"
         class="flex flex-wrap gap-2 pt-2 md:pt-4"
       >
-        <TclTagList :tags="<Tag[]>article.tags" />
+        <TclTagList
+          :free="article?.free as boolean"
+          :limited="article?.limited as boolean"
+          :premium="article?.premium as boolean"
+          :tags="<Tag[]>article.tags"
+        />
       </section>
       <template v-if="article?.related?.length">
         <Separator class="my-8" />

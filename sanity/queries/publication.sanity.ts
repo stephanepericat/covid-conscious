@@ -29,7 +29,10 @@ const PUBLICATION_QUERY = groq`
   language,
   location,
   onlineOnly,
-  "free": isEventFree,
+  "free": coalesce(isEventFree, false),
+  "limited": coalesce(limitedAccess, false),
+  "onlineOnly": coalesce(onlineOnly, false),
+  "premium": coalesce(premiumAccess, false),
   "tags": tags[]-> { 'label': coalesce(name[$locale], name['${BASE_LANGUAGE}'], ''), 'slug': uri.current },
   "promos": *[(_type == "promo") && !(_id in path('drafts.**')) && (enabled)] {
     "external": isExternalLink,
