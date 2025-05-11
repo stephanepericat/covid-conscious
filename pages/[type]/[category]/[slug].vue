@@ -3,7 +3,12 @@ import { motion } from 'motion-v'
 import { SERIALIZERS } from '@/assets/constants/serializers'
 import PUBLICATION_QUERY from '@/sanity/queries/publication.sanity'
 import METADATA_QUERY from '@/sanity/queries/metadata.sanity'
-import { isVideo } from '@/assets/utils/article-types'
+import {
+  isCovidnet,
+  isProduct,
+  isResource,
+  isVideo,
+} from '@/assets/utils/article-types'
 import type {
   METADATA_QUERYResult,
   PUBLICATION_QUERYResult,
@@ -55,7 +60,13 @@ const loading = computed(
 )
 
 const hasReadMoreButton = computed(() => !isVideo(type as string))
-const hasSplash = computed(() => !isVideo(type as string))
+const hasSplash = computed(
+  () =>
+    !isCovidnet(type as string) &&
+    !isProduct(type as string) &&
+    !isResource(type as string) &&
+    !isVideo(type as string),
+)
 </script>
 
 <template>

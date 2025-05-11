@@ -2,7 +2,7 @@
 import { motion } from 'motion-v'
 import { isExternalLink } from '@/assets/utils/article-types'
 import { useDynamicQuery } from '@/composables/useDynamicQuery'
-import { isBlog } from '@/assets/utils/article-types'
+import { isBlog, isProduct } from '@/assets/utils/article-types'
 
 import type { Tag } from '@/lib/types'
 
@@ -19,6 +19,10 @@ const { buildDynamicQuery, loading, results, total } = useDynamicQuery()
 const onUpdateFilters = (filters: Record<string, string>) =>
   updateQueryParams({ ...filters, offset: '0', limit: '5' })
 
+const hasLocale = computed(
+  () => !isBlog(<string>type.value) && !isProduct(<string>type.value),
+)
+
 watch(
   () => filters.value,
   () => {
@@ -27,7 +31,7 @@ watch(
         parseInt(filters.value.offset as string) +
         parseInt(filters.value.limit as string),
       filters: filters.value as Record<string, string>,
-      locale: isBlog(<string>type.value) ? null : locale.value,
+      locale: hasLocale.value ? locale.value : null,
       start: parseInt(filters.value.offset as string),
       type: type.value as string,
     })
