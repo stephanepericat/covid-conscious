@@ -653,6 +653,7 @@ export default {
     resource: 'A list of useful resources around COVID-19.',
     video: 'The latest videos about COVID-19.',
   },
+
   filters: {
     apply: 'Apply Filters',
     close: 'Close',
@@ -664,7 +665,7 @@ export default {
     placeholder: {
       tags: 'Select tag...',
     },
-    reset: ' Reset Filters',
+    reset: 'Reset Filters',
     title: 'Filters',
   },
 

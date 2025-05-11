@@ -244,7 +244,8 @@ export default {
       login: "S'identifier",
       signup: 'Créer un compte',
     },
-    description: "Nous avons créé cette plateforme sans frais pour vous afin de promouvoir l'éducation en matière de santé publique et de science et nous ne recevons aucun retour financier. Nous vous demandons de nous soutenir en créant un compte gratuit. Merci.",
+    description:
+      "Nous avons créé cette plateforme sans frais pour vous afin de promouvoir l'éducation en matière de santé publique et de science et nous ne recevons aucun retour financier. Nous vous demandons de nous soutenir en créant un compte gratuit. Merci.",
     title: 'Vous devez être connecté pour accéder à ce contenu',
   },
   notFound: {
@@ -672,5 +673,30 @@ export default {
       'Les dernières nouvelles sur les pandémies émergentes, telles que la variole et le H5N1.',
     resource: 'Une liste de ressources utiles autour du COVID-19.',
     video: 'Les dernières vidéos sur la COVID-19.',
+  },
+
+  filtres: {
+    apply: 'Appliquer les filtres',
+    close: 'Fermer',
+    description: 'Utilisez ces filtres pour affiner votre recherche.',
+    label: {
+      tags: 'Tags',
+    },
+    noResults: 'Rien trouvé.',
+    placeholder: {
+      tags: 'Sélectionner un tag…',
+    },
+    reset: 'Réinitialiser les filtres',
+    title: 'Filtres',
+  },
+
+  bookmarks: {
+    tooltip: 'Ajouter aux favoris',
+  },
+
+  share: {
+    action: 'Partager sur {name}',
+    send: 'Envoyer par e-mail',
+    tooltip: 'Partager',
   },
 }

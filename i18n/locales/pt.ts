@@ -245,7 +245,8 @@ export default {
       login: 'Entrar',
       signup: 'Criar uma conta',
     },
-    description: 'Criamos esta plataforma sem nenhum custo para você para promover a educação sobre saúde pública e ciência. Não recebemos nenhum retorno financeiro. Apoie-nos criando uma conta gratuita. Obrigado.',
+    description:
+      'Criamos esta plataforma sem nenhum custo para você para promover a educação sobre saúde pública e ciência. Não recebemos nenhum retorno financeiro. Apoie-nos criando uma conta gratuita. Obrigado.',
     title: 'Você precisa estar conectado para acessar este conteúdo',
   },
   notFound: {
@@ -663,5 +664,30 @@ export default {
       'As últimas notícias sobre pandemias emergentes, como Mpox e H5N1.',
     resource: 'Uma lista de recursos úteis sobre a COVID-19.',
     video: 'Os últimos vídeos sobre a COVID-19.',
+  },
+
+  filters: {
+    apply: 'Aplicar filtros',
+    close: 'Fechar',
+    description: 'Use estes filtros para refinar sua busca.',
+    label: {
+      tags: 'Tags',
+    },
+    noResults: 'Nada encontrado.',
+    placeholder: {
+      tags: 'Selecionar tag...',
+    },
+    reset: 'Redefinir filtros',
+    title: 'Filtros',
+  },
+
+  bookmarks: {
+    tooltip: 'Adicionar aos favoritos',
+  },
+
+  share: {
+    action: 'Compartilhar com{name}',
+    send: 'Enviar por e-mail',
+    tooltip: 'Compartilhar',
   },
 }
