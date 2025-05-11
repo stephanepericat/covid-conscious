@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { convertTs } from '@/assets/utils/convert-timestamp'
 import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
+import { useStatsig } from '@/composables/useStatsig'
 
 defineProps<{
   date: string | null
@@ -11,6 +12,7 @@ defineProps<{
 }>()
 
 const { locale } = useI18n()
+const { statsig } = useStatsig()
 
 const url = computed(() => {
   return `${location?.origin}${useRoute().fullPath}`
@@ -38,7 +40,7 @@ const url = computed(() => {
     <Separator class="my-4" />
     <div class="mb-2 flex gap-3">
       <TclShare :title="title" :url="url" />
-      <TclBookmark />
+      <TclBookmark v-if="statsig?.checkGate('bookmarks_enabled')" />
     </div>
   </div>
 </template>

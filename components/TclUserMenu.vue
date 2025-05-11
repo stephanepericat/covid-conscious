@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useSignOut } from '@/composables/useSignOut'
+import { useStatsig } from '@/composables/useStatsig'
 
 defineProps<{
   loggedIn?: boolean
@@ -7,6 +8,7 @@ defineProps<{
 
 const localePath = useLocalePath()
 const { signOut } = useSignOut()
+const { statsig } = useStatsig()
 </script>
 
 <template>
@@ -21,7 +23,7 @@ const { signOut } = useSignOut()
       <DropdownMenuLabel>{{ $t('layout.user.account') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <template v-if="loggedIn">
-        <DropdownMenuItem>
+        <DropdownMenuItem v-if="statsig?.checkGate('bookmarks_enabled')">
           <NuxtLink :to="localePath('/bookmarks')">{{
             $t('layout.user.bookmarks')
           }}</NuxtLink>
