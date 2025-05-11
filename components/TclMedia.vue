@@ -7,6 +7,7 @@ import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
 
 const props = defineProps<{
   date?: Date | string | null
+  end?: Date | string | null
   description?: string
   free?: boolean
   link: string
@@ -33,6 +34,12 @@ const publicationDate = computed(() => {
   return props.date.toString().split('T').length === 1
     ? convertTs(props.date as string)
     : props.date
+})
+
+const endDate = computed(() => {
+  if (!props.end) return null
+
+  return convertTs(props.end as string)
 })
 </script>
 
@@ -74,11 +81,21 @@ const publicationDate = computed(() => {
       </h2>
       <h4 v-if="publicationDate" class="uppercase tracking-widest text-xs mb-3">
         <span v-if="source">{{ source }} | </span>
-        {{
-          format(publicationDate, LOCALIZED_DATE_FORMAT, {
-            locale: getDateLocale(locale),
-          })
-        }}
+        <span
+          >{{
+            format(publicationDate, LOCALIZED_DATE_FORMAT, {
+              locale: getDateLocale(locale),
+            })
+          }}
+        </span>
+        <span v-if="publicationDate && endDate" class="mx-1">-</span>
+        <span v-if="endDate">
+          {{
+            format(endDate, LOCALIZED_DATE_FORMAT, {
+              locale: getDateLocale(locale),
+            })
+          }}
+        </span>
       </h4>
       <p v-if="description" class="text-sm">{{ description }}</p>
       <TclTagList

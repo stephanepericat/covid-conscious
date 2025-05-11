@@ -80,6 +80,7 @@ watch(
             v-for="article in results"
             :key="article.id"
             :date="article.date"
+            :end="article.end"
             :description="article.description"
             :free="article.free"
             :link="<string>(article.link || article.url || '')"

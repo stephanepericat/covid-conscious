@@ -83,6 +83,7 @@ const hasSplash = computed(
         v-if="article"
         class="mb-4 md:mb-10"
         :date="<string | null>article.date"
+        :end="<string | null>article.end"
         :source="<string | null>article.source"
         :title="<string>article.title"
       />

@@ -7,6 +7,7 @@ import { useStatsig } from '@/composables/useStatsig'
 
 defineProps<{
   date: string | null
+  end: string | null
   source: string | null
   title: string
 }>()
@@ -34,6 +35,14 @@ const url = computed(() => {
           locale: getDateLocale(locale),
         })
       }}</span>
+      <span v-if="date && end" class="hidden md:flex mx-1">-</span>
+      <span v-if="end">
+        {{
+          format(convertTs(end), LOCALIZED_DATE_FORMAT, {
+            locale: getDateLocale(locale),
+          })
+        }}
+      </span>
       <span v-if="date && source" class="hidden md:flex">|</span>
       <span v-if="source">{{ source }}</span>
     </h2>
