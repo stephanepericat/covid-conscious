@@ -5,15 +5,26 @@ import { getDateLocale } from '@/assets/constants/date-locales'
 import { LOCALIZED_DATE_FORMAT } from '@/assets/constants/date-formats'
 import { useStatsig } from '@/composables/useStatsig'
 
+import { isProduct } from '@/assets/utils/article-types'
+
+type Brand = {
+  name: string | null
+  url: string | null
+  path: string | null
+} | null
+
 defineProps<{
-  date: string | null
-  end: string | null
-  source: string | null
+  brand?: Brand
+  date?: string | null
+  end?: string | null
+  source?: string | null
   title: string
+  type: string
 }>()
 
 const { locale } = useI18n()
 const { statsig } = useStatsig()
+const localePath = useLocalePath()
 
 const url = computed(() => {
   return `${location?.origin}${useRoute().fullPath}`
@@ -26,6 +37,12 @@ const url = computed(() => {
     >
       {{ title }}
     </h1>
+    <NuxtLink
+      v-if="isProduct(type) && brand?.name"
+      class="antialiased text-sm uppercase tracking-widest mb-2 hover:text-primary transition-colors"
+      :to="localePath(<string>brand.path)"
+      >{{ brand.name }}</NuxtLink
+    >
     <h2
       v-if="date || source"
       class="flex flex-col md:flex-row gap-1 antialiased text-sm uppercase tracking-widest mb-2"

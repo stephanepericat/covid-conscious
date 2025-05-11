@@ -4,6 +4,7 @@ import { SERIALIZERS } from '@/assets/constants/serializers'
 import PUBLICATION_QUERY from '@/sanity/queries/publication.sanity'
 import METADATA_QUERY from '@/sanity/queries/metadata.sanity'
 import {
+  isBrand,
   isCovidnet,
   isProduct,
   isResource,
@@ -62,6 +63,7 @@ const loading = computed(
 const hasReadMoreButton = computed(() => !isVideo(type as string))
 const hasSplash = computed(
   () =>
+    !isBrand(type as string) &&
     !isCovidnet(type as string) &&
     !isProduct(type as string) &&
     !isResource(type as string) &&
@@ -82,10 +84,12 @@ const hasSplash = computed(
       <TclArticleHeader
         v-if="article"
         class="mb-4 md:mb-10"
+        :brand="article?.brand"
         :date="<string | null>article.date"
         :end="<string | null>article.end"
         :source="<string | null>article.source"
         :title="<string>article.title"
+        :type="<string>type"
       />
       <section class="font-pt text-lg">
         <SanityImage
@@ -108,7 +112,7 @@ const hasSplash = computed(
           />
         </div>
       </section>
-      <section v-if="article?.link" class="py-2">
+      <section v-if="article?.link" class="py-2 flex gap-4">
         <TclMoreButton
           v-if="hasReadMoreButton"
           :label="$t('article.readMore')"
@@ -119,6 +123,12 @@ const hasSplash = computed(
           v-if="isVideo(<string>type) && !article?.embedCode"
           :label="$t('article.watchVideo')"
           :link="<string>article.link"
+          target="_blank"
+        />
+        <TclMoreButton
+          v-if="isProduct(<string>type) && article?.brand"
+          :label="$t('article.manufacturerWebsite')"
+          :link="<string>article.brand?.url"
           target="_blank"
         />
       </section>
