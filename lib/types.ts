@@ -4,7 +4,9 @@ export type Metadata = {
   width: number | null
 }
 
-export type MobileNavItem = Omit<NavConfigChild, 'description'>
+export type MobileNavItem = Omit<NavConfigChild, 'description'> & {
+  enabled?: boolean
+}
 
 export type NavConfigChild = {
   description: string
@@ -17,6 +19,7 @@ export type NavConfigChild = {
 export type NavConfig = {
   children?: NavConfigChild[]
   display?: { description: string; icon?: string; title: string }
+  enabled?: boolean
   id: string
   link?: string
   premium?: boolean

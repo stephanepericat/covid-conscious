@@ -1,7 +1,10 @@
+import { useStatsig } from './useStatsig'
 import type { MobileNavItem, NavConfig } from '@/lib/types'
 
 export const useNavConfig = () => {
   const { t } = useI18n()
+  const { statsig } = useStatsig()
+  const chatEnabled = computed(() => statsig.checkGate('chat_enabled'))
 
   const config = computed(
     () =>
@@ -46,6 +49,7 @@ export const useNavConfig = () => {
               link: '/event?offset=0&limit=5',
             },
           ],
+          enabled: true,
         },
         {
           id: 'other',
@@ -77,6 +81,7 @@ export const useNavConfig = () => {
               link: '/resource?offset=0&limit=5',
             },
           ],
+          enabled: true,
         },
         // {
         //   id: 'forum',
@@ -88,12 +93,14 @@ export const useNavConfig = () => {
           title: t('topNav.blog.title'),
           link: '/blog?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         {
           id: 'chat',
           title: 'Chat',
           link: '/chat',
           premium: true,
+          enabled: chatEnabled.value,
         },
       ] as NavConfig[],
   )
@@ -106,54 +113,63 @@ export const useNavConfig = () => {
           link: '/news?offset=0&limit=5',
           premium: false,
           title: t('topNav.latest.children.news.title'),
+          enabled: true,
         },
         {
           id: 'mobile-library',
           link: '/scientific-library?offset=0&limit=5',
           premium: false,
           title: t('topNav.latest.children.library.title'),
+          enabled: true,
         },
         {
           id: 'mobile-videos',
           link: '/video?offset=0&limit=5',
           premium: false,
           title: t('topNav.latest.children.videos.title'),
+          enabled: true,
         },
         {
           id: 'mobile-phw',
           title: t('topNav.latest.children.phw.title'),
           link: '/public-health?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         {
           id: 'mobile-events',
           title: t('topNav.latest.children.events.title'),
           link: '/event?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         {
           id: 'mobile-covidnet',
           title: t('topNav.other.children.covidnet.title'),
           link: '/covidnet?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         {
           id: 'mobile-directory',
           title: t('topNav.other.children.directory.title'),
           link: '/directory?offset=0&limit=5',
           premium: true,
+          enabled: true,
         },
         {
           id: 'mobile-products',
           title: t('topNav.other.children.products.title'),
           link: '/product?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         {
           id: 'mobile-resources',
           title: t('topNav.other.children.resources.title'),
           link: '/resource?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         // {
         //   id: 'forum',
@@ -166,12 +182,14 @@ export const useNavConfig = () => {
           title: t('topNav.blog.title'),
           link: '/blog?offset=0&limit=5',
           premium: false,
+          enabled: true,
         },
         {
           id: 'chat',
           title: 'Chat',
           link: '/chat',
           premium: true,
+          enabled: chatEnabled.value,
         },
       ] as MobileNavItem[],
   )

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useNavConfig } from '@/composables/useNavConfig'
+import { cn } from '@/lib/utils'
 
 const props = defineProps<{
   loggedIn?: boolean
@@ -40,7 +41,12 @@ const lockIcon = computed(() =>
           v-for="item in mobileConfig"
           :key="item.id"
           :to="localePath(item.link)"
-          class="flex items-center text-muted-foreground transition-colors hover:text-foreground"
+          :class="
+            cn(
+              'flex items-center text-muted-foreground transition-colors hover:text-foreground',
+              !item.enabled ? 'hidden' : '',
+            )
+          "
         >
           {{ item.title }}
           <Icon

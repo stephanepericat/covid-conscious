@@ -68,7 +68,7 @@ const lockIcon = computed(() =>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem v-else>
-          <NuxtLink :to="localePath(item.link as string)">
+          <NuxtLink :to="localePath(item.link as string)" v-if="item.enabled">
             <NavigationMenuLink :class="navigationMenuTriggerStyle()">
               {{ item.title }}
               <Icon
