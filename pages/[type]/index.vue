@@ -2,7 +2,11 @@
 import { motion } from 'motion-v'
 import { isExternalLink } from '@/assets/utils/article-types'
 import { useDynamicQuery } from '@/composables/useDynamicQuery'
-import { isBlog, isProduct } from '@/assets/utils/article-types'
+import {
+  isBlog,
+  isProduct,
+  showPublicationDate,
+} from '@/assets/utils/article-types'
 
 import type { Tag } from '@/lib/types'
 
@@ -19,6 +23,7 @@ const { buildDynamicQuery, loading, results, total } = useDynamicQuery()
 const onUpdateFilters = (filters: Record<string, string>) =>
   updateQueryParams({ ...filters, offset: '0', limit: '5' })
 
+const hasDate = computed(() => showPublicationDate(<string>type.value))
 const hasLocale = computed(
   () => !isBlog(<string>type.value) && !isProduct(<string>type.value),
 )
@@ -79,7 +84,7 @@ watch(
           <TclMedia
             v-for="article in results"
             :key="article.id"
-            :date="article.date"
+            :date="hasDate ? article.date : null"
             :end="article.end"
             :description="article.description"
             :free="article.free"
