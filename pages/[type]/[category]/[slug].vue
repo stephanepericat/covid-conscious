@@ -88,7 +88,9 @@ const hasSplash = computed(
         :date="<string | null>article.date"
         :end="<string | null>article.end"
         :source="<string | null>article.source"
-        :title="<string>article.title"
+        :title="
+          isBrand(<string>type) ? <string>article.name : <string>article.title
+        "
         :type="<string>type"
       />
       <section class="font-pt text-lg">
@@ -143,6 +145,25 @@ const hasSplash = computed(
           :tags="<Tag[]>article.tags"
         />
       </section>
+      <template v-if="isBrand(<string>type) && article?.products?.length">
+        <Separator class="my-8" />
+        <section class="grid gap-4 md:gap-8">
+          <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
+            {{ t('article.listedProducts') }}
+          </h2>
+          <TclMedia
+            v-for="product in article?.products"
+            :key="product.id"
+            :description="
+              product.description ? `${product.description}...` : ''
+            "
+            :link="<string>product.url"
+            :tags="<Tag[]>product.tags"
+            :title="<string>product.title"
+            :visual="<string>product.visual"
+          />
+        </section>
+      </template>
       <template v-if="article?.related?.length">
         <Separator class="my-8" />
         <section class="grid gap-4 md:gap-8">
