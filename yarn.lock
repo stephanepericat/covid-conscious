@@ -16023,16 +16023,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nuxt-api-shield@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "nuxt-api-shield@npm:0.8.0"
-  dependencies:
-    "@nuxt/kit": "npm:^3.12.2"
-    defu: "npm:^6.1.4"
-  checksum: 10c0/98bfadc5034dabc4560c078d076e2d22ea6952fd0ef41fa0dbafc39686a644f949ffc485dccd69af07f5317a270a0b5b9e68533352f614f05b7d6f9f7c803f6b
-  languageName: node
-  linkType: hard
-
 "nuxt-auth-utils@npm:^0.5.20":
   version: 0.5.20
   resolution: "nuxt-auth-utils@npm:0.5.20"
@@ -19884,7 +19874,6 @@ __metadata:
     lucide-vue-next: "npm:^0.509.0"
     motion-v: "npm:^1.1.0-alpha.1"
     nuxt: "npm:^3.17.2"
-    nuxt-api-shield: "npm:^0.8.0"
     nuxt-auth-utils: "npm:^0.5.20"
     nuxt-llms: "npm:^0.1.2"
     nuxt-security: "npm:^2.2.0"

@@ -70,7 +70,6 @@
     "lucide-vue-next": "^0.509.0",
     "motion-v": "^1.1.0-alpha.1",
     "nuxt": "^3.17.2",
-    "nuxt-api-shield": "^0.8.0",
     "nuxt-auth-utils": "^0.5.20",
     "nuxt-llms": "^0.1.2",
     "nuxt-security": "^2.2.0",
