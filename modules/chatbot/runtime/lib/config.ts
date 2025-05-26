@@ -1,10 +1,5 @@
 export const config = {
-  allowedOrigin: process.env.ALLOWED_ORIGIN!,
   apiKey: process.env.DEEPINFRA_API_KEY,
-  auth: {
-    password: process.env.API_PASSWORD!,
-    username: process.env.API_USERNAME!,
-  },
   baseUrl: process.env.DEEPINFRA_BASE_URL,
   embedModel: process.env.DEEPINFRA_EMBED_MODEL,
   lfPublicKey: process.env.LANGFUSE_PUBLIC_KEY,
@@ -22,7 +17,6 @@ export const config = {
   workflowName: process.env.WORKFLOW_NAME,
   upstashToken: process.env.UPSTASH_REDIS_REST_TOKEN,
   upstashUrl: process.env.UPSTASH_REDIS_REST_URL,
-  testUserId: process.env.TEST_USER_ID,
   rateMaxRequests: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS!),
   ratePrefix: process.env.RATE_LIMIT_PREFIX || '@upstash/ratelimit',
   rateWindow: process.env.RATE_LIMIT_WINDOW,
