@@ -10,8 +10,8 @@ export default defineNuxtModule({
     // Add an API route
     addServerHandler({
       route: '/api/chat',
-      // method: 'post',
-      handler: resolver.resolve('./runtime/routes/api/chat.ts'),
+      method: 'post',
+      handler: resolver.resolve('./runtime/routes/chat.ts'),
     })
   },
 })
