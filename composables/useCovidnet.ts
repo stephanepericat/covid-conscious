@@ -1,5 +1,5 @@
 import { COVIDNET_TYPES } from '@/assets/constants/covidnet-types'
-import type { VideoPost } from '@/lib/types'
+import type { FeaturedPost, VideoPost } from '@/lib/types'
 
 export const useCovidnet = () => {
   const videosMapper = (v: Record<string, any>): VideoPost => ({
@@ -28,7 +28,7 @@ export const useCovidnet = () => {
     }
   }
 
-  const getBlogOg = async (posts: string[]) => {
+  const getBlogOg = async (posts: string[]): Promise<FeaturedPost[]> => {
     try {
       const { data, error } = await useFetch('/api/external/feeds/blog/og', {
         method: 'POST',
@@ -39,7 +39,7 @@ export const useCovidnet = () => {
 
       if (error.value) throw error.value
 
-      return data.value
+      return data?.value as FeaturedPost[]
     } catch (e) {
       console.error(e)
       return []
@@ -56,8 +56,8 @@ export const useCovidnet = () => {
     blogFeaturedURLs: string[]
     contentType: string
     twitterFeaturedPosts: string[]
-  }) => {
-    let content: any[] | null = []
+  }): Promise<FeaturedPost[] | string[] | null> => {
+    let content: FeaturedPost[] | string[] | null = []
 
     switch (contentType) {
       case COVIDNET_TYPES.BLOG:

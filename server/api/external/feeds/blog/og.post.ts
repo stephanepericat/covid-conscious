@@ -9,15 +9,22 @@ export default defineEventHandler(async (event) => {
     return info
       .map(({ result }) => result || null)
       .filter((r) => r !== null && r.success)
-      .map((info) => ({
-        description: info.ogDescription,
-        image: info.ogImage[0],
-        locale: info.ogLocale,
-        siteName: info.ogSiteName,
-        title: info.ogTitle,
-        type: info.ogType,
-        url: info.ogUrl,
-      }))
+      .map((info) => {
+        console.log('info', info)
+        return {
+          id: crypto.randomUUID(),
+          date: info.jsonLD?.[0]?.datePublished?.substr(0, 10),
+          description: info.ogDescription
+            ? info.ogDescription.substr(0, 128) + '...'
+            : null,
+          image: info.ogImage[0],
+          locale: info.ogLocale,
+          siteName: info.ogSiteName,
+          title: info.ogTitle,
+          type: info.ogType,
+          url: info.ogUrl,
+        }
+      })
   } catch (e) {
     throw e
   }

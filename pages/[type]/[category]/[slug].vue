@@ -15,7 +15,8 @@ import type {
   METADATA_QUERYResult,
   PUBLICATION_QUERYResult,
 } from '@/sanity/types'
-import type { Tag } from '@/lib/types'
+import type { FeaturedPost, Tag } from '@/lib/types'
+import { convertTs } from '@/assets/utils/convert-timestamp'
 
 const route = useRoute()
 const { locale, t } = useI18n()
@@ -75,6 +76,20 @@ const channelFeed = await useAsyncData(
 )
 const channelVideos = computed(() => channelFeed?.data?.value || [])
 
+const ftdPosts = await useAsyncData(
+  'ftdPosts',
+  () => {
+    return isCovidnet(<string>type) &&
+      article?.value?.covidnet &&
+      hasFeaturedContent(<Record<string, any>>article?.value?.covidnet)
+      ? // @ts-expect-error type
+        getFeaturedContent(article?.value?.covidnet)
+      : Promise.resolve([])
+  },
+  { watch: [article] },
+)
+const featuredPosts = computed(() => ftdPosts?.data?.value || [])
+
 const loading = computed(
   () => status?.value === 'pending' || status?.value === 'idle',
 )
@@ -92,7 +107,6 @@ const hasSplash = computed(
 
 <template>
   <div class="container max-w-3xl py-4 md:py-8">
-    <div>{{ article }}</div>
     <TclSeo
       :description="pageDescription"
       :image="ogImage"
@@ -179,6 +193,32 @@ const hasSplash = computed(
           :tags="<Tag[]>article.tags"
         />
       </section>
+
+      <!-- COVIDNET: BLOG -->
+      <template
+        v-if="
+          isCovidnet(type as string) &&
+          article?.contentType === COVIDNET_TYPES.BLOG &&
+          hasFeaturedContent(<Record<string, any>>article?.covidnet)
+        "
+      >
+        <Separator class="my-8" />
+        <TclLoader v-if="isFeaturedContentLoading" />
+        <section class="grid gap-4 md:gap-8">
+          <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
+            {{ t('covidnet.blog.featured') }}
+          </h2>
+          <TclMedia
+            v-for="post in <FeaturedPost[]>featuredPosts"
+            :key="post.id"
+            :date="post.date ? convertTs(post.date) : null"
+            :description="post.description ? `${post.description}...` : ''"
+            :link="<string>post.url"
+            :source="<string>article?.title"
+            :title="<string>post.title"
+          />
+        </section>
+      </template>
 
       <!-- COVIDNET: YOUTUBE -->
       <template

@@ -1,3 +1,18 @@
+export type FeaturedPost = {
+  date: string | null
+  description: string | null
+  id: string
+  image: {
+    type?: string
+    url?: string
+  } | null
+  locale: string | null
+  siteName: string | null
+  title: string | null
+  type: string | null
+  url: string | null
+}
+
 export type Metadata = {
   aspectRatio: number | null
   height: number | null
