@@ -2,6 +2,8 @@
 import { useFooterConfig } from '@/composables/useFooterConfig'
 import { useMobileButtons } from '@/composables/useMobileButtons'
 
+const { t } = useI18n()
+
 const { config } = useFooterConfig()
 const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } =
   useMobileButtons()
@@ -59,8 +61,8 @@ const { ANDROID_URL, IOS_URL, appleStoreBtn, googlePlayBtn } =
     <div class="container mt-4">
       <Separator />
       <p class="mt-6 text-xs">
-        &copy; 2023 - {{ new Date().getFullYear() }} | {{ $t('layout.tcl') }} |
-        {{ $t('layout.rights') }}.
+        &copy; 2023 - {{ new Date().getFullYear() }} | {{ t('layout.tcl') }} |
+        {{ t('layout.rights') }}.
       </p>
     </div>
   </footer>

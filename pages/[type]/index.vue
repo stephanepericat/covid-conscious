@@ -13,7 +13,7 @@ import type { Tag } from '@/lib/types'
 const { currentPage, limit, onPageChange, route, updateQueryParams } =
   usePagination()
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 
 const type = computed(() => route.params.type)
 const filters = computed(() => route.query || {})
@@ -48,22 +48,22 @@ watch(
 <template>
   <div class="container pt-4 md:pt-8">
     <TclSeo
-      :description="$t(`description.${type}`)"
+      :description="t(`description.${type}`)"
       image="/tcl-fallback-169.jpg"
       image-type="image/jpeg"
-      :title="$t(`layout.${type}`)"
+      :title="t(`layout.${type}`)"
     />
     <div class="flex justify-between items-center">
       <div>
         <h1
           class="scroll-m-20 text-4xl font-extrabold lg:text-5xl font-title uppercase"
         >
-          {{ $t(`layout.${type}`) }}
+          {{ t(`layout.${type}`) }}
         </h1>
         <h4
           class="scroll-m-20 text-base lg:text-xl font-semibold tracking-tight"
         >
-          {{ $t(`description.${type}`) }}
+          {{ t(`description.${type}`) }}
         </h4>
       </div>
       <TclFiltersSheet

@@ -9,6 +9,7 @@ const props = defineProps<{
 
 const { mobileConfig } = useNavConfig()
 const localePath = useLocalePath()
+const { t } = useI18n()
 
 const lockIcon = computed(() =>
   props.loggedIn ? 'mynaui:lock-open' : 'mynaui:lock',
@@ -21,13 +22,13 @@ const lockIcon = computed(() =>
       <Button variant="outline" size="icon" class="shrink-0 md:hidden">
         <Icon v-if="withTaco" name="mdi:taco" :size="20" class="h-5 w-5" />
         <Icon v-else name="cil:hamburger-menu" :size="20" class="h-5 w-5" />
-        <span class="sr-only">{{ $t('layout.toggleNavMenu') }}</span>
+        <span class="sr-only">{{ t('layout.toggleNavMenu') }}</span>
       </Button>
     </SheetTrigger>
     <SheetContent side="left">
       <SheetHeader class="hidden">
-        <SheetTitle>{{ $t('layout.tcl') }}</SheetTitle>
-        <SheetDescription>{{ $t('layout.tcl') }}</SheetDescription>
+        <SheetTitle>{{ t('layout.tcl') }}</SheetTitle>
+        <SheetDescription>{{ t('layout.tcl') }}</SheetDescription>
       </SheetHeader>
       <nav class="grid gap-5 text-lg font-medium">
         <NuxtLink
@@ -35,7 +36,7 @@ const lockIcon = computed(() =>
           class="flex items-center gap-2 text-lg font-semibold"
         >
           <TclLogo />
-          <span class="sr-only">{{ $t('layout.tcl') }}</span>
+          <span class="sr-only">{{ t('layout.tcl') }}</span>
         </NuxtLink>
         <NuxtLink
           v-for="item in mobileConfig"

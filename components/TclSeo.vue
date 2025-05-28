@@ -6,7 +6,7 @@ defineProps<{
   title: string
 }>()
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 </script>
 
 <template>
@@ -20,7 +20,7 @@ const { locale } = useI18n()
     <Meta v-if="imageType" name="og:image:type" :content="imageType" />
     <Meta v-if="image" name="og:image:alt" :content="title" />
     <Meta name="og:locale" :content="locale" />
-    <Meta name="og:site_name" :content="$t('layout.tcl')" />
+    <Meta name="og:site_name" :content="t('layout.tcl')" />
     <Meta name="twitter:title" :content="title" />
     <Meta name="twitter:description" :content="description" />
     <Meta v-if="image" name="twitter:image" :content="image" />

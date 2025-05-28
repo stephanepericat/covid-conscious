@@ -5,7 +5,7 @@ import LATEST_PUBLICATIONS_QUERY from '@/sanity/queries/latestPublications.sanit
 import type { LATEST_PUBLICATIONS_QUERYResult } from '@/sanity/types'
 
 const host = computed(() => window?.location?.origin || '')
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const localePath = useLocalePath()
 
 const { data, status } =
@@ -34,10 +34,10 @@ const videos = computed(() => data?.value?.videos || [])
     class="flex flex-col justify-center items-center"
   >
     <TclSeo
-      :description="$t('layout.description')"
+      :description="t('layout.description')"
       image="/tcl-fallback-169.jpg"
       image-type="image/jpeg"
-      :title="$t('layout.home')"
+      :title="t('layout.home')"
     />
 
     <TclLoader v-if="loading" />
@@ -64,7 +64,7 @@ const videos = computed(() => data?.value?.videos || [])
         <h2
           class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
         >
-          {{ $t('home.latestNews') }}
+          {{ t('home.latestNews') }}
         </h2>
 
         <div
@@ -89,7 +89,7 @@ const videos = computed(() => data?.value?.videos || [])
         <div class="md:flex md:justify-center pb-6 md:pb-12">
           <TclMoreButton
             extra="w-full md:w-auto"
-            :label="$t('home.seeAllNews')"
+            :label="t('home.seeAllNews')"
             :link="localePath('/news?offset=0&limit=5')"
             target="_self"
           />
@@ -107,7 +107,7 @@ const videos = computed(() => data?.value?.videos || [])
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl text-background uppercase"
           >
-            {{ $t('home.events') }}
+            {{ t('home.events') }}
           </h2>
           <div
             class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 xl:gap-12 py-6 md:py-12"
@@ -131,7 +131,7 @@ const videos = computed(() => data?.value?.videos || [])
           <div class="md:flex md:justify-center">
             <TclMoreButton
               extra="w-full md:w-auto"
-              :label="$t('home.seeAllEvents')"
+              :label="t('home.seeAllEvents')"
               :link="localePath('/event?offset=0&limit=5')"
               target="_self"
             />
@@ -149,7 +149,7 @@ const videos = computed(() => data?.value?.videos || [])
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
           >
-            {{ $t('home.videos') }}
+            {{ t('home.videos') }}
           </h2>
           <div
             class="flex flex-col w-full justify-center items-center pt-6 md:pt-12"
@@ -157,7 +157,7 @@ const videos = computed(() => data?.value?.videos || [])
             <TclVideoCarousel
               class="hidden md:block max-w-[calc(100%-100px)] 2xl:max-w-full"
               :link="localePath('/video?offset=0&limit=5')"
-              :see-all-label="$t('home.seeAllVideos')"
+              :see-all-label="t('home.seeAllVideos')"
               :videos="videos"
             />
             <div class="md:hidden grid gap-6 mb-6 w-full">
@@ -177,7 +177,7 @@ const videos = computed(() => data?.value?.videos || [])
             <div class="w-full md:hidden">
               <TclMoreButton
                 extra="w-full"
-                :label="$t('home.seeAllVideos')"
+                :label="t('home.seeAllVideos')"
                 :link="localePath('/video?offset=0&limit=5')"
                 target="_self"
               />
@@ -192,13 +192,13 @@ const videos = computed(() => data?.value?.videos || [])
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
           >
-            {{ $t('home.library') }}
+            {{ t('home.library') }}
           </h2>
           <TclArticleBlock :articles="library" class="py-6 md:py-12" />
           <div class="md:flex md:justify-center pb-6 md:pb-12">
             <TclMoreButton
               extra="w-full md:w-auto"
-              :label="$t('home.seeAllLibrary')"
+              :label="t('home.seeAllLibrary')"
               :link="localePath('/scientific-library?offset=0&limit=5')"
               target="_self"
             />
@@ -208,7 +208,7 @@ const videos = computed(() => data?.value?.videos || [])
           <h2
             class="font-title scroll-m-20 text-4xl font-extrabold lg:text-5xl uppercase"
           >
-            {{ $t('home.phw') }}
+            {{ t('home.phw') }}
           </h2>
           <TclArticleBlock
             :articles="phw"
@@ -218,7 +218,7 @@ const videos = computed(() => data?.value?.videos || [])
           <div class="md:flex md:justify-center pb-6 md:pb-12">
             <TclMoreButton
               extra="w-full md:w-auto"
-              :label="$t('home.seeAllPhw')"
+              :label="t('home.seeAllPhw')"
               :link="localePath('/public-health?offset=0&limit=5')"
               target="_self"
             />

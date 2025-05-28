@@ -117,19 +117,19 @@ const hasSplash = computed(
       <section v-if="article?.link" class="py-2 flex gap-4">
         <TclMoreButton
           v-if="hasReadMoreButton"
-          :label="$t('article.readMore')"
+          :label="t('article.readMore')"
           :link="<string>article.link"
           target="_blank"
         />
         <TclMoreButton
           v-if="isVideo(<string>type) && !article?.embedCode"
-          :label="$t('article.watchVideo')"
+          :label="t('article.watchVideo')"
           :link="<string>article.link"
           target="_blank"
         />
         <TclMoreButton
           v-if="isProduct(<string>type) && article?.brand"
-          :label="$t('article.manufacturerWebsite')"
+          :label="t('article.manufacturerWebsite')"
           :link="<string>article.brand?.url"
           target="_blank"
         />

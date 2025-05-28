@@ -9,18 +9,19 @@ defineProps<{
 }>()
 
 const localePath = useLocalePath()
+const { t } = useI18n()
 </script>
 
 <template>
   <div class="flex flex-wrap">
     <Badge v-if="free" class="uppercase tracking-widest mr-1.5 mb-1">
-      {{ $t('article.free') }}
+      {{ t('article.free') }}
     </Badge>
     <Badge v-if="limited" class="uppercase tracking-widest mr-1.5 mb-1">
-      {{ $t('article.limited') }}
+      {{ t('article.limited') }}
     </Badge>
     <Badge v-if="premium" class="uppercase tracking-widest mr-1.5 mb-1">
-      {{ $t('article.locked') }}
+      {{ t('article.locked') }}
     </Badge>
     <NuxtLink
       v-for="{ label, slug } in tags"

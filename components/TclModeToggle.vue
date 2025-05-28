@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -14,25 +15,25 @@ const colorMode = useColorMode()
           name="mynaui:moon-star"
           class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
         />
-        <span class="sr-only">{{ $t('layout.toggleTheme') }}</span>
+        <span class="sr-only">{{ t('layout.toggleTheme') }}</span>
       </Button>
     </DropdownMenuTrigger>
     <DropdownMenuContent align="end">
-      <DropdownMenuLabel>{{ $t('layout.theme') }}</DropdownMenuLabel>
+      <DropdownMenuLabel>{{ t('layout.theme') }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem @click="colorMode.preference = 'light'">
         <span class="hover:cursor-pointer">{{
-          $t('layout.themeOptions.light')
+          t('layout.themeOptions.light')
         }}</span>
       </DropdownMenuItem>
       <DropdownMenuItem @click="colorMode.preference = 'dark'">
         <span class="hover:cursor-pointer">{{
-          $t('layout.themeOptions.dark')
+          t('layout.themeOptions.dark')
         }}</span>
       </DropdownMenuItem>
       <DropdownMenuItem @click="colorMode.preference = 'system'">
         <span class="hover:cursor-pointer">{{
-          $t('layout.themeOptions.system')
+          t('layout.themeOptions.system')
         }}</span>
       </DropdownMenuItem>
     </DropdownMenuContent>

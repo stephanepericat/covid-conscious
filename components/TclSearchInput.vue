@@ -2,6 +2,8 @@
 import type { HTMLAttributes } from 'vue'
 import { useVModel } from '@vueuse/core'
 
+const { t } = useI18n()
+
 const props = defineProps<{
   defaultValue?: string
   modelValue?: string
@@ -25,7 +27,7 @@ const modelValue = useVModel(props, 'modelValue', emits, {
         v-model="modelValue"
         id="search"
         type="text"
-        :placeholder="$t('layout.search')"
+        :placeholder="t('layout.search')"
         class="pl-9 sm:w-[250px] md:w-[150px] lg:w-[250px]"
       />
       <span

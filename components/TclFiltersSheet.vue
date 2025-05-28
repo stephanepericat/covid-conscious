@@ -10,6 +10,8 @@ import { Check, ChevronsUpDown } from 'lucide-vue-next'
 import TAGS_BY_TYPE_QUERY from '@/sanity/queries/tagsByType.sanity'
 import type { TAGS_BY_TYPE_QUERYResult } from '@/sanity/types'
 
+const { t } = useI18n()
+
 const props = defineProps<{
   locale: string
   type: string
@@ -48,28 +50,28 @@ const onSubmit = handleSubmit((values) => emit('update:filters', values))
     <SheetTrigger as-child>
       <Button>
         <ListFilterPlus />
-        {{ $t('filters.title') }}
+        {{ t('filters.title') }}
       </Button>
     </SheetTrigger>
     <SheetContent>
       <SheetHeader>
-        <SheetTitle>{{ $t('filters.title') }}</SheetTitle>
+        <SheetTitle>{{ t('filters.title') }}</SheetTitle>
         <SheetDescription>
-          {{ $t('filters.description') }}
+          {{ t('filters.description') }}
         </SheetDescription>
       </SheetHeader>
       <form @submit="onSubmit">
         <div class="grid gap-4 py-4">
           <FormField v-slot="{ componentField }" name="tag">
             <FormItem v-auto-animate>
-              <FormLabel>{{ $t('filters.label.tags') }}</FormLabel>
+              <FormLabel>{{ t('filters.label.tags') }}</FormLabel>
               <Combobox by="label" class="w-full">
                 <FormControl>
                   <ComboboxAnchor class="flex w-full">
                     <div class="relative w-full items-center">
                       <ComboboxInput
                         :display-value="(val) => val?.label ?? ''"
-                        :placeholder="$t('filters.placeholder.tags')"
+                        :placeholder="t('filters.placeholder.tags')"
                       />
                       <ComboboxTrigger
                         class="absolute end-0 inset-y-0 flex items-center justify-center px-3"
@@ -82,7 +84,7 @@ const onSubmit = handleSubmit((values) => emit('update:filters', values))
                 <ComboboxList
                   class="max-h-60 w-[250px] sm:w-[325px] overflow-auto"
                 >
-                  <ComboboxEmpty>{{ $t('filters.noResults') }}</ComboboxEmpty>
+                  <ComboboxEmpty>{{ t('filters.noResults') }}</ComboboxEmpty>
                   <ComboboxGroup>
                     <ComboboxItem
                       v-for="tag in tagList"
@@ -110,12 +112,12 @@ const onSubmit = handleSubmit((values) => emit('update:filters', values))
         <SheetFooter>
           <SheetClose as-child>
             <Button class="mb-3 mr-1" variant="secondary">{{
-              $t('filters.close')
+              t('filters.close')
             }}</Button>
           </SheetClose>
           <SheetClose as-child>
             <Button class="mb-3" type="submit" :disabled="!isFormValid">{{
-              $t('filters.apply')
+              t('filters.apply')
             }}</Button>
           </SheetClose>
         </SheetFooter>

@@ -3,6 +3,7 @@ import { Search as SearchIcon } from 'lucide-vue-next'
 
 const localePath = useLocalePath()
 const { loggedIn } = useUserSession()
+const { t } = useI18n()
 </script>
 
 <template>
@@ -14,7 +15,7 @@ const { loggedIn } = useUserSession()
     >
       <NuxtLink :to="localePath('/')" class="min-w-[46px]">
         <TclLogo />
-        <span class="sr-only">{{ $t('layout.tcl') }}</span>
+        <span class="sr-only">{{ t('layout.tcl') }}</span>
       </NuxtLink>
       <TclTopNavigation :logged-in="loggedIn" />
     </nav>
