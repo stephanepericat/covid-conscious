@@ -10,6 +10,7 @@ import {
   isResource,
   isVideo,
 } from '@/assets/utils/article-types'
+import { useCovidnet } from '@/composables/useCovidnet'
 import type {
   METADATA_QUERYResult,
   PUBLICATION_QUERYResult,
@@ -18,6 +19,13 @@ import type { Tag } from '@/lib/types'
 
 const route = useRoute()
 const { locale, t } = useI18n()
+const {
+  COVIDNET_TYPES,
+  getChannelFeed,
+  getFeaturedContent,
+  hasFeaturedContent,
+  isFeaturedContentLoading,
+} = useCovidnet()
 
 const { category, slug, type } = route.params
 
@@ -56,6 +64,17 @@ const { data: article, status } =
     type,
   })
 
+const channelFeed = await useAsyncData(
+  'channelFeed',
+  () => {
+    return isCovidnet(<string>type) && article?.value?.covidnet?.channelID
+      ? getChannelFeed(article.value.covidnet.channelID)
+      : Promise.resolve([])
+  },
+  { watch: [article] },
+)
+const channelVideos = computed(() => channelFeed?.data?.value || [])
+
 const loading = computed(
   () => status?.value === 'pending' || status?.value === 'idle',
 )
@@ -73,6 +92,7 @@ const hasSplash = computed(
 
 <template>
   <div class="container max-w-3xl py-4 md:py-8">
+    <div>{{ article }}</div>
     <TclSeo
       :description="pageDescription"
       :image="ogImage"
@@ -134,6 +154,20 @@ const hasSplash = computed(
           target="_blank"
         />
       </section>
+      <section v-if="isCovidnet(type as string)" class="py-2 flex gap-4">
+        <TclMoreButton
+          v-if="article?.covidnet?.contentType === COVIDNET_TYPES.BLOG"
+          :label="t('covidnet.blog.link')"
+          :link="<string>article?.covidnet?.blogURL"
+          target="_blank"
+        />
+        <TclMoreButton
+          v-if="article?.covidnet?.contentType === COVIDNET_TYPES.YOUTUBE"
+          :label="t('covidnet.videos.channel')"
+          :link="<string>article?.covidnet?.channelURL"
+          target="_blank"
+        />
+      </section>
       <section
         v-if="article?.tags?.length"
         class="flex flex-wrap gap-2 pt-2 md:pt-4"
@@ -145,6 +179,34 @@ const hasSplash = computed(
           :tags="<Tag[]>article.tags"
         />
       </section>
+
+      <!-- COVIDNET: YOUTUBE -->
+      <template
+        v-if="
+          isCovidnet(type as string) &&
+          article?.contentType === COVIDNET_TYPES.YOUTUBE &&
+          article?.covidnet?.channelID
+        "
+      >
+        <Separator class="my-8" />
+        <section class="grid gap-4 md:gap-8">
+          <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
+            {{ t('covidnet.videos.latest') }}
+          </h2>
+          <TclMedia
+            v-for="video in channelVideos"
+            :key="video.id"
+            :date="video.date"
+            :description="video.description ? `${video.description}...` : ''"
+            :link="<string>video.url"
+            :source="COVIDNET_TYPES.YOUTUBE"
+            :thumbnail="video.thumbnail"
+            :title="<string>video.title"
+          />
+        </section>
+      </template>
+
+      <!-- LISTED PRODUCTS -->
       <template v-if="isBrand(<string>type) && article?.products?.length">
         <Separator class="my-8" />
         <section class="grid gap-4 md:gap-8">
@@ -164,6 +226,8 @@ const hasSplash = computed(
           />
         </section>
       </template>
+
+      <!-- RELATED ARTICLES -->
       <template v-if="article?.related?.length">
         <Separator class="my-8" />
         <section class="grid gap-4 md:gap-8">

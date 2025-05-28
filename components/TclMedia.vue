@@ -21,6 +21,7 @@ const props = defineProps<{
   source?: string
   tags?: Tag[]
   target?: Target
+  thumbnail?: string
   title: string
   visual?: string | null
 }>()
@@ -59,6 +60,12 @@ const endDate = computed(() => {
         crop="entropy"
         :h="135"
         :w="240"
+      />
+      <NuxtImg
+        v-else-if="thumbnail"
+        :src="thumbnail"
+        class="rounded-lg"
+        :alt="title"
       />
       <NuxtImg
         v-else

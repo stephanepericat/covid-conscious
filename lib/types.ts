@@ -53,3 +53,12 @@ export type Publication = {
 export type Tag = { label: string; slug: string }
 
 export type Target = '_blank' | '_self'
+
+export type VideoPost = {
+  id: string
+  date: string
+  description: string
+  thumbnail: string
+  title: string
+  url: string
+}
