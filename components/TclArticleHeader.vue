@@ -17,6 +17,7 @@ defineProps<{
   brand?: Brand
   date?: string | null
   end?: string | null
+  location?: string | null
   source?: string | null
   title: string
   type: string
@@ -44,7 +45,7 @@ const url = computed(() => {
       >{{ brand.name }}</NuxtLink
     >
     <h2
-      v-if="date || source"
+      v-if="date || source || location"
       class="flex flex-col md:flex-row gap-1 antialiased text-sm uppercase tracking-widest mb-2"
     >
       <span v-if="date">{{
@@ -62,6 +63,7 @@ const url = computed(() => {
       </span>
       <span v-if="date && source" class="hidden md:flex">|</span>
       <span v-if="source">{{ source }}</span>
+      <span v-if="location">{{ location }}</span>
     </h2>
     <Separator class="my-4" />
     <div class="mb-2 flex gap-3">

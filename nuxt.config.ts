@@ -151,6 +151,7 @@ export default defineNuxtConfig({
     '@nuxt/test-utils/module',
     '@nuxtjs/color-mode',
     '@nuxtjs/i18n',
+    '@nuxtjs/leaflet',
     '@nuxtjs/sanity',
     '@nuxtjs/seo',
     '@nuxtjs/tailwindcss',

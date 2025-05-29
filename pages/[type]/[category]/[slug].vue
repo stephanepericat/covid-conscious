@@ -58,6 +58,14 @@ const ogImageType = computed(() => {
   return `image/${extension}`
 })
 
+const location = computed(() => {
+  if (!article?.value?.info?.city || !article?.value?.info?.country) {
+    return null
+  }
+
+  return `${article.value.info.city}, ${article.value.info.country}`
+})
+
 const { data: article, status } =
   await useLazySanityQuery<PUBLICATION_QUERYResult>(PUBLICATION_QUERY, {
     category,
@@ -126,6 +134,7 @@ const hasSplash = computed(
         :brand="article?.brand"
         :date="<string | null>article.date"
         :end="<string | null>article.end"
+        :location="location"
         :source="<string | null>article.source"
         :title="
           isBrand(<string>type) ? <string>article.name : <string>article.title
@@ -200,7 +209,7 @@ const hasSplash = computed(
         />
       </section>
 
-      <!-- DIRECTORY -->
+      <!-- DIRECTORY: CONTACT INFO -->
       <template v-if="isDirectory(type as string) && article?.info">
         <Separator class="my-8" />
         <section class="grid gap-4 md:gap-8">
@@ -209,12 +218,24 @@ const hasSplash = computed(
           </h2>
           <div class="grid gap-4 md:flex justify-between">
             <div>
-              <div v-text="article.title" class="font-bold" />
-              <div v-text="article.info.street1" />
-              <div v-text="article.info.street2" />
-              <div v-text="article.info.city" />
-              <div v-text="article.info.zipCode" />
-              <div v-text="article.info.country" />
+              <div v-text="article?.title" class="font-bold" />
+              <div
+                v-if="article?.info?.street1"
+                v-text="article?.info?.street1"
+              />
+              <div
+                v-if="article?.info?.street2"
+                v-text="article?.info?.street2"
+              />
+              <div v-if="article?.info?.city" v-text="article?.info?.city" />
+              <div
+                v-if="article?.info?.zipCode"
+                v-text="article?.info?.zipCode"
+              />
+              <div
+                v-if="article?.info?.country"
+                v-text="article?.info?.country"
+              />
             </div>
             <div class="md:text-right">
               <div v-if="article?.info?.phone">
@@ -241,6 +262,17 @@ const hasSplash = computed(
               </div>
             </div>
           </div>
+        </section>
+      </template>
+
+      <!-- DIRECTORY: DIRECTIONS -->
+      <template v-if="isDirectory(type as string) && article?.location">
+        <Separator class="my-8" />
+        <section class="grid gap-4 md:gap-8">
+          <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
+            {{ t('article.directions') }}
+          </h2>
+          <div class=""></div>
         </section>
       </template>
 
