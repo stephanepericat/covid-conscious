@@ -125,9 +125,6 @@ const hasSplash = computed(
     />
     <TclLoader v-if="loading" />
     <motion.div :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" v-else>
-      <div>
-        {{ article }}
-      </div>
       <TclArticleHeader
         v-if="article"
         class="mb-4 md:mb-10"
@@ -272,7 +269,29 @@ const hasSplash = computed(
           <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
             {{ t('article.directions') }}
           </h2>
-          <div class=""></div>
+          <div class="aspect-video w-full overflow-hidden rounded-xl">
+            <LMap
+              :zoom="6"
+              :center="[
+                <number>article.location.lat,
+                <number>article.location.lng,
+              ]"
+              :use-global-leaflet="false"
+            >
+              <LTileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&amp;copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+                layer-type="base"
+                name="OpenStreetMap"
+              />
+              <LMarker
+                :lat-lng="[
+                  <number>article.location.lat,
+                  <number>article.location.lng,
+                ]"
+              />
+            </LMap>
+          </div>
         </section>
       </template>
 
