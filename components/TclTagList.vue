@@ -4,6 +4,7 @@ import type { Tag } from '@/lib/types'
 defineProps<{
   free?: boolean
   limited?: boolean
+  online?: boolean
   premium?: boolean
   tags: Tag[]
 }>()
@@ -19,6 +20,9 @@ const { t } = useI18n()
     </Badge>
     <Badge v-if="limited" class="uppercase tracking-widest mr-1.5 mb-1">
       {{ t('article.limited') }}
+    </Badge>
+    <Badge v-if="online" class="uppercase tracking-widest mr-1.5 mb-1">
+      {{ t('article.online') }}
     </Badge>
     <Badge v-if="premium" class="uppercase tracking-widest mr-1.5 mb-1">
       {{ t('article.locked') }}

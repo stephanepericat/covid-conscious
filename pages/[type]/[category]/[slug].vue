@@ -6,6 +6,7 @@ import METADATA_QUERY from '@/sanity/queries/metadata.sanity'
 import {
   isBrand,
   isCovidnet,
+  isDirectory,
   isProduct,
   isResource,
   isVideo,
@@ -99,6 +100,7 @@ const hasSplash = computed(
   () =>
     !isBrand(type as string) &&
     !isCovidnet(type as string) &&
+    !isDirectory(type as string) &&
     !isProduct(type as string) &&
     !isResource(type as string) &&
     !isVideo(type as string),
@@ -115,6 +117,9 @@ const hasSplash = computed(
     />
     <TclLoader v-if="loading" />
     <motion.div :initial="{ opacity: 0 }" :animate="{ opacity: 1 }" v-else>
+      <div>
+        {{ article }}
+      </div>
       <TclArticleHeader
         v-if="article"
         class="mb-4 md:mb-10"
@@ -189,6 +194,7 @@ const hasSplash = computed(
         <TclTagList
           :free="article?.free"
           :limited="article?.limited"
+          :online="article?.onlineOnly"
           :premium="article?.premium"
           :tags="<Tag[]>article.tags"
         />
