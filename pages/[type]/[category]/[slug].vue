@@ -213,7 +213,9 @@ const hasSplash = computed(
           <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
             {{ t('article.contactInfo') }}
           </h2>
-          <div class="grid gap-4 md:flex justify-between">
+          <div
+            class="grid gap-4 md:flex justify-between font-pt leading-relaxed text-lg"
+          >
             <div>
               <div v-text="article?.title" class="font-bold" />
               <div
