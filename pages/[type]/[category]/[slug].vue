@@ -200,6 +200,50 @@ const hasSplash = computed(
         />
       </section>
 
+      <!-- DIRECTORY -->
+      <template v-if="isDirectory(type as string) && article?.info">
+        <Separator class="my-8" />
+        <section class="grid gap-4 md:gap-8">
+          <h2 class="font-pt text-2xl font-semibold uppercase tracking-widest">
+            {{ t('article.contactInfo') }}
+          </h2>
+          <div class="grid gap-4 md:flex justify-between">
+            <div>
+              <div v-text="article.title" class="font-bold" />
+              <div v-text="article.info.street1" />
+              <div v-text="article.info.street2" />
+              <div v-text="article.info.city" />
+              <div v-text="article.info.zipCode" />
+              <div v-text="article.info.country" />
+            </div>
+            <div class="md:text-right">
+              <div v-if="article?.info?.phone">
+                <NuxtLink
+                  :href="`tel:${article?.info?.phone}`"
+                  class="hover:text-primary transition-colors"
+                  >{{ article?.info?.phone }}</NuxtLink
+                >
+              </div>
+              <div v-if="article?.info?.email">
+                <NuxtLink
+                  :href="`mailto:${article?.info?.email}`"
+                  class="hover:text-primary transition-colors"
+                  >{{ article?.info?.email }}</NuxtLink
+                >
+              </div>
+              <div v-if="article?.info?.website">
+                <NuxtLink
+                  :href="article?.info?.website"
+                  target="_blank"
+                  class="hover:text-primary transition-colors"
+                  >{{ article?.info?.website }}</NuxtLink
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+      </template>
+
       <!-- COVIDNET: BLOG -->
       <template
         v-if="

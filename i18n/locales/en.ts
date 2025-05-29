@@ -2,6 +2,7 @@ export default {
   article: {
     call: 'Call',
     contactInfo: 'Contact Info',
+    directions: 'Directions',
     email: 'Email',
     free: 'Free',
     limited: 'Limited Access',

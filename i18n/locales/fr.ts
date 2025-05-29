@@ -3,6 +3,7 @@ export default {
     call: 'Appeler',
     contactInfo: 'Coordonnées',
     email: 'E-mail',
+    directions: 'Directions',
     free: 'Gratuit',
     limited: 'Accès limité',
     listedProducts: 'Produits Listés',

@@ -2,6 +2,7 @@ export default {
   article: {
     call: 'Chamar',
     contactInfo: 'Informações de Contato',
+    directions: 'Orientações',
     email: 'E-mail',
     free: 'Gratuito',
     limited: 'Acesso Limitado',
