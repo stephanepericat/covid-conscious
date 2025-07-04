@@ -136,11 +136,11 @@ import {
 // Import shadcn-vue components
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { show } from '@unovis/ts/components/tooltip/style'
 import type { InputEvent } from 'happy-dom'
-import { se } from 'date-fns/locale'
 
-const { locale } = useI18n() // Assuming you have a useI18n composable for translations
+const { locale } = useI18n()
+const localePath = useLocalePath()
+const router = useRouter()
 
 const searchQuery = ref('')
 const showResults = ref(false)
@@ -184,14 +184,27 @@ const clearSearch = () => {
 
 // Select a result
 const selectResult = (result: QUICK_SEARCH_QUERYResult[0]) => {
-  console.log('Selected result:', result)
+  // console.log('Selected result:', result)
   // In a real app, you would navigate to the result page
   showResults.value = false
+  searchQuery.value = ''
+  if (result.link) {
+    router.push(localePath(result.link))
+  } else if (result.url) {
+    window.open(result.url, '_blank')
+  } else {
+    // Handle case where no link is provided
+    console.warn('No link or URL provided for result:', result)
+  }
 }
 
 // View all results
 const viewAllResults = () => {
   console.log('View all results for:', searchQuery.value)
+  router.push({
+    path: localePath('/search'),
+    query: { limit: 5, offset: 0, q: searchQuery.value },
+  })
   // In a real app, you would navigate to a search results page
 }
 
@@ -199,7 +212,7 @@ const viewAllResults = () => {
 // let debounceTimeout
 const handleClickOutside = () => {
   if (showResults.value) {
-    console.log('Clicked outside, closing results')
+    // console.log('Clicked outside, closing results')
     showResults.value = false
   }
 }

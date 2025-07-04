@@ -637,6 +637,7 @@ export default {
       title: 'That Covid Life',
     },
   },
+
   description: {
     blog: 'The latest news from the editorial team.',
     forum: 'A user forum to exchange tips, experiences and testimonies.',
@@ -652,6 +653,7 @@ export default {
     'public-health':
       'The latest news on emerging pandemics, such as Mpox and H5N1.',
     resource: 'A list of useful resources around COVID-19.',
+    search: 'Search our archives for news, scientific papers, and more.',
     video: 'The latest videos about COVID-19.',
   },
 

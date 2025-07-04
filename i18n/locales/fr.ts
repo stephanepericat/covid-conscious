@@ -673,6 +673,8 @@ export default {
     'public-health':
       'Les dernières nouvelles sur les pandémies émergentes, telles que la variole et le H5N1.',
     resource: 'Une liste de ressources utiles autour du COVID-19.',
+    search:
+      'Recherchez dans nos archives des nouvelles, des articles scientifiques et plus encore.',
     video: 'Les dernières vidéos sur la COVID-19.',
   },
 

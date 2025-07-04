@@ -670,6 +670,7 @@ export default {
     'public-health':
       'Las últimas noticias sobre pandemias emergentes, como Mpox y H5N1.',
     resource: 'Una lista de recursos útiles sobre la COVID-19.',
+    search: 'Busca en nuestros archivos noticias, artículos científicos y más.',
     video: 'Los últimos videos sobre la COVID-19.',
   },
 
