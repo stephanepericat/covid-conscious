@@ -6,6 +6,7 @@
         v-model="searchQuery"
         placeholder="Search..."
         class="w-full h-10 pl-10"
+        @click="handleInputFocus"
       />
       <SearchIcon
         class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
@@ -34,7 +35,7 @@
       </div>
 
       <!-- No results state -->
-      <div v-if="filteredResults.length === 0" class="p-4 text-center">
+      <div v-if="searchResults.length === 0" class="p-4 text-center">
         <SearchXIcon class="w-6 h-6 text-muted-foreground mx-auto mb-2" />
         <p class="text-sm text-muted-foreground">
           No results found for "{{ searchQuery }}"
@@ -65,15 +66,15 @@
                     class="w-4 h-4 text-primary"
                   />
                   <BookOpenIcon
-                    v-else-if="category === 'scientific papers'"
+                    v-else-if="category === 'scientific-library'"
                     class="w-4 h-4 text-emerald-500"
                   />
                   <AlertCircleIcon
-                    v-else-if="category === 'public health watch'"
+                    v-else-if="category === 'public-health'"
                     class="w-4 h-4 text-amber-500"
                   />
                   <VideoIcon
-                    v-else-if="category === 'videos'"
+                    v-else-if="category === 'video'"
                     class="w-4 h-4 text-rose-500"
                   />
                 </div>
@@ -82,11 +83,11 @@
                 <div class="flex-1">
                   <div
                     class="text-sm font-medium"
-                    v-html="highlightMatch(result.title)"
+                    v-html="highlightMatch(result.title as string)"
                   ></div>
                   <div
                     class="text-xs text-muted-foreground mt-1"
-                    v-html="highlightMatch(result.description)"
+                    v-html="highlightMatch(result.description ?? '')"
                   ></div>
                   <div class="flex items-center mt-1">
                     <CalendarIcon class="w-3 h-3 text-muted-foreground mr-1" />
@@ -115,8 +116,12 @@
   </div>
 </template>
 
-<script setup>
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+<script setup lang="ts">
+// import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import QUICK_SEARCH_QUERY from '@/sanity/queries/quickSearch.sanity'
+import type { QUICK_SEARCH_QUERYResult } from '@/sanity/types'
+// import type { UseDebounceFnReturn } from '@vueuse/core'
+
 import {
   Search as SearchIcon,
   X as XIcon,
@@ -131,107 +136,38 @@ import {
 // Import shadcn-vue components
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { show } from '@unovis/ts/components/tooltip/style'
+import type { InputEvent } from 'happy-dom'
+import { se } from 'date-fns/locale'
 
-// Mock data - in a real app, this would come from an API
-const mockData = [
-  {
-    id: 1,
-    title: 'COVID-19 Updates',
-    description: 'Latest updates on COVID-19 pandemic',
-    category: 'news',
-    date: '2023-05-15',
-  },
-  {
-    id: 2,
-    title: 'Vaccine Efficacy Study',
-    description: 'New research on vaccine efficacy against variants',
-    category: 'scientific papers',
-    date: '2023-04-22',
-  },
-  {
-    id: 3,
-    title: 'Global Health Alert',
-    description: 'WHO issues new global health alert',
-    category: 'public health watch',
-    date: '2023-05-10',
-  },
-  {
-    id: 4,
-    title: 'Understanding mRNA Technology',
-    description: 'Educational video on mRNA vaccine technology',
-    category: 'videos',
-    date: '2023-03-18',
-  },
-  {
-    id: 5,
-    title: 'New Variant Discovered',
-    description: 'Scientists discover new COVID variant',
-    category: 'news',
-    date: '2023-05-12',
-  },
-  {
-    id: 6,
-    title: 'Pandemic Response Analysis',
-    description: 'Academic paper analyzing pandemic responses globally',
-    category: 'scientific papers',
-    date: '2023-04-05',
-  },
-  {
-    id: 7,
-    title: 'Health System Preparedness',
-    description: 'Report on health system preparedness for future outbreaks',
-    category: 'public health watch',
-    date: '2023-05-01',
-  },
-  {
-    id: 8,
-    title: 'Expert Interview: Future of Vaccines',
-    description: 'Interview with leading vaccine researchers',
-    category: 'videos',
-    date: '2023-04-28',
-  },
-]
+const { locale } = useI18n() // Assuming you have a useI18n composable for translations
 
 const searchQuery = ref('')
 const showResults = ref(false)
-const categories = [
-  'news',
-  'scientific papers',
-  'public health watch',
-  'videos',
-]
+const categories = ['news', 'scientific-library', 'public-health', 'video']
 const inputWidth = ref(0)
 
 // Format category name for display
-const formatCategory = (category) => {
+const formatCategory = (category: string) => {
+  // TODO: Get translation for category names
   return category
-    .split(' ')
+    .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 
-// Filter results based on search query
-const filteredResults = computed(() => {
-  if (!searchQuery.value) return []
-
-  const query = searchQuery.value.toLowerCase()
-  return mockData.filter(
-    (item) =>
-      item.title.toLowerCase().includes(query) ||
-      item.description.toLowerCase().includes(query),
-  )
-})
+const searchResults = ref<QUICK_SEARCH_QUERYResult>([])
 
 // Get total number of results
-const totalResults = computed(() => filteredResults.value.length)
+const totalResults = computed(() => searchResults.value.length)
 
 // Get results by category
-const getResultsByCategory = (category) => {
-  return filteredResults.value.filter((item) => item.category === category)
+const getResultsByCategory = (category: string) => {
+  return searchResults.value.filter((item) => item.type === category)
 }
 
 // Highlight matching text
-const highlightMatch = (text) => {
+const highlightMatch = (text: string) => {
   if (!searchQuery.value) return text
 
   const regex = new RegExp(`(${searchQuery.value})`, 'gi')
@@ -247,7 +183,7 @@ const clearSearch = () => {
 }
 
 // Select a result
-const selectResult = (result) => {
+const selectResult = (result: QUICK_SEARCH_QUERYResult[0]) => {
   console.log('Selected result:', result)
   // In a real app, you would navigate to the result page
   showResults.value = false
@@ -260,45 +196,51 @@ const viewAllResults = () => {
 }
 
 // Handle click outside to close results
-let debounceTimeout
-const handleClickOutside = (event) => {
-  const searchElement = document.querySelector('.search-container')
-  if (searchElement && !searchElement.contains(event.target)) {
+// let debounceTimeout
+const handleClickOutside = () => {
+  if (showResults.value) {
+    console.log('Clicked outside, closing results')
     showResults.value = false
   }
 }
 
+const handleInputFocus = (e: InputEvent) => {
+  e.stopPropagation()
+  showResults.value = searchQuery.value?.length > 0
+}
+
 // Get input width for minimum dropdown width
-const updateInputWidth = () => {
-  nextTick(() => {
-    const inputElement = document.querySelector('.search-container input')
-    if (inputElement) {
-      inputWidth.value = inputElement.offsetWidth
-    }
-  })
+// const updateInputWidth = () => {
+//   nextTick(() => {
+//     const inputElement = document.querySelector('.search-container input')
+//     if (inputElement) {
+//       inputWidth.value = inputElement.offsetWidth
+//     }
+//   })
+// }
+
+const searchFn = async () => {
+  if (!searchQuery.value) {
+    searchResults.value = []
+    return
+  }
+
+  const { data } = await useSanityQuery<QUICK_SEARCH_QUERYResult>(
+    QUICK_SEARCH_QUERY,
+    { searchTerm: searchQuery.value, locale }, // Adjust locale as needed
+  )
+
+  searchResults.value = data?.value || []
 }
 
 // Show results when typing
 watch(searchQuery, (newValue) => {
   showResults.value = newValue.length > 0
-
-  // Debounce for API calls
-  clearTimeout(debounceTimeout)
-  debounceTimeout = setTimeout(() => {
-    // In a real app, this is where you would call the search API
-    console.log('Searching for:', searchQuery.value)
-  }, 300)
+  useDebounceFn(searchFn, 300, { rejectOnCancel: true })()
 })
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-  updateInputWidth()
-  window.addEventListener('resize', updateInputWidth)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-  window.removeEventListener('resize', updateInputWidth)
+  useEventListener(document, 'click', handleClickOutside)
 })
 </script>
 
