@@ -681,4 +681,13 @@ export default {
     send: 'Send via email',
     tooltip: 'Share',
   },
+
+  searchbox: {
+    placeholder: 'Search for news, videos, and more...',
+    results: {
+      noResults: 'No results found for "{query}"',
+      total: '{amount} results',
+    },
+    viewAll: 'View All Results',
+  },
 }

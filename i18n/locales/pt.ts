@@ -693,4 +693,13 @@ export default {
     send: 'Enviar por e-mail',
     tooltip: 'Compartilhar',
   },
+
+  searchbox: {
+    placeholder: 'Pesquisar notícias, vídeos e mais...',
+    results: {
+      noResults: 'Nenhum resultado encontrado para "{query}"',
+      total: '{amount} resultados',
+    },
+    viewAll: 'Ver Todos os Resultados',
+  },
 }

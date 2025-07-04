@@ -698,4 +698,13 @@ export default {
     send: 'Enviar por correo electrónico',
     tooltip: 'Compartir',
   },
+
+  searchbox: {
+    placeholder: 'Buscar noticias, videos y más...',
+    results: {
+      noResults: 'No se encontraron resultados para "{query}"',
+      total: '{amount} resultados',
+    },
+    viewAll: 'Ver todos los resultados',
+  },
 }

@@ -702,4 +702,13 @@ export default {
     send: 'Envoyer par e-mail',
     tooltip: 'Partager',
   },
+
+  searchbox: {
+    placeholder: 'Rechercher des nouvelles, des vidéos et plus encore...',
+    results: {
+      noResults: 'Aucun résultat trouvé pour "{query}"',
+      total: '{amount} résultat(s)',
+    },
+    viewAll: 'Voir tous les résultats',
+  },
 }

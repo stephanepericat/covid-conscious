@@ -4,7 +4,7 @@
     <div class="relative">
       <Input
         v-model="searchQuery"
-        placeholder="Search..."
+        :placeholder="t('searchbox.placeholder')"
         class="w-full h-10 pl-10"
         @click="handleInputFocus"
       />
@@ -29,16 +29,16 @@
       :style="{ minWidth: inputWidth + 'px' }"
     >
       <div class="p-2 flex items-center justify-between border-b">
-        <span class="text-sm font-medium text-muted-foreground"
-          >{{ totalResults }} results</span
-        >
+        <span class="text-sm font-medium text-muted-foreground">
+          {{ t('searchbox.results.total', { amount: totalResults }) }}
+        </span>
       </div>
 
       <!-- No results state -->
       <div v-if="searchResults.length === 0" class="p-4 text-center">
         <SearchXIcon class="w-6 h-6 text-muted-foreground mx-auto mb-2" />
         <p class="text-sm text-muted-foreground">
-          No results found for "{{ searchQuery }}"
+          {{ t('searchbox.results.noResults', { query: searchQuery }) }}
         </p>
       </div>
 
@@ -108,7 +108,7 @@
             @click="viewAllResults"
             class="w-full justify-center text-primary hover:text-primary hover:bg-primary/10"
           >
-            View all results
+            {{ t('searchbox.viewAll') }}
           </Button>
         </div>
       </div>
@@ -117,10 +117,8 @@
 </template>
 
 <script setup lang="ts">
-// import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import QUICK_SEARCH_QUERY from '@/sanity/queries/quickSearch.sanity'
 import type { QUICK_SEARCH_QUERYResult } from '@/sanity/types'
-// import type { UseDebounceFnReturn } from '@vueuse/core'
 
 import {
   Search as SearchIcon,
@@ -138,7 +136,7 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import type { InputEvent } from 'happy-dom'
 
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const localePath = useLocalePath()
 const router = useRouter()
 
@@ -150,10 +148,7 @@ const inputWidth = ref(0)
 // Format category name for display
 const formatCategory = (category: string) => {
   // TODO: Get translation for category names
-  return category
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ')
+  return t(`layout.${category}`)
 }
 
 const searchResults = ref<QUICK_SEARCH_QUERYResult>([])
@@ -171,10 +166,7 @@ const highlightMatch = (text: string) => {
   if (!searchQuery.value) return text
 
   const regex = new RegExp(`(${searchQuery.value})`, 'gi')
-  return text.replace(
-    regex,
-    '<span class="bg-yellow-100 font-medium">$1</span>',
-  )
+  return text.replace(regex, '<span class="bg-primary font-medium">$1</span>')
 }
 
 // Clear search
@@ -184,10 +176,9 @@ const clearSearch = () => {
 
 // Select a result
 const selectResult = (result: QUICK_SEARCH_QUERYResult[0]) => {
-  // console.log('Selected result:', result)
-  // In a real app, you would navigate to the result page
   showResults.value = false
-  searchQuery.value = ''
+  // searchQuery.value = ''
+
   if (result.link) {
     router.push(localePath(result.link))
   } else if (result.url) {
@@ -200,19 +191,15 @@ const selectResult = (result: QUICK_SEARCH_QUERYResult[0]) => {
 
 // View all results
 const viewAllResults = () => {
-  console.log('View all results for:', searchQuery.value)
   router.push({
     path: localePath('/search'),
     query: { limit: 5, offset: 0, q: searchQuery.value },
   })
-  // In a real app, you would navigate to a search results page
 }
 
 // Handle click outside to close results
-// let debounceTimeout
 const handleClickOutside = () => {
   if (showResults.value) {
-    // console.log('Clicked outside, closing results')
     showResults.value = false
   }
 }
@@ -221,16 +208,6 @@ const handleInputFocus = (e: InputEvent) => {
   e.stopPropagation()
   showResults.value = searchQuery.value?.length > 0
 }
-
-// Get input width for minimum dropdown width
-// const updateInputWidth = () => {
-//   nextTick(() => {
-//     const inputElement = document.querySelector('.search-container input')
-//     if (inputElement) {
-//       inputWidth.value = inputElement.offsetWidth
-//     }
-//   })
-// }
 
 const searchFn = async () => {
   if (!searchQuery.value) {
