@@ -8,17 +8,17 @@ export const useFooterConfig = () => {
         {
           icon: null,
           label: t('footer.tcl.about'),
-          href: '/about',
+          href: '/legal/about',
           target: '_self',
           external: false,
         },
-        {
-          icon: null,
-          label: t('footer.tcl.contact'),
-          href: '/contact',
-          target: '_self',
-          external: false,
-        },
+        // {
+        //   icon: null,
+        //   label: t('footer.tcl.contact'),
+        //   href: '/contact',
+        //   target: '_self',
+        //   external: false,
+        // },
         {
           icon: null,
           label: t('footer.tcl.contribute'),
