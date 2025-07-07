@@ -2,6 +2,7 @@ import consola from 'consola'
 import type { Publication, Tag } from '@/lib/types'
 import { useGroqd } from '@/composables/useGroqd'
 import { BASE_LANGUAGE } from '@/assets/constants/base-language'
+import { isSearch } from '@/assets/utils/article-types'
 
 export const useDynamicQuery = () => {
   const results = ref<Publication[]>([])
@@ -24,6 +25,10 @@ export const useDynamicQuery = () => {
     start: number
     type: string
   }) => {
+    const isSearchPage = isSearch(type)
+
+    console.log('search page:', isSearchPage)
+
     let query = q.star
       .filterByType(type as any)
       .filterRaw(`!(_id in path('drafts.**'))`)

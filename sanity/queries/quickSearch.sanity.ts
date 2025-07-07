@@ -6,7 +6,7 @@ const QUICK_SEARCH_QUERY = groq`
   _type in ["news", "scientific-library", "public-health", "video"]
   && language == $locale
   && title match "**" + $searchTerm + "**"
-][0..4] {
+] | order(_createdAt desc)[0..4] {
   "date": publicationDate,
   "description": array::join(string::split(pt::text(coalesce(description[_key == $locale][0].value, description[_key == ^.language][0].value, description[_key == '${BASE_LANGUAGE}'][0].value)), '')[0..80], '') + '...',
   "id": _id,
