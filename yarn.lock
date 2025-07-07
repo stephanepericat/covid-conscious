@@ -13494,13 +13494,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"groqd@npm:^1.6.0":
-  version: 1.6.0
-  resolution: "groqd@npm:1.6.0"
+"groqd@npm:^1.7.1":
+  version: 1.7.1
+  resolution: "groqd@npm:1.7.1"
   dependencies:
     type-fest: "npm:^4.10.1"
     zod: "npm:^3.22.4"
-  checksum: 10c0/5b89104372e37bfd476b8a7d2c6bf550a8adee1687dbc4e4479a550ea10d3447dd28ebc2087e775d30013952ecbaf08714219317590081322f4bdc89a8a88334
+  checksum: 10c0/7f17f9dfb733c0c17152701fa46ea7f095a931a08d63ecf35071ec1a9aeacaa073a9078bf44a69d74609a04d4d48525e9c745ac74abb89a5c8bb94a5d918e85d
   languageName: node
   linkType: hard
 
@@ -20397,7 +20397,7 @@ __metadata:
     deepl-node: "npm:^1.18.0"
     embla-carousel-vue: "npm:^8.6.0"
     feed: "npm:^5.0.0"
-    groqd: "npm:^1.6.0"
+    groqd: "npm:^1.7.1"
     happy-dom: "npm:^17.4.7"
     husky: "npm:^9.1.7"
     jsonwebtoken: "npm:^9.0.2"

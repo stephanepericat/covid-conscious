@@ -16,22 +16,24 @@ export const useDynamicQuery = () => {
     end,
     filters,
     locale,
+    searchTerm,
     start,
     type,
   }: {
     end: number
     filters: Record<string, string>
     locale: string | null
+    searchTerm?: string
     start: number
     type: string
   }) => {
-    const isSearchPage = isSearch(type)
-
-    console.log('search page:', isSearchPage)
-
-    let query = q.star
-      .filterByType(type as any)
-      .filterRaw(`!(_id in path('drafts.**'))`)
+    let query = isSearch(type)
+      ? q.star.filterRaw(
+          `_type != 'feedSettings' && !(_id in path('drafts.**')) && [coalesce(title[_key == "${locale}"][0].value, title[_key == '${BASE_LANGUAGE}'][0].value, title, null), coalesce(description[_key == "${locale}"][0].value, description[_key == '${BASE_LANGUAGE}'][0].value, [])[0].children[0].text] match "**${searchTerm}**"`,
+        )
+      : q.star
+          .filterByType(type as any)
+          .filterRaw(`!(_id in path('drafts.**'))`)
 
     if (locale) {
       query = query.filterRaw(`language == "${locale}"`)
