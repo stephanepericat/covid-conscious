@@ -1,121 +1,3 @@
-<template>
-  <div class="relative w-full max-w-md search-container">
-    <!-- Search Input -->
-    <div class="relative">
-      <Input
-        v-model="searchQuery"
-        :placeholder="t('searchbox.placeholder')"
-        class="w-full h-10 pl-10"
-        @click="handleInputFocus"
-      />
-      <SearchIcon
-        class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
-      />
-      <Button
-        v-if="searchQuery"
-        variant="ghost"
-        size="icon"
-        class="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
-        @click="clearSearch"
-      >
-        <XIcon class="h-4 w-4" />
-      </Button>
-    </div>
-
-    <!-- Results Dropdown - Fixed width, positioned absolutely -->
-    <div
-      v-if="searchQuery && showResults"
-      class="absolute z-50 left-0 mt-1 w-[380px] max-w-[95vw] bg-background rounded-md border shadow-md overflow-hidden"
-      :style="{ minWidth: inputWidth + 'px' }"
-    >
-      <div class="p-2 flex items-center justify-between border-b">
-        <span class="text-sm font-medium text-muted-foreground">
-          {{ t('searchbox.results.total', { amount: totalResults }) }}
-        </span>
-      </div>
-
-      <!-- No results state -->
-      <div v-if="searchResults.length === 0" class="p-4 text-center">
-        <SearchXIcon class="w-6 h-6 text-muted-foreground mx-auto mb-2" />
-        <p class="text-sm text-muted-foreground">
-          {{ t('searchbox.results.noResults', { query: searchQuery }) }}
-        </p>
-      </div>
-
-      <!-- Results by category -->
-      <div v-else>
-        <div v-for="(category, index) in categories" :key="index" class="py-2">
-          <div v-if="getResultsByCategory(category).length > 0">
-            <div
-              class="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase"
-            >
-              {{ formatCategory(category) }}
-            </div>
-
-            <div
-              v-for="(result, resultIndex) in getResultsByCategory(category)"
-              :key="resultIndex"
-              class="px-4 py-2 hover:bg-accent cursor-pointer"
-              @click="selectResult(result)"
-            >
-              <div class="flex items-start">
-                <!-- Category-specific icon -->
-                <div class="mr-3 mt-0.5">
-                  <FileTextIcon
-                    v-if="category === 'news'"
-                    class="w-4 h-4 text-primary"
-                  />
-                  <BookOpenIcon
-                    v-else-if="category === 'scientific-library'"
-                    class="w-4 h-4 text-emerald-500"
-                  />
-                  <AlertCircleIcon
-                    v-else-if="category === 'public-health'"
-                    class="w-4 h-4 text-amber-500"
-                  />
-                  <VideoIcon
-                    v-else-if="category === 'video'"
-                    class="w-4 h-4 text-rose-500"
-                  />
-                </div>
-
-                <!-- Result content -->
-                <div class="flex-1">
-                  <div
-                    class="text-sm font-medium"
-                    v-html="highlightMatch(result.title as string)"
-                  ></div>
-                  <div
-                    class="text-xs text-muted-foreground mt-1"
-                    v-html="highlightMatch(result.description ?? '')"
-                  ></div>
-                  <div class="flex items-center mt-1">
-                    <CalendarIcon class="w-3 h-3 text-muted-foreground mr-1" />
-                    <span class="text-xs text-muted-foreground">{{
-                      result.date
-                    }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- View all results -->
-        <div class="p-2 border-t">
-          <Button
-            variant="ghost"
-            @click="viewAllResults"
-            class="w-full justify-center text-primary hover:text-primary hover:bg-primary/10"
-          >
-            {{ t('searchbox.viewAll') }}
-          </Button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import QUICK_SEARCH_QUERY from '@/sanity/queries/quickSearch.sanity'
 import type { QUICK_SEARCH_QUERYResult } from '@/sanity/types'
@@ -234,8 +116,120 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-:deep(.bg-yellow-100) {
-  background-color: rgba(254, 240, 138, 0.5);
-}
-</style>
+<template>
+  <div class="relative w-full max-w-md search-container">
+    <!-- Search Input -->
+    <div class="relative">
+      <Input
+        v-model="searchQuery"
+        :placeholder="t('searchbox.placeholder')"
+        class="w-full h-10 pl-10"
+        @click="handleInputFocus"
+      />
+      <SearchIcon
+        class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+      />
+      <Button
+        v-if="searchQuery"
+        variant="ghost"
+        size="icon"
+        class="absolute right-1 top-1/2 -translate-y-1/2 h-8 w-8 p-0"
+        @click="clearSearch"
+      >
+        <XIcon class="h-4 w-4" />
+      </Button>
+    </div>
+
+    <!-- Results Dropdown - Fixed width, positioned absolutely -->
+    <div
+      v-if="searchQuery && showResults"
+      class="absolute z-50 left-0 mt-1 w-[380px] max-w-[95vw] bg-background rounded-md border shadow-md overflow-hidden"
+      :style="{ minWidth: inputWidth + 'px' }"
+    >
+      <div class="p-2 flex items-center justify-between border-b">
+        <span class="text-sm font-medium text-muted-foreground">
+          {{ t('searchbox.results.total', { amount: totalResults }) }}
+        </span>
+      </div>
+
+      <!-- No results state -->
+      <div v-if="searchResults.length === 0" class="p-4 text-center">
+        <SearchXIcon class="w-6 h-6 text-muted-foreground mx-auto mb-2" />
+        <p class="text-sm text-muted-foreground">
+          {{ t('searchbox.results.noResults', { query: searchQuery }) }}
+        </p>
+      </div>
+
+      <!-- Results by category -->
+      <div v-else>
+        <div v-for="(category, index) in categories" :key="index" class="py-2">
+          <div v-if="getResultsByCategory(category).length > 0">
+            <div
+              class="px-4 py-1 text-xs font-semibold text-muted-foreground uppercase"
+            >
+              {{ formatCategory(category) }}
+            </div>
+
+            <div
+              v-for="(result, resultIndex) in getResultsByCategory(category)"
+              :key="resultIndex"
+              class="px-4 py-2 hover:bg-accent cursor-pointer"
+              @click="selectResult(result)"
+            >
+              <div class="flex items-start">
+                <!-- Category-specific icon -->
+                <div class="mr-3 mt-0.5">
+                  <FileTextIcon
+                    v-if="category === 'news'"
+                    class="w-4 h-4 text-primary"
+                  />
+                  <BookOpenIcon
+                    v-else-if="category === 'scientific-library'"
+                    class="w-4 h-4 text-emerald-500"
+                  />
+                  <AlertCircleIcon
+                    v-else-if="category === 'public-health'"
+                    class="w-4 h-4 text-amber-500"
+                  />
+                  <VideoIcon
+                    v-else-if="category === 'video'"
+                    class="w-4 h-4 text-rose-500"
+                  />
+                </div>
+
+                <!-- Result content -->
+                <div class="flex-1">
+                  <div
+                    class="text-sm font-medium"
+                    v-html="highlightMatch(result.title as string)"
+                  ></div>
+                  <div
+                    class="text-xs text-muted-foreground mt-1"
+                    v-html="highlightMatch(result.description ?? '')"
+                  ></div>
+                  <div class="flex items-center mt-1">
+                    <CalendarIcon class="w-3 h-3 text-muted-foreground mr-1" />
+                    <span class="text-xs text-muted-foreground">{{
+                      result.date
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- View all results -->
+        <div class="p-2 border-t">
+          <Button
+            variant="ghost"
+            @click="viewAllResults"
+            class="w-full justify-center text-primary hover:text-primary hover:bg-primary/10"
+          >
+            {{ t('searchbox.viewAll') }}
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
