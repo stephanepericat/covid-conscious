@@ -54,6 +54,12 @@ export default {
         invalid: 'Veuillez entrer un lien valide.',
       },
     },
+    help: {
+      description:
+        "Fournissez une brève description de votre contribution, accompagnée d'un lien, le cas échéant.",
+      email:
+        "Nous l'utiliserons uniquement pour vous répondre au sujet de votre contribution.",
+    },
     labels: {
       category: 'Catégorie',
       description: 'Description',

@@ -53,6 +53,11 @@ export default {
         invalid: 'Please enter a valid link.',
       },
     },
+    help: {
+      description:
+        'Provide a quick description of what you would like to contribute, along with a link if applicable.',
+      email: "We'll only use this to get back to you about your contribution.",
+    },
     labels: {
       category: 'Category',
       description: 'Description',

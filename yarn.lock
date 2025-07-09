@@ -4923,9 +4923,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/turnstile@npm:0.9.16":
-  version: 0.9.16
-  resolution: "@nuxtjs/turnstile@npm:0.9.16"
+"@nuxtjs/turnstile@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@nuxtjs/turnstile@npm:1.0.0"
   dependencies:
     "@nuxt/kit": "npm:^3.16.0"
     "@types/cloudflare-turnstile": "npm:0.2.2"
@@ -4933,7 +4933,7 @@ __metadata:
     pathe: "npm:^2.0.3"
   peerDependencies:
     "@nuxt/scripts": ^0.11.0
-  checksum: 10c0/e06d76deace43ec1426fc101ac06601d2a791f72178a2b4a07d831317439edaf5856cc744d4108058abd470671ccfc377cb91f7efb49c52754e98f62b0a967b3
+  checksum: 10c0/9fc0798a879f3a76d01b0b25a8650814925c2eac272867740950907bc276da2f86ab46aa5d32a3e134f6fd99442261ab68fa3237b1d6f184672dd3a74437f01f
   languageName: node
   linkType: hard
 
@@ -20365,7 +20365,7 @@ __metadata:
     "@nuxtjs/sanity": "npm:^1.13.3"
     "@nuxtjs/seo": "npm:^3.0.3"
     "@nuxtjs/tailwindcss": "npm:^6.14.0"
-    "@nuxtjs/turnstile": "npm:0.9.16"
+    "@nuxtjs/turnstile": "npm:^1.0.0"
     "@pinia/nuxt": "npm:0.11.0"
     "@prisma/client": "npm:^6.3.1"
     "@prisma/extension-accelerate": "npm:^1.2.1"

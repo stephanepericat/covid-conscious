@@ -54,6 +54,12 @@ export default {
         invalid: 'Insira um link válido.',
       },
     },
+    help: {
+      description:
+        'Forneça uma breve descrição do que você gostaria de contribuir, juntamente com um link, se aplicável.',
+      email:
+        'Usaremos isso apenas para entrar em contato com você sobre sua contribuição.',
+    },
     labels: {
       category: 'Categoria',
       description: 'Descrição',
